@@ -32,13 +32,15 @@
     "newArchEnabled": true,
     "scheme": "fitnessrpg",
     "plugins": [
+      "expo-router",
       [
         "react-native-fast-tflite",
         {
           "enableAndroidGpuLibraries": true,
           "enableCoreMLDelegate": true
         }
-      ]
+      ],
+      "expo-router"
     ]
   }
 }
