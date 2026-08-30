@@ -56,183 +56,209 @@ export type DetectorEvent = RepEvent | TrackingEvent | RejectedEvent;
 
 export type Phase = 'unknown' | 'top' | 'dip';
 
-export type DetectorState = {
-  phase: Phase;
-  /** Reps that reached full depth. */
-  reps: number;
-  /** Descents that turned back early. */
-  partials: number;
-  /** Smoothed elbow angle, or NaN when there is no usable reading. */
-  elbowAngle: number;
-  side: Side | null;
-  tracking: boolean;
-};
-
 export type RepDetector = {
   push(frame: PoseFrame): DetectorEvent[];
   state(): Readonly<DetectorState>;
   reset(): void;
 };
 
-export function createRepDetector(config: Partial<DetectorConfig> = {}): RepDetector {
-  const cfg: DetectorConfig = { ...DEFAULT_CONFIG, ...config };
+/**
+ * All mutable detector state, held explicitly rather than in closures.
+ *
+ * This shape exists so the state machine can run inside a camera worklet: a
+ * closure created on the JS thread cannot be called from the camera thread, and
+ * shipping keypoints to JS at 30fps to avoid that is exactly the bridge traffic
+ * the pipeline is designed to prevent.
+ */
+export type DetectorState = {
+  phase: Phase;
+  reps: number;
+  partials: number;
+  /** Smoothed elbow angle, or NaN when there is no usable reading. */
+  elbowAngle: number;
+  side: Side | null;
+  tracking: boolean;
+  lowConfidenceFrames: number;
+  descentStartedAt: number;
+  dipMinAngle: number;
+  topEnteredAt: number;
+};
 
-  let phase: Phase = 'unknown';
-  let reps = 0;
-  let partials = 0;
-  let smoothed = NaN;
-  let side: Side | null = null;
-  let tracking = false;
-  let lowConfidenceFrames = 0;
+export function createDetectorState(): DetectorState {
+  'worklet';
+  return {
+    phase: 'unknown',
+    reps: 0,
+    partials: 0,
+    elbowAngle: NaN,
+    side: null,
+    tracking: false,
+    lowConfidenceFrames: 0,
+    descentStartedAt: NaN,
+    dipMinAngle: Infinity,
+    topEnteredAt: 0,
+  };
+}
 
-  // A rep is timed from where the descent actually begins — the moment the angle
-  // leaves lockout — not from where it crosses into the dip band. The dip band is
-  // only the middle slice of the movement, so timing it instead would under-measure
-  // every rep and reject legitimately fast ones.
-  let descentStartedAt = NaN;
-  let dipMinAngle = Infinity;
-  // When the top was reached, so a new descent can be required to wait.
-  let topEnteredAt = 0;
+/** Clears movement state but keeps the rep tally and tracking status. */
+function resetMovement(s: DetectorState): void {
+  'worklet';
+  s.phase = 'unknown';
+  s.elbowAngle = NaN;
+  s.dipMinAngle = Infinity;
+  s.descentStartedAt = NaN;
+  s.topEnteredAt = 0;
+}
 
-  function reset(): void {
-    phase = 'unknown';
-    smoothed = NaN;
-    dipMinAngle = Infinity;
-    descentStartedAt = NaN;
-    topEnteredAt = 0;
+/**
+ * Picks the arm the model can actually see.
+ *
+ * In a side-on pushup the far arm is occluded by the torso, so scoring both and
+ * taking the better one avoids counting off a limb the model is only guessing at.
+ * The weakest joint governs: one unreliable point invalidates the whole angle, so
+ * a good average must not paper over a missing wrist.
+ */
+function selectSide(frame: PoseFrame): { side: Side; confidence: number } | null {
+  'worklet';
+  let bestSide: Side | null = null;
+  let bestConfidence = -1;
+  const sides: Side[] = ['left', 'right'];
+  for (let i = 0; i < sides.length; i++) {
+    const candidate = sides[i];
+    const j = SIDE_JOINTS[candidate];
+    const shoulder = frame.keypoints[j.shoulder];
+    const elbow = frame.keypoints[j.elbow];
+    const wrist = frame.keypoints[j.wrist];
+    if (shoulder == null || elbow == null || wrist == null) continue;
+    const confidence = Math.min(shoulder.score, elbow.score, wrist.score);
+    if (confidence > bestConfidence) {
+      bestConfidence = confidence;
+      bestSide = candidate;
+    }
+  }
+  return bestSide == null ? null : { side: bestSide, confidence: bestConfidence };
+}
+
+/**
+ * Advances the state machine by one frame, mutating `s` and returning any events.
+ *
+ * Worklet-safe: no closures, no imports beyond pure maths.
+ */
+export function stepDetector(
+  s: DetectorState,
+  frame: PoseFrame,
+  cfg: DetectorConfig,
+): DetectorEvent[] {
+  'worklet';
+  const events: DetectorEvent[] = [];
+
+  const selected = selectSide(frame);
+  const usable = selected !== null && selected.confidence >= cfg.minConfidence;
+
+  let angle = NaN;
+  if (usable && selected !== null) {
+    const j = SIDE_JOINTS[selected.side];
+    angle = angleDeg(
+      frame.keypoints[j.shoulder],
+      frame.keypoints[j.elbow],
+      frame.keypoints[j.wrist],
+    );
   }
 
-  /**
-   * Pick the arm the model can actually see. In a side-on pushup the far arm is
-   * occluded by the torso, so scoring both and taking the better one avoids
-   * counting off a limb the model is only guessing at.
-   */
-  function selectSide(frame: PoseFrame): { side: Side; confidence: number } | null {
-    let best: { side: Side; confidence: number } | null = null;
-    for (const candidate of ['left', 'right'] as Side[]) {
-      const j = SIDE_JOINTS[candidate];
-      const kp = frame.keypoints;
-      const shoulder = kp[j.shoulder];
-      const elbow = kp[j.elbow];
-      const wrist = kp[j.wrist];
-      if (!shoulder || !elbow || !wrist) continue;
-      // The weakest joint governs: one unreliable point invalidates the angle,
-      // so a high average must not paper over a missing wrist.
-      const confidence = Math.min(shoulder.score, elbow.score, wrist.score);
-      if (!best || confidence > best.confidence) best = { side: candidate, confidence };
+  if (!usable || Number.isNaN(angle)) {
+    s.lowConfidenceFrames++;
+    if (s.tracking && s.lowConfidenceFrames >= cfg.trackingLostFrames) {
+      s.tracking = false;
+      // Reset rather than resume: reacquiring mid-descent and then rising would
+      // otherwise emit a rep for a movement that was never actually observed.
+      resetMovement(s);
+      events.push({ type: 'trackingLost', t: frame.t });
     }
-    return best;
-  }
-
-  function push(frame: PoseFrame): DetectorEvent[] {
-    const events: DetectorEvent[] = [];
-
-    const selected = selectSide(frame);
-    const usable = selected !== null && selected.confidence >= cfg.minConfidence;
-
-    let angle = NaN;
-    if (usable) {
-      const j = SIDE_JOINTS[selected.side];
-      angle = angleDeg(
-        frame.keypoints[j.shoulder],
-        frame.keypoints[j.elbow],
-        frame.keypoints[j.wrist],
-      );
-    }
-
-    if (!usable || Number.isNaN(angle)) {
-      lowConfidenceFrames++;
-      if (tracking && lowConfidenceFrames >= cfg.trackingLostFrames) {
-        tracking = false;
-        // Reset rather than resume: coming back mid-descent and then rising would
-        // otherwise emit a rep for a movement that was never actually observed.
-        reset();
-        events.push({ type: 'trackingLost', t: frame.t });
-      }
-      return events;
-    }
-
-    lowConfidenceFrames = 0;
-    side = selected.side;
-    if (!tracking) {
-      tracking = true;
-      events.push({ type: 'trackingRegained', t: frame.t });
-    }
-
-    smoothed = ema(smoothed, angle, cfg.emaAlpha);
-
-    switch (phase) {
-      case 'unknown':
-        // Only start counting from a known top, so a session that begins
-        // mid-pushup does not award a rep for half a movement.
-        if (smoothed >= cfg.upAngle) {
-          phase = 'top';
-          topEnteredAt = frame.t;
-        }
-        break;
-
-      case 'top':
-        if (smoothed >= cfg.upAngle) {
-          // Still locked out; any earlier dip below lockout was a wobble, not a descent.
-          descentStartedAt = NaN;
-        } else if (Number.isNaN(descentStartedAt)) {
-          descentStartedAt = frame.t;
-        }
-        if (smoothed < cfg.dipAngle && frame.t - topEnteredAt >= cfg.minTopDwellMs) {
-          phase = 'dip';
-          dipMinAngle = smoothed;
-        }
-        break;
-
-      case 'dip': {
-        dipMinAngle = Math.min(dipMinAngle, smoothed);
-        if (smoothed < cfg.upAngle) break;
-
-        const startedAt = Number.isNaN(descentStartedAt) ? frame.t : descentStartedAt;
-        const durationMs = frame.t - startedAt;
-        phase = 'top';
-        topEnteredAt = frame.t;
-        descentStartedAt = NaN;
-
-        if (durationMs < cfg.minRepMs) {
-          events.push({ type: 'rejected', reason: 'tooFast', durationMs, t: frame.t });
-          break;
-        }
-        if (durationMs > cfg.maxRepMs) {
-          events.push({ type: 'rejected', reason: 'tooSlow', durationMs, t: frame.t });
-          break;
-        }
-
-        const valid = dipMinAngle <= cfg.downAngle;
-        if (valid) reps++;
-        else partials++;
-
-        events.push({
-          type: 'rep',
-          index: valid ? reps : partials,
-          valid,
-          minAngle: dipMinAngle,
-          durationMs,
-          startedAt,
-          endedAt: frame.t,
-        });
-        break;
-      }
-    }
-
     return events;
   }
 
+  s.lowConfidenceFrames = 0;
+  if (selected !== null) s.side = selected.side;
+  if (!s.tracking) {
+    s.tracking = true;
+    events.push({ type: 'trackingRegained', t: frame.t });
+  }
+
+  s.elbowAngle = ema(s.elbowAngle, angle, cfg.emaAlpha);
+  const smoothed = s.elbowAngle;
+
+  if (s.phase === 'unknown') {
+    // Only start counting from a known top, so a session that begins mid-pushup
+    // does not award a rep for half a movement.
+    if (smoothed >= cfg.upAngle) {
+      s.phase = 'top';
+      s.topEnteredAt = frame.t;
+    }
+    return events;
+  }
+
+  if (s.phase === 'top') {
+    if (smoothed >= cfg.upAngle) {
+      // Still locked out; any earlier dip below lockout was a wobble.
+      s.descentStartedAt = NaN;
+    } else if (Number.isNaN(s.descentStartedAt)) {
+      s.descentStartedAt = frame.t;
+    }
+    if (smoothed < cfg.dipAngle && frame.t - s.topEnteredAt >= cfg.minTopDwellMs) {
+      s.phase = 'dip';
+      s.dipMinAngle = smoothed;
+    }
+    return events;
+  }
+
+  // phase === 'dip'
+  if (smoothed < s.dipMinAngle) s.dipMinAngle = smoothed;
+  if (smoothed < cfg.upAngle) return events;
+
+  const startedAt = Number.isNaN(s.descentStartedAt) ? frame.t : s.descentStartedAt;
+  const durationMs = frame.t - startedAt;
+  s.phase = 'top';
+  s.topEnteredAt = frame.t;
+  s.descentStartedAt = NaN;
+
+  if (durationMs < cfg.minRepMs) {
+    events.push({ type: 'rejected', reason: 'tooFast', durationMs, t: frame.t });
+    return events;
+  }
+  if (durationMs > cfg.maxRepMs) {
+    events.push({ type: 'rejected', reason: 'tooSlow', durationMs, t: frame.t });
+    return events;
+  }
+
+  const valid = s.dipMinAngle <= cfg.downAngle;
+  if (valid) s.reps++;
+  else s.partials++;
+
+  events.push({
+    type: 'rep',
+    index: valid ? s.reps : s.partials,
+    valid,
+    minAngle: s.dipMinAngle,
+    durationMs,
+    startedAt,
+    endedAt: frame.t,
+  });
+  return events;
+}
+
+/**
+ * Stateful wrapper around {@link stepDetector} for use on the JS thread and in
+ * tests. The camera path uses the reducer directly.
+ */
+export function createRepDetector(config: Partial<DetectorConfig> = {}): RepDetector {
+  const cfg: DetectorConfig = { ...DEFAULT_CONFIG, ...config };
+  let s = createDetectorState();
+
   return {
-    push,
-    state: () => ({ phase, reps, partials, elbowAngle: smoothed, side, tracking }),
-    reset() {
-      reset();
-      reps = 0;
-      partials = 0;
-      side = null;
-      tracking = false;
-      lowConfidenceFrames = 0;
+    push: (frame: PoseFrame) => stepDetector(s, frame, cfg),
+    state: () => s,
+    reset: () => {
+      s = createDetectorState();
     },
   };
 }

@@ -16,6 +16,8 @@ import { useTensorflowModel } from 'react-native-fast-tflite';
 
 import { createKeypointBuffer, decodeMoveNet, MODEL_INPUT_SIZE, rotateSquareRgb, unrotateKeypoints, type InputRotation } from './model';
 import { KEYPOINT_COUNT, type Keypoint } from './keypoints';
+import { createDetectorState, stepDetector, type DetectorState } from '../reps/detector';
+import { DEFAULT_CONFIG } from '../reps/config';
 
 export type PoseSnapshot = {
   keypoints: Keypoint[];
@@ -30,6 +32,20 @@ export function emptySnapshot(): PoseSnapshot {
   'worklet';
   return { keypoints: createKeypointBuffer(), frameWidth: 0, frameHeight: 0, inferenceMs: 0 };
 }
+
+/** What the HUD needs from the detector, sampled off the camera thread. */
+export type RepReadout = {
+  reps: number;
+  partials: number;
+  phase: DetectorState['phase'];
+  elbowAngle: number;
+  tracking: boolean;
+  side: DetectorState['side'];
+  /** Deepest angle of the rep in progress, for a live depth cue. */
+  dipMinAngle: number;
+  /** Why the last movement was thrown away, if it was. */
+  lastRejection: string | null;
+};
 
 export type UsePoseCameraOptions = {
   /** Quarter turns applied to the model input. See the accuracy spike. */
@@ -59,6 +75,24 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
 
   const pose = useSharedValue<PoseSnapshot>(emptySnapshot());
 
+  // The detector runs on the camera thread. Its state lives in a shared value so
+  // it survives between frames and can be read from the UI thread.
+  const detector = useSharedValue<DetectorState>(createDetectorState());
+  // Reset is requested as a flag and applied by the camera thread on its next
+  // frame. Clearing the state from JS instead would race the worklet, which is
+  // mid-write to the same object roughly 30 times a second.
+  const resetRequested = useSharedValue(false);
+  const readout = useSharedValue<RepReadout>({
+    reps: 0,
+    partials: 0,
+    phase: 'unknown',
+    elbowAngle: NaN,
+    tracking: false,
+    side: null,
+    dipMinAngle: Infinity,
+    lastRejection: null,
+  });
+
   // Scratch buffers allocated once and reused; allocating 110KB per frame on the
   // camera thread would dominate the actual inference cost.
   const scratch = useMemo(
@@ -85,6 +119,11 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
 
         frameCounter.value = (frameCounter.value + 1) % frameStride;
         if (frameCounter.value !== 0) return;
+
+        if (resetRequested.value) {
+          detector.value = createDetectorState();
+          resetRequested.value = false;
+        }
 
         const started = performance.now();
 
@@ -113,6 +152,33 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
             frameHeight: frame.height,
             inferenceMs: performance.now() - started,
           };
+
+          // Timestamps come from the frame itself, not wall clock: the detector's
+          // duration guards must measure the movement, not how long the pipeline
+          // took to get here.
+          const s = detector.value;
+          const events = stepDetector(s, { t: frame.timestamp, keypoints: copy }, DEFAULT_CONFIG);
+
+          let rejection: string | null = readout.value.lastRejection;
+          for (let i = 0; i < events.length; i++) {
+            const e = events[i];
+            if (e.type === 'rejected') rejection = e.reason;
+            else if (e.type === 'rep') rejection = null;
+          }
+
+          // Reassign both rather than mutating in place, so the UI thread sees
+          // the update.
+          detector.value = s;
+          readout.value = {
+            reps: s.reps,
+            partials: s.partials,
+            phase: s.phase,
+            elbowAngle: s.elbowAngle,
+            tracking: s.tracking,
+            side: s.side,
+            dipMinAngle: s.dipMinAngle,
+            lastRejection: rejection,
+          };
         } finally {
           gpuFrame.dispose();
         }
@@ -122,9 +188,18 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
     },
   });
 
+  // Deliberately not memoised: shared values are stable across renders, so a new
+  // function identity costs nothing here, and useCallback would put the shared
+  // values in a dependency array that this function then mutates.
+  const resetReps = () => {
+    resetRequested.value = true;
+  };
+
   return {
     frameOutput,
     pose,
+    readout,
+    resetReps,
     modelState: model.state,
     modelError: model.state === 'error' ? model.error : undefined,
     resizerReady: resizer != null,
