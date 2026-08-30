@@ -47,11 +47,17 @@ function toView(
   frameH: number,
   viewW: number,
   viewH: number,
+  mirrorX: boolean,
 ): { x: number; y: number } {
   'worklet';
+  // The front camera preview is mirrored, but the frame buffer handed to the
+  // model may not be. When they disagree the skeleton lands flipped left-right,
+  // which reads as broken tracking rather than a coordinate problem.
+  const kx = mirrorX ? 1 - k.x : k.x;
+
   // Model space -> frame pixels, undoing the centre square crop.
   const square = Math.min(frameW, frameH);
-  const fx = (frameW - square) / 2 + k.x * square;
+  const fx = (frameW - square) / 2 + kx * square;
   const fy = (frameH - square) / 2 + k.y * square;
 
   // Frame pixels -> view pixels, applying the preview's own cover crop.
@@ -62,7 +68,13 @@ function toView(
   };
 }
 
-export function SkeletonOverlay({ pose }: { pose: SharedValue<PoseSnapshot> }) {
+export function SkeletonOverlay({
+  pose,
+  mirrorX = false,
+}: {
+  pose: SharedValue<PoseSnapshot>;
+  mirrorX?: boolean;
+}) {
   const [size, setSize] = useState({ width: 0, height: 0 });
 
   const onLayout = (e: LayoutChangeEvent) => {
@@ -74,10 +86,10 @@ export function SkeletonOverlay({ pose }: { pose: SharedValue<PoseSnapshot> }) {
     const snap = pose.value;
     if (snap.frameWidth === 0 || size.width === 0) return [];
     return snap.keypoints.map((k) => ({
-      ...toView(k, snap.frameWidth, snap.frameHeight, size.width, size.height),
+      ...toView(k, snap.frameWidth, snap.frameHeight, size.width, size.height, mirrorX),
       score: k.score,
     }));
-  }, [size]);
+  }, [size, mirrorX]);
 
   return (
     <View style={StyleSheet.absoluteFill} onLayout={onLayout} pointerEvents="none">

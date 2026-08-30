@@ -8,6 +8,7 @@ import {
   useCameraPermission,
   usePreviewOutput,
 } from 'react-native-vision-camera';
+import type { TargetCameraPosition } from 'react-native-vision-camera';
 
 import { usePoseCamera } from '../src/pose/usePoseCamera';
 import { SkeletonOverlay } from '../src/ui/SkeletonOverlay';
@@ -20,7 +21,16 @@ export default function Session() {
   useKeepAwake();
 
   const { hasPermission, requestPermission } = useCameraPermission();
-  const device = useCameraDevice('back');
+
+  // Back camera is the better sensor and the one used for real sets with the
+  // phone on the floor. Front is for framing yourself while setting up.
+  const [position, setPosition] = useState<TargetCameraPosition>('back');
+  const device = useCameraDevice(position);
+
+  // The front preview is mirrored; whether the frame buffer is mirrored too is
+  // platform-dependent. Toggle rather than guess - a wrong guess looks exactly
+  // like the model failing to track.
+  const [mirrorOverlay, setMirrorOverlay] = useState(false);
 
   // The accuracy spike: MoveNet is trained on upright people, and a pushup is
   // horizontal. This cycles the input rotation so the effect can be seen live.
@@ -64,7 +74,13 @@ export default function Session() {
   if (device == null) {
     return (
       <Centered>
-        <Text style={styles.notice}>No back camera found on this device.</Text>
+        <Text style={styles.notice}>No {position} camera found on this device.</Text>
+        <Pressable
+          style={styles.button}
+          onPress={() => setPosition((p) => (p === 'back' ? 'front' : 'back'))}
+        >
+          <Text style={styles.buttonText}>Try the other camera</Text>
+        </Pressable>
       </Centered>
     );
   }
@@ -77,8 +93,9 @@ export default function Session() {
         isActive
         outputs={[previewOutput, frameOutput]}
         resizeMode="cover"
+        mirrorMode="auto"
       />
-      <SkeletonOverlay pose={pose} />
+      <SkeletonOverlay pose={pose} mirrorX={mirrorOverlay} />
 
       <View style={styles.hud} pointerEvents="box-none">
         <View style={styles.debugPanel}>
@@ -86,15 +103,28 @@ export default function Session() {
           <Text style={styles.debugText}>inference: {debug.ms} ms</Text>
           <Text style={styles.debugText}>joints tracked: {debug.tracked}/17</Text>
           <Text style={styles.debugText}>best score: {debug.best}%</Text>
+          <Text style={styles.debugText}>camera: {position}</Text>
           {modelError ? <Text style={styles.errorText}>{String(modelError)}</Text> : null}
         </View>
 
         <View style={styles.controls}>
           <Pressable
             style={styles.button}
+            onPress={() => setPosition((p) => (p === 'back' ? 'front' : 'back'))}
+          >
+            <Text style={styles.buttonText}>flip camera</Text>
+          </Pressable>
+          <Pressable
+            style={styles.button}
             onPress={() => setRotationIndex((i) => (i + 1) % ROTATIONS.length)}
           >
-            <Text style={styles.buttonText}>rotate input: {rotation}°</Text>
+            <Text style={styles.buttonText}>rotate: {rotation}°</Text>
+          </Pressable>
+          <Pressable
+            style={[styles.button, mirrorOverlay ? undefined : styles.secondary]}
+            onPress={() => setMirrorOverlay((m) => !m)}
+          >
+            <Text style={styles.buttonText}>mirror</Text>
           </Pressable>
           <Pressable style={[styles.button, styles.secondary]} onPress={() => router.back()}>
             <Text style={styles.buttonText}>Finish</Text>
@@ -123,8 +153,8 @@ const styles = StyleSheet.create({
   },
   debugText: { color: '#7dd3fc', fontSize: 13, fontVariant: ['tabular-nums'] },
   errorText: { color: '#fca5a5', fontSize: 12 },
-  controls: { flexDirection: 'row', gap: 12, justifyContent: 'center' },
-  button: { backgroundColor: '#2563eb', paddingVertical: 12, paddingHorizontal: 18, borderRadius: 10 },
+  controls: { flexDirection: 'row', gap: 8, justifyContent: 'center', flexWrap: 'wrap' },
+  button: { backgroundColor: '#2563eb', paddingVertical: 12, paddingHorizontal: 14, borderRadius: 10 },
   secondary: { backgroundColor: '#374151' },
-  buttonText: { color: '#fff', fontSize: 15, fontWeight: '600' },
+  buttonText: { color: '#fff', fontSize: 14, fontWeight: '600' },
 });
