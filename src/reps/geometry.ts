@@ -5,6 +5,10 @@
  * here runs identically in a camera worklet and in a Node test process, which is what
  * lets the rep detector be tuned against recorded fixtures on a laptop.
  *
+ * Every function carries the 'worklet' directive. The rep detector calls them from
+ * the camera thread, and without it they remain remote JS functions — which fails at
+ * runtime with "tried to synchronously call a Remote Function", not at compile time.
+ *
  * Coordinates are normalised to 0..1 of the frame. Note that image y grows *downward*,
  * but since every function here is orientation-agnostic that never matters.
  */
@@ -13,12 +17,14 @@ export type Point2 = { x: number; y: number };
 
 /** Squared distance. Prefer this over `distance` when only comparing magnitudes. */
 export function distanceSquared(a: Point2, b: Point2): number {
+  'worklet';
   const dx = a.x - b.x;
   const dy = a.y - b.y;
   return dx * dx + dy * dy;
 }
 
 export function distance(a: Point2, b: Point2): number {
+  'worklet';
   return Math.sqrt(distanceSquared(a, b));
 }
 
@@ -34,6 +40,7 @@ export function distance(a: Point2, b: Point2): number {
  * genuinely undefined — callers must treat NaN as "no reading", not as 0°.
  */
 export function angleDeg(a: Point2, b: Point2, c: Point2): number {
+  'worklet';
   const v1x = a.x - b.x;
   const v1y = a.y - b.y;
   const v2x = c.x - b.x;
@@ -51,6 +58,7 @@ export function angleDeg(a: Point2, b: Point2, c: Point2): number {
 }
 
 export function clamp(value: number, min: number, max: number): number {
+  'worklet';
   return value < min ? min : value > max ? max : value;
 }
 
@@ -63,6 +71,7 @@ export function clamp(value: number, min: number, max: number): number {
  * tracking resumes cleanly instead of poisoning every later sample with NaN.
  */
 export function ema(previous: number, next: number, alpha: number): number {
+  'worklet';
   if (!Number.isFinite(previous)) return next;
   return previous + alpha * (next - previous);
 }
