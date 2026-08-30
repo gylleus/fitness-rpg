@@ -86,11 +86,20 @@ export function frameWithElbowAngle(
     keypoints[j.a] = { x: shoulder.x - 0.4, y: shoulder.y, score: legScore };
   }
 
-  // The other side is occluded in a side-on pushup — mimic that so side selection
-  // is actually exercised rather than always seeing two equally good arms.
+  // The far side is occluded in a side-on pushup — mimic that so side selection
+  // is exercised rather than always seeing two equally good limbs. This must
+  // cover the hip, knee and ankle too: leaving them at their default centre
+  // position with full confidence makes measureBody average the real hip with a
+  // phantom one, which corrupts torso direction and length.
   const other = side === 'left'
-    ? [KEYPOINT.RIGHT_SHOULDER, KEYPOINT.RIGHT_ELBOW, KEYPOINT.RIGHT_WRIST]
-    : [KEYPOINT.LEFT_SHOULDER, KEYPOINT.LEFT_ELBOW, KEYPOINT.LEFT_WRIST];
+    ? [
+        KEYPOINT.RIGHT_SHOULDER, KEYPOINT.RIGHT_ELBOW, KEYPOINT.RIGHT_WRIST,
+        KEYPOINT.RIGHT_HIP, KEYPOINT.RIGHT_KNEE, KEYPOINT.RIGHT_ANKLE,
+      ]
+    : [
+        KEYPOINT.LEFT_SHOULDER, KEYPOINT.LEFT_ELBOW, KEYPOINT.LEFT_WRIST,
+        KEYPOINT.LEFT_HIP, KEYPOINT.LEFT_KNEE, KEYPOINT.LEFT_ANKLE,
+      ];
   for (const i of other) keypoints[i] = { x: 0.5, y: 0.5, score: 0.05 };
 
   return { t, keypoints };

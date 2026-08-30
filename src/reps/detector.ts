@@ -22,7 +22,8 @@
  * smoothed angle jittered across it.
  */
 
-import { angleDeg, angleFromHorizontalDeg, ema } from './geometry';
+import { angleDeg, ema } from './geometry';
+import { angleDifference, measureBody, median } from './body';
 import { DEFAULT_CONFIG, type DetectorConfig } from './config';
 import { SIDE_JOINTS, type PoseFrame, type Side } from '../pose/keypoints';
 
@@ -48,7 +49,12 @@ export type RepEvent = {
 };
 
 export type TrackingEvent = {
-  type: 'trackingLost' | 'trackingRegained' | 'positionAcquired' | 'positionLost';
+  type:
+    | 'trackingLost'
+    | 'trackingRegained'
+    | 'positionAcquired'
+    | 'positionLost'
+    | 'calibrated';
   t: number;
 };
 
@@ -101,6 +107,20 @@ export type DetectorState = {
   shoulderScore: number;
   hipScore: number;
   kneeScore: number;
+
+  /** Until a reference is captured, nothing is counted. */
+  mode: 'calibrating' | 'counting';
+  calibration: Calibration | null;
+  /** Samples gathered while the user holds the top position. */
+  calTorsoDir: number[];
+  calTorsoLength: number[];
+  calElbow: number[];
+  calStartedAt: number;
+  /** How far through calibration we are, 0..1, for the UI. */
+  calProgress: number;
+  /** How far the torso has drifted from the reference. */
+  torsoDelta: number;
+  scaleRatio: number;
 };
 
 export function createDetectorState(): DetectorState {
@@ -124,6 +144,15 @@ export function createDetectorState(): DetectorState {
     shoulderScore: 0,
     hipScore: 0,
     kneeScore: 0,
+    mode: 'calibrating',
+    calibration: null,
+    calTorsoDir: [],
+    calTorsoLength: [],
+    calElbow: [],
+    calStartedAt: NaN,
+    calProgress: 0,
+    torsoDelta: NaN,
+    scaleRatio: NaN,
   };
 }
 
@@ -190,59 +219,109 @@ function selectSide(frame: PoseFrame): { side: Side; confidence: number } | null
   return bestSide == null ? null : { side: bestSide, confidence: bestConfidence };
 }
 
+export type Calibration = {
+  /** Torso direction captured while holding the top position. */
+  torsoDir: number;
+  /** Torso length at the top, used as the body scale reference. */
+  torsoLength: number;
+  /** Elbow angle at full extension, for this person in this camera view. */
+  topElbowAngle: number;
+};
+
 export type Posture = {
-  /** True when the body looks like it is actually in a pushup position. */
+  /** True when the body matches the calibrated reference. */
   inPosition: boolean;
-  /** Shoulder→hip tilt away from horizontal, degrees. NaN if unmeasurable. */
-  torsoTilt: number;
-  /** Shoulder→hip→knee angle, degrees. NaN when the knee is not visible. */
+  /** How far the torso has rotated from the reference, degrees. */
+  torsoDelta: number;
+  /** Torso length relative to the reference. 1 means unchanged. */
+  scaleRatio: number;
+  /** Shoulder→hip→knee angle. NaN when the knee is not visible. */
   bodyLine: number;
   /** In position, but the hips are sagging. */
   hipSag: boolean;
 };
 
 /**
- * Decides whether the body is in a pushup position at all.
+ * Decides whether the body still matches the position it was calibrated in.
  *
- * Elbow angle alone cannot distinguish a pushup from any other arm movement —
- * sitting and bending your arms produces exactly the same signal. The torso
- * orientation is what separates them: in a pushup the shoulder→hip line is
- * roughly horizontal in frame, whereas standing or sitting puts it near vertical.
- *
- * The straightness check is only applied when the knee is actually visible, so a
- * tight camera framing that crops the legs does not block counting outright.
+ * Nothing here is compared against an absolute expectation. Standing up rotates
+ * the torso well away from the reference and changes its apparent length, which
+ * is what excludes arm movement performed out of position — without ever needing
+ * to know which way is up in the image.
  */
-function evaluatePosture(frame: PoseFrame, side: Side, cfg: DetectorConfig): Posture {
+function evaluatePosture(
+  frame: PoseFrame,
+  side: Side,
+  cal: Calibration,
+  cfg: DetectorConfig,
+): Posture {
   'worklet';
+  const body = measureBody(frame, cfg.minConfidence);
+  if (!body.ok) {
+    return { inPosition: false, torsoDelta: NaN, scaleRatio: NaN, bodyLine: NaN, hipSag: false };
+  }
+
+  const torsoDelta = angleDifference(body.torsoDir, cal.torsoDir);
+  const scaleRatio = cal.torsoLength > 0 ? body.torsoLength / cal.torsoLength : NaN;
+
+  if (torsoDelta > cfg.torsoToleranceDeg) {
+    return { inPosition: false, torsoDelta, scaleRatio, bodyLine: NaN, hipSag: false };
+  }
+  if (
+    !Number.isFinite(scaleRatio) ||
+    scaleRatio < cfg.minScaleRatio ||
+    scaleRatio > cfg.maxScaleRatio
+  ) {
+    return { inPosition: false, torsoDelta, scaleRatio, bodyLine: NaN, hipSag: false };
+  }
+
+  // Straightness is a form check, not a position check, and is only measurable
+  // when the knee is actually visible — a head-on view often crops or occludes it.
   const j = SIDE_JOINTS[side];
   const shoulder = frame.keypoints[j.shoulder];
   const hip = frame.keypoints[j.hip];
   const knee = frame.keypoints[j.knee];
-
-  if (
-    shoulder == null ||
-    hip == null ||
-    shoulder.score < cfg.minConfidence ||
-    hip.score < cfg.minConfidence
-  ) {
-    return { inPosition: false, torsoTilt: NaN, bodyLine: NaN, hipSag: false };
-  }
-
-  const torsoTilt = angleFromHorizontalDeg(shoulder, hip);
-  if (Number.isNaN(torsoTilt) || torsoTilt > cfg.maxTorsoTiltDeg) {
-    return { inPosition: false, torsoTilt, bodyLine: NaN, hipSag: false };
-  }
-
   let bodyLine = NaN;
-  if (knee != null && knee.score >= cfg.minConfidence) {
+  if (
+    shoulder != null &&
+    hip != null &&
+    knee != null &&
+    shoulder.score >= cfg.minConfidence &&
+    hip.score >= cfg.minConfidence &&
+    knee.score >= cfg.minConfidence
+  ) {
     bodyLine = angleDeg(shoulder, hip, knee);
-    if (!Number.isNaN(bodyLine) && bodyLine < cfg.minBodyLineAngle) {
-      return { inPosition: false, torsoTilt, bodyLine, hipSag: false };
-    }
+  }
+
+  if (!Number.isNaN(bodyLine) && bodyLine < cfg.minBodyLineAngle) {
+    // Folded at the hips. The shoulder→hip axis can be unchanged while the body
+    // is not remotely in a plank, so this is a position check and not just a
+    // form flag — but only when the knee is actually visible to measure it.
+    return { inPosition: false, torsoDelta, scaleRatio, bodyLine, hipSag: false };
   }
 
   const hipSag = !Number.isNaN(bodyLine) && bodyLine < cfg.hipSagAngle;
-  return { inPosition: true, torsoTilt, bodyLine, hipSag };
+  return { inPosition: true, torsoDelta, scaleRatio, bodyLine, hipSag };
+}
+
+/**
+ * Elbow-angle thresholds for this person in this camera view.
+ *
+ * A head-on camera foreshortens the arm, so the projected elbow angle at full
+ * lockout may read 150 degrees rather than 180. Fixed absolute thresholds would
+ * then never be reached. Deriving them from the observed top makes the same
+ * relative range of motion work from any viewpoint.
+ */
+function thresholdsFor(cal: Calibration) {
+  'worklet';
+  const top = cal.topElbowAngle;
+  // Spreads chosen so an unforeshortened view (top ≈ 170) lands close to the
+  // hand-tuned absolute thresholds these replaced: 158 / 130 / 100.
+  return {
+    up: top - 12,
+    dip: top - 40,
+    down: top - 70,
+  };
 }
 
 /**
@@ -268,6 +347,15 @@ export function stepDetector(
       // Reset rather than resume: reacquiring mid-descent and then rising would
       // otherwise emit a rep for a movement that was never actually observed.
       resetMovement(s);
+      if (s.mode === 'calibrating') {
+        // Discard a partial hold too, so the reference is never averaged across
+        // the position before the dropout and the one after it.
+        s.calTorsoDir = [];
+        s.calTorsoLength = [];
+        s.calElbow = [];
+        s.calStartedAt = NaN;
+        s.calProgress = 0;
+      }
       events.push({ type: 'trackingLost', t: frame.t });
     }
     return events;
@@ -308,16 +396,64 @@ export function stepDetector(
     return events;
   }
 
-  // Posture gate. Arm movement alone is not a pushup, so nothing is counted
-  // unless the torso is actually in position.
-  const posture = evaluatePosture(frame, active, cfg);
-  s.torsoTilt = posture.torsoTilt;
-  s.bodyLine = posture.bodyLine;
-
   const pj = SIDE_JOINTS[active];
   s.shoulderScore = frame.keypoints[pj.shoulder]?.score ?? 0;
   s.hipScore = frame.keypoints[pj.hip]?.score ?? 0;
   s.kneeScore = frame.keypoints[pj.knee]?.score ?? 0;
+
+  // --- Calibration -------------------------------------------------------
+  // Until the user's own position is captured there is nothing to compare
+  // against, so nothing is counted.
+  if (s.mode === 'calibrating') {
+    const body = measureBody(frame, cfg.minConfidence);
+    if (!body.ok) {
+      // Lost the body mid-hold: start the hold over rather than averaging a
+      // reference across two different positions.
+      s.calTorsoDir = [];
+      s.calTorsoLength = [];
+      s.calElbow = [];
+      s.calStartedAt = NaN;
+      s.calProgress = 0;
+      return events;
+    }
+
+    if (Number.isNaN(s.calStartedAt)) s.calStartedAt = frame.t;
+    s.calTorsoDir.push(body.torsoDir);
+    s.calTorsoLength.push(body.torsoLength);
+    s.calElbow.push(angle);
+
+    const elapsed = frame.t - s.calStartedAt;
+    s.calProgress = Math.min(1, elapsed / cfg.calibrationMs);
+
+    if (elapsed >= cfg.calibrationMs && s.calTorsoDir.length >= cfg.calibrationMinSamples) {
+      // Medians rather than means: a couple of bad frames during the hold
+      // should not drag the reference with them.
+      s.calibration = {
+        torsoDir: median(s.calTorsoDir),
+        torsoLength: median(s.calTorsoLength),
+        topElbowAngle: median(s.calElbow),
+      };
+      s.calTorsoDir = [];
+      s.calTorsoLength = [];
+      s.calElbow = [];
+      s.mode = 'counting';
+      s.inPosition = true;
+      s.calProgress = 1;
+      events.push({ type: 'calibrated', t: frame.t });
+    }
+    return events;
+  }
+
+  const cal = s.calibration;
+  if (cal == null) return events;
+
+  // --- Posture gate ------------------------------------------------------
+  // Everything is relative to the captured reference, so this works from any
+  // camera placement and any buffer orientation.
+  const posture = evaluatePosture(frame, active, cal, cfg);
+  s.torsoDelta = posture.torsoDelta;
+  s.scaleRatio = posture.scaleRatio;
+  s.bodyLine = posture.bodyLine;
 
   if (posture.inPosition) {
     s.outOfPositionFrames = 0;
@@ -339,13 +475,15 @@ export function stepDetector(
 
   if (!s.inPosition) return events;
 
+  const th = thresholdsFor(cal);
+
   s.elbowAngle = ema(s.elbowAngle, angle, cfg.emaAlpha);
   const smoothed = s.elbowAngle;
 
   if (s.phase === 'unknown') {
     // Only start counting from a known top, so a session that begins mid-pushup
     // does not award a rep for half a movement.
-    if (smoothed >= cfg.upAngle) {
+    if (smoothed >= th.up) {
       s.phase = 'top';
       s.topEnteredAt = frame.t;
     }
@@ -353,7 +491,7 @@ export function stepDetector(
   }
 
   if (s.phase === 'top') {
-    if (smoothed >= cfg.upAngle) {
+    if (smoothed >= th.up) {
       // Still locked out; any earlier dip below lockout was a wobble.
       s.descentStartedAt = NaN;
     } else if (Number.isNaN(s.descentStartedAt)) {
@@ -366,7 +504,7 @@ export function stepDetector(
     if (!Number.isNaN(s.descentStartedAt) && smoothed < s.dipMinAngle) {
       s.dipMinAngle = smoothed;
     }
-    if (smoothed < cfg.dipAngle && frame.t - s.topEnteredAt >= cfg.minTopDwellMs) {
+    if (smoothed < th.dip && frame.t - s.topEnteredAt >= cfg.minTopDwellMs) {
       s.phase = 'dip';
     }
     return events;
@@ -374,7 +512,7 @@ export function stepDetector(
 
   // phase === 'dip'
   if (smoothed < s.dipMinAngle) s.dipMinAngle = smoothed;
-  if (smoothed < cfg.upAngle) return events;
+  if (smoothed < th.up) return events;
 
   const startedAt = Number.isNaN(s.descentStartedAt) ? frame.t : s.descentStartedAt;
   const durationMs = frame.t - startedAt;
@@ -398,7 +536,7 @@ export function stepDetector(
   s.dipMinAngle = Infinity;
   s.sagThisRep = false;
 
-  const valid = depth <= cfg.downAngle;
+  const valid = depth <= th.down;
   if (valid) s.reps++;
   else s.partials++;
 

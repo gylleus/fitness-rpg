@@ -61,7 +61,10 @@ export default function Session() {
     tracking: false,
     rejection: null as string | null,
     inPosition: false,
-    tilt: NaN,
+    calibrating: true,
+    calProgress: 0,
+    delta: NaN,
+    scale: NaN,
   });
 
   useEffect(() => {
@@ -90,8 +93,10 @@ export default function Session() {
           .map(([i, v]) => `${i}:${v.toFixed(2)}`)
           .join(' ');
         console.log(
-          `[posture] inPosition=${r.inPosition} tilt=${fmt(r.torsoTilt)} ` +
+          `[posture] inPosition=${r.inPosition} ` +
             `elbow=${fmt(r.elbowAngle)} side=${r.side} phase=${r.phase} ` +
+            `cal=${r.calibrating ? r.calProgress.toFixed(2) : 'done'} ` +
+            `delta=${fmt(r.torsoDelta)} scale=${fmt(r.scaleRatio, 2)} ` +
             `| model: best3=${top} nose=${kp[0] ? kp[0].score.toFixed(2) : 'n/a'} ` +
             `Lsh=${kp[5] ? kp[5].score.toFixed(2) : 'n/a'} Lel=${kp[7] ? kp[7].score.toFixed(2) : 'n/a'} ` +
             `Lwr=${kp[9] ? kp[9].score.toFixed(2) : 'n/a'} Lhip=${kp[11] ? kp[11].score.toFixed(2) : 'n/a'} ` +
@@ -109,7 +114,10 @@ export default function Session() {
         tracking: r.tracking,
         rejection: r.lastRejection,
         inPosition: r.inPosition,
-        tilt: r.torsoTilt,
+        calibrating: r.calibrating,
+        calProgress: r.calProgress,
+        delta: r.torsoDelta,
+        scale: r.scaleRatio,
       });
     }, 100);
     return () => clearInterval(id);
@@ -158,8 +166,11 @@ export default function Session() {
             phase: {reps.phase}{reps.tracking ? '' : '  (no tracking)'}
           </Text>
           <Text style={styles.debugText}>
-            torso tilt: {Number.isNaN(reps.tilt) ? '--' : Math.round(reps.tilt) + '°'}
-            {'  '}(max {DEFAULT_CONFIG.maxTorsoTiltDeg}°) {reps.inPosition ? 'OK' : 'BLOCKED'}
+            torso drift: {fmtDeg(reps.delta)} (max {DEFAULT_CONFIG.torsoToleranceDeg}°){'  '}
+            scale: {Number.isFinite(reps.scale) ? reps.scale.toFixed(2) : '--'}
+          </Text>
+          <Text style={styles.debugText}>
+            position: {reps.calibrating ? 'CALIBRATING' : reps.inPosition ? 'OK' : 'LOST'}
           </Text>
           <Text style={styles.debugText}>
             elbow: {Number.isNaN(reps.angle) ? '--' : Math.round(reps.angle)}°
@@ -179,8 +190,17 @@ export default function Session() {
         </View>
 
         <View style={styles.counterWrap} pointerEvents="none">
-          {!reps.inPosition ? (
-            <Text style={styles.prompt}>Get into pushup position</Text>
+          {reps.calibrating ? (
+            <>
+              <Text style={styles.prompt}>
+                Hold the top of a pushup to calibrate
+              </Text>
+              <View style={styles.progressTrack}>
+                <View style={[styles.progressFill, { width: `${reps.calProgress * 100}%` }]} />
+              </View>
+            </>
+          ) : !reps.inPosition ? (
+            <Text style={styles.prompt}>Back into position</Text>
           ) : null}
           <Text style={styles.counter}>{reps.reps}</Text>
           <Text style={styles.counterLabel}>
@@ -191,7 +211,7 @@ export default function Session() {
 
         <View style={styles.controls}>
           <Pressable style={[styles.button, styles.secondary]} onPress={resetReps}>
-            <Text style={styles.buttonText}>reset</Text>
+            <Text style={styles.buttonText}>recalibrate</Text>
           </Pressable>
           <Pressable
             style={styles.button}
@@ -244,6 +264,10 @@ function AngleBar({ angle }: { angle: number }) {
   );
 }
 
+function fmtDeg(v: number): string {
+  return Number.isFinite(v) ? `${Math.round(v)}°` : '--';
+}
+
 function fmt(v: number, digits = 0): string {
   return Number.isFinite(v) ? v.toFixed(digits) : '--';
 }
@@ -277,6 +301,15 @@ const styles = StyleSheet.create({
     textShadowRadius: 8,
   },
   counterLabel: { color: '#d1d5db', fontSize: 15, letterSpacing: 1.5, textTransform: 'uppercase' },
+  progressTrack: {
+    width: 220,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: 'rgba(255,255,255,0.25)',
+    marginBottom: 8,
+    overflow: 'hidden',
+  },
+  progressFill: { height: '100%', backgroundColor: '#fcd34d' },
   prompt: {
     color: '#fcd34d',
     fontSize: 17,

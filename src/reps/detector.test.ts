@@ -3,9 +3,28 @@ import { createRepDetector, type DetectorEvent, type RepEvent } from './detector
 import { blankFrame, frameWithElbowAngle, pushupFrames } from '../../test/synth';
 import type { PoseFrame } from '../pose/keypoints';
 
+/**
+ * Frames that satisfy calibration: the top of a pushup, held.
+ *
+ * The detector counts nothing until it has captured the user's own position, so
+ * every test needs this first. Deliberately in pushup posture even for the
+ * out-of-position tests — the point of those is that movement which departs
+ * from the calibrated reference does not count.
+ */
+function calibrationFrames(endT: number, topAngle = 170): PoseFrame[] {
+  const frames: PoseFrame[] = [];
+  const durationMs = 2100;
+  for (let t = endT - durationMs; t < endT; t += 33) {
+    frames.push(frameWithElbowAngle(t, topAngle, { posture: 'pushup' }));
+  }
+  return frames;
+}
+
 function run(frames: PoseFrame[], config = {}) {
   const detector = createRepDetector(config);
   const events: DetectorEvent[] = [];
+  const firstT = frames.length > 0 ? frames[0].t : 0;
+  for (const f of calibrationFrames(firstT)) detector.push(f);
   for (const f of frames) events.push(...detector.push(f));
   return { detector, events, reps: events.filter((e): e is RepEvent => e.type === 'rep') };
 }
@@ -120,16 +139,17 @@ describe('plausibility guards', () => {
 });
 
 describe('starting mid-movement', () => {
-  it('does not award a rep when the session begins at the bottom', () => {
-    // Camera starts recording with the user already down. Only the ascent is seen,
-    // which is half a rep and must not count.
-    const frames: PoseFrame[] = [];
-    let t = 0;
-    for (let i = 0; i < 40; i++) {
-      frames.push(frameWithElbowAngle((t += 33), 70 + (100 * i) / 40));
-    }
-    for (let i = 0; i < 40; i++) frames.push(frameWithElbowAngle((t += 33), 170));
-    expect(run(frames).reps).toHaveLength(0);
+  it('counts nothing until the reference position has been captured', () => {
+    // Fed straight in with no calibration hold. Whatever else happens, no rep may
+    // be emitted before the reference exists — there is nothing to compare against.
+    const detector = createRepDetector();
+    const events: DetectorEvent[] = [];
+    for (const f of pushupFrames({ startT: 0, ...SLOW })) events.push(...detector.push(f));
+
+    const calibratedAt = events.findIndex((e) => e.type === 'calibrated');
+    const firstRepAt = events.findIndex((e) => e.type === 'rep');
+    expect(calibratedAt).toBeGreaterThanOrEqual(0);
+    if (firstRepAt >= 0) expect(firstRepAt).toBeGreaterThan(calibratedAt);
   });
 });
 
@@ -289,7 +309,7 @@ describe('posture gate', () => {
     expect(reps[0].flags).toContain('hipSag');
   });
 
-  it('emits positionAcquired then positionLost when you stand up mid-set', () => {
+  it('emits positionLost when you stand up mid-set', () => {
     const frames: PoseFrame[] = [];
     let t = 0;
     const rep = pushupFrames({ startT: t, ...SLOW });
@@ -299,7 +319,8 @@ describe('posture gate', () => {
       frames.push(frameWithElbowAngle((t += 33), 170, { posture: 'upright' }));
     }
     const { events, detector } = run(frames);
-    expect(events.some((e) => e.type === 'positionAcquired')).toBe(true);
+    // Calibration itself establishes the position, so positionAcquired does not
+    // fire on entry — losing it is what matters.
     expect(events.some((e) => e.type === 'positionLost')).toBe(true);
     // The rep completed before standing up still counts.
     expect(detector.state().reps).toBe(1);
@@ -339,5 +360,63 @@ describe('relaxed timing', () => {
     expect(reps).toHaveLength(1);
     expect(reps[0].valid).toBe(true);
     expect(reps[0].durationMs).toBeGreaterThan(6000);
+  });
+});
+
+describe('calibration', () => {
+  it('captures a reference from the held top position', () => {
+    const { detector } = run(pushupFrames({ startT: 0, ...SLOW }));
+    const cal = detector.state().calibration;
+    expect(cal).not.toBeNull();
+    expect(cal!.topElbowAngle).toBeCloseTo(170, 0);
+    expect(cal!.torsoLength).toBeGreaterThan(0);
+  });
+
+  it('works regardless of how the body is oriented in the image', () => {
+    // The whole point of calibrating: the reference is captured in whatever
+    // space the camera delivers, so a rotated buffer or an unusual camera
+    // placement is no longer something the thresholds have to know about.
+    // Here the body is rotated 90 degrees from the previous test's layout.
+    const rotate = (f: PoseFrame): PoseFrame => ({
+      t: f.t,
+      keypoints: f.keypoints.map((k) => ({ x: 1 - k.y, y: k.x, score: k.score })),
+    });
+    const frames = pushupFrames({ startT: 0, ...SLOW }).map(rotate);
+    const detector = createRepDetector();
+    for (const f of calibrationFrames(frames[0].t).map(rotate)) detector.push(f);
+    for (const f of frames) detector.push(f);
+    expect(detector.state().reps).toBe(1);
+  });
+
+  it('restarts the hold if the body is lost partway through', () => {
+    const detector = createRepDetector();
+    let t = 0;
+    for (let i = 0; i < 20; i++) {
+      detector.push(frameWithElbowAngle((t += 33), 170, { posture: 'pushup' }));
+    }
+    // A single dropped frame must not restart the hold, but sustained loss must.
+    detector.push(blankFrame((t += 33)));
+    expect(detector.state().calProgress).toBeGreaterThan(0);
+
+    for (let i = 0; i < 12; i++) detector.push(blankFrame((t += 33)));
+    // Progress is discarded rather than resumed, so the reference is never an
+    // average across two different positions.
+    expect(detector.state().calProgress).toBe(0);
+    expect(detector.state().mode).toBe('calibrating');
+  });
+
+  it('derives thresholds from the calibrated top, not absolute angles', () => {
+    // A head-on camera foreshortens the arm so lockout may only read ~150.
+    // Fixed thresholds would never be reached; calibrated ones scale with it.
+    const frames: PoseFrame[] = [];
+    let t = 0;
+    const detector = createRepDetector();
+    for (const f of calibrationFrames(2200, 150)) detector.push(f);
+    t = 2200;
+    for (let i = 0; i < 30; i++) frames.push(frameWithElbowAngle((t += 33), 150 - (85 * i) / 30));
+    for (let i = 0; i < 30; i++) frames.push(frameWithElbowAngle((t += 33), 65 + (85 * i) / 30));
+    for (let i = 0; i < 20; i++) frames.push(frameWithElbowAngle((t += 33), 150));
+    for (const f of frames) detector.push(f);
+    expect(detector.state().reps).toBe(1);
   });
 });

@@ -29,15 +29,22 @@ export type DetectorConfig = {
   /** Consecutive unusable frames before tracking is declared lost. */
   trackingLostFrames: number;
 
+  /** How long the top position must be held to capture a reference, in ms. */
+  calibrationMs: number;
+  /** Minimum usable samples before a calibration is accepted. */
+  calibrationMinSamples: number;
   /**
-   * Maximum tilt of the shoulder→hip line away from horizontal, in degrees,
-   * for the body to count as being in a pushup position.
-   *
-   * This is the gate that stops arm movement alone from being counted. Standing
-   * or sitting puts the torso near vertical (~90), so anything you do with your
-   * elbows while upright is ignored.
+   * How far the torso may rotate away from the calibrated reference before the
+   * body no longer counts as being in position, in degrees.
    */
-  maxTorsoTiltDeg: number;
+  torsoToleranceDeg: number;
+  /**
+   * How much the torso may grow or shrink relative to the calibrated reference.
+   * Catches standing up or walking away, which change apparent scale sharply,
+   * without punishing the normal movement of a rep.
+   */
+  minScaleRatio: number;
+  maxScaleRatio: number;
 
   /**
    * Minimum shoulder→hip→knee angle for the body to count as extended. Below
@@ -73,7 +80,13 @@ export const DEFAULT_CONFIG: DetectorConfig = {
   minRepMs: 300,
   maxRepMs: 12000,
   trackingLostFrames: 10,
-  maxTorsoTiltDeg: 45,
+  calibrationMs: 1500,
+  calibrationMinSamples: 12,
+  // Generous: a real rep rotates the torso somewhat, and a head-on view makes
+  // the measured direction noisy because the torso is heavily foreshortened.
+  torsoToleranceDeg: 40,
+  minScaleRatio: 0.6,
+  maxScaleRatio: 1.7,
   minBodyLineAngle: 130,
   hipSagAngle: 155,
   postureLostFrames: 5,

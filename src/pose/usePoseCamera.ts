@@ -61,8 +61,13 @@ export type RepReadout = {
   dipMinAngle: number;
   /** Whether the body is currently in a pushup position at all. */
   inPosition: boolean;
-  /** Shoulder→hip tilt from horizontal, degrees. NaN if unmeasurable. */
-  torsoTilt: number;
+  /** Calibration progress 0..1 while capturing the reference position. */
+  calibrating: boolean;
+  calProgress: number;
+  /** How far the torso has drifted from the calibrated reference, degrees. */
+  torsoDelta: number;
+  /** Torso length relative to the reference. 1 means unchanged. */
+  scaleRatio: number;
   /** Shoulder→hip→knee angle. NaN when the knee is not visible. */
   bodyLine: number;
   shoulderScore: number;
@@ -86,7 +91,10 @@ function emptyReadout(): RepReadout {
     side: null,
     dipMinAngle: Infinity,
     inPosition: false,
-    torsoTilt: NaN,
+    calibrating: true,
+    calProgress: 0,
+    torsoDelta: NaN,
+    scaleRatio: NaN,
     bodyLine: NaN,
     shoulderScore: 0,
     hipScore: 0,
@@ -250,7 +258,10 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
             side: d.side,
             dipMinAngle: d.dipMinAngle,
             inPosition: d.inPosition,
-            torsoTilt: d.torsoTilt,
+            calibrating: d.mode === 'calibrating',
+            calProgress: d.calProgress,
+            torsoDelta: d.torsoDelta,
+            scaleRatio: d.scaleRatio,
             bodyLine: d.bodyLine,
             shoulderScore: d.shoulderScore,
             hipScore: d.hipScore,
