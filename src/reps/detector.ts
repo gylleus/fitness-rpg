@@ -22,7 +22,7 @@
  * smoothed angle jittered across it.
  */
 
-import { angleDeg, ema } from './geometry';
+import { angleDeg, angleFromHorizontalDeg, ema } from './geometry';
 import { DEFAULT_CONFIG, type DetectorConfig } from './config';
 import { SIDE_JOINTS, type PoseFrame, type Side } from '../pose/keypoints';
 
@@ -40,12 +40,17 @@ export type RepEvent = {
   valid: boolean;
   /** Deepest (smallest) elbow angle reached during the descent. */
   minAngle: number;
+  /** Form problems observed during this rep. */
+  flags: string[];
   durationMs: number;
   startedAt: number;
   endedAt: number;
 };
 
-export type TrackingEvent = { type: 'trackingLost' | 'trackingRegained'; t: number };
+export type TrackingEvent = {
+  type: 'trackingLost' | 'trackingRegained' | 'positionAcquired' | 'positionLost';
+  t: number;
+};
 
 /** A movement that looked like a rep but failed a plausibility guard. */
 export type RejectedEvent = {
@@ -85,6 +90,13 @@ export type DetectorState = {
   descentStartedAt: number;
   dipMinAngle: number;
   topEnteredAt: number;
+  /** Whether the body currently looks like a pushup position. */
+  inPosition: boolean;
+  outOfPositionFrames: number;
+  torsoTilt: number;
+  bodyLine: number;
+  /** Hip sag seen at any point during the rep in progress. */
+  sagThisRep: boolean;
 };
 
 export function createDetectorState(): DetectorState {
@@ -100,6 +112,11 @@ export function createDetectorState(): DetectorState {
     descentStartedAt: NaN,
     dipMinAngle: Infinity,
     topEnteredAt: 0,
+    inPosition: false,
+    outOfPositionFrames: 0,
+    torsoTilt: NaN,
+    bodyLine: NaN,
+    sagThisRep: false,
   };
 }
 
@@ -111,6 +128,7 @@ function resetMovement(s: DetectorState): void {
   s.dipMinAngle = Infinity;
   s.descentStartedAt = NaN;
   s.topEnteredAt = 0;
+  s.sagThisRep = false;
 }
 
 /**
@@ -163,6 +181,61 @@ function selectSide(frame: PoseFrame): { side: Side; confidence: number } | null
     }
   }
   return bestSide == null ? null : { side: bestSide, confidence: bestConfidence };
+}
+
+export type Posture = {
+  /** True when the body looks like it is actually in a pushup position. */
+  inPosition: boolean;
+  /** Shoulder→hip tilt away from horizontal, degrees. NaN if unmeasurable. */
+  torsoTilt: number;
+  /** Shoulder→hip→knee angle, degrees. NaN when the knee is not visible. */
+  bodyLine: number;
+  /** In position, but the hips are sagging. */
+  hipSag: boolean;
+};
+
+/**
+ * Decides whether the body is in a pushup position at all.
+ *
+ * Elbow angle alone cannot distinguish a pushup from any other arm movement —
+ * sitting and bending your arms produces exactly the same signal. The torso
+ * orientation is what separates them: in a pushup the shoulder→hip line is
+ * roughly horizontal in frame, whereas standing or sitting puts it near vertical.
+ *
+ * The straightness check is only applied when the knee is actually visible, so a
+ * tight camera framing that crops the legs does not block counting outright.
+ */
+function evaluatePosture(frame: PoseFrame, side: Side, cfg: DetectorConfig): Posture {
+  'worklet';
+  const j = SIDE_JOINTS[side];
+  const shoulder = frame.keypoints[j.shoulder];
+  const hip = frame.keypoints[j.hip];
+  const knee = frame.keypoints[j.knee];
+
+  if (
+    shoulder == null ||
+    hip == null ||
+    shoulder.score < cfg.minConfidence ||
+    hip.score < cfg.minConfidence
+  ) {
+    return { inPosition: false, torsoTilt: NaN, bodyLine: NaN, hipSag: false };
+  }
+
+  const torsoTilt = angleFromHorizontalDeg(shoulder, hip);
+  if (Number.isNaN(torsoTilt) || torsoTilt > cfg.maxTorsoTiltDeg) {
+    return { inPosition: false, torsoTilt, bodyLine: NaN, hipSag: false };
+  }
+
+  let bodyLine = NaN;
+  if (knee != null && knee.score >= cfg.minConfidence) {
+    bodyLine = angleDeg(shoulder, hip, knee);
+    if (!Number.isNaN(bodyLine) && bodyLine < cfg.minBodyLineAngle) {
+      return { inPosition: false, torsoTilt, bodyLine, hipSag: false };
+    }
+  }
+
+  const hipSag = !Number.isNaN(bodyLine) && bodyLine < cfg.hipSagAngle;
+  return { inPosition: true, torsoTilt, bodyLine, hipSag };
 }
 
 /**
@@ -228,6 +301,32 @@ export function stepDetector(
     return events;
   }
 
+  // Posture gate. Arm movement alone is not a pushup, so nothing is counted
+  // unless the torso is actually in position.
+  const posture = evaluatePosture(frame, active, cfg);
+  s.torsoTilt = posture.torsoTilt;
+  s.bodyLine = posture.bodyLine;
+
+  if (posture.inPosition) {
+    s.outOfPositionFrames = 0;
+    if (!s.inPosition) {
+      s.inPosition = true;
+      events.push({ type: 'positionAcquired', t: frame.t });
+    }
+    if (posture.hipSag) s.sagThisRep = true;
+  } else {
+    s.outOfPositionFrames++;
+    if (s.inPosition && s.outOfPositionFrames >= cfg.postureLostFrames) {
+      s.inPosition = false;
+      // Abandon the movement in progress rather than resuming it later: the part
+      // that happened out of position was not a pushup.
+      resetMovement(s);
+      events.push({ type: 'positionLost', t: frame.t });
+    }
+  }
+
+  if (!s.inPosition) return events;
+
   s.elbowAngle = ema(s.elbowAngle, angle, cfg.emaAlpha);
   const smoothed = s.elbowAngle;
 
@@ -283,7 +382,9 @@ export function stepDetector(
   }
 
   const depth = s.dipMinAngle;
+  const sagged = s.sagThisRep;
   s.dipMinAngle = Infinity;
+  s.sagThisRep = false;
 
   const valid = depth <= cfg.downAngle;
   if (valid) s.reps++;
@@ -296,6 +397,7 @@ export function stepDetector(
     index: s.reps + s.partials,
     valid,
     minAngle: depth,
+    flags: sagged ? ['hipSag'] : [],
     durationMs,
     startedAt,
     endedAt: frame.t,

@@ -41,6 +41,23 @@ export function clamp(value: number, min: number, max: number): number {
 }
 
 /**
+ * Absolute angle of the vector a→b away from horizontal, in degrees, 0..90.
+ *
+ * 0 means the two points lie side by side, 90 means one is directly above the
+ * other. Used to tell a pushup (torso roughly horizontal in frame) from standing
+ * or sitting, which is what stops arm movement alone from counting as a rep.
+ *
+ * Returns NaN for coincident points, since the direction is then undefined.
+ */
+export function angleFromHorizontalDeg(a: Point2, b: Point2): number {
+  'worklet';
+  const dx = b.x - a.x;
+  const dy = b.y - a.y;
+  if (dx === 0 && dy === 0) return NaN;
+  return (Math.atan2(Math.abs(dy), Math.abs(dx)) * 180) / Math.PI;
+}
+
+/**
  * Interior angle at vertex `b`, in degrees, in the range [0, 180].
  *
  * This is the core signal for rep counting: the elbow angle (shoulder→elbow→wrist)

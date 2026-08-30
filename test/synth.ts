@@ -8,13 +8,26 @@ import { KEYPOINT } from '../src/pose/keypoints';
  * The arm is laid out as shoulder → elbow → wrist with the requested interior angle
  * at the elbow. Everything else is placed plausibly and given the same confidence.
  */
+export type BodyPosture =
+  /** Torso horizontal and straight — a real pushup position. */
+  | 'pushup'
+  /** Torso vertical: sitting or standing. Arm movement here is not a pushup. */
+  | 'upright'
+  /** Torso horizontal but folded at the hips. */
+  | 'folded'
+  /** Torso horizontal but sagging — counts, with a form flag. */
+  | 'sagging'
+  /** Hips and knees not confidently visible. */
+  | 'legsHidden';
+
 export function frameWithElbowAngle(
   t: number,
   degrees: number,
-  opts: { score?: number; side?: 'left' | 'right' } = {},
+  opts: { score?: number; side?: 'left' | 'right'; posture?: BodyPosture } = {},
 ): PoseFrame {
   const score = opts.score ?? 0.9;
   const side = opts.side ?? 'left';
+  const posture = opts.posture ?? 'pushup';
 
   const blank: Keypoint = { x: 0.5, y: 0.5, score };
   const keypoints: Keypoint[] = Array.from({ length: KEYPOINT_COUNT }, () => ({ ...blank }));
@@ -28,12 +41,50 @@ export function frameWithElbowAngle(
   };
 
   const j = side === 'left'
-    ? { s: KEYPOINT.LEFT_SHOULDER, e: KEYPOINT.LEFT_ELBOW, w: KEYPOINT.LEFT_WRIST }
-    : { s: KEYPOINT.RIGHT_SHOULDER, e: KEYPOINT.RIGHT_ELBOW, w: KEYPOINT.RIGHT_WRIST };
+    ? {
+        s: KEYPOINT.LEFT_SHOULDER,
+        e: KEYPOINT.LEFT_ELBOW,
+        w: KEYPOINT.LEFT_WRIST,
+        h: KEYPOINT.LEFT_HIP,
+        k: KEYPOINT.LEFT_KNEE,
+        a: KEYPOINT.LEFT_ANKLE,
+      }
+    : {
+        s: KEYPOINT.RIGHT_SHOULDER,
+        e: KEYPOINT.RIGHT_ELBOW,
+        w: KEYPOINT.RIGHT_WRIST,
+        h: KEYPOINT.RIGHT_HIP,
+        k: KEYPOINT.RIGHT_KNEE,
+        a: KEYPOINT.RIGHT_ANKLE,
+      };
 
   keypoints[j.s] = { ...shoulder, score };
   keypoints[j.e] = { ...elbow, score };
   keypoints[j.w] = { ...wrist, score };
+
+  // Torso and legs trail away from the arm. In a real side-on pushup these lie
+  // roughly along a horizontal line through the shoulder.
+  // A tight framing crops the legs but still shows the hips; torso tilt stays
+  // measurable, only the straightness check is lost.
+  const hipScore = score;
+  const legScore = posture === 'legsHidden' ? 0.05 : score;
+  if (posture === 'upright') {
+    keypoints[j.h] = { x: shoulder.x, y: shoulder.y + 0.18, score: hipScore };
+    keypoints[j.k] = { x: shoulder.x, y: shoulder.y + 0.34, score: legScore };
+    keypoints[j.a] = { x: shoulder.x, y: shoulder.y + 0.48, score: legScore };
+  } else if (posture === 'folded') {
+    keypoints[j.h] = { x: shoulder.x - 0.15, y: shoulder.y, score: hipScore };
+    keypoints[j.k] = { x: shoulder.x - 0.1, y: shoulder.y + 0.16, score: legScore };
+    keypoints[j.a] = { x: shoulder.x - 0.02, y: shoulder.y + 0.2, score: legScore };
+  } else if (posture === 'sagging') {
+    keypoints[j.h] = { x: shoulder.x - 0.15, y: shoulder.y + 0.05, score: hipScore };
+    keypoints[j.k] = { x: shoulder.x - 0.29, y: shoulder.y, score: legScore };
+    keypoints[j.a] = { x: shoulder.x - 0.4, y: shoulder.y - 0.01, score: legScore };
+  } else {
+    keypoints[j.h] = { x: shoulder.x - 0.15, y: shoulder.y, score: hipScore };
+    keypoints[j.k] = { x: shoulder.x - 0.29, y: shoulder.y, score: legScore };
+    keypoints[j.a] = { x: shoulder.x - 0.4, y: shoulder.y, score: legScore };
+  }
 
   // The other side is occluded in a side-on pushup — mimic that so side selection
   // is actually exercised rather than always seeing two equally good arms.
@@ -65,8 +116,10 @@ export function pushupFrames(opts: {
   ascentMs: number;
   holdMs?: number;
   fps?: number;
+  posture?: BodyPosture;
 }): PoseFrame[] {
   const { startT, bottomAngle, descentMs, ascentMs } = opts;
+  const posture = opts.posture ?? 'pushup';
   const topAngle = opts.topAngle ?? 170;
   const holdMs = opts.holdMs ?? 300;
   const fps = opts.fps ?? 30;
@@ -75,23 +128,23 @@ export function pushupFrames(opts: {
   const frames: PoseFrame[] = [];
   let t = startT;
 
-  for (let e = 0; e < holdMs; e += step) frames.push(frameWithElbowAngle(t + e, topAngle));
+  for (let e = 0; e < holdMs; e += step) frames.push(frameWithElbowAngle(t + e, topAngle, { posture }));
   t += holdMs;
 
   for (let e = 0; e < descentMs; e += step) {
     const p = e / descentMs;
-    frames.push(frameWithElbowAngle(t + e, topAngle + (bottomAngle - topAngle) * p));
+    frames.push(frameWithElbowAngle(t + e, topAngle + (bottomAngle - topAngle) * p, { posture }));
   }
   t += descentMs;
 
   for (let e = 0; e < ascentMs; e += step) {
     const p = e / ascentMs;
-    frames.push(frameWithElbowAngle(t + e, bottomAngle + (topAngle - bottomAngle) * p));
+    frames.push(frameWithElbowAngle(t + e, bottomAngle + (topAngle - bottomAngle) * p, { posture }));
   }
   t += ascentMs;
 
   // Settle at the top so the smoothed angle actually crosses upAngle.
-  for (let e = 0; e < holdMs; e += step) frames.push(frameWithElbowAngle(t + e, topAngle));
+  for (let e = 0; e < holdMs; e += step) frames.push(frameWithElbowAngle(t + e, topAngle, { posture }));
 
   return frames;
 }

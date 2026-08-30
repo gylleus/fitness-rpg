@@ -59,6 +59,8 @@ export default function Session() {
     depth: NaN,
     tracking: false,
     rejection: null as string | null,
+    inPosition: false,
+    tilt: NaN,
   });
 
   useEffect(() => {
@@ -80,6 +82,8 @@ export default function Session() {
         depth: r.dipMinAngle,
         tracking: r.tracking,
         rejection: r.lastRejection,
+        inPosition: r.inPosition,
+        tilt: r.torsoTilt,
       });
     }, 100);
     return () => clearInterval(id);
@@ -128,6 +132,10 @@ export default function Session() {
             phase: {reps.phase}{reps.tracking ? '' : '  (no tracking)'}
           </Text>
           <Text style={styles.debugText}>
+            torso tilt: {Number.isNaN(reps.tilt) ? '--' : Math.round(reps.tilt) + '°'}
+            {'  '}(max {DEFAULT_CONFIG.maxTorsoTiltDeg}°)
+          </Text>
+          <Text style={styles.debugText}>
             elbow: {Number.isNaN(reps.angle) ? '--' : Math.round(reps.angle)}°
           </Text>
           <Text style={styles.debugText}>
@@ -145,6 +153,9 @@ export default function Session() {
         </View>
 
         <View style={styles.counterWrap} pointerEvents="none">
+          {!reps.inPosition ? (
+            <Text style={styles.prompt}>Get into pushup position</Text>
+          ) : null}
           <Text style={styles.counter}>{reps.reps}</Text>
           <Text style={styles.counterLabel}>
             reps{reps.partials > 0 ? `   ·   ${reps.partials} partial` : ''}
@@ -236,6 +247,14 @@ const styles = StyleSheet.create({
     textShadowRadius: 8,
   },
   counterLabel: { color: '#d1d5db', fontSize: 15, letterSpacing: 1.5, textTransform: 'uppercase' },
+  prompt: {
+    color: '#fcd34d',
+    fontSize: 17,
+    fontWeight: '700',
+    marginBottom: 4,
+    textShadowColor: 'rgba(0,0,0,0.9)',
+    textShadowRadius: 6,
+  },
   bar: {
     marginTop: 10,
     width: 260,

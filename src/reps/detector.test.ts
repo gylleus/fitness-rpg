@@ -252,3 +252,92 @@ describe('review regressions', () => {
     expect(settled === 'left' || settled === 'right').toBe(true);
   });
 });
+
+describe('posture gate', () => {
+  it('ignores arm movement performed while upright', () => {
+    // The reported bug: moving about without doing pushups counted reps. Elbow
+    // angle alone cannot tell a pushup from sitting and bending your arms — the
+    // torso orientation is what separates them.
+    const frames = pushupFrames({ startT: 0, ...SLOW, posture: 'upright' });
+    const { detector, reps } = run(frames);
+    expect(reps).toHaveLength(0);
+    expect(detector.state().reps).toBe(0);
+    expect(detector.state().inPosition).toBe(false);
+  });
+
+  it('ignores the same movement performed folded up', () => {
+    const { reps } = run(pushupFrames({ startT: 0, ...SLOW, posture: 'folded' }));
+    expect(reps).toHaveLength(0);
+  });
+
+  it('still counts a normal pushup', () => {
+    const { reps } = run(pushupFrames({ startT: 0, ...SLOW, posture: 'pushup' }));
+    expect(reps).toHaveLength(1);
+    expect(reps[0].valid).toBe(true);
+  });
+
+  it('counts when the legs are out of frame rather than blocking on it', () => {
+    // Straightness cannot be measured without a visible knee, but a tight
+    // framing should not stop the counter outright.
+    const { reps } = run(pushupFrames({ startT: 0, ...SLOW, posture: 'legsHidden' }));
+    expect(reps).toHaveLength(1);
+  });
+
+  it('counts a sagging rep but flags the form', () => {
+    const { reps } = run(pushupFrames({ startT: 0, ...SLOW, posture: 'sagging' }));
+    expect(reps).toHaveLength(1);
+    expect(reps[0].flags).toContain('hipSag');
+  });
+
+  it('emits positionAcquired then positionLost when you stand up mid-set', () => {
+    const frames: PoseFrame[] = [];
+    let t = 0;
+    const rep = pushupFrames({ startT: t, ...SLOW });
+    frames.push(...rep);
+    t = rep[rep.length - 1].t + 33;
+    for (let i = 0; i < 30; i++) {
+      frames.push(frameWithElbowAngle((t += 33), 170, { posture: 'upright' }));
+    }
+    const { events, detector } = run(frames);
+    expect(events.some((e) => e.type === 'positionAcquired')).toBe(true);
+    expect(events.some((e) => e.type === 'positionLost')).toBe(true);
+    // The rep completed before standing up still counts.
+    expect(detector.state().reps).toBe(1);
+  });
+
+  it('does not resume a movement that began out of position', () => {
+    const frames: PoseFrame[] = [];
+    let t = 0;
+    // Bend the arms while upright...
+    for (let i = 0; i < 30; i++) {
+      frames.push(frameWithElbowAngle((t += 33), 170 - (100 * i) / 30, { posture: 'upright' }));
+    }
+    // ...then drop into position already at the bottom and push up.
+    for (let i = 0; i < 30; i++) {
+      frames.push(frameWithElbowAngle((t += 33), 70 + (100 * i) / 30, { posture: 'pushup' }));
+    }
+    for (let i = 0; i < 20; i++) frames.push(frameWithElbowAngle((t += 33), 170, { posture: 'pushup' }));
+    expect(run(frames).reps).toHaveLength(0);
+  });
+
+  it('tolerates a brief posture dropout without abandoning the set', () => {
+    const frames = pushupFrames({ startT: 0, ...SLOW });
+    // Three bad frames mid-rep, under postureLostFrames (5).
+    const patched = frames.map((f, i) =>
+      i >= 25 && i < 28 ? frameWithElbowAngle(f.t, 120, { posture: 'upright' }) : f,
+    );
+    const { events } = run(patched);
+    expect(events.some((e) => e.type === 'positionLost')).toBe(false);
+  });
+});
+
+describe('relaxed timing', () => {
+  it('accepts a slow controlled rep that the old 6s cap rejected', () => {
+    const { reps } = run(
+      pushupFrames({ startT: 0, bottomAngle: 70, descentMs: 5000, ascentMs: 5000, holdMs: 400 }),
+    );
+    expect(reps).toHaveLength(1);
+    expect(reps[0].valid).toBe(true);
+    expect(reps[0].durationMs).toBeGreaterThan(6000);
+  });
+});

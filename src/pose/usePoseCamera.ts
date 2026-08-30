@@ -59,6 +59,10 @@ export type RepReadout = {
   side: DetectorState['side'];
   /** Deepest angle of the rep in progress. Infinity between reps. */
   dipMinAngle: number;
+  /** Whether the body is currently in a pushup position at all. */
+  inPosition: boolean;
+  /** Shoulder→hip tilt from horizontal, degrees. NaN if unmeasurable. */
+  torsoTilt: number;
   /** Why the last movement was discarded, if it was. */
   lastRejection: string | null;
 };
@@ -73,6 +77,8 @@ function emptyReadout(): RepReadout {
     tracking: false,
     side: null,
     dipMinAngle: Infinity,
+    inPosition: false,
+    torsoTilt: NaN,
     lastRejection: null,
   };
 }
@@ -217,6 +223,8 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
             tracking: d.tracking,
             side: d.side,
             dipMinAngle: d.dipMinAngle,
+            inPosition: d.inPosition,
+            torsoTilt: d.torsoTilt,
             lastRejection: st.lastRejection,
           };
         } finally {
