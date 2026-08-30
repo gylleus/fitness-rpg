@@ -47,7 +47,8 @@
             "minSdkVersion": 26
           }
         }
-      ]
+      ],
+      "expo-sqlite"
     ]
   }
 }
