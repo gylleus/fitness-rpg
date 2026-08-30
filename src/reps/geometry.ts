@@ -5,9 +5,16 @@
  * here runs identically in a camera worklet and in a Node test process, which is what
  * lets the rep detector be tuned against recorded fixtures on a laptop.
  *
- * Every function carries the 'worklet' directive. The rep detector calls them from
- * the camera thread, and without it they remain remote JS functions — which fails at
- * runtime with "tried to synchronously call a Remote Function", not at compile time.
+ * Two constraints apply here because the rep detector calls these from the camera
+ * thread, and neither is enforced by TypeScript, ESLint, or the Node tests:
+ *
+ * 1. Every function carries the 'worklet' directive. Without it the function stays
+ *    on the JS thread and the call fails with "tried to synchronously call a Remote
+ *    Function".
+ * 2. A worklet must be DEFINED ABOVE any worklet in this file that calls it. The
+ *    Babel plugin rewrites hoisted `function` declarations into plain assignments,
+ *    so an ordinary forward reference — legal JavaScript everywhere else — captures
+ *    `undefined` and fails with "undefined is not a function".
  *
  * Coordinates are normalised to 0..1 of the frame. Note that image y grows *downward*,
  * but since every function here is orientation-agnostic that never matters.
@@ -26,6 +33,11 @@ export function distanceSquared(a: Point2, b: Point2): number {
 export function distance(a: Point2, b: Point2): number {
   'worklet';
   return Math.sqrt(distanceSquared(a, b));
+}
+
+export function clamp(value: number, min: number, max: number): number {
+  'worklet';
+  return value < min ? min : value > max ? max : value;
 }
 
 /**
@@ -55,11 +67,6 @@ export function angleDeg(a: Point2, b: Point2, c: Point2): number {
   // for a perfectly straight arm — exactly the case we care most about.
   const cos = clamp((v1x * v2x + v1y * v2y) / (m1 * m2), -1, 1);
   return (Math.acos(cos) * 180) / Math.PI;
-}
-
-export function clamp(value: number, min: number, max: number): number {
-  'worklet';
-  return value < min ? min : value > max ? max : value;
 }
 
 /**
