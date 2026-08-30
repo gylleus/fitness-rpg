@@ -8,6 +8,7 @@
     "expo": "~57.0.18",
     "expo-build-properties": "~57.0.15",
     "expo-constants": "~57.0.16",
+    "expo-dev-client": "~57.0.16",
     "expo-file-system": "~57.0.6",
     "expo-keep-awake": "~57.0.1",
     "expo-linking": "~57.0.8",
@@ -44,7 +45,9 @@
     "lint": "expo lint",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "android:apk": "cd android && ./gradlew :app:assembleDebug -PreactNativeArchitectures=arm64-v8a",
+    "android:install": "adb install -r android/app/build/outputs/apk/debug/app-debug.apk"
   },
   "private": true
 }
