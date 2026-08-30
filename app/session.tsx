@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useKeepAwake } from 'expo-keep-awake';
@@ -50,6 +50,7 @@ export default function Session() {
   // Sample shared values at ~10Hz rather than reacting per frame: the numbers
   // are unreadable faster than that, and it keeps 30fps of keypoints off the JS
   // thread entirely.
+  const lastLog = useRef(0);
   const [debug, setDebug] = useState({ ms: 0, tracked: 0, best: 0 });
   const [reps, setReps] = useState({
     reps: 0,
@@ -74,6 +75,20 @@ export default function Session() {
       });
 
       const r = readout.value;
+
+      // Log once a second so a closed posture gate can be diagnosed from real
+      // numbers rather than guessed at. Reads as one line in the Metro output.
+      const now = Date.now();
+      if (now - lastLog.current > 1000) {
+        lastLog.current = now;
+        console.log(
+          `[posture] inPosition=${r.inPosition} tilt=${fmt(r.torsoTilt)} ` +
+            `bodyLine=${fmt(r.bodyLine)} elbow=${fmt(r.elbowAngle)} ` +
+            `scores(sh/hip/knee)=${fmt(r.shoulderScore, 2)}/${fmt(r.hipScore, 2)}/${fmt(r.kneeScore, 2)} ` +
+            `side=${r.side} phase=${r.phase} frame=${r.frameWidth}x${r.frameHeight}`,
+        );
+      }
+
       setReps({
         reps: r.reps,
         partials: r.partials,
@@ -133,7 +148,7 @@ export default function Session() {
           </Text>
           <Text style={styles.debugText}>
             torso tilt: {Number.isNaN(reps.tilt) ? '--' : Math.round(reps.tilt) + '°'}
-            {'  '}(max {DEFAULT_CONFIG.maxTorsoTiltDeg}°)
+            {'  '}(max {DEFAULT_CONFIG.maxTorsoTiltDeg}°) {reps.inPosition ? 'OK' : 'BLOCKED'}
           </Text>
           <Text style={styles.debugText}>
             elbow: {Number.isNaN(reps.angle) ? '--' : Math.round(reps.angle)}°
@@ -216,6 +231,10 @@ function AngleBar({ angle }: { angle: number }) {
       <View style={[styles.marker, { left: `${pct * 100}%` }]} />
     </View>
   );
+}
+
+function fmt(v: number, digits = 0): string {
+  return Number.isFinite(v) ? v.toFixed(digits) : '--';
 }
 
 function Centered({ children }: { children: React.ReactNode }) {

@@ -97,6 +97,10 @@ export type DetectorState = {
   bodyLine: number;
   /** Hip sag seen at any point during the rep in progress. */
   sagThisRep: boolean;
+  /** Confidence of the joints the posture gate depends on, for diagnostics. */
+  shoulderScore: number;
+  hipScore: number;
+  kneeScore: number;
 };
 
 export function createDetectorState(): DetectorState {
@@ -117,6 +121,9 @@ export function createDetectorState(): DetectorState {
     torsoTilt: NaN,
     bodyLine: NaN,
     sagThisRep: false,
+    shoulderScore: 0,
+    hipScore: 0,
+    kneeScore: 0,
   };
 }
 
@@ -306,6 +313,11 @@ export function stepDetector(
   const posture = evaluatePosture(frame, active, cfg);
   s.torsoTilt = posture.torsoTilt;
   s.bodyLine = posture.bodyLine;
+
+  const pj = SIDE_JOINTS[active];
+  s.shoulderScore = frame.keypoints[pj.shoulder]?.score ?? 0;
+  s.hipScore = frame.keypoints[pj.hip]?.score ?? 0;
+  s.kneeScore = frame.keypoints[pj.knee]?.score ?? 0;
 
   if (posture.inPosition) {
     s.outOfPositionFrames = 0;

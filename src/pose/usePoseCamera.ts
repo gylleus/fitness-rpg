@@ -63,6 +63,14 @@ export type RepReadout = {
   inPosition: boolean;
   /** Shoulder→hip tilt from horizontal, degrees. NaN if unmeasurable. */
   torsoTilt: number;
+  /** Shoulder→hip→knee angle. NaN when the knee is not visible. */
+  bodyLine: number;
+  shoulderScore: number;
+  hipScore: number;
+  kneeScore: number;
+  /** Raw frame geometry, to expose any buffer/preview orientation mismatch. */
+  frameWidth: number;
+  frameHeight: number;
   /** Why the last movement was discarded, if it was. */
   lastRejection: string | null;
 };
@@ -79,6 +87,12 @@ function emptyReadout(): RepReadout {
     dipMinAngle: Infinity,
     inPosition: false,
     torsoTilt: NaN,
+    bodyLine: NaN,
+    shoulderScore: 0,
+    hipScore: 0,
+    kneeScore: 0,
+    frameWidth: 0,
+    frameHeight: 0,
     lastRejection: null,
   };
 }
@@ -225,6 +239,12 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
             dipMinAngle: d.dipMinAngle,
             inPosition: d.inPosition,
             torsoTilt: d.torsoTilt,
+            bodyLine: d.bodyLine,
+            shoulderScore: d.shoulderScore,
+            hipScore: d.hipScore,
+            kneeScore: d.kneeScore,
+            frameWidth: frame.width,
+            frameHeight: frame.height,
             lastRejection: st.lastRejection,
           };
         } finally {
