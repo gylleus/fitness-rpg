@@ -1,21 +1,37 @@
 /**
  * Wires the camera to MoveNet and the rep detector.
  *
- * Everything expensive happens on the camera thread inside a worklet. Only three
- * things cross back to JS: rep events, a throttled status tick for the HUD, and
- * the keypoints — and those travel through a Reanimated shared value rather than
- * a bridge call, because shipping 30 objects/sec across the JS boundary is what
- * makes frame processors stutter.
+ * ## Why state lives on the camera runtime, not in shared values
+ *
+ * The frame processor runs on its own worklet runtime. Reanimated hosts mutables
+ * on the UI runtime, so from any other runtime a read is `getSync()` — a blocking
+ * hop onto the UI thread — while a write is `setAsync()`, queued and applied
+ * later. A read-modify-write of detector state across that boundary therefore
+ * races itself: at 30fps a read routinely observes state from before a still
+ * pending write, so the EMA never accumulates and the phase never advances.
+ *
+ * All hot state consequently lives on the camera runtime's own global, mutated in
+ * place. Shared values are used only for one-way publication to the UI, where an
+ * asynchronous write is exactly what we want.
  */
 
 import { useMemo } from 'react';
+import { Platform } from 'react-native';
 import { useSharedValue } from 'react-native-reanimated';
 import { useFrameOutput } from 'react-native-vision-camera';
 import { useResizer } from 'react-native-vision-camera-resizer';
 import { useTensorflowModel } from 'react-native-fast-tflite';
 
-import { createKeypointBuffer, decodeMoveNet, MODEL_INPUT_SIZE, rotateSquareRgb, unrotateKeypoints, type InputRotation } from './model';
-import { KEYPOINT_COUNT, type Keypoint } from './keypoints';
+import {
+  createKeypointBuffer,
+  decodeMoveNet,
+  MODEL_CHANNELS,
+  MODEL_INPUT_SIZE,
+  rotateSquareRgb,
+  unrotateKeypoints,
+  type InputRotation,
+} from './model';
+import { type Keypoint, type PoseFrame } from './keypoints';
 import { createDetectorState, stepDetector, type DetectorState } from '../reps/detector';
 import { DEFAULT_CONFIG } from '../reps/config';
 
@@ -33,7 +49,7 @@ export function emptySnapshot(): PoseSnapshot {
   return { keypoints: createKeypointBuffer(), frameWidth: 0, frameHeight: 0, inferenceMs: 0 };
 }
 
-/** What the HUD needs from the detector, sampled off the camera thread. */
+/** What the HUD needs from the detector, published once per processed frame. */
 export type RepReadout = {
   reps: number;
   partials: number;
@@ -41,14 +57,49 @@ export type RepReadout = {
   elbowAngle: number;
   tracking: boolean;
   side: DetectorState['side'];
-  /** Deepest angle of the rep in progress, for a live depth cue. */
+  /** Deepest angle of the rep in progress. Infinity between reps. */
   dipMinAngle: number;
-  /** Why the last movement was thrown away, if it was. */
+  /** Why the last movement was discarded, if it was. */
+  lastRejection: string | null;
+};
+
+function emptyReadout(): RepReadout {
+  'worklet';
+  return {
+    reps: 0,
+    partials: 0,
+    phase: 'unknown',
+    elbowAngle: NaN,
+    tracking: false,
+    side: null,
+    dipMinAngle: Infinity,
+    lastRejection: null,
+  };
+}
+
+/**
+ * `Frame.timestamp` is a presentation timestamp in platform-native units, NOT
+ * milliseconds: CameraX reports nanoseconds on Android and `CMTime.seconds`
+ * gives fractional seconds on iOS. The detector's duration guards are all in ms,
+ * so feeding the raw value through makes every Android rep exceed `maxRepMs`
+ * (a 1s rep measures as 1e9) and every iOS frame gap collapse below
+ * `minTopDwellMs`. Either way nothing is ever counted.
+ */
+const TIMESTAMP_TO_MS = Platform.OS === 'android' ? 1e-6 : 1e3;
+
+/** State held on the camera runtime, keyed off its global. */
+type RuntimeState = {
+  detector: DetectorState;
+  keypoints: Keypoint[];
+  rotated: Uint8Array;
+  frame: PoseFrame;
+  frameCount: number;
+  resetEpoch: number;
   lastRejection: string | null;
 };
 
 export type UsePoseCameraOptions = {
-  /** Quarter turns applied to the model input. See the accuracy spike. */
+  /** Quarter turns applied to the model input. */
   rotation?: InputRotation;
   /** Run inference on every Nth frame. 1 = every frame. */
   frameStride?: number;
@@ -73,37 +124,14 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
     pixelLayout: 'interleaved',
   });
 
+  // Published to the UI thread only. Never read back on the camera thread.
   const pose = useSharedValue<PoseSnapshot>(emptySnapshot());
+  const readout = useSharedValue<RepReadout>(emptyReadout());
+  // Incremented from JS to request a reset. The worklet compares it against its
+  // own copy, so a missed or repeated read is self-correcting — unlike a boolean
+  // flag the worklet must clear with an asynchronous write.
+  const resetEpoch = useSharedValue(0);
 
-  // The detector runs on the camera thread. Its state lives in a shared value so
-  // it survives between frames and can be read from the UI thread.
-  const detector = useSharedValue<DetectorState>(createDetectorState());
-  // Reset is requested as a flag and applied by the camera thread on its next
-  // frame. Clearing the state from JS instead would race the worklet, which is
-  // mid-write to the same object roughly 30 times a second.
-  const resetRequested = useSharedValue(false);
-  const readout = useSharedValue<RepReadout>({
-    reps: 0,
-    partials: 0,
-    phase: 'unknown',
-    elbowAngle: NaN,
-    tracking: false,
-    side: null,
-    dipMinAngle: Infinity,
-    lastRejection: null,
-  });
-
-  // Scratch buffers allocated once and reused; allocating 110KB per frame on the
-  // camera thread would dominate the actual inference cost.
-  const scratch = useMemo(
-    () => ({
-      rotated: new Uint8Array(MODEL_INPUT_SIZE * MODEL_INPUT_SIZE * 3),
-      keypoints: createKeypointBuffer(),
-    }),
-    [],
-  );
-
-  const frameCounter = useSharedValue(0);
   const loadedModel = model.state === 'loaded' ? model.model : undefined;
 
   const frameOutput = useFrameOutput({
@@ -117,67 +145,79 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
       try {
         if (loadedModel == null || resizer == null) return;
 
-        frameCounter.value = (frameCounter.value + 1) % frameStride;
-        if (frameCounter.value !== 0) return;
-
-        if (resetRequested.value) {
-          detector.value = createDetectorState();
-          resetRequested.value = false;
+        // Created once per camera runtime and mutated in place thereafter. A
+        // useMemo object captured in the closure would not do: the worklet is
+        // rebuilt on every React render and its closure re-serialized, so the
+        // "reused" scratch buffers would be re-copied — and any state in them
+        // silently reset — at the HUD's refresh rate.
+        const g = globalThis as unknown as { __poseState?: RuntimeState };
+        let st = g.__poseState;
+        if (st == null) {
+          st = {
+            detector: createDetectorState(),
+            keypoints: createKeypointBuffer(),
+            rotated: new Uint8Array(MODEL_INPUT_SIZE * MODEL_INPUT_SIZE * MODEL_CHANNELS),
+            frame: { t: 0, keypoints: [] },
+            frameCount: 0,
+            resetEpoch: 0,
+            lastRejection: null,
+          };
+          st.frame.keypoints = st.keypoints;
+          g.__poseState = st;
         }
+
+        const epoch = resetEpoch.value;
+        if (epoch !== st.resetEpoch) {
+          st.resetEpoch = epoch;
+          st.detector = createDetectorState();
+          st.lastRejection = null;
+        }
+
+        const n = (st.frameCount + 1) % frameStride;
+        st.frameCount = n;
+        if (n !== 0) return;
 
         const started = performance.now();
 
         const gpuFrame = resizer.resize(frame);
         try {
           const raw = new Uint8Array(gpuFrame.getPixelBuffer());
-          const input = rotateSquareRgb(raw, scratch.rotated, MODEL_INPUT_SIZE, rotation);
+          const input = rotateSquareRgb(raw, st.rotated, MODEL_INPUT_SIZE, rotation);
 
           const outputs = loadedModel.runSync([input.buffer as ArrayBuffer]);
           const values = new Float32Array(outputs[0]);
 
-          decodeMoveNet(values, scratch.keypoints);
-          unrotateKeypoints(scratch.keypoints, rotation);
+          decodeMoveNet(values, st.keypoints);
+          unrotateKeypoints(st.keypoints, rotation);
 
-          // Copy into a fresh array: the shared value is read on the UI thread and
-          // must not alias a buffer the camera thread is about to overwrite.
-          const copy: Keypoint[] = [];
-          for (let i = 0; i < KEYPOINT_COUNT; i++) {
-            const k = scratch.keypoints[i];
-            copy.push({ x: k.x, y: k.y, score: k.score });
+          st.frame.t = frame.timestamp * TIMESTAMP_TO_MS;
+          const events = stepDetector(st.detector, st.frame, DEFAULT_CONFIG);
+
+          for (let i = 0; i < events.length; i++) {
+            const e = events[i];
+            if (e.type === 'rejected') st.lastRejection = e.reason;
+            else if (e.type === 'rep') st.lastRejection = null;
           }
 
+          const d = st.detector;
+          // Both writes are asynchronous, which is fine: nothing on the camera
+          // thread reads them back. The serializer deep-copies, so publishing the
+          // scratch keypoints directly cannot alias what the next frame overwrites.
           pose.value = {
-            keypoints: copy,
+            keypoints: st.keypoints,
             frameWidth: frame.width,
             frameHeight: frame.height,
             inferenceMs: performance.now() - started,
           };
-
-          // Timestamps come from the frame itself, not wall clock: the detector's
-          // duration guards must measure the movement, not how long the pipeline
-          // took to get here.
-          const s = detector.value;
-          const events = stepDetector(s, { t: frame.timestamp, keypoints: copy }, DEFAULT_CONFIG);
-
-          let rejection: string | null = readout.value.lastRejection;
-          for (let i = 0; i < events.length; i++) {
-            const e = events[i];
-            if (e.type === 'rejected') rejection = e.reason;
-            else if (e.type === 'rep') rejection = null;
-          }
-
-          // Reassign both rather than mutating in place, so the UI thread sees
-          // the update.
-          detector.value = s;
           readout.value = {
-            reps: s.reps,
-            partials: s.partials,
-            phase: s.phase,
-            elbowAngle: s.elbowAngle,
-            tracking: s.tracking,
-            side: s.side,
-            dipMinAngle: s.dipMinAngle,
-            lastRejection: rejection,
+            reps: d.reps,
+            partials: d.partials,
+            phase: d.phase,
+            elbowAngle: d.elbowAngle,
+            tracking: d.tracking,
+            side: d.side,
+            dipMinAngle: d.dipMinAngle,
+            lastRejection: st.lastRejection,
           };
         } finally {
           gpuFrame.dispose();
@@ -189,11 +229,16 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
   });
 
   // Deliberately not memoised: shared values are stable across renders, so a new
-  // function identity costs nothing here, and useCallback would put the shared
-  // values in a dependency array that this function then mutates.
+  // function identity costs nothing, and useCallback would place the shared value
+  // in a dependency array that this function then mutates.
   const resetReps = () => {
-    resetRequested.value = true;
+    resetEpoch.value = resetEpoch.value + 1;
   };
+
+  const modelError = useMemo(
+    () => (model.state === 'error' ? model.error : undefined),
+    [model],
+  );
 
   return {
     frameOutput,
@@ -201,7 +246,7 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
     readout,
     resetReps,
     modelState: model.state,
-    modelError: model.state === 'error' ? model.error : undefined,
+    modelError,
     resizerReady: resizer != null,
   };
 }

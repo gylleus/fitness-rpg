@@ -28,7 +28,10 @@ import { SIDE_JOINTS, type PoseFrame, type Side } from '../pose/keypoints';
 
 export type RepEvent = {
   type: 'rep';
-  /** 1-based index of this rep within the set. */
+  /**
+   * 1-based ordinal of this movement within the set, counting valid and partial
+   * reps in a single sequence so no two events share an index.
+   */
   index: number;
   /**
    * False when the descent never reached `downAngle`. Partial reps are reported
@@ -118,11 +121,34 @@ function resetMovement(s: DetectorState): void {
  * The weakest joint governs: one unreliable point invalidates the whole angle, so
  * a good average must not paper over a missing wrist.
  */
+const SIDES: Side[] = ['left', 'right'];
+
+/**
+ * How much better the other arm must score before we switch to it.
+ *
+ * Without this margin the selection flaps frame to frame on a partly-frontal
+ * view, and since both sides share one EMA the smoothed angle ends up blending
+ * two different elbows — an angle belonging to neither arm.
+ */
+const SIDE_SWITCH_MARGIN = 0.15;
+
+function scoreSide(frame: PoseFrame, candidate: Side): number {
+  'worklet';
+  const j = SIDE_JOINTS[candidate];
+  const shoulder = frame.keypoints[j.shoulder];
+  const elbow = frame.keypoints[j.elbow];
+  const wrist = frame.keypoints[j.wrist];
+  if (shoulder == null || elbow == null || wrist == null) return -1;
+  // The weakest joint governs: one unreliable point invalidates the whole angle,
+  // so a good average must not paper over a missing wrist.
+  return Math.min(shoulder.score, elbow.score, wrist.score);
+}
+
 function selectSide(frame: PoseFrame): { side: Side; confidence: number } | null {
   'worklet';
   let bestSide: Side | null = null;
   let bestConfidence = -1;
-  const sides: Side[] = ['left', 'right'];
+  const sides = SIDES;
   for (let i = 0; i < sides.length; i++) {
     const candidate = sides[i];
     const j = SIDE_JOINTS[candidate];
@@ -155,17 +181,7 @@ export function stepDetector(
   const selected = selectSide(frame);
   const usable = selected !== null && selected.confidence >= cfg.minConfidence;
 
-  let angle = NaN;
-  if (usable && selected !== null) {
-    const j = SIDE_JOINTS[selected.side];
-    angle = angleDeg(
-      frame.keypoints[j.shoulder],
-      frame.keypoints[j.elbow],
-      frame.keypoints[j.wrist],
-    );
-  }
-
-  if (!usable || Number.isNaN(angle)) {
+  if (!usable) {
     s.lowConfidenceFrames++;
     if (s.tracking && s.lowConfidenceFrames >= cfg.trackingLostFrames) {
       s.tracking = false;
@@ -178,10 +194,38 @@ export function stepDetector(
   }
 
   s.lowConfidenceFrames = 0;
-  if (selected !== null) s.side = selected.side;
+
+  // Stick with the arm already being tracked unless the other one is clearly
+  // better, and restart the EMA when the side genuinely changes so the average
+  // never blends two different elbows.
+  if (selected !== null) {
+    const chosen = selected.side;
+    if (s.side === null) {
+      s.side = chosen;
+    } else if (chosen !== s.side) {
+      const currentScore = scoreSide(frame, s.side);
+      if (currentScore < cfg.minConfidence || selected.confidence > currentScore + SIDE_SWITCH_MARGIN) {
+        s.side = chosen;
+        s.elbowAngle = NaN;
+      }
+    }
+  }
+
   if (!s.tracking) {
     s.tracking = true;
     events.push({ type: 'trackingRegained', t: frame.t });
+  }
+
+  const active = s.side ?? (selected as { side: Side }).side;
+  const joints = SIDE_JOINTS[active];
+  const angle = angleDeg(
+    frame.keypoints[joints.shoulder],
+    frame.keypoints[joints.elbow],
+    frame.keypoints[joints.wrist],
+  );
+  if (Number.isNaN(angle)) {
+    s.lowConfidenceFrames++;
+    return events;
   }
 
   s.elbowAngle = ema(s.elbowAngle, angle, cfg.emaAlpha);
@@ -203,10 +247,16 @@ export function stepDetector(
       s.descentStartedAt = NaN;
     } else if (Number.isNaN(s.descentStartedAt)) {
       s.descentStartedAt = frame.t;
+      s.dipMinAngle = smoothed;
+    }
+    // Track depth from the moment the descent begins. Waiting until the dip
+    // transition discards the deepest part of a fast rep taken off a short
+    // lockout, scoring a full-depth rep as a partial.
+    if (!Number.isNaN(s.descentStartedAt) && smoothed < s.dipMinAngle) {
+      s.dipMinAngle = smoothed;
     }
     if (smoothed < cfg.dipAngle && frame.t - s.topEnteredAt >= cfg.minTopDwellMs) {
       s.phase = 'dip';
-      s.dipMinAngle = smoothed;
     }
     return events;
   }
@@ -222,23 +272,30 @@ export function stepDetector(
   s.descentStartedAt = NaN;
 
   if (durationMs < cfg.minRepMs) {
+    s.dipMinAngle = Infinity;
     events.push({ type: 'rejected', reason: 'tooFast', durationMs, t: frame.t });
     return events;
   }
   if (durationMs > cfg.maxRepMs) {
+    s.dipMinAngle = Infinity;
     events.push({ type: 'rejected', reason: 'tooSlow', durationMs, t: frame.t });
     return events;
   }
 
-  const valid = s.dipMinAngle <= cfg.downAngle;
+  const depth = s.dipMinAngle;
+  s.dipMinAngle = Infinity;
+
+  const valid = depth <= cfg.downAngle;
   if (valid) s.reps++;
   else s.partials++;
 
   events.push({
     type: 'rep',
-    index: valid ? s.reps : s.partials,
+    // #9: a single monotonic ordinal across valid and partial reps, so two
+    // events never share an index.
+    index: s.reps + s.partials,
     valid,
-    minAngle: s.dipMinAngle,
+    minAngle: depth,
     durationMs,
     startedAt,
     endedAt: frame.t,

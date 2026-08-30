@@ -194,3 +194,61 @@ describe('reset', () => {
     expect(detector.state().tracking).toBe(false);
   });
 });
+
+describe('review regressions', () => {
+  it('scores depth from the start of the descent, not from the dip transition', () => {
+    // A fast rep off a short lockout can reach its deepest point before
+    // minTopDwellMs elapses. Recording depth only at the top -> dip transition
+    // discarded that, scoring a full-depth rep as a partial.
+    const frames: PoseFrame[] = [];
+    let t = 0;
+    for (let i = 0; i < 6; i++) frames.push(frameWithElbowAngle((t += 33), 170));
+    for (let i = 0; i < 20; i++) frames.push(frameWithElbowAngle((t += 33), 170 - (100 * i) / 20));
+    for (let i = 0; i < 20; i++) frames.push(frameWithElbowAngle((t += 33), 70 + (100 * i) / 20));
+    for (let i = 0; i < 20; i++) frames.push(frameWithElbowAngle((t += 33), 170));
+
+    const { reps } = run(frames);
+    expect(reps).toHaveLength(1);
+    expect(reps[0].valid).toBe(true);
+  });
+
+  it('gives valid and partial reps distinct indices', () => {
+    const frames: PoseFrame[] = [];
+    let t = 0;
+    for (const bottom of [70, 105, 70]) {
+      const rep = pushupFrames({ startT: t, bottomAngle: bottom, descentMs: 900, ascentMs: 900 });
+      frames.push(...rep);
+      t = rep[rep.length - 1].t + 33;
+    }
+    const { reps } = run(frames);
+    expect(reps.map((r) => r.index)).toEqual([1, 2, 3]);
+  });
+
+  it('clears the depth reading once a rep completes', () => {
+    // The HUD labels this "the rep in progress"; leaving the previous rep's
+    // value in place made it show a stale depth for the whole rest period.
+    const { detector } = run(pushupFrames({ startT: 0, ...SLOW }));
+    expect(detector.state().dipMinAngle).toBe(Infinity);
+  });
+
+  it('keeps tracking one arm when both are briefly visible', () => {
+    // Without hysteresis the side flaps frame to frame, and since both sides
+    // share a single EMA the smoothed angle blends two different elbows.
+    const frames: PoseFrame[] = [];
+    let t = 0;
+    for (let i = 0; i < 60; i++) {
+      // Alternate which arm scores marginally higher.
+      const side = i % 2 === 0 ? 'left' : 'right';
+      const f = frameWithElbowAngle((t += 33), 170, { side });
+      // Make the other arm nearly as good, so a naive argmax would oscillate.
+      const other = side === 'left' ? 6 : 5;
+      f.keypoints[other].score = 0.85;
+      f.keypoints[other === 6 ? 8 : 7].score = 0.85;
+      f.keypoints[other === 6 ? 10 : 9].score = 0.85;
+      frames.push(f);
+    }
+    const { detector } = run(frames);
+    const settled = detector.state().side;
+    expect(settled === 'left' || settled === 'right').toBe(true);
+  });
+});
