@@ -125,3 +125,11 @@ bd prime                # Refresh Beads context
 
 **Architecture in one line:** issues live in a local Dolt DB; sync uses `refs/dolt/data` on your git remote; `.beads/issues.jsonl` is a passive export. See https://github.com/gastownhall/beads/blob/main/docs/SYNC_CONCEPTS.md for details and anti-patterns.
 <!-- END BEADS CODEX SETUP -->
+
+## Expo
+
+Expo changes fast. Read the exact versioned docs at https://docs.expo.dev/versions/v57.0.0/
+before writing Expo code — this project is on SDK 57 / React Native 0.86.
+
+VisionCamera v5 is a Nitro-based rewrite: use `useFrameOutput()`, not v4's `useFrameProcessor()`.
+Most tutorials online still show the v4 API. Source of truth is https://visioncamera.margelo.com.

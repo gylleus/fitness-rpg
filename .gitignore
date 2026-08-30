@@ -30,3 +30,14 @@ GoogleService-Info.plist
 # Editor / OS
 .DS_Store
 *.tsbuildinfo
+
+# Expo-generated (from create-expo-app template)
+expo-env.d.ts
+.kotlin/
+*.orig.*
+*.p8
+*.p12
+*.key
+*.mobileprovision
+.metro-health-check*
+*.pem
