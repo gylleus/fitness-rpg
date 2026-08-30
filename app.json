@@ -40,7 +40,14 @@
           "enableCoreMLDelegate": true
         }
       ],
-      "expo-router"
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "minSdkVersion": 26
+          }
+        }
+      ]
     ]
   }
 }
