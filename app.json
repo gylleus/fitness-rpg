@@ -8,7 +8,10 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.gylleus.fitnessrpg"
+      "bundleIdentifier": "com.gylleus.fitnessrpg",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Fitness RPG uses the camera to count your reps. Video is processed on-device and never leaves your phone."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -18,12 +21,24 @@
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.gylleus.fitnessrpg"
+      "package": "com.gylleus.fitnessrpg",
+      "permissions": [
+        "android.permission.CAMERA"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "newArchEnabled": true,
-    "scheme": "fitnessrpg"
+    "scheme": "fitnessrpg",
+    "plugins": [
+      [
+        "react-native-fast-tflite",
+        {
+          "enableAndroidGpuLibraries": true,
+          "enableCoreMLDelegate": true
+        }
+      ]
+    ]
   }
 }
