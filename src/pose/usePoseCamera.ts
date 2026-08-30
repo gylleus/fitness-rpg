@@ -31,7 +31,7 @@ import {
   unrotateKeypoints,
   type InputRotation,
 } from './model';
-import { type Keypoint, type PoseFrame } from './keypoints';
+import { KEYPOINT_COUNT, type Keypoint, type PoseFrame } from './keypoints';
 import { createDetectorState, stepDetector, type DetectorState } from '../reps/detector';
 import { DEFAULT_CONFIG } from '../reps/config';
 
@@ -220,11 +220,23 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
           }
 
           const d = st.detector;
+
+          // Publish a FRESH array of fresh objects every frame. The serializer
+          // caches clones by object identity (cloneArray does
+          // serializableMappingCache.set(value, clone)), so republishing the same
+          // scratch array hands the UI the clone made on the very first frame,
+          // forever — a skeleton frozen at whatever the camera saw at startup.
+          // The 17 small allocations are trivial next to inference.
+          const published: Keypoint[] = [];
+          for (let i = 0; i < KEYPOINT_COUNT; i++) {
+            const k = st.keypoints[i];
+            published.push({ x: k.x, y: k.y, score: k.score });
+          }
+
           // Both writes are asynchronous, which is fine: nothing on the camera
-          // thread reads them back. The serializer deep-copies, so publishing the
-          // scratch keypoints directly cannot alias what the next frame overwrites.
+          // thread reads them back.
           pose.value = {
-            keypoints: st.keypoints,
+            keypoints: published,
             frameWidth: frame.width,
             frameHeight: frame.height,
             inferenceMs: performance.now() - started,

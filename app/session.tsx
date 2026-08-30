@@ -81,11 +81,22 @@ export default function Session() {
       const now = Date.now();
       if (now - lastLog.current > 1000) {
         lastLog.current = now;
+        // Also dump the raw model output, so a detector that bails out early can
+        // be told apart from a model that is producing nothing usable.
+        const kp = snap.keypoints;
+        const top = scores.map((v, i) => [i, v] as const)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 3)
+          .map(([i, v]) => `${i}:${v.toFixed(2)}`)
+          .join(' ');
         console.log(
           `[posture] inPosition=${r.inPosition} tilt=${fmt(r.torsoTilt)} ` +
-            `bodyLine=${fmt(r.bodyLine)} elbow=${fmt(r.elbowAngle)} ` +
-            `scores(sh/hip/knee)=${fmt(r.shoulderScore, 2)}/${fmt(r.hipScore, 2)}/${fmt(r.kneeScore, 2)} ` +
-            `side=${r.side} phase=${r.phase} frame=${r.frameWidth}x${r.frameHeight}`,
+            `elbow=${fmt(r.elbowAngle)} side=${r.side} phase=${r.phase} ` +
+            `| model: best3=${top} nose=${kp[0] ? kp[0].score.toFixed(2) : 'n/a'} ` +
+            `Lsh=${kp[5] ? kp[5].score.toFixed(2) : 'n/a'} Lel=${kp[7] ? kp[7].score.toFixed(2) : 'n/a'} ` +
+            `Lwr=${kp[9] ? kp[9].score.toFixed(2) : 'n/a'} Lhip=${kp[11] ? kp[11].score.toFixed(2) : 'n/a'} ` +
+            `| xy0=${kp[0] ? kp[0].x.toFixed(2) + ',' + kp[0].y.toFixed(2) : 'n/a'} ` +
+            `ms=${Math.round(snap.inferenceMs)} frame=${snap.frameWidth}x${snap.frameHeight}`,
         );
       }
 
