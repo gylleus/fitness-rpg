@@ -146,7 +146,10 @@ describe('plausibility guards', () => {
 
   it('rejects a descent held so long it is a rest, not a rep', () => {
     const { events, reps } = run(
-      pushupFrames({ startT: 0, bottomAngle: 70, descentMs: 8000, ascentMs: 8000, holdMs: 300 }),
+      // Duration is measured between lockout crossings, and the return threshold
+      // is now more forgiving, so the movement has to be slower still to exceed
+      // the 12s cap.
+      pushupFrames({ startT: 0, bottomAngle: 70, descentMs: 12000, ascentMs: 12000, holdMs: 300 }),
     );
     expect(reps).toHaveLength(0);
     expect(events.some((e) => e.type === 'rejected' && e.reason === 'tooSlow')).toBe(true);
@@ -607,4 +610,70 @@ describe('fast cadence', () => {
     const { detector } = run(setAtTempo(160, 4));
     expect(detector.state().reps).toBeLessThanOrEqual(1);
   });
+});
+
+describe('incomplete lockout between reps', () => {
+  /** A set where the arm only comes back part of the way up between reps. */
+  function partialLockoutSet(returnTo: number, count: number): PoseFrame[] {
+    const frames: PoseFrame[] = [];
+    const step = 1000 / 30;
+    let t = 0;
+    for (let i = 0; i < 10; i++) frames.push(frameWithElbowAngle((t += step), 170));
+    for (let r = 0; r < count; r++) {
+      for (let e = 0; e < 300; e += step) {
+        frames.push(frameWithElbowAngle((t += step), returnTo - (returnTo - 70) * (e / 300)));
+      }
+      for (let e = 0; e < 300; e += step) {
+        frames.push(frameWithElbowAngle((t += step), 70 + (returnTo - 70) * (e / 300)));
+      }
+    }
+    for (let i = 0; i < 10; i++) frames.push(frameWithElbowAngle((t += step), 170));
+    return frames;
+  }
+
+  it('counts reps that only return to 85% of lockout', () => {
+    // Nobody fully straightens their arms between fast reps. Requiring it means
+    // the boundary between reps is never seen and several merge into one count.
+    expect(run(partialLockoutSet(155, 8)).detector.state().reps).toBe(8);
+  });
+
+  it('counts reps that only return to 75% of lockout', () => {
+    expect(run(partialLockoutSet(145, 8)).detector.state().reps).toBe(8);
+  });
+});
+
+describe('tempo and lockout envelope', () => {
+  /** A continuous set at a tempo, returning only partway to lockout. */
+  function set(returnTo: number, repMs: number, count: number): PoseFrame[] {
+    const frames: PoseFrame[] = [];
+    const step = 1000 / 30;
+    let t = 0;
+    const half = repMs / 2;
+    for (let i = 0; i < 10; i++) frames.push(frameWithElbowAngle((t += step), 170));
+    for (let r = 0; r < count; r++) {
+      for (let e = 0; e < half; e += step) {
+        frames.push(frameWithElbowAngle((t += step), returnTo - (returnTo - 70) * (e / half)));
+      }
+      for (let e = 0; e < half; e += step) {
+        frames.push(frameWithElbowAngle((t += step), 70 + (returnTo - 70) * (e / half)));
+      }
+    }
+    for (let i = 0; i < 10; i++) frames.push(frameWithElbowAngle((t += step), 170));
+    return frames;
+  }
+
+  // The supported envelope, pinned so a future filtering change cannot quietly
+  // shrink it. Each was verified to fail before the rebound-based completion.
+  const cases: [number, number][] = [
+    [165, 1000], [165, 600], [165, 400], [165, 300],
+    [155, 1000], [155, 600], [155, 400], [155, 300],
+    [150, 1000], [150, 600], [150, 400],
+    [145, 1000], [145, 600], [145, 400],
+  ];
+
+  for (const [lockout, tempo] of cases) {
+    it(`counts 8 of 8 returning to ${lockout} at ${tempo}ms per rep`, () => {
+      expect(run(set(lockout, tempo, 8)).detector.state().reps).toBe(8);
+    });
+  }
 });

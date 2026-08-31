@@ -26,6 +26,14 @@ export type DetectorConfig = {
    * reps until they stop crossing the thresholds.
    */
   smoothingTauMs: number;
+  /**
+   * Fastest plausible elbow angular rate, in degrees per second.
+   *
+   * A two-and-a-half rep per second set moves roughly 500 deg/s, so this leaves
+   * generous headroom above real movement while still catching pose-estimation
+   * spikes, which are effectively instantaneous.
+   */
+  maxElbowRateDegPerSec: number;
   /** Minimum time held at the top before a new descent can begin. */
   minTopDwellMs: number;
   /** Reps faster than this are physically implausible — jitter, not movement. */
@@ -107,6 +115,28 @@ export type DetectorConfig = {
   minTravelFraction: number;
   /** Fraction of the demonstrated range that marks a rep as full depth. */
   fullDepthFraction: number;
+  /**
+   * How far back toward lockout the arm must come for a rep to be completed,
+   * as a fraction of the demonstrated range.
+   *
+   * A fast set rarely returns to a full lockout between reps. Demanding one
+   * means the rep boundary is never detected and several reps merge into a
+   * single count — a direct cause of undercounting at speed.
+   */
+  topReturnFraction: number;
+  /**
+   * How much of the descent must be undone for the rep to count as finished,
+   * as a fraction of the depth actually reached.
+   *
+   * Completing on an absolute angle is brittle: smoothing attenuates the peak of
+   * a fast rep, so the signal can miss a fixed threshold by a degree and merge
+   * every rep in the set into one. Measuring the rebound relative to the
+   * observed bottom removes the dependence on how completely the user locks out
+   * and on how much the filter flattened the peak.
+   */
+  reboundFraction: number;
+  /** Minimum gap kept between the completion and descent thresholds. */
+  minHysteresisDeg: number;
 };
 
 export const DEFAULT_CONFIG: DetectorConfig = {
@@ -116,15 +146,24 @@ export const DEFAULT_CONFIG: DetectorConfig = {
   // Measured head-on at 1-2m, every joint sat around 0.31 mean and cleared 0.30
   // only about half the time, so a 0.30 gate discarded half the descent.
   minConfidence: 0.25,
-  smoothingTauMs: 45,
+  // Short: the median stage already removes outliers, and every millisecond here
+  // is lag that attenuates a fast rep.
+  smoothingTauMs: 25,
+  maxElbowRateDegPerSec: 1500,
   // The timing guards were originally tight because they were the only defence
   // against stray movement being counted. The posture gate now does that job
   // properly, so these can be loose enough to accept a genuinely slow, controlled
   // rep instead of rejecting it.
-  // Only enough to reject threshold jitter; a fast set has almost no pause at
-  // the top, and anything longer silently blocks the next descent.
-  minTopDwellMs: 40,
-  minRepMs: 300,
+  // Zero. The hysteresis band between dip and up already rejects jitter, and the
+  // median prefilter removes outliers. Any dwell requirement instead demands the
+  // arm linger above the return threshold, which at speed it does for only a
+  // single frame — so the next descent was never registered and reps merged into
+  // one. Measured: reps returning to 155 counted, 150 collapsed to 1 in 8.
+  minTopDwellMs: 0,
+  // 200 rather than 300: measured, a 2.5 rep/second set crosses the completion
+  // thresholds only ~250ms apart when the user locks out well, so 300 rejected
+  // genuine fast reps. 200 counts 8 of 8 at every tempo down to 300ms/rep.
+  minRepMs: 200,
   maxRepMs: 12000,
   trackingLostFrames: 10,
   trackingLostFramesInRep: 30,
@@ -147,4 +186,7 @@ export const DEFAULT_CONFIG: DetectorConfig = {
   // rather than demanding the very bottom, which is where tracking is worst.
   minTravelFraction: 0.45,
   fullDepthFraction: 0.7,
+  topReturnFraction: 0.3,
+  reboundFraction: 0.62,
+  minHysteresisDeg: 8,
 };

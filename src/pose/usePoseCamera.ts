@@ -42,11 +42,25 @@ export type PoseSnapshot = {
   frameHeight: number;
   /** Milliseconds spent in resize + inference for the last processed frame. */
   inferenceMs: number;
+  /**
+   * Milliseconds between the last two processed frames.
+   *
+   * Distinct from inference time: the camera itself slows down in dim light as
+   * auto-exposure lengthens each exposure, which costs samples per rep and adds
+   * motion blur. Inference being fast does not mean frames are arriving fast.
+   */
+  frameIntervalMs: number;
 };
 
 export function emptySnapshot(): PoseSnapshot {
   'worklet';
-  return { keypoints: createKeypointBuffer(), frameWidth: 0, frameHeight: 0, inferenceMs: 0 };
+  return {
+    keypoints: createKeypointBuffer(),
+    frameWidth: 0,
+    frameHeight: 0,
+    inferenceMs: 0,
+    frameIntervalMs: 0,
+  };
 }
 
 /** What the HUD needs from the detector, published once per processed frame. */
@@ -140,6 +154,7 @@ type RuntimeState = {
   frame: PoseFrame;
   frameCount: number;
   resetEpoch: number;
+  lastFrameAt: number;
   lastRejection: string | null;
 };
 
@@ -212,6 +227,7 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
             frame: { t: 0, keypoints: [] },
             frameCount: 0,
             resetEpoch: 0,
+            lastFrameAt: NaN,
             lastRejection: null,
           };
           st.frame.keypoints = st.keypoints;
@@ -230,6 +246,8 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
         if (n !== 0) return;
 
         const started = performance.now();
+        const interval = Number.isFinite(st.lastFrameAt) ? started - st.lastFrameAt : 0;
+        st.lastFrameAt = started;
 
         const gpuFrame = resizer.resize(frame);
         try {
@@ -272,6 +290,7 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
             frameWidth: frame.width,
             frameHeight: frame.height,
             inferenceMs: performance.now() - started,
+            frameIntervalMs: interval,
           };
           readout.value = {
             reps: d.reps,

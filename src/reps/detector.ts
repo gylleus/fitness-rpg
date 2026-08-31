@@ -22,7 +22,7 @@
  * smoothed angle jittered across it.
  */
 
-import { angleDeg, ema, emaAlphaForDt, median3 } from './geometry';
+import { angleDeg, ema, emaAlphaForDt, slewLimit } from './geometry';
 import { angleDifference, measureBody, median } from './body';
 import { DEFAULT_CONFIG, type DetectorConfig } from './config';
 import { SIDE_JOINTS, type PoseFrame, type Side } from '../pose/keypoints';
@@ -104,9 +104,8 @@ export type DetectorState = {
   bodyLine: number;
   /** Hip sag seen at any point during the rep in progress. */
   sagThisRep: boolean;
-  /** Last two raw angle samples, for the median-of-three prefilter. */
+  /** Previous slew-limited angle sample. */
   rawPrev: number;
-  rawPrev2: number;
   /** Timestamp of the last processed frame, for time-based smoothing. */
   lastFrameT: number;
 
@@ -160,7 +159,6 @@ export function createDetectorState(): DetectorState {
     bodyLine: NaN,
     sagThisRep: false,
     rawPrev: NaN,
-    rawPrev2: NaN,
     lastFrameT: NaN,
     shoulderScore: 0,
     hipScore: 0,
@@ -195,7 +193,6 @@ function resetMovement(s: DetectorState): void {
   s.topEnteredAt = 0;
   s.sagThisRep = false;
   s.rawPrev = NaN;
-  s.rawPrev2 = NaN;
 }
 
 /**
@@ -345,22 +342,22 @@ function evaluatePosture(
 }
 
 /**
- * Median-of-three, then a short time-based exponential average.
+ * Slew limiting, then a short time-based exponential average.
  *
- * The median removes single-frame outliers, which is all the aggressive
- * averaging was ever really needed for, while leaving the amplitude of a fast
- * rep intact.
+ * Both stages are deliberately gentle. The signal only needs protecting from
+ * pose-estimation spikes; anything stronger attenuates the turning points of a
+ * fast rep, which is precisely where the rep is detected.
  */
 function smoothAngle(s: DetectorState, raw: number, t: number, cfg: DetectorConfig): number {
   'worklet';
-  const filtered = median3(raw, s.rawPrev, s.rawPrev2);
-  s.rawPrev2 = s.rawPrev;
-  s.rawPrev = raw;
-
   const dt = Number.isFinite(s.lastFrameT) ? t - s.lastFrameT : NaN;
   s.lastFrameT = t;
+
+  const limited = slewLimit(s.rawPrev, raw, dt, cfg.maxElbowRateDegPerSec);
+  s.rawPrev = limited;
+
   const alpha = Number.isFinite(dt) ? emaAlphaForDt(dt, cfg.smoothingTauMs) : 1;
-  s.elbowAngle = ema(s.elbowAngle, filtered, alpha);
+  s.elbowAngle = ema(s.elbowAngle, limited, alpha);
   return s.elbowAngle;
 }
 
@@ -379,7 +376,7 @@ function thresholdsFor(cal: Calibration, cfg: DetectorConfig) {
   // Fractions of the range the user actually demonstrated, so the same relative
   // depth is asked for whatever the camera can see of it.
   return {
-    up: top - range * 0.18,
+    up: top - range * cfg.topReturnFraction,
     dip: top - range * cfg.minTravelFraction,
     down: top - range * cfg.fullDepthFraction,
   };
@@ -611,8 +608,12 @@ export function stepDetector(
 
   if (s.phase === 'top') {
     if (smoothed >= th.up) {
-      // Still locked out; any earlier dip below lockout was a wobble.
+      // Genuinely back at lockout: any earlier dip was a wobble, and the depth
+      // reading belongs to a rep that is over. A rep can now complete on rebound
+      // below this threshold, so without clearing here the next descent inherits
+      // the previous rep's minimum.
       s.descentStartedAt = NaN;
+      s.dipMinAngle = Infinity;
     } else if (Number.isNaN(s.descentStartedAt)) {
       s.descentStartedAt = frame.t;
       s.dipMinAngle = smoothed;
@@ -631,7 +632,17 @@ export function stepDetector(
 
   // phase === 'dip'
   if (smoothed < s.dipMinAngle) s.dipMinAngle = smoothed;
-  if (smoothed < th.up) return events;
+
+  // Finish on rebound from the depth actually reached, or on reaching the
+  // absolute return threshold — whichever comes first. The rebound test is what
+  // makes a fast or shallow-lockout rep close at all; the hysteresis floor keeps
+  // it from sitting so close to the descent threshold that jitter re-triggers.
+  const rebound = s.dipMinAngle + (cal.topElbowAngle - s.dipMinAngle) * cfg.reboundFraction;
+  const completeAt = Math.max(
+    Math.min(th.up, rebound),
+    th.dip + cfg.minHysteresisDeg,
+  );
+  if (smoothed < completeAt) return events;
 
   const startedAt = Number.isNaN(s.descentStartedAt) ? frame.t : s.descentStartedAt;
   const durationMs = frame.t - startedAt;

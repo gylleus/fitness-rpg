@@ -87,20 +87,26 @@ export function angleDeg(a: Point2, b: Point2, c: Point2): number {
 }
 
 /**
- * Median of three samples.
+ * Rejects implausible jumps while following real motion at full amplitude.
  *
- * Preferred over an exponential average as the first filtering stage because it
- * removes single-frame outliers without attenuating real motion. An EMA is a
- * low-pass filter: it flattens the peaks of a fast movement, so a quick rep's
- * smoothed angle never reaches the thresholds the slow version comfortably
- * crossed — the movement was real, the filter hid it.
+ * A median-of-three was tried here first and is wrong for this signal: at speed
+ * a rep's peak is a single sample, and a median discards single-sample extremes
+ * by construction. Measured, it clipped the turning points of a fast rep so the
+ * angle never reached the completion threshold and eight reps merged into one.
+ *
+ * An elbow cannot physically move faster than a few hundred degrees per second,
+ * so anything beyond that is a pose-estimation spike. Clamping to the plausible
+ * rate rather than discarding the sample keeps following fast motion instead of
+ * stalling on it.
  */
-export function median3(a: number, b: number, c: number): number {
+export function slewLimit(previous: number, next: number, dtMs: number, maxDegPerSec: number): number {
   'worklet';
-  if (!Number.isFinite(a)) return Number.isFinite(b) ? b : c;
-  if (!Number.isFinite(b)) return c;
-  if (!Number.isFinite(c)) return b;
-  return Math.max(Math.min(a, b), Math.min(Math.max(a, b), c));
+  if (!Number.isFinite(previous)) return next;
+  if (!Number.isFinite(dtMs) || dtMs <= 0) return next;
+  const maxStep = (maxDegPerSec * dtMs) / 1000;
+  const delta = next - previous;
+  if (Math.abs(delta) <= maxStep) return next;
+  return previous + (delta > 0 ? maxStep : -maxStep);
 }
 
 /**

@@ -10,6 +10,7 @@ import {
 } from 'react-native-vision-camera';
 import type { TargetCameraPosition } from 'react-native-vision-camera';
 
+import { runOnJS, useAnimatedReaction } from 'react-native-reanimated';
 import { usePoseCamera } from '../src/pose/usePoseCamera';
 import { SkeletonOverlay } from '../src/ui/SkeletonOverlay';
 import type { InputRotation } from '../src/pose/model';
@@ -49,8 +50,20 @@ export default function Session() {
   // Sample shared values at ~10Hz rather than reacting per frame: the numbers
   // are unreadable faster than that, and it keeps 30fps of keypoints off the JS
   // thread entirely.
+  // The rep count is driven by a reaction rather than the 10Hz poll below, so it
+  // updates the moment a rep lands instead of up to 100ms later. That delay was
+  // small but it is the one number the user is actually watching.
+  const [liveReps, setLiveReps] = useState(0);
+  useAnimatedReaction(
+    () => readout.value.reps + manualAdjustment.value,
+    (count, previous) => {
+      if (count !== previous) runOnJS(setLiveReps)(Math.max(0, count));
+    },
+    [],
+  );
+
   const lastLog = useRef(0);
-  const [debug, setDebug] = useState({ ms: 0, tracked: 0, best: 0, margin: 1 });
+  const [debug, setDebug] = useState({ ms: 0, tracked: 0, best: 0, margin: 1, fps: 0 });
   const [reps, setReps] = useState({
     reps: 0,
     detected: 0,
@@ -83,6 +96,7 @@ export default function Session() {
         ? Math.min(...seen.map((k) => Math.min(k.x, 1 - k.x, k.y, 1 - k.y)))
         : 1;
       setDebug({
+        fps: snap.frameIntervalMs > 0 ? 1000 / snap.frameIntervalMs : 0,
         ms: Math.round(snap.inferenceMs),
         tracked: scores.filter((s) => s >= 0.3).length,
         best: Math.round(Math.max(0, ...scores) * 100),
@@ -116,7 +130,9 @@ export default function Session() {
             `Lsh=${kp[5] ? kp[5].score.toFixed(2) : 'n/a'} Lel=${kp[7] ? kp[7].score.toFixed(2) : 'n/a'} ` +
             `Lwr=${kp[9] ? kp[9].score.toFixed(2) : 'n/a'} Lhip=${kp[11] ? kp[11].score.toFixed(2) : 'n/a'} ` +
             `| xy0=${kp[0] ? kp[0].x.toFixed(2) + ',' + kp[0].y.toFixed(2) : 'n/a'} ` +
-            `ms=${Math.round(snap.inferenceMs)} frame=${snap.frameWidth}x${snap.frameHeight}`,
+            `ms=${Math.round(snap.inferenceMs)} dt=${Math.round(snap.frameIntervalMs)}ms ` +
+            `fps=${snap.frameIntervalMs > 0 ? (1000 / snap.frameIntervalMs).toFixed(1) : '--'} ` +
+            `frame=${snap.frameWidth}x${snap.frameHeight}`,
         );
       }
 
@@ -206,7 +222,9 @@ export default function Session() {
             <Text style={styles.warnText}>last movement rejected: {reps.rejection}</Text>
           ) : null}
           <Text style={styles.debugText}>model: {modelState}</Text>
-          <Text style={styles.debugText}>inference: {debug.ms} ms</Text>
+          <Text style={styles.debugText}>
+            inference: {debug.ms} ms{'  '}camera: {debug.fps.toFixed(0)} fps
+          </Text>
           <Text style={styles.debugText}>
             joints tracked: {debug.tracked}/17{'  '}edge margin: {debug.margin.toFixed(2)}
           </Text>
@@ -245,7 +263,7 @@ export default function Session() {
           ) : !reps.inPosition ? (
             <Text style={styles.prompt}>Back into position</Text>
           ) : null}
-          <Text style={styles.counter}>{reps.reps}</Text>
+          <Text style={styles.counter}>{liveReps}</Text>
           <Text style={styles.counterLabel}>
             reps{reps.partials > 0 ? `   ·   ${reps.partials} shallow` : ''}
           </Text>
