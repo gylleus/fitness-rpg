@@ -154,7 +154,7 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
   const model = useTensorflowModel(
     // fast-tflite takes a Metro asset handle, which only require() produces.
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    require('../../assets/models/movenet-lightning-int8.tflite'),
+    require('../../assets/models/movenet-thunder-int8.tflite'),
     ['android-gpu'],
   );
 
@@ -165,11 +165,13 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
     // MoveNet Lightning INT8 expects uint8 NHWC, verified against the model's
     // own input tensor spec.
     dataType: 'uint8',
-    // 'contain' letterboxes the whole frame into the square. 'cover' crops to a
-    // centred square, which on a 1280x720 frame throws away 39% of the width on
-    // each side — precisely where the limbs of a horizontal body are. Losing
-    // resolution to padding is a much better trade than losing the arms.
-    scaleMode: 'contain',
+    // 'cover' crops to a centred square; 'contain' letterboxes the whole frame.
+    // Contain was tried to avoid cropping a horizontal body's limbs, but it
+    // costs resolution where it matters most: letterboxing 1280x720 into the
+    // square leaves the subject roughly 0.56x the linear size that cropping
+    // gives. For a head-on subject, who is centred anyway, the cropped edges are
+    // empty floor and the resolution is worth far more.
+    scaleMode: 'cover',
     pixelLayout: 'interleaved',
   });
 

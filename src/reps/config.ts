@@ -85,7 +85,9 @@ export const DEFAULT_CONFIG: DetectorConfig = {
   upAngle: 150,
   downAngle: 95,
   dipAngle: 110,
-  minConfidence: 0.3,
+  // Measured head-on at 1-2m, every joint sat around 0.31 mean and cleared 0.30
+  // only about half the time, so a 0.30 gate discarded half the descent.
+  minConfidence: 0.25,
   emaAlpha: 0.4,
   // The timing guards were originally tight because they were the only defence
   // against stray movement being counted. The posture gate now does that job

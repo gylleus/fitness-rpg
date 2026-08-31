@@ -36,10 +36,10 @@ const MIN_SCORE = 0.3;
 /**
  * Maps a model-space point into preview-view pixels.
  *
- * Two different transforms of the same frame are involved and they are not the
- * same: the resizer letterboxes the whole frame into a square (scaleMode
- * 'contain'), while the preview covers a view of a different aspect ratio.
- * Skipping either step puts the skeleton visibly off the body.
+ * Two different crops of the same frame are involved and they are not the same:
+ * the resizer takes a centre square (scaleMode 'cover'), while the preview
+ * covers a view of a different aspect ratio. Skipping either step puts the
+ * skeleton visibly off the body.
  */
 function toView(
   k: Keypoint,
@@ -55,14 +55,10 @@ function toView(
   // which reads as broken tracking rather than a coordinate problem.
   const kx = mirrorX ? 1 - k.x : k.x;
 
-  // Model space -> frame pixels, undoing the letterbox. The frame is scaled to
-  // fit inside the unit square preserving aspect, leaving padding on the shorter
-  // axis which carries no image and must be subtracted before rescaling.
-  const fit = Math.min(1 / frameW, 1 / frameH);
-  const contentW = frameW * fit;
-  const contentH = frameH * fit;
-  const fx = ((kx - (1 - contentW) / 2) / contentW) * frameW;
-  const fy = ((k.y - (1 - contentH) / 2) / contentH) * frameH;
+  // Model space -> frame pixels, undoing the centre square crop.
+  const square = Math.min(frameW, frameH);
+  const fx = (frameW - square) / 2 + kx * square;
+  const fy = (frameH - square) / 2 + k.y * square;
 
   // Frame pixels -> view pixels, applying the preview's own cover crop.
   const scale = Math.max(viewW / frameW, viewH / frameH);

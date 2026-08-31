@@ -7,8 +7,15 @@
 
 import { KEYPOINT_COUNT, type Keypoint } from './keypoints';
 
-/** MoveNet Lightning takes a 192x192 RGB image. */
-export const MODEL_INPUT_SIZE = 192;
+/**
+ * MoveNet Thunder takes a 256x256 RGB image.
+ *
+ * Lightning (192x192) was the original choice for framerate, but on a head-on
+ * view at 1-2m it only cleared the confidence threshold on about half of frames,
+ * which broke tracking partway down a rep. Measured inference was 8-9ms against
+ * a 33ms budget, so there was ample headroom to trade for accuracy.
+ */
+export const MODEL_INPUT_SIZE = 256;
 export const MODEL_CHANNELS = 3;
 
 /** Quarter turns applied to the model input before inference. */
