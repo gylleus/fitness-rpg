@@ -63,6 +63,9 @@ export default function Session() {
     inPosition: false,
     calibrating: true,
     calProgress: 0,
+    measuringRange: false,
+    top: NaN,
+    bottom: NaN,
     delta: NaN,
     scale: NaN,
     down: NaN,
@@ -128,6 +131,9 @@ export default function Session() {
         inPosition: r.inPosition,
         calibrating: r.calibrating,
         calProgress: r.calProgress,
+        measuringRange: r.measuringRange,
+        top: r.topElbowAngle,
+        bottom: r.bottomElbowAngle,
         delta: r.torsoDelta,
         scale: r.scaleRatio,
         down: r.downThreshold,
@@ -192,6 +198,9 @@ export default function Session() {
             deepest: {Number.isFinite(reps.depth) ? Math.round(reps.depth) + '°' : '--'}
             {'  '}need &lt;= {fmtDeg(reps.down)}
           </Text>
+          <Text style={styles.debugText}>
+            range: {fmtDeg(reps.top)} → {fmtDeg(reps.bottom)}
+          </Text>
           {reps.rejection ? (
             <Text style={styles.warnText}>last movement rejected: {reps.rejection}</Text>
           ) : null}
@@ -221,12 +230,17 @@ export default function Session() {
           ) : reps.calibrating ? (
             <>
               <Text style={styles.prompt}>
-                Hold the top of a pushup to calibrate
+                Step 1 — hold the top of a pushup
               </Text>
               <View style={styles.progressTrack}>
                 <View style={[styles.progressFill, { width: `${reps.calProgress * 100}%` }]} />
               </View>
             </>
+          ) : reps.measuringRange ? (
+            <Text style={styles.prompt}>
+              Step 2 — do one slow pushup{'\n'}
+              <Text style={styles.promptSub}>to measure your range in this view</Text>
+            </Text>
           ) : !reps.inPosition ? (
             <Text style={styles.prompt}>Back into position</Text>
           ) : null}
@@ -347,6 +361,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   progressFill: { height: '100%', backgroundColor: '#fcd34d' },
+  promptSub: { color: '#fde68a', fontSize: 13, fontWeight: '500' },
   prompt: {
     color: '#fcd34d',
     fontSize: 17,

@@ -42,6 +42,12 @@ export type DetectorConfig = {
   calibrationMs: number;
   /** Minimum usable samples before a calibration is accepted. */
   calibrationMinSamples: number;
+  /** Minimum elbow travel that counts as having demonstrated a full rep. */
+  rangeMinTravelDeg: number;
+  /** How close to the calibrated top counts as having returned. */
+  rangeReturnDeg: number;
+  /** Give up waiting for a demonstration rep after this long. */
+  rangeTimeoutMs: number;
   /**
    * How far the torso may rotate away from the calibrated reference before the
    * body no longer counts as being in position, in degrees.
@@ -92,6 +98,9 @@ export const DEFAULT_CONFIG: DetectorConfig = {
   trackingLostFramesInRep: 30,
   calibrationMs: 1500,
   calibrationMinSamples: 12,
+  rangeMinTravelDeg: 25,
+  rangeReturnDeg: 15,
+  rangeTimeoutMs: 20000,
   // Generous: a real rep rotates the torso somewhat, and a head-on view makes
   // the measured direction noisy because the torso is heavily foreshortened.
   torsoToleranceDeg: 40,

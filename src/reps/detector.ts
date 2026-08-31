@@ -54,7 +54,8 @@ export type TrackingEvent = {
     | 'trackingRegained'
     | 'positionAcquired'
     | 'positionLost'
-    | 'calibrated';
+    | 'calibrated'
+    | 'rangeMeasured';
   t: number;
 };
 
@@ -109,7 +110,7 @@ export type DetectorState = {
   kneeScore: number;
 
   /** Until a reference is captured, nothing is counted. */
-  mode: 'calibrating' | 'counting';
+  mode: 'calibrating' | 'measuringRange' | 'counting';
   calibration: Calibration | null;
   /** Samples gathered while the user holds the top position. */
   calTorsoDir: number[];
@@ -118,6 +119,9 @@ export type DetectorState = {
   calStartedAt: number;
   /** How far through calibration we are, 0..1, for the UI. */
   calProgress: number;
+  /** Deepest elbow angle seen while demonstrating one rep. */
+  rangeMinElbow: number;
+  rangeStartedAt: number;
   /** How far the torso has drifted from the reference. */
   torsoDelta: number;
   scaleRatio: number;
@@ -159,6 +163,8 @@ export function createDetectorState(): DetectorState {
     calElbow: [],
     calStartedAt: NaN,
     calProgress: 0,
+    rangeMinElbow: Infinity,
+    rangeStartedAt: NaN,
     torsoDelta: NaN,
     scaleRatio: NaN,
     upThreshold: NaN,
@@ -240,6 +246,15 @@ export type Calibration = {
   torsoLength: number;
   /** Elbow angle at full extension, for this person in this camera view. */
   topElbowAngle: number;
+  /**
+   * Elbow angle at the bottom of a real rep, measured rather than assumed.
+   *
+   * A head-on camera points the forearm partly at the lens, so lockout may
+   * project as 150 degrees and a deep bottom as 120 rather than 180 and 90.
+   * Deriving the depth requirement from a fixed offset below the top then asks
+   * for a range the view cannot show, and honest reps score as partials.
+   */
+  bottomElbowAngle: number;
 };
 
 export type Posture = {
@@ -329,12 +344,13 @@ function evaluatePosture(
 function thresholdsFor(cal: Calibration) {
   'worklet';
   const top = cal.topElbowAngle;
-  // Spreads chosen so an unforeshortened view (top ≈ 170) lands close to the
-  // hand-tuned absolute thresholds these replaced: 158 / 130 / 100.
+  const range = top - cal.bottomElbowAngle;
+  // Fractions of the range the user actually demonstrated, so the same relative
+  // depth is required whatever the camera can see of it.
   return {
-    up: top - 12,
-    dip: top - 40,
-    down: top - 70,
+    up: top - range * 0.18,
+    dip: top - range * 0.45,
+    down: top - range * 0.72,
   };
 }
 
@@ -450,11 +466,16 @@ export function stepDetector(
         torsoDir: median(s.calTorsoDir),
         torsoLength: median(s.calTorsoLength),
         topElbowAngle: median(s.calElbow),
+        // Provisional: replaced by the measured bottom below. Assumes an
+        // unforeshortened view until the user demonstrates otherwise.
+        bottomElbowAngle: median(s.calElbow) - 80,
       };
       s.calTorsoDir = [];
       s.calTorsoLength = [];
       s.calElbow = [];
-      s.mode = 'counting';
+      s.mode = 'measuringRange';
+      s.rangeMinElbow = Infinity;
+      s.rangeStartedAt = frame.t;
       s.inPosition = true;
       s.calProgress = 1;
       events.push({ type: 'calibrated', t: frame.t });
@@ -464,6 +485,35 @@ export function stepDetector(
 
   const cal = s.calibration;
   if (cal == null) return events;
+
+  // --- Range measurement -------------------------------------------------
+  // One slow rep, to learn how much of the movement this camera angle actually
+  // shows. Nothing is counted during it.
+  if (s.mode === 'measuringRange') {
+    s.elbowAngle = ema(s.elbowAngle, angle, cfg.emaAlpha);
+    const smoothedRange = s.elbowAngle;
+    if (smoothedRange < s.rangeMinElbow) s.rangeMinElbow = smoothedRange;
+
+    const descended = cal.topElbowAngle - s.rangeMinElbow;
+    const returned = smoothedRange >= cal.topElbowAngle - cfg.rangeReturnDeg;
+    const timedOut = frame.t - s.rangeStartedAt > cfg.rangeTimeoutMs;
+
+    if ((descended >= cfg.rangeMinTravelDeg && returned) || timedOut) {
+      const measured =
+        descended >= cfg.rangeMinTravelDeg ? s.rangeMinElbow : cal.topElbowAngle - 80;
+      s.calibration = {
+        torsoDir: cal.torsoDir,
+        torsoLength: cal.torsoLength,
+        topElbowAngle: cal.topElbowAngle,
+        bottomElbowAngle: measured,
+      };
+      s.mode = 'counting';
+      s.phase = 'unknown';
+      s.elbowAngle = NaN;
+      events.push({ type: 'rangeMeasured', t: frame.t });
+    }
+    return events;
+  }
 
   // --- Posture gate ------------------------------------------------------
   // Everything is relative to the captured reference, so this works from any

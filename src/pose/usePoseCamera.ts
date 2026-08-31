@@ -64,6 +64,10 @@ export type RepReadout = {
   /** Calibration progress 0..1 while capturing the reference position. */
   calibrating: boolean;
   calProgress: number;
+  /** Demonstrating one rep so the usable range of motion can be measured. */
+  measuringRange: boolean;
+  topElbowAngle: number;
+  bottomElbowAngle: number;
   /** How far the torso has drifted from the calibrated reference, degrees. */
   torsoDelta: number;
   /** Torso length relative to the reference. 1 means unchanged. */
@@ -98,6 +102,9 @@ function emptyReadout(): RepReadout {
     inPosition: false,
     calibrating: true,
     calProgress: 0,
+    measuringRange: false,
+    topElbowAngle: NaN,
+    bottomElbowAngle: NaN,
     torsoDelta: NaN,
     scaleRatio: NaN,
     upThreshold: NaN,
@@ -274,6 +281,9 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
             inPosition: d.inPosition,
             calibrating: d.mode === 'calibrating',
             calProgress: d.calProgress,
+            measuringRange: d.mode === 'measuringRange',
+            topElbowAngle: d.calibration?.topElbowAngle ?? NaN,
+            bottomElbowAngle: d.calibration?.bottomElbowAngle ?? NaN,
             torsoDelta: d.torsoDelta,
             scaleRatio: d.scaleRatio,
             upThreshold: d.upThreshold,

@@ -20,11 +20,25 @@ function calibrationFrames(endT: number, topAngle = 170): PoseFrame[] {
   return frames;
 }
 
+/** One slow rep, which the detector uses to measure the usable range. */
+function demonstrationFrames(startT: number): PoseFrame[] {
+  return pushupFrames({
+    startT,
+    bottomAngle: 70,
+    descentMs: 600,
+    ascentMs: 600,
+    holdMs: 200,
+    posture: 'pushup',
+  });
+}
+
 function run(frames: PoseFrame[], config = {}) {
   const detector = createRepDetector(config);
   const events: DetectorEvent[] = [];
   const firstT = frames.length > 0 ? frames[0].t : 0;
-  for (const f of calibrationFrames(firstT)) detector.push(f);
+  const demoStart = firstT - 2200;
+  for (const f of calibrationFrames(demoStart)) detector.push(f);
+  for (const f of demonstrationFrames(demoStart)) detector.push(f);
   for (const f of frames) events.push(...detector.push(f));
   return { detector, events, reps: events.filter((e): e is RepEvent => e.type === 'rep') };
 }
@@ -383,7 +397,9 @@ describe('calibration', () => {
     });
     const frames = pushupFrames({ startT: 0, ...SLOW }).map(rotate);
     const detector = createRepDetector();
-    for (const f of calibrationFrames(frames[0].t).map(rotate)) detector.push(f);
+    const demoStart = frames[0].t - 2200;
+    for (const f of calibrationFrames(demoStart).map(rotate)) detector.push(f);
+    for (const f of demonstrationFrames(demoStart).map(rotate)) detector.push(f);
     for (const f of frames) detector.push(f);
     expect(detector.state().reps).toBe(1);
   });
@@ -411,7 +427,15 @@ describe('calibration', () => {
     const frames: PoseFrame[] = [];
     let t = 0;
     const detector = createRepDetector();
-    for (const f of calibrationFrames(2200, 150)) detector.push(f);
+    for (const f of calibrationFrames(0, 150)) detector.push(f);
+    // Demonstrate the range this foreshortened view can actually show: lockout
+    // reads 150, not 180, and the bottom only reaches 65.
+    for (const f of pushupFrames({
+      startT: 0, topAngle: 150, bottomAngle: 65,
+      descentMs: 600, ascentMs: 600, holdMs: 200, posture: 'pushup',
+    })) {
+      detector.push(f);
+    }
     t = 2200;
     for (let i = 0; i < 30; i++) frames.push(frameWithElbowAngle((t += 33), 150 - (85 * i) / 30));
     for (let i = 0; i < 30; i++) frames.push(frameWithElbowAngle((t += 33), 65 + (85 * i) / 30));
@@ -467,5 +491,67 @@ describe('the bottom of a rep', () => {
     // Depth is cleared once the rep completes, so check the reported outcome.
     expect(detector.state().lastRepValid).toBe(true);
     expect(detector.state().lastRepDepth).toBeLessThan(110);
+  });
+});
+
+describe('measured range of motion', () => {
+  it('counts a foreshortened rep that fixed offsets would score as partial', () => {
+    // Head-on, the forearm points partly at the lens: lockout projects as 150
+    // and a genuinely deep bottom only reaches 105. A depth requirement derived
+    // as "top minus 70" would demand 80 and never be satisfied.
+    const detector = createRepDetector();
+    for (const f of calibrationFrames(0, 150)) detector.push(f);
+    for (const f of pushupFrames({
+      startT: 0, topAngle: 150, bottomAngle: 105,
+      descentMs: 600, ascentMs: 600, holdMs: 200, posture: 'pushup',
+    })) {
+      detector.push(f);
+    }
+
+    let t = 2200;
+    const frames: PoseFrame[] = [];
+    for (let i = 0; i < 8; i++) frames.push(frameWithElbowAngle((t += 33), 150));
+    for (let i = 0; i < 25; i++) frames.push(frameWithElbowAngle((t += 33), 150 - (45 * i) / 25));
+    for (let i = 0; i < 25; i++) frames.push(frameWithElbowAngle((t += 33), 105 + (45 * i) / 25));
+    for (let i = 0; i < 15; i++) frames.push(frameWithElbowAngle((t += 33), 150));
+    for (const f of frames) detector.push(f);
+
+    expect(detector.state().reps).toBe(1);
+    expect(detector.state().partials).toBe(0);
+  });
+
+  it('still calls a genuinely shallow rep a partial', () => {
+    // Same foreshortened view, but only half the demonstrated travel.
+    const detector = createRepDetector();
+    for (const f of calibrationFrames(0, 150)) detector.push(f);
+    for (const f of pushupFrames({
+      startT: 0, topAngle: 150, bottomAngle: 105,
+      descentMs: 600, ascentMs: 600, holdMs: 200, posture: 'pushup',
+    })) {
+      detector.push(f);
+    }
+
+    let t = 2200;
+    const frames: PoseFrame[] = [];
+    for (let i = 0; i < 8; i++) frames.push(frameWithElbowAngle((t += 33), 150));
+    for (let i = 0; i < 25; i++) frames.push(frameWithElbowAngle((t += 33), 150 - (22 * i) / 25));
+    for (let i = 0; i < 25; i++) frames.push(frameWithElbowAngle((t += 33), 128 + (22 * i) / 25));
+    for (let i = 0; i < 15; i++) frames.push(frameWithElbowAngle((t += 33), 150));
+    for (const f of frames) detector.push(f);
+
+    expect(detector.state().reps).toBe(0);
+    expect(detector.state().partials).toBe(1);
+  });
+
+  it('falls back to an assumed range if no rep is demonstrated', () => {
+    const detector = createRepDetector();
+    let t = 0;
+    for (const f of calibrationFrames(0, 170)) detector.push(f);
+    // Hold at the top well past the timeout without ever descending.
+    for (t = 0; t < 22000; t += 100) {
+      detector.push(frameWithElbowAngle(t, 170, { posture: 'pushup' }));
+    }
+    expect(detector.state().mode).toBe('counting');
+    expect(detector.state().calibration!.bottomElbowAngle).toBeCloseTo(90, 0);
   });
 });
