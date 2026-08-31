@@ -79,6 +79,28 @@ export type DetectorConfig = {
    * A couple of frames of bad hip tracking should not abandon a set.
    */
   postureLostFrames: number;
+
+  /**
+   * Count a rep even when it did not reach full demonstrated depth.
+   *
+   * The two failure modes are not symmetric. A missed rep means the user did the
+   * work and got nothing, which reads as the app being broken. A spurious rep in
+   * a solo tracker costs almost nothing. Tracking is also least reliable exactly
+   * where depth is judged — at the bottom — so strictness there converts pose
+   * dropouts into lost reps.
+   *
+   * Depth is still recorded on every rep, so a later grading or form feature has
+   * the data without counting ever having depended on it.
+   */
+  countShallowReps: boolean;
+
+  /**
+   * Fraction of the demonstrated range that must be travelled for a movement to
+   * register as a rep at all. Below this it is not treated as a rep.
+   */
+  minTravelFraction: number;
+  /** Fraction of the demonstrated range that marks a rep as full depth. */
+  fullDepthFraction: number;
 };
 
 export const DEFAULT_CONFIG: DetectorConfig = {
@@ -111,4 +133,10 @@ export const DEFAULT_CONFIG: DetectorConfig = {
   minBodyLineAngle: 130,
   hipSagAngle: 155,
   postureLostFrames: 5,
+  countShallowReps: true,
+  // Deliberately lenient. Half the demonstrated travel is unmistakably a rep
+  // attempt rather than a twitch, and anything at 70% is treated as full depth
+  // rather than demanding the very bottom, which is where tracking is worst.
+  minTravelFraction: 0.45,
+  fullDepthFraction: 0.7,
 };

@@ -182,6 +182,7 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
   // own copy, so a missed or repeated read is self-correcting — unlike a boolean
   // flag the worklet must clear with an asynchronous write.
   const resetEpoch = useSharedValue(0);
+  const manualAdjustment = useSharedValue(0);
 
   const loadedModel = model.state === 'loaded' ? model.model : undefined;
 
@@ -317,6 +318,14 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
     resetEpoch.value = resetEpoch.value + 1;
   };
 
+  // Manual correction. However good the detector gets, it will sometimes be
+  // wrong, and a user who cannot fix the number stops trusting the whole app.
+  // Applied on top of the detected count rather than inside the detector, so a
+  // correction is never undone by the next frame's publication.
+  const adjustReps = (delta: number) => {
+    manualAdjustment.value = Math.max(manualAdjustment.value + delta, -readout.value.reps);
+  };
+
   const modelError = useMemo(
     () => (model.state === 'error' ? model.error : undefined),
     [model],
@@ -326,7 +335,9 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
     frameOutput,
     pose,
     readout,
+    manualAdjustment,
     resetReps,
+    adjustReps,
     modelState: model.state,
     modelError,
     resizerReady: resizer != null,

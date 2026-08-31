@@ -101,15 +101,16 @@ describe('hysteresis', () => {
 });
 
 describe('partial reps', () => {
-  it('reports a shallow descent as a partial rather than dropping it', () => {
-    // Descends to 120 — past dipAngle (110)? No: 120 > 110, so no dip is even entered.
-    // Use 105: enters the dip band but never reaches downAngle (95).
+  it('counts a shallow descent, flagged as not full depth', () => {
+    // Leniency: a missed rep means the user did the work and got nothing, which
+    // reads as the app being broken. A shallow one still counts, and records
+    // that it was shallow so form can be graded later.
     const { reps, detector } = run(
       pushupFrames({ startT: 0, bottomAngle: 105, descentMs: 900, ascentMs: 900 }),
     );
     expect(reps).toHaveLength(1);
     expect(reps[0].valid).toBe(false);
-    expect(detector.state().reps).toBe(0);
+    expect(detector.state().reps).toBe(1);
     expect(detector.state().partials).toBe(1);
   });
 
@@ -118,7 +119,7 @@ describe('partial reps', () => {
     expect(reps).toHaveLength(0);
   });
 
-  it('keeps valid and partial counts separate across a mixed set', () => {
+  it('counts every rep in a mixed set, tracking how many were shallow', () => {
     const frames: PoseFrame[] = [];
     let t = 0;
     for (const bottom of [70, 70, 105, 70, 105]) {
@@ -127,7 +128,7 @@ describe('partial reps', () => {
       t = rep[rep.length - 1].t + 33;
     }
     const { detector } = run(frames);
-    expect(detector.state().reps).toBe(3);
+    expect(detector.state().reps).toBe(5);
     expect(detector.state().partials).toBe(2);
   });
 });
@@ -520,7 +521,7 @@ describe('measured range of motion', () => {
     expect(detector.state().partials).toBe(0);
   });
 
-  it('still calls a genuinely shallow rep a partial', () => {
+  it('still marks a genuinely shallow rep as not full depth', () => {
     // Same foreshortened view, but only half the demonstrated travel.
     const detector = createRepDetector();
     for (const f of calibrationFrames(0, 150)) detector.push(f);
@@ -539,8 +540,10 @@ describe('measured range of motion', () => {
     for (let i = 0; i < 15; i++) frames.push(frameWithElbowAngle((t += 33), 150));
     for (const f of frames) detector.push(f);
 
-    expect(detector.state().reps).toBe(0);
+    // It counts — but is recorded as shallow.
+    expect(detector.state().reps).toBe(1);
     expect(detector.state().partials).toBe(1);
+    expect(detector.state().lastRepValid).toBe(false);
   });
 
   it('falls back to an assumed range if no rep is demonstrated', () => {

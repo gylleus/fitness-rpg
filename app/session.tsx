@@ -38,9 +38,8 @@ export default function Session() {
   const [rotationIndex, setRotationIndex] = useState(0);
   const rotation = ROTATIONS[rotationIndex];
 
-  const { frameOutput, pose, readout, resetReps, modelState, modelError } = usePoseCamera({
-    rotation,
-  });
+  const { frameOutput, pose, readout, manualAdjustment, resetReps, adjustReps, modelState, modelError } =
+    usePoseCamera({ rotation });
   const previewOutput = usePreviewOutput();
 
   useEffect(() => {
@@ -54,6 +53,7 @@ export default function Session() {
   const [debug, setDebug] = useState({ ms: 0, tracked: 0, best: 0, margin: 1 });
   const [reps, setReps] = useState({
     reps: 0,
+    detected: 0,
     partials: 0,
     phase: 'unknown' as string,
     angle: NaN,
@@ -121,7 +121,8 @@ export default function Session() {
       }
 
       setReps({
-        reps: r.reps,
+        reps: Math.max(0, r.reps + manualAdjustment.value),
+        detected: r.reps,
         partials: r.partials,
         phase: r.phase,
         angle: r.elbowAngle,
@@ -140,7 +141,7 @@ export default function Session() {
       });
     }, 100);
     return () => clearInterval(id);
-  }, [pose, readout]);
+  }, [pose, readout, manualAdjustment]);
 
   if (!hasPermission) {
     return (
@@ -246,12 +247,18 @@ export default function Session() {
           ) : null}
           <Text style={styles.counter}>{reps.reps}</Text>
           <Text style={styles.counterLabel}>
-            reps{reps.partials > 0 ? `   ·   ${reps.partials} partial` : ''}
+            reps{reps.partials > 0 ? `   ·   ${reps.partials} shallow` : ''}
           </Text>
           <AngleBar angle={reps.angle} />
         </View>
 
         <View style={styles.controls}>
+          <Pressable style={[styles.button, styles.adjust]} onPress={() => adjustReps(-1)}>
+            <Text style={styles.buttonText}>−1</Text>
+          </Pressable>
+          <Pressable style={[styles.button, styles.adjust]} onPress={() => adjustReps(1)}>
+            <Text style={styles.buttonText}>+1</Text>
+          </Pressable>
           <Pressable style={[styles.button, styles.secondary]} onPress={resetReps}>
             <Text style={styles.buttonText}>recalibrate</Text>
           </Pressable>
@@ -392,5 +399,6 @@ const styles = StyleSheet.create({
   controls: { flexDirection: 'row', gap: 8, justifyContent: 'center', flexWrap: 'wrap' },
   button: { backgroundColor: '#2563eb', paddingVertical: 12, paddingHorizontal: 14, borderRadius: 10 },
   secondary: { backgroundColor: '#374151' },
+  adjust: { backgroundColor: '#4b5563', minWidth: 56, alignItems: 'center' },
   buttonText: { color: '#fff', fontSize: 14, fontWeight: '600' },
 });

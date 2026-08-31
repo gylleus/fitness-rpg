@@ -341,16 +341,16 @@ function evaluatePosture(
  * then never be reached. Deriving them from the observed top makes the same
  * relative range of motion work from any viewpoint.
  */
-function thresholdsFor(cal: Calibration) {
+function thresholdsFor(cal: Calibration, cfg: DetectorConfig) {
   'worklet';
   const top = cal.topElbowAngle;
   const range = top - cal.bottomElbowAngle;
   // Fractions of the range the user actually demonstrated, so the same relative
-  // depth is required whatever the camera can see of it.
+  // depth is asked for whatever the camera can see of it.
   return {
     up: top - range * 0.18,
-    dip: top - range * 0.45,
-    down: top - range * 0.72,
+    dip: top - range * cfg.minTravelFraction,
+    down: top - range * cfg.fullDepthFraction,
   };
 }
 
@@ -562,7 +562,7 @@ export function stepDetector(
 
   if (!s.inPosition) return events;
 
-  const th = thresholdsFor(cal);
+  const th = thresholdsFor(cal, cfg);
   s.upThreshold = th.up;
   s.dipThreshold = th.dip;
   s.downThreshold = th.down;
@@ -626,10 +626,12 @@ export function stepDetector(
   s.dipMinAngle = Infinity;
   s.sagThisRep = false;
 
-  const valid = depth <= th.down;
-  if (valid) s.reps++;
-  else s.partials++;
-  s.lastRepValid = valid;
+  const fullDepth = depth <= th.down;
+  // Leniency lives here: a shallow rep still counts, and is recorded as shallow
+  // rather than discarded.
+  if (fullDepth || cfg.countShallowReps) s.reps++;
+  if (!fullDepth) s.partials++;
+  s.lastRepValid = fullDepth;
   s.lastRepDepth = depth;
   s.lastRepDurationMs = durationMs;
 
@@ -637,8 +639,8 @@ export function stepDetector(
     type: 'rep',
     // #9: a single monotonic ordinal across valid and partial reps, so two
     // events never share an index.
-    index: s.reps + s.partials,
-    valid,
+    index: s.reps,
+    valid: fullDepth,
     minAngle: depth,
     flags: sagged ? ['hipSag'] : [],
     durationMs,
