@@ -65,6 +65,7 @@ export default function Session() {
     calProgress: 0,
     delta: NaN,
     scale: NaN,
+    down: NaN,
   });
 
   useEffect(() => {
@@ -97,6 +98,9 @@ export default function Session() {
             `elbow=${fmt(r.elbowAngle)} side=${r.side} phase=${r.phase} ` +
             `cal=${r.calibrating ? r.calProgress.toFixed(2) : 'done'} ` +
             `delta=${fmt(r.torsoDelta)} scale=${fmt(r.scaleRatio, 2)} ` +
+            `th(up/dip/down)=${fmt(r.upThreshold)}/${fmt(r.dipThreshold)}/${fmt(r.downThreshold)} ` +
+            `deepest=${fmt(r.dipMinAngle)} lastRep=${r.lastRepValid === null ? '-' : r.lastRepValid ? 'valid' : 'partial'}@${fmt(r.lastRepDepth)} ` +
+            `reps=${r.reps}/${r.partials} ` +
             `| model: best3=${top} nose=${kp[0] ? kp[0].score.toFixed(2) : 'n/a'} ` +
             `Lsh=${kp[5] ? kp[5].score.toFixed(2) : 'n/a'} Lel=${kp[7] ? kp[7].score.toFixed(2) : 'n/a'} ` +
             `Lwr=${kp[9] ? kp[9].score.toFixed(2) : 'n/a'} Lhip=${kp[11] ? kp[11].score.toFixed(2) : 'n/a'} ` +
@@ -118,6 +122,7 @@ export default function Session() {
         calProgress: r.calProgress,
         delta: r.torsoDelta,
         scale: r.scaleRatio,
+        down: r.downThreshold,
       });
     }, 100);
     return () => clearInterval(id);
@@ -177,6 +182,7 @@ export default function Session() {
           </Text>
           <Text style={styles.debugText}>
             deepest: {Number.isFinite(reps.depth) ? Math.round(reps.depth) + '°' : '--'}
+            {'  '}need &lt;= {fmtDeg(reps.down)}
           </Text>
           {reps.rejection ? (
             <Text style={styles.warnText}>last movement rejected: {reps.rejection}</Text>

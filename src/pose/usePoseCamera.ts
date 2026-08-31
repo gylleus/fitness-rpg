@@ -68,6 +68,11 @@ export type RepReadout = {
   torsoDelta: number;
   /** Torso length relative to the reference. 1 means unchanged. */
   scaleRatio: number;
+  upThreshold: number;
+  dipThreshold: number;
+  downThreshold: number;
+  lastRepValid: boolean | null;
+  lastRepDepth: number;
   /** Shoulder→hip→knee angle. NaN when the knee is not visible. */
   bodyLine: number;
   shoulderScore: number;
@@ -95,6 +100,11 @@ function emptyReadout(): RepReadout {
     calProgress: 0,
     torsoDelta: NaN,
     scaleRatio: NaN,
+    upThreshold: NaN,
+    dipThreshold: NaN,
+    downThreshold: NaN,
+    lastRepValid: null,
+    lastRepDepth: NaN,
     bodyLine: NaN,
     shoulderScore: 0,
     hipScore: 0,
@@ -262,6 +272,11 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
             calProgress: d.calProgress,
             torsoDelta: d.torsoDelta,
             scaleRatio: d.scaleRatio,
+            upThreshold: d.upThreshold,
+            dipThreshold: d.dipThreshold,
+            downThreshold: d.downThreshold,
+            lastRepValid: d.lastRepValid,
+            lastRepDepth: d.lastRepDepth,
             bodyLine: d.bodyLine,
             shoulderScore: d.shoulderScore,
             hipScore: d.hipScore,

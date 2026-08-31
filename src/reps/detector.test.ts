@@ -420,3 +420,52 @@ describe('calibration', () => {
     expect(detector.state().reps).toBe(1);
   });
 });
+
+describe('the bottom of a rep', () => {
+  it('completes a rep even when tracking drops out at the bottom', () => {
+    // The pose model is least confident exactly where the body is lowest and
+    // limbs occlude. Abandoning there costs the whole rep.
+    const frames = pushupFrames({ startT: 0, ...SLOW });
+    const lowest = frames.reduce(
+      (best, f, i) => (i > 20 && i < 45 ? i : best),
+      0,
+    );
+    const patched = frames.map((f, i) =>
+      i >= lowest - 6 && i < lowest + 6 ? blankFrame(f.t) : f,
+    );
+    const { detector } = run(patched);
+    expect(detector.state().reps + detector.state().partials).toBe(1);
+  });
+
+  it('does not abandon a rep because the body shape changed while descending', () => {
+    // Descending is exactly what changes the torso's apparent length and angle.
+    // Checking the calibrated posture mid-rep made the gate fight the movement.
+    const frames: PoseFrame[] = [];
+    let t = 0;
+    for (let i = 0; i < 8; i++) frames.push(frameWithElbowAngle((t += 33), 170));
+    // Descend while the torso also foreshortens sharply, as it does head-on.
+    for (let i = 0; i < 25; i++) {
+      const f = frameWithElbowAngle((t += 33), 170 - (100 * i) / 25);
+      const hip = f.keypoints[11];
+      // Torso foreshortens progressively as the body lowers: full length at the
+      // top, down to 55% at the bottom — past the scale tolerance that applies
+      // between reps, which is the point.
+      hip.x = 0.4 - 0.15 * (1 - 0.45 * (i / 25));
+      frames.push(f);
+    }
+    for (let i = 0; i < 25; i++) frames.push(frameWithElbowAngle((t += 33), 70 + (100 * i) / 25));
+    for (let i = 0; i < 20; i++) frames.push(frameWithElbowAngle((t += 33), 170));
+
+    const { events, detector } = run(frames);
+    expect(events.some((e) => e.type === 'positionLost')).toBe(false);
+    expect(detector.state().reps).toBe(1);
+  });
+
+  it('still records how deep the rep got when frames are missing at the bottom', () => {
+    const frames = pushupFrames({ startT: 0, ...SLOW });
+    const { detector } = run(frames);
+    // Depth is cleared once the rep completes, so check the reported outcome.
+    expect(detector.state().lastRepValid).toBe(true);
+    expect(detector.state().lastRepDepth).toBeLessThan(110);
+  });
+});

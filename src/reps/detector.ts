@@ -121,6 +121,14 @@ export type DetectorState = {
   /** How far the torso has drifted from the reference. */
   torsoDelta: number;
   scaleRatio: number;
+  /** Live thresholds derived from calibration, exposed for diagnosis. */
+  upThreshold: number;
+  dipThreshold: number;
+  downThreshold: number;
+  /** Outcome of the last completed movement. */
+  lastRepValid: boolean | null;
+  lastRepDepth: number;
+  lastRepDurationMs: number;
 };
 
 export function createDetectorState(): DetectorState {
@@ -153,6 +161,12 @@ export function createDetectorState(): DetectorState {
     calProgress: 0,
     torsoDelta: NaN,
     scaleRatio: NaN,
+    upThreshold: NaN,
+    dipThreshold: NaN,
+    downThreshold: NaN,
+    lastRepValid: null,
+    lastRepDepth: NaN,
+    lastRepDurationMs: NaN,
   };
 }
 
@@ -342,7 +356,11 @@ export function stepDetector(
 
   if (!usable) {
     s.lowConfidenceFrames++;
-    if (s.tracking && s.lowConfidenceFrames >= cfg.trackingLostFrames) {
+    // Be far more patient mid-rep: the bottom of a pushup is where the model is
+    // least confident and also where abandoning costs the whole rep.
+    const limit =
+      s.phase === 'dip' ? cfg.trackingLostFramesInRep : cfg.trackingLostFrames;
+    if (s.tracking && s.lowConfidenceFrames >= limit) {
       s.tracking = false;
       // Reset rather than resume: reacquiring mid-descent and then rising would
       // otherwise emit a rep for a movement that was never actually observed.
@@ -450,32 +468,54 @@ export function stepDetector(
   // --- Posture gate ------------------------------------------------------
   // Everything is relative to the captured reference, so this works from any
   // camera placement and any buffer orientation.
-  const posture = evaluatePosture(frame, active, cal, cfg);
-  s.torsoDelta = posture.torsoDelta;
-  s.scaleRatio = posture.scaleRatio;
-  s.bodyLine = posture.bodyLine;
-
-  if (posture.inPosition) {
-    s.outOfPositionFrames = 0;
-    if (!s.inPosition) {
-      s.inPosition = true;
-      events.push({ type: 'positionAcquired', t: frame.t });
-    }
-    if (posture.hipSag) s.sagThisRep = true;
+  //
+  // Checked only between reps, never during one. Descending is precisely what
+  // changes the torso's apparent length and angle, so applying the check mid-rep
+  // made the gate fight the movement it was meant to be watching: the body
+  // stopped matching its calibrated top, position was declared lost, and the rep
+  // was abandoned at the bottom every time. Form is still sampled during the dip
+  // to catch sagging.
+  // The descent begins while the phase is still 'top' — descentStartedAt is set
+  // as soon as the arm leaves lockout — so gating on phase alone still left the
+  // check live for the first part of the movement.
+  const lockedOut = s.phase === 'unknown' || Number.isNaN(s.descentStartedAt);
+  if (!lockedOut) {
+    const midRep = evaluatePosture(frame, active, cal, cfg);
+    if (midRep.hipSag) s.sagThisRep = true;
+    s.bodyLine = midRep.bodyLine;
+    s.torsoDelta = midRep.torsoDelta;
+    s.scaleRatio = midRep.scaleRatio;
   } else {
-    s.outOfPositionFrames++;
-    if (s.inPosition && s.outOfPositionFrames >= cfg.postureLostFrames) {
-      s.inPosition = false;
-      // Abandon the movement in progress rather than resuming it later: the part
-      // that happened out of position was not a pushup.
-      resetMovement(s);
-      events.push({ type: 'positionLost', t: frame.t });
+    const posture = evaluatePosture(frame, active, cal, cfg);
+    s.torsoDelta = posture.torsoDelta;
+    s.scaleRatio = posture.scaleRatio;
+    s.bodyLine = posture.bodyLine;
+
+    if (posture.inPosition) {
+      s.outOfPositionFrames = 0;
+      if (!s.inPosition) {
+        s.inPosition = true;
+        events.push({ type: 'positionAcquired', t: frame.t });
+      }
+      if (posture.hipSag) s.sagThisRep = true;
+    } else {
+      s.outOfPositionFrames++;
+      if (s.inPosition && s.outOfPositionFrames >= cfg.postureLostFrames) {
+        s.inPosition = false;
+        // Abandon the movement in progress rather than resuming it later: the
+        // part that happened out of position was not a pushup.
+        resetMovement(s);
+        events.push({ type: 'positionLost', t: frame.t });
+      }
     }
   }
 
   if (!s.inPosition) return events;
 
   const th = thresholdsFor(cal);
+  s.upThreshold = th.up;
+  s.dipThreshold = th.dip;
+  s.downThreshold = th.down;
 
   s.elbowAngle = ema(s.elbowAngle, angle, cfg.emaAlpha);
   const smoothed = s.elbowAngle;
@@ -539,6 +579,9 @@ export function stepDetector(
   const valid = depth <= th.down;
   if (valid) s.reps++;
   else s.partials++;
+  s.lastRepValid = valid;
+  s.lastRepDepth = depth;
+  s.lastRepDurationMs = durationMs;
 
   events.push({
     type: 'rep',

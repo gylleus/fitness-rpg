@@ -28,6 +28,15 @@ export type DetectorConfig = {
   maxRepMs: number;
   /** Consecutive unusable frames before tracking is declared lost. */
   trackingLostFrames: number;
+  /**
+   * The same, but while a rep is in progress.
+   *
+   * The bottom of a pushup is the worst case for the pose model: limbs occlude
+   * each other and the body is closest to the floor. Giving up as fast as we do
+   * between reps meant the descent was routinely abandoned right at the point
+   * that decides whether the rep counts.
+   */
+  trackingLostFramesInRep: number;
 
   /** How long the top position must be held to capture a reference, in ms. */
   calibrationMs: number;
@@ -80,6 +89,7 @@ export const DEFAULT_CONFIG: DetectorConfig = {
   minRepMs: 300,
   maxRepMs: 12000,
   trackingLostFrames: 10,
+  trackingLostFramesInRep: 30,
   calibrationMs: 1500,
   calibrationMinSamples: 12,
   // Generous: a real rep rotates the torso somewhat, and a head-on view makes
