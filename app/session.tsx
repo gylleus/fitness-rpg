@@ -51,7 +51,7 @@ export default function Session() {
   // are unreadable faster than that, and it keeps 30fps of keypoints off the JS
   // thread entirely.
   const lastLog = useRef(0);
-  const [debug, setDebug] = useState({ ms: 0, tracked: 0, best: 0 });
+  const [debug, setDebug] = useState({ ms: 0, tracked: 0, best: 0, margin: 1 });
   const [reps, setReps] = useState({
     reps: 0,
     partials: 0,
@@ -72,10 +72,18 @@ export default function Session() {
     const id = setInterval(() => {
       const snap = pose.value;
       const scores = snap.keypoints.map((k) => k.score);
+      // How close the detected body sits to the frame edge. Losing the person at
+      // the bottom of a rep is usually them leaving the view, not the model
+      // failing, and the two need opposite fixes.
+      const seen = snap.keypoints.filter((k) => k.score >= 0.3);
+      const margin = seen.length
+        ? Math.min(...seen.map((k) => Math.min(k.x, 1 - k.x, k.y, 1 - k.y)))
+        : 1;
       setDebug({
         ms: Math.round(snap.inferenceMs),
         tracked: scores.filter((s) => s >= 0.3).length,
         best: Math.round(Math.max(0, ...scores) * 100),
+        margin,
       });
 
       const r = readout.value;
@@ -189,14 +197,21 @@ export default function Session() {
           ) : null}
           <Text style={styles.debugText}>model: {modelState}</Text>
           <Text style={styles.debugText}>inference: {debug.ms} ms</Text>
-          <Text style={styles.debugText}>joints tracked: {debug.tracked}/17</Text>
+          <Text style={styles.debugText}>
+            joints tracked: {debug.tracked}/17{'  '}edge margin: {debug.margin.toFixed(2)}
+          </Text>
           <Text style={styles.debugText}>best score: {debug.best}%</Text>
           <Text style={styles.debugText}>camera: {position}</Text>
           {modelError ? <Text style={styles.errorText}>{String(modelError)}</Text> : null}
         </View>
 
         <View style={styles.counterWrap} pointerEvents="none">
-          {debug.best < 35 ? (
+          {debug.best >= 35 && debug.margin < 0.04 ? (
+            <Text style={styles.alert}>
+              You&apos;re at the edge of the frame.{'\n'}
+              Move the phone back or further to your side.
+            </Text>
+          ) : debug.best < 35 ? (
             // Distinguish "the camera cannot see you" from "your position is
             // wrong". They look identical on screen but need opposite fixes.
             <Text style={styles.alert}>

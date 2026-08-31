@@ -158,7 +158,11 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
     // MoveNet Lightning INT8 expects uint8 NHWC, verified against the model's
     // own input tensor spec.
     dataType: 'uint8',
-    scaleMode: 'cover',
+    // 'contain' letterboxes the whole frame into the square. 'cover' crops to a
+    // centred square, which on a 1280x720 frame throws away 39% of the width on
+    // each side — precisely where the limbs of a horizontal body are. Losing
+    // resolution to padding is a much better trade than losing the arms.
+    scaleMode: 'contain',
     pixelLayout: 'interleaved',
   });
 
