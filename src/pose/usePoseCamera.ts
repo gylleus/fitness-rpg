@@ -18,7 +18,7 @@
 import { useMemo } from 'react';
 import { Platform } from 'react-native';
 import { useSharedValue } from 'react-native-reanimated';
-import { useFrameOutput } from 'react-native-vision-camera';
+import { useFrameOutput, type CameraOrientation } from 'react-native-vision-camera';
 import { useResizer } from 'react-native-vision-camera-resizer';
 import { useTensorflowModel } from 'react-native-fast-tflite';
 
@@ -50,6 +50,15 @@ export type PoseSnapshot = {
    * motion blur. Inference being fast does not mean frames are arriving fast.
    */
   frameIntervalMs: number;
+  /**
+   * How the frame's pixels are rotated relative to upright.
+   *
+   * VisionCamera delivers buffers in sensor orientation, and documents that the
+   * consumer must interpret the pixels as rotated by this value. Keypoints come
+   * back in that same rotated space, so anything drawing them over the preview
+   * has to counter-rotate first or the overlay is mirrored or sideways.
+   */
+  orientation: CameraOrientation;
 };
 
 export function emptySnapshot(): PoseSnapshot {
@@ -60,6 +69,7 @@ export function emptySnapshot(): PoseSnapshot {
     frameHeight: 0,
     inferenceMs: 0,
     frameIntervalMs: 0,
+    orientation: 'up',
   };
 }
 
@@ -298,6 +308,7 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
             frameHeight: frame.height,
             inferenceMs: performance.now() - started,
             frameIntervalMs: interval,
+            orientation: frame.orientation,
           };
           readout.value = {
             reps: d.reps,

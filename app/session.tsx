@@ -63,7 +63,9 @@ export default function Session() {
   );
 
   const lastLog = useRef(0);
-  const [debug, setDebug] = useState({ ms: 0, tracked: 0, best: 0, margin: 1, fps: 0 });
+  const [debug, setDebug] = useState({
+    ms: 0, tracked: 0, best: 0, margin: 1, fps: 0, orientation: 'up' as string,
+  });
   const [reps, setReps] = useState({
     reps: 0,
     detected: 0,
@@ -99,6 +101,7 @@ export default function Session() {
         ? Math.min(...seen.map((k) => Math.min(k.x, 1 - k.x, k.y, 1 - k.y)))
         : 1;
       setDebug({
+        orientation: snap.orientation as string,
         fps: snap.frameIntervalMs > 0 ? 1000 / snap.frameIntervalMs : 0,
         ms: Math.round(snap.inferenceMs),
         tracked: scores.filter((s) => s >= 0.3).length,
@@ -136,7 +139,7 @@ export default function Session() {
             `| xy0=${kp[0] ? kp[0].x.toFixed(2) + ',' + kp[0].y.toFixed(2) : 'n/a'} ` +
             `ms=${Math.round(snap.inferenceMs)} dt=${Math.round(snap.frameIntervalMs)}ms ` +
             `fps=${snap.frameIntervalMs > 0 ? (1000 / snap.frameIntervalMs).toFixed(1) : '--'} ` +
-            `frame=${snap.frameWidth}x${snap.frameHeight}`,
+            `frame=${snap.frameWidth}x${snap.frameHeight} orient=${snap.orientation}`,
         );
       }
 
@@ -245,7 +248,8 @@ export default function Session() {
             inference: {debug.ms} ms{'  '}camera: {debug.fps.toFixed(0)} fps
           </Text>
           <Text style={styles.debugText}>
-            joints tracked: {debug.tracked}/17{'  '}edge margin: {debug.margin.toFixed(2)}
+            joints tracked: {debug.tracked}/17{'  '}edge: {debug.margin.toFixed(2)}
+            {'  '}orient: {debug.orientation}
           </Text>
           <Text style={styles.debugText}>best score: {debug.best}%</Text>
           <Text style={styles.debugText}>camera: {position}</Text>

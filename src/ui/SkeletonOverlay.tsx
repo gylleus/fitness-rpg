@@ -12,7 +12,9 @@ import type { SharedValue } from 'react-native-reanimated';
 import { StyleSheet, View, type LayoutChangeEvent } from 'react-native';
 import { useState } from 'react';
 
+import type { CameraOrientation } from 'react-native-vision-camera';
 import { KEYPOINT, type Keypoint } from '../pose/keypoints';
+import { counterRotate, isQuarterTurn } from '../pose/orientation';
 import type { PoseSnapshot } from '../pose/usePoseCamera';
 
 /** Pairs of keypoints drawn as bones. */
@@ -57,6 +59,7 @@ function toView(
   viewW: number,
   viewH: number,
   mirrorX: boolean,
+  orientation: CameraOrientation,
 ): { x: number; y: number } {
   'worklet';
   // The front camera preview is mirrored, but the frame buffer handed to the
@@ -64,16 +67,29 @@ function toView(
   // which reads as broken tracking rather than a coordinate problem.
   const kx = mirrorX ? 1 - k.x : k.x;
 
-  // Model space -> frame pixels, undoing the centre square crop.
-  const square = Math.min(frameW, frameH);
-  const fx = (frameW - square) / 2 + kx * square;
-  const fy = (frameH - square) / 2 + k.y * square;
+  // Counter-rotate out of the frame's own orientation into upright space. The
+  // buffer arrives in sensor orientation, so on a portrait phone a body that
+  // looks upright on screen is sideways in these coordinates.
+  const up = counterRotate(kx, k.y, orientation);
+  const ux = up.x;
+  const uy = up.y;
+
+  // A quarter turn swaps which frame dimension is horizontal.
+  const quarterTurn = isQuarterTurn(orientation);
+  const upW = quarterTurn ? frameH : frameW;
+  const upH = quarterTurn ? frameW : frameH;
+
+  // Model space -> upright frame pixels, undoing the centre square crop. The
+  // crop is a centred square, so it stays centred and square under rotation.
+  const square = Math.min(upW, upH);
+  const fx = (upW - square) / 2 + ux * square;
+  const fy = (upH - square) / 2 + uy * square;
 
   // Frame pixels -> view pixels, applying the preview's own cover crop.
-  const scale = Math.max(viewW / frameW, viewH / frameH);
+  const scale = Math.max(viewW / upW, viewH / upH);
   return {
-    x: fx * scale + (viewW - frameW * scale) / 2,
-    y: fy * scale + (viewH - frameH * scale) / 2,
+    x: fx * scale + (viewW - upW * scale) / 2,
+    y: fy * scale + (viewH - upH * scale) / 2,
   };
 }
 
@@ -95,7 +111,15 @@ export function SkeletonOverlay({
     const snap = pose.value;
     if (snap.frameWidth === 0 || size.width === 0) return [];
     return snap.keypoints.map((k) => ({
-      ...toView(k, snap.frameWidth, snap.frameHeight, size.width, size.height, mirrorX),
+      ...toView(
+        k,
+        snap.frameWidth,
+        snap.frameHeight,
+        size.width,
+        size.height,
+        mirrorX,
+        snap.orientation,
+      ),
       score: k.score,
     }));
   }, [size, mirrorX]);
