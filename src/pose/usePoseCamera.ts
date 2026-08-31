@@ -91,6 +91,10 @@ export type RepReadout = {
   downThreshold: number;
   lastRepValid: boolean | null;
   lastRepDepth: number;
+  /** How far the body and hands have moved this rep, and what is required. */
+  bodyTravel: number;
+  handTravel: number;
+  travelNeeded: number;
   /** Shoulder→hip→knee angle. NaN when the knee is not visible. */
   bodyLine: number;
   shoulderScore: number;
@@ -126,6 +130,9 @@ function emptyReadout(): RepReadout {
     downThreshold: NaN,
     lastRepValid: null,
     lastRepDepth: NaN,
+    bodyTravel: 0,
+    handTravel: 0,
+    travelNeeded: NaN,
     bodyLine: NaN,
     shoulderScore: 0,
     hipScore: 0,
@@ -313,6 +320,9 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
             downThreshold: d.downThreshold,
             lastRepValid: d.lastRepValid,
             lastRepDepth: d.lastRepDepth,
+            bodyTravel: d.bodyTravel,
+            handTravel: d.handTravel,
+            travelNeeded: (d.calibration?.torsoLength ?? NaN) * DEFAULT_CONFIG.minBodyTravelFraction,
             bodyLine: d.bodyLine,
             shoulderScore: d.shoulderScore,
             hipScore: d.hipScore,

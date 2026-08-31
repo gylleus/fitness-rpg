@@ -82,6 +82,9 @@ export default function Session() {
     delta: NaN,
     scale: NaN,
     down: NaN,
+    bodyTravel: 0,
+    handTravel: 0,
+    travelNeeded: NaN,
   });
 
   useEffect(() => {
@@ -124,6 +127,7 @@ export default function Session() {
             `cal=${r.calibrating ? r.calProgress.toFixed(2) : 'done'} ` +
             `delta=${fmt(r.torsoDelta)} scale=${fmt(r.scaleRatio, 2)} ` +
             `th(up/dip/down)=${fmt(r.upThreshold)}/${fmt(r.dipThreshold)}/${fmt(r.downThreshold)} ` +
+            `travel body=${r.bodyTravel.toFixed(3)}/${fmt(r.travelNeeded, 3)} hand=${r.handTravel.toFixed(3)} ` +
             `deepest=${fmt(r.dipMinAngle)} lastRep=${r.lastRepValid === null ? '-' : r.lastRepValid ? 'valid' : 'partial'}@${fmt(r.lastRepDepth)} ` +
             `reps=${r.reps}/${r.partials} ` +
             `| model: best3=${top} nose=${kp[0] ? kp[0].score.toFixed(2) : 'n/a'} ` +
@@ -154,6 +158,9 @@ export default function Session() {
         delta: r.torsoDelta,
         scale: r.scaleRatio,
         down: r.downThreshold,
+        bodyTravel: r.bodyTravel,
+        handTravel: r.handTravel,
+        travelNeeded: r.travelNeeded,
       });
     }, 100);
     return () => clearInterval(id);
@@ -217,6 +224,12 @@ export default function Session() {
           </Text>
           <Text style={styles.debugText}>
             range: {fmtDeg(reps.top)} → {fmtDeg(reps.bottom)}
+          </Text>
+          <Text style={styles.debugText}>
+            body moved: {reps.bodyTravel.toFixed(3)}{'  '}need {fmt(reps.travelNeeded, 3)}
+          </Text>
+          <Text style={styles.debugText}>
+            hands moved: {reps.handTravel.toFixed(3)}{'  '}(body must exceed 1.5x)
           </Text>
           {reps.rejection ? (
             <Text style={styles.warnText}>

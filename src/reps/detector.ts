@@ -114,6 +114,8 @@ export type DetectorState = {
   /** Furthest either has moved from that origin during the rep. */
   bodyTravel: number;
   handTravel: number;
+  /** Highest smoothed angle seen since the last rep, for anchoring travel. */
+  cycleMaxAngle: number;
   /** Timestamp of the last processed frame, for time-based smoothing. */
   lastFrameT: number;
 
@@ -173,6 +175,7 @@ export function createDetectorState(): DetectorState {
     repStartWristY: NaN,
     bodyTravel: 0,
     handTravel: 0,
+    cycleMaxAngle: -Infinity,
     lastFrameT: NaN,
     shoulderScore: 0,
     hipScore: 0,
@@ -213,6 +216,7 @@ function resetMovement(s: DetectorState): void {
   s.repStartWristY = NaN;
   s.bodyTravel = 0;
   s.handTravel = 0;
+  s.cycleMaxAngle = -Infinity;
 }
 
 /**
@@ -612,6 +616,23 @@ export function stepDetector(
   // Track how far the body and the hands have actually moved since this descent
   // began. A pushup plants the hands and travels the torso; a stationary body
   // whose joint angles merely jitter travels nowhere.
+  //
+  // The origin is anchored at the highest point reached since the last rep, not
+  // at a fixed threshold. Anchoring it to the lockout threshold meant a rep that
+  // completed on rebound without ever reaching lockout never captured an origin
+  // at all, so its travel stayed zero and every rep was rejected as motionless.
+  if (Number.isFinite(s.elbowAngle) && s.elbowAngle > s.cycleMaxAngle) {
+    s.cycleMaxAngle = s.elbowAngle;
+    const sh0 = frame.keypoints[joints.shoulder];
+    const wr0 = frame.keypoints[joints.wrist];
+    s.repStartShoulderX = sh0.x;
+    s.repStartShoulderY = sh0.y;
+    s.repStartWristX = wr0.x;
+    s.repStartWristY = wr0.y;
+    s.bodyTravel = 0;
+    s.handTravel = 0;
+  }
+
   if (!Number.isNaN(s.repStartShoulderX)) {
     const sh = frame.keypoints[joints.shoulder];
     const wr = frame.keypoints[joints.wrist];
@@ -646,17 +667,6 @@ export function stepDetector(
       // the previous rep's minimum.
       s.descentStartedAt = NaN;
       s.dipMinAngle = Infinity;
-      // Keep the travel origin at the true top. Recording it only once the
-      // descent is detected — already below the return threshold — discards the
-      // first part of the movement and undercounts how far the body went.
-      const sh = frame.keypoints[joints.shoulder];
-      const wr = frame.keypoints[joints.wrist];
-      s.repStartShoulderX = sh.x;
-      s.repStartShoulderY = sh.y;
-      s.repStartWristX = wr.x;
-      s.repStartWristY = wr.y;
-      s.bodyTravel = 0;
-      s.handTravel = 0;
     } else if (Number.isNaN(s.descentStartedAt)) {
       s.descentStartedAt = frame.t;
       s.dipMinAngle = smoothed;
@@ -724,6 +734,7 @@ export function stepDetector(
     return events;
   }
 
+  s.cycleMaxAngle = -Infinity;
   const depth = s.dipMinAngle;
   const sagged = s.sagThisRep;
   s.dipMinAngle = Infinity;
