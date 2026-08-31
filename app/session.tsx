@@ -190,7 +190,14 @@ export default function Session() {
         </View>
 
         <View style={styles.counterWrap} pointerEvents="none">
-          {reps.calibrating ? (
+          {debug.best < 35 ? (
+            // Distinguish "the camera cannot see you" from "your position is
+            // wrong". They look identical on screen but need opposite fixes.
+            <Text style={styles.alert}>
+              Camera can&apos;t see a person ({debug.best}% confidence).{'\n'}
+              Prop the phone up so it points at you.
+            </Text>
+          ) : reps.calibrating ? (
             <>
               <Text style={styles.prompt}>
                 Hold the top of a pushup to calibrate
@@ -301,6 +308,15 @@ const styles = StyleSheet.create({
     textShadowRadius: 8,
   },
   counterLabel: { color: '#d1d5db', fontSize: 15, letterSpacing: 1.5, textTransform: 'uppercase' },
+  alert: {
+    color: '#f87171',
+    fontSize: 16,
+    fontWeight: '700',
+    textAlign: 'center',
+    marginBottom: 8,
+    textShadowColor: 'rgba(0,0,0,0.9)',
+    textShadowRadius: 6,
+  },
   progressTrack: {
     width: 220,
     height: 6,
