@@ -18,8 +18,14 @@ export type DetectorConfig = {
   dipAngle: number;
   /** Keypoints scoring below this are treated as absent. */
   minConfidence: number;
-  /** EMA weight for the new sample. Lower = smoother but laggier. */
-  emaAlpha: number;
+  /**
+   * Smoothing time constant in milliseconds, applied after a median-of-three.
+   *
+   * Kept short deliberately. The filter only has to remove per-frame jitter; the
+   * median stage already handles outliers, and heavy averaging flattens fast
+   * reps until they stop crossing the thresholds.
+   */
+  smoothingTauMs: number;
   /** Minimum time held at the top before a new descent can begin. */
   minTopDwellMs: number;
   /** Reps faster than this are physically implausible — jitter, not movement. */
@@ -110,12 +116,14 @@ export const DEFAULT_CONFIG: DetectorConfig = {
   // Measured head-on at 1-2m, every joint sat around 0.31 mean and cleared 0.30
   // only about half the time, so a 0.30 gate discarded half the descent.
   minConfidence: 0.25,
-  emaAlpha: 0.4,
+  smoothingTauMs: 45,
   // The timing guards were originally tight because they were the only defence
   // against stray movement being counted. The posture gate now does that job
   // properly, so these can be loose enough to accept a genuinely slow, controlled
   // rep instead of rejecting it.
-  minTopDwellMs: 80,
+  // Only enough to reject threshold jitter; a fast set has almost no pause at
+  // the top, and anything longer silently blocks the next descent.
+  minTopDwellMs: 40,
   minRepMs: 300,
   maxRepMs: 12000,
   trackingLostFrames: 10,

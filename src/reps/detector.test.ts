@@ -558,3 +558,53 @@ describe('measured range of motion', () => {
     expect(detector.state().calibration!.bottomElbowAngle).toBeCloseTo(90, 0);
   });
 });
+
+describe('fast cadence', () => {
+  /** A continuous set at a given tempo, with no pause at the top. */
+  function setAtTempo(repMs: number, count: number): PoseFrame[] {
+    const frames: PoseFrame[] = [];
+    const step = 1000 / 30;
+    let t = 0;
+    for (let i = 0; i < 10; i++) frames.push(frameWithElbowAngle((t += step), 170));
+    for (let r = 0; r < count; r++) {
+      const half = repMs / 2;
+      for (let e = 0; e < half; e += step) {
+        frames.push(frameWithElbowAngle((t += step), 170 - 100 * (e / half)));
+      }
+      for (let e = 0; e < half; e += step) {
+        frames.push(frameWithElbowAngle((t += step), 70 + 100 * (e / half)));
+      }
+    }
+    for (let i = 0; i < 10; i++) frames.push(frameWithElbowAngle((t += step), 170));
+    return frames;
+  }
+
+  it('counts ten reps at one per second', () => {
+    // The reported failure point: anything faster than roughly 1/s stopped
+    // registering, because the smoothing flattened the movement below the
+    // thresholds even though the movement itself was full range.
+    expect(run(setAtTempo(1000, 10)).detector.state().reps).toBe(10);
+  });
+
+  it('counts ten reps at two per second', () => {
+    expect(run(setAtTempo(500, 10)).detector.state().reps).toBe(10);
+  });
+
+  it('does not over-count at speed', () => {
+    const { detector } = run(setAtTempo(600, 8));
+    expect(detector.state().reps).toBe(8);
+  });
+
+  it('heavily under-counts oscillation far faster than any real rep', () => {
+    // Four full-range oscillations at 160ms each - six per second, which nobody
+    // does - yield at most one rep rather than four.
+    //
+    // Not zero, and deliberately so. Rejecting these outright means raising
+    // minRepMs, but a genuine two-per-second set measures only ~350ms between
+    // lockouts, so the guard that would exclude a twitch also excludes a real
+    // fast rep. Given a missed rep is far more costly to a user than a spurious
+    // one, the threshold sits on the permissive side.
+    const { detector } = run(setAtTempo(160, 4));
+    expect(detector.state().reps).toBeLessThanOrEqual(1);
+  });
+});

@@ -87,6 +87,36 @@ export function angleDeg(a: Point2, b: Point2, c: Point2): number {
 }
 
 /**
+ * Median of three samples.
+ *
+ * Preferred over an exponential average as the first filtering stage because it
+ * removes single-frame outliers without attenuating real motion. An EMA is a
+ * low-pass filter: it flattens the peaks of a fast movement, so a quick rep's
+ * smoothed angle never reaches the thresholds the slow version comfortably
+ * crossed — the movement was real, the filter hid it.
+ */
+export function median3(a: number, b: number, c: number): number {
+  'worklet';
+  if (!Number.isFinite(a)) return Number.isFinite(b) ? b : c;
+  if (!Number.isFinite(b)) return c;
+  if (!Number.isFinite(c)) return b;
+  return Math.max(Math.min(a, b), Math.min(Math.max(a, b), c));
+}
+
+/**
+ * EMA smoothing factor for a given frame interval and time constant.
+ *
+ * Expressing the constant in milliseconds rather than frames keeps the amount of
+ * smoothing the same when frames arrive irregularly, which they do whenever the
+ * pose model drops one.
+ */
+export function emaAlphaForDt(dtMs: number, tauMs: number): number {
+  'worklet';
+  if (!Number.isFinite(dtMs) || dtMs <= 0) return 1;
+  return 1 - Math.exp(-dtMs / tauMs);
+}
+
+/**
  * Exponential moving average, used to smooth per-frame angle jitter from the pose
  * model. `alpha` is the weight of the new sample: 1 is no smoothing, values near 0
  * are heavy smoothing (and heavy lag, which shows up as late rep transitions).

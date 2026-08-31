@@ -22,7 +22,7 @@
  * smoothed angle jittered across it.
  */
 
-import { angleDeg, ema } from './geometry';
+import { angleDeg, ema, emaAlphaForDt, median3 } from './geometry';
 import { angleDifference, measureBody, median } from './body';
 import { DEFAULT_CONFIG, type DetectorConfig } from './config';
 import { SIDE_JOINTS, type PoseFrame, type Side } from '../pose/keypoints';
@@ -104,6 +104,12 @@ export type DetectorState = {
   bodyLine: number;
   /** Hip sag seen at any point during the rep in progress. */
   sagThisRep: boolean;
+  /** Last two raw angle samples, for the median-of-three prefilter. */
+  rawPrev: number;
+  rawPrev2: number;
+  /** Timestamp of the last processed frame, for time-based smoothing. */
+  lastFrameT: number;
+
   /** Confidence of the joints the posture gate depends on, for diagnostics. */
   shoulderScore: number;
   hipScore: number;
@@ -153,6 +159,9 @@ export function createDetectorState(): DetectorState {
     torsoTilt: NaN,
     bodyLine: NaN,
     sagThisRep: false,
+    rawPrev: NaN,
+    rawPrev2: NaN,
+    lastFrameT: NaN,
     shoulderScore: 0,
     hipScore: 0,
     kneeScore: 0,
@@ -185,6 +194,8 @@ function resetMovement(s: DetectorState): void {
   s.descentStartedAt = NaN;
   s.topEnteredAt = 0;
   s.sagThisRep = false;
+  s.rawPrev = NaN;
+  s.rawPrev2 = NaN;
 }
 
 /**
@@ -331,6 +342,26 @@ function evaluatePosture(
 
   const hipSag = !Number.isNaN(bodyLine) && bodyLine < cfg.hipSagAngle;
   return { inPosition: true, torsoDelta, scaleRatio, bodyLine, hipSag };
+}
+
+/**
+ * Median-of-three, then a short time-based exponential average.
+ *
+ * The median removes single-frame outliers, which is all the aggressive
+ * averaging was ever really needed for, while leaving the amplitude of a fast
+ * rep intact.
+ */
+function smoothAngle(s: DetectorState, raw: number, t: number, cfg: DetectorConfig): number {
+  'worklet';
+  const filtered = median3(raw, s.rawPrev, s.rawPrev2);
+  s.rawPrev2 = s.rawPrev;
+  s.rawPrev = raw;
+
+  const dt = Number.isFinite(s.lastFrameT) ? t - s.lastFrameT : NaN;
+  s.lastFrameT = t;
+  const alpha = Number.isFinite(dt) ? emaAlphaForDt(dt, cfg.smoothingTauMs) : 1;
+  s.elbowAngle = ema(s.elbowAngle, filtered, alpha);
+  return s.elbowAngle;
 }
 
 /**
@@ -490,8 +521,7 @@ export function stepDetector(
   // One slow rep, to learn how much of the movement this camera angle actually
   // shows. Nothing is counted during it.
   if (s.mode === 'measuringRange') {
-    s.elbowAngle = ema(s.elbowAngle, angle, cfg.emaAlpha);
-    const smoothedRange = s.elbowAngle;
+    const smoothedRange = smoothAngle(s, angle, frame.t, cfg);
     if (smoothedRange < s.rangeMinElbow) s.rangeMinElbow = smoothedRange;
 
     const descended = cal.topElbowAngle - s.rangeMinElbow;
@@ -567,8 +597,7 @@ export function stepDetector(
   s.dipThreshold = th.dip;
   s.downThreshold = th.down;
 
-  s.elbowAngle = ema(s.elbowAngle, angle, cfg.emaAlpha);
-  const smoothed = s.elbowAngle;
+  const smoothed = smoothAngle(s, angle, frame.t, cfg);
 
   if (s.phase === 'unknown') {
     // Only start counting from a known top, so a session that begins mid-pushup
