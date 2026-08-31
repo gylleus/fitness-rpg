@@ -219,7 +219,13 @@ export default function Session() {
             range: {fmtDeg(reps.top)} → {fmtDeg(reps.bottom)}
           </Text>
           {reps.rejection ? (
-            <Text style={styles.warnText}>last movement rejected: {reps.rejection}</Text>
+            <Text style={styles.warnText}>
+              rejected: {reps.rejection === 'noMovement'
+                ? 'body did not move'
+                : reps.rejection === 'handsMoved'
+                  ? 'hands moved, not a pushup'
+                  : reps.rejection}
+            </Text>
           ) : null}
           <Text style={styles.debugText}>model: {modelState}</Text>
           <Text style={styles.debugText}>

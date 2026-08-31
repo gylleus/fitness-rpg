@@ -137,6 +137,26 @@ export type DetectorConfig = {
   reboundFraction: number;
   /** Minimum gap kept between the completion and descent thresholds. */
   minHysteresisDeg: number;
+
+  /**
+   * How far the torso must actually travel during a rep, as a fraction of the
+   * calibrated torso length.
+   *
+   * An elbow angle can oscillate from pose noise alone while the person sits
+   * perfectly still, which produced reps out of nothing. In a real pushup the
+   * body demonstrably moves through space, so requiring measured displacement
+   * rejects a stationary body no matter what the joint angles appear to do.
+   */
+  minBodyTravelFraction: number;
+
+  /**
+   * The body must travel at least this many times as far as the hands.
+   *
+   * In a pushup the hands are planted and the torso travels toward them. Seated
+   * arm movement is the reverse: hands move, body stays. This ratio separates
+   * the two without needing to know the camera angle.
+   */
+  minBodyToHandTravelRatio: number;
 };
 
 export const DEFAULT_CONFIG: DetectorConfig = {
@@ -189,4 +209,11 @@ export const DEFAULT_CONFIG: DetectorConfig = {
   topReturnFraction: 0.3,
   reboundFraction: 0.62,
   minHysteresisDeg: 8,
+  // 0.15, not 0.25. A shallow rep genuinely moves the body less, and the origin
+  // is only fixed once the smoothed angle leaves lockout, which lags the real
+  // descent — measured, a shallow rep registered 0.036 against a 0.0375 bar and
+  // was rejected. The body-versus-hands ratio below is the stronger test for a
+  // motionless person anyway, since sitting still jitters both equally.
+  minBodyTravelFraction: 0.15,
+  minBodyToHandTravelRatio: 1.5,
 };

@@ -62,7 +62,7 @@ export type TrackingEvent = {
 /** A movement that looked like a rep but failed a plausibility guard. */
 export type RejectedEvent = {
   type: 'rejected';
-  reason: 'tooFast' | 'tooSlow';
+  reason: 'tooFast' | 'tooSlow' | 'noMovement' | 'handsMoved';
   durationMs: number;
   t: number;
 };
@@ -106,6 +106,14 @@ export type DetectorState = {
   sagThisRep: boolean;
   /** Previous slew-limited angle sample. */
   rawPrev: number;
+  /** Where the shoulder and wrist were when this descent began. */
+  repStartShoulderX: number;
+  repStartShoulderY: number;
+  repStartWristX: number;
+  repStartWristY: number;
+  /** Furthest either has moved from that origin during the rep. */
+  bodyTravel: number;
+  handTravel: number;
   /** Timestamp of the last processed frame, for time-based smoothing. */
   lastFrameT: number;
 
@@ -159,6 +167,12 @@ export function createDetectorState(): DetectorState {
     bodyLine: NaN,
     sagThisRep: false,
     rawPrev: NaN,
+    repStartShoulderX: NaN,
+    repStartShoulderY: NaN,
+    repStartWristX: NaN,
+    repStartWristY: NaN,
+    bodyTravel: 0,
+    handTravel: 0,
     lastFrameT: NaN,
     shoulderScore: 0,
     hipScore: 0,
@@ -193,6 +207,12 @@ function resetMovement(s: DetectorState): void {
   s.topEnteredAt = 0;
   s.sagThisRep = false;
   s.rawPrev = NaN;
+  s.repStartShoulderX = NaN;
+  s.repStartShoulderY = NaN;
+  s.repStartWristX = NaN;
+  s.repStartWristY = NaN;
+  s.bodyTravel = 0;
+  s.handTravel = 0;
 }
 
 /**
@@ -589,6 +609,18 @@ export function stepDetector(
 
   if (!s.inPosition) return events;
 
+  // Track how far the body and the hands have actually moved since this descent
+  // began. A pushup plants the hands and travels the torso; a stationary body
+  // whose joint angles merely jitter travels nowhere.
+  if (!Number.isNaN(s.repStartShoulderX)) {
+    const sh = frame.keypoints[joints.shoulder];
+    const wr = frame.keypoints[joints.wrist];
+    const bd = Math.hypot(sh.x - s.repStartShoulderX, sh.y - s.repStartShoulderY);
+    const hd = Math.hypot(wr.x - s.repStartWristX, wr.y - s.repStartWristY);
+    if (bd > s.bodyTravel) s.bodyTravel = bd;
+    if (hd > s.handTravel) s.handTravel = hd;
+  }
+
   const th = thresholdsFor(cal, cfg);
   s.upThreshold = th.up;
   s.dipThreshold = th.dip;
@@ -614,6 +646,17 @@ export function stepDetector(
       // the previous rep's minimum.
       s.descentStartedAt = NaN;
       s.dipMinAngle = Infinity;
+      // Keep the travel origin at the true top. Recording it only once the
+      // descent is detected — already below the return threshold — discards the
+      // first part of the movement and undercounts how far the body went.
+      const sh = frame.keypoints[joints.shoulder];
+      const wr = frame.keypoints[joints.wrist];
+      s.repStartShoulderX = sh.x;
+      s.repStartShoulderY = sh.y;
+      s.repStartWristX = wr.x;
+      s.repStartWristY = wr.y;
+      s.bodyTravel = 0;
+      s.handTravel = 0;
     } else if (Number.isNaN(s.descentStartedAt)) {
       s.descentStartedAt = frame.t;
       s.dipMinAngle = smoothed;
@@ -653,6 +696,26 @@ export function stepDetector(
   if (durationMs < cfg.minRepMs) {
     s.dipMinAngle = Infinity;
     events.push({ type: 'rejected', reason: 'tooFast', durationMs, t: frame.t });
+    return events;
+  }
+
+  // The movement test. Pose noise can swing an elbow angle through a full rep's
+  // worth of degrees while the person sits motionless, so the angle alone is not
+  // evidence that anything happened.
+  const travelNeeded = cal.torsoLength * cfg.minBodyTravelFraction;
+  if (s.bodyTravel < travelNeeded) {
+    s.dipMinAngle = Infinity;
+    s.bodyTravel = 0;
+    s.handTravel = 0;
+    events.push({ type: 'rejected', reason: 'noMovement', durationMs, t: frame.t });
+    return events;
+  }
+  if (s.bodyTravel < s.handTravel * cfg.minBodyToHandTravelRatio) {
+    // Hands moved as much as the body: that is arm movement, not a pushup.
+    s.dipMinAngle = Infinity;
+    s.bodyTravel = 0;
+    s.handTravel = 0;
+    events.push({ type: 'rejected', reason: 'handsMoved', durationMs, t: frame.t });
     return events;
   }
   if (durationMs > cfg.maxRepMs) {

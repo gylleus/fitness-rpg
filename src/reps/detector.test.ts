@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { createRepDetector, type DetectorEvent, type RepEvent } from './detector';
 import { blankFrame, frameWithElbowAngle, pushupFrames } from '../../test/synth';
-import type { PoseFrame } from '../pose/keypoints';
+import { KEYPOINT, type PoseFrame } from '../pose/keypoints';
 
 /**
  * Frames that satisfy calibration: the top of a pushup, held.
@@ -524,8 +524,11 @@ describe('measured range of motion', () => {
     expect(detector.state().partials).toBe(0);
   });
 
-  it('still marks a genuinely shallow rep as not full depth', () => {
-    // Same foreshortened view, but only half the demonstrated travel.
+  it('rejects a movement too small to have moved the body', () => {
+    // Same foreshortened view, but only half the demonstrated travel. An elbow
+    // change this small corresponds to the body barely moving, which is what a
+    // motionless person's pose noise looks like — so it is now rejected rather
+    // than counted as a shallow rep.
     const detector = createRepDetector();
     for (const f of calibrationFrames(0, 150)) detector.push(f);
     for (const f of pushupFrames({
@@ -541,12 +544,11 @@ describe('measured range of motion', () => {
     for (let i = 0; i < 25; i++) frames.push(frameWithElbowAngle((t += 33), 150 - (22 * i) / 25));
     for (let i = 0; i < 25; i++) frames.push(frameWithElbowAngle((t += 33), 128 + (22 * i) / 25));
     for (let i = 0; i < 15; i++) frames.push(frameWithElbowAngle((t += 33), 150));
-    for (const f of frames) detector.push(f);
+    const events: DetectorEvent[] = [];
+    for (const f of frames) events.push(...detector.push(f));
 
-    // It counts — but is recorded as shallow.
-    expect(detector.state().reps).toBe(1);
-    expect(detector.state().partials).toBe(1);
-    expect(detector.state().lastRepValid).toBe(false);
+    expect(detector.state().reps).toBe(0);
+    expect(events.some((e) => e.type === 'rejected' && e.reason === 'noMovement')).toBe(true);
   });
 
   it('falls back to an assumed range if no rep is demonstrated', () => {
@@ -676,4 +678,84 @@ describe('tempo and lockout envelope', () => {
       expect(run(set(lockout, tempo, 8)).detector.state().reps).toBe(8);
     });
   }
+});
+
+describe('sitting still', () => {
+  /**
+   * A motionless body whose joints jitter, which is what pose estimation does
+   * on a static subject. Joint angles wander through a rep's worth of degrees
+   * while nothing actually moves.
+   */
+  function stationaryNoise(frames: number, jitterDeg: number, seed = 7): PoseFrame[] {
+    let s = seed;
+    const rand = () => ((s = (s * 1103515245 + 12345) % 2147483648) / 2147483648);
+    const out: PoseFrame[] = [];
+    let t = 0;
+    for (let i = 0; i < frames; i++) {
+      // Oscillate the apparent elbow angle over the full working range, exactly
+      // the signal that previously produced reps out of nothing.
+      const angle = 120 + Math.sin(i / 5) * jitterDeg + (rand() - 0.5) * 6;
+      const f = frameWithElbowAngle((t += 1000 / 30), angle, { posture: 'pushup' });
+      // The body does NOT move: pin every joint to its resting position and let
+      // only small independent noise move each one.
+      for (const k of f.keypoints) {
+        k.x = 0.5 + (rand() - 0.5) * 0.012;
+        k.y = 0.6 + (rand() - 0.5) * 0.012;
+      }
+      f.keypoints[KEYPOINT.LEFT_SHOULDER] = { x: 0.5 + (rand() - 0.5) * 0.012, y: 0.56, score: 0.9 };
+      f.keypoints[KEYPOINT.LEFT_ELBOW] = { x: 0.58, y: 0.68 + (rand() - 0.5) * 0.02, score: 0.9 };
+      f.keypoints[KEYPOINT.LEFT_WRIST] = { x: 0.5 + (rand() - 0.5) * 0.012, y: 0.8, score: 0.9 };
+      f.keypoints[KEYPOINT.LEFT_HIP] = { x: 0.35, y: 0.56, score: 0.9 };
+      f.keypoints[KEYPOINT.LEFT_KNEE] = { x: 0.21, y: 0.56, score: 0.9 };
+      out.push(f);
+    }
+    return out;
+  }
+
+  it('counts nothing while the body is stationary', () => {
+    // The reported bug: sitting completely still produced pushups.
+    const { detector } = run(stationaryNoise(400, 45));
+    expect(detector.state().reps).toBe(0);
+  });
+
+  it('counts nothing across several noise seeds', () => {
+    for (const seed of [1, 13, 99, 12345]) {
+      const { detector } = run(stationaryNoise(300, 50, seed));
+      expect(detector.state().reps).toBe(0);
+    }
+  });
+
+  it('rejects arm movement where the hands travel and the body does not', () => {
+    // Seated arm movement is the reverse of a pushup: hands move, torso stays.
+    const frames: PoseFrame[] = [];
+    let t = 0;
+    for (let r = 0; r < 6; r++) {
+      for (let i = 0; i < 20; i++) {
+        const f = frameWithElbowAngle((t += 1000 / 30), 170 - 100 * (i / 20), { posture: 'pushup' });
+        const sh = f.keypoints[KEYPOINT.LEFT_SHOULDER];
+        // Pin the body where it was and let the wrist do the travelling.
+        const drop = 0.56 - sh.y;
+        for (const idx of [KEYPOINT.LEFT_SHOULDER, KEYPOINT.LEFT_HIP, KEYPOINT.LEFT_KNEE, KEYPOINT.NOSE]) {
+          f.keypoints[idx].y += drop;
+        }
+        f.keypoints[KEYPOINT.LEFT_WRIST].y -= drop;
+        frames.push(f);
+      }
+      for (let i = 0; i < 20; i++) {
+        const f = frameWithElbowAngle((t += 1000 / 30), 70 + 100 * (i / 20), { posture: 'pushup' });
+        const sh = f.keypoints[KEYPOINT.LEFT_SHOULDER];
+        const drop = 0.56 - sh.y;
+        for (const idx of [KEYPOINT.LEFT_SHOULDER, KEYPOINT.LEFT_HIP, KEYPOINT.LEFT_KNEE, KEYPOINT.NOSE]) {
+          f.keypoints[idx].y += drop;
+        }
+        f.keypoints[KEYPOINT.LEFT_WRIST].y -= drop;
+        frames.push(f);
+      }
+    }
+    expect(run(frames).detector.state().reps).toBe(0);
+  });
+
+  it('still counts real pushups, where the body travels and hands stay put', () => {
+    expect(run(pushupFrames({ startT: 0, ...SLOW })).detector.state().reps).toBe(1);
+  });
 });

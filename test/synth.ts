@@ -32,38 +32,41 @@ export function frameWithElbowAngle(
   const blank: Keypoint = { x: 0.5, y: 0.5, score };
   const keypoints: Keypoint[] = Array.from({ length: KEYPOINT_COUNT }, () => ({ ...blank }));
 
-  const elbow = { x: 0.5, y: 0.5 };
-  const shoulder = { x: elbow.x - 0.1, y: elbow.y };
-  const rad = (degrees * Math.PI) / 180;
-  const wrist = {
-    x: elbow.x - 0.1 * Math.cos(rad),
-    y: elbow.y + 0.1 * Math.sin(rad),
+  // Physical layout: the hand is planted and the body travels toward it, which
+  // is what actually happens in a pushup. Holding the shoulder still and swinging
+  // the wrist - the obvious way to synthesise an elbow angle - produces the
+  // opposite motion and would let fixtures pass a hands-planted check that real
+  // movement fails, or vice versa.
+  const UPPER_ARM = 0.12;
+  const half = ((degrees / 2) * Math.PI) / 180;
+  const wrist = { x: 0.5, y: 0.8 };
+  // Shoulder-to-wrist distance shrinks as the elbow bends, so the shoulder
+  // descends toward the planted hand.
+  const reach = 2 * UPPER_ARM * Math.sin(half);
+  const shoulder = { x: wrist.x, y: wrist.y - reach };
+  const elbow = {
+    x: wrist.x + UPPER_ARM * Math.cos(half),
+    y: wrist.y - UPPER_ARM * Math.sin(half),
   };
 
-  const j = side === 'left'
-    ? {
-        s: KEYPOINT.LEFT_SHOULDER,
-        e: KEYPOINT.LEFT_ELBOW,
-        w: KEYPOINT.LEFT_WRIST,
-        h: KEYPOINT.LEFT_HIP,
-        k: KEYPOINT.LEFT_KNEE,
-        a: KEYPOINT.LEFT_ANKLE,
-      }
-    : {
-        s: KEYPOINT.RIGHT_SHOULDER,
-        e: KEYPOINT.RIGHT_ELBOW,
-        w: KEYPOINT.RIGHT_WRIST,
-        h: KEYPOINT.RIGHT_HIP,
-        k: KEYPOINT.RIGHT_KNEE,
-        a: KEYPOINT.RIGHT_ANKLE,
-      };
+  const j =
+    side === 'left'
+      ? {
+          s: KEYPOINT.LEFT_SHOULDER, e: KEYPOINT.LEFT_ELBOW, w: KEYPOINT.LEFT_WRIST,
+          h: KEYPOINT.LEFT_HIP, k: KEYPOINT.LEFT_KNEE, a: KEYPOINT.LEFT_ANKLE,
+        }
+      : {
+          s: KEYPOINT.RIGHT_SHOULDER, e: KEYPOINT.RIGHT_ELBOW, w: KEYPOINT.RIGHT_WRIST,
+          h: KEYPOINT.RIGHT_HIP, k: KEYPOINT.RIGHT_KNEE, a: KEYPOINT.RIGHT_ANKLE,
+        };
 
   keypoints[j.s] = { ...shoulder, score };
   keypoints[j.e] = { ...elbow, score };
   keypoints[j.w] = { ...wrist, score };
+  // The head rides with the shoulders, so it travels during a rep as they do.
+  keypoints[KEYPOINT.NOSE] = { x: shoulder.x + 0.06, y: shoulder.y - 0.03, score };
 
-  // Torso and legs trail away from the arm. In a real side-on pushup these lie
-  // roughly along a horizontal line through the shoulder.
+  // Torso and legs trail away from the arm, hanging off the moving shoulder.
   // A tight framing crops the legs but still shows the hips; torso tilt stays
   // measurable, only the straightness check is lost.
   const hipScore = score;
