@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { counterRotate, isQuarterTurn } from './orientation';
+import {
+  applyOverlayTransform,
+  counterRotate,
+  isQuarterTurn,
+  OVERLAY_TRANSFORMS,
+  transformSwapsAxes,
+} from './orientation';
 
 describe('counterRotate', () => {
   it('leaves an already-upright frame alone', () => {
@@ -53,5 +59,52 @@ describe('isQuarterTurn', () => {
     expect(isQuarterTurn('right')).toBe(true);
     expect(isQuarterTurn('up')).toBe(false);
     expect(isQuarterTurn('down')).toBe(false);
+  });
+});
+
+describe('applyOverlayTransform', () => {
+  const HEAD_TOP = { x: 0.5, y: 0.05 };
+  const HEAD_BOTTOM = { x: 0.5, y: 0.95 };
+
+  it('identity leaves a point alone', () => {
+    expect(applyOverlayTransform(0.3, 0.7, 'identity')).toEqual({ x: 0.3, y: 0.7 });
+  });
+
+  it('flipY moves a bottom point to the top', () => {
+    // The observed situation: the head sits near y=1 in model space but belongs
+    // at the top of the screen.
+    const out = applyOverlayTransform(HEAD_BOTTOM.x, HEAD_BOTTOM.y, 'flipY');
+    expect(out.y).toBeCloseTo(0.05);
+    expect(out.x).toBeCloseTo(0.5);
+  });
+
+  it('every transform is a bijection of the unit square', () => {
+    for (const t of OVERLAY_TRANSFORMS) {
+      const out = applyOverlayTransform(0.25, 0.75, t);
+      expect(out.x).toBeGreaterThanOrEqual(0);
+      expect(out.x).toBeLessThanOrEqual(1);
+      expect(out.y).toBeGreaterThanOrEqual(0);
+      expect(out.y).toBeLessThanOrEqual(1);
+    }
+  });
+
+  it('offers a distinct mapping for each of the eight cases', () => {
+    const seen = new Set(
+      OVERLAY_TRANSFORMS.map((t) => {
+        const o = applyOverlayTransform(0.2, 0.7, t);
+        return `${o.x.toFixed(3)},${o.y.toFixed(3)}`;
+      }),
+    );
+    expect(seen.size).toBe(OVERLAY_TRANSFORMS.length);
+  });
+
+  it('marks exactly the quarter turns as axis-swapping', () => {
+    const swapping = OVERLAY_TRANSFORMS.filter(transformSwapsAxes);
+    expect(swapping).toEqual(['rot90', 'rot90flip', 'rot270', 'rot270flip']);
+  });
+
+  it('keeps a head at the top where it already is under identity', () => {
+    const out = applyOverlayTransform(HEAD_TOP.x, HEAD_TOP.y, 'identity');
+    expect(out.y).toBeLessThan(0.5);
   });
 });

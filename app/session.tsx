@@ -14,6 +14,7 @@ import { runOnJS, useAnimatedReaction } from 'react-native-reanimated';
 import { usePoseCamera } from '../src/pose/usePoseCamera';
 import { SkeletonOverlay } from '../src/ui/SkeletonOverlay';
 import type { InputRotation } from '../src/pose/model';
+import { OVERLAY_TRANSFORMS } from '../src/pose/orientation';
 import { DEFAULT_CONFIG } from '../src/reps/config';
 
 const ROTATIONS: InputRotation[] = [0, 90, 180, 270];
@@ -29,10 +30,11 @@ export default function Session() {
   const [position, setPosition] = useState<TargetCameraPosition>('back');
   const device = useCameraDevice(position);
 
-  // The front preview is mirrored; whether the frame buffer is mirrored too is
-  // platform-dependent. Toggle rather than guess - a wrong guess looks exactly
-  // like the model failing to track.
-  const [mirrorOverlay, setMirrorOverlay] = useState(false);
+  // Which mapping puts the drawn skeleton on the actual body. Derived from
+  // Frame.orientation twice and wrong both times, so it is selectable until the
+  // correct one for this pipeline is confirmed on a device.
+  const [transformIndex, setTransformIndex] = useState(1); // 'flipY'
+  const overlayTransform = OVERLAY_TRANSFORMS[transformIndex];
 
   // The accuracy spike: MoveNet is trained on upright people, and a pushup is
   // horizontal. This cycles the input rotation so the effect can be seen live.
@@ -204,7 +206,8 @@ export default function Session() {
         resizeMode="cover"
         mirrorMode="auto"
       />
-      <SkeletonOverlay pose={pose} mirrorX={mirrorOverlay} />
+      {/* The transform covers mirroring too, so no separate mirror flag. */}
+      <SkeletonOverlay pose={pose} transform={overlayTransform} />
 
       <View style={styles.hud} pointerEvents="box-none">
         <View style={styles.debugPanel}>
@@ -249,7 +252,7 @@ export default function Session() {
           </Text>
           <Text style={styles.debugText}>
             joints tracked: {debug.tracked}/17{'  '}edge: {debug.margin.toFixed(2)}
-            {'  '}orient: {debug.orientation}
+            {'  '}orient: {debug.orientation}{'  '}map: {overlayTransform}
           </Text>
           <Text style={styles.debugText}>best score: {debug.best}%</Text>
           <Text style={styles.debugText}>camera: {position}</Text>
@@ -316,10 +319,10 @@ export default function Session() {
             <Text style={styles.buttonText}>rotate: {rotation}°</Text>
           </Pressable>
           <Pressable
-            style={[styles.button, mirrorOverlay ? undefined : styles.secondary]}
-            onPress={() => setMirrorOverlay((m) => !m)}
+            style={styles.button}
+            onPress={() => setTransformIndex((i) => (i + 1) % OVERLAY_TRANSFORMS.length)}
           >
-            <Text style={styles.buttonText}>mirror</Text>
+            <Text style={styles.buttonText}>map: {overlayTransform}</Text>
           </Pressable>
           <Pressable style={[styles.button, styles.secondary]} onPress={() => router.back()}>
             <Text style={styles.buttonText}>Finish</Text>

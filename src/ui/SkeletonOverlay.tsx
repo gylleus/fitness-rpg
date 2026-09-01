@@ -12,9 +12,12 @@ import type { SharedValue } from 'react-native-reanimated';
 import { StyleSheet, View, type LayoutChangeEvent } from 'react-native';
 import { useState } from 'react';
 
-import type { CameraOrientation } from 'react-native-vision-camera';
 import { KEYPOINT, type Keypoint } from '../pose/keypoints';
-import { counterRotate, isQuarterTurn } from '../pose/orientation';
+import {
+  applyOverlayTransform,
+  transformSwapsAxes,
+  type OverlayTransform,
+} from '../pose/orientation';
 import type { PoseSnapshot } from '../pose/usePoseCamera';
 
 /** Pairs of keypoints drawn as bones. */
@@ -59,7 +62,7 @@ function toView(
   viewW: number,
   viewH: number,
   mirrorX: boolean,
-  orientation: CameraOrientation,
+  transform: OverlayTransform,
 ): { x: number; y: number } {
   'worklet';
   // The front camera preview is mirrored, but the frame buffer handed to the
@@ -70,12 +73,12 @@ function toView(
   // Counter-rotate out of the frame's own orientation into upright space. The
   // buffer arrives in sensor orientation, so on a portrait phone a body that
   // looks upright on screen is sideways in these coordinates.
-  const up = counterRotate(kx, k.y, orientation);
+  const up = applyOverlayTransform(kx, k.y, transform);
   const ux = up.x;
   const uy = up.y;
 
   // A quarter turn swaps which frame dimension is horizontal.
-  const quarterTurn = isQuarterTurn(orientation);
+  const quarterTurn = transformSwapsAxes(transform);
   const upW = quarterTurn ? frameH : frameW;
   const upH = quarterTurn ? frameW : frameH;
 
@@ -96,9 +99,11 @@ function toView(
 export function SkeletonOverlay({
   pose,
   mirrorX = false,
+  transform = 'flipY',
 }: {
   pose: SharedValue<PoseSnapshot>;
   mirrorX?: boolean;
+  transform?: OverlayTransform;
 }) {
   const [size, setSize] = useState({ width: 0, height: 0 });
 
@@ -118,11 +123,11 @@ export function SkeletonOverlay({
         size.width,
         size.height,
         mirrorX,
-        snap.orientation,
+        transform,
       ),
       score: k.score,
     }));
-  }, [size, mirrorX]);
+  }, [size, mirrorX, transform]);
 
   return (
     <View style={StyleSheet.absoluteFill} onLayout={onLayout} pointerEvents="none">
