@@ -114,6 +114,9 @@ export type DetectorState = {
   /** Furthest either has moved from that origin during the rep. */
   bodyTravel: number;
   handTravel: number;
+  /** Frames this rep, and how many had a confidently tracked wrist. */
+  repFrames: number;
+  handTrackedFrames: number;
   /** Highest smoothed angle seen since the last rep, for anchoring travel. */
   cycleMaxAngle: number;
   /** Timestamp of the last processed frame, for time-based smoothing. */
@@ -175,6 +178,8 @@ export function createDetectorState(): DetectorState {
     repStartWristY: NaN,
     bodyTravel: 0,
     handTravel: 0,
+    repFrames: 0,
+    handTrackedFrames: 0,
     cycleMaxAngle: -Infinity,
     lastFrameT: NaN,
     shoulderScore: 0,
@@ -216,6 +221,8 @@ function resetMovement(s: DetectorState): void {
   s.repStartWristY = NaN;
   s.bodyTravel = 0;
   s.handTravel = 0;
+  s.repFrames = 0;
+  s.handTrackedFrames = 0;
   s.cycleMaxAngle = -Infinity;
 }
 
@@ -631,15 +638,22 @@ export function stepDetector(
     s.repStartWristY = wr0.y;
     s.bodyTravel = 0;
     s.handTravel = 0;
+    s.repFrames = 0;
+    s.handTrackedFrames = 0;
   }
 
   if (!Number.isNaN(s.repStartShoulderX)) {
     const sh = frame.keypoints[joints.shoulder];
     const wr = frame.keypoints[joints.wrist];
+    s.repFrames++;
     const bd = Math.hypot(sh.x - s.repStartShoulderX, sh.y - s.repStartShoulderY);
-    const hd = Math.hypot(wr.x - s.repStartWristX, wr.y - s.repStartWristY);
     if (bd > s.bodyTravel) s.bodyTravel = bd;
-    if (hd > s.handTravel) s.handTravel = hd;
+    // Only believe hand movement when the wrist is actually being tracked.
+    if (wr.score >= cfg.handTrackingMinConfidence) {
+      s.handTrackedFrames++;
+      const hd = Math.hypot(wr.x - s.repStartWristX, wr.y - s.repStartWristY);
+      if (hd > s.handTravel) s.handTravel = hd;
+    }
   }
 
   const th = thresholdsFor(cal, cfg);
@@ -720,8 +734,14 @@ export function stepDetector(
     events.push({ type: 'rejected', reason: 'noMovement', durationMs, t: frame.t });
     return events;
   }
-  if (s.bodyTravel < s.handTravel * cfg.minBodyToHandTravelRatio) {
-    // Hands moved as much as the body: that is arm movement, not a pushup.
+  const handCoverage = s.repFrames > 0 ? s.handTrackedFrames / s.repFrames : 0;
+  if (
+    handCoverage >= cfg.handTrackingMinCoverage &&
+    s.bodyTravel < s.handTravel * cfg.minBodyToHandTravelRatio
+  ) {
+    // Hands moved as far as the body: that is arm movement, not a pushup. Only
+    // applied when the wrist was tracked well enough for the comparison to mean
+    // anything — otherwise a jumping keypoint would veto a real rep.
     s.dipMinAngle = Infinity;
     s.bodyTravel = 0;
     s.handTravel = 0;

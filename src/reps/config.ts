@@ -157,6 +157,21 @@ export type DetectorConfig = {
    * the two without needing to know the camera angle.
    */
   minBodyToHandTravelRatio: number;
+  /**
+   * Wrist confidence below which hand movement is not believed.
+   *
+   * Head-on, the hands are frequently occluded by the body or outside the frame,
+   * and the wrist keypoint then jumps around the image. Measured on device, that
+   * produced half a frame of apparent hand travel during a genuine pushup, which
+   * failed the ratio test and rejected the rep. A check that rejects real reps
+   * because its input is unreliable is worse than no check.
+   */
+  handTrackingMinConfidence: number;
+  /**
+   * Fraction of a rep's frames the wrist must be confidently tracked for before
+   * the hands-versus-body comparison is applied at all.
+   */
+  handTrackingMinCoverage: number;
 };
 
 export const DEFAULT_CONFIG: DetectorConfig = {
@@ -215,5 +230,9 @@ export const DEFAULT_CONFIG: DetectorConfig = {
   // was rejected. The body-versus-hands ratio below is the stronger test for a
   // motionless person anyway, since sitting still jitters both equally.
   minBodyTravelFraction: 0.15,
-  minBodyToHandTravelRatio: 1.5,
+  // 1.0, not 1.5: the body need only move further than the hands, which is
+  // unambiguous for a pushup and forgiving of residual wrist jitter.
+  minBodyToHandTravelRatio: 1.0,
+  handTrackingMinConfidence: 0.4,
+  handTrackingMinCoverage: 0.6,
 };

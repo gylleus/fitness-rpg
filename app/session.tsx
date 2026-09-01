@@ -235,7 +235,8 @@ export default function Session() {
             body moved: {reps.bodyTravel.toFixed(3)}{'  '}need {fmt(reps.travelNeeded, 3)}
           </Text>
           <Text style={styles.debugText}>
-            hands moved: {reps.handTravel.toFixed(3)}{'  '}(body must exceed 1.5x)
+            hands moved: {reps.handTravel.toFixed(3)}
+            {reps.handTravel > reps.bodyTravel ? '  ← exceeds body!' : ''}
           </Text>
           {reps.rejection ? (
             <Text style={styles.warnText}>

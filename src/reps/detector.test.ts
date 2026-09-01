@@ -759,3 +759,56 @@ describe('sitting still', () => {
     expect(run(pushupFrames({ startT: 0, ...SLOW })).detector.state().reps).toBe(1);
   });
 });
+
+describe('unreliable wrist tracking', () => {
+  it('counts a rep when the wrist keypoint jumps around untracked', () => {
+    // Measured on device: head-on, the hands are often occluded or out of frame,
+    // and the wrist keypoint reported half a frame of travel during a genuine
+    // pushup — more than the body moved. The hands check vetoed real reps.
+    const frames = pushupFrames({ startT: 0, ...SLOW }).map((f, i) => {
+      if (i % 5 !== 0) return f;
+      // Every fifth frame the wrist is unconfident and flung across the image,
+      // which is what an occluded hand looks like. Those samples must not be
+      // allowed to claim the hands travelled.
+      const wrist = f.keypoints[KEYPOINT.LEFT_WRIST];
+      wrist.score = 0.15;
+      wrist.x = i % 10 === 0 ? 0.05 : 0.95;
+      wrist.y = i % 15 === 0 ? 0.1 : 0.9;
+      return f;
+    });
+    const { detector } = run(frames);
+    expect(detector.state().reps).toBe(1);
+    // The glitched samples contributed nothing to measured hand travel.
+    expect(detector.state().handTravel).toBeLessThan(0.1);
+  });
+
+  it('still rejects hand movement when the wrist IS reliably tracked', () => {
+    const frames: PoseFrame[] = [];
+    let t = 0;
+    for (let r = 0; r < 4; r++) {
+      for (let i = 0; i < 20; i++) {
+        const f = frameWithElbowAngle((t += 1000 / 30), 170 - 100 * (i / 20), { posture: 'pushup' });
+        const sh = f.keypoints[KEYPOINT.LEFT_SHOULDER];
+        const drop = 0.56 - sh.y;
+        for (const idx of [KEYPOINT.LEFT_SHOULDER, KEYPOINT.LEFT_HIP, KEYPOINT.LEFT_KNEE, KEYPOINT.NOSE]) {
+          f.keypoints[idx].y += drop;
+        }
+        f.keypoints[KEYPOINT.LEFT_WRIST].y -= drop;
+        f.keypoints[KEYPOINT.LEFT_WRIST].score = 0.9;
+        frames.push(f);
+      }
+      for (let i = 0; i < 20; i++) {
+        const f = frameWithElbowAngle((t += 1000 / 30), 70 + 100 * (i / 20), { posture: 'pushup' });
+        const sh = f.keypoints[KEYPOINT.LEFT_SHOULDER];
+        const drop = 0.56 - sh.y;
+        for (const idx of [KEYPOINT.LEFT_SHOULDER, KEYPOINT.LEFT_HIP, KEYPOINT.LEFT_KNEE, KEYPOINT.NOSE]) {
+          f.keypoints[idx].y += drop;
+        }
+        f.keypoints[KEYPOINT.LEFT_WRIST].y -= drop;
+        f.keypoints[KEYPOINT.LEFT_WRIST].score = 0.9;
+        frames.push(f);
+      }
+    }
+    expect(run(frames).detector.state().reps).toBe(0);
+  });
+});
