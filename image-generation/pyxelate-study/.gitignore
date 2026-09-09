@@ -1,0 +1,6 @@
+.venv/
+.cache/
+models/
+vendor/wheels/
+__pycache__/
+*.pyc

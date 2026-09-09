@@ -1,0 +1,103 @@
+{
+  "base_model": {
+    "id": "stabilityai/stable-diffusion-xl-base-1.0",
+    "revision": "462165984030d82259a11f4367a4eed129e94a7b"
+  },
+  "lora": {
+    "id": "nerijs/pixel-art-xl",
+    "revision": "8bf4a4d9ea283e00a51fafda8e0539f8248ea037",
+    "weight": 1.0
+  },
+  "vae": {
+    "id": "madebyollin/sdxl-vae-fp16-fix",
+    "revision": "207b116dae70ace3637169f1ddd2434b91b3a8cd"
+  },
+  "generation": {
+    "width": 1024,
+    "height": 1024,
+    "num_inference_steps": 30,
+    "guidance_scale": 7.0,
+    "scheduler": "DPMSolverMultistepScheduler",
+    "algorithm_type": "dpmsolver++",
+    "solver_order": 2,
+    "use_karras_sigmas": true,
+    "dtype": "float16",
+    "refiner": false
+  },
+  "batch": "Dark fantasy 01: twelve mixed game assets",
+  "negative_prompt": "photo, photorealistic, 3d render, blurry, gradients, text, letters, watermark, logo, frame, border, sprite sheet, multiple views, cropped, duplicate characters, extra limbs",
+  "assets": [
+    {
+      "name": "ashen_knight",
+      "kind": "character",
+      "seed": 52001,
+      "prompt": "pixel art, dark fantasy RPG sprite, weathered black iron knight, longsword, torn burgundy cape, full body, three-quarter view, centered large on plain light gray background, dark outline, crisp pixel clusters, simple shading"
+    },
+    {
+      "name": "grave_warden",
+      "kind": "character",
+      "seed": 52002,
+      "prompt": "pixel art, dark fantasy RPG sprite, hooded grave warden, iron lantern, hooked staff, bone charms, full body, three-quarter view, centered large on plain light gray background, dark outline, crisp pixel clusters, simple shading"
+    },
+    {
+      "name": "ember_witch",
+      "kind": "character",
+      "seed": 52003,
+      "prompt": "pixel art, dark fantasy RPG sprite, adult witch, wide brim hat, dark crimson robe, charred wooden staff with glowing embers, full body, three-quarter view, centered large on plain light gray background, dark outline, crisp pixel clusters, simple shading"
+    },
+    {
+      "name": "bone_hound",
+      "kind": "monster",
+      "seed": 52004,
+      "prompt": "pixel art, dark fantasy RPG sprite, skeletal wolf, exposed ribs, sharp silhouette, dull amber eyes, full body, three-quarter view, centered large on plain light gray background, dark outline, crisp pixel clusters, simple shading"
+    },
+    {
+      "name": "crypt_wraith",
+      "kind": "monster",
+      "seed": 52005,
+      "prompt": "pixel art, dark fantasy RPG sprite, floating wraith, torn black shroud, two pale blue eyes, long skeletal hands, full body, three-quarter view, centered large on plain light gray background, dark outline, crisp pixel clusters, simple shading"
+    },
+    {
+      "name": "thorn_horror",
+      "kind": "monster",
+      "seed": 52006,
+      "prompt": "pixel art, dark fantasy RPG sprite, hunched root monster, branch antlers, twisted bark limbs, small green glowing heart, full body, three-quarter view, centered large on plain light gray background, dark outline, crisp pixel clusters, simple shading"
+    },
+    {
+      "name": "cursed_greatsword",
+      "kind": "item",
+      "seed": 52007,
+      "prompt": "pixel art, dark fantasy RPG sprite, one ancient black iron greatsword, chipped broad blade, glowing red fissure, weathered hilt, centered large isolated on plain light gray background, dark outline, crisp pixel clusters, simple shading"
+    },
+    {
+      "name": "soul_lantern",
+      "kind": "item",
+      "seed": 52008,
+      "prompt": "pixel art, dark fantasy RPG sprite, one old brass cage lantern, pale blue ghost flame, hanging iron ring, centered large isolated on plain light gray background, dark outline, crisp pixel clusters, simple shading"
+    },
+    {
+      "name": "reliquary_chest",
+      "kind": "item",
+      "seed": 52009,
+      "prompt": "pixel art, dark fantasy RPG sprite, one closed dark oak treasure chest, black iron bands, bone ornament, heavy lock, centered large isolated on plain light gray background, dark outline, crisp pixel clusters, simple shading"
+    },
+    {
+      "name": "ruined_chapel",
+      "kind": "environment",
+      "seed": 52010,
+      "prompt": "pixel art, dark fantasy RPG environment, ruined gothic chapel, overgrown graveyard path, dead trees, cold moonlight, square composition, readable large shapes, dark navy shadows, muted colors, crisp pixel clusters, no characters, no text"
+    },
+    {
+      "name": "forsaken_keep",
+      "kind": "environment",
+      "seed": 52011,
+      "prompt": "pixel art, dark fantasy RPG environment, distant black stone castle above a deep chasm, narrow broken bridge, red dusk, square composition, readable large shapes, dark navy shadows, muted colors, crisp pixel clusters, no characters, no text"
+    },
+    {
+      "name": "witchwood_shrine",
+      "kind": "environment",
+      "seed": 52012,
+      "prompt": "pixel art, dark fantasy RPG environment, forest shrine, cracked stone altar, twisted ancient trees, small amber candles, blue fog, square composition, readable large shapes, dark navy shadows, muted colors, crisp pixel clusters, no characters, no text"
+    }
+  ]
+}

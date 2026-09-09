@@ -1,0 +1,16 @@
+numpy==1.26.4
+pillow==11.1.0
+scikit-learn==1.6.1
+scikit-image==0.25.2
+numba==0.61.0
+llvmlite==0.44.0
+scipy==1.15.2
+networkx==3.4.2
+imageio==2.37.0
+tifffile==2025.2.18
+packaging==24.2
+lazy-loader==0.4
+joblib==1.4.2
+threadpoolctl==3.5.0
+setuptools==75.8.0
+wheel==0.45.1

@@ -1,0 +1,43 @@
+{
+  "base_model": {
+    "id": "stabilityai/stable-diffusion-xl-base-1.0",
+    "revision": "462165984030d82259a11f4367a4eed129e94a7b"
+  },
+  "lora": {
+    "id": "nerijs/pixel-art-xl",
+    "revision": "8bf4a4d9ea283e00a51fafda8e0539f8248ea037",
+    "weight": 1.0
+  },
+  "vae": {
+    "id": "madebyollin/sdxl-vae-fp16-fix",
+    "revision": "207b116dae70ace3637169f1ddd2434b91b3a8cd"
+  },
+  "generation": {
+    "width": 1024,
+    "height": 1024,
+    "num_inference_steps": 30,
+    "guidance_scale": 7.0,
+    "scheduler": "DPMSolverMultistepScheduler",
+    "algorithm_type": "dpmsolver++",
+    "solver_order": 2,
+    "use_karras_sigmas": true,
+    "dtype": "float16",
+    "refiner": false
+  },
+  "batch": "Dark fantasy 01: targeted knight and lantern refinements",
+  "negative_prompt": "photo, photorealistic, 3d render, blurry, gradients, text, letters, watermark, logo, frame, border, sprite sheet, multiple views, cropped, duplicate characters, extra limbs",
+  "assets": [
+    {
+      "name": "ashen_knight",
+      "kind": "character",
+      "seed": 53001,
+      "prompt": "pixel art, one lone full-body knight standing alone, black iron armor, burgundy cape, holding one longsword at his side, centered isolated on plain light gray background, dark fantasy, single character, dark outline, crisp pixel clusters, simple shading"
+    },
+    {
+      "name": "soul_lantern",
+      "kind": "item",
+      "seed": 53008,
+      "prompt": "pixel art, one simple old brass lantern, bright blue flame inside glass, small iron handle on top, centered isolated on a flat solid white background, dark fantasy inventory icon, dark outline, crisp pixel clusters, simple shading"
+    }
+  ]
+}

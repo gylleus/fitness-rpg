@@ -1,0 +1,38 @@
+# Local model installations and Python runtimes
+.venv/
+.download-venv/
+.cache/
+.download-cache/
+__pycache__/
+*.py[cod]
+models/
+vendor/
+*.safetensors
+*.gguf
+*.onnx
+*.pt
+*.pth
+*.whl
+
+# Generated experiments stay local; small reusable inputs live under guides/.
+runs/
+outputs/
+inputs/
+originals/
+processed/
+sheets/
+fixed-palette/
+grid-recovery/
+alpha-probe/
+variants/
+logs/
+*.zip
+*.part
+*.latent
+
+# Keep reproducible download manifests, not captured API responses/diagnostics.
+**/metadata/*
+!pyxelate-study/metadata/wheels.json
+!pyxelate-study/metadata/model-downloads.json
+!pyxelate-study/metadata/model-checksums.json
+!sprite-animation/metadata/README.md

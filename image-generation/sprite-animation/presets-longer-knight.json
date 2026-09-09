@@ -1,0 +1,72 @@
+{
+  "generation": {
+    "size": 512,
+    "length": 65,
+    "fps": 24,
+    "steps": 20,
+    "cfg": 5.0,
+    "shift": 8.0
+  },
+  "export": {
+    "sizes": [
+      64,
+      128
+    ],
+    "frames": 8,
+    "mask_resize": "coverage",
+    "alpha_threshold": 128,
+    "method": "nearest",
+    "min_loop_frames": 36,
+    "color_metric": "ciede2000"
+  },
+  "gates": {
+    "max_area_jump": 0.18,
+    "max_area_ratio": 1.35,
+    "max_anchor_drift": 0.045,
+    "min_motion": 0.018,
+    "max_seam": 0.15,
+    "max_velocity_seam": 0.15,
+    "min_mask_iou": 0.6
+  },
+  "presets": {
+    "knight-idle": {
+      "source": "../dark-fantasy-01/variants/refinements/originals/ashen_knight.png",
+      "anchor": "ground",
+      "pivot": [
+        0.5,
+        0.92
+      ],
+      "seed": 62001,
+      "prompt": "A single silver armored knight with a burgundy cape and one long sword performs a visible idle breathing cycle. He inhales deeply: his chest and shoulders clearly rise, his elbows shift slightly and the lower cape gently billows outward. Then he exhales and settles back into the starting pose. His feet remain planted. The sword stays attached to the same hand. Preserve the reference character, armor, helmet, proportions and colors throughout. Entire figure visible. Locked orthographic camera. Plain uniform gray blue background. Dark fantasy pixel art game sprite with clearly visible restrained body movement.",
+      "negative": "camera motion, zoom, pan, rotation, walking, stepping, extra character, extra limbs, new equipment, missing sword, changing armor, changing colors, scenery, floor texture, cast shadow, text, motion blur, cropped body",
+      "gates": {
+        "min_shape_motion": 0.02
+      }
+    },
+    "lantern-flame": {
+      "source": "../dark-fantasy-01/variants/refinements/originals/soul_lantern.png",
+      "anchor": "stationary",
+      "pivot": [
+        0.5,
+        0.92
+      ],
+      "seed": 61008,
+      "prompt": "The exact same small brass soul lantern as the reference, standing perfectly still. Only the blue magical flame inside flickers and curls upward in a repeating gentle cycle. The metal housing, handle and base remain rigid and motionless with exactly the same shape. Entire lantern visible with empty margin. Static orthographic camera. Plain uniform gray blue background, dark fantasy pixel art game object, preserve all reference colors and geometry.",
+      "negative": "moving lantern, wobbling housing, bending metal, moving handle, camera motion, zoom, rotation, orange fire, new objects, scenery, floor texture, text, blur, cropped object, smoke covering object"
+    },
+    "wraith-hover": {
+      "source": "../dark-fantasy-01/originals/crypt_wraith.png",
+      "anchor": "floating",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "seed": 61005,
+      "prompt": "The exact same single skeletal crypt wraith with blue eyes and dark tattered robes as the reference. A gentle hovering cycle, rising and falling slightly as the lower robe wisps sway. Preserve the skull, arms, silhouette, costume and colors. Entire figure visible with empty margin. Static orthographic camera, plain uniform gray blue background. Dark fantasy pixel art sprite. Slow restrained motion returning to the initial hovering pose.",
+      "negative": "camera motion, zoom, pan, rotating figure, walking, extra limbs, extra face, changing skull, new costume, new colors, scenery, floor, text, motion blur, cropped figure, disappearing body",
+      "gates": {
+        "min_shape_motion": 0.02
+      }
+    }
+  }
+}

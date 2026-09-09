@@ -1,0 +1,85 @@
+{
+  "cinder_imp": {
+    "caption": "one squat charcoal imp, large round belly, short blunt horns, long arms, thin tail, ember eyes, orange belly cracks",
+    "avoid": [
+      "huge horns",
+      "armor",
+      "clothes"
+    ],
+    "source_sha256": "34a3e43fa4d4621dddd9f096f1507691eb338b3376bbeb4f0240b2faa95fb156"
+  },
+  "ash_knight": {
+    "caption": "one stocky knight in ash-covered blackened plate, warped closed pointed helmet, dim orange visor, charred tabard, holding a heavy broad straight sword",
+    "avoid": [
+      "shiny silver",
+      "blue cape",
+      "shield"
+    ],
+    "source_sha256": "9bdb27d2d73ecd94156645c992e9edb553b3814763f83e7733ec24fefd9dc763"
+  },
+  "fire_wisp": {
+    "caption": "one floating irregular cluster of dark clinker rock fragments surrounding a glowing amber-white core, small flame plume above, faceless glowing rock",
+    "avoid": [
+      "face",
+      "eyes",
+      "limbs",
+      "lantern",
+      "feet"
+    ],
+    "source_sha256": "0c77fa0c54179b0bcbdd0fac3d51e985fc68a603ad18c133ad07efe59f006535"
+  },
+  "dwarf_furnace_deserter": {
+    "caption": "one short stout blacksmith dwarf, singed copper beard, hinged iron faceguard, soot armor, brown leather apron, holding long metal pincers",
+    "avoid": [
+      "axe",
+      "sword",
+      "shield"
+    ],
+    "source_sha256": "924e33c894f4306ea12468bb8a1e77d1e63d6a1f9faaa2dc3e80ea8422f96975"
+  },
+  "goblin_scrapper": {
+    "caption": "one short olive-gray goblin in mismatched rusty scrap armor, huge crooked shoulder plate, one squinting eye, tool apron, holding a long hooked salvage pole",
+    "avoid": [
+      "human",
+      "shiny armor",
+      "shield"
+    ],
+    "source_sha256": "e2a16844ecb52a5913a1f07af246b6757eb163073a8e4467e829aa323bb3f093"
+  },
+  "foundries_slag_slug": {
+    "caption": "one broad low amorphous mound of molten brown-black slag slime, irregular clinker plates on its back, narrow orange glowing underside, flat trailing lip",
+    "avoid": [
+      "legs",
+      "arms",
+      "hands",
+      "limbs",
+      "face",
+      "eyes",
+      "mouth",
+      "shell",
+      "spiral",
+      "animal head"
+    ],
+    "source_sha256": "c52767b1850c8fedc9eec48a984d72e1d0d65bf53dbff334e672e388c149ea19"
+  },
+  "foundries_bellows_brute": {
+    "caption": "one stocky riveted iron robot, round vented faceless head, accordion leather bellows chest, short piston legs, one blunt arm, one broad furnace rake arm",
+    "avoid": [
+      "human face",
+      "skin",
+      "beard",
+      "knight"
+    ],
+    "source_sha256": "2456b97efcc9bfff87ab36c2f60ac4a2a5bc0005426121b3cce9e8375568c316"
+  },
+  "furnace_king": {
+    "caption": "one massive barrel-chested black iron golem, chimney crown, amber visor, grated orange furnace door chest, thick hinged limbs, huge square forge hammer",
+    "avoid": [
+      "human face",
+      "skin",
+      "beard",
+      "sword"
+    ],
+    "source_sha256": "a6afbc534bc59d5dbd290a6e088ca779892879c740207c3ec11b383ddbcbe55f"
+  }
+}

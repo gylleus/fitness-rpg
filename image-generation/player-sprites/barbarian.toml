@@ -1,0 +1,34 @@
+schema_version = 1
+
+[art]
+facing = "right"
+style = "Weathered dark fantasy, stylized sturdy proportions, distinct silhouettes, worn practical materials."
+lighting = "Restrained upper-left light with broad three-tone clusters."
+avoid = ["photorealism", "cute mascot", "text", "watermark", "scenery"]
+
+[[assets]]
+id = "barbarian_player"
+name = "Barbarian wanderer"
+kind = "player"
+visual_description = """
+A broad-shouldered adult male barbarian has a bare chest, thick arms, weathered tan skin, shaggy dark brown hair, and a short rough beard. His heavy brow and square jaw give his face a stubborn, tired expression. His muscular torso narrows into a wide worn leather belt and ragged dark brown fur shorts that cover his hips and upper thighs.
+
+Coarse leather wraps protect his wrists, and scuffed brown boots rise to the middle of his calves. A plain iron hand axe with a short wooden handle rests in one hand. His clothing is sparse and practical; his chest, shoulders, and knees remain bare. He carries no helmet, breastplate, cloak, shield, or extra weapons.
+"""
+reference_caption = "one muscular bearded barbarian, side view, bare chest, brown fur shorts, brown boots, holding a short iron axe"
+
+[assets.visual]
+height_scale = 1.0
+anchor = "ground"
+silhouette = "Broad bare shoulders and strong arms, compact fur shorts, sturdy legs, one short axe held low in a ready stance."
+equipment = ["one short iron hand axe", "fur shorts", "leather belt", "wrist wraps", "calf-high boots"]
+palette = ["#e4a672", "#b86f50", "#733e39", "#3e2731", "#c0cbdc", "#5a6988"]
+avoid = ["helmet", "chest armor", "shirt", "cape", "shield", "sword", "two axes", "long polearm", "nude", "exposed genitals"]
+
+[assets.animations.idle]
+description = "The barbarian stands in a right-facing ready stance. His chest rises and falls once with a slow breath, his knees soften slightly, and the axe remains low in his hand. Both boots stay planted. He returns to the same stance without turning toward the viewer."
+loop = true
+
+[assets.animations.attack]
+description = "The barbarian draws his short axe back beside his right shoulder, leans forward, and makes one strong downward chopping swing toward the right. His empty hand stays close to his body. He follows through, then brings the axe back down to the original low ready position, keeping his feet near their starting places."
+loop = false

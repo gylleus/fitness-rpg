@@ -1,0 +1,16 @@
+{
+  "experiment": "SDXL + Pixel Art XL, five first-seed samples, Pyxelate study",
+  "base_model": {"id": "stabilityai/stable-diffusion-xl-base-1.0", "revision": "462165984030d82259a11f4367a4eed129e94a7b"},
+  "lora": {"id": "nerijs/pixel-art-xl", "revision": "8bf4a4d9ea283e00a51fafda8e0539f8248ea037", "weight": 1.0},
+  "vae": {"id": "madebyollin/sdxl-vae-fp16-fix", "revision": "207b116dae70ace3637169f1ddd2434b91b3a8cd"},
+  "pyxelate": {"version": "2.1.1", "revision": "f4a046b8b148370a20ab7681fce160551e5fc49b", "dither": "none", "svd": true, "sobel": 3, "depth": 1, "alpha": 0.6},
+  "generation": {"width": 1024, "height": 1024, "num_inference_steps": 30, "guidance_scale": 7.0, "scheduler": "DPMSolverMultistepScheduler", "algorithm_type": "dpmsolver++", "solver_order": 2, "use_karras_sigmas": true, "dtype": "float16", "refiner": false},
+  "negative_prompt": "photo, realistic, 3d render, blurry, gradient background, text, watermark, sprite sheet, multiple views, cropped, frame",
+  "assets": [
+    {"name": "knight", "kind": "sprite", "seed": 41001, "prompt": "pixel art, one full-body fantasy knight, silver armor, blue cape, sword and shield, standing three-quarter view, centered isolated on plain ivory background, 16-bit RPG game sprite, dark navy outline, flat colors, simple shading, light from upper left"},
+    {"name": "slime", "kind": "sprite", "seed": 41002, "prompt": "pixel art, one small green slime monster, round jelly body, two black eyes, three-quarter view, centered isolated on plain ivory background, 16-bit RPG game sprite, dark navy outline, flat colors, simple shading, light from upper left"},
+    {"name": "chest", "kind": "sprite", "seed": 41003, "prompt": "pixel art, one closed fantasy treasure chest, brown wood, gold bands and lock, three-quarter view, centered isolated on plain ivory background, 16-bit RPG game sprite, dark navy outline, flat colors, simple shading, light from upper left"},
+    {"name": "potion", "kind": "sprite", "seed": 41004, "prompt": "pixel art, one red healing potion, round glass bottle, cork stopper, three-quarter view, centered isolated on plain ivory background, 16-bit RPG game sprite, dark navy outline, flat colors, simple shading, light from upper left"},
+    {"name": "environment", "kind": "scene", "seed": 41005, "prompt": "pixel art, small fantasy forest clearing, old stone archway, winding dirt path, grass and two trees, three-quarter game view, 16-bit RPG game environment, dark navy outlines, flat colors, simple shading, light from upper left, no characters"}
+  ]
+}

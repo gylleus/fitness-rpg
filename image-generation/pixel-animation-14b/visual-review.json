@@ -1,0 +1,25 @@
+{
+  "method": "Visual inspection of raw sampled frames, processed cycles and actual 43-to-0 wrap strips, supported by native-resolution metrics. Browser animation playback was not observed by the agent.",
+  "jobs": {
+    "lantern-pixel": {
+      "status": "prototype_candidate_with_cleanup",
+      "summary": "Blue flame changes shape inside a mostly steady metal frame; automatic masking preserves the open gaps. Metal highlights still vary and the wrap is more noticeable than the knight's. Prefer nearest 128px; 64px remains recognizable but loses flame detail."
+    },
+    "knight-control": {
+      "status": "weaker_control",
+      "summary": "Recognizable knight and stable feet, but restrained cape motion and a more noticeable change in armor highlights at the wrap. Fine details vary. Prefer 128px nearest to either 64px version."
+    },
+    "knight-pixel": {
+      "status": "prototype_candidate",
+      "summary": "Clearer breathing poses: shoulders and sword rise and settle, with stable feet and a closer loop boundary. Best simple knight candidate at 128px nearest + ENDESGA. Armor highlights and small gauntlet details still need review."
+    },
+    "wraith-pixel": {
+      "status": "prototype_candidate_with_cleanup",
+      "summary": "The body rises and falls with moving robe tails. Fine ribs, hands and cyan highlights vary, making this noisier than the knight. Prefer 128px nearest; Pyxelate blurs the skull and bone details."
+    },
+    "knight-pixel-loop": {
+      "status": "prototype_candidate",
+      "summary": "Keeps the breathing motion and has a close wrap. Ending-frame conditioning adds little improvement over the ordinary pixel-adapter run in this seed; it is not a demonstrated general loop fix."
+    }
+  }
+}

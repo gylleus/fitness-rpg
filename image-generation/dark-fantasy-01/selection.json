@@ -1,0 +1,12 @@
+{
+  "ashen_knight": {
+    "path": "variants/refinements/originals/ashen_knight.png",
+    "seed": 53001,
+    "reason": "The first seed produced multiple views; select a single-character refinement."
+  },
+  "soul_lantern": {
+    "path": "variants/refinements/originals/soul_lantern.png",
+    "seed": 53008,
+    "reason": "The first seed had a textured background and orange flame; simplify the backdrop and request blue fire."
+  }
+}

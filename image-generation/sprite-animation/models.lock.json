@@ -1,0 +1,50 @@
+{
+  "models": [
+    {
+      "path": "comfy/diffusion_models/wan2.2_ti2v_5B_fp16.safetensors",
+      "bytes": 9999658848,
+      "digest": "456f901338bd9eadbded3828b819109a9b68e8a525ca5cf8d0049a69fcfeca1e",
+      "url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/c4f60d30c55a624e35427060fdd217579a6c1d77/split_files/diffusion_models/wan2.2_ti2v_5B_fp16.safetensors",
+      "group": "motion",
+      "license": "Apache-2.0",
+      "revision": "c4f60d30c55a624e35427060fdd217579a6c1d77"
+    },
+    {
+      "path": "comfy/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "bytes": 6735906897,
+      "digest": "c3355d30191f1f066b26d93fba017ae9809dce6c627dda5f6a66eaa651204f68",
+      "url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/c4f60d30c55a624e35427060fdd217579a6c1d77/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "group": "motion",
+      "license": "Apache-2.0",
+      "revision": "c4f60d30c55a624e35427060fdd217579a6c1d77"
+    },
+    {
+      "path": "comfy/vae/wan2.2_vae.safetensors",
+      "bytes": 1409400960,
+      "digest": "e40321bd36b9709991dae2530eb4ac303dd168276980d3e9bc4b6e2b75fed156",
+      "url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/c4f60d30c55a624e35427060fdd217579a6c1d77/split_files/vae/wan2.2_vae.safetensors",
+      "group": "motion",
+      "license": "Apache-2.0",
+      "revision": "c4f60d30c55a624e35427060fdd217579a6c1d77"
+    },
+    {
+      "path": "rembg/birefnet-general.onnx",
+      "bytes": 972666916,
+      "digest": "7a35a0141cbbc80de11d9c9a28f52697",
+      "algorithm": "md5",
+      "url": "https://github.com/danielgatis/rembg/releases/download/v0.0.0/BiRefNet-general-epoch_244.onnx",
+      "group": "segmentation",
+      "license": "MIT",
+      "revision": "rembg v2.0.67 session checksum"
+    },
+    {
+      "path": "sam2/sam2.1_hiera_tiny.pt",
+      "bytes": 156008466,
+      "digest": "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69",
+      "url": "https://huggingface.co/facebook/sam2.1-hiera-tiny/resolve/de431c4043854a71d8101e17995dfe596bf101a5/sam2.1_hiera_tiny.pt",
+      "group": "segmentation",
+      "license": "Apache-2.0",
+      "revision": "de431c4043854a71d8101e17995dfe596bf101a5"
+    }
+  ]
+}

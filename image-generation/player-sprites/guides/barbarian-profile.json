@@ -1,0 +1,26 @@
+{
+  "source": "image-generation/player-sprites/runs/barbarian-v2/originals/barbarian_player.png",
+  "source_sha256": "5efdf7024762c8b5191a6ffc3878465aac3135e6974a552145aae5d885be8e28",
+  "crop": [
+    40,
+    60,
+    490,
+    990
+  ],
+  "operation": "Extract left subject, aspect-preserving nearest resize and square padding",
+  "size": [
+    1024,
+    1024
+  ],
+  "padding_rgb": [
+    145,
+    143,
+    144
+  ],
+  "resampling": "nearest",
+  "source_size": [
+    1024,
+    1024
+  ],
+  "source_rgba_sha256": "4a6bf49d4abb8bf96daf20d564a44ce6d894eced8d9c9314a07b30abcf2ba023"
+}

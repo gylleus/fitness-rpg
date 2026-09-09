@@ -1,0 +1,2 @@
+# Optional, Linux x86_64 / CPython 3.10. Not used for the main Pyxelate matrix.
+pixel-snapper @ https://files.pythonhosted.org/packages/97/4e/eb5a294158c801b659d1de6849e52b1d94ec1b878e5f13a2787f4dd27105/pixel_snapper-0.1.0-cp310-cp310-manylinux_2_34_x86_64.whl --hash=sha256:35d7088929dd2e06e1215cdf98baf8493d0e105a24b77612dbebf9fe45555ed8

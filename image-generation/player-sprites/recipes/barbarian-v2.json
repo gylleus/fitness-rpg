@@ -1,0 +1,185 @@
+{
+  "schema_version": 2,
+  "facing": "right",
+  "actions": [
+    "idle",
+    "attack"
+  ],
+  "export": {
+    "size": 64,
+    "frame_step": 2,
+    "columns": 8,
+    "margin": 0.08,
+    "palette": {
+      "name": "ENDESGA 32",
+      "author": "ENDESGA",
+      "source": "https://lospec.com/palette-list/endesga-32",
+      "description": "User-selected ENDESGA 32 palette. Hex values and order match the supplied list and Lospec source.",
+      "colors": [
+        "#be4a2f",
+        "#d77643",
+        "#ead4aa",
+        "#e4a672",
+        "#b86f50",
+        "#733e39",
+        "#3e2731",
+        "#a22633",
+        "#e43b44",
+        "#f77622",
+        "#feae34",
+        "#fee761",
+        "#63c74d",
+        "#3e8948",
+        "#265c42",
+        "#193c3e",
+        "#124e89",
+        "#0099db",
+        "#2ce8f5",
+        "#ffffff",
+        "#c0cbdc",
+        "#8b9bb4",
+        "#5a6988",
+        "#3a4466",
+        "#262b44",
+        "#181425",
+        "#ff0044",
+        "#68386c",
+        "#b55088",
+        "#f6757a",
+        "#e8b796",
+        "#c28569"
+      ]
+    }
+  },
+  "art": {
+    "style": "Weathered dark fantasy, stylized sturdy proportions, distinct silhouettes, worn practical materials.",
+    "lighting": "Restrained upper-left light with broad three-tone clusters.",
+    "facing": "right",
+    "avoid": [
+      "photorealism",
+      "cute mascot",
+      "text",
+      "watermark",
+      "scenery"
+    ]
+  },
+  "assets": [
+    {
+      "asset": {
+        "id": "barbarian_player",
+        "name": "Barbarian wanderer",
+        "kind": "player",
+        "visual_description": "A broad-shouldered adult male barbarian has a bare chest, thick arms, weathered tan skin, shaggy dark brown hair, and a short rough beard. His heavy brow and square jaw give his face a stubborn, tired expression. His muscular torso narrows into a wide worn leather belt and ragged dark brown fur shorts that cover his hips and upper thighs.\n\nCoarse leather wraps protect his wrists, and scuffed brown boots rise to the middle of his calves. A plain iron hand axe with a short wooden handle rests in one hand. His clothing is sparse and practical; his chest, shoulders, and knees remain bare. He carries no helmet, breastplate, cloak, shield, or extra weapons.\n",
+        "reference_caption": "a bare-chested muscular barbarian standing sideways, nose and both feet pointing right, one arm in front of the other, holding a short axe in front, fur shorts, boots, shaggy brown hair and beard",
+        "visual": {
+          "height_scale": 1.0,
+          "anchor": "ground",
+          "silhouette": "Broad bare shoulders and strong arms, compact fur shorts, sturdy legs, one short axe held low in a ready stance.",
+          "equipment": [
+            "one short iron hand axe",
+            "fur shorts",
+            "leather belt",
+            "wrist wraps",
+            "calf-high boots"
+          ],
+          "palette": [
+            "#e4a672",
+            "#b86f50",
+            "#733e39",
+            "#3e2731",
+            "#c0cbdc",
+            "#5a6988"
+          ],
+          "avoid": [
+            "helmet",
+            "chest armor",
+            "shirt",
+            "cape",
+            "shield",
+            "sword",
+            "two axes",
+            "long polearm",
+            "nude",
+            "exposed genitals"
+          ]
+        },
+        "animations": {
+          "idle": {
+            "description": "The barbarian stands in a right-facing ready stance. His chest rises and falls once with a slow breath, his knees soften slightly, and the axe remains low in his hand. Both boots stay planted. He returns to the same stance without turning toward the viewer.",
+            "loop": true
+          },
+          "attack": {
+            "description": "The barbarian draws his short axe back beside his right shoulder, leans forward, and makes one strong downward chopping swing toward the right. His empty hand stays close to his body. He follows through, then brings the axe back down to the original low ready position, keeping his feet near their starting places.",
+            "loop": false
+          }
+        }
+      },
+      "prompts": {
+        "reference": "A right-facing profile view of a bare-chested muscular barbarian standing sideways, nose and both feet pointing right, one arm in front of the other, holding a short axe in front, fur shorts, boots, shaggy brown hair and beard. One isolated full body subject on plain gray. Dark fantasy pixel art, chunky dark outline, flat colors.",
+        "full_reference_context": "pixel art, one Barbarian wanderer, full body, facing right, side-on view for a 2D side-scroller, slight three-quarter turn, fixed eye-level camera. Broad bare shoulders and strong arms, compact fur shorts, sturdy legs, one short axe held low in a ready stance. A broad-shouldered adult male barbarian has a bare chest, thick arms, weathered tan skin, shaggy dark brown hair, and a short rough beard. His heavy brow and square jaw give his face a stubborn, tired expression. His muscular torso narrows into a wide worn leather belt and ragged dark brown fur shorts that cover his hips and upper thighs. Coarse leather wraps protect his wrists, and scuffed brown boots rise to the middle of his calves. A plain iron hand axe with a short wooden handle rests in one hand. His clothing is sparse and practical; his chest, shoulders, and knees remain bare. He carries no helmet, breastplate, cloak, shield, or extra weapons. Visible equipment: one short iron hand axe, fur shorts, leather belt, wrist wraps, calf-high boots. Weathered dark fantasy, stylized sturdy proportions, distinct silhouettes, worn practical materials. Restrained upper-left light with broad three-tone clusters. Single isolated subject centered with generous empty padding; plain flat light gray background, crisp dark outline, chunky pixel clusters, three-tone shading. All equipment fits inside the image.",
+        "caption_source": "curated condensation of visual_description",
+        "negative": "front view, back view, isometric view, top down, looking at viewer, multiple views, sprite sheet, duplicates, cropped, gradient background, cast shadow, checkerboard, floor, blurry, photorealism, cute mascot, text, watermark, scenery, helmet, chest armor, shirt, cape, shield, sword, two axes, long polearm, nude, exposed genitals, ",
+        "motions": {
+          "idle": "The exact same single Barbarian wanderer as the reference, facing right throughout. The barbarian stands in a right-facing ready stance. His chest rises and falls once with a slow breath, his knees soften slightly, and the axe remains low in his hand. Both boots stay planted. He returns to the same stance without turning toward the viewer. One restrained motion cycle, then settle back into the exact starting pose. Keep the ground contact or hovering center in place. Preserve the reference anatomy, face, equipment, silhouette and colors. Locked eye-level side-scroller camera, side-on with a slight three-quarter turn. Keep the entire subject, equipment and effects inside the fixed frame with empty padding. Plain uniform gray-blue background. Dark fantasy pixel art, crisp pixel clusters. Subject identity: A broad-shouldered adult male barbarian has a bare chest, thick arms, weathered tan skin, shaggy dark brown hair, and a short rough beard. His heavy brow and square jaw give his face a stubborn, tired expression. His muscular torso narrows into a wide worn leather belt and ragged dark brown fur shorts that cover his hips and upper thighs. Coarse leather wraps protect his wrists, and scuffed brown boots rise to the middle of his calves. A plain iron hand axe with a short wooden handle rests in one hand. His clothing is sparse and practical; his chest, shoulders, and knees remain bare. He carries no helmet, breastplate, cloak, shield, or extra weapons.",
+          "attack": "The exact same single Barbarian wanderer as the reference, facing right throughout. The barbarian draws his short axe back beside his right shoulder, leans forward, and makes one strong downward chopping swing toward the right. His empty hand stays close to his body. He follows through, then brings the axe back down to the original low ready position, keeping his feet near their starting places. One complete action: brief anticipation, decisive movement, follow-through, then recover to the reference ready stance. Do not repeat the action in this clip. Preserve the reference anatomy, face, equipment, silhouette and colors. Locked eye-level side-scroller camera, side-on with a slight three-quarter turn. Keep the entire subject, equipment and effects inside the fixed frame with empty padding. Plain uniform gray-blue background. Dark fantasy pixel art, crisp pixel clusters. Subject identity: A broad-shouldered adult male barbarian has a bare chest, thick arms, weathered tan skin, shaggy dark brown hair, and a short rough beard. His heavy brow and square jaw give his face a stubborn, tired expression. His muscular torso narrows into a wide worn leather belt and ragged dark brown fur shorts that cover his hips and upper thighs. Coarse leather wraps protect his wrists, and scuffed brown boots rise to the middle of his calves. A plain iron hand axe with a short wooden handle rests in one hand. His clothing is sparse and practical; his chest, shoulders, and knees remain bare. He carries no helmet, breastplate, cloak, shield, or extra weapons."
+        }
+      },
+      "seeds": {
+        "reference": 988517617,
+        "idle": 1440751889,
+        "attack": 1139068295
+      }
+    }
+  ],
+  "source": {
+    "adapter": "asset-definition",
+    "path": "image-generation/player-sprites/barbarian.toml",
+    "sha256": "68096ac0cd57a8d3d709d521f6e23036247815d65bc993a865c88cd16f96e723",
+    "text": "schema_version = 1\n\n[art]\nfacing = \"right\"\nstyle = \"Weathered dark fantasy, stylized sturdy proportions, distinct silhouettes, worn practical materials.\"\nlighting = \"Restrained upper-left light with broad three-tone clusters.\"\navoid = [\"photorealism\", \"cute mascot\", \"text\", \"watermark\", \"scenery\"]\n\n[[assets]]\nid = \"barbarian_player\"\nname = \"Barbarian wanderer\"\nkind = \"player\"\nvisual_description = \"\"\"\nA broad-shouldered adult male barbarian has a bare chest, thick arms, weathered tan skin, shaggy dark brown hair, and a short rough beard. His heavy brow and square jaw give his face a stubborn, tired expression. His muscular torso narrows into a wide worn leather belt and ragged dark brown fur shorts that cover his hips and upper thighs.\n\nCoarse leather wraps protect his wrists, and scuffed brown boots rise to the middle of his calves. A plain iron hand axe with a short wooden handle rests in one hand. His clothing is sparse and practical; his chest, shoulders, and knees remain bare. He carries no helmet, breastplate, cloak, shield, or extra weapons.\n\"\"\"\nreference_caption = \"a bare-chested muscular barbarian standing sideways, nose and both feet pointing right, one arm in front of the other, holding a short axe in front, fur shorts, boots, shaggy brown hair and beard\"\n\n[assets.visual]\nheight_scale = 1.0\nanchor = \"ground\"\nsilhouette = \"Broad bare shoulders and strong arms, compact fur shorts, sturdy legs, one short axe held low in a ready stance.\"\nequipment = [\"one short iron hand axe\", \"fur shorts\", \"leather belt\", \"wrist wraps\", \"calf-high boots\"]\npalette = [\"#e4a672\", \"#b86f50\", \"#733e39\", \"#3e2731\", \"#c0cbdc\", \"#5a6988\"]\navoid = [\"helmet\", \"chest armor\", \"shirt\", \"cape\", \"shield\", \"sword\", \"two axes\", \"long polearm\", \"nude\", \"exposed genitals\"]\n\n[assets.animations.idle]\ndescription = \"The barbarian stands in a right-facing ready stance. His chest rises and falls once with a slow breath, his knees soften slightly, and the axe remains low in his hand. Both boots stay planted. He returns to the same stance without turning toward the viewer.\"\nloop = true\n\n[assets.animations.attack]\ndescription = \"The barbarian draws his short axe back beside his right shoulder, leans forward, and makes one strong downward chopping swing toward the right. His empty hand stays close to his body. He follows through, then brings the axe back down to the original low ready position, keeping his feet near their starting places.\"\nloop = false\n"
+  },
+  "reference_generation": {
+    "base_model": {
+      "id": "stabilityai/stable-diffusion-xl-base-1.0",
+      "revision": "462165984030d82259a11f4367a4eed129e94a7b"
+    },
+    "lora": {
+      "id": "nerijs/pixel-art-xl",
+      "revision": "8bf4a4d9ea283e00a51fafda8e0539f8248ea037",
+      "weight": 0.65
+    },
+    "vae": {
+      "id": "madebyollin/sdxl-vae-fp16-fix",
+      "revision": "207b116dae70ace3637169f1ddd2434b91b3a8cd"
+    },
+    "generation": {
+      "width": 1024,
+      "height": 1024,
+      "num_inference_steps": 30,
+      "guidance_scale": 7.0,
+      "scheduler": "DPMSolverMultistepScheduler",
+      "algorithm_type": "dpmsolver++",
+      "solver_order": 2,
+      "use_karras_sigmas": true,
+      "dtype": "float16",
+      "refiner": false
+    }
+  },
+  "animation_generation": {
+    "size": 512,
+    "length": 45,
+    "fps": 16,
+    "steps": 4,
+    "split_step": 2,
+    "cfg": 1.0,
+    "shift": 5.0,
+    "sampler": "ddim",
+    "distilled": true,
+    "pixel_lora": 1.0,
+    "end_condition": false,
+    "seed": 72001
+  },
+  "model_manifest_sha256": {
+    "pixel-animation-14b/models.lock.json": "6699432aa440e90055d991c7675753cf97a9eb54962222bfc4fc5fb7ca24b43d",
+    "sprite-animation/models.lock.json": "5130ba7a677a230d145cc611755cfa34c742670ff9ff8098e8d4fac0caad5ee3"
+  }
+}
