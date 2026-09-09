@@ -47,6 +47,15 @@ cp -rf source dest          # NOT: cp -r source dest
 - `apt-get` - use `-y` flag
 - `brew` - use `HOMEBREW_NO_AUTO_UPDATE=1` env var
 
+## Git Commits
+
+- Always commit the changes made for a completed task before handing off, unless the user explicitly asks not to commit. This is standing authorization; do not ask for confirmation before each commit.
+- Review the diff, run the relevant checks, and stage only changes belonging to the task. Preserve unrelated work in the working tree or staging area.
+- Include the commit hash and validation results in the handoff. If committing is blocked, report the exact command and error.
+- Git pushes and Dolt remote sync still require an explicit user request.
+
+This repository policy overrides the conservative/minimal commit defaults in the managed Beads guidance below and in `bd prime` output.
+
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:6cd5cc61 -->
 ## Beads Issue Tracker
 
