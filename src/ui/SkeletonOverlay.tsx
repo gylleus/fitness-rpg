@@ -6,7 +6,7 @@
  * are wrong" — both look like a counter stuck at zero.
  */
 
-import { Canvas, Circle, Line, Rect, vec } from '@shopify/react-native-skia';
+import { Canvas, Circle, Line, vec } from '@shopify/react-native-skia';
 import { useDerivedValue } from 'react-native-reanimated';
 import type { SharedValue } from 'react-native-reanimated';
 import { StyleSheet, View, type LayoutChangeEvent } from 'react-native';
@@ -37,15 +37,6 @@ const EDGES: [number, number][] = [
 ];
 
 const MIN_SCORE = 0.3;
-
-/** Head is bounded by the face keypoints MoveNet already returns. */
-const HEAD_POINTS = [
-  KEYPOINT.NOSE,
-  KEYPOINT.LEFT_EYE,
-  KEYPOINT.RIGHT_EYE,
-  KEYPOINT.LEFT_EAR,
-  KEYPOINT.RIGHT_EAR,
-];
 
 /**
  * Maps a model-space point into preview-view pixels.
@@ -138,11 +129,11 @@ export function SkeletonOverlay({
         {Array.from({ length: 17 }, (_, i) => (
           <Joint key={`j${i}`} points={points} index={i} />
         ))}
-        {/* The two things the rep gate actually watches: the head, which must
-            travel, and the hands, which must stay planted. */}
-        <TrackedBox points={points} indices={HEAD_POINTS} color="#4ade80" pad={26} />
-        <TrackedBox points={points} indices={[KEYPOINT.LEFT_WRIST]} color="#fbbf24" pad={30} />
-        <TrackedBox points={points} indices={[KEYPOINT.RIGHT_WRIST]} color="#fbbf24" pad={30} />
+        {/* The ONE point the detector watches: the shoulder midpoint. Hands,
+            elbows, and the face have no influence on counting — drawing boxes
+            around them (as this overlay once did) made users reasonably
+            conclude they were being tracked. */}
+        <TrackedPoint points={points} />
       </Canvas>
     </View>
   );
@@ -151,43 +142,24 @@ export function SkeletonOverlay({
 type ViewPoint = { x: number; y: number; score: number };
 
 /**
- * Box around a group of keypoints, drawn off-screen when none are confident so
- * it disappears rather than snapping to a corner.
+ * Ring on the shoulder midpoint — the detector's tracked point — mirroring the
+ * fallback logic in the detector: both shoulders when confident, one shoulder
+ * otherwise, off-screen when neither is visible.
  */
-function TrackedBox({
-  points,
-  indices,
-  color,
-  pad,
-}: {
-  points: SharedValue<ViewPoint[]>;
-  indices: number[];
-  color: string;
-  pad: number;
-}) {
-  const box = useDerivedValue(() => {
-    let minX = Infinity;
-    let minY = Infinity;
-    let maxX = -Infinity;
-    let maxY = -Infinity;
-    for (let i = 0; i < indices.length; i++) {
-      const p = points.value[indices[i]];
-      if (p == null || p.score < MIN_SCORE) continue;
-      if (p.x < minX) minX = p.x;
-      if (p.y < minY) minY = p.y;
-      if (p.x > maxX) maxX = p.x;
-      if (p.y > maxY) maxY = p.y;
-    }
-    if (minX === Infinity) return { x: -1000, y: -1000, w: 0, h: 0 };
-    return { x: minX - pad, y: minY - pad, w: maxX - minX + pad * 2, h: maxY - minY + pad * 2 };
-  }, [indices, pad]);
-
-  const x = useDerivedValue(() => box.value.x);
-  const y = useDerivedValue(() => box.value.y);
-  const w = useDerivedValue(() => box.value.w);
-  const h = useDerivedValue(() => box.value.h);
-
-  return <Rect x={x} y={y} width={w} height={h} color={color} style="stroke" strokeWidth={3} />;
+function TrackedPoint({ points }: { points: SharedValue<ViewPoint[]> }) {
+  const center = useDerivedValue(() => {
+    const l = points.value[KEYPOINT.LEFT_SHOULDER];
+    const r = points.value[KEYPOINT.RIGHT_SHOULDER];
+    const lOk = l != null && l.score >= MIN_SCORE;
+    const rOk = r != null && r.score >= MIN_SCORE;
+    if (lOk && rOk) return { x: (l.x + r.x) / 2, y: (l.y + r.y) / 2 };
+    if (lOk) return { x: l.x, y: l.y };
+    if (rOk) return { x: r.x, y: r.y };
+    return { x: -1000, y: -1000 };
+  });
+  const cx = useDerivedValue(() => center.value.x);
+  const cy = useDerivedValue(() => center.value.y);
+  return <Circle cx={cx} cy={cy} r={18} color="#4ade80" style="stroke" strokeWidth={4} />;
 }
 
 function Joint({ points, index }: { points: SharedValue<ViewPoint[]>; index: number }) {

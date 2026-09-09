@@ -1,0 +1,57 @@
+import { describe, expect, it } from 'vitest';
+import { createTestDb } from '../../test/db';
+import { activeRecording, appendLocations, createRecording, discardRecording, finishRecording, getRecording, getRoute, pauseRecording, resumeRecording } from './recordings';
+import { deleteRun, getGameSnapshot } from './game';
+import { runs } from './schema';
+const now = new Date(2026, 8, 6, 12).getTime();
+const fix = (seconds: number, meters: number) => ({ timestamp: now + seconds * 1000, latitude: 0, longitude: meters / 111195, accuracy: 5 });
+describe('durable run recorder', () => {
+  it('saves GPS once, excludes pauses, resumes, and publishes a single completed workout', () => {
+    const db = createTestDb();
+    createRecording(db, 'run-1', now);
+    expect(createRecording(db, 'run-2', now).id).toBe('run-1');
+    const points = [fix(0, 0), fix(10, 20), fix(20, 40)];
+    appendLocations(db, 'run-1', points, now + 20000);
+    appendLocations(db, 'run-1', points, now + 20000);
+    expect(getRoute(db, 'run-1')).toHaveLength(3);
+    pauseRecording(db, 'run-1', now + 20000);
+    appendLocations(db, 'run-1', [fix(25, 50)], now + 25000);
+    expect(getRoute(db, 'run-1')).toHaveLength(3);
+    resumeRecording(db, 'run-1', now + 40000);
+    appendLocations(db, 'run-1', [fix(40, 100), fix(50, 120)], now + 50000);
+    const saved = finishRecording(db, 'run-1', 100, now + 60000);
+    expect(saved.durationSeconds).toBe(40);
+    expect(saved.distanceMeters).toBeCloseTo(60, 1);
+    expect(saved).toMatchObject({ source: 'gps', steps: 100, recordingId: 'run-1' });
+    expect(finishRecording(db, 'run-1', 100, now + 61000).id).toBe(saved.id);
+    expect(db.select().from(runs).all()).toHaveLength(1);
+    expect(activeRecording(db)).toBeNull();
+    expect(getGameSnapshot(db, now + 61000).totals.runs).toBe(1);
+    deleteRun(db, saved.id);
+    expect(getRoute(db, 'run-1')).toHaveLength(0);
+    expect(getRecording(db, 'run-1')).toBeNull();
+    db.$client.close();
+  });
+  it('keeps a route and retryable recording if final workout storage fails', () => {
+    const db = createTestDb();
+    createRecording(db, 'run', now);
+    appendLocations(db, 'run', [fix(0, 0), fix(10, 20)], now + 10000);
+    db.run("CREATE TRIGGER fail_run BEFORE INSERT ON runs BEGIN SELECT RAISE(ABORT, 'disk full'); END");
+    expect(() => finishRecording(db, 'run', null, now + 10000)).toThrow();
+    expect(getRecording(db, 'run')?.status).toBe('recording');
+    expect(getRoute(db, 'run')).toHaveLength(2);
+    db.run('DROP TRIGGER fail_run');
+    expect(finishRecording(db, 'run', null, now + 10000).distanceMeters).toBeCloseTo(20, 1);
+    db.$client.close();
+  });
+  it('does not award a workout for no GPS distance or a discarded run', () => {
+    const db = createTestDb();
+    createRecording(db, 'empty', now);
+    expect(() => finishRecording(db, 'empty', 0, now + 60000)).toThrow('No distance');
+    discardRecording(db, 'empty', now + 60000);
+    expect(activeRecording(db)).toBeNull();
+    expect(() => finishRecording(db, 'empty', 0, now + 60000)).toThrow();
+    expect(db.select().from(runs).all()).toHaveLength(0);
+    db.$client.close();
+  });
+});

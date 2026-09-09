@@ -10,7 +10,8 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.gylleus.fitnessrpg",
       "infoPlist": {
-        "NSCameraUsageDescription": "Fitness RPG uses the camera to count your reps. Video is processed on-device and never leaves your phone."
+        "NSCameraUsageDescription": "Fitness RPG uses the camera to count your reps. Video is processed on-device and never leaves your phone.",
+        "NSMotionUsageDescription": "Fitness RPG reads your steps during runs to power your hero."
       }
     },
     "android": {
@@ -23,7 +24,10 @@
       "predictiveBackGestureEnabled": false,
       "package": "com.gylleus.fitnessrpg",
       "permissions": [
-        "android.permission.CAMERA"
+        "android.permission.CAMERA",
+        "android.permission.health.READ_STEPS",
+        "android.permission.ACTIVITY_RECOGNITION",
+        "android.permission.RECEIVE_BOOT_COMPLETED"
       ]
     },
     "web": {
@@ -48,7 +52,27 @@
           }
         }
       ],
-      "expo-sqlite"
+      "expo-sqlite",
+      "react-native-health-connect",
+      [
+        "@kingstinct/react-native-healthkit",
+        {
+          "background": false,
+          "NSHealthShareUsageDescription": "Fitness RPG reads your step totals to show activity progress and power your hero.",
+          "NSHealthUpdateUsageDescription": false
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Fitness RPG records your GPS route and pace during runs you start.",
+          "locationAlwaysAndWhenInUsePermission": "Allow location during your run so recording continues when you lock the screen.",
+          "isIosBackgroundLocationEnabled": true,
+          "isAndroidBackgroundLocationEnabled": true,
+          "isAndroidForegroundServiceEnabled": true
+        }
+      ],
+      "./plugins/with-health-rationale"
     ]
   }
 }

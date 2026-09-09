@@ -1,0 +1,3 @@
+interface:
+  display_name: "Design Enemy"
+  short_description: "Curate biome enemies from ideas to approved TOML"

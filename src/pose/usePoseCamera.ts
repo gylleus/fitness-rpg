@@ -15,12 +15,12 @@
  * asynchronous write is exactly what we want.
  */
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Platform } from 'react-native';
 import { useSharedValue } from 'react-native-reanimated';
 import { useFrameOutput, type CameraOrientation } from 'react-native-vision-camera';
 import { useResizer } from 'react-native-vision-camera-resizer';
-import { useTensorflowModel } from 'react-native-fast-tflite';
+import { usePoseModel } from './usePoseModel';
 
 import {
   createKeypointBuffer,
@@ -32,8 +32,12 @@ import {
   type InputRotation,
 } from './model';
 import { KEYPOINT_COUNT, type Keypoint, type PoseFrame } from './keypoints';
-import { createDetectorState, stepDetector, type DetectorState } from '../reps/detector';
-import { DEFAULT_CONFIG } from '../reps/config';
+import {
+  createHeadDetectorState,
+  stepHeadDetector,
+  HEAD_DEFAULT_CONFIG,
+  type HeadDetectorState,
+} from '../reps/headDetector';
 
 export type PoseSnapshot = {
   keypoints: Keypoint[];
@@ -77,39 +81,26 @@ export function emptySnapshot(): PoseSnapshot {
 export type RepReadout = {
   reps: number;
   partials: number;
-  phase: DetectorState['phase'];
-  elbowAngle: number;
+  phase: HeadDetectorState['phase'];
   tracking: boolean;
-  side: DetectorState['side'];
-  /** Deepest angle of the rep in progress. Infinity between reps. */
-  dipMinAngle: number;
-  /** Whether the body is currently in a pushup position at all. */
+  /** Whether the body is near enough its reference to be counted. */
   inPosition: boolean;
-  /** Calibration progress 0..1 while capturing the reference position. */
+  /** True until the first reference has been captured from stillness. */
   calibrating: boolean;
+  /** Stillness-hold progress 0..1 while capturing or re-capturing a reference. */
   calProgress: number;
-  /** Demonstrating one rep so the usable range of motion can be measured. */
-  measuringRange: boolean;
-  topElbowAngle: number;
-  bottomElbowAngle: number;
-  /** How far the torso has drifted from the calibrated reference, degrees. */
-  torsoDelta: number;
-  /** Torso length relative to the reference. 1 means unchanged. */
-  scaleRatio: number;
-  upThreshold: number;
-  dipThreshold: number;
-  downThreshold: number;
+  /** Current head displacement from the top reference, in body-scale units. */
+  d: number;
+  /** Adaptive rep depth estimate, in body-scale units. */
+  depthD: number;
+  /** Deepest displacement of the rep in progress, in body-scale units. */
+  maxDThisRep: number;
+  /** Confidence of the head reading, the signal everything runs on. */
+  headScore: number;
   lastRepValid: boolean | null;
+  /** Deepest point of the last rep as a fraction of demonstrated depth. */
   lastRepDepth: number;
-  /** How far the body and hands have moved this rep, and what is required. */
-  bodyTravel: number;
-  handTravel: number;
-  travelNeeded: number;
-  /** Shoulder→hip→knee angle. NaN when the knee is not visible. */
-  bodyLine: number;
-  shoulderScore: number;
-  hipScore: number;
-  kneeScore: number;
+  lastRepDurationMs: number;
   /** Raw frame geometry, to expose any buffer/preview orientation mismatch. */
   frameWidth: number;
   frameHeight: number;
@@ -123,30 +114,17 @@ function emptyReadout(): RepReadout {
     reps: 0,
     partials: 0,
     phase: 'unknown',
-    elbowAngle: NaN,
     tracking: false,
-    side: null,
-    dipMinAngle: Infinity,
     inPosition: false,
     calibrating: true,
     calProgress: 0,
-    measuringRange: false,
-    topElbowAngle: NaN,
-    bottomElbowAngle: NaN,
-    torsoDelta: NaN,
-    scaleRatio: NaN,
-    upThreshold: NaN,
-    dipThreshold: NaN,
-    downThreshold: NaN,
+    d: NaN,
+    depthD: NaN,
+    maxDThisRep: 0,
+    headScore: 0,
     lastRepValid: null,
     lastRepDepth: NaN,
-    bodyTravel: 0,
-    handTravel: 0,
-    travelNeeded: NaN,
-    bodyLine: NaN,
-    shoulderScore: 0,
-    hipScore: 0,
-    kneeScore: 0,
+    lastRepDurationMs: NaN,
     frameWidth: 0,
     frameHeight: 0,
     lastRejection: null,
@@ -165,7 +143,16 @@ const TIMESTAMP_TO_MS = Platform.OS === 'android' ? 1e-6 : 1e3;
 
 /** State held on the camera runtime, keyed off its global. */
 type RuntimeState = {
-  detector: DetectorState;
+  /**
+   * Which detector shape `detector` holds. The camera runtime's global outlives
+   * a JS reload, so after swapping detector implementations the old state
+   * object is still there — same field names, wrong shape — and the new
+   * detector reads it as "calibrated, but with no reference" and silently
+   * counts nothing forever. A kind stamp makes stale state detectable.
+   */
+  kind: string;
+  owner: string;
+  detector: HeadDetectorState;
   keypoints: Keypoint[];
   rotated: Uint8Array;
   frame: PoseFrame;
@@ -183,12 +170,10 @@ export type UsePoseCameraOptions = {
 };
 
 export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOptions = {}) {
-  const model = useTensorflowModel(
-    // fast-tflite takes a Metro asset handle, which only require() produces.
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    require('../../assets/models/movenet-thunder-int8.tflite'),
-    ['android-gpu'],
-  );
+  // Camera runtime globals can survive navigation. A new workout owns fresh
+  // counters; a React re-render within the same workout keeps them intact.
+  const [owner] = useState(() => `camera-${Date.now()}-${Math.random().toString(36).slice(2)}`);
+  const model = usePoseModel();
 
   const { resizer } = useResizer({
     width: MODEL_INPUT_SIZE,
@@ -236,9 +221,11 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
         // silently reset — at the HUD's refresh rate.
         const g = globalThis as unknown as { __poseState?: RuntimeState };
         let st = g.__poseState;
-        if (st == null) {
+        if (st == null || st.kind !== 'head-v3' || st.owner !== owner) {
           st = {
-            detector: createDetectorState(),
+            kind: 'head-v3',
+            owner,
+            detector: createHeadDetectorState(),
             keypoints: createKeypointBuffer(),
             rotated: new Uint8Array(MODEL_INPUT_SIZE * MODEL_INPUT_SIZE * MODEL_CHANNELS),
             frame: { t: 0, keypoints: [] },
@@ -254,7 +241,11 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
         const epoch = resetEpoch.value;
         if (epoch !== st.resetEpoch) {
           st.resetEpoch = epoch;
-          st.detector = createDetectorState();
+          const previous = st.detector;
+          st.detector = createHeadDetectorState();
+          // Recalibrate position/depth without discarding this workout's effort.
+          st.detector.reps = previous.reps;
+          st.detector.partials = previous.partials;
           st.lastRejection = null;
         }
 
@@ -278,7 +269,7 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
           unrotateKeypoints(st.keypoints, rotation);
 
           st.frame.t = frame.timestamp * TIMESTAMP_TO_MS;
-          const events = stepDetector(st.detector, st.frame, DEFAULT_CONFIG);
+          const events = stepHeadDetector(st.detector, st.frame, HEAD_DEFAULT_CONFIG);
 
           for (let i = 0; i < events.length; i++) {
             const e = events[i];
@@ -314,30 +305,17 @@ export function usePoseCamera({ rotation = 0, frameStride = 1 }: UsePoseCameraOp
             reps: d.reps,
             partials: d.partials,
             phase: d.phase,
-            elbowAngle: d.elbowAngle,
             tracking: d.tracking,
-            side: d.side,
-            dipMinAngle: d.dipMinAngle,
             inPosition: d.inPosition,
-            calibrating: d.mode === 'calibrating',
+            calibrating: !d.calibrated,
             calProgress: d.calProgress,
-            measuringRange: d.mode === 'measuringRange',
-            topElbowAngle: d.calibration?.topElbowAngle ?? NaN,
-            bottomElbowAngle: d.calibration?.bottomElbowAngle ?? NaN,
-            torsoDelta: d.torsoDelta,
-            scaleRatio: d.scaleRatio,
-            upThreshold: d.upThreshold,
-            dipThreshold: d.dipThreshold,
-            downThreshold: d.downThreshold,
+            d: d.d,
+            depthD: d.depthD,
+            maxDThisRep: d.maxDThisRep,
+            headScore: d.headScore,
             lastRepValid: d.lastRepValid,
             lastRepDepth: d.lastRepDepth,
-            bodyTravel: d.bodyTravel,
-            handTravel: d.handTravel,
-            travelNeeded: (d.calibration?.torsoLength ?? NaN) * DEFAULT_CONFIG.minBodyTravelFraction,
-            bodyLine: d.bodyLine,
-            shoulderScore: d.shoulderScore,
-            hipScore: d.hipScore,
-            kneeScore: d.kneeScore,
+            lastRepDurationMs: d.lastRepDurationMs,
             frameWidth: frame.width,
             frameHeight: frame.height,
             lastRejection: st.lastRejection,

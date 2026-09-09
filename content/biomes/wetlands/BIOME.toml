@@ -1,0 +1,137 @@
+schema_version = 1
+id = "wetlands"
+name = "Wetlands"
+short_description = "A hostile expanse of dark pools, reed beds, sinking paths, and abandoned buildings, where prowling creatures make permanent habitation impossible."
+description = """
+The Wetlands stretch across low, waterlogged country where slow rivers lose their banks and roads gradually disappear beneath the mud. Dark pools lie between reed beds, peat banks, and islands of coarse grass. Scattered willows lean over the water, their exposed roots gripping the banks like knotted fingers. The horizon is broad but often obscured by ground fog, with crooked rooftops and dead trees appearing as isolated silhouettes.
+
+Travel follows raised earth causeways, narrow plank walkways, and channels marked with wooden stakes. Everything sinks eventually. Bridges tilt, fence posts vanish inch by inch, and old stone buildings stand with their doors permanently underwater. Weathered markers still indicate roads that have required a boat for several generations.
+
+The remains of former habitation rot along the waterways. Empty cottages sag on timber stilts, their roofs split and their hearths cold. Torn fishing nets hang from collapsed racks, wicker traps fill with silt, and abandoned boats knock against the remains of their landings. Hostile creatures prowl the reeds and ruined structures; the Wetlands are too inhospitable for anyone to make a home here.
+
+Floodwater exposes old foundations and burial stones, then conceals them again. On still evenings, bell notes carry across the marsh from places where no towers remain. Beneath the rustle of reeds and the drip of water from rotten timber, the empty landscape feels watchful.
+"""
+
+[setting]
+terrain = "Low, waterlogged ground cut by slow rivers and shallow channels. Dark peat pools, dense reed beds, coarse grass islands, scattered willows, and exposed roots break up the open water. Sinking causeways and damaged plank walkways connect patches of firmer ground; old roads and building entrances disappear below the waterline."
+inhabitants = "Hostile creatures prowl the waterways, reed beds, and abandoned structures. Bog Toads lie low along muddy banks and reed-fringed pools. There are no settled residents, working villages, or staffed inns. Cottages, boats, peat workings, and fishing equipment are remnants of former habitation."
+supernatural = "Bell notes sometimes carry across still water from places where no towers remain. Floods reveal and conceal old foundations and burial stones, leaving the source of the sound uncertain."
+environmental_pressure_and_humor = "Soft ground, concealed water depth, rotten crossings, poor visibility, and prowling enemies make travel dangerous and permanent habitation untenable. Dry humor lies in obsolete practical details: road markers still point confidently into open water, while layers of old repairs sink along with the structures they once supported."
+
+[visual]
+lighting = "Soft gray daylight beneath low cloud, with subdued reflections across dark water. Ground fog obscures distant banks and leaves crooked roofs and dead trees as isolated silhouettes. Empty cottages have cold hearths, and the remaining lanterns are unlit. Rust provides a restrained warm accent."
+materials = ["dark peat", "slick mud", "waterlogged gray timber", "coarse yellow reeds", "mossy stone", "tarnished iron", "rust", "rotting rope", "frayed netting", "silt-coated wicker", "wet bark"]
+weather = "Persistent damp, low cloud, intermittent drizzle, and mist that gathers close to the water, especially toward evening."
+ambient_sounds = ["water dripping from rotten timber", "reeds rustling against one another", "distant frogs", "the soft knock of abandoned boats against broken landings", "water lapping at submerged walls", "occasional distant bell notes with no visible source"]
+ambient_motion = "Reeds bend in slow gusts, duckweed shifts across shallow pools, loose cloth stirs on channel markers, and half-sunken boats rock against old posts. Thin ground fog drifts between banks and through abandoned buildings."
+
+[[visual.palette]]
+name = "Peat brown"
+color = "#3E3029"
+
+[[visual.palette]]
+name = "Dull olive"
+color = "#62684A"
+
+[[visual.palette]]
+name = "Reed yellow"
+color = "#A29665"
+
+[[visual.palette]]
+name = "Weathered timber gray"
+color = "#77776B"
+
+[[visual.palette]]
+name = "Dark water"
+color = "#252F2D"
+
+[[visual.palette]]
+name = "Ground fog"
+color = "#ADB2A7"
+
+[[visual.palette]]
+name = "Muted rust"
+color = "#8A543C"
+
+[generation]
+composition = "Broad stretches of low water and reeds establish an open, horizontal landscape. Broken walkways and strips of raised earth form the visible travel route, bordered by shallow pools, exposed roots, and flood debris. Scattered willows and abandoned cottages interrupt the middle distance, while fog softens distant rooftops and dead trees. Ruined structures and neglected equipment convey former habitation; there are no active settlements, occupied homes, maintained fishing operations, or welcoming inn lights."
+
+[[sites]]
+id = "wetlands_abandoned_stilt_cottages"
+name = "Abandoned stilt cottages"
+description = "A small cluster of empty timber cottages stands unevenly above the water on rotting stilts and raised foundations. Moss weighs down split roofs; narrow porches sag, and broken ladders descend into the mud. Old repairs overlap beneath newer damage. The interiors are dark, with cold hearths and collapsed floorboards."
+
+[[sites]]
+id = "wetlands_disused_peat_workings"
+name = "Disused peat workings"
+description = "Rectangular cuts in a low bank have filled with dark water. Nearby stacks of peat blocks slump beneath the remnants of patched covers, their once-straight edges softened by rain. Reeds grow through the narrow strips of ground between the flooded cuts."
+
+[[sites]]
+id = "wetlands_drowned_masonry"
+name = "Drowned masonry"
+description = "Half-submerged boundary walls and small stone shrines emerge from shallow pools. Worn steps descend into water that hides their lower ends. Silt collects along exposed ledges, while old foundations and tilted burial stones appear where the water has receded."
+
+[[props]]
+id = "wetlands_plank_walkway"
+name = "Uneven plank walkway"
+description = "Bowed gray boards rest on posts of unequal height. Mismatched patches show repeated attempts to keep the crossing usable, but several planks have split or fallen away, exposing shallow water and mud below."
+
+[[props]]
+id = "wetlands_channel_marker"
+name = "Channel marker"
+description = "A leaning wooden stake carries a faded strip of cloth and a series of carved water-level marks. Its lower half is dark with moisture, and fragments of weed cling around the latest flood line."
+
+[[props]]
+id = "wetlands_obsolete_road_marker"
+name = "Obsolete road marker"
+description = "A weathered direction board remains firmly attached to a crooked post. Its arrow points along the vanished course of a road, directly into an uninterrupted stretch of dark water."
+
+[[props]]
+id = "wetlands_abandoned_boat"
+name = "Abandoned flat-bottomed boat"
+description = "A broad, shallow wooden hull sits partly flooded beside a broken landing. Mud streaks its sides; a worn pole, coils of rotting rope, and a battered bailing bucket lie among leaves and standing water inside."
+
+[[props]]
+id = "wetlands_wicker_fish_traps"
+name = "Discarded wicker traps"
+description = "Long eel baskets and rounded fish traps lie tipped against the bank. Their wicker ribs are stained with silt, split at the narrow openings, and threaded with young reeds."
+
+[[props]]
+id = "wetlands_collapsed_net_rack"
+name = "Collapsed net rack"
+description = "Torn fishing nets hang in heavy folds from a wooden rack with one broken upright. Frayed mesh trails into the water, holding leaves, twigs, and patches of green growth."
+
+[[props]]
+id = "wetlands_unlit_lantern"
+name = "Abandoned lantern"
+description = "A small iron lantern hangs beneath a decaying eave or beside an empty landing. Rust gathers around the hinges, cloudy glass obscures its empty interior, and one cracked pane admits damp air. No flame burns inside."
+
+[[decorations]]
+id = "wetlands_reed_clump"
+name = "Reeds and rushes"
+description = "Dense stems of dull olive and straw yellow grow along the margins of pools. Bent stalks cross above the water, and dead blades collect in tangled mats around their bases."
+
+[[decorations]]
+id = "wetlands_duckweed"
+name = "Drifting duckweed"
+description = "Small muted green leaves gather in irregular rafts across sheltered water. Narrow black gaps and curved breaks interrupt the surface where water moves around posts and roots."
+
+[[decorations]]
+id = "wetlands_willow_roots"
+name = "Exposed willow roots"
+description = "Thick, knotted roots grip an eroded peat bank beneath a leaning willow. Wet bark darkens their undersides, while coarse grass and stranded reeds catch in the spaces between them."
+
+[[decorations]]
+id = "wetlands_shelf_fungi"
+name = "Pale shelf fungi"
+description = "Small cream and gray fungal shelves crowd the shaded sides of rotten posts and fallen branches. Their layered edges stand out against dark, saturated wood."
+
+[[decorations]]
+id = "wetlands_flood_debris"
+name = "Flood debris"
+description = "Branches, broken fence rails, and scraps of faded fabric lodge against roots and supports above the current waterline. Mud coats the lower pieces, marking the height of an earlier flood."
+
+[[decorations]]
+id = "wetlands_sinking_fence"
+name = "Sinking fence remnants"
+description = "A short run of crooked posts emerges from coarse grass and shallow water. A few warped rails remain attached, descending toward the mud until the final section disappears beneath it."

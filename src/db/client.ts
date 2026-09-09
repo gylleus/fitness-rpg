@@ -5,7 +5,7 @@
  */
 
 import { drizzle } from 'drizzle-orm/expo-sqlite';
-import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
+import { migrate, useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
 import migrations from './migrations/migrations';
 import { openDatabaseSync } from 'expo-sqlite';
 import * as schema from './schema';
@@ -17,9 +17,15 @@ const expoDb = openDatabaseSync(DATABASE_NAME, { enableChangeListener: true });
 // Foreign keys are OFF by default in SQLite, so the cascade on sets.session_id
 // would silently not fire without this.
 expoDb.execSync('PRAGMA foreign_keys = ON;');
+expoDb.execSync('PRAGMA journal_mode = WAL;');
+expoDb.execSync('PRAGMA busy_timeout = 5000;');
 
 export const db = drizzle(expoDb, { schema });
 export type Database = typeof db;
+let migrationPromise: Promise<void> | null = null;
+export function ensureDatabaseReady() {
+  return migrationPromise ??= migrate(db, migrations).catch(error => { migrationPromise = null; throw error; });
+}
 
 /**
  * Runs pending migrations on mount and reports progress.

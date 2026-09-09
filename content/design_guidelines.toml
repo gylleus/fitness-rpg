@@ -1,0 +1,70 @@
+# Agreed creative direction and content-authoring conventions.
+# Consult this file before extending settings, enemies, or visual descriptions.
+# Concrete enemy definitions and their art fields remain in the content catalog.
+schema_version = 1
+
+[setting]
+player_identity = "A wanderer or adventurer traveling through a worn fantasy world."
+focus = "Places, inhabitants, everyday life, creatures, and the experience of wandering."
+story_and_title = "The campaign story and game title are intentionally undecided."
+inhabitants = ["skeletons", "necromancers", "liches", "goblins", "dwarves", "humans", "uncanny beasts", "spirits", "plant creatures", "constructs"]
+world_character = "Old roads, practical settlements, suspicious inns, ancient ruins, worked stone, muddy paths, and equipment that has been repaired many times. Magic has a physical presence in bodies, materials, tools, and places."
+communities = "Enemy entries describe hostile individuals and creatures. Humans, goblins, and dwarves also have ordinary occupations and peaceful communities."
+
+[tone]
+genre = "Dark fantasy with understated comedic elements."
+mood = "Weathered, unsettling, macabre, and grounded in ordinary physical details."
+humor = "Dry humor comes from awkward proportions, stubborn habits, minor inconveniences, and creatures taking themselves seriously. Threatening creatures remain threatening."
+humor_examples = ["A goblin officiously collecting tolls with a cooking pot for a helmet.", "A lich fussing over a loose finger joint.", "An undead worker continuing an impractical work habit."]
+avoid = ["a uniformly cheerful world", "cute mascot treatment", "constant slapstick", "random joke accessories", "humor that erases the threat", "graphic gore as the main source of darkness"]
+
+[visual_style]
+approach = "Stylized dark fantasy with slightly exaggerated anatomy, distinct silhouettes, and a tangible sense of weight. Neither hyper-realistic nor extremely cartoonish."
+materials = ["worn leather", "patched coarse cloth", "tarnished metal", "weathered bone", "wet bark", "pitted stone", "mud", "soot", "frost", "salt", "fungal growth"]
+color = "Muted earth colors and biome-specific palettes, with restrained accents for magic, heat, and unusual materials."
+detail = "Anatomy, proportions, facial features, surface texture, clothing, equipment, wear, asymmetry, and physical posture distinguish each creature."
+regional_identity = "Biomes have distinct terrain, lighting, materials, occupations, props, and decorations while sharing the same underlying tone."
+
+[enemy_descriptions]
+field = "visual_description"
+location = "A top-level string on each enemy definition, alongside description and quirk."
+purpose = "Detailed prose describing what the creature itself looks like, usable by artists, generation tools, and descriptive interfaces."
+voice = "Concrete, third-person, present-tense description."
+coverage = ["body shape and proportions", "head, face, and eyes", "skin, fur, bone, or other body material", "clothing and armor", "equipment and how it is worn or carried", "colors and textures", "damage, age, dirt, and repairs", "visible stance, expression, and distinguishing details"]
+depth = "Enough specific detail to form a clear picture of an individual creature. Roughly two paragraphs is a useful starting point; substance matters more than a fixed word count."
+separation = "The shorter description provides bestiary context. The visual table retains structured appearance, equipment, palette, scale, and animation details. Art and generation instructions belong in those dedicated fields, outside visual_description."
+avoid = ["imperative directions such as Draw, Make, Render, or Use", "instructions to an artist or generation model", "camera, framing, resolution, or sprite-production advice inside visual_description", "vague praise in place of physical detail", "new equipment or anatomy that contradicts the existing definition"]
+example = "An enormous shaggy bear stands on two broad hind paws. Coarse umber fur hangs in uneven clumps around its shoulders and belly. Both eyes are completely matte black, without whites, irises, pupils, or any glow."
+
+[reference_creature]
+concept = "An upright black-eyed bear; a style reference, not a registered enemy."
+role = "Reference example for the balance of unsettling anatomy, physical weight, and understated humor."
+requirements = ["a bear standing upright on two hind legs", "huge hanging forearms and broad clawed paws", "solid matte-black eyes without whites, irises, pupils, or glow", "a heavy horizontal arm swipe", "bear anatomy with an unnervingly casual, almost human stance", "no clothing or boxing equipment"]
+scope = "These anatomical and eye requirements belong to this bear; other creatures keep their own established designs."
+
+[content_structure]
+format = "TOML for authored setting and enemy data. Markdown README files explain the format."
+manifest = "content/catalog.toml"
+field_contract = "content/README.md"
+biome_files = ["content/biomes/<biome_id>/BIOME.toml", "content/biomes/<biome_id>/ENEMIES.toml"]
+biome_content = "Structured descriptions, terrain, inhabitants, atmosphere, visual direction, sites, props, and decorations. Sites, props, and decorations have individual IDs, names, and descriptions."
+enemy_ownership = "Each enemy has one canonical definition. Biome encounters reference stable enemy IDs; shared descriptions and stats resolve from the definition without duplicated copies."
+identifiers = "Stable lowercase snake_case IDs survive display-name changes."
+expansion = "Additional biomes and enemies can be registered without treating current roster counts as permanent limits."
+curation = "Develop environments and their enemy membership with the user, within the scope under discussion. Do not automatically repopulate a broad roster or restore discarded designs."
+validation_tool = "scripts/content.py"
+export = "The content tool exports resolved JSON. Each encounter includes the full enemy object, including enemy.visual_description."
+
+[gameplay_boundary]
+format = "A side-scrolling game in which enemies spawn randomly as the player walks through a biome."
+encounters = "Each biome's encounters list identifies enemies eligible for random spawning. Use enemy_id references without location-specific context. List order does not determine spawn order or probability."
+scenery = "Biome terrain, sites, props, and decorations provide visual setting. Enemy spawning is independent of scenery and does not require a particular pool, building, prop, or local habitat."
+stats = "Health, attack, gold, and XP are explicit numeric fields. New enemy stats are provisional until balanced."
+appearance_and_rules = "Descriptive anatomy, armor, magic, and environmental hazards do not automatically create combat abilities, resistances, status effects, or stat multipliers."
+runtime = "Authored content is separate from runtime integration; adding a description does not itself change gameplay."
+
+[sprite_conventions]
+source = "Saved sprite conventions and the visual fields on future curated enemy definitions."
+current_defaults = "Isolated full-body characters on transparency, facing left with a slight three-quarter view, complete limbs and equipment inside the frame, and readable shapes suitable for a side-scrolling game."
+separate_poses = "Idle and attack directions describe separate assets or animation states."
+scope = "These production conventions guide sprite work; they are not prose to insert into visual_description."

@@ -58,6 +58,13 @@ This protocol applies when ending a Beads implementation workflow. It is subordi
 <!-- END BEADS INTEGRATION -->
 
 
+## Enemy Design
+
+For `design-enemy` requests or collaborative biome enemy design, read and follow
+[skills/design-enemy/SKILL.md](skills/design-enemy/SKILL.md). It supports biome
+suggestions, custom concepts, appearance and attack review, and saving accepted
+enemies to TOML. Example: `Use design-enemy for Wetlands`.
+
 ## Build & Test
 
 _Add your build and test commands here_

@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { useRouter } from 'expo-router';
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useNavigation, useRouter } from 'expo-router';
+import { usePreventRemove } from 'expo-router/react-navigation';
 import { useKeepAwake } from 'expo-keep-awake';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   Camera,
   useCameraDevice,
@@ -15,19 +17,34 @@ import { usePoseCamera } from '../src/pose/usePoseCamera';
 import { SkeletonOverlay } from '../src/ui/SkeletonOverlay';
 import type { InputRotation } from '../src/pose/model';
 import { OVERLAY_TRANSFORMS } from '../src/pose/orientation';
-import { DEFAULT_CONFIG } from '../src/reps/config';
+import { HEAD_DEFAULT_CONFIG } from '../src/reps/headDetector';
+import { db } from '../src/db/client';
+import { getPushupUnits, savePushupWorkout } from '../src/db/game';
+import { useGame } from '../src/game/GameProvider';
+import { PUSHUP_UNITS } from '../src/game/items';
+import { Button, Card, colors, PageHeading, Screen, ui } from '../src/ui/theme';
 
 const ROTATIONS: InputRotation[] = [0, 90, 180, 270];
 
 export default function Session() {
   const router = useRouter();
+  const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
+  const { perform, foreground } = useGame();
+  const [startedAt] = useState(() => Date.now());
+  const [sourceKey] = useState(() => `pushup-${Date.now()}-${Math.random().toString(36).slice(2)}`);
+  const saved = useRef(false);
+  const [summary, setSummary] = useState<{ full: number; partial: number; credited: number } | null>(null);
+  const [showDebug, setShowDebug] = useState(false);
   useKeepAwake();
 
   const { hasPermission, requestPermission } = useCameraPermission();
 
-  // Back camera is the better sensor and the one used for real sets with the
-  // phone on the floor. Front is for framing yourself while setting up.
-  const [position, setPosition] = useState<TargetCameraPosition>('back');
+  // Front camera by default: it is the only way to see the screen — the rep
+  // count, the calibration prompts, and the "can't see you" alert — while
+  // actually doing pushups. The back camera's better sensor is worthless if
+  // using it means exercising blind.
+  const [position, setPosition] = useState<TargetCameraPosition>('front');
   const device = useCameraDevice(position);
 
   // Which mapping puts the drawn skeleton on the actual body. Derived from
@@ -73,22 +90,17 @@ export default function Session() {
     detected: 0,
     partials: 0,
     phase: 'unknown' as string,
-    angle: NaN,
-    depth: NaN,
+    d: NaN,
+    depthD: NaN,
+    maxD: 0,
+    headScore: 0,
     tracking: false,
     rejection: null as string | null,
     inPosition: false,
     calibrating: true,
     calProgress: 0,
-    measuringRange: false,
-    top: NaN,
-    bottom: NaN,
-    delta: NaN,
-    scale: NaN,
-    down: NaN,
-    bodyTravel: 0,
-    handTravel: 0,
-    travelNeeded: NaN,
+    lastValid: null as boolean | null,
+    lastDepth: NaN,
   });
 
   useEffect(() => {
@@ -116,7 +128,7 @@ export default function Session() {
       // Log once a second so a closed posture gate can be diagnosed from real
       // numbers rather than guessed at. Reads as one line in the Metro output.
       const now = Date.now();
-      if (now - lastLog.current > 1000) {
+      if (__DEV__ && now - lastLog.current > 1000) {
         lastLog.current = now;
         // Also dump the raw model output, so a detector that bails out early can
         // be told apart from a model that is producing nothing usable.
@@ -127,17 +139,14 @@ export default function Session() {
           .map(([i, v]) => `${i}:${v.toFixed(2)}`)
           .join(' ');
         console.log(
-          `[posture] inPosition=${r.inPosition} ` +
-            `elbow=${fmt(r.elbowAngle)} side=${r.side} phase=${r.phase} ` +
+          `[head] inPosition=${r.inPosition} phase=${r.phase} ` +
             `cal=${r.calibrating ? r.calProgress.toFixed(2) : 'done'} ` +
-            `delta=${fmt(r.torsoDelta)} scale=${fmt(r.scaleRatio, 2)} ` +
-            `th(up/dip/down)=${fmt(r.upThreshold)}/${fmt(r.dipThreshold)}/${fmt(r.downThreshold)} ` +
-            `travel body=${r.bodyTravel.toFixed(3)}/${fmt(r.travelNeeded, 3)} hand=${r.handTravel.toFixed(3)} ` +
-            `deepest=${fmt(r.dipMinAngle)} lastRep=${r.lastRepValid === null ? '-' : r.lastRepValid ? 'valid' : 'partial'}@${fmt(r.lastRepDepth)} ` +
-            `reps=${r.reps}/${r.partials} ` +
+            `d=${fmt(r.d, 2)} depthD=${fmt(r.depthD, 2)} maxD=${r.maxDThisRep.toFixed(2)} ` +
+            `headScore=${r.headScore.toFixed(2)} ` +
+            `lastRep=${r.lastRepValid === null ? '-' : r.lastRepValid ? 'valid' : 'shallow'}@${fmt(r.lastRepDepth, 2)} ` +
+            `rej=${r.lastRejection ?? '-'} reps=${r.reps}/${r.partials} ` +
             `| model: best3=${top} nose=${kp[0] ? kp[0].score.toFixed(2) : 'n/a'} ` +
-            `Lsh=${kp[5] ? kp[5].score.toFixed(2) : 'n/a'} Lel=${kp[7] ? kp[7].score.toFixed(2) : 'n/a'} ` +
-            `Lwr=${kp[9] ? kp[9].score.toFixed(2) : 'n/a'} Lhip=${kp[11] ? kp[11].score.toFixed(2) : 'n/a'} ` +
+            `Lsh=${kp[5] ? kp[5].score.toFixed(2) : 'n/a'} ` +
             `| xy0=${kp[0] ? kp[0].x.toFixed(2) + ',' + kp[0].y.toFixed(2) : 'n/a'} ` +
             `ms=${Math.round(snap.inferenceMs)} dt=${Math.round(snap.frameIntervalMs)}ms ` +
             `fps=${snap.frameIntervalMs > 0 ? (1000 / snap.frameIntervalMs).toFixed(1) : '--'} ` +
@@ -150,26 +159,50 @@ export default function Session() {
         detected: r.reps,
         partials: r.partials,
         phase: r.phase,
-        angle: r.elbowAngle,
-        depth: r.dipMinAngle,
+        d: r.d,
+        depthD: r.depthD,
+        maxD: r.maxDThisRep,
+        headScore: r.headScore,
         tracking: r.tracking,
         rejection: r.lastRejection,
         inPosition: r.inPosition,
         calibrating: r.calibrating,
         calProgress: r.calProgress,
-        measuringRange: r.measuringRange,
-        top: r.topElbowAngle,
-        bottom: r.bottomElbowAngle,
-        delta: r.torsoDelta,
-        scale: r.scaleRatio,
-        down: r.downThreshold,
-        bodyTravel: r.bodyTravel,
-        handTravel: r.handTravel,
-        travelNeeded: r.travelNeeded,
+        lastValid: r.lastRepValid,
+        lastDepth: r.lastRepDepth,
       });
     }, 100);
     return () => clearInterval(id);
   }, [pose, readout, manualAdjustment]);
+
+  const finish = () => {
+    if (saved.current) return;
+    saved.current = true;
+    const full = Math.max(0, readout.value.reps + manualAdjustment.value);
+    const partial = readout.value.partials;
+    let credited = 0;
+    const success = perform(() => {
+      const before = getPushupUnits(db);
+      savePushupWorkout(db, { sourceKey, startedAt, endedAt: Date.now(), validReps: full, partialReps: partial });
+      credited = (getPushupUnits(db) - before) / PUSHUP_UNITS;
+    });
+    if (success) setSummary({ full, partial, credited }); else saved.current = false;
+  };
+
+  usePreventRemove(!summary && (liveReps > 0 || reps.partials > 0), ({ data: actionData }) => {
+    Alert.alert('Save your pushups?', 'Finish this workout to add its reps to your history and your attack stockpile.', [
+      { text: 'Keep training', style: 'cancel' },
+      { text: 'Discard', style: 'destructive', onPress: () => navigation.dispatch(actionData.action) },
+      { text: 'Save workout', onPress: finish },
+    ]);
+  });
+
+  if (summary) return <Screen>
+    <PageHeading eyebrow="Training / workout saved" title="A little stronger." />
+    <Card><Text style={ui.label}>Pushups completed</Text><Text style={[ui.number, { fontSize: 64 }]}>{summary.full}</Text><Text style={[ui.heading, { color: colors.green }]}>+{summary.credited} pushups stockpiled</Text><Text style={ui.body}>{summary.partial} shallow reps recorded separately. Your effort is saved on this phone.</Text><Text style={ui.small}>Each attack uses one pushup before item savings. Unused pushups carry over; your workout history always stays.</Text></Card>
+    <Button label="Return to camp" onPress={() => router.replace('/')} />
+    <Button secondary label="Take this power to the dungeon" onPress={() => router.replace('/dungeon')} />
+  </Screen>;
 
   if (!hasPermission) {
     return (
@@ -178,6 +211,7 @@ export default function Session() {
         <Pressable style={styles.button} onPress={() => void requestPermission()}>
           <Text style={styles.buttonText}>Grant permission</Text>
         </Pressable>
+        <Button secondary label="Back to camp" onPress={() => router.replace('/')} />
       </Centered>
     );
   }
@@ -192,6 +226,7 @@ export default function Session() {
         >
           <Text style={styles.buttonText}>Try the other camera</Text>
         </Pressable>
+        <Button secondary label="Back to camp" onPress={() => router.replace('/')} />
       </Centered>
     );
   }
@@ -201,7 +236,7 @@ export default function Session() {
       <Camera
         style={StyleSheet.absoluteFill}
         device={device}
-        isActive
+        isActive={foreground}
         outputs={[previewOutput, frameOutput]}
         resizeMode="cover"
         mirrorMode="auto"
@@ -209,42 +244,33 @@ export default function Session() {
       {/* The transform covers mirroring too, so no separate mirror flag. */}
       <SkeletonOverlay pose={pose} transform={overlayTransform} />
 
-      <View style={styles.hud} pointerEvents="box-none">
-        <View style={styles.debugPanel}>
+      <View style={[styles.hud, { paddingTop: insets.top + 12, paddingBottom: insets.bottom + 12 }]} pointerEvents="box-none">
+        {showDebug ? <View style={styles.debugPanel}>
           <Text style={styles.debugText}>
             phase: {reps.phase}{reps.tracking ? '' : '  (no tracking)'}
-          </Text>
-          <Text style={styles.debugText}>
-            torso drift: {fmtDeg(reps.delta)} (max {DEFAULT_CONFIG.torsoToleranceDeg}°){'  '}
-            scale: {Number.isFinite(reps.scale) ? reps.scale.toFixed(2) : '--'}
           </Text>
           <Text style={styles.debugText}>
             position: {reps.calibrating ? 'CALIBRATING' : reps.inPosition ? 'OK' : 'LOST'}
           </Text>
           <Text style={styles.debugText}>
-            elbow: {Number.isNaN(reps.angle) ? '--' : Math.round(reps.angle)}°
+            head depth: {fmt(reps.d, 2)}{'  '}demo: {fmt(reps.depthD, 2)}
           </Text>
           <Text style={styles.debugText}>
-            deepest: {Number.isFinite(reps.depth) ? Math.round(reps.depth) + '°' : '--'}
-            {'  '}need &lt;= {fmtDeg(reps.down)}
+            this rep: {reps.maxD > 0 && reps.depthD > 0 ? (reps.maxD / reps.depthD).toFixed(2) : '--'}
+            {'  '}(full ≥ {HEAD_DEFAULT_CONFIG.fullDepthFraction})
           </Text>
           <Text style={styles.debugText}>
-            range: {fmtDeg(reps.top)} → {fmtDeg(reps.bottom)}
+            last rep: {reps.lastValid === null ? '--' : reps.lastValid ? 'full' : 'shallow'}
+            {Number.isFinite(reps.lastDepth) ? ` @ ${Math.round(reps.lastDepth * 100)}%` : ''}
           </Text>
           <Text style={styles.debugText}>
-            body moved: {reps.bodyTravel.toFixed(3)}{'  '}need {fmt(reps.travelNeeded, 3)}
-          </Text>
-          <Text style={styles.debugText}>
-            hands moved: {reps.handTravel.toFixed(3)}
-            {reps.handTravel > reps.bodyTravel ? '  ← exceeds body!' : ''}
+            head confidence: {Math.round(reps.headScore * 100)}%
           </Text>
           {reps.rejection ? (
             <Text style={styles.warnText}>
-              rejected: {reps.rejection === 'noMovement'
-                ? 'body did not move'
-                : reps.rejection === 'handsMoved'
-                  ? 'hands moved, not a pushup'
-                  : reps.rejection}
+              rejected: {reps.rejection === 'wanderedOff'
+                ? 'you left the pushup position'
+                : reps.rejection}
             </Text>
           ) : null}
           <Text style={styles.debugText}>model: {modelState}</Text>
@@ -258,7 +284,7 @@ export default function Session() {
           <Text style={styles.debugText}>best score: {debug.best}%</Text>
           <Text style={styles.debugText}>camera: {position}</Text>
           {modelError ? <Text style={styles.errorText}>{String(modelError)}</Text> : null}
-        </View>
+        </View> : <View style={styles.debugPanel}><Text style={styles.buttonText}>PUSHUPS → TODAY&apos;S ATTACK</Text><Text style={styles.debugText}>Finish to save your workout.</Text>{modelError ? <Text style={styles.errorText}>{String(modelError)}</Text> : null}</View>}
 
         <View style={styles.counterWrap} pointerEvents="none">
           {debug.best >= 35 && debug.margin < 0.04 ? (
@@ -273,28 +299,23 @@ export default function Session() {
               Camera can&apos;t see a person ({debug.best}% confidence).{'\n'}
               Prop the phone up so it points at you.
             </Text>
-          ) : reps.calibrating ? (
+          ) : reps.calibrating || !reps.inPosition ? (
+            // One prompt for both first capture and re-capture: get set, be
+            // still for a moment, and counting arms itself. No steps to follow.
             <>
               <Text style={styles.prompt}>
-                Step 1 — hold the top of a pushup
+                Get into pushup position and hold still
               </Text>
               <View style={styles.progressTrack}>
                 <View style={[styles.progressFill, { width: `${reps.calProgress * 100}%` }]} />
               </View>
             </>
-          ) : reps.measuringRange ? (
-            <Text style={styles.prompt}>
-              Step 2 — do one slow pushup{'\n'}
-              <Text style={styles.promptSub}>to measure your range in this view</Text>
-            </Text>
-          ) : !reps.inPosition ? (
-            <Text style={styles.prompt}>Back into position</Text>
           ) : null}
           <Text style={styles.counter}>{liveReps}</Text>
           <Text style={styles.counterLabel}>
             reps{reps.partials > 0 ? `   ·   ${reps.partials} shallow` : ''}
           </Text>
-          <AngleBar angle={reps.angle} />
+          <DepthBar d={reps.d} depthD={reps.depthD} />
         </View>
 
         <View style={styles.controls}>
@@ -307,6 +328,10 @@ export default function Session() {
           <Pressable style={[styles.button, styles.secondary]} onPress={resetReps}>
             <Text style={styles.buttonText}>recalibrate</Text>
           </Pressable>
+          <Pressable style={[styles.button, styles.secondary]} onPress={() => setShowDebug(!showDebug)}>
+            <Text style={styles.buttonText}>{showDebug ? 'Hide diagnostics' : 'Camera settings'}</Text>
+          </Pressable>
+          {showDebug && <>
           <Pressable
             style={styles.button}
             onPress={() => setPosition((p) => (p === 'back' ? 'front' : 'back'))}
@@ -325,8 +350,9 @@ export default function Session() {
           >
             <Text style={styles.buttonText}>map: {overlayTransform}</Text>
           </Pressable>
-          <Pressable style={[styles.button, styles.secondary]} onPress={() => router.back()}>
-            <Text style={styles.buttonText}>Finish</Text>
+          </>}
+          <Pressable style={[styles.button, { backgroundColor: '#377c49', minWidth: 150 }]} onPress={finish}>
+            <Text style={styles.buttonText}>Finish & save</Text>
           </Pressable>
         </View>
       </View>
@@ -335,31 +361,30 @@ export default function Session() {
 }
 
 /**
- * Shows the elbow angle against the two thresholds the state machine uses.
+ * Shows head displacement against the completion and full-depth thresholds.
  *
- * This is what makes a miscount diagnosable: if the marker never crosses into
- * the green zone the descent was too shallow, and if it never returns to the top
- * zone the lockout was never reached. Either explains a rep that did not count.
+ * This is what makes a miscount diagnosable: the marker starts in the blue
+ * (top) zone, must reach the green (full depth) zone for a valid rep, and must
+ * return to blue for the rep to complete. Where the marker turns around
+ * explains any rep that scored shallow or did not count.
  */
-function AngleBar({ angle }: { angle: number }) {
-  if (Number.isNaN(angle)) return <View style={styles.bar} />;
-  const MIN = 40;
-  const MAX = 180;
-  const pct = Math.max(0, Math.min(1, (angle - MIN) / (MAX - MIN)));
-  const downPct = (DEFAULT_CONFIG.downAngle - MIN) / (MAX - MIN);
-  const upPct = (DEFAULT_CONFIG.upAngle - MIN) / (MAX - MIN);
+function DepthBar({ d, depthD }: { d: number; depthD: number }) {
+  if (!Number.isFinite(d) || !Number.isFinite(depthD) || depthD <= 0) {
+    return <View style={styles.bar} />;
+  }
+  // Scale the bar to 1.3x the demonstrated depth so overshoot stays visible.
+  const MAX = depthD * 1.3;
+  const pct = Math.max(0, Math.min(1, d / MAX));
+  const topPct = (depthD * HEAD_DEFAULT_CONFIG.completeFraction) / MAX;
+  const fullPct = (depthD * HEAD_DEFAULT_CONFIG.fullDepthFraction) / MAX;
 
   return (
     <View style={styles.bar}>
-      <View style={[styles.zone, { left: '0%', width: `${downPct * 100}%`, backgroundColor: '#16a34a' }]} />
-      <View style={[styles.zone, { left: `${upPct * 100}%`, right: 0, backgroundColor: '#2563eb' }]} />
+      <View style={[styles.zone, { left: '0%', width: `${topPct * 100}%`, backgroundColor: '#2563eb' }]} />
+      <View style={[styles.zone, { left: `${fullPct * 100}%`, right: 0, backgroundColor: '#16a34a' }]} />
       <View style={[styles.marker, { left: `${pct * 100}%` }]} />
     </View>
   );
-}
-
-function fmtDeg(v: number): string {
-  return Number.isFinite(v) ? `${Math.round(v)}°` : '--';
 }
 
 function fmt(v: number, digits = 0): string {
@@ -413,7 +438,6 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   progressFill: { height: '100%', backgroundColor: '#fcd34d' },
-  promptSub: { color: '#fde68a', fontSize: 13, fontWeight: '500' },
   prompt: {
     color: '#fcd34d',
     fontSize: 17,

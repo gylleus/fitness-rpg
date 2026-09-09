@@ -1,0 +1,7 @@
+# Environments and enemy membership are curated with the user.
+schema_version = 1
+
+[[biomes]]
+id = "wetlands"
+biome_file = "biomes/wetlands/BIOME.toml"
+enemies_file = "biomes/wetlands/ENEMIES.toml"

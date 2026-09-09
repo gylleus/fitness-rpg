@@ -66,6 +66,7 @@ export async function listRecentSessions(db: AnyDb, limit = 20): Promise<Session
     .select({
       id: sessions.id,
       exercise: sessions.exercise,
+      sourceKey: sessions.sourceKey,
       startedAt: sessions.startedAt,
       endedAt: sessions.endedAt,
       createdAt: sessions.createdAt,
@@ -95,6 +96,7 @@ export async function getSession(db: AnyDb, id: number): Promise<SessionSummary 
     .select({
       id: sessions.id,
       exercise: sessions.exercise,
+      sourceKey: sessions.sourceKey,
       startedAt: sessions.startedAt,
       endedAt: sessions.endedAt,
       createdAt: sessions.createdAt,

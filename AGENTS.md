@@ -126,6 +126,13 @@ bd prime                # Refresh Beads context
 **Architecture in one line:** issues live in a local Dolt DB; sync uses `refs/dolt/data` on your git remote; `.beads/issues.jsonl` is a passive export. See https://github.com/gastownhall/beads/blob/main/docs/SYNC_CONCEPTS.md for details and anti-patterns.
 <!-- END BEADS CODEX SETUP -->
 
+## Enemy Design
+
+For `design-enemy` requests or collaborative biome enemy design, read and follow
+[skills/design-enemy/SKILL.md](skills/design-enemy/SKILL.md). It supports biome
+suggestions, custom concepts, appearance and attack review, and saving accepted
+enemies to TOML. Example: `Use design-enemy for Wetlands`.
+
 ## Expo
 
 Expo changes fast. Read the exact versioned docs at https://docs.expo.dev/versions/v57.0.0/
