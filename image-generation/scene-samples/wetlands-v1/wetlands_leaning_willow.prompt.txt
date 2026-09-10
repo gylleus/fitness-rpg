@@ -1,0 +1,11 @@
+Use case: stylized-concept. Asset type: one production candidate for a 2D side-scrolling dark-fantasy pixel-art game.
+Style: unmistakable clean pixel art, large deliberate square pixel clusters, hard stepped edges, flat restrained three-tone shading, broad readable silhouettes. Match a chunky 64-pixel-tall barbarian character. Not a finely dithered illustration or a painted image with a pixel filter.
+Lighting: soft gray daylight beneath low cloud; no warm sun, no luminous mist.
+Palette: muted peat brown #3E3029, dull olive #62684A, reed yellow #A29665, weathered gray #77776B, near-black water #252F2D, fog gray #ADB2A7; subdued neighboring shades only.
+View: orthographic side view for a route moving horizontally left to right.
+Asset ID (metadata only): wetlands_leaning_willow
+Subject: A thick willow trunk leans beneath an uneven crown of dull olive leaves. Long, sparse branchlets droop around open gaps in the foliage, their tips browned and ragged. Deep grooves split the wet gray bark, and broad exposed roots spread from the swollen base with dead reeds caught between them.
+Composition: One complete side-view tree with its crown, hanging branchlets and root base inside the transparent canvas. Use broad leaf clusters and a few substantial hanging strands instead of hair-thin twigs. The root contacts form the ground anchor. Keep open gaps in the canopy; no pool, sky, cast-shadow patch or other trees.
+Canvas: portrait 3:4, target logical grid 192x256. A single tree fills approximately 85 percent of the image height with generous clear margins; the visible tree is about 3.4 times the height of a 64-pixel adventurer. The crown is wider than the root base. Leaning wet gray trunk, sparse uneven dull-olive willow canopy, a few broad drooping leaf strands, substantial crooked boughs and knotted exposed roots. Keep foliage chunky and legible.
+Output an RGBA PNG with ACTUAL ALPHA TRANSPARENCY around the whole tree and through canopy gaps. Do not paint any sky, ground plane, water, cast shadow or checkerboard. It is an isolated cutout, not a scene.
+Avoid: characters, enemies, UI, labels, text, borders, watermarks, photorealism, painterly brush texture, smooth gradients, bloom, occupied houses, lit windows, fires, lantern light, bell towers, or a path vanishing into the distance.

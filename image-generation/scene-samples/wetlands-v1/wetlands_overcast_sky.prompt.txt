@@ -1,0 +1,12 @@
+Use case: stylized-concept. Asset type: one production candidate for a 2D side-scrolling dark-fantasy pixel-art game.
+Style: unmistakable clean pixel art, large deliberate square pixel clusters, hard stepped edges, flat restrained three-tone shading, broad readable silhouettes. Match a chunky 64-pixel-tall barbarian character. Not a finely dithered illustration or a painted image with a pixel filter.
+Lighting: soft gray daylight beneath low cloud; no warm sun, no luminous mist.
+Palette: muted peat brown #3E3029, dull olive #62684A, reed yellow #A29665, weathered gray #77776B, near-black water #252F2D, fog gray #ADB2A7; subdued neighboring shades only.
+View: orthographic side view for a route moving horizontally left to right.
+Asset ID (metadata only; do not write it on the image): wetlands_overcast_sky
+Subject: A low ceiling of gray-green cloud hangs over the marsh. Broad, uneven bands of pale gray gather near the horizon, while the upper sky is a cooler, darker slate. The light is diffuse and there is no distinct sun or bright opening in the cloud.
+Composition: Fill the entire 640 by 360 canvas with opaque sky and subdued atmospheric color. Keep cloud masses broad and low contrast, with no trees, buildings, terrain or figures. Match the left and right edges without a border or a conspicuous repeated cloud. Fog is represented by solid bands of stepped color rather than translucent bloom.
+Canvas: landscape 16:9; target logical pixel grid 640x360. Render as if each logical pixel were a crisp square; preserve these proportions if the delivered PNG must be larger.
+Output a fully opaque sky-only image, edge to edge. This is only the sky layer; absolutely no ground, horizon silhouette, trees or water.
+The left and right border colors and forms should connect when repeated horizontally.
+Avoid: characters, enemies, UI, labels, text, borders, watermarks, photorealism, painterly brush texture, smooth gradients, bloom, occupied houses, lit windows, fires, lantern light, bell towers, or a path vanishing into the distance.

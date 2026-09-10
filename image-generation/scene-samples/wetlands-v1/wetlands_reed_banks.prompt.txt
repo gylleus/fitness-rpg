@@ -1,0 +1,12 @@
+Use case: stylized-concept. Asset type: one production candidate for a 2D side-scrolling dark-fantasy pixel-art game.
+Style: unmistakable clean pixel art, large deliberate square pixel clusters, hard stepped edges, flat restrained three-tone shading, broad readable silhouettes. Match a chunky 64-pixel-tall barbarian character. Not a finely dithered illustration or a painted image with a pixel filter.
+Lighting: soft gray daylight beneath low cloud; no warm sun, no luminous mist.
+Palette: muted peat brown #3E3029, dull olive #62684A, reed yellow #A29665, weathered gray #77776B, near-black water #252F2D, fog gray #ADB2A7; subdued neighboring shades only.
+View: orthographic side view for a route moving horizontally left to right.
+Asset ID (metadata only; do not write it on the image): wetlands_reed_banks
+Subject: Long pools of nearly black water separate low peat islands. Dull yellow reeds gather along the banks, interrupted by slick exposed mud, shallow rectangular peat cuts and low fragments of drowned stonework. Narrow gray reflections break across the water beneath the reeds, while the channels remain broad and still.
+Composition: Use the shared scene canvas with transparent space above the bank silhouettes. Place the banks and pools mainly below row 220, continuing their color to the bottom behind the separate ground strip. Keep the area above the walking baseline at row 288 quiet enough to read a 64-pixel adventurer. Match water levels, bank colors and silhouettes at the horizontal seam. No nearby willows, cottages, freestanding props or playable path are baked into this layer.
+Canvas: landscape 16:9; target logical pixel grid 640x360. Render as if each logical pixel were a crisp square; preserve these proportions if the delivered PNG must be larger.
+Output must be an RGBA PNG with ACTUAL ALPHA TRANSPARENCY in the empty sky above and between the silhouettes, and fully opaque painted land below. Do not draw a checkerboard or colored studio backdrop. This is an independent parallax layer to lay over a separate sky, not a full background scene. No translucent gradients or semitransparent haze.
+The left and right border colors and forms should connect when repeated horizontally.
+Avoid: characters, enemies, UI, labels, text, borders, watermarks, photorealism, painterly brush texture, smooth gradients, bloom, occupied houses, lit windows, fires, lantern light, bell towers, or a path vanishing into the distance.

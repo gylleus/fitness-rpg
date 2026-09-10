@@ -1,0 +1,182 @@
+[
+  {
+    "id": "wetlands_overcast_sky",
+    "image": "wetlands_overcast_sky.png",
+    "backend": "built-in imagegen",
+    "original_path": "/home/karl/.codex/generated_images/01a08d6e-51ce-7aa2-bb84-8a549e10a35a/exec-2a8af3e7-83dd-4956-95ec-40a0e7dc236e.png",
+    "sha256": "c64c5ced7b3bea0bd796f90146aa964a4a00f954d53aa799696f4dd412019e99",
+    "size": [
+      1672,
+      941
+    ],
+    "mode": "RGB",
+    "alpha_extrema": null,
+    "transparent_pixels": 0,
+    "partial_alpha_pixels": 0,
+    "total_pixels": 1573352,
+    "prompt": "wetlands_overcast_sky.prompt.txt",
+    "status": "candidate",
+    "edge_mismatch_fraction": 0.9861849096705633,
+    "low_alpha_pixels": 0,
+    "near_opaque_pixels": 1573352,
+    "target_size": [
+      640,
+      360
+    ]
+  },
+  {
+    "id": "wetlands_distant_silhouettes",
+    "image": "wetlands_distant_silhouettes.png",
+    "backend": "built-in imagegen",
+    "original_path": "/home/karl/.codex/generated_images/01a08d6e-51ce-7aa2-bb84-8a549e10a35a/exec-4750e0fe-9529-4781-8153-86956d84c123.png",
+    "sha256": "6c1346b8e1737c5e91508c440ada0aaba519d7a18d7e893045c8e4902ca3ee74",
+    "size": [
+      1672,
+      941
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "transparent_pixels": 1148022,
+    "partial_alpha_pixels": 425165,
+    "total_pixels": 1573352,
+    "prompt": "wetlands_distant_silhouettes.prompt.txt",
+    "status": "candidate",
+    "edge_mismatch_fraction": 0.2731137088204038,
+    "low_alpha_pixels": 32674,
+    "near_opaque_pixels": 375222,
+    "target_size": [
+      640,
+      360
+    ]
+  },
+  {
+    "id": "wetlands_reed_banks",
+    "image": "wetlands_reed_banks.png",
+    "backend": "built-in imagegen",
+    "original_path": "/home/karl/.codex/generated_images/01a08d6e-51ce-7aa2-bb84-8a549e10a35a/exec-017ae989-905c-4665-a266-c2ff2003a942.png",
+    "sha256": "59f681084074fbc3bfa56f30aed8ad3d385a42b83648bf5f26e0f4c19220a8ef",
+    "size": [
+      1672,
+      941
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "transparent_pixels": 1020837,
+    "partial_alpha_pixels": 552430,
+    "total_pixels": 1573352,
+    "prompt": "wetlands_reed_banks.prompt.txt",
+    "status": "candidate",
+    "edge_mismatch_fraction": 0.3900106269925611,
+    "low_alpha_pixels": 23116,
+    "near_opaque_pixels": 514636,
+    "target_size": [
+      640,
+      360
+    ]
+  },
+  {
+    "id": "wetlands_raised_peat_path",
+    "image": "wetlands_raised_peat_path.png",
+    "backend": "built-in imagegen",
+    "original_path": "/home/karl/.codex/generated_images/01a08d6e-51ce-7aa2-bb84-8a549e10a35a/exec-163824f8-47bd-4d48-8f3f-48deefc5670c.png",
+    "sha256": "7ac7914cd6c5962816f8a751e095643614d734bd9252a9605140660cf27f341c",
+    "size": [
+      2048,
+      768
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "transparent_pixels": 625541,
+    "partial_alpha_pixels": 947322,
+    "total_pixels": 1572864,
+    "prompt": "wetlands_raised_peat_path.prompt.txt",
+    "status": "candidate",
+    "edge_mismatch_fraction": 0.89453125,
+    "low_alpha_pixels": 38329,
+    "near_opaque_pixels": 893377,
+    "target_size": [
+      256,
+      96
+    ]
+  },
+  {
+    "id": "wetlands_leaning_willow",
+    "image": "wetlands_leaning_willow.png",
+    "backend": "built-in imagegen",
+    "original_path": "/home/karl/.codex/generated_images/01a08d6e-51ce-7aa2-bb84-8a549e10a35a/exec-3f021ca8-367f-4fdd-952c-a0414857d895.png",
+    "sha256": "fbb46a7e511d8cc39426d2c540e16e34f0a85854d58850cad9cb8741813d4f59",
+    "size": [
+      1086,
+      1448
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "transparent_pixels": 753085,
+    "partial_alpha_pixels": 817305,
+    "total_pixels": 1572528,
+    "prompt": "wetlands_leaning_willow.prompt.txt",
+    "status": "candidate",
+    "edge_mismatch_fraction": 0.020718232044198894,
+    "low_alpha_pixels": 158697,
+    "near_opaque_pixels": 523793,
+    "target_size": [
+      192,
+      256
+    ]
+  },
+  {
+    "id": "wetlands_raised_peat_path_v2",
+    "image": "wetlands_raised_peat_path-v2.png",
+    "backend": "built-in imagegen",
+    "original_path": "/home/karl/.codex/generated_images/01a08d6e-51ce-7aa2-bb84-8a549e10a35a/exec-64f183a8-393f-4d9d-b10e-5fdb6c01c33c.png",
+    "sha256": "5b10de37bf9ffa35a5bd0598244e6d00244603fcba62d4c9c73a99b604d704e1",
+    "size": [
+      2048,
+      768
+    ],
+    "mode": "RGB",
+    "prompt": "wetlands_raised_peat_path-v2.prompt.txt",
+    "edit_target": "wetlands_raised_peat_path.png",
+    "status": "rejected: painted checkerboard background"
+  },
+  {
+    "id": "wetlands_raised_peat_path_v3",
+    "image": "wetlands_raised_peat_path-v3.png",
+    "backend": "built-in imagegen",
+    "original_path": "/home/karl/.codex/generated_images/01a08d6e-51ce-7aa2-bb84-8a549e10a35a/exec-a045881b-1b95-40b3-9bb1-4ecf9cf1d99f.png",
+    "sha256": "d8eacffe25dd3fde69f6e1ca1ecf4432d623eb8941d3d43f32c787c437ace667",
+    "size": [
+      2048,
+      768
+    ],
+    "mode": "RGB",
+    "prompt": "wetlands_raised_peat_path-v3.prompt.txt",
+    "edit_target": "wetlands_raised_peat_path-v2.png",
+    "status": "rejected: extraction retained painted checkerboard"
+  },
+  {
+    "id": "scale_reference_player",
+    "image": "scale-reference-player.png",
+    "backend": "existing project asset; not generated for this trial",
+    "original_path": "image-generation/player-sprites/references/barbarian-club-profile-v1/pixel-reference.png",
+    "sha256": "d484d6010333d56136be62a27d318af15be8c46e0d6d604d8dc19a2d873717dc",
+    "preview_bbox": [
+      42,
+      33,
+      86,
+      95
+    ]
+  }
+]

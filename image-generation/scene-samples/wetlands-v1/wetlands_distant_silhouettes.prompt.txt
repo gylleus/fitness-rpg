@@ -1,0 +1,12 @@
+Use case: stylized-concept. Asset type: one production candidate for a 2D side-scrolling dark-fantasy pixel-art game.
+Style: unmistakable clean pixel art, large deliberate square pixel clusters, hard stepped edges, flat restrained three-tone shading, broad readable silhouettes. Match a chunky 64-pixel-tall barbarian character. Not a finely dithered illustration or a painted image with a pixel filter.
+Lighting: soft gray daylight beneath low cloud; no warm sun, no luminous mist.
+Palette: muted peat brown #3E3029, dull olive #62684A, reed yellow #A29665, weathered gray #77776B, near-black water #252F2D, fog gray #ADB2A7; subdued neighboring shades only.
+View: orthographic side view for a route moving horizontally left to right.
+Asset ID (metadata only; do not write it on the image): wetlands_distant_silhouettes
+Subject: Thin dead trunks, sparse willow crowns and a few crooked roof ridges emerge from the low mist. Long gaps of open horizon separate the silhouettes. Their gray-green edges merge with the damp air, and neither doors nor individual branches can be distinguished at this distance.
+Composition: Use the shared scene canvas, leaving the upper sky transparent. Confine most silhouettes to rows 150 through 250; let low haze-colored bank shapes reach the bottom edge. Use a narrow, low-contrast color range and sparse roofs with no window lights. Leave generous open gaps and compatible left and right edges. Keep near trees, isolated props and the walking path out of this layer.
+Canvas: landscape 16:9; target logical pixel grid 640x360. Render as if each logical pixel were a crisp square; preserve these proportions if the delivered PNG must be larger.
+Output must be an RGBA PNG with ACTUAL ALPHA TRANSPARENCY in the empty sky above and between the silhouettes, and fully opaque painted land below. Do not draw a checkerboard or colored studio backdrop. This is an independent parallax layer to lay over a separate sky, not a full background scene. No translucent gradients or semitransparent haze.
+The left and right border colors and forms should connect when repeated horizontally.
+Avoid: characters, enemies, UI, labels, text, borders, watermarks, photorealism, painterly brush texture, smooth gradients, bloom, occupied houses, lit windows, fires, lantern light, bell towers, or a path vanishing into the distance.

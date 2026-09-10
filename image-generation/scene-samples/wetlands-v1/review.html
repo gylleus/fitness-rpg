@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wetlands · First art sample</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #141b19; color: #e2e2d6; font: 15px/1.55 system-ui, sans-serif; }
+  main { max-width: 1120px; padding: 32px 24px 60px; margin: auto; }
+  h1 { font-size: 32px; margin: 0 0 4px; font-weight: 650; }
+  h2 { font-size: 19px; margin: 28px 0 12px; }
+  p { color: #b4bcae; max-width: 850px; margin: 8px 0 18px; }
+  .eyebrow { color: #b6ac79; text-transform: uppercase; letter-spacing: .15em; font-size: 11px; }
+  a { color: #d0c994; }
+  canvas { display: block; width: 100%; height: auto; image-rendering: pixelated; background: #252f2d; border: 1px solid #465047; }
+  .controls { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; margin: 16px 0; }
+  label { display: inline-flex; align-items: center; gap: 7px; }
+  input { accent-color: #b6ac79; }
+  button, select { background: #2b382e; color: #e2e2d6; border: 1px solid #67715b; border-radius: 5px; padding: 8px 14px; font: inherit; }
+  button { cursor: pointer; }
+  .note { padding: 12px 16px; border-left: 3px solid #9d8b5f; background: #202923; font-size: 13px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 16px; }
+  article { border: 1px solid #3c473d; background: #1c251f; border-radius: 6px; overflow: hidden; }
+  article .image { height: 190px; display: flex; align-items: center; justify-content: center; background: repeating-conic-gradient(#343d37 0% 25%, #414941 0% 50%) 0 0 / 20px 20px; }
+  article img { max-width: 100%; max-height: 100%; object-fit: contain; image-rendering: pixelated; }
+  article .body { padding: 14px 16px; }
+  article h3 { margin: 0 0 5px; font-size: 15px; }
+  article p { font-size: 13px; margin: 0 0 10px; }
+  .meta { font-size: 12px; color: #b6ac79; }
+  details { margin-top: 24px; color: #b4bcae; }
+  #status { font-size: 12px; color: #b6ac79; }
+</style>
+<main>
+  <div class="eyebrow">Environment art · Candidate set 01</div>
+  <h1>Wetlands</h1>
+  <p>Overcast sky, drowned silhouettes, reed banks, a peat path and a leaning willow.
+    The existing adventurer is included as a scale reference. These are generated source candidates, before final pixel export.</p>
+  <canvas id="scene" width="640" height="360" role="img" aria-label="Scrolling composition of the five Wetlands art candidates with the existing player for scale"></canvas>
+  <div class="controls">
+    <button id="play" type="button">Play scroll</button>
+    <label>Position <input id="position" type="range" min="0" max="1280" value="0" step="1"></label>
+    <label><input id="far" type="checkbox" checked> Distant layer</label>
+    <label><input id="banks" type="checkbox" checked> Reed banks</label>
+    <label><input id="willow" type="checkbox" checked> Willow</label>
+    <label><input id="hero" type="checkbox" checked> Adventurer</label>
+    <label><input id="guides" type="checkbox"> Ground guides</label>
+  </div>
+  <p class="note">The original ground's surface is about 18 logical pixels below its requested position.
+    This preview aligns the adventurer and willow to the visible turf. Ground guides show both positions.
+    Repeated image seams remain visible; the sources have not been altered to hide them.</p>
+  <div id="status" role="status">Loading images…</div>
+  <h2>Source images</h2>
+  <div class="grid">
+    <article><a class="image" href="wetlands_overcast_sky.png"><img src="wetlands_overcast_sky.png" alt="Gray stepped cloud bands filling the sky"></a><div class="body"><h3>Overcast sky</h3><p>Broad, subdued clouds. Opaque base layer; horizontal edges still need matching.</p><div class="meta">Target 640 × 360 · Stationary</div><a href="wetlands_overcast_sky.prompt.txt">Exact prompt</a></div></article>
+    <article><a class="image" href="wetlands_distant_silhouettes.png"><img src="wetlands_distant_silhouettes.png" alt="Distant willow silhouettes and crooked roofs over low banks"></a><div class="body"><h3>Distant silhouettes</h3><p>Actual transparent sky. The horizon sits too low and contains more water and reeds than the intended distant layer.</p><div class="meta">Target 640 × 360 · Parallax 0.15</div><a href="wetlands_distant_silhouettes.prompt.txt">Exact prompt</a></div></article>
+    <article><a class="image" href="wetlands_reed_banks.png"><img src="wetlands_reed_banks.png" alt="Dark pools between low peat islands and yellow reeds"></a><div class="body"><h3>Pools and reed banks</h3><p>Readable Wetlands materials and real transparency. Detailed for a layer directly behind combatants.</p><div class="meta">Target 640 × 360 · Parallax 0.35</div><a href="wetlands_reed_banks.prompt.txt">Exact prompt</a></div></article>
+    <article><a class="image" href="wetlands_raised_peat_path.png"><img src="wetlands_raised_peat_path.png" alt="A side-on peat strip with grass and small stones"></a><div class="body"><h3>Raised peat path</h3><p>Transparent original retained. Needs a higher walking surface, crisp alpha edges and matching seams.</p><div class="meta">Target 256 × 96 · Ground speed</div><a href="wetlands_raised_peat_path.prompt.txt">Exact prompt</a></div></article>
+    <article><a class="image" href="wetlands_leaning_willow.png"><img src="wetlands_leaning_willow.png" alt="Leaning willow with exposed roots and drooping olive foliage"></a><div class="body"><h3>Leaning willow</h3><p>Strong silhouette and actual transparency. Fine fringe pixels and soft edge alpha need cleanup at final size.</p><div class="meta">Target 192 × 256 · Height 3.4 adventurers</div><a href="wetlands_leaning_willow.prompt.txt">Exact prompt</a></div></article>
+  </div>
+  <details><summary>Ground correction attempts</summary><p>Both edits produced opaque RGB images with painted checkerboards, so neither is selected for the composition.</p><p><a href="wetlands_raised_peat_path-v2.png">Layout correction</a> · <a href="wetlands_raised_peat_path-v3.png">Background extraction attempt</a></p></details>
+  <p><a href="plan.json">Authored inputs and prompt set</a> · <a href="sources.json">Source files and measurements</a> · <a href="README.md">Review notes</a></p>
+</main>
+<script>
+  const $ = id => document.getElementById(id);
+  const canvas = $('scene'), ctx = canvas.getContext('2d');
+  const sources = {
+    sky: 'wetlands_overcast_sky.png', far: 'wetlands_distant_silhouettes.png',
+    banks: 'wetlands_reed_banks.png', ground: 'wetlands_raised_peat_path.png',
+    willow: 'wetlands_leaning_willow.png', hero: 'scale-reference-player.png'
+  };
+  const images = {};
+  let playing = false, position = 0, lastTime = 0, loaded = false;
+  const expectedBaseline = 288, groundTop = 264, visibleBaseline = groundTop + 338 / 8;
+  function strip(image, width, height, y, speed) {
+    const offset = ((position * speed) % width + width) % width;
+    for (let x = -offset; x < canvas.width; x += width) ctx.drawImage(image, Math.round(x), y, width, height);
+  }
+  function draw() {
+    if (!loaded) return;
+    ctx.imageSmoothingEnabled = false;
+    ctx.clearRect(0, 0, 640, 360);
+    strip(images.sky, 640, 360, 0, 0);
+    if ($('far').checked) strip(images.far, 640, 360, 0, .15);
+    if ($('banks').checked) strip(images.banks, 640, 360, 0, .35);
+    if ($('willow').checked) {
+      // Render the unmodified source at the authored relative silhouette height.
+      const scale = (64 * 3.4) / (1410 - 42);
+      for (let i = -1; i < 5; i++) {
+        const x = 465 + i * 700 - position;
+        ctx.drawImage(images.willow, Math.round(x - 432 * scale), Math.round(visibleBaseline - 1410 * scale),
+          Math.round(1086 * scale), Math.round(1448 * scale));
+      }
+    }
+    strip(images.ground, 256, 96, groundTop, 1);
+    if ($('hero').checked) {
+      // Existing 128px reference: visible bounds [42,33,86,95], 64px display height.
+      ctx.drawImage(images.hero, 42, 33, 44, 62, 151, Math.round(visibleBaseline - 64), 45, 64);
+    }
+    if ($('guides').checked) {
+      for (const [y, color, label] of [[expectedBaseline, '#f4dc90', 'Target surface'], [visibleBaseline, '#e7947c', 'Visible turf']]) {
+        ctx.strokeStyle = color; ctx.setLineDash([5,5]); ctx.beginPath(); ctx.moveTo(0,y+.5); ctx.lineTo(640,y+.5); ctx.stroke();
+        ctx.fillStyle = color; ctx.font = '10px monospace'; ctx.fillText(label, 505, y-4);
+      }
+      ctx.setLineDash([]);
+    }
+  }
+  $('play').onclick = () => { playing = !playing; $('play').textContent = playing ? 'Pause scroll' : 'Play scroll'; };
+  $('position').oninput = () => { position = Number($('position').value); draw(); };
+  for (const id of ['far','banks','willow','hero','guides']) $(id).onchange = draw;
+  function tick(now) {
+    const dt = lastTime ? Math.min((now-lastTime)/1000,.1) : 0; lastTime = now;
+    if (playing && loaded) { position = (position + dt*30) % 1280; $('position').value = Math.round(position); draw(); }
+    requestAnimationFrame(tick);
+  }
+  Promise.all(Object.entries(sources).map(([key, path]) => new Promise((resolve, reject) => {
+    const image = new Image(); image.onload = () => { images[key] = image; resolve(); };
+    image.onerror = () => reject(new Error('Could not load '+path)); image.src = path;
+  }))).then(() => { loaded = true; $('status').textContent = 'Five generated candidates loaded · Existing player used only for scale · No runtime assets replaced'; draw(); requestAnimationFrame(tick); })
+    .catch(error => { $('status').textContent = error.message; });
+</script>
+</html>
