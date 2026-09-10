@@ -27,6 +27,7 @@ describe('fitness persistence', () => {
       sqlite.exec(readFileSync(join(__dirname, 'migrations/0001_fitness_game.sql'), 'utf8'));
       sqlite.exec(readFileSync(join(__dirname, 'migrations/0002_native_activity_and_expeditions.sql'), 'utf8'));
       sqlite.exec(readFileSync(join(__dirname, 'migrations/0003_attack_stockpile.sql'), 'utf8'));
+      sqlite.exec(readFileSync(join(__dirname, 'migrations/0004_dungeon_recovery.sql'), 'utf8'));
       const migrated = drizzle(sqlite, { schema });
       expect(getGameSnapshot(migrated, now).today).toMatchObject({ pushups: 12, partialReps: 2 });
       expect(migrated.select().from(sessions).get()?.sourceKey).toBeNull();
@@ -75,7 +76,7 @@ describe('fitness persistence', () => {
     expect(db.select().from(sessions).all()).toHaveLength(1);
     expect(db.select().from(sets).all()).toHaveLength(1);
     expect(getFitnessDay(db, today)).toMatchObject({ pushups: 20, partialReps: 3 });
-    expect(getGameSnapshot(db, now).stats.attack).toBe(25);
+    expect(getGameSnapshot(db, now).stats.attack).toBe(75);
   });
   it('rejects an invalid workout before saving any session or set', () => {
     const db = createTestDb();
@@ -130,7 +131,7 @@ describe('fitness persistence', () => {
     getHero(db);
     db.update(heroes).set({ gold: 123, xp: 250, swordLevel: 2, armorLevel: 1, unlockedDungeon: 1 }).run();
     const nextDay = getGameSnapshot(db, tomorrow);
-    expect(nextDay.stats).toMatchObject({ attack: 33, health: 130, dodgeBps: 0, dailyHealth: 0 });
+    expect(nextDay.stats).toMatchObject({ attack: 99, health: 130, dodgeBps: 0, dailyHealth: 0 });
     expect(nextDay.hero).toMatchObject({ gold: 123, xp: 250, swordLevel: 2, armorLevel: 1, unlockedDungeon: 1 });
     expect(nextDay.history.find((d) => d.day === today)).toMatchObject({ pushups: 20, steps: 6000, distanceMeters: 2000 });
     expect(nextDay.totals).toMatchObject({ pushups: 20, bestPushupDay: 20, runs: 1 });
@@ -197,14 +198,14 @@ describe('saved dungeons', () => {
     const next = advanceDungeon(db, first.id, 0, now)!;
     savePushupWorkout(db, workout);
     expect(getGameSnapshot(db, now).latestBattle).toEqual(next);
-    expect(next.state.stats.attack).toBe(25);
-    expect(getGameSnapshot(db, now).stats.attack).toBe(25);
+    expect(next.state.stats.attack).toBe(28);
+    expect(getGameSnapshot(db, now).stats.attack).toBe(78);
     expect(advanceDungeon(db, first.id, 0, now)).toEqual(next);
   });
   it('awards enemy loot once despite repeated callbacks, unlocks on victory', () => {
     const db = createTestDb();
     savePushupWorkout(db, { ...workout, validReps: 100 });
-    saveStepTotal(db, today, 6000);
+    saveStepTotal(db, today, 20000);
     const first = startDungeon(db, 0, now);
     let checkpoint = first;
     for (let i = 0; checkpoint.status === 'active' && i < 1000; i++) {
@@ -215,9 +216,9 @@ describe('saved dungeons', () => {
       checkpoint = db.select().from(dungeonRuns).where(eq(dungeonRuns.id, first.id)).get()!;
     }
     expect(checkpoint.status).toBe('victory');
-    expect(getHero(db)).toMatchObject({ gold: 70, xp: 85, unlockedDungeon: 1 });
+    expect(getHero(db)).toMatchObject({ gold: 72, xp: 99, unlockedDungeon: 1 });
     expect(advanceDungeon(db, first.id, checkpoint.state.tick, now)).toEqual(checkpoint);
-    expect(getHero(db).gold).toBe(70);
+    expect(getHero(db).gold).toBe(72);
     expect(startDungeon(db, 1, now).state.dungeonId).toBe(1);
   });
   it('retreats without loot and permits a fresh attempt', () => {
@@ -227,7 +228,7 @@ describe('saved dungeons', () => {
     const first = startDungeon(db, 0, now);
     let current = first;
     while (current.state.defeated === 0) current = advanceDungeon(db, first.id, current.state.tick, now)!;
-    expect(current.state.gold).toBe(8);
+    expect(current.state.gold).toBe(10);
     retreatDungeon(db, first.id);
     expect(getHero(db).gold).toBe(0);
     expect(advanceDungeon(db, first.id, 1, now)?.status).toBe('retreated');

@@ -89,6 +89,7 @@ export const heroes = sqliteTable('heroes', {
   unlockedDungeon: integer('unlocked_dungeon').notNull().default(0),
   damageDay: text('damage_day'),
   damageTaken: integer('damage_taken').notNull().default(0),
+  /** Historical stockpile accounting; new combat never reads or charges it. */
   pushupUnitsSpent: integer('pushup_units_spent').notNull().default(0),
   amuletOwned: integer('amulet_owned', { mode: 'boolean' }).notNull().default(false),
   healthPotions: integer('health_potions').notNull().default(0),
@@ -100,6 +101,7 @@ export const heroes = sqliteTable('heroes', {
 export const dungeonRuns = sqliteTable('dungeon_runs', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   startedAt: integer('started_at').notNull(),
+  dismissedAt: integer('dismissed_at'),
   status: text('status').$type<BattleStatus>().notNull(),
   state: text('state', { mode: 'json' }).$type<BattleState>().notNull(),
 });

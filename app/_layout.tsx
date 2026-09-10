@@ -10,7 +10,7 @@ export default function RootLayout() {
     <GameProvider>
       <HealthProvider>
       <StatusBar style="light" />
-      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.bg } }}>
+      <Stack screenOptions={{ headerShown: false, orientation: 'portrait', statusBarHidden: false, navigationBarHidden: false, contentStyle: { backgroundColor: colors.bg } }}>
         <Stack.Screen name="(tabs)" />
         {/* The session screen owns the whole viewport: the phone is on the floor
             metres away, so chrome would only steal space from the rep count. */}
@@ -18,6 +18,7 @@ export default function RootLayout() {
         <Stack.Screen name="activity" options={{ presentation: 'modal' }} />
         <Stack.Screen name="health" options={{ presentation: 'modal' }} />
         <Stack.Screen name="run" />
+        <Stack.Screen name="expedition" options={{ orientation: 'landscape', statusBarHidden: true, navigationBarHidden: true, animation: 'fade' }} />
       </Stack>
       </HealthProvider>
     </GameProvider>

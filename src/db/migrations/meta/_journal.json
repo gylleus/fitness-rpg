@@ -29,6 +29,20 @@
       "when": 1788698745110,
       "tag": "0003_attack_stockpile",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1789041093931,
+      "tag": "0004_dungeon_recovery",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1789051389413,
+      "tag": "0005_pushup_damage",
+      "breakpoints": true
     }
   ]
 }

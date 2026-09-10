@@ -1,10 +1,11 @@
-import type { HeroStats } from './rules';
+import { attackPower, type HeroStats } from './rules';
 import { advanceMeter, emptyCombatMeters, resolveAttack, type CombatMeters } from './attacks';
-import { attackCostUnits, pushupLabel } from './items';
+import wetlands from './rosters/wetlands.json';
 
-export type Enemy = { name: string; health: number; attack: number; gold: number; xp: number; sprite: 'slime' | 'wolf' | 'knight' | 'boss' };
+export type Enemy = { id?: string; name: string; health: number; attack: number; gold: number; xp: number; sprite: 'slime' | 'wolf' | 'knight' | 'boss' };
 export type Dungeon = { id: number; name: string; subtitle: string; color: string; enemies: Enemy[] };
-export const DUNGEONS: Dungeon[] = [
+// Pre-snapshot saves retain their original enemies and balances.
+const LEGACY_DUNGEONS: Dungeon[] = [
   { id: 0, name: 'Mossfall Hollow', subtitle: 'Something stirs beneath the roots.', color: '#8ae3b1', enemies: [
     { name: 'Moss Slime', health: 35, attack: 8, gold: 8, xp: 10, sprite: 'slime' },
     { name: 'Thornling', health: 55, attack: 10, gold: 10, xp: 15, sprite: 'slime' },
@@ -24,9 +25,26 @@ export const DUNGEONS: Dungeon[] = [
     { name: 'The Pale Regent', health: 580, attack: 46, gold: 110, xp: 90, sprite: 'boss' },
   ] },
 ];
+// Expedition order is a game rule, independent of the biome's random spawn pool.
+export const DUNGEONS: Dungeon[] = [
+  { id: 0, name: wetlands.name, subtitle: 'A path through reeds, dark pools and tangled roots.', color: '#8ae3b1',
+    enemies: (['bog_toad', 'drowned_corpse', 'giant_water_strider', 'bog_hag', 'root_hulk'] as const)
+      .map(id => wetlands.enemies[id] as Enemy) },
+  ...LEGACY_DUNGEONS.slice(1),
+];
 export type BattleStatus = 'active' | 'victory' | 'defeat' | 'exhausted' | 'retreated' | 'expired';
+export type BattleImpact = {
+  target: 'hero' | 'enemy';
+  encounter: number;
+  kind: 'damage' | 'heal' | 'miss';
+  amount: number;
+  critical?: boolean;
+};
 export type BattleState = {
+  rulesVersion?: 2;
   dungeonId: number;
+  /** Snapshot the roster so future content/art additions cannot change this run. */
+  dungeon?: Dungeon;
   day: string;
   stats: HeroStats;
   heroHp: number;
@@ -42,56 +60,58 @@ export type BattleState = {
   phase: 'travelling' | 'fighting';
   travel: number;
   entryHp: number;
-  pushupUnits: number;
-  /** Actual cost paid in this attempt, including item discounts. */
-  pushupUnitsSpent?: number;
   focusAttacks: number;
   meters: CombatMeters;
   attacksMade: number;
   lastAction: 'travel' | 'attack' | 'hit' | 'dodge' | 'exhausted';
+  /** Outcomes of this tick, including the original target of a finishing blow. */
+  impacts?: BattleImpact[];
 };
 
-export function beginBattle(dungeonId: number, day: string, stats: HeroStats, entryHp = stats.health,
-  resources: { pushupUnits: number; focusAttacks?: number; meters?: CombatMeters } = { pushupUnits: 0 }): BattleState {
-  const dungeon = DUNGEONS[dungeonId];
-  if (!dungeon) throw new Error('Dungeon not found.');
-  return { dungeonId, day, stats, heroHp: entryHp, entryHp, enemyHp: dungeon.enemies[0].health, encounter: 0, defeated: 0,
-    turn: 'hero', status: 'active', phase: 'travelling', travel: 0, gold: 0, xp: 0, log: [`You enter ${dungeon.name}.`], tick: 0,
-    pushupUnits: resources.pushupUnits, pushupUnitsSpent: 0, focusAttacks: resources.focusAttacks ?? 0, meters: resources.meters ?? emptyCombatMeters(), attacksMade: 0, lastAction: 'travel' };
+export function battleDungeon(battle: BattleState): Dungeon {
+  return battle.dungeon ?? LEGACY_DUNGEONS[battle.dungeonId];
 }
 
-/** A saved travel step or attack. Loot is carried until the boss is defeated. */
+export function beginBattle(dungeonId: number, day: string, stats: HeroStats, entryHp = stats.health,
+  resources: { focusAttacks?: number; meters?: CombatMeters } = {}): BattleState {
+  const dungeon = DUNGEONS[dungeonId];
+  if (!dungeon) throw new Error('Dungeon not found.');
+  return { rulesVersion: 2, dungeonId, dungeon: { ...dungeon, enemies: dungeon.enemies.map(enemy => ({ ...enemy })) }, day, stats, heroHp: entryHp, entryHp, enemyHp: dungeon.enemies[0].health, encounter: 0, defeated: 0,
+    turn: 'hero', status: 'active', phase: 'travelling', travel: 0, gold: 0, xp: 0, log: [`You enter ${dungeon.name}.`], tick: 0,
+    focusAttacks: resources.focusAttacks ?? 0, meters: resources.meters ?? emptyCombatMeters(), attacksMade: 0, lastAction: 'travel' };
+}
+
+/** A saved travel step or attack. Pushup power is fixed at entry and never spent. */
 export function battleTurn(current: BattleState): BattleState {
   if (current.status !== 'active') return current;
-  const next = { ...current, tick: current.tick + 1, log: [...current.log] };
-  const enemies = DUNGEONS[current.dungeonId].enemies;
+  const next = { ...current, tick: current.tick + 1, log: [...current.log], impacts: [] as BattleImpact[] };
+  const enemies = battleDungeon(current).enemies;
   const enemy = enemies[current.encounter];
   if (current.phase === 'travelling') {
     next.lastAction = 'travel';
-    next.travel++;
-    if (next.travel >= 3) {
-      next.phase = 'fighting';
-      next.log.push(`${enemy.name} blocks the path.`);
+    // A killing swing owns its recovery tick. Walking starts at the beginning
+    // of the next leg instead of skipping its first travel segment.
+    next.travel = current.lastAction === 'attack' ? 0 : current.travel + 1;
+    if (next.travel < 3) {
+      next.log = next.log.slice(-5);
+      return next;
     }
-    next.log = next.log.slice(-5);
-    return next;
+    next.phase = 'fighting';
+    next.log.push(`${enemy.name} blocks the path.`);
+    // Arrival is also the first attack: switch straight from walking to the
+    // windup, rather than waiting through an extra idle combat beat.
   }
-  if (current.turn === 'hero') {
-    const cost = attackCostUnits(current.stats.pushupCostUnits, current.focusAttacks);
-    if (current.pushupUnits < cost) {
-      return { ...next, status: 'exhausted', lastAction: 'exhausted', gold: 0, xp: 0,
-        log: ['Your pushup stockpile cannot cover another attack. No loot earned. Entry health and spent pushups are restored.'] };
-    }
-    next.pushupUnits -= cost;
-    next.pushupUnitsSpent = (current.pushupUnitsSpent ?? 0) + cost;
+  if (current.phase === 'travelling' || current.turn === 'hero') {
     next.focusAttacks = Math.max(0, current.focusAttacks - 1);
     next.attacksMade++;
     next.lastAction = 'attack';
-    const attack = resolveAttack(current.stats.attack, current.stats.attackEffects, current.meters);
+    const attack = resolveAttack(attackPower(current.stats, current.focusAttacks).damage, current.stats.attackEffects, current.meters);
     next.meters = attack.meters;
     next.enemyHp = Math.max(0, current.enemyHp - attack.damage);
     next.heroHp = Math.min(current.stats.health, current.heroHp + attack.healing);
-    next.log.push(`Attack uses ${pushupLabel(cost)} pushups.`);
+    next.impacts.push({ target: 'enemy', encounter: current.encounter, kind: 'damage', amount: attack.damage,
+      critical: attack.events.some(event => event.critical) });
+    if (next.heroHp > current.heroHp) next.impacts.push({ target: 'hero', encounter: current.encounter, kind: 'heal', amount: next.heroHp - current.heroHp });
     for (const event of attack.events) {
       next.log.push(event.kind === 'heal' ? `${event.source} restores up to ${event.amount} HP.`
         : `${event.critical ? 'Critical! ' : ''}${event.source} hits ${enemy.name} for ${event.amount}.`);
@@ -119,13 +139,14 @@ export function battleTurn(current: BattleState): BattleState {
     next.meters = { ...current.meters, dodge: dodge.meter };
     next.lastAction = dodge.triggered ? 'dodge' : 'hit';
     next.heroHp = Math.max(0, current.heroHp - (dodge.triggered ? 0 : enemy.attack));
+    next.impacts.push({ target: 'hero', encounter: current.encounter, kind: dodge.triggered ? 'miss' : 'damage', amount: dodge.triggered ? 0 : enemy.attack });
     next.log.push(dodge.triggered ? `Dodge! ${enemy.name} misses.` : `${enemy.name} hits you for ${enemy.attack}.`);
     next.turn = 'hero';
     if (next.heroHp === 0) {
       next.status = 'defeat';
       next.gold = 0;
       next.xp = 0;
-      next.log.push('No loot earned. Entry health and spent pushups are restored.');
+      next.log.push('No loot earned. Your entry health is restored.');
     }
   }
   next.log = next.log.slice(-5);

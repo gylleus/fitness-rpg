@@ -1,21 +1,24 @@
 import { describe, expect, it } from 'vitest';
-import { dayStart, fitnessDay, heroStats, localDay, nextMidnight, paceLabel, recentDays, runDodgeBps, validateRun, validateSteps } from './rules';
+import { attackPower, dayStart, fitnessDay, heroStats, localDay, nextMidnight, paceLabel, pushupPower, recentDays, runDodgeBps, validateRun, validateSteps } from './rules';
 import { battleTurn, beginBattle, DUNGEONS } from './combat';
 
 const hero = { gold: 0, xp: 0, swordLevel: 0, armorLevel: 0, unlockedDungeon: 0 };
 const day = '2026-09-06';
 
 describe('fitness power', () => {
-  it('derives damage from permanent gear, not the size of the pushup stockpile', () => {
+  it('multiplies base damage by one plus the configurable bonus per pushup', () => {
     expect(heroStats(hero, fitnessDay(day))).toMatchObject({ attack: 25, health: 100, dodgeBps: 0, dailyHealth: 0 });
-    expect(heroStats(hero, fitnessDay(day, 1000)).attack).toBe(25);
+    expect(heroStats(hero, fitnessDay(day, 10))).toMatchObject({ attack: 50, baseAttack: 25, pushupDamageCoefficient: 0.1, damageMultiplier: 2 });
+    expect(heroStats(hero, fitnessDay(day, 20)).attack).toBe(75);
+    expect(pushupPower(40, 20, 0.15)).toEqual({ damage: 160, multiplier: 4 });
+    expect(attackPower(heroStats({ ...hero, amuletOwned: true }, fitnessDay(day, 10)), 1).damage).toBe(58);
     const activity = fitnessDay(day, 120);
     expect(activity.pushups).toBe(120);
   });
   it('adds step health to permanent gear and levels', () => {
     expect(heroStats({ ...hero, xp: 250, swordLevel: 2, armorLevel: 1 }, fitnessDay(day, 20, 4, 3000)))
-      .toEqual({ level: 3, attack: 33, health: 160, baseAttack: 33, baseHealth: 130, dailyHealth: 30,
-        dodgeBps: 0, pushupCostUnits: 100, attackEffects: [] });
+      .toEqual({ level: 3, attack: 99, health: 160, baseAttack: 33, baseHealth: 130, dailyHealth: 30,
+        dodgeBps: 0, pushups: 20, pushupDamageCoefficient: 0.1, damageMultiplier: 3, attackEffects: [] });
   });
   it('awards running dodge without multiplying or double-counting health', () => {
     const activity = fitnessDay(day, 0, 0, 6000, [{ distanceMeters: 2000, durationSeconds: 900, steps: 2000 }]);
@@ -80,16 +83,15 @@ describe('local calendar days', () => {
 describe('automatic combat', () => {
   it('allows the hero to attack first and prevents dead enemies retaliating', () => {
     const stats = heroStats({ ...hero, swordLevel: 10 }, fitnessDay(day));
-    let battle = beginBattle(0, day, stats, stats.health, { pushupUnits: 10000 });
-    while (battle.phase === 'travelling') battle = battleTurn(battle);
-    battle = battleTurn(battle);
+    let battle = beginBattle(0, day, stats, stats.health);
+    while (battle.attacksMade === 0) battle = battleTurn(battle);
     expect(battle.defeated).toBe(1);
     expect(battle.heroHp).toBe(stats.health);
     expect(battle.turn).toBe('hero');
     expect(battle.gold).toBe(DUNGEONS[0].enemies[0].gold);
   });
   it('ends an untrained attempt with no loot or XP', () => {
-    let battle = beginBattle(0, day, heroStats(hero, fitnessDay(day)), 100, { pushupUnits: 10000 });
+    let battle = beginBattle(0, day, heroStats(hero, fitnessDay(day)), 100);
     for (let i = 0; battle.status === 'active' && i < 1000; i++) battle = battleTurn(battle);
     expect(battle.status).toBe('defeat');
     expect(battle.heroHp).toBe(0);
@@ -99,11 +101,11 @@ describe('automatic combat', () => {
     expect(battleTurn(battle)).toEqual(battle);
   });
   it.each(DUNGEONS.map((d) => d.id))('can clear dungeon %s including its final boss', (id) => {
-    let battle = beginBattle(id, day, { ...heroStats(hero, fitnessDay(day)), level: 20, attack: 200, health: 2000 }, 2000, { pushupUnits: 10000 });
+    let battle = beginBattle(id, day, { ...heroStats(hero, fitnessDay(day)), level: 20, attack: 200, baseAttack: 200, health: 2000 }, 2000);
     for (let i = 0; battle.status === 'active' && i < 1000; i++) battle = battleTurn(battle);
     expect(battle.status).toBe('victory');
     expect(battle.enemyHp).toBe(0);
-    expect(battle.defeated).toBe(4);
+    expect(battle.defeated).toBe(DUNGEONS[id].enemies.length);
     expect(battle.gold).toBe(DUNGEONS[id].enemies.reduce((sum, e) => sum + e.gold, 0));
     expect(battleTurn(battle)).toEqual(battle);
   });

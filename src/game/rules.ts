@@ -1,5 +1,5 @@
 import type { AttackEffect } from './attacks';
-import { AMULET, PUSHUP_UNITS } from './items';
+import { AMULET, BASE_PUSHUP_DAMAGE_COEFFICIENT, FOCUS_COEFFICIENT_BONUS } from './items';
 
 /** Pure game rules. Fitness records never contain derived game power. */
 export function localDay(time: number | Date = Date.now()): string {
@@ -38,7 +38,20 @@ export type FitnessDay = {
   agilityBps: number;
 };
 export type Hero = { gold: number; xp: number; swordLevel: number; armorLevel: number; unlockedDungeon: number; amuletOwned?: boolean };
-export type HeroStats = { attack: number; health: number; baseAttack: number; baseHealth: number; dailyHealth: number; level: number; dodgeBps: number; pushupCostUnits: number; attackEffects: AttackEffect[] };
+export type HeroStats = { attack: number; health: number; baseAttack: number; baseHealth: number; dailyHealth: number; level: number; dodgeBps: number;
+  pushups: number; pushupDamageCoefficient: number; damageMultiplier: number; attackEffects: AttackEffect[] };
+
+/** Coefficient bonuses are additive, so equipment and future talents compose. */
+export function pushupPower(baseDamage: number, pushups: number, coefficient = BASE_PUSHUP_DAMAGE_COEFFICIENT) {
+  // Integer basis points avoid e.g. 0.1 + 0.01 + 0.02 rounding 57.5 down to 57.
+  const scale = 10000;
+  const numerator = scale + Math.max(0, pushups) * Math.max(0, Math.round(coefficient * scale));
+  return { multiplier: numerator / scale, damage: Math.round(baseDamage * numerator / scale) };
+}
+
+export function attackPower(stats: HeroStats, focusAttacks = 0) {
+  return pushupPower(stats.baseAttack, stats.pushups, stats.pushupDamageCoefficient + (focusAttacks > 0 ? FOCUS_COEFFICIENT_BONUS : 0));
+}
 
 export const MAX_DODGE_BPS = 3000;
 export function runDodgeBps(run: Pick<RunActivity, 'distanceMeters' | 'durationSeconds'>): number {
@@ -59,13 +72,15 @@ export function fitnessDay(day: string, pushups = 0, partialReps = 0, enteredSte
   };
 }
 
-export function heroStats(hero: Hero, today: FitnessDay): HeroStats {
+export function heroStats(hero: Hero, today: FitnessDay, pushups = today.pushups): HeroStats {
   const level = 1 + Math.floor(hero.xp / 100);
   const baseAttack = 25 + hero.swordLevel * 3 + level - 1;
   const baseHealth = 100 + hero.armorLevel * 20 + (level - 1) * 5;
   const dailyHealth = Math.floor(today.steps / 100);
-  return { attack: baseAttack, health: baseHealth + dailyHealth, baseAttack, baseHealth, dailyHealth, level,
-    dodgeBps: today.agilityBps, pushupCostUnits: PUSHUP_UNITS - (hero.amuletOwned ? AMULET.reduction : 0), attackEffects: [] };
+  const pushupDamageCoefficient = BASE_PUSHUP_DAMAGE_COEFFICIENT + (hero.amuletOwned ? AMULET.coefficientBonus : 0);
+  const power = pushupPower(baseAttack, pushups, pushupDamageCoefficient);
+  return { attack: power.damage, health: baseHealth + dailyHealth, baseAttack, baseHealth, dailyHealth, level,
+    dodgeBps: today.agilityBps, pushups, pushupDamageCoefficient, damageMultiplier: power.multiplier, attackEffects: [] };
 }
 
 export const upgradeCost = (level: number) => 30 + level * 25;

@@ -22,7 +22,7 @@ export function advanceMeter(meter: number, rateBps: number) {
   return { triggered: total >= RATE_SCALE, meter: total % RATE_SCALE };
 }
 
-/** Resolve one paid attack. Procs cannot recursively trigger more procs/attacks.
+/** Resolve one attack. Procs cannot recursively trigger more procs/attacks.
  * Critical effects modify weapon damage first (strongest wins), then flat damage
  * and healing procs resolve in equipment order. No UI or database dependencies.
  */

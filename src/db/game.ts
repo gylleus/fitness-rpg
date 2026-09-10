@@ -3,9 +3,9 @@ import type { BaseSQLiteDatabase } from 'drizzle-orm/sqlite-core';
 import * as schema from './schema';
 import { activityDays, challengeClaims, dungeonRuns, heroes, runs, sessions, sets } from './schema';
 import { beginBattle, battleTurn, DUNGEONS, type BattleState } from '../game/combat';
-import { CHALLENGES, dayStart, fitnessDay, heroStats, localDay, nextMidnight, recentDays, upgradeCost, validateRun, validateSteps,
+import { attackPower, CHALLENGES, dayStart, fitnessDay, heroStats, localDay, nextMidnight, recentDays, upgradeCost, validateRun, validateSteps,
   type ChallengeId, type Equipment, type RunActivity } from '../game/rules';
-import { AMULET, attackCostUnits, attacksAvailable, FOCUS_ATTACKS, HEALING_HP, POTIONS, PUSHUP_UNITS, type Potion } from '../game/items';
+import { AMULET, FOCUS_ATTACKS, HEALING_HP, POTIONS, type Potion } from '../game/items';
 
 // Both production Expo SQLite and the test SQLite driver execute synchronously.
 // Never put an async callback inside these transactions.
@@ -16,13 +16,11 @@ export function getHero(db: GameDb) {
   return db.select().from(heroes).where(eq(heroes.id, 1)).get()!;
 }
 
-/** Earned reps stay in fitness history; only spending belongs to the game save.
- * This includes legacy workouts without a one-time credit that could duplicate.
- */
-export function getPushupUnits(db: GameDb, spent = getHero(db).pushupUnitsSpent) {
+/** Saved full reps power damage; historical spending never subtracts from them. */
+export function getSavedPushups(db: GameDb) {
   const reps = db.select({ total: sql<number>`coalesce(sum(${sets.validReps}), 0)`.mapWith(Number) })
     .from(sets).innerJoin(sessions, eq(sets.sessionId, sessions.id)).where(eq(sessions.exercise, 'pushup')).get()!;
-  return Math.max(0, reps.total * PUSHUP_UNITS - spent);
+  return Math.max(0, reps.total);
 }
 
 export function getFitnessDay(db: GameDb, day = localDay()) {
@@ -109,7 +107,7 @@ export function purchaseAmulet(db: GameDb) {
   return db.transaction(tx => {
     const hero = getHero(tx);
     if (hero.amuletOwned) throw new Error('This amulet is already equipped.');
-    if (hero.unlockedDungeon < AMULET.unlockDungeon) throw new Error('Defeat the Rootwarden to unlock this rare amulet.');
+    if (hero.unlockedDungeon < AMULET.unlockDungeon) throw new Error('Defeat the Root Hulk to unlock this rare amulet.');
     if (hero.gold < AMULET.cost) throw new Error('You need 150 gold for this amulet.');
     tx.update(heroes).set({ gold: hero.gold - AMULET.cost, amuletOwned: true }).where(eq(heroes.id, 1)).run();
   });
@@ -147,16 +145,8 @@ export function drinkPotion(db: GameDb, kind: Potion, now = Date.now()) {
   });
 }
 
-/** Called only for an active run, inside its transaction. The terminal status
- * and refund commit together, so repeated callbacks cannot refund twice.
- */
+/** Called only for an active run, inside its transaction. */
 function saveBattleCheckpoint(db: GameDb, id: number, state: BattleState) {
-  if (state.status !== 'active' && state.status !== 'victory') {
-    const hero = getHero(db);
-    const spent = Math.max(0, hero.pushupUnitsSpent - (state.pushupUnitsSpent ?? 0));
-    db.update(heroes).set({ pushupUnitsSpent: spent }).where(eq(heroes.id, 1)).run();
-    state = { ...state, pushupUnits: getPushupUnits(db, spent) };
-  }
   return db.update(dungeonRuns).set({ status: state.status, state }).where(eq(dungeonRuns.id, id)).returning().get();
 }
 
@@ -166,7 +156,7 @@ export function expireBattles(db: GameDb, now = Date.now()) {
     for (const run of active) {
       if (run.state.day === localDay(now)) continue;
       saveBattleCheckpoint(tx, run.id, { ...run.state, status: 'expired', gold: 0, xp: 0,
-        log: ['A new day begins. The unfinished bounty is lost and spent pushups are refunded. Start a fresh expedition.'] });
+        log: ['A new day begins. Start a fresh expedition with today’s health and dodge. Your saved pushup power stays.'] });
     }
   });
 }
@@ -179,18 +169,16 @@ export function startDungeon(db: GameDb, dungeonId: number, now = Date.now()) {
     const hero = getHero(tx);
     if (!Number.isInteger(dungeonId) || !DUNGEONS[dungeonId] || dungeonId > hero.unlockedDungeon) throw new Error('Defeat the previous boss to unlock this dungeon.');
     const day = localDay(now);
-    const stats = heroStats(hero, getFitnessDay(tx, day));
+    const stats = heroStats(hero, getFitnessDay(tx, day), getSavedPushups(tx));
     const health = availableHealth(hero, stats.health, day);
     if (health <= 0) throw new Error('Your hero needs more health. Walk, drink a healing potion, upgrade armor, or return tomorrow.');
-    const pushupUnits = getPushupUnits(tx, hero.pushupUnitsSpent);
-    if (pushupUnits < attackCostUnits(stats.pushupCostUnits, hero.focusAttacks)) throw new Error('Train pushups to stockpile at least one attack before entering.');
-    const state = beginBattle(dungeonId, day, stats, health, { pushupUnits, focusAttacks: hero.focusAttacks, meters: hero.combatMeters });
+    const state = beginBattle(dungeonId, day, stats, health, { focusAttacks: hero.focusAttacks, meters: hero.combatMeters });
     return tx.insert(dungeonRuns).values({ startedAt: now, state, status: 'active' }).returning().get();
   });
 }
 
-/** Tick guard handles stale callbacks. Spending, meters, bounty, and checkpoint
- * share one transaction, including failures and the boss's final paid attack.
+/** Tick guard handles stale callbacks. Focus, meters, bounty, and checkpoint
+ * share one transaction, including failures and the boss's final attack.
  */
 export function advanceDungeon(db: GameDb, id: number, expectedTick: number, now = Date.now()) {
   return db.transaction((tx) => {
@@ -198,13 +186,9 @@ export function advanceDungeon(db: GameDb, id: number, expectedTick: number, now
     const run = tx.select().from(dungeonRuns).where(eq(dungeonRuns.id, id)).get();
     if (!run || run.status !== 'active' || run.state.tick !== expectedTick) return run;
     const hero = getHero(tx);
-    const pushupUnits = getPushupUnits(tx, hero.pushupUnitsSpent);
-    // Newly saved workouts can replenish a paused expedition. Gear/agility stay
-    // fixed at entry; resource availability always comes from the database.
-    const next = battleTurn({ ...run.state, pushupUnits });
-    const spent = pushupUnits - next.pushupUnits;
-    tx.update(heroes).set({ pushupUnitsSpent: hero.pushupUnitsSpent + spent,
-      focusAttacks: next.focusAttacks, combatMeters: next.meters }).where(eq(heroes.id, 1)).run();
+    // All damage inputs are snapshotted at entry. New training powers the next run.
+    const next = battleTurn(run.state);
+    tx.update(heroes).set({ focusAttacks: next.focusAttacks, combatMeters: next.meters }).where(eq(heroes.id, 1)).run();
     if (next.status === 'victory') {
       // Award once in the same transaction as the final checkpoint. Level-up
       // health does not refill the hero on victory; the exact remaining HP stays.
@@ -223,7 +207,17 @@ export function retreatDungeon(db: GameDb, id: number) {
     const run = tx.select().from(dungeonRuns).where(eq(dungeonRuns.id, id)).get();
     if (!run || run.status !== 'active') return;
     saveBattleCheckpoint(tx, id, { ...run.state, status: 'retreated', gold: 0, xp: 0,
-      log: ['You return without loot. Entry health and spent pushups are restored. Used potion charges stay spent.'] });
+      log: ['You return without loot. Entry health is restored. Used potion charges stay spent.'] });
+  });
+}
+
+/** Keep the result in history while clearing it from the expedition screen. */
+export function dismissDungeonResult(db: GameDb, id: number, now = Date.now()) {
+  db.transaction(tx => {
+    const run = tx.select().from(dungeonRuns).where(eq(dungeonRuns.id, id)).get();
+    if (!run || run.dismissedAt !== null) return;
+    if (run.status === 'active') throw new Error('Finish or retreat from this expedition first.');
+    tx.update(dungeonRuns).set({ dismissedAt: now }).where(eq(dungeonRuns.id, id)).run();
   });
 }
 
@@ -241,13 +235,15 @@ export function getGameSnapshot(db: GameDb, now = Date.now()) {
     .groupBy(sql`date(${sets.endedAt} / 1000, 'unixepoch', 'localtime')`).all();
   const runTotals = db.select({ distance: sql<number>`coalesce(sum(${runs.distanceMeters}), 0)`.mapWith(Number),
     count: sql<number>`count(*)`.mapWith(Number) }).from(runs).get()!;
-  const stats = heroStats(hero, today);
-  const pushupUnits = getPushupUnits(db, hero.pushupUnitsSpent);
-  const latestBattle = db.select().from(dungeonRuns).orderBy(desc(dungeonRuns.id)).limit(1).get() ?? null;
-  const cost = latestBattle?.status === 'active' ? latestBattle.state.stats.pushupCostUnits : stats.pushupCostUnits;
+  const savedPushups = getSavedPushups(db);
+  const stats = heroStats(hero, today, savedPushups);
+  const latestRun = db.select().from(dungeonRuns).orderBy(desc(dungeonRuns.id)).limit(1).get();
+  // Select the latest first: filtering dismissed rows in SQL would resurrect
+  // an even older result when the player clears the current one.
+  const latestBattle = latestRun && latestRun.dismissedAt === null ? latestRun : null;
+  const power = attackPower(stats, hero.focusAttacks);
   return {
-    hero, today, history, stats, pushupUnits, attackCostUnits: attackCostUnits(cost, hero.focusAttacks),
-    attacksAvailable: attacksAvailable(pushupUnits, cost, hero.focusAttacks),
+    hero, today, history, stats, savedPushups, damage: power.damage, damageMultiplier: power.multiplier,
     currentHealth: availableHealth(hero, stats.health, today.day),
     claimed: db.select().from(challengeClaims).where(eq(challengeClaims.day, today.day)).all().map((c) => c.challengeId),
     latestBattle,

@@ -19,9 +19,8 @@ import type { InputRotation } from '../src/pose/model';
 import { OVERLAY_TRANSFORMS } from '../src/pose/orientation';
 import { HEAD_DEFAULT_CONFIG } from '../src/reps/headDetector';
 import { db } from '../src/db/client';
-import { getPushupUnits, savePushupWorkout } from '../src/db/game';
+import { getSavedPushups, savePushupWorkout } from '../src/db/game';
 import { useGame } from '../src/game/GameProvider';
-import { PUSHUP_UNITS } from '../src/game/items';
 import { Button, Card, colors, PageHeading, Screen, ui } from '../src/ui/theme';
 
 const ROTATIONS: InputRotation[] = [0, 90, 180, 270];
@@ -182,15 +181,15 @@ export default function Session() {
     const partial = readout.value.partials;
     let credited = 0;
     const success = perform(() => {
-      const before = getPushupUnits(db);
+      const before = getSavedPushups(db);
       savePushupWorkout(db, { sourceKey, startedAt, endedAt: Date.now(), validReps: full, partialReps: partial });
-      credited = (getPushupUnits(db) - before) / PUSHUP_UNITS;
+      credited = getSavedPushups(db) - before;
     });
     if (success) setSummary({ full, partial, credited }); else saved.current = false;
   };
 
   usePreventRemove(!summary && (liveReps > 0 || reps.partials > 0), ({ data: actionData }) => {
-    Alert.alert('Save your pushups?', 'Finish this workout to add its reps to your history and your attack stockpile.', [
+    Alert.alert('Save your pushups?', 'Finish this workout to add its reps to your history and your damage bonus.', [
       { text: 'Keep training', style: 'cancel' },
       { text: 'Discard', style: 'destructive', onPress: () => navigation.dispatch(actionData.action) },
       { text: 'Save workout', onPress: finish },
@@ -199,7 +198,7 @@ export default function Session() {
 
   if (summary) return <Screen>
     <PageHeading eyebrow="Training / workout saved" title="A little stronger." />
-    <Card><Text style={ui.label}>Pushups completed</Text><Text style={[ui.number, { fontSize: 64 }]}>{summary.full}</Text><Text style={[ui.heading, { color: colors.green }]}>+{summary.credited} pushups stockpiled</Text><Text style={ui.body}>{summary.partial} shallow reps recorded separately. Your effort is saved on this phone.</Text><Text style={ui.small}>Each attack uses one pushup before item savings. Unused pushups carry over; your workout history always stays.</Text></Card>
+    <Card><Text style={ui.label}>Pushups completed</Text><Text style={[ui.number, { fontSize: 64 }]}>{summary.full}</Text><Text style={[ui.heading, { color: colors.green }]}>+{summary.credited} pushups saved</Text><Text style={ui.body}>{summary.partial} shallow reps recorded separately. Your effort is saved on this phone.</Text><Text style={ui.small}>Every saved pushup adds 10% of your base damage before item bonuses. Pushups are never consumed, and your power carries over.</Text></Card>
     <Button label="Return to camp" onPress={() => router.replace('/')} />
     <Button secondary label="Take this power to the dungeon" onPress={() => router.replace('/dungeon')} />
   </Screen>;
@@ -284,7 +283,7 @@ export default function Session() {
           <Text style={styles.debugText}>best score: {debug.best}%</Text>
           <Text style={styles.debugText}>camera: {position}</Text>
           {modelError ? <Text style={styles.errorText}>{String(modelError)}</Text> : null}
-        </View> : <View style={styles.debugPanel}><Text style={styles.buttonText}>PUSHUPS → TODAY&apos;S ATTACK</Text><Text style={styles.debugText}>Finish to save your workout.</Text>{modelError ? <Text style={styles.errorText}>{String(modelError)}</Text> : null}</View>}
+        </View> : <View style={styles.debugPanel}><Text style={styles.buttonText}>PUSHUPS → DAMAGE BONUS</Text><Text style={styles.debugText}>Finish to save your workout.</Text>{modelError ? <Text style={styles.errorText}>{String(modelError)}</Text> : null}</View>}
 
         <View style={styles.counterWrap} pointerEvents="none">
           {debug.best >= 35 && debug.margin < 0.04 ? (

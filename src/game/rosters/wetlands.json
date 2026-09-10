@@ -1,0 +1,51 @@
+{
+  "biome_id": "wetlands",
+  "name": "Wetlands",
+  "enemies": {
+    "bog_toad": {
+      "id": "bog_toad",
+      "name": "Bog Toad",
+      "health": 55,
+      "attack": 10,
+      "gold": 10,
+      "xp": 15,
+      "sprite": "slime"
+    },
+    "drowned_corpse": {
+      "id": "drowned_corpse",
+      "name": "Drowned Corpse",
+      "health": 80,
+      "attack": 11,
+      "gold": 12,
+      "xp": 18,
+      "sprite": "knight"
+    },
+    "bog_hag": {
+      "id": "bog_hag",
+      "name": "Bog Hag",
+      "health": 90,
+      "attack": 14,
+      "gold": 14,
+      "xp": 20,
+      "sprite": "knight"
+    },
+    "root_hulk": {
+      "id": "root_hulk",
+      "name": "Root Hulk",
+      "health": 140,
+      "attack": 18,
+      "gold": 24,
+      "xp": 28,
+      "sprite": "knight"
+    },
+    "giant_water_strider": {
+      "id": "giant_water_strider",
+      "name": "Giant Water Strider",
+      "health": 65,
+      "attack": 13,
+      "gold": 12,
+      "xp": 18,
+      "sprite": "knight"
+    }
+  }
+}

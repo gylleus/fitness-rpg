@@ -5,7 +5,7 @@ import { db } from '../../src/db/client';
 import { deleteRun } from '../../src/db/game';
 import { useGame } from '../../src/game/GameProvider';
 import { dayStart, paceLabel, runDodgeBps, type FitnessDay } from '../../src/game/rules';
-import { percentLabel, pushupLabel } from '../../src/game/items';
+import { percentLabel, multiplierLabel } from '../../src/game/items';
 import { Button, Card, colors, PageHeading, Screen, ui } from '../../src/ui/theme';
 
 type Metric = 'pushups' | 'steps' | 'distanceMeters';
@@ -67,7 +67,7 @@ export default function Progress() {
       </Card>)}
     </View>
 
-    <Card><Text style={ui.heading}>Your attack stockpile</Text><Detail label="Unspent pushups" value={pushupLabel(data.pushupUnits)} /><Detail label="Pushups spent in combat" value={pushupLabel(data.hero.pushupUnitsSpent)} /><Text style={ui.small}>Spending pushups never subtracts from your fitness records or daily quests.</Text></Card>
+    <Card><Text style={ui.heading}>Your pushup power</Text><Detail label="Saved pushups" value={String(data.savedPushups)} /><Detail label="Damage multiplier" value={multiplierLabel(data.damageMultiplier)} /><Text style={ui.small}>Every saved full rep boosts damage. Attacks never spend pushups or subtract from your fitness history.</Text></Card>
     <View style={{ gap: 14 }}><Text style={ui.heading}>Since your first day</Text>
       <View style={ui.row}><Card style={ui.flex}><Text style={ui.label}>Total pushups</Text><Text style={ui.number}>{data.totals.pushups.toLocaleString()}</Text></Card><Card style={ui.flex}><Text style={ui.label}>Best pushup day</Text><Text style={ui.number}>{data.totals.bestPushupDay.toLocaleString()}</Text></Card></View>
       <Card><Detail label="Distance run, all time" value={`${(data.totals.distanceMeters / 1000).toFixed(2)} km`} /><Detail label="Runs completed" value={data.totals.runs.toLocaleString()} /><Text style={ui.small}>Your exercise data and game progress are saved on this phone. No account or internet needed.</Text></Card>

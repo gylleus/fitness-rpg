@@ -2,7 +2,6 @@ import { describe, expect, it, vi } from 'vitest';
 import { advanceMeter, emptyCombatMeters, resolveAttack, type AttackEffect } from './attacks';
 import { beginBattle, battleTurn } from './combat';
 import { fitnessDay, heroStats } from './rules';
-import { attacksAvailable } from './items';
 
 const stats = heroStats({ gold: 0, xp: 0, swordLevel: 0, armorLevel: 0, unlockedDungeon: 0 }, fitnessDay('2026-09-06'));
 
@@ -48,20 +47,20 @@ describe('deterministic attacks', () => {
     expect(attack.damage).toBe(50);
   });
 
-  it('charges once for a killing blow with crit, damage, and healing procs', () => {
+  it('resolves a killing blow with crit, damage, and healing procs without spending pushups', () => {
     const battle = beginBattle(0, '2026-09-06', { ...stats, attackEffects: [
       { id: 'crit', name: 'Keen edge', trigger: 'onAttack', rateBps: 10000, kind: 'critical', multiplierBps: 20000 },
       { id: 'spark', name: 'Spark', trigger: 'onAttack', rateBps: 10000, kind: 'damage', amount: 20 },
       { id: 'mend', name: 'Mend', trigger: 'onAttack', rateBps: 10000, kind: 'heal', amount: 30 },
-    ] }, 95, { pushupUnits: 100 });
+    ] }, 95);
     const next = battleTurn({ ...battle, phase: 'fighting' });
-    expect(next).toMatchObject({ pushupUnits: 0, heroHp: 100, defeated: 1, attacksMade: 1, lastAction: 'attack' });
+    expect(next).toMatchObject({ heroHp: 100, defeated: 1, attacksMade: 1, lastAction: 'attack' });
     expect(next.meters.dodge).toBe(0);
-    expect(battle.pushupUnits).toBe(100);
+    expect(next.stats.pushups).toBe(battle.stats.pushups);
   });
 
   it('dodges the fifth incoming hit even across an enemy change and JSON reload', () => {
-    let battle = beginBattle(0, '2026-09-06', { ...stats, health: 1000, dodgeBps: 2000 }, 1000, { pushupUnits: 10000 });
+    let battle = beginBattle(0, '2026-09-06', { ...stats, health: 1000, dodgeBps: 2000 }, 1000);
     let incoming = 0;
     const dodges: number[] = [];
     for (let i = 0; i < 100 && battle.status === 'active'; i++) {
@@ -76,20 +75,12 @@ describe('deterministic attacks', () => {
         }
       }
     }
-    expect(dodges).toEqual([5, 10]);
+    expect(dodges).toEqual([5, 10, 15]);
   });
 
-  it('exhausts without a free attack, resource debt, or pending loot', () => {
-    const battle = beginBattle(0, '2026-09-06', { ...stats, pushupCostUnits: 90 }, 100, { pushupUnits: 89 });
+  it('attacks at base damage even with zero recorded pushups', () => {
+    const battle = beginBattle(0, '2026-09-06', stats, 100);
     const next = battleTurn({ ...battle, phase: 'fighting', gold: 20, xp: 30 });
-    expect(next).toMatchObject({ status: 'exhausted', enemyHp: 35, pushupUnits: 89, attacksMade: 0, gold: 0, xp: 0 });
-    expect(battleTurn(next)).toEqual(next);
-  });
-
-  it('previews affordability through the last discounted potion charge', () => {
-    expect(attacksAvailable(900, 90, 0)).toBe(10);
-    expect(attacksAvailable(88, 90, 0)).toBe(0);
-    expect(attacksAvailable(250, 90, 1)).toBe(3); // 0.7 + 0.9 + 0.9
-    expect(attacksAvailable(900, 90, 10)).toBe(12); // 7 + 1.8, remainder 0.2
+    expect(next).toMatchObject({ status: 'active', enemyHp: battle.enemyHp - 25, attacksMade: 1, gold: 20, xp: 30 });
   });
 });

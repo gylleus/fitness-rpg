@@ -32,9 +32,9 @@ export default function Forge() {
     <Card>
       <Text style={[ui.label, { color: colors.purple }]}>Rare amulet · {hero.amuletOwned ? 'Equipped' : 'Merchant stock'}</Text>
       <Text style={ui.heading}>{AMULET.name}</Text>
-      <Text style={ui.body}>Permanently use 10% fewer pushups per attack. Each swing costs 0.9 instead of 1.</Text>
-      <Text style={ui.small}>Unlocked by defeating the Rootwarden. A guaranteed purchase; no random drops.</Text>
-      <Button label={hero.amuletOwned ? 'Amulet equipped ✓' : hero.unlockedDungeon < AMULET.unlockDungeon ? 'Defeat the Rootwarden to unlock' : `Buy amulet  ·  ◆ ${AMULET.cost} gold`}
+      <Text style={ui.body}>Permanently add 1 percentage point to the damage bonus per pushup: 10% becomes 11%.</Text>
+      <Text style={ui.small}>Unlocked by defeating the Root Hulk. A guaranteed purchase; no random drops.</Text>
+      <Button label={hero.amuletOwned ? 'Amulet equipped ✓' : hero.unlockedDungeon < AMULET.unlockDungeon ? 'Defeat the Root Hulk to unlock' : `Buy amulet  ·  ◆ ${AMULET.cost} gold`}
         disabled={hero.amuletOwned || hero.unlockedDungeon < AMULET.unlockDungeon || hero.gold < AMULET.cost}
         onPress={() => perform(() => purchaseAmulet(db))} />
     </Card>
@@ -46,7 +46,7 @@ export default function Forge() {
       return <Card key={kind}>
         <View style={ui.between}><Text style={ui.heading}>{potion.name}</Text><Text style={ui.small}>{hero[potion.field]} owned</Text></View>
         <Text style={ui.body}>{potion.description}</Text>
-        {kind === 'efficiency' && <Text style={ui.small}>Stacks with the amulet: 0.7 pushups per attack. {hero.focusAttacks > 0 ? `${hero.focusAttacks} focused attacks remaining.` : 'One focus potion active at a time.'}</Text>}
+        {kind === 'efficiency' && <Text style={ui.small}>Stacks with the amulet: each pushup adds 13% damage while focused. {hero.focusAttacks > 0 ? `${hero.focusAttacks} focused attacks remaining.` : 'One focus potion active at a time.'}</Text>}
         {kind === 'health' && <Text style={ui.small}>{currentHealth} / {stats.health} HP available</Text>}
         <Button secondary label={`Buy ${potion.name.toLowerCase()}  ·  ◆ ${potion.cost} gold`} disabled={hero.gold < potion.cost} onPress={() => perform(() => purchasePotion(db, kind))} />
         <Button label={`Drink ${potion.name.toLowerCase()}`} disabled={cannotUse} onPress={() => perform(() => drinkPotion(db, kind))} />

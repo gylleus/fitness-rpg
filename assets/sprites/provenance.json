@@ -1,0 +1,167 @@
+{
+  "recipe_sha256": "ddf2fead09a9c0204565c83260f5d54f6d0432b0add25e3d3f3420c1e127d99f",
+  "entities": {
+    "barbarian_player": {
+      "manifest": "image-generation/player-sprites/sequences/barbarian-club-v1/export/manifest.json",
+      "sha256": "0bb8870852516a184d7d301355f3e53d6085ef26fc17b259da07e8e7479d71e0",
+      "frame_step": 1,
+      "sheets": {
+        "idle": {
+          "atlas_sha256": "0c6522729178d7ada0ac3beb5f0b880a74a33ded02427a49911514c111e7511a",
+          "image_sha256": "1c72727d7c97795f741dd453690e17a4ff1c360819b27a719e0af16435530618",
+          "output_sha256": "2afaea92e40b9d1e60a7f6891a7931d972e91c1554dc0dff7652f07fde89a832"
+        },
+        "walk": {
+          "atlas_sha256": "0c45847b22fe209fd380c46cdb01f654c163fd2839ebcf656f727e2d3652a3b9",
+          "image_sha256": "1ce36b01c2e67bc486baa2881925b1c1aabd798af2dc3fcc9778ab9b9f65b153",
+          "output_sha256": "80b42e14b2112d3e41b89fdb0c6db1b14eab230075f1b39310f89744a64d0e21"
+        },
+        "attack": {
+          "atlas_sha256": "e317d837ad780bdf0c967ce5198cff7544126eab571b1d5209c135c77e1755c1",
+          "image_sha256": "575d529a3a396cbb161c4ac54d2c49e5161fe34cf9161757c6426815ed0eab21",
+          "output_sha256": "b8605f79b08b78119b14faf7cab526a6fd77822a9212e3822f474030b3b9e8ad"
+        },
+        "death": {
+          "atlas_sha256": "4757dbe38a25509377efa693e64027783b3f08f2692b7c87ef1548dcb4519a83",
+          "image_sha256": "ec71781e0bdbc5073db0011042f33eca9a8c3ae2826017a5e7329568607e606f",
+          "output_sha256": "ce6ffb5bb68ad98b593c8bcc534d0e154aed16e8df76b8911f52ab54337df213"
+        }
+      }
+    },
+    "bog_toad": {
+      "manifest": "image-generation/enemy-sprites/runs/wetlands-selected/exports/bog_toad/manifest.json",
+      "sha256": "053c0685c2d762bc6ea222c3bc3c9cc64685285b7a4cf0db50a2bde6afdc5e29",
+      "frame_step": 1,
+      "sheets": {
+        "idle": {
+          "atlas_sha256": "cf7f8d0d1fb405c72ed2bfc8ad9c7119ee9086cb6e25b505522c170065cdcd86",
+          "image_sha256": "c1023ef04f18c28f4cbe63b143fe18ba0288255559f729ae73a397584482687e",
+          "output_sha256": "c1023ef04f18c28f4cbe63b143fe18ba0288255559f729ae73a397584482687e"
+        },
+        "walk": {
+          "atlas_sha256": "0f8a912b6f76496d900a369bf7c44a2187494a7362db26cf2faa58e728e443d9",
+          "image_sha256": "e3f043fab87e31a4951876eddfbd1b1fe30dfe506db55fcea015df5bc863b9c1",
+          "output_sha256": "e3f043fab87e31a4951876eddfbd1b1fe30dfe506db55fcea015df5bc863b9c1"
+        },
+        "attack": {
+          "atlas_sha256": "12dd98023ce2ddc1f0244a9a413ad5f8da75b20f0f006de01262e568a33d5353",
+          "image_sha256": "fc3770e1f8bfcf7c63a681c623afcb1607732ec23295fd7674963f2cd20b0ca1",
+          "output_sha256": "fc3770e1f8bfcf7c63a681c623afcb1607732ec23295fd7674963f2cd20b0ca1"
+        },
+        "death": {
+          "atlas_sha256": "46d05e6950271db3a5b63ce2f6d920f63a1f7757fa3fe9db785b8baf4940bba1",
+          "image_sha256": "c793ab24b469962cce037d421c8973dcb46d7aba20ca914eb24d8dca1387ab2c",
+          "output_sha256": "c793ab24b469962cce037d421c8973dcb46d7aba20ca914eb24d8dca1387ab2c"
+        }
+      }
+    },
+    "drowned_corpse": {
+      "manifest": "image-generation/enemy-sprites/runs/wetlands-selected/exports/drowned_corpse/manifest.json",
+      "sha256": "9657a2ed4a578523ab74d73375bf23f81a9648ff161e4faa703157848b0bd845",
+      "frame_step": 1,
+      "sheets": {
+        "idle": {
+          "atlas_sha256": "122e6a0a7e75a688e5c7fef95b2adb8e5e1ac7e3c0e676e9a6b4c91fca1c73eb",
+          "image_sha256": "d03863f45d762ce52fc944c7567c4ccb714a83b5e5d5a670270671383efa036e",
+          "output_sha256": "d03863f45d762ce52fc944c7567c4ccb714a83b5e5d5a670270671383efa036e"
+        },
+        "walk": {
+          "atlas_sha256": "2d041ee8cce9cffa74401c94675806c5f2fd76762a363076b17659408e3d2e52",
+          "image_sha256": "fd9d207653337a4668c7d2d7770d9e0e19325b232b7b3e729bee7814507f2f7c",
+          "output_sha256": "fd9d207653337a4668c7d2d7770d9e0e19325b232b7b3e729bee7814507f2f7c"
+        },
+        "attack": {
+          "atlas_sha256": "eccad2024b1e23146925d41c0da0aa6c4182fbf545f50d179daa41e91d9e5049",
+          "image_sha256": "6bb3afab8cb3e4261df17cd148c52229dd6fa567e336ea8a0c7f5067c208e26c",
+          "output_sha256": "6bb3afab8cb3e4261df17cd148c52229dd6fa567e336ea8a0c7f5067c208e26c"
+        },
+        "death": {
+          "atlas_sha256": "662647d4c8a1b5c902113cbec0573fc402c05c30db7c34a74c2a2a47cb0ef5d8",
+          "image_sha256": "9212479f3433f565b2e43df5be7e4cfd3fcea14a7547ac2e28e6aaf9d0fbf401",
+          "output_sha256": "9212479f3433f565b2e43df5be7e4cfd3fcea14a7547ac2e28e6aaf9d0fbf401"
+        }
+      }
+    },
+    "bog_hag": {
+      "manifest": "image-generation/enemy-sprites/runs/wetlands-selected/exports/bog_hag/manifest.json",
+      "sha256": "8d6ac1f12ba58a5d9448dddf5c4d03c1ac260ee79d5256cdd9449077d445d666",
+      "frame_step": 1,
+      "sheets": {
+        "idle": {
+          "atlas_sha256": "80302e3eb0f3c7c794c5c5469bfa32ddbb6829f1fac51933b7fcaa18857a4e87",
+          "image_sha256": "79285409209e30cec856e58eb8cc88d69e00a3379d0287f9f3fb28ccd1d7ca70",
+          "output_sha256": "79285409209e30cec856e58eb8cc88d69e00a3379d0287f9f3fb28ccd1d7ca70"
+        },
+        "walk": {
+          "atlas_sha256": "8e83abe4a01df86a57680a16a98052897d5cbd4f8225a03d221e3e9b60810fc9",
+          "image_sha256": "0498097eb64e992f087972989c3bdb0acefcd887be9cd281c0b3a363d944824d",
+          "output_sha256": "0498097eb64e992f087972989c3bdb0acefcd887be9cd281c0b3a363d944824d"
+        },
+        "attack": {
+          "atlas_sha256": "545bcf4b7fb2dab7100a1fe726c8be0aa92c33242cbff396e22765aab428838f",
+          "image_sha256": "addb888a4de8b41b0b414ef208a7e42df87a96c483d2e859752fc970411c1bb7",
+          "output_sha256": "addb888a4de8b41b0b414ef208a7e42df87a96c483d2e859752fc970411c1bb7"
+        },
+        "death": {
+          "atlas_sha256": "9ebfc78e4be9166e672de4772a311c814259ea13546ab7f85927ca6ecec2ec7a",
+          "image_sha256": "9e710e3f75c9b37fdf891ab6b9416d2493416fc1cb86eb1b34b2781f31859886",
+          "output_sha256": "9e710e3f75c9b37fdf891ab6b9416d2493416fc1cb86eb1b34b2781f31859886"
+        }
+      }
+    },
+    "root_hulk": {
+      "manifest": "image-generation/enemy-sprites/runs/wetlands-selected/exports/root_hulk/manifest.json",
+      "sha256": "d0567270e98db22cb12a23b2cdd8d2a4212f25ec381b03410a5f9d7d3c3e02bd",
+      "frame_step": 1,
+      "sheets": {
+        "idle": {
+          "atlas_sha256": "c0e9147a52005392dce3a2b11128d6180186218a595a06519710e5983e355b7c",
+          "image_sha256": "ef632c703568147734d0071f188b877a07a0114bfa7d7f706dacbd6cd6784cf3",
+          "output_sha256": "ef632c703568147734d0071f188b877a07a0114bfa7d7f706dacbd6cd6784cf3"
+        },
+        "walk": {
+          "atlas_sha256": "5b9ce4d38e6ecc83415c21e1fcec0657d5fb3880cd5126be64e2b2fc713e3cf2",
+          "image_sha256": "39e8be1a6a9ddf77aa5654df58f740b8179d83fee81220ef10b78e529f5e3ed0",
+          "output_sha256": "39e8be1a6a9ddf77aa5654df58f740b8179d83fee81220ef10b78e529f5e3ed0"
+        },
+        "attack": {
+          "atlas_sha256": "1b3dd5bb99b18b43b3b298d546b26d2599b8fb25ef7d212aeba452c49d2c865d",
+          "image_sha256": "3a33f1f14b54e58f4808922d8ee6b03380aaf03403927ba24b0b6800f143461b",
+          "output_sha256": "3a33f1f14b54e58f4808922d8ee6b03380aaf03403927ba24b0b6800f143461b"
+        },
+        "death": {
+          "atlas_sha256": "4814cdf8850f3456cc1733ee69630c1ac702dab88f11d2129a19f0dbaddc42dc",
+          "image_sha256": "b4bca160ce6db0e0ce7003d2b412b39e65924b7b62bedbc386aed00671254daa",
+          "output_sha256": "b4bca160ce6db0e0ce7003d2b412b39e65924b7b62bedbc386aed00671254daa"
+        }
+      }
+    },
+    "giant_water_strider": {
+      "manifest": "image-generation/enemy-sprites/runs/wetlands-selected/exports/giant_water_strider/manifest.json",
+      "sha256": "203b1a1f97cbbcecd24556ad75b8d2fb9ec377ef0544812db7ef3f83af2c778a",
+      "frame_step": 1,
+      "sheets": {
+        "idle": {
+          "atlas_sha256": "1b584c1acded9d23cb006ceab3b1b37e80f50d9b7c727c1077e1dca4128592b8",
+          "image_sha256": "f15f4fce50c0b5a71691335180602a7388e195dada35071dca45cb725bf8aff9",
+          "output_sha256": "f15f4fce50c0b5a71691335180602a7388e195dada35071dca45cb725bf8aff9"
+        },
+        "walk": {
+          "atlas_sha256": "b40345a7201cb33df77c454ddcc4a585221435796dccbe8d6c007d75aa52a7c3",
+          "image_sha256": "c995c041de624ea551b8308892cc3f0aee80c31e76ce3883f238415db11e2006",
+          "output_sha256": "c995c041de624ea551b8308892cc3f0aee80c31e76ce3883f238415db11e2006"
+        },
+        "attack": {
+          "atlas_sha256": "d3d6cd6c87fc077d95059fdb3347b2ebdf61d48eda55ba278fe27497ea078983",
+          "image_sha256": "df29e9c98be0c67c1afb4ec4f0c947420effabd90d73db7c1d4330779bea5c4d",
+          "output_sha256": "df29e9c98be0c67c1afb4ec4f0c947420effabd90d73db7c1d4330779bea5c4d"
+        },
+        "death": {
+          "atlas_sha256": "030a91a35c730460d58ff31b9712bc220a7ebb2012e32e022155166c40fdffb6",
+          "image_sha256": "6564f85706c9b449cf39161e118e7f3cd2751179eeb9bbf19250d50168e2547d",
+          "output_sha256": "6564f85706c9b449cf39161e118e7f3cd2751179eeb9bbf19250d50168e2547d"
+        }
+      }
+    }
+  }
+}

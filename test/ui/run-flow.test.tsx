@@ -36,7 +36,7 @@ jest.mock('expo-sensors', () => ({ Pedometer: {
 } }));
 jest.mock('../../src/health/native', () => ({ healthName: 'Test Health', healthAvailable: async () => true, healthAuthorized: async () => true, authorizeHealth: async () => true, readHealthSteps: async () => 0 }));
 const now = new Date(2026, 8, 6, 12).getTime();
-const routes = { _layout: Root, '(tabs)/_layout': Tabs, '(tabs)/index': Camp, run: Run, health: Health, session: () => null, activity: () => null };
+const routes = { _layout: Root, '(tabs)/_layout': Tabs, '(tabs)/index': Camp, run: Run, health: Health, expedition: () => null, session: () => null, activity: () => null };
 
 beforeEach(() => { mockDb = createTestDb(); jest.useFakeTimers(); jest.setSystemTime(now); AppState.currentState = 'active'; mockRegistered = false; mockPrecise = true; mockBackgroundGranted = true; mockSteps = null; mockStart.mockClear(); mockStop.mockClear(); });
 afterEach(async () => { await cleanup(); mockDb.$client.close(); jest.useRealTimers(); });

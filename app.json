@@ -72,7 +72,8 @@
           "isAndroidForegroundServiceEnabled": true
         }
       ],
-      "./plugins/with-health-rationale"
+      "./plugins/with-health-rationale",
+      "./plugins/with-game-category"
     ]
   }
 }
