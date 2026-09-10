@@ -54,11 +54,14 @@ schema_version = 1
 id = "wetlands"
 biome_file = "biomes/wetlands/BIOME.toml"
 enemies_file = "biomes/wetlands/ENEMIES.toml"
+scenery_file = "biomes/wetlands/SCENERY.toml"
 ```
 
 Each `[[biomes]]` entry has an `id`, `biome_file`, and `enemies_file`, with
-paths relative to the manifest. Biome data belongs in
-`biomes/<biome_id>/BIOME.toml` and `biomes/<biome_id>/ENEMIES.toml`. The optional
+paths relative to the manifest. An optional `scenery_file` registers the biome's
+isolated prop library; an explicitly registered missing file is an error.
+Biome data belongs in `biomes/<biome_id>/BIOME.toml`,
+`biomes/<biome_id>/ENEMIES.toml`, and `biomes/<biome_id>/SCENERY.toml`. The optional
 `shared_enemies_file` field is supported if a shared library is later authored;
 omitting it requires no shared file and loads no default enemies or encounters.
 
@@ -80,10 +83,94 @@ loaded before encounter references resolve, including references across biomes.
 | `visual.materials`, `visual.ambient_sounds` | string array | Materials and sound cues. |
 | `visual.palette` | table array | Each swatch has `name` and `color` (`#RRGGBB`). |
 | `generation.composition` | string | Environment composition and asset guidance. |
-| `sites`, `props`, `decorations` | table array | Each entry has a globally unique `id`, `name`, and `description`. Empty arrays are allowed. |
+| `sites` | table array | Location concepts with a globally unique `id`, `name`, and `description`. May be empty. |
+| `background_layers`, `ground_sections` | table array, optional | Scene asset definitions; see below. |
+| `props`, `decorations` | table array, optional | Legacy inline libraries with `id`, `name`, and `description`. New isolated props belong in `SCENERY.toml`. |
 
-Display descriptions and generation instructions have distinct fields. Props and
-decorations form an asset library; their presence does not imply interactivity.
+Display descriptions and generation instructions have distinct fields. Wetlands'
+existing isolated props and decorations moved to `SCENERY.toml` with their IDs
+and prose preserved. The plank walkway moved to `ground_sections`. Sites remain
+setting descriptions; representative cottages, walls and peat stacks are scenery
+cutouts, not required stops on a route.
+
+## Background and ground art
+
+[Wetlands BIOME.toml](biomes/wetlands/BIOME.toml) defines three background layers
+and three interchangeable ground sections. Each asset has `id`, `name`,
+`visual_description` (appearance prose), and a `generation` table (production
+instructions). Site, legacy prop/decoration, background, ground and scenery IDs
+share one global namespace. Enemy IDs retain their separate namespace.
+
+`generation.scene` establishes the shared art target:
+
+| Field | Meaning |
+| --- | --- |
+| `canvas` | `[width, height]` logical pixels for every background layer, currently `[640, 360]`. |
+| `ground_y` | Walking baseline measured down from the top of the scene, currently `288`. |
+| `reference_height` | Adventurer silhouette height in the reference composition, currently `64` pixels. |
+| `view` | `orthographic_side`; the route travels horizontally across the image. |
+| `style`, `avoid` | Shared style text and exclusions. Lighting and palette guidance come from `visual`. |
+
+`background_layers` are ordered far to near. Each layer's `generation` requires
+`parallax` (0–1, nondecreasing), `repeat_x` (boolean), `transparent` (boolean), and
+`composition` (text). The first layer is opaque; later layers have transparent
+space around their painted silhouettes. A parallax factor of 0 is stationary;
+1 moves with the ground. Wetlands uses overcast sky, distant tree/roof silhouettes,
+and middle-distance pools and reed banks. Nearby trees and cottages are separate
+props. No layer contains characters or enemies.
+
+`generation.ground` supplies the common `canvas`, `surface_y`, `edge_margin`,
+`repeat_x`, and `edge_description` for all ground sections. Wetlands uses a
+256×96 canvas with a surface at row 24: place the strip at scene row 264 to align
+its surface with the walking baseline and cover the bottom of the scene.
+The first and last 16 columns return to the same level peat profile; distinctive
+boards or roots occupy the middle. Each section's `generation.composition`
+describes its variation within that contract. The ground has transparent space
+above its silhouette and opaque soil below it. Sections describe visual terrain,
+not collision shapes, jumps, or mandatory obstacles.
+
+Canvas dimensions are integers from 16–1024 per side, with aspect ratio at most
+4:1. These are initial art targets, not device sizes or inference settings.
+`repeat_x` and the edge description request matching seams; actual pixel seams
+and mixed-section joins still require visual review after generation.
+
+## Scenery library
+
+[Wetlands SCENERY.toml](biomes/wetlands/SCENERY.toml) contains `schema_version`,
+`biome_id`, and a `scenery` table array. An empty array is allowed. Each entry has
+`id`, `name`, `visual_description`, and the following `generation` fields:
+
+| Field | Meaning |
+| --- | --- |
+| `canvas` | Target transparent cutout dimensions; rectangular props are allowed. |
+| `height_scale` | Positive visible silhouette height relative to the adventurer. Transparent padding is excluded. |
+| `layers` | Eligible placements: `behind_path`, `foreground`, or both. |
+| `anchor` | `ground` for a supported base or `waterline` for the depicted contact with water. |
+| `composition` | Isolation, attachment, silhouette and framing instructions. |
+
+All scenery entries are static transparent cutouts and inherit the biome's view,
+style, lighting, exclusions and palette guidance. The reference-height target
+sets their relative size in a composed scene; canvas dimensions include padding
+and do not themselves define world scale. The contact anchor is identified during
+cutout preparation; these definitions do not claim a measured pixel pivot yet.
+Reeds, roots and debris can occupy the low foreground. Tall trees and buildings
+stay behind the walking path. Attached details include their support: fungi on a
+short stump, or an unlit lantern on a broken post. Waterline assets omit painted
+water so they can be placed over a pool.
+
+This is a library of eligible props, not a placement sequence. Runtime placement
+chooses suitable bank/water positions and keeps the walking silhouettes readable.
+List order does not set frequency, and entries do not imply interactivity or
+enemy spawn conditions. Enemy eligibility remains entirely in `ENEMIES.toml`.
+
+`load_content()` and resolved JSON expose the library as each biome's `scenery`
+array (empty when no file is registered), alongside background and ground data.
+The content validator checks the files and their composition contracts. The
+sprite CLI does not yet consume these scene definitions: its existing background
+adapter exports opaque static scenes, and its prop adapter exports square sprites.
+Transparent scene layers, rectangular scenery, seamless joins, asset bundling and
+runtime placement still need the corresponding pipeline/runtime adapters. Model
+settings, seeds, generated output paths and measured pivots belong in asset runs.
 
 ## Enemy field contract
 

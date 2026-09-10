@@ -71,67 +71,82 @@ id = "wetlands_drowned_masonry"
 name = "Drowned masonry"
 description = "Half-submerged boundary walls and small stone shrines emerge from shallow pools. Worn steps descend into water that hides their lower ends. Silt collects along exposed ledges, while old foundations and tilted burial stones appear where the water has receded."
 
-[[props]]
+
+# Art targets in logical pixels, independent of device resolution and model settings.
+# Every background layer shares this canvas. The hero's feet meet ground_y.
+[generation.scene]
+canvas = [640, 360]
+ground_y = 288
+reference_height = 64
+view = "orthographic_side"
+style = "Pixel art with broad, readable shapes, restrained dark outlines and stepped clusters of muted color. Weathered dark fantasy; wet wood, peat and reeds carry the detail. Distant shapes lose contrast and detail, while foreground shapes remain distinct from the adventurer."
+avoid = ["photorealism", "isometric or overhead view", "a road receding toward a vanishing point", "characters or enemies baked into scenery", "occupied cottages", "lit windows or lanterns", "working settlements", "visible bell towers explaining the distant bells", "text or readable lettering", "soft airbrushed edges", "dense high-contrast detail behind combatants"]
+
+# All sections use this edge contract and can be joined in any order.
+# surface_y aligns with scene.ground_y; the soil extends to the scene's bottom.
+[generation.ground]
+canvas = [256, 96]
+surface_y = 24
+edge_margin = 16
+repeat_x = true
+edge_description = "The first and last 16 columns share the same level peat-path cross-section: a subdued olive turf lip at row 24, dark compact peat below, and sparse short reed stubble above. The outer edge columns match when repeated. Distinctive boards, roots, stones and puddles stay within the middle 224 columns and taper back to this common edge. There are no open gaps, vertical steps or raised obstacles along the walking surface. Pixels above the turf silhouette are transparent; the soil below it is opaque through the bottom edge."
+
+# Ordered from farthest to nearest. Layers after the sky have transparent space.
+# repeat_x describes the intended asset; it does not certify generated seams.
+
+[[background_layers]]
+id = "wetlands_overcast_sky"
+name = "Low overcast sky"
+visual_description = "A low ceiling of gray-green cloud hangs over the marsh. Broad, uneven bands of pale gray gather near the horizon, while the upper sky is a cooler, darker slate. The light is diffuse and there is no distinct sun or bright opening in the cloud."
+
+[background_layers.generation]
+parallax = 0.0
+repeat_x = true
+transparent = false
+composition = "Fill the entire 640 by 360 canvas with opaque sky and subdued atmospheric color. Keep cloud masses broad and low contrast, with no trees, buildings, terrain or figures. Match the left and right edges without a border or a conspicuous repeated cloud. Fog is represented by solid bands of stepped color rather than translucent bloom."
+
+[[background_layers]]
+id = "wetlands_distant_silhouettes"
+name = "Distant drowned treeline"
+visual_description = "Thin dead trunks, sparse willow crowns and a few crooked roof ridges emerge from the low mist. Long gaps of open horizon separate the silhouettes. Their gray-green edges merge with the damp air, and neither doors nor individual branches can be distinguished at this distance."
+
+[background_layers.generation]
+parallax = 0.15
+repeat_x = true
+transparent = true
+composition = "Use the shared scene canvas, leaving the upper sky transparent. Confine most silhouettes to rows 150 through 250; let low haze-colored bank shapes reach the bottom edge. Use a narrow, low-contrast color range and sparse roofs with no window lights. Leave generous open gaps and compatible left and right edges. Keep near trees, isolated props and the walking path out of this layer."
+
+[[background_layers]]
+id = "wetlands_reed_banks"
+name = "Pools and middle-distance reed banks"
+visual_description = "Long pools of nearly black water separate low peat islands. Dull yellow reeds gather along the banks, interrupted by slick exposed mud, shallow rectangular peat cuts and low fragments of drowned stonework. Narrow gray reflections break across the water beneath the reeds, while the channels remain broad and still."
+
+[background_layers.generation]
+parallax = 0.35
+repeat_x = true
+transparent = true
+composition = "Use the shared scene canvas with transparent space above the bank silhouettes. Place the banks and pools mainly below row 220, continuing their color to the bottom behind the separate ground strip. Keep the area above the walking baseline at row 288 quiet enough to read a 64-pixel adventurer. Match water levels, bank colors and silhouettes at the horizontal seam. No nearby willows, cottages, freestanding props or playable path are baked into this layer."
+
+[[ground_sections]]
+id = "wetlands_raised_peat_path"
+name = "Raised peat causeway"
+visual_description = "A narrow crown of firm brown peat runs above the surrounding wet ground. Coarse olive grass grips its ragged edges, and small flattened stones lie pressed into the mud. Darker damp patches and a few shallow puddles interrupt the trodden surface without breaking the route."
+
+[ground_sections.generation]
+composition = "A level side-on travel strip with a narrow visible upper lip and an opaque peat face below it. Small puddles are surface markings, not holes. Keep reeds and stones low, retain the shared edge profile, and leave the space above the path clear for feet and combat silhouettes."
+
+[[ground_sections]]
 id = "wetlands_plank_walkway"
 name = "Uneven plank walkway"
-description = "Bowed gray boards rest on posts of unequal height. Mismatched patches show repeated attempts to keep the crossing usable, but several planks have split or fallen away, exposing shallow water and mud below."
+visual_description = "Bowed gray boards rest on posts of unequal height. Mismatched patches show repeated attempts to keep the crossing usable, but several planks have split or fallen away, exposing shallow water and mud below."
 
-[[props]]
-id = "wetlands_channel_marker"
-name = "Channel marker"
-description = "A leaning wooden stake carries a faded strip of cloth and a series of carved water-level marks. Its lower half is dark with moisture, and fragments of weed cling around the latest flood line."
+[ground_sections.generation]
+composition = "A short patched board crossing embedded within the peat causeway. Keep the supported walking surface level at row 24; missing boards reveal mud below without creating a required jump. Show the exposed board ends and a few short supports from the side. Boards begin and end inside the central span, returning to the common peat edge within the 16-column margins."
 
-[[props]]
-id = "wetlands_obsolete_road_marker"
-name = "Obsolete road marker"
-description = "A weathered direction board remains firmly attached to a crooked post. Its arrow points along the vanished course of a road, directly into an uninterrupted stretch of dark water."
+[[ground_sections]]
+id = "wetlands_root_bound_path"
+name = "Root-bound peat causeway"
+visual_description = "Flattened willow roots thread through a strip of compact peat. Their wet bark is almost black beneath rubbed gray ridges, with small pockets of coarse grass caught between them. Stranded reed blades and patches of mud lie across the roots where repeated floods have passed."
 
-[[props]]
-id = "wetlands_abandoned_boat"
-name = "Abandoned flat-bottomed boat"
-description = "A broad, shallow wooden hull sits partly flooded beside a broken landing. Mud streaks its sides; a worn pole, coils of rotting rope, and a battered bailing bucket lie among leaves and standing water inside."
-
-[[props]]
-id = "wetlands_wicker_fish_traps"
-name = "Discarded wicker traps"
-description = "Long eel baskets and rounded fish traps lie tipped against the bank. Their wicker ribs are stained with silt, split at the narrow openings, and threaded with young reeds."
-
-[[props]]
-id = "wetlands_collapsed_net_rack"
-name = "Collapsed net rack"
-description = "Torn fishing nets hang in heavy folds from a wooden rack with one broken upright. Frayed mesh trails into the water, holding leaves, twigs, and patches of green growth."
-
-[[props]]
-id = "wetlands_unlit_lantern"
-name = "Abandoned lantern"
-description = "A small iron lantern hangs beneath a decaying eave or beside an empty landing. Rust gathers around the hinges, cloudy glass obscures its empty interior, and one cracked pane admits damp air. No flame burns inside."
-
-[[decorations]]
-id = "wetlands_reed_clump"
-name = "Reeds and rushes"
-description = "Dense stems of dull olive and straw yellow grow along the margins of pools. Bent stalks cross above the water, and dead blades collect in tangled mats around their bases."
-
-[[decorations]]
-id = "wetlands_duckweed"
-name = "Drifting duckweed"
-description = "Small muted green leaves gather in irregular rafts across sheltered water. Narrow black gaps and curved breaks interrupt the surface where water moves around posts and roots."
-
-[[decorations]]
-id = "wetlands_willow_roots"
-name = "Exposed willow roots"
-description = "Thick, knotted roots grip an eroded peat bank beneath a leaning willow. Wet bark darkens their undersides, while coarse grass and stranded reeds catch in the spaces between them."
-
-[[decorations]]
-id = "wetlands_shelf_fungi"
-name = "Pale shelf fungi"
-description = "Small cream and gray fungal shelves crowd the shaded sides of rotten posts and fallen branches. Their layered edges stand out against dark, saturated wood."
-
-[[decorations]]
-id = "wetlands_flood_debris"
-name = "Flood debris"
-description = "Branches, broken fence rails, and scraps of faded fabric lodge against roots and supports above the current waterline. Mud coats the lower pieces, marking the height of an earlier flood."
-
-[[decorations]]
-id = "wetlands_sinking_fence"
-name = "Sinking fence remnants"
-description = "A short run of crooked posts emerges from coarse grass and shallow water. A few warped rails remain attached, descending toward the mud until the final section disappears beneath it."
+[ground_sections.generation]
+composition = "Keep the roots pressed into or immediately beneath the walking surface, with no raised root arch, trunk or obstacle above the route. Let the distinctive root pattern taper out before the shared peat edge margins. Preserve a continuous level silhouette and the opaque soil below it."

@@ -1,0 +1,210 @@
+# Library of eligible visual props, not a scripted route or a spawn order.
+# All entries are static transparent cutouts. Scene style, lighting and palette
+# come from BIOME.toml. Canvas sizes and relative heights are initial art targets.
+# Enemy spawning is independent of this library.
+schema_version = 1
+biome_id = "wetlands"
+
+[[scenery]]
+id = "wetlands_channel_marker"
+name = "Channel marker"
+visual_description = "A leaning wooden stake carries a faded strip of cloth and a series of carved water-level marks. Its lower half is dark with moisture, and fragments of weed cling around the latest flood line."
+
+[scenery.generation]
+canvas = [64, 128]
+height_scale = 1.4
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One leaning stake and its attached cloth, fully visible on transparency. The foot is the ground anchor. Carved notches are simple marks, with no lettering; exclude surrounding reeds, water and other stakes."
+
+[[scenery]]
+id = "wetlands_obsolete_road_marker"
+name = "Obsolete road marker"
+visual_description = "A weathered direction board remains firmly attached to a crooked post. Its arrow points along the vanished course of a road, directly into an uninterrupted stretch of dark water."
+
+[scenery.generation]
+canvas = [96, 128]
+height_scale = 1.5
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One crooked post with an arrow-shaped board, all parts inside the transparent canvas. Keep the direction readable through silhouette alone; no lettering. The post base is the anchor. Its placement beside water can convey the obsolete route without painting water into the prop."
+
+[[scenery]]
+id = "wetlands_abandoned_boat"
+name = "Abandoned flat-bottomed boat"
+visual_description = "A broad, shallow wooden hull sits partly flooded beside a broken landing. Mud streaks its sides; a worn pole, coils of rotting rope, and a battered bailing bucket lie among leaves and standing water inside."
+
+[scenery.generation]
+canvas = [192, 96]
+height_scale = 0.8
+layers = ["behind_path"]
+anchor = "waterline"
+composition = "A single broadside hull with a small view into its flooded interior. Keep the pole, rope and bucket inside or attached to the boat. The lower hull meets the waterline anchor; no landing, separate water patch, reflection or shore is included."
+
+[[scenery]]
+id = "wetlands_wicker_fish_traps"
+name = "Discarded wicker traps"
+visual_description = "Long eel baskets and rounded fish traps lie tipped against the bank. Their wicker ribs are stained with silt, split at the narrow openings, and threaded with young reeds."
+
+[scenery.generation]
+canvas = [96, 64]
+height_scale = 0.65
+layers = ["behind_path", "foreground"]
+anchor = "ground"
+composition = "One compact group of two overlapping traps, with a few attached reed blades. Use broad broken ribs that remain readable as pixels; avoid a dense fine mesh. Keep the ground and water transparent around the group."
+
+[[scenery]]
+id = "wetlands_collapsed_net_rack"
+name = "Collapsed net rack"
+visual_description = "Torn fishing nets hang in heavy folds from a wooden rack with one broken upright. Frayed mesh trails into the water, holding leaves, twigs, and patches of green growth."
+
+[scenery.generation]
+canvas = [128, 128]
+height_scale = 1.5
+layers = ["behind_path"]
+anchor = "ground"
+composition = "The broken rack and its hanging net form one complete isolated prop. Simplify frayed mesh into a few connected bands and conspicuous holes. Include the foot of the remaining upright as the ground anchor, with no painted pool or bank."
+
+[[scenery]]
+id = "wetlands_unlit_lantern"
+name = "Abandoned lantern"
+visual_description = "A small iron lantern hangs beneath a decaying eave or beside an empty landing. Rust gathers around the hinges, cloudy glass obscures its empty interior, and one cracked pane admits damp air. No flame burns inside."
+
+[scenery.generation]
+canvas = [64, 96]
+height_scale = 0.95
+layers = ["behind_path"]
+anchor = "ground"
+composition = "Keep the unlit lantern attached to a short rotten landing post with a bent iron bracket. Include the entire post down to its ground anchor so this prop can stand independently. The glass has dull solid highlights; there is no flame, glow or surrounding landing."
+
+[[scenery]]
+id = "wetlands_reed_clump"
+name = "Reeds and rushes"
+visual_description = "Dense stems of dull olive and straw yellow grow along the margins of pools. Bent stalks cross above the water, and dead blades collect in tangled mats around their bases."
+
+[scenery.generation]
+canvas = [96, 96]
+height_scale = 0.9
+layers = ["behind_path", "foreground"]
+anchor = "ground"
+composition = "One irregular clump with a clear base and a few thick, bent stalks. Preserve open gaps using hard transparency and keep tips inside the canvas. No water rectangle or ground patch surrounds it. Foreground placement stays at the lower edge of the scene."
+
+[[scenery]]
+id = "wetlands_duckweed"
+name = "Drifting duckweed"
+visual_description = "Small muted green leaves gather in irregular rafts across sheltered water. Narrow black gaps and curved breaks interrupt the surface where water moves around posts and roots."
+
+[scenery.generation]
+canvas = [96, 32]
+height_scale = 0.2
+layers = ["behind_path"]
+anchor = "waterline"
+composition = "A low raft seen at the same shallow side-view angle as the scene pools. Use simple connected leaf clusters separated by transparent gaps. Do not include black water, reflections or a square backing; the raft rests on the waterline anchor."
+
+[[scenery]]
+id = "wetlands_willow_roots"
+name = "Exposed willow roots"
+visual_description = "Thick, knotted roots grip an eroded peat bank beneath a leaning willow. Wet bark darkens their undersides, while coarse grass and stranded reeds catch in the spaces between them."
+
+[scenery.generation]
+canvas = [128, 64]
+height_scale = 0.65
+layers = ["behind_path", "foreground"]
+anchor = "ground"
+composition = "One low cluster of roots, with a short broken trunk base to explain their attachment. No full tree or separate peat-bank rectangle. Keep the broad root contacts at the ground anchor and all openings transparent. Foreground placement remains below the combat silhouettes."
+
+[[scenery]]
+id = "wetlands_shelf_fungi"
+name = "Pale shelf fungi"
+visual_description = "Small cream and gray fungal shelves crowd the shaded sides of rotten posts and fallen branches. Their layered edges stand out against dark, saturated wood."
+
+[scenery.generation]
+canvas = [64, 64]
+height_scale = 0.45
+layers = ["behind_path", "foreground"]
+anchor = "ground"
+composition = "The pale shelves stay attached to one short rotten stump. Include its base as the ground anchor; do not produce floating fungi. Group the shelves into a few readable tiers, without luminous edges or a separate ground patch."
+
+[[scenery]]
+id = "wetlands_flood_debris"
+name = "Flood debris"
+visual_description = "Branches, broken fence rails, and scraps of faded fabric lodge against roots and supports above the current waterline. Mud coats the lower pieces, marking the height of an earlier flood."
+
+[scenery.generation]
+canvas = [128, 64]
+height_scale = 0.55
+layers = ["behind_path", "foreground"]
+anchor = "ground"
+composition = "A low tangle caught against a single broken support. Keep branches, rails and fabric connected or overlapping as one isolated prop. Leave irregular holes transparent and exclude a surrounding bank. Foreground placement stays below the walking silhouettes."
+
+[[scenery]]
+id = "wetlands_sinking_fence"
+name = "Sinking fence remnants"
+visual_description = "A short run of crooked posts emerges from coarse grass and shallow water. A few warped rails remain attached, descending toward the mud until the final section disappears beneath it."
+
+[scenery.generation]
+canvas = [192, 96]
+height_scale = 0.95
+layers = ["behind_path"]
+anchor = "ground"
+composition = "A short, complete span of three uneven posts and warped attached rails. Let the last rail descend to the anchor level without painting a water or mud rectangle around it. Keep both ends fully visible; this is an isolated prop, not a repeating fence tile."
+
+[[scenery]]
+id = "wetlands_leaning_willow"
+name = "Leaning marsh willow"
+visual_description = "A thick willow trunk leans beneath an uneven crown of dull olive leaves. Long, sparse branchlets droop around open gaps in the foliage, their tips browned and ragged. Deep grooves split the wet gray bark, and broad exposed roots spread from the swollen base with dead reeds caught between them."
+
+[scenery.generation]
+canvas = [192, 256]
+height_scale = 3.4
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete side-view tree with its crown, hanging branchlets and root base inside the transparent canvas. Use broad leaf clusters and a few substantial hanging strands instead of hair-thin twigs. The root contacts form the ground anchor. Keep open gaps in the canopy; no pool, sky, cast-shadow patch or other trees."
+
+[[scenery]]
+id = "wetlands_dead_willow"
+name = "Dead marsh willow"
+visual_description = "A hollow gray trunk rises from a splayed root base and divides into a few crooked limbs. The upper branches end in pale broken stubs, while a single long branch bends downward under its own weight. Dark cavities interrupt the flaking bark, and scraps of floodweed cling near the swollen roots."
+
+[scenery.generation]
+canvas = [128, 256]
+height_scale = 3.0
+layers = ["behind_path"]
+anchor = "ground"
+composition = "A complete isolated tree with thick readable branches, open transparent gaps and a visible root anchor. Keep the silhouette asymmetrical and the snapped tips inside the canvas. No face, moving limbs, leaves or surrounding water."
+
+[[scenery]]
+id = "wetlands_ruined_stilt_cottage"
+name = "Ruined stilt cottage"
+visual_description = "An empty timber cottage sags above a row of uneven, rotting stilts. Its low roof carries heavy patches of moss and a long split through the shingles. A narrow porch tilts away from the dark doorway, and a broken ladder hangs from one end. Overlapping repair boards cover old damage, but gaps in the wall reveal an unlit, abandoned interior."
+
+[scenery.generation]
+canvas = [256, 192]
+height_scale = 2.3
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One small cottage seen broadside with a slight view under the eaves, consistent with the orthographic scene. Include all stilts and the broken ladder as attached parts. Stilt bottoms define the ground anchor. Leave gaps between supports transparent; no water, sky, smoke, figures or lit windows."
+
+[[scenery]]
+id = "wetlands_slumped_peat_stack"
+name = "Slumped peat stack"
+visual_description = "A squat stack of dark peat blocks has slumped into irregular layers. A torn gray cover hangs over one side, held down by a mossy stone. Rain has rounded the edges of the blocks, and small reeds grow through the gaps at the base."
+
+[scenery.generation]
+canvas = [96, 64]
+height_scale = 0.65
+layers = ["behind_path", "foreground"]
+anchor = "ground"
+composition = "One low stack with its attached cover, stone and reed shoots. Keep the silhouette compact and the spaces around it transparent. No cutting tools, workers, peat pit or surrounding bank. Foreground placement stays low in the scene."
+
+[[scenery]]
+id = "wetlands_drowned_wall"
+name = "Drowned stone wall"
+visual_description = "A short remnant of rough gray masonry stands unevenly above its stained lower courses. One end has collapsed into a few large blocks, while the other retains a shallow corner and a worn step. Moss fills the joints, and a dark silt line crosses the exposed stones near the base."
+
+[scenery.generation]
+canvas = [192, 96]
+height_scale = 1.0
+layers = ["behind_path"]
+anchor = "waterline"
+composition = "A single low wall fragment with attached fallen blocks and step, seen from the side. The silt line near the base identifies the waterline anchor. Exclude water, reflections, buildings and the rest of the ruin; preserve clear gaps between the upper broken stones."

@@ -56,6 +56,99 @@ def unique(value, seen, where):
     seen.add(value)
 
 
+def canvas(value, where):
+    require(isinstance(value, list) and len(value) == 2
+            and all(type(n) is int and 16 <= n <= 1024 for n in value),
+            f"{where}: expected [width, height], each 16–1024")
+    require(max(value) <= 4 * min(value), f"{where}: aspect ratio exceeds 4:1")
+
+
+def number(value, where, minimum=0, maximum=None):
+    require(type(value) in (int, float) and math.isfinite(value) and value >= minimum
+            and (maximum is None or value <= maximum), f"{where}: invalid number")
+
+
+def visual_asset(asset, asset_ids, where):
+    shape(asset, ("id", "name", "visual_description", "generation"), where)
+    identifier(asset["id"], f"{where}.id")
+    unique(asset["id"], asset_ids, "visual asset ID")
+    for field in ("name", "visual_description"):
+        string(asset[field], f"{asset['id']}.{field}")
+
+
+def validate_environment(biome, asset_ids):
+    """Validate art targets and layer/join contracts, without asserting pixel seams."""
+    generation = biome["generation"]
+    key = biome["id"]
+    if "scene" in generation:
+        scene = generation["scene"]
+        shape(scene, ("canvas", "ground_y", "reference_height", "view", "style", "avoid"), f"{key}.generation.scene")
+        canvas(scene["canvas"], f"{key}.scene.canvas")
+        require(type(scene["ground_y"]) is int and 0 < scene["ground_y"] < scene["canvas"][1],
+                f"{key}.scene.ground_y: expected pixel row inside canvas")
+        require(type(scene["reference_height"]) is int and 0 < scene["reference_height"] <= scene["ground_y"],
+                f"{key}.scene.reference_height: expected positive pixel height above ground")
+        require(scene["view"] == "orthographic_side", f"{key}.scene.view: expected orthographic_side")
+        string(scene["style"], f"{key}.scene.style")
+        strings(scene["avoid"], f"{key}.scene.avoid", allow_empty=True)
+    layers = rows(biome.get("background_layers", []), f"{key}.background_layers")
+    require(not layers or "scene" in generation, f"{key}: background layers require generation.scene")
+    previous = 0
+    for index, layer in enumerate(layers):
+        visual_asset(layer, asset_ids, "background layer")
+        spec = layer["generation"]
+        where = f"{layer['id']}.generation"
+        shape(spec, ("parallax", "repeat_x", "transparent", "composition"), where)
+        number(spec["parallax"], f"{where}.parallax", maximum=1)
+        require(spec["parallax"] >= previous, f"{where}: layers must be ordered far to near")
+        previous = spec["parallax"]
+        for flag in ("repeat_x", "transparent"):
+            require(type(spec[flag]) is bool, f"{where}.{flag}: expected boolean")
+        require(spec["transparent"] == (index > 0), f"{where}: base layer must be opaque; later layers transparent")
+        string(spec["composition"], f"{where}.composition")
+    sections = rows(biome.get("ground_sections", []), f"{key}.ground_sections")
+    require(not sections or "ground" in generation, f"{key}: ground sections require generation.ground")
+    if "ground" in generation:
+        require("scene" in generation, f"{key}: ground requires generation.scene")
+        ground = generation["ground"]
+        shape(ground, ("canvas", "surface_y", "edge_margin", "repeat_x", "edge_description"), f"{key}.generation.ground")
+        canvas(ground["canvas"], f"{key}.ground.canvas")
+        require(type(ground["surface_y"]) is int and 0 <= ground["surface_y"] < ground["canvas"][1],
+                f"{key}.ground.surface_y: expected pixel row inside canvas")
+        require(type(ground["edge_margin"]) is int and 0 < ground["edge_margin"] * 2 < ground["canvas"][0],
+                f"{key}.ground.edge_margin: expected positive margin smaller than half the width")
+        require(type(ground["repeat_x"]) is bool, f"{key}.ground.repeat_x: expected boolean")
+        string(ground["edge_description"], f"{key}.ground.edge_description")
+        scene = generation["scene"]
+        require(ground["surface_y"] <= scene["ground_y"] and
+                ground["canvas"][1] - ground["surface_y"] >= scene["canvas"][1] - scene["ground_y"],
+                f"{key}: ground must cover the scene below the walking baseline")
+    for section in sections:
+        visual_asset(section, asset_ids, "ground section")
+        shape(section["generation"], ("composition",), f"{section['id']}.generation")
+        string(section["generation"]["composition"], f"{section['id']}.generation.composition")
+
+
+def validate_scenery(library, biome, asset_ids):
+    shape(library, ("schema_version", "biome_id", "scenery"), "scenery library")
+    require(library["biome_id"] == biome["id"], f"{biome['id']}: scenery biome ID mismatch")
+    entries = rows(library["scenery"], f"{biome['id']}.scenery")
+    require(not entries or "scene" in biome["generation"], f"{biome['id']}: scenery requires generation.scene")
+    for asset in entries:
+        visual_asset(asset, asset_ids, "scenery")
+        spec = asset["generation"]
+        where = f"{asset['id']}.generation"
+        shape(spec, ("canvas", "height_scale", "layers", "anchor", "composition"), where)
+        canvas(spec["canvas"], f"{where}.canvas")
+        number(spec["height_scale"], f"{where}.height_scale")
+        require(spec["height_scale"] > 0, f"{where}.height_scale: expected positive relative height")
+        strings(spec["layers"], f"{where}.layers")
+        require(set(spec["layers"]) <= {"behind_path", "foreground"}
+                and len(set(spec["layers"])) == len(spec["layers"]), f"{where}: invalid or duplicate scenery layers")
+        require(spec["anchor"] in ("ground", "waterline"), f"{where}: invalid anchor")
+        string(spec["composition"], f"{where}.composition")
+
+
 def read_toml(root, filename):
     string(filename, "file path")
     relative = Path(filename)
@@ -104,7 +197,7 @@ def validate_enemy(enemy, catalog):
 
 def validate_biome(biome, asset_ids):
     shape(biome, ("schema_version", "id", "name", "short_description", "description", "setting", "visual",
-                  "generation", "sites", "props", "decorations"), "biome")
+                  "generation", "sites"), "biome", ("props", "decorations", "background_layers", "ground_sections"))
     key = biome["id"]
     identifier(key, "biome.id")
     for field in ("name", "short_description", "description"):
@@ -124,15 +217,16 @@ def validate_biome(biome, asset_ids):
         string(swatch["name"], f"{key}.palette.name")
         string(swatch["color"], f"{key}.palette.color")
         require(COLOR.fullmatch(swatch["color"]), f"{key}: invalid palette color")
-    shape(biome["generation"], ("composition",), f"{key}.generation")
+    shape(biome["generation"], ("composition",), f"{key}.generation", ("scene", "ground"))
     string(biome["generation"]["composition"], f"{key}.generation.composition")
     for group in ("sites", "props", "decorations"):
-        for item in rows(biome[group], f"{key}.{group}"):
+        for item in rows(biome.get(group, []), f"{key}.{group}"):
             shape(item, ("id", "name", "description"), f"{key}.{group}")
             identifier(item["id"], f"{key}.{group}.id")
             unique(item["id"], asset_ids, "site/prop/decoration ID")
             for field in ("name", "description"):
                 string(item[field], f"{item['id']}.{field}")
+    validate_environment(biome, asset_ids)
 
 
 def load_content(root=CONTENT_ROOT):
@@ -167,9 +261,11 @@ def load_content(root=CONTENT_ROOT):
 
     add_enemies(shared["enemies"])
     for entry in rows(manifest["biomes"], "catalog.toml.biomes"):
-        shape(entry, ("id", "biome_file", "enemies_file"), "biome manifest entry")
+        shape(entry, ("id", "biome_file", "enemies_file"), "biome manifest entry", ("scenery_file",))
         identifier(entry["id"], "manifest biome ID")
-        for field in ("biome_file", "enemies_file"):
+        for field in ("biome_file", "enemies_file", "scenery_file"):
+            if field not in entry:
+                continue
             string(entry[field], field)
             unique(entry[field], sources, "content source path")
         biome = read_toml(root, entry["biome_file"])
@@ -186,7 +282,12 @@ def load_content(root=CONTENT_ROOT):
             unique(encounter["enemy_id"], seen, f"{biome['id']} encounter")
             if "context" in encounter:
                 string(encounter["context"], "encounter.context")
-        biomes[biome["id"]] = {**biome, "encounters": roster["encounters"]}
+        scenery = []
+        if "scenery_file" in entry:
+            library = read_toml(root, entry["scenery_file"])
+            validate_scenery(library, biome, asset_ids)
+            scenery = library["scenery"]
+        biomes[biome["id"]] = {**biome, "scenery": scenery, "encounters": roster["encounters"]}
     for biome in biomes.values():
         for encounter in biome["encounters"]:
             require(encounter["enemy_id"] in enemies,

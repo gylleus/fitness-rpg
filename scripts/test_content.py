@@ -6,7 +6,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from content import load_content, resolved_export
+from content import load_content, resolved_export, validate_biome, validate_scenery
 
 
 BIOME_FIXTURE = '''schema_version = 1
@@ -70,6 +70,66 @@ attack = "Fixture attack."
 '''
 
 
+ENVIRONMENT_FIXTURE = '''
+[generation.scene]
+canvas = [320, 180]
+ground_y = 144
+reference_height = 32
+view = "orthographic_side"
+style = "Fixture style."
+avoid = []
+
+[generation.ground]
+canvas = [128, 48]
+surface_y = 12
+edge_margin = 8
+repeat_x = true
+edge_description = "Level, matching edges."
+
+[[background_layers]]
+id = "{biome_id}_sky"
+name = "Sky"
+visual_description = "A gray sky."
+[background_layers.generation]
+parallax = 0.0
+repeat_x = true
+transparent = false
+composition = "Fill the canvas."
+
+[[background_layers]]
+id = "{biome_id}_banks"
+name = "Banks"
+visual_description = "Low banks."
+[background_layers.generation]
+parallax = 0.3
+repeat_x = true
+transparent = true
+composition = "Leave the sky transparent."
+
+[[ground_sections]]
+id = "{biome_id}_path"
+name = "Path"
+visual_description = "A muddy path."
+[ground_sections.generation]
+composition = "Keep the shared edges."
+'''
+
+SCENERY_FIXTURE = '''schema_version = 1
+biome_id = "{biome_id}"
+
+[[scenery]]
+id = "{biome_id}_tree"
+name = "Tree"
+visual_description = "A bent tree with exposed roots."
+[scenery.generation]
+canvas = [64, 128]
+height_scale = 2.5
+layers = ["behind_path"]
+anchor = "ground"
+composition = "An isolated tree with a visible root anchor."
+'''
+
+
 class ContentTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
@@ -93,6 +153,13 @@ class ContentTests(unittest.TestCase):
         self.assertIn(before, text)
         path.write_text(text.replace(before, after, 1))
 
+    def add_scenery(self, biome_id="fixture_a"):
+        path = self.root / biome_id / "BIOME.toml"
+        path.write_text(path.read_text() + ENVIRONMENT_FIXTURE.format(biome_id=biome_id))
+        (path.parent / "SCENERY.toml").write_text(SCENERY_FIXTURE.format(biome_id=biome_id))
+        self.replace("catalog.toml", f'enemies_file = "{biome_id}/ENEMIES.toml"',
+                     f'enemies_file = "{biome_id}/ENEMIES.toml"\nscenery_file = "{biome_id}/SCENERY.toml"')
+
     def test_empty_catalog_needs_no_shared_roster_or_biome_directory(self):
         empty = self.root / "empty"
         empty.mkdir()
@@ -112,6 +179,7 @@ class ContentTests(unittest.TestCase):
         for biome_id in ("fixture_a", "fixture_b"):
             output = json.loads(json.dumps(resolved_export(content, biome_id)))
             self.assertEqual([b["id"] for b in output["biomes"]], [biome_id])
+            self.assertEqual(output["biomes"][0]["scenery"], [])
             for encounter in output["biomes"][0]["encounters"]:
                 self.assertEqual(encounter["enemy"], content["enemies"][encounter["enemy_id"]])
         self.assertEqual(content, before)
@@ -158,6 +226,101 @@ class ContentTests(unittest.TestCase):
     def test_unknown_biome_does_not_silently_export_everything(self):
         with self.assertRaisesRegex(ValueError, "unknown biome ID"):
             resolved_export(load_content(self.root), "unknown_biome")
+
+    def test_scene_and_scenery_export_preserves_prose_and_enemy_membership(self):
+        before = resolved_export(load_content(self.root), "fixture_a")["biomes"][0]
+        self.add_scenery()
+        content = load_content(self.root)
+        output = json.loads(json.dumps(resolved_export(content, "fixture_a")))["biomes"][0]
+        self.assertEqual(output["encounters"], before["encounters"])
+        self.assertEqual(output["scenery"][0]["visual_description"], "A bent tree with exposed roots.")
+        self.assertEqual(output["scenery"][0]["generation"]["canvas"], [64, 128])
+        self.assertEqual([a["id"] for a in output["background_layers"]], ["fixture_a_sky", "fixture_a_banks"])
+        self.assertEqual(output["ground_sections"][0]["id"], "fixture_a_path")
+        self.assertEqual(content["biomes"]["fixture_b"]["scenery"], [])
+
+    def test_environment_rejects_bad_geometry_and_layer_contracts(self):
+        self.add_scenery()
+        base = load_content(self.root)["biomes"]["fixture_a"]
+        base = {k: v for k, v in base.items() if k not in ("scenery", "encounters")}
+        cases = [
+            (("generation", "scene", "canvas"), [True, 180]),
+            (("generation", "scene", "canvas"), [1025, 180]),
+            (("generation", "scene", "canvas"), [1024, 16]),
+            (("generation", "scene", "ground_y"), 180),
+            (("generation", "scene", "reference_height"), 0),
+            (("generation", "ground", "surface_y"), 48),
+            (("generation", "ground", "surface_y"), 13),  # Leaves a gap at the scene bottom.
+            (("generation", "ground", "edge_margin"), 64),
+            (("background_layers", 0, "generation", "transparent"), True),
+            (("background_layers", 1, "generation", "transparent"), False),
+            (("background_layers", 0, "generation", "parallax"), 0.5),  # Out-of-order depth.
+            (("background_layers", 1, "generation", "parallax"), float("nan")),
+            (("background_layers", 1, "generation", "parallax"), True),
+            (("background_layers", 1, "generation", "repeat_x"), "yes"),
+        ]
+        for keys, value in cases:
+            with self.subTest(field=keys, value=value):
+                biome = copy.deepcopy(base)
+                parent = biome
+                for key in keys[:-1]:
+                    parent = parent[key]
+                parent[keys[-1]] = value
+                with self.assertRaises(ValueError):
+                    validate_biome(biome, set())
+        for table in ("scene", "ground"):
+            with self.subTest(missing=table):
+                biome = copy.deepcopy(base)
+                del biome["generation"][table]
+                with self.assertRaisesRegex(ValueError, "require"):
+                    validate_biome(biome, set())
+
+    def test_scenery_rejects_invalid_dimensions_scale_anchors_and_placement(self):
+        self.add_scenery()
+        biome = load_content(self.root)["biomes"]["fixture_a"]
+        for field, value in (("canvas", [64, False]), ("canvas", [16, 1024]),
+                             ("height_scale", 0), ("height_scale", float("inf")), ("height_scale", True),
+                             ("layers", []), ("layers", ["behind_path", "behind_path"]),
+                             ("layers", ["enemy_spawn"]), ("anchor", "unknown")):
+            with self.subTest(field=field, value=value):
+                library = {"schema_version": 1, "biome_id": "fixture_a", "scenery": copy.deepcopy(biome["scenery"])}
+                library["scenery"][0]["generation"][field] = value
+                with self.assertRaises(ValueError):
+                    validate_scenery(library, biome, set())
+
+    def test_visual_ids_cannot_duplicate_scenery_ground_or_legacy_assets(self):
+        self.add_scenery()
+        path = self.root / "fixture_a/SCENERY.toml"
+        original = path.read_text()
+        for duplicate in ("fixture_a_sky", "fixture_a_path", "fixture_a_prop", "fixture_b_prop"):
+            with self.subTest(duplicate=duplicate):
+                path.write_text(original.replace('id = "fixture_a_tree"', f'id = "{duplicate}"'))
+                with self.assertRaisesRegex(ValueError, "duplicate"):
+                    load_content(self.root)
+
+    def test_registered_scenery_validates_owner_version_fields_and_path(self):
+        self.add_scenery()
+        path = self.root / "fixture_a/SCENERY.toml"
+        original = path.read_text()
+        for before, after, error in (("fixture_a", "wrong_biome", "scenery biome ID mismatch"),
+                                     ("schema_version = 1", "schema_version = 2", "unsupported schema_version"),
+                                     ("height_scale", "height_scal", "missing fields")):
+            with self.subTest(error=error):
+                path.write_text(original.replace(before, after, 1))
+                with self.assertRaisesRegex(ValueError, error):
+                    load_content(self.root)
+        path.unlink()
+        with self.assertRaises(FileNotFoundError):
+            load_content(self.root)
+        self.replace("catalog.toml", 'scenery_file = "fixture_a/SCENERY.toml"', 'scenery_file = "../SCENERY.toml"')
+        with self.assertRaisesRegex(ValueError, "within the content directory"):
+            load_content(self.root)
+
+    def test_empty_scenery_file_does_not_require_scene_art(self):
+        self.replace("catalog.toml", 'enemies_file = "fixture_a/ENEMIES.toml"',
+                     'enemies_file = "fixture_a/ENEMIES.toml"\nscenery_file = "fixture_a/SCENERY.toml"')
+        (self.root / "fixture_a/SCENERY.toml").write_text('schema_version = 1\nbiome_id = "fixture_a"\nscenery = []\n')
+        self.assertEqual(load_content(self.root)["biomes"]["fixture_a"]["scenery"], [])
 
 
 if __name__ == "__main__":
