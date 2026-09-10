@@ -5,6 +5,7 @@ This file provides instructions and context for AI coding agents working on this
 ## Git Commits
 
 - Always commit the changes made for a completed task before handing off, unless the user explicitly asks not to commit. This is standing authorization; do not ask for confirmation before each commit.
+- Commit each completed, validated chunk of work as you go during multi-step tasks; do not wait until the final handoff to commit everything. Keep commits focused and independently understandable.
 - Review the diff, run the relevant checks, and stage only changes belonging to the task. Preserve unrelated work in the working tree or staging area.
 - Include the commit hash and validation results in the handoff. If committing is blocked, report the exact command and error.
 - Git pushes and Dolt remote sync still require an explicit user request.
