@@ -6,8 +6,11 @@ import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import * as schema from './schema';
+import { giveItem } from '../../test/equipment';
+import { GEAR } from '../game/equipment';
+import { equipItem, unequipItem } from './inventory';
 import { createTestDb } from '../../test/db';
-import { advanceDungeon, claimChallenge, getGameSnapshot, getHero, getSavedPushups, purchaseAmulet, purchasePotion,
+import { advanceDungeon, claimChallenge, getGameSnapshot, getHero, getSavedPushups, purchasePotion,
   retreatDungeon, expireBattles, savePushupWorkout, saveRun, saveStepTotal, startDungeon, drinkPotion } from './game';
 
 const now = new Date(2026, 8, 6, 12).getTime();
@@ -49,7 +52,9 @@ describe('saved pushup damage power', () => {
     let run = startDungeon(db, 0, now);
     expect(run.state.stats).toMatchObject({ pushups: 4, attack: 35, damageMultiplier: 1.4 });
     run = nextAttack(db, run);
-    expect(run.state.enemyHp).toBe(20);
+    expect(run.state.enemyHp).toBe(55 - run.state.impacts![0].amount);
+    expect(run.state.impacts![0].amount).toBeGreaterThanOrEqual(28);
+    expect(run.state.impacts![0].amount).toBeLessThanOrEqual(42);
     expect(advanceDungeon(db, run.id, run.state.tick - 1, now)).toEqual(run);
     expect(getSavedPushups(db)).toBe(4);
     retreatDungeon(db, run.id);
@@ -59,7 +64,7 @@ describe('saved pushup damage power', () => {
     expect(startDungeon(db, 0, now).state.stats.pushups).toBe(4);
   });
 
-  it('restores snapshotted power, focus charges, and dodge meters after reopening', () => {
+  it('restores snapshotted power, focus charges, and seeded rolls after reopening', () => {
     const directory = mkdtempSync(join(tmpdir(), 'fitness-power-'));
     const path = join(directory, 'game.db');
     const db = database(path);
@@ -67,18 +72,19 @@ describe('saved pushup damage power', () => {
     try {
       savePushupWorkout(db, { ...workout, validReps: 1 });
       getHero(db);
-      db.update(schema.heroes).set({ amuletOwned: true, focusAttacks: 10 }).run();
+      giveItem(db, GEAR.restraint_amulet, 'amulet');
+      db.update(schema.heroes).set({ focusAttacks: 10 }).run();
       saveRun(db, day, { distanceMeters: 10000, durationSeconds: 4500, steps: 10000 }, 'agility', now);
       let run = nextAttack(db, startDungeon(db, 0, now));
       run = advanceDungeon(db, run.id, run.state.tick, now)!;
       const before = getGameSnapshot(db, now);
-      expect(before.hero).toMatchObject({ pushupUnitsSpent: 0, focusAttacks: 9, combatMeters: { dodge: 2000 } });
+      expect(before.hero).toMatchObject({ pushupUnitsSpent: 0, focusAttacks: 9, combatMeters: { dodge: 0 } });
       db.$client.close();
       reopened = new Database(path);
       const restored = drizzle(reopened, { schema });
       expect(getGameSnapshot(restored, now)).toEqual(before);
       retreatDungeon(restored, run.id);
-      expect(startDungeon(restored, 0, now).state).toMatchObject({ stats: { pushups: 1 }, focusAttacks: 9, meters: { dodge: 2000 } });
+      expect(startDungeon(restored, 0, now).state).toMatchObject({ stats: { pushups: 1 }, focusAttacks: 9, meters: { dodge: 0 } });
     } finally {
       reopened?.close();
       if (db.$client.open) db.$client.close();
@@ -147,19 +153,14 @@ describe('saved pushup damage power', () => {
 });
 
 describe('gold items', () => {
-  it('enforces the rare amulet unlock, price, and single ownership', () => {
+  it('applies a found amulet bonus only while equipped', () => {
     const db = database();
-    getHero(db);
-    db.update(schema.heroes).set({ gold: 149, unlockedDungeon: 1 }).run();
-    expect(() => purchaseAmulet(db)).toThrow();
-    db.update(schema.heroes).set({ gold: 200, unlockedDungeon: 0 }).run();
-    expect(() => purchaseAmulet(db)).toThrow();
-    db.update(schema.heroes).set({ unlockedDungeon: 1 }).run();
-    purchaseAmulet(db);
-    expect(getHero(db)).toMatchObject({ gold: 50, amuletOwned: true });
+    const found = giveItem(db, GEAR.restraint_amulet);
+    expect(getGameSnapshot(db, now).stats.pushupDamageCoefficient).toBeCloseTo(0.1);
+    equipItem(db, found.id, 'amulet');
     expect(getGameSnapshot(db, now).stats.pushupDamageCoefficient).toBeCloseTo(0.11);
-    expect(() => purchaseAmulet(db)).toThrow();
-    expect(getHero(db).gold).toBe(50);
+    unequipItem(db, 'amulet');
+    expect(getGameSnapshot(db, now).stats.pushupDamageCoefficient).toBeCloseTo(0.1);
   });
 
   it('buys and consumes potions atomically, forbids wasted use and use during combat', () => {
@@ -189,7 +190,8 @@ describe('gold items', () => {
     const db = database();
     savePushupWorkout(db, { ...workout, validReps: 1 });
     getHero(db);
-    db.update(schema.heroes).set({ focusAttacks: 10, amuletOwned: true }).run();
+    giveItem(db, GEAR.restraint_amulet, 'amulet');
+    db.update(schema.heroes).set({ focusAttacks: 10 }).run();
     saveStepTotal(db, day, 10000);
     let run = startDungeon(db, 0, now);
     for (let i = 0; i < 11; i++) run = nextAttack(db, run);
@@ -225,6 +227,8 @@ it('migrates old free-attack battles without losing banked progress or workouts'
     sqlite.prepare('INSERT INTO dungeon_runs (started_at, status, state) VALUES (?, ?, ?)').run(now, 'active', JSON.stringify(legacy));
     sqlite.exec(readFileSync(join(__dirname, 'migrations/0003_attack_stockpile.sql'), 'utf8'));
     sqlite.exec(readFileSync(join(__dirname, 'migrations/0004_dungeon_recovery.sql'), 'utf8'));
+    sqlite.exec(readFileSync(join(__dirname, 'migrations/0005_pushup_damage.sql'), 'utf8'));
+    sqlite.exec(readFileSync(join(__dirname, 'migrations/0006_inventory.sql'), 'utf8'));
     const db = drizzle(sqlite, { schema });
     const snapshot = getGameSnapshot(db, now);
     expect(snapshot).toMatchObject({ savedPushups: 12, hero: { gold: 70, xp: 85, swordLevel: 2 },

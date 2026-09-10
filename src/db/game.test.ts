@@ -6,10 +6,13 @@ import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import * as schema from './schema';
+import { giveItem } from '../../test/equipment';
+import { GEAR, startingEquipment } from '../game/equipment';
+import { getInventory, equipItem, sellItem } from './inventory';
 import { createTestDb } from '../../test/db';
-import { advanceDungeon, claimChallenge, deleteRun, getFitnessDay, getGameSnapshot, getHero, purchaseUpgrade, retreatDungeon, savePushupWorkout, saveRun, saveStepTotal, startDungeon } from './game';
+import { advanceDungeon, claimChallenge, deleteRun, getFitnessDay, getGameSnapshot, getHero, retreatDungeon, savePushupWorkout, saveRun, saveStepTotal, startDungeon } from './game';
 import { activityDays, challengeClaims, dungeonRuns, heroes, runs, sessions, sets } from './schema';
-import { heroStats, localDay } from '../game/rules';
+import { localDay } from '../game/rules';
 
 const now = new Date(2026, 8, 6, 12).getTime();
 const today = localDay(now);
@@ -28,6 +31,8 @@ describe('fitness persistence', () => {
       sqlite.exec(readFileSync(join(__dirname, 'migrations/0002_native_activity_and_expeditions.sql'), 'utf8'));
       sqlite.exec(readFileSync(join(__dirname, 'migrations/0003_attack_stockpile.sql'), 'utf8'));
       sqlite.exec(readFileSync(join(__dirname, 'migrations/0004_dungeon_recovery.sql'), 'utf8'));
+    sqlite.exec(readFileSync(join(__dirname, 'migrations/0005_pushup_damage.sql'), 'utf8'));
+    sqlite.exec(readFileSync(join(__dirname, 'migrations/0006_inventory.sql'), 'utf8'));
       const migrated = drizzle(sqlite, { schema });
       expect(getGameSnapshot(migrated, now).today).toMatchObject({ pushups: 12, partialReps: 2 });
       expect(migrated.select().from(sessions).get()?.sourceKey).toBeNull();
@@ -44,7 +49,7 @@ describe('fitness persistence', () => {
       saveRun(db, today, runActivity, 'persistent-run', now);
       claimChallenge(db, 'pushups', now);
       claimChallenge(db, 'steps', now);
-      purchaseUpgrade(db, 'armor');
+      giveItem(db, GEAR.hide_armor, 'armor');
       const battle = startDungeon(db, 0, now);
       advanceDungeon(db, battle.id, 0, now);
       const before = getGameSnapshot(db, now);
@@ -129,10 +134,11 @@ describe('fitness persistence', () => {
     saveStepTotal(db, today, 6000);
     saveRun(db, today, runActivity, 'run-1', now);
     getHero(db);
-    db.update(heroes).set({ gold: 123, xp: 250, swordLevel: 2, armorLevel: 1, unlockedDungeon: 1 }).run();
+    db.update(heroes).set({ gold: 123, xp: 250, unlockedDungeon: 1 }).run();
+    for (const gear of startingEquipment(2, 1)) giveItem(db, gear.item, gear.slot);
     const nextDay = getGameSnapshot(db, tomorrow);
     expect(nextDay.stats).toMatchObject({ attack: 99, health: 130, dodgeBps: 0, dailyHealth: 0 });
-    expect(nextDay.hero).toMatchObject({ gold: 123, xp: 250, swordLevel: 2, armorLevel: 1, unlockedDungeon: 1 });
+    expect(nextDay.hero).toMatchObject({ gold: 123, xp: 250, unlockedDungeon: 1 });
     expect(nextDay.history.find((d) => d.day === today)).toMatchObject({ pushups: 20, steps: 6000, distanceMeters: 2000 });
     expect(nextDay.totals).toMatchObject({ pushups: 20, bestPushupDay: 20, runs: 1 });
   });
@@ -170,15 +176,16 @@ describe('rewards and equipment', () => {
     expect(claimChallenge(db, 'pushups', tomorrow)).toBe(true);
     expect(getHero(db).gold).toBe(80);
   });
-  it('atomically deducts gold for an upgrade and rejects an unaffordable repeat', () => {
+  it('equips collected gear and sells the replaced item exactly once', () => {
     const db = createTestDb();
-    getHero(db);
-    db.update(heroes).set({ gold: 40 }).run();
-    purchaseUpgrade(db, 'sword');
-    expect(getHero(db)).toMatchObject({ gold: 10, swordLevel: 1 });
-    expect(() => purchaseUpgrade(db, 'sword')).toThrow();
-    expect(getHero(db)).toMatchObject({ gold: 10, swordLevel: 1 });
-    expect(heroStats(getHero(db), getFitnessDay(db, today)).baseAttack).toBe(28);
+    const found = giveItem(db, GEAR.iron_club);
+    const old = getInventory(db).find(item => item.slot === 'weapon')!;
+    equipItem(db, found.id, 'weapon');
+    expect(getGameSnapshot(db, now).stats.baseAttack).toBe(31);
+    sellItem(db, old.id);
+    expect(getHero(db).gold).toBe(5);
+    expect(() => sellItem(db, old.id)).toThrow();
+    expect(getHero(db).gold).toBe(5);
   });
 });
 

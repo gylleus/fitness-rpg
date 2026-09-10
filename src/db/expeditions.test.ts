@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { eq } from 'drizzle-orm';
 import { createTestDb } from '../../test/db';
-import { advanceDungeon, getGameSnapshot, getHero, purchaseUpgrade, savePushupWorkout, saveStepTotal, startDungeon } from './game';
+import { giveItem } from '../../test/equipment';
+import { GEAR } from '../game/equipment';
+import { advanceDungeon, getGameSnapshot, getHero, savePushupWorkout, saveStepTotal, startDungeon } from './game';
 import { dungeonRuns, heroes } from './schema';
 import { DUNGEONS } from '../game/combat';
 import { localDay } from '../game/rules';
@@ -48,8 +50,8 @@ describe('victory stakes', () => {
     const win = finish(db, startDungeon(db, 0, now));
     saveStepTotal(db, day, 22000);
     expect(getGameSnapshot(db, now).currentHealth).toBe(win.state.heroHp + 20);
-    purchaseUpgrade(db, 'armor');
-    expect(getGameSnapshot(db, now).currentHealth).toBe(win.state.heroHp + 40);
+    giveItem(db, GEAR.hide_armor, 'armor');
+    expect(getGameSnapshot(db, now).currentHealth).toBe(win.state.heroHp + 45);
     const tomorrow = new Date(2026, 8, 7, 12).getTime();
     const next = getGameSnapshot(db, tomorrow);
     expect(next.currentHealth).toBe(next.stats.health);

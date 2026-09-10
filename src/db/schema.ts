@@ -12,6 +12,7 @@
 import { sql } from 'drizzle-orm';
 import { index, integer, primaryKey, real, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core';
 import type { BattleState, BattleStatus } from '../game/combat';
+import type { EquipmentSlot, GearItem } from '../game/equipment';
 import type { CombatMeters } from '../game/attacks';
 import type { RunSegment } from '../running/route';
 
@@ -84,6 +85,8 @@ export const heroes = sqliteTable('heroes', {
   id: integer('id').primaryKey(),
   gold: integer('gold').notNull().default(0),
   xp: integer('xp').notNull().default(0),
+  inventoryVersion: integer('inventory_version').notNull().default(0),
+  /** Retained for one-time conversion of old saves, never upgraded again. */
   swordLevel: integer('sword_level').notNull().default(0),
   armorLevel: integer('armor_level').notNull().default(0),
   unlockedDungeon: integer('unlocked_dungeon').notNull().default(0),
@@ -96,6 +99,19 @@ export const heroes = sqliteTable('heroes', {
   focusPotions: integer('focus_potions').notNull().default(0),
   focusAttacks: integer('focus_attacks').notNull().default(0),
   combatMeters: text('combat_meters', { mode: 'json' }).$type<CombatMeters>().notNull().default({ dodge: 0, effects: {} }),
+});
+
+export const inventoryItems = sqliteTable('inventory_items', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  item: text('item', { mode: 'json' }).$type<GearItem>().notNull(),
+  slot: text('slot').$type<EquipmentSlot>(),
+  acquiredAt: integer('acquired_at').notNull(),
+  sourceKey: text('source_key').notNull(),
+}, t => [uniqueIndex('inventory_slot_idx').on(t.slot), uniqueIndex('inventory_source_idx').on(t.sourceKey)]);
+
+export const dungeonSeeds = sqliteTable('dungeon_seeds', {
+  dungeonId: integer('dungeon_id').primaryKey(),
+  victories: integer('victories').notNull().default(0),
 });
 
 export const dungeonRuns = sqliteTable('dungeon_runs', {

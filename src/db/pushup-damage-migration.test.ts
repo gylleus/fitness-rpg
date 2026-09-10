@@ -27,11 +27,12 @@ it('retires old ammo-based runs without changing workouts, progression, health, 
     sqlite.exec(migration);
     expect(sqlite.prepare('SELECT * FROM heroes').get()).toEqual(heroBefore);
     expect(sqlite.prepare('SELECT state FROM dungeon_runs WHERE id=1').get()).toEqual({ state: oldWin });
+    sqlite.exec(readFileSync(join(__dirname, 'migrations/0006_inventory.sql'), 'utf8'));
     const db = drizzle(sqlite, { schema });
     expect(getGameSnapshot(db, now)).toMatchObject({ savedPushups: 20, currentHealth: 75,
       latestBattle: { status: 'retreated', state: { gold: 0, xp: 0 } }, today: { pushups: 20, partialReps: 2 } });
     const fresh = startDungeon(db, 0, now);
-    expect(fresh.state).toMatchObject({ rulesVersion: 2, entryHp: 75, focusAttacks: 3, stats: { pushups: 20, attack: 75 } });
+    expect(fresh.state).toMatchObject({ rulesVersion: 3, entryHp: 75, focusAttacks: 3, stats: { pushups: 20, attack: 75 } });
     sqlite.exec(migration);
     expect(getGameSnapshot(db, now).latestBattle).toEqual(fresh);
   } finally { sqlite.close(); }

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { attackPower, dayStart, fitnessDay, heroStats, localDay, nextMidnight, paceLabel, pushupPower, recentDays, runDodgeBps, validateRun, validateSteps } from './rules';
+import { startingEquipment } from './equipment';
 import { battleTurn, beginBattle, DUNGEONS } from './combat';
 
 const hero = { gold: 0, xp: 0, swordLevel: 0, armorLevel: 0, unlockedDungeon: 0 };
@@ -11,13 +12,13 @@ describe('fitness power', () => {
     expect(heroStats(hero, fitnessDay(day, 10))).toMatchObject({ attack: 50, baseAttack: 25, pushupDamageCoefficient: 0.1, damageMultiplier: 2 });
     expect(heroStats(hero, fitnessDay(day, 20)).attack).toBe(75);
     expect(pushupPower(40, 20, 0.15)).toEqual({ damage: 160, multiplier: 4 });
-    expect(attackPower(heroStats({ ...hero, amuletOwned: true }, fitnessDay(day, 10)), 1).damage).toBe(58);
+    expect(attackPower(heroStats({ ...hero, amuletOwned: true }, fitnessDay(day, 10), 10, startingEquipment(0, 0, true)), 1).damage).toBe(58);
     const activity = fitnessDay(day, 120);
     expect(activity.pushups).toBe(120);
   });
   it('adds step health to permanent gear and levels', () => {
-    expect(heroStats({ ...hero, xp: 250, swordLevel: 2, armorLevel: 1 }, fitnessDay(day, 20, 4, 3000)))
-      .toEqual({ level: 3, attack: 99, health: 160, baseAttack: 33, baseHealth: 130, dailyHealth: 30,
+    expect(heroStats({ ...hero, xp: 250, swordLevel: 2, armorLevel: 1 }, fitnessDay(day, 20, 4, 3000), 20, startingEquipment(2, 1)))
+      .toEqual({ level: 3, attack: 99, health: 160, baseAttack: 33, baseDamageMin: 28, baseDamageMax: 38, baseHealth: 130, dailyHealth: 30,
         dodgeBps: 0, pushups: 20, pushupDamageCoefficient: 0.1, damageMultiplier: 3, attackEffects: [] });
   });
   it('awards running dodge without multiplying or double-counting health', () => {
@@ -82,7 +83,7 @@ describe('local calendar days', () => {
 
 describe('automatic combat', () => {
   it('allows the hero to attack first and prevents dead enemies retaliating', () => {
-    const stats = heroStats({ ...hero, swordLevel: 10 }, fitnessDay(day));
+    const stats = heroStats(hero, fitnessDay(day), 0, startingEquipment(10));
     let battle = beginBattle(0, day, stats, stats.health);
     while (battle.attacksMade === 0) battle = battleTurn(battle);
     expect(battle.defeated).toBe(1);

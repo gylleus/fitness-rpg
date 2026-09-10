@@ -26,7 +26,7 @@ export default function Camp() {
       <Meter value={hero.xp % 100} max={100} color={colors.gold} label="Experience toward next level" />
       <View style={ui.divider} />
       <View style={ui.row}>
-        <View style={[ui.flex, { gap: 5 }]}><Text style={ui.label}>Damage per hit</Text><Text style={ui.number}>{data.damage}</Text><Text style={ui.small}>{stats.baseAttack} from hero & gear</Text></View>
+        <View style={[ui.flex, { gap: 5 }]}><Text style={ui.label}>Damage per hit</Text><Text style={ui.number}>{data.damageMin}–{data.damageMax}</Text><Text style={ui.small}>{stats.baseDamageMin}–{stats.baseDamageMax} from hero & gear</Text></View>
         <View style={[ui.flex, { gap: 5 }]}><Text style={ui.label}>Health</Text><Text style={ui.number}>{data.currentHealth} <Text style={{ fontSize: 14, color: colors.green }}>/ {stats.health} HP</Text></Text><Text style={ui.small}>{stats.dailyHealth} bonus today · wins spend HP</Text></View>
       </View>
       <View style={ui.divider} />
@@ -45,7 +45,7 @@ export default function Camp() {
       </View>
       <Card style={{ backgroundColor: '#202b32' }}>
         <View style={ui.between}><View style={{ gap: 5 }}><Text style={[ui.label, { color: colors.purple }]}>Running agility</Text><Text style={ui.heading}>{(today.distanceMeters / 1000).toFixed(2)} km today</Text></View><Text style={{ color: colors.purple, fontSize: 26, fontWeight: '800' }}>{percentLabel(stats.dodgeBps)}</Text></View>
-        <Text style={ui.small}>Distance and pace build dodge, up to 30% each day. At 20%, every fifth enemy attack misses. {today.runningSteps.toLocaleString()} running steps included in today&apos;s total.</Text>
+        <Text style={ui.small}>Distance and pace build dodge, up to 30% each day. Dodge rolls repeat when retrying the same dungeon. {today.runningSteps.toLocaleString()} running steps included in today&apos;s total.</Text>
       </Card>
       <Button label="Train pushups  ·  increase damage" onPress={() => router.push('/session')} />
       <View style={ui.row}><View style={ui.flex}><Button secondary label={health.connected ? "Connected steps" : "Connect steps"} onPress={() => router.push('/health')} /></View><View style={ui.flex}><Button secondary label={running ? "Return to your run" : "Start running"} onPress={() => router.push('/run')} /></View></View>

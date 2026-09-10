@@ -26,7 +26,7 @@ export function advanceMeter(meter: number, rateBps: number) {
  * Critical effects modify weapon damage first (strongest wins), then flat damage
  * and healing procs resolve in equipment order. No UI or database dependencies.
  */
-export function resolveAttack(attack: number, effects: readonly AttackEffect[], meters: CombatMeters) {
+export function resolveAttack(attack: number, effects: readonly AttackEffect[], meters: CombatMeters, roll?: (rateBps: number) => boolean) {
   const nextMeters = { ...meters, effects: { ...meters.effects } };
   const triggered: AttackEffect[] = [];
   const ids = new Set<string>();
@@ -35,7 +35,7 @@ export function resolveAttack(attack: number, effects: readonly AttackEffect[], 
     ids.add(effect.id);
     const next = advanceMeter(meters.effects[effect.id] ?? 0, effect.rateBps);
     nextMeters.effects[effect.id] = next.meter;
-    if (next.triggered) triggered.push(effect);
+    if (roll ? roll(effect.rateBps) : next.triggered) triggered.push(effect);
   }
   const multiplier = Math.max(RATE_SCALE, ...triggered.filter(e => e.kind === 'critical').map(e => e.multiplierBps));
   const events: AttackEvent[] = [{ source: 'Weapon', kind: 'damage', amount: Math.max(0, Math.floor(attack * multiplier / RATE_SCALE)), critical: multiplier > RATE_SCALE }];

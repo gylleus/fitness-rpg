@@ -1,6 +1,8 @@
 import { attackPower, type HeroStats } from './rules';
 import { advanceMeter, emptyCombatMeters, resolveAttack, type CombatMeters } from './attacks';
 import wetlands from './rosters/wetlands.json';
+import { rollLoot, type LootDrop } from './equipment';
+import { randomInt, seedFor } from './random';
 
 export type Enemy = { id?: string; name: string; health: number; attack: number; gold: number; xp: number; sprite: 'slime' | 'wolf' | 'knight' | 'boss' };
 export type Dungeon = { id: number; name: string; subtitle: string; color: string; enemies: Enemy[] };
@@ -41,7 +43,10 @@ export type BattleImpact = {
   critical?: boolean;
 };
 export type BattleState = {
-  rulesVersion?: 2;
+  rulesVersion?: 2 | 3;
+  rng?: { seed: number; state: number; generation: number };
+  lootPlan?: LootDrop[];
+  loot?: LootDrop[];
   dungeonId: number;
   /** Snapshot the roster so future content/art additions cannot change this run. */
   dungeon?: Dungeon;
@@ -73,12 +78,16 @@ export function battleDungeon(battle: BattleState): Dungeon {
 }
 
 export function beginBattle(dungeonId: number, day: string, stats: HeroStats, entryHp = stats.health,
-  resources: { focusAttacks?: number; meters?: CombatMeters } = {}): BattleState {
+  resources: { focusAttacks?: number; meters?: CombatMeters; seed?: number; generation?: number } = {}): BattleState {
   const dungeon = DUNGEONS[dungeonId];
   if (!dungeon) throw new Error('Dungeon not found.');
-  return { rulesVersion: 2, dungeonId, dungeon: { ...dungeon, enemies: dungeon.enemies.map(enemy => ({ ...enemy })) }, day, stats, heroHp: entryHp, entryHp, enemyHp: dungeon.enemies[0].health, encounter: 0, defeated: 0,
+  const seeded = resources.seed !== undefined;
+  return { rulesVersion: seeded ? 3 : 2,
+    ...(seeded ? { rng: { seed: resources.seed!, state: seedFor(`combat-v1:${resources.seed}`), generation: resources.generation ?? 0 },
+      loot: [], lootPlan: dungeon.enemies.flatMap((_, i) => rollLoot(resources.seed!, i, i === dungeon.enemies.length - 1, dungeonId)) } : {}),
+    dungeonId, dungeon: { ...dungeon, enemies: dungeon.enemies.map(enemy => ({ ...enemy })) }, day, stats, heroHp: entryHp, entryHp, enemyHp: dungeon.enemies[0].health, encounter: 0, defeated: 0,
     turn: 'hero', status: 'active', phase: 'travelling', travel: 0, gold: 0, xp: 0, log: [`You enter ${dungeon.name}.`], tick: 0,
-    focusAttacks: resources.focusAttacks ?? 0, meters: resources.meters ?? emptyCombatMeters(), attacksMade: 0, lastAction: 'travel' };
+    focusAttacks: resources.focusAttacks ?? 0, meters: seeded ? emptyCombatMeters() : resources.meters ?? emptyCombatMeters(), attacksMade: 0, lastAction: 'travel' };
 }
 
 /** A saved travel step or attack. Pushup power is fixed at entry and never spent. */
@@ -87,6 +96,11 @@ export function battleTurn(current: BattleState): BattleState {
   const next = { ...current, tick: current.tick + 1, log: [...current.log], impacts: [] as BattleImpact[] };
   const enemies = battleDungeon(current).enemies;
   const enemy = enemies[current.encounter];
+  const draw = (min: number, max: number) => {
+    const rolled = randomInt(next.rng!.state, min, max);
+    next.rng = { ...next.rng!, state: rolled.state };
+    return rolled.value;
+  };
   if (current.phase === 'travelling') {
     next.lastAction = 'travel';
     // A killing swing owns its recovery tick. Walking starts at the beginning
@@ -105,7 +119,9 @@ export function battleTurn(current: BattleState): BattleState {
     next.focusAttacks = Math.max(0, current.focusAttacks - 1);
     next.attacksMade++;
     next.lastAction = 'attack';
-    const attack = resolveAttack(attackPower(current.stats, current.focusAttacks).damage, current.stats.attackEffects, current.meters);
+    const baseDamage = current.rng ? draw(current.stats.baseDamageMin ?? current.stats.baseAttack, current.stats.baseDamageMax ?? current.stats.baseAttack) : current.stats.baseAttack;
+    const attack = resolveAttack(attackPower(current.stats, current.focusAttacks, baseDamage).damage, current.stats.attackEffects, current.meters,
+      current.rng ? rate => draw(0, 9999) < rate : undefined);
     next.meters = attack.meters;
     next.enemyHp = Math.max(0, current.enemyHp - attack.damage);
     next.heroHp = Math.min(current.stats.health, current.heroHp + attack.healing);
@@ -118,6 +134,7 @@ export function battleTurn(current: BattleState): BattleState {
     }
     next.turn = 'enemy';
     if (next.enemyHp === 0) {
+      if (current.lootPlan) next.loot = [...(current.loot ?? []), ...current.lootPlan.filter(drop => drop.encounter === current.encounter)];
       next.defeated++;
       next.gold += enemy.gold;
       next.xp += enemy.xp;
@@ -135,7 +152,8 @@ export function battleTurn(current: BattleState): BattleState {
       }
     }
   } else {
-    const dodge = advanceMeter(current.meters.dodge, current.stats.dodgeBps);
+    const dodge = current.rng ? { triggered: draw(0, 9999) < current.stats.dodgeBps, meter: current.meters.dodge }
+      : advanceMeter(current.meters.dodge, current.stats.dodgeBps);
     next.meters = { ...current.meters, dodge: dodge.meter };
     next.lastAction = dodge.triggered ? 'dodge' : 'hit';
     next.heroHp = Math.max(0, current.heroHp - (dodge.triggered ? 0 : enemy.attack));
@@ -146,6 +164,7 @@ export function battleTurn(current: BattleState): BattleState {
       next.status = 'defeat';
       next.gold = 0;
       next.xp = 0;
+      if (next.loot) next.loot = [];
       next.log.push('No loot earned. Your entry health is restored.');
     }
   }

@@ -43,6 +43,13 @@
       "when": 1789051389413,
       "tag": "0005_pushup_damage",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1789058192151,
+      "tag": "0006_inventory",
+      "breakpoints": true
     }
   ]
 }

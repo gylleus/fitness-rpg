@@ -1,5 +1,6 @@
 import type { AttackEffect } from './attacks';
-import { AMULET, BASE_PUSHUP_DAMAGE_COEFFICIENT, FOCUS_COEFFICIENT_BONUS } from './items';
+import { BASE_PUSHUP_DAMAGE_COEFFICIENT, FOCUS_COEFFICIENT_BONUS } from './items';
+import { equipmentBonuses, startingEquipment, type OwnedItem } from './equipment';
 
 /** Pure game rules. Fitness records never contain derived game power. */
 export function localDay(time: number | Date = Date.now()): string {
@@ -39,6 +40,7 @@ export type FitnessDay = {
 };
 export type Hero = { gold: number; xp: number; swordLevel: number; armorLevel: number; unlockedDungeon: number; amuletOwned?: boolean };
 export type HeroStats = { attack: number; health: number; baseAttack: number; baseHealth: number; dailyHealth: number; level: number; dodgeBps: number;
+  baseDamageMin?: number; baseDamageMax?: number;
   pushups: number; pushupDamageCoefficient: number; damageMultiplier: number; attackEffects: AttackEffect[] };
 
 /** Coefficient bonuses are additive, so equipment and future talents compose. */
@@ -49,8 +51,11 @@ export function pushupPower(baseDamage: number, pushups: number, coefficient = B
   return { multiplier: numerator / scale, damage: Math.round(baseDamage * numerator / scale) };
 }
 
-export function attackPower(stats: HeroStats, focusAttacks = 0) {
-  return pushupPower(stats.baseAttack, stats.pushups, stats.pushupDamageCoefficient + (focusAttacks > 0 ? FOCUS_COEFFICIENT_BONUS : 0));
+export function attackPower(stats: HeroStats, focusAttacks = 0, baseDamage = stats.baseAttack) {
+  const coefficient = stats.pushupDamageCoefficient + (focusAttacks > 0 ? FOCUS_COEFFICIENT_BONUS : 0);
+  return { ...pushupPower(baseDamage, stats.pushups, coefficient),
+    minDamage: pushupPower(stats.baseDamageMin ?? stats.baseAttack, stats.pushups, coefficient).damage,
+    maxDamage: pushupPower(stats.baseDamageMax ?? stats.baseAttack, stats.pushups, coefficient).damage };
 }
 
 export const MAX_DODGE_BPS = 3000;
@@ -72,19 +77,19 @@ export function fitnessDay(day: string, pushups = 0, partialReps = 0, enteredSte
   };
 }
 
-export function heroStats(hero: Hero, today: FitnessDay, pushups = today.pushups): HeroStats {
+export function heroStats(hero: Hero, today: FitnessDay, pushups = today.pushups,
+  gear: readonly Pick<OwnedItem, 'item' | 'slot'>[] = startingEquipment()): HeroStats {
   const level = 1 + Math.floor(hero.xp / 100);
-  const baseAttack = 25 + hero.swordLevel * 3 + level - 1;
-  const baseHealth = 100 + hero.armorLevel * 20 + (level - 1) * 5;
+  const bonuses = equipmentBonuses(gear);
+  const baseDamageMin = bonuses.damageMin + level - 1, baseDamageMax = bonuses.damageMax + level - 1;
+  const baseAttack = (baseDamageMin + baseDamageMax) / 2;
+  const baseHealth = 100 + bonuses.health + (level - 1) * 5;
   const dailyHealth = Math.floor(today.steps / 100);
-  const pushupDamageCoefficient = BASE_PUSHUP_DAMAGE_COEFFICIENT + (hero.amuletOwned ? AMULET.coefficientBonus : 0);
+  const pushupDamageCoefficient = BASE_PUSHUP_DAMAGE_COEFFICIENT + bonuses.coefficientBonus;
   const power = pushupPower(baseAttack, pushups, pushupDamageCoefficient);
-  return { attack: power.damage, health: baseHealth + dailyHealth, baseAttack, baseHealth, dailyHealth, level,
-    dodgeBps: today.agilityBps, pushups, pushupDamageCoefficient, damageMultiplier: power.multiplier, attackEffects: [] };
+  return { attack: power.damage, health: baseHealth + dailyHealth, baseAttack, baseDamageMin, baseDamageMax, baseHealth, dailyHealth, level,
+    dodgeBps: today.agilityBps, pushups, pushupDamageCoefficient, damageMultiplier: power.multiplier, attackEffects: bonuses.effects };
 }
-
-export const upgradeCost = (level: number) => 30 + level * 25;
-export type Equipment = 'sword' | 'armor';
 
 export function validateSteps(steps: number) {
   if (!Number.isSafeInteger(steps) || steps < 0 || steps > 200_000) throw new Error('Enter a whole step total between 0 and 200,000.');

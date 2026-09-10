@@ -2,6 +2,8 @@ import { afterEach, beforeEach, describe, expect, it, jest } from '@jest/globals
 import { act, cleanup, fireEvent, renderRouter, screen } from 'expo-router/testing-library';
 import { router } from 'expo-router';
 import { Alert, AppState, type AppStateStatus } from 'react-native';
+import { giveItem } from '../equipment';
+import { GEAR } from '../../src/game/equipment';
 import { createTestDb } from '../db';
 import { getGameSnapshot, savePushupWorkout } from '../../src/db/game';
 import * as gameRepository from '../../src/db/game';
@@ -138,7 +140,8 @@ describe('first playable game flow', () => {
     expect(getGameSnapshot(mockDb).latestBattle?.state).toMatchObject({ phase: 'travelling', attacksMade: 0 });
     await moveTime(500);
     expect(getGameSnapshot(mockDb).latestBattle?.state).toMatchObject({ tick: 3, phase: 'fighting', lastAction: 'attack', attacksMade: 1 });
-    expect(screen.getByLabelText('25 damage to enemy')).toHaveTextContent('−25');
+    const damage = getGameSnapshot(mockDb).latestBattle!.state.impacts![0].amount;
+    expect(screen.getByLabelText(`${damage} damage to enemy`)).toHaveTextContent(`−${damage}`);
   });
 
   it('opens combat outside the tabs with landscape and hidden system bars, then restores the picker', async () => {
@@ -287,7 +290,7 @@ describe('first playable game flow', () => {
     expect(getGameSnapshot(mockDb).totals.runs).toBe(0);
   });
 
-  it('claims earned quests once and buys a permanent upgrade through the forge', async () => {
+  it('claims earned quests once and sells an unequipped item through inventory', async () => {
     savePushupWorkout(mockDb, { sourceKey: 'earned-pushups', startedAt: NOW - 60_000, endedAt: NOW, validReps: 20, partialReps: 2 });
     await renderRouter(routes);
     await press('Claim gold');
@@ -297,10 +300,13 @@ describe('first playable game flow', () => {
     await press('← Camp');
     await press('Claim gold');
     await navigate('/forge');
-    await fireEvent.press(screen.getAllByRole('button', { name: 'Upgrade  ·  ◆ 30 gold' })[0]);
-    expect(getGameSnapshot(mockDb).hero).toMatchObject({ gold: 10, swordLevel: 1 });
-    expect(screen.getByText('Equipped · upgrade 1')).toBeVisible();
-    expect(screen.getByRole('button', { name: 'Need 45 more gold  ·  ◆ 55' })).toBeDisabled();
+    await press('Weapon: Wooden Club');
+    expect(screen.getByRole('button', { name: 'Sell for 5 gold' })).toBeDisabled();
+    await press('Unequip to bag');
+    await press('Sell for 5 gold');
+    expect(getGameSnapshot(mockDb).hero.gold).toBe(45);
+    expect(screen.getByRole('button', { name: 'Weapon: Empty' })).toBeDisabled();
+    expect(screen.queryByText(/Upgrade/)).toBeNull();
   });
 
   it('pauses combat when navigating away or backgrounding and resumes saved turns', async () => {
@@ -354,18 +360,21 @@ describe('first playable game flow', () => {
     expect(getGameSnapshot(mockDb).latestBattle?.state.stats.pushups).toBe(2);
   });
 
-  it('buys the rare amulet and drinks a focus potion through the forge', async () => {
+  it('equips a found amulet and drinks a focus potion through inventory', async () => {
     gameRepository.getHero(mockDb);
     mockDb.update(heroes).set({ gold: 200, unlockedDungeon: 1 }).run();
+    giveItem(mockDb, GEAR.restraint_amulet);
     savePushupWorkout(mockDb, { sourceKey: 'reserve', startedAt: NOW - 60_000, endedAt: NOW, validReps: 9, partialReps: 0 });
     await renderRouter(routes, { initialUrl: '/forge' });
-    await press('Buy amulet  ·  ◆ 150 gold');
-    expect(screen.getByRole('button', { name: 'Amulet equipped ✓' })).toBeDisabled();
+    await press('Inspect Amulet of Restraint');
+    await press('Equip to Amulet');
+    await press('Close item');
+    await press('Supplies');
     await press('Buy focus potion  ·  ◆ 25 gold');
     await press('Drink focus potion');
     expect(screen.getByRole('button', { name: 'Drink focus potion' })).toBeDisabled();
     expect(getGameSnapshot(mockDb)).toMatchObject({ damage: 54, savedPushups: 9,
-      hero: { gold: 25, amuletOwned: true, focusPotions: 0, focusAttacks: 10 } });
+      hero: { gold: 175, focusPotions: 0, focusAttacks: 10 } });
     await navigate('/');
     expect(screen.getByText(/2.17× damage/)).toBeVisible();
   });

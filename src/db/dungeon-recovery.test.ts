@@ -43,6 +43,7 @@ describe('legacy failed stockpile recovery', () => {
       sqlite.exec(recoverySql.split('--> statement-breakpoint')[1]);
       expect(sqlite.prepare('SELECT pushup_units_spent FROM heroes').get()).toEqual({ pushup_units_spent: restored ? 0 : spent });
       if (restored) {
+        for (const entry of journal.entries.filter(entry => entry.idx > 4)) sqlite.exec(readFileSync(join(__dirname, `migrations/${entry.tag}.sql`), 'utf8'));
         const db = drizzle(sqlite, { schema });
         const run = startDungeon(db, 0, now);
         expect(run.state).toMatchObject({ stats: { pushups: 4 }, heroHp: 165, dungeon: { name: 'Wetlands' } });

@@ -41,7 +41,7 @@ export default function ExpeditionScreen() {
   const battle = run.state;
   const dungeon = battleDungeon(battle);
   const enemy = dungeon.enemies[battle.encounter];
-  const power = battle.rulesVersion === 2 ? attackPower(battle.stats, battle.focusAttacks) : { damage: battle.stats.attack, multiplier: 1 };
+  const power = (battle.rulesVersion ?? 0) >= 2 ? attackPower(battle.stats, battle.focusAttacks) : { damage: battle.stats.attack, minDamage: battle.stats.attack, maxDamage: battle.stats.attack, multiplier: 1 };
   const retry = () => { if (perform(() => startDungeon(db, battle.dungeonId))) setPlaying(true); };
   const choose = () => { if (perform(() => dismissDungeonResult(db, run.id))) leave(); };
   return <View testID="fullscreen-expedition" style={styles.screen}>
@@ -50,9 +50,9 @@ export default function ExpeditionScreen() {
       <View style={[styles.health, { maxWidth: 260 }]}>
         <Text numberOfLines={1} style={styles.name}>BARBARIAN · {battle.heroHp}/{battle.stats.health} HP</Text>
         <Meter value={battle.heroHp} max={battle.stats.health} label="Hero health" />
-        <Text style={ui.small}>{power.damage} damage · {multiplierLabel(power.multiplier)} power</Text>
+        <Text style={ui.small}>{power.minDamage}–{power.maxDamage} damage · {multiplierLabel(power.multiplier)} power</Text>
       </View>
-      <View style={styles.chapter}><Text style={[ui.label, { color: dungeon.color }]}>{dungeon.name}</Text><Text style={ui.small}>{battle.defeated}/{dungeon.enemies.length} defeated · ◆ {battle.gold} {active ? 'pending' : 'earned'}</Text></View>
+      <View style={styles.chapter}><Text style={[ui.label, { color: dungeon.color }]}>{dungeon.name}</Text><Text style={ui.small}>{battle.defeated}/{dungeon.enemies.length} defeated · {battle.loot?.length ?? 0} items · ◆ {battle.gold} {active ? 'pending' : 'earned'}</Text></View>
       <View style={[styles.health, { maxWidth: 260 }]}>
         <Text numberOfLines={1} style={[styles.name, { textAlign: 'right' }]}>{enemy.name} · {battle.enemyHp}/{enemy.health} HP</Text>
         <Meter value={battle.enemyHp} max={enemy.health} color={colors.red} label="Enemy health" />
@@ -75,6 +75,7 @@ export default function ExpeditionScreen() {
       <View style={styles.result}>
         <Text style={ui.heading}>{battle.status === 'victory' ? 'Boss defeated. Well fought.' : 'Back to the campfire.'}</Text>
         <Text style={ui.body}>{battle.status === 'victory' ? `${battle.gold} gold · ${battle.xp} XP secured` : 'Entry health restored. Your pushup power stays.'}</Text>
+        {battle.status === 'victory' && <Text style={[ui.small, { color: colors.green }]}>To your bag: {(battle.loot ?? []).map(drop => drop.item.name).join(', ') || 'No item drops in this older expedition'}</Text>}
         <View style={ui.row}>
           <Button compact secondary label="Choose a new expedition" onPress={choose} />
           <Button compact label="Try this dungeon again" disabled={data.currentHealth <= 0} onPress={retry} />
