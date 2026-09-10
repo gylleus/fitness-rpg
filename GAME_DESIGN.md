@@ -2,7 +2,7 @@
 
 ## The promise
 
-Real effort supplies an adventurer. Save pushups, build an attack stockpile,
+Real effort supplies an adventurer. Save pushups, increase damage,
 walk for daily health, and run for daily agility. Watch automatic dungeon battles,
 then turn boss bounties into lasting gear and useful consumables. Fitness history
 also shows progress outside the game; spending resources never erases exercise.
@@ -10,15 +10,15 @@ An in-game level is adventure progress, not a measurement of physical ability.
 
 ## Core loop
 
-1. Save a pushup workout: every full rep adds one pushup to the stockpile.
+1. Save a pushup workout: every full rep increases your damage multiplier.
 2. Sync native steps for health; record a GPS run for dodge from distance and pace.
 3. Enter a dungeon. Travel right, stop at enemies, and auto-attack.
-4. Every hero attack spends pushups. Defeat the boss to bank all gold and XP.
-5. Upgrade sword/armor, buy a rare efficiency amulet, or buy potions with gold.
+4. Attacks never consume pushups. Defeat the boss to bank gold, XP, enemy drops and a guaranteed boss item.
+5. Equip found items, sell spare gear, and buy potions from Inventory → Supplies.
 6. Wins carry exact remaining health into the next expedition. Failure restores
-   entry health, refunds spent pushups, and grants zero loot. Used potion charges stay spent.
+   entry health and grants zero loot. Used potion charges stay spent.
 
-Unused pushups **carry over across days**, as do gear, gold, XP, unlocked dungeons,
+All saved pushups **carry over across days**, as do gear, gold, XP, unlocked dungeons,
 potions, and unused focus charges. Daily step health and running agility expire
 at local midnight, and health recovers to the new day's maximum.
 
@@ -28,38 +28,32 @@ These are tunable game numbers, not prescribed workout targets.
 
 | Source | Benefit | Lifetime |
 | --- | --- | --- |
-| Base character | 25 damage per hit, 100 health | Permanent |
-| Sword upgrade | +3 damage per hit | Permanent |
-| Armor upgrade | +20 health | Permanent |
+| Base character | 100 health; unarmed damage 5–9 | Permanent |
+| Starter Wooden Club | 20–30 damage per hit | While equipped |
+| Found equipment | Damage range, health, flat damage, or pushup coefficient bonus | While equipped |
 | Each level after level 1 | +1 damage, +5 health | Permanent |
-| Completed pushup | +1 pushup to the attack stockpile | Until spent |
+| Completed pushup | +10% of base damage per attack, before item bonuses | Permanent |
 | Every 100 steps today | +1 health | Until local midnight |
 | Running distance and pace | Agility, expressed as deterministic dodge | Until local midnight |
 
-Damage is independent of pushup count. Base damage is tuned to make the first
-chapter attainable with a modest stockpile and daily step health: at 25 damage,
-Mossfall needs 14 attacks and deals 142 damage before dodge. Gear reduces both
-attacks needed and enemy retaliation. Partial reps stay in history but grant no
-attack resources. There is no soft cap on credited full pushups.
+### Pushup damage
 
-### Pushup spending
+Damage is `round(baseDamage * (1 + coefficient * savedPushups))`. The default
+coefficient is `0.1` in `src/game/items.ts`; 10 saved pushups doubles damage,
+20 triples it. Full reps from all saved pushup workouts count, including older
+reps previously spent under stockpile rules. Partial reps remain in history and
+do not add damage. There is no cap, spending, attack limit, or exhaustion state
+for new battles. Zero pushups permits entry with the normal base damage.
 
-One attack normally costs one pushup. Store hundredths of a pushup as integers:
-100 units per completed rep, 90 units per attack with the 10% amulet. Ten such
-attacks cost exactly nine pushups, without random free swings or rounding loss.
-Efficiency reductions add in percentage points and are capped at 50% total.
+Coefficient bonuses from equipment and future talents add to the base value.
+The existing amulet adds `0.01`; a focus charge adds `0.02` for that swing.
+Coefficients resolve in integer basis points before rounding final damage to
+avoid decimal rounding errors at half-damage boundaries.
 
-Spend only when the hero actually attacks. Travelling, pausing, incoming enemy
-attacks, and dodges cost no pushups. Critical hits and on-attack effects are part
-of that one paid swing and do not charge extra. The killing blow also costs an
-attack. Never allow an attack with insufficient resources or a negative balance.
-
-Zero affordable attacks blocks dungeon entry. If the balance cannot cover the
-next hero turn, the expedition ends as **exhausted**: zero gold/XP, entry health
-and spent pushups restored. Unaffordable fractional leftovers stay banked. The UI
-shows pushups remaining, next swing cost, and the exact number of attacks
-available, including a focus potion wearing off. Training while an expedition is
-paused adds usable resources when it resumes.
+Training, gear, and the permanent coefficient are snapshotted at entry. New
+workouts increase camp power immediately and apply to the next expedition;
+a paused battle retains its original damage inputs. Focus charges still wear
+off after ten actual attacks, so the HUD previews the next swing correctly.
 
 ### Step health and running agility
 
@@ -70,9 +64,10 @@ agility from saved distance and active duration.
 
 ```
 level = 1 + floor(xp / 100)
-damage = 25 + swordLevel * 3 + (level - 1)
+baseDamage = seededRoll(weaponMin, weaponMax) + gearDamageBonus + (level - 1)
+damage = round(baseDamage * (1 + pushupDamageCoefficient * savedPushups))
 dailyHealth = floor(totalSteps / 100)
-health = 100 + armorLevel * 20 + (level - 1) * 5 + dailyHealth
+health = 100 + equippedHealthBonus + (level - 1) * 5 + dailyHealth
 speedKmh = distanceMeters / activeSeconds * 3.6
 paceWeight = clamp(speedKmh / 8, 0.5, 1.5)
 runDodgeBps = min(3000, round(distanceKm * 200 * paceWeight))
@@ -84,44 +79,39 @@ One basis point is 0.01%. At 8 km/h, 5 km earns 10% dodge; at 12 km/h it earns
 at 12 km/h, and total daily dodge is capped at 30%. Multiple runs use their own
 pace before summing. A short sprint cannot boost an entire day's activity.
 
-### Deterministic dodge and attack effects
+### Seeded damage, dodge and attack effects
 
-There are no random combat rolls. On every incoming enemy attack, add the dodge
-rate to a saved meter. At 10,000 basis points, dodge the whole attack and subtract
-10,000. Starting from zero, 20% dodges attacks 5, 10, 15, and so on. Arbitrary rates
-also work: 15% dodges attacks 7, 14, 20, etc. A dead enemy never attacks and never
-advances the dodge meter.
+Each dungeon has a persistent victory counter. Its seed is derived from the
+dungeon ID and that counter. Defeat, retreat, expiry, pausing and app restarts
+never advance it. Only victory increments it, atomically with the rewards.
+Winning a different dungeon cannot reroll this one's encounters.
 
-Meters carry across enemies, retries, successful expeditions, day changes, and
-app restarts. Pausing or re-entering cannot reset their progress. The entry dodge
-rate stays fixed for that expedition; if a later expedition has a different rate,
-it advances the existing remainder at its new rate. Zero dodge adds nothing.
+Weapon damage is an inclusive integer roll, followed by flat gear and level
+bonuses, then the pushup multiplier. The screen shows the resulting min–max
+range. Dodge and on-attack effects also use the saved combat RNG, rather than
+carrying proc meters between attempts. Matching entry stats, gear, health and
+focus charges replay the same outcomes. Training or changing equipment can
+change the outcome; used potion charges still remain spent after failure.
 
-Damage resolution is a pure function producing typed damage/healing events. Item
-effects have stable unique IDs, an on-attack trigger, a basis-point rate, and an
-effect payload. Each effect owns a saved deterministic meter. Resolution order:
+The versioned RNG and current draw state are saved in every battle checkpoint.
+Loot uses a separate stream per encounter, so the number of attacks or proc
+rolls cannot alter drops. The full loot plan is snapshotted at entry. Existing
+version-2 expeditions finish with their saved fixed-damage and meter rules;
+new version-3 expeditions use seeded rolls and item rewards.
 
-1. Check and spend the attack cost; consume one active focus charge.
-2. Advance each on-attack effect meter once.
-3. Apply triggered critical modifiers to weapon damage (strongest multiplier
-   wins; round down once). Baseline critical rate is zero.
-4. Append triggered flat damage and healing effects in equipment order. Flat
-   proc damage is not multiplied by a weapon critical. Healing caps at max HP.
-5. Apply the result, process enemy death, then save everything atomically.
-
-Proc damage does not recurse into more attacks/procs. Effects may activate on a
-killing blow. This version implements and tests critical, extra damage, and
-healing effect support; the current item catalog does not yet grant these effects.
-Later items can supply effect definitions without changing battle turns or the
-screen. New trigger types should get an explicit resolution stage when needed.
+Damage resolution stays pure: roll base damage, apply pushup/focus power,
+roll on-attack effects, apply the strongest triggered critical, then flat damage
+and healing effects in equipment-slot order. Criticals do not multiply flat
+proc damage; healing caps at max HP. Effects cannot recursively trigger attacks.
+Current gear supplies damage, health and coefficient bonuses; the effect
+schema supports later critical, damage and healing items.
 
 ## Time, persistence, and migration
 
 A day is a local calendar date. Derive health/agility from saved activity and
 refresh on foreground entry and midnight; no reset job or deletion is needed.
 Pushup sets and GPS workouts belong to their completion date. An active dungeon
-expires when the local date changes, dropping pending loot and refunding spent
-pushups. Used potion charges stay consumed. Meters and focus charges carry over. Version one trusts the phone's
+expires when the local date changes, dropping pending loot and retaining pushup power. Used potion charges stay consumed. Unused focus charges carry over; dungeon seeds stay unchanged. Version one trusts the phone's
 clock; no streak penalty applies on rest days.
 
 Use the existing expo-sqlite + Drizzle database, offline with no new account or
@@ -134,77 +124,95 @@ backend. [Expo SDK 57 SQLite](https://docs.expo.dev/versions/v57.0.0/sdk/sqlite/
 | Runs | Completion date, source/key, distance, active seconds, steps, recording ID |
 | Recordings and route points | Status, pause intervals, accepted GPS fixes, route gaps |
 | Health connection | Explicit opt-in and last completed sync |
-| Hero | Gold, XP, gear, unlocks, daily damage, spent pushup units, potions, focus charges, combat meters |
-| Dungeon runs | Entry stat snapshot, resources, meters, turns, combat log, pending rewards |
+| Hero | Gold, XP, unlocks, daily damage, legacy fields, potions, focus charges, inventory conversion version |
+| Inventory items | Unique owned item ID, immutable item snapshot, optional unique equipment slot, acquisition/source |
+| Dungeon seeds | Victory counter per dungeon |
+| Dungeon runs | Entry stats/roster, RNG seed/state, loot plan, focus charges, turns, combat log, pending rewards |
 | Challenge claims | Unique local date + challenge ID |
 
-Stockpile = all saved full pushup reps × 100 − persisted spent units, floored at
-zero. Existing pushup history becomes the initial stockpile; it is not copied or
-credited repeatedly. Workout save keys prevent duplicate deposits. Gold and
-resource changes use database transactions. Every paid attack saves spending,
-meters, potion charges, and battle state together. A stale tick does nothing; a
-failed checkpoint rolls back the entire turn, including any final boss reward.
-Track actual pushup units paid per attempt in its saved state. An unsuccessful
-result and its refund commit together; repeated callbacks cannot refund twice.
-Refund spending rather than replacing the balance, preserving workouts saved
-during an expedition. Successful attempts keep their costs permanently.
+Power counts all saved full pushup reps directly. Workout save keys prevent
+duplicating a retried save. Every turn atomically saves focus, RNG state,
+and its battle checkpoint. Stale callbacks do nothing, and failed saves roll
+back all changes, including the final boss reward. Attacks do not change fitness
+records or historical spending counters.
 
-Migration 0003 adds hero resource fields and ends active attempts from the old
-free-attack rules without awarding pending loot. It normalizes old result JSON
-for display and preserves workouts, banked rewards, equipment, and saved routes.
+Migrations 0003 and 0004 preserve older stockpile history and support dismissing
+finished results. Migration 0005 retires active stockpile battles without banking
+pending rewards. All workouts, banked gold/XP, gear, available entry health, and
+potion inventory are preserved. Historical spending no longer reduces power.
+Migration 0006 adds inventory and dungeon seed storage. On first read, one
+transaction converts old sword/armor levels and the owned amulet to equipped
+item instances with equivalent average damage, health and coefficient bonuses.
+A version flag prevents starter items from reappearing after they are sold.
 
 ## Automatic dungeon battles
 
 The hero moves right through a scrolling woodland, stopping to auto-attack each
 enemy. Three saved travel steps separate encounters. The hero attacks first;
-surviving enemies retaliate. Show both health bars, damage, stockpile/cost, dodge,
-the next dodge countdown, and a combat log. A dodge displays a miss and a backward
+surviving enemies retaliate. Show both health bars, next-swing damage, the pushup multiplier, pending bounty,
+and the latest combat event in a compact overlay. A dodge displays a miss and a backward
 movement. Navigating away or backgrounding pauses the battle.
 
-Each dungeon has four encounters, ending in a named boss:
+The portrait dungeon picker opens a dedicated full-screen landscape expedition.
+System bars and tabs are hidden while playing; returning restores portrait and
+normal navigation. The Android manifest identifies the app as a game so that
+Android 16+ honors orientation requests on large foldable displays. This metadata
+requires a rebuilt native client (`npx expo prebuild --platform android --no-install`).
+A single native canvas per entity stays mounted across loops
+and action changes to prevent whole-character flashes. All action images preload.
+
+Each dungeon ends in a named boss; encounter counts come from its saved roster:
 
 | Dungeon | Enemies | Boss |
 | --- | --- | --- |
-| Mossfall Hollow | Slime, thornling, wolf | The Rootwarden |
+| Wetlands | Bog toad, drowned corpse, giant water strider, bog hag | Root Hulk |
 | Embercrypt | Cinder imp, ash knight, fire wisp | The Furnace King |
 | Frostbound Keep | Ice crawler, frost guard, snow beast | The Pale Regent |
 
 Only one expedition can be active. Boss victory awards the whole pending bounty
 once and unlocks the next dungeon. Exact remaining health carries forward even
-if XP causes a level-up. Replaying spends pushups and any health lost in combat.
-Defeat, exhaustion, retreat, and expiry grant no gold or XP and refund the exact
-pushup cost paid in that attempt, including fractional costs. Focus charges stay consumed. Entry health is restored on failure/retreat.
+if XP causes a level-up. Defeat, retreat, and expiry grant no gold or XP.
+Focus charges stay consumed. Entry health is restored on failure/retreat.
 
 Daily damage from successful expeditions is stored separately from max health.
 More steps or armor can add available health; a healing potion reduces that
 stored damage. Running helps avoid future damage. At local midnight health
 recovers. No dungeon entry is allowed at zero available health.
 
-## Permanent progression and items
+## Inventory and equipment
 
-Sword and armor start at upgrade level zero and are always equipped. Each upgrade
-costs `30 + currentUpgradeLevel * 25` gold. XP levels require 100 XP each. Stats and
-equipment effects are snapshotted at entry, so a forge upgrade affects the next
-expedition. Purchase and inventory changes are atomic and cannot overspend gold.
+The Inventory tab replaces the forge's linear upgrades. One bag holds unequipped
+gear, and seven slots hold weapon, armor, helmet, gloves, two rings and an amulet.
+Each copy has its own ID, so two identical rings can be equipped independently.
+Selecting an item opens its details and compares it with each compatible slot.
+Equipping replaces the slot's old item and returns that item to the bag. Unequip
+before selling for the displayed gold value. Changing/selling gear is blocked
+while an expedition is active; its entry stats remain fixed.
 
-| Item | Acquisition | Effect |
-| --- | --- | --- |
-| Amulet of Restraint · rare | 150 gold after defeating the Rootwarden; buy once | Permanently reduces pushup usage by 10% |
-| Healing potion | 30 gold each | Drink at camp to restore up to 40 HP |
-| Focus potion | 25 gold each | Drink at camp for 20% lower usage on the next 10 paid attacks |
+Regular enemies have an initial 35% chance to drop one item. A boss always drops
+one rare item. Enemy and boss rewards stay pending until victory; defeat,
+retreat and expiry discard them without rerolling the seed. The final checkpoint
+banks all gear, gold and XP once. Item snapshots preserve earned stats when the
+catalog is later tuned. The initial pool and drop rates are provisional and
+live in `src/game/equipment.ts`; later chapters scale its damage/health values.
 
-The rare amulet is a guaranteed unlock and merchant purchase, with no RNG drop.
-Amulet + focus costs 0.7 pushups per attack. Focus lasts for attacks, not time,
-and charges are consumed even on failed expeditions. Only one focus potion can
-be active. Drinking at full health or while already focused is blocked without
-consuming an item. Potions can be bought during an expedition but are drunk only
-at camp after finishing or retreating. Inventory survives restarts and midnight.
+Starter gear is a Wooden Club (20–30 damage) and Travel Wraps. Empty weapon slots
+use 5–9 unarmed damage. Health gear, gloves and rings contribute only while
+equipped. The Amulet of Restraint is now a possible boss drop, adding 0.01 to the
+pushup coefficient; previously purchased copies are retained as equipped items.
+There are no weapon or armor upgrade purchases.
+
+Inventory → Supplies retains healing potions (30 gold, restore up to 40 HP at
+camp) and focus potions (25 gold, +0.02 coefficient for ten attacks). Only one
+focus potion can be active. Full-health healing and already-active focus are
+blocked without consuming a charge. Potions can be bought during an expedition
+but are drunk only at camp. All gear and unused supplies survive midnight and
+app restarts. XP levels still require 100 XP each.
 
 ## Daily challenges and screens
 
 Daily optional quests remain: complete 10 pushups, walk 3,000 steps, run 1 km.
-Each grants 20 gold once per date. Progress comes from raw activity, not unspent
-resources. Spending pushups cannot undo quest progress. Later goals can be
+Each grants 20 gold once per date. Progress comes from raw activity; combat cannot undo quest progress. Later goals can be
 personalized for alternatives and recovery days.
 
 Keep the dark woodland theme and pixel characters, with layouts that fit narrow
@@ -213,7 +221,7 @@ phones and the Fold.
 The authored environment and enemy catalog is being rebuilt through user-led curation.
 [content/catalog.toml](content/catalog.toml) registers
 [Wetlands](content/biomes/wetlands/BIOME.toml), a hostile, abandoned environment
-with no settled residents. Its first curated enemy is the Bog Toad; combat values
+with no settled residents. Its five curated enemies now supply the first runtime expedition; combat values
 remain provisional. Saved
 [design guidelines](content/design_guidelines.toml) retain the agreed tone,
 visual style, and descriptive writing conventions. The
@@ -221,14 +229,14 @@ visual style, and descriptive writing conventions. The
 curated TOML definitions and resolved JSON export. Runtime combat still
 uses `src/game/combat.ts`; authored content does not automatically alter those battles.
 
-- **Camp:** stockpile, affordable attacks, cost, damage per hit, available health,
+- **Camp:** saved pushups, damage multiplier, damage per hit, available health,
   daily running dodge, today's activity, native step connection, and quests.
-- **Dungeon:** travel/combat, resource use, exact dodge timing, pause/resume,
-  retreat, boss rewards, and exhaustion/retry feedback.
-- **Forge:** permanent upgrades, rare amulet unlock/purchase, potion shop and use.
+- **Dungeon:** portrait expedition picker and landscape full-screen travel/combat,
+  pause/resume, retreat, boss rewards, and retry feedback.
+- **Inventory:** equipment slots, a shared bag, item inspection/comparison, equip/unequip/sell, and potion supplies.
 - **Progress:** seven-day raw activity chart, daily runs/pace/agility, lifetime
-  totals, best pushup day, and a separate unspent/spent resource summary.
-- **Pushups:** camera counter/corrections; save full reps into the stockpile and
+  totals, best pushup day, and the saved-pushup damage multiplier.
+- **Pushups:** camera counter/corrections; save full reps to increase damage and
   record partials separately. Recalibration preserves accumulated totals.
 - **Connected steps:** one-time Health Connect/HealthKit setup, automatic sync,
   last-sync/retry/disconnect, sharing instructions, and phone health settings.
@@ -279,15 +287,15 @@ References: [Expo SDK 57 Location](https://docs.expo.dev/versions/v57.0.0/sdk/lo
 
 ## Acceptance and validation
 
-Verify integer spending, fractional amulet/focus costs and expiry, exact depletion,
-exactly-once refunds on losses/retreats/expiry, no duplicate charges on stale ticks, rollback on
-failed saves, and a paid boss killing blow. Test deterministic dodge and critical/
-proc sequences across enemy changes and persisted reloads, with no RNG calls.
+Verify zero-pushup entry, multiplier arithmetic, additive coefficient bonuses,
+focus expiry, unchanged saved reps during combat, fixed entry power, stale tick
+guards, rollback on failed saves, and the boss killing blow. Test deterministic dodge and critical/
+proc sequences across enemy changes and persisted reloads, using saved RNG state.
 Verify daily agility/health reset while resources/history persist, including
 legacy migration and duplicate workout saves. Check potion ownership, gold,
-full-health/active-focus guards, camp-only use, and permanent amulet unlocks.
+full-health/active-focus guards, camp-only use, equipment swaps, duplicate rings, sales, and legacy gear conversion.
 
-Keep boss-only loot, exact carried HP, unlocks, and challenges covered by real
+Keep victory-banked enemy/boss loot, seed advancement, exact carried HP, unlocks, and challenges covered by real
 SQLite tests and screen interaction tests. Run TypeScript, lint, all logic/UI
-tests, and an Android bundle. Physical checks should cover the resource/dodge
-readouts and narrow/Fold layouts, alongside native health and GPS behavior.
+tests, and an Android bundle. Physical checks should cover the damage/health
+readouts, landscape entry/exit, sprite transitions, and narrow/Fold layouts, alongside native health and GPS behavior.

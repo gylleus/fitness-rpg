@@ -4,14 +4,14 @@ A fitness tracker structured as a role-playing game: completing real workouts le
 character and earns rewards.
 
 The playable version connects camera-counted pushups, native step totals, and GPS runs to an RPG:
-train, clear automatic dungeon battles, earn gold, and upgrade permanent equipment.
+train, clear automatic dungeon battles, and collect, equip or sell dungeon loot.
 The full rules, balance, storage model, and future integrations are in [GAME_DESIGN.md](GAME_DESIGN.md).
 
 ## Play the first version
 
-- **Camp:** check your attack stockpile, damage, health, and dodge, train pushups, and claim daily quests.
+- **Camp:** check your pushup damage multiplier, health, and dodge, train pushups, and claim daily quests.
 - **Pushups:** use the existing camera counter, correct any miscounts, then choose
-  **Finish & save** to record the workout and add pushups to your attack stockpile.
+  **Finish & save** to record the workout and increase your damage multiplier.
 - **Connected steps:** connect Health Connect on Android or Apple Health on iPhone.
   Totals then sync automatically; there is no manual step-entry form. On Samsung,
   enable step sharing in Samsung Health → Settings → Health Connect first.
@@ -20,12 +20,20 @@ The full rules, balance, storage model, and future integrations are in [GAME_DES
   continue with the screen locked; an Android notification shows an active run.
 - **Dungeon:** the hero walks right through the scrolling world, stopping to fight.
   Defeat the final boss to bank all gold and XP. Failure/retreat gives zero loot
-  and restores entry health. Every hero attack spends pushups; unsuccessful
-  attempts refund those pushups. A victory carries remaining health into the next run.
-- **Forge:** upgrade sword/armor, buy a rare 10% pushup-efficiency amulet, and
-  buy/drink healing or focus potions at camp. Unspent pushups and items carry over.
-  Steps add health; running grants deterministic dodge (20% misses every fifth
-  enemy attack). Step health and running dodge reset at local midnight.
+  and restores entry health. Expeditions fill the screen in landscape, with pause and
+  retreat controls. Saved pushups multiply base damage by `1 + 0.1 * pushups` and
+  are never consumed. A victory carries remaining health into the next run.
+  Walking and the camera move continuously between encounters, switching straight
+  into an attack on arrival. Damage numbers pop on impact, drift upward and fade;
+  pause and speed controls apply to both.
+- **Inventory:** one bag for collected gear, with weapon, armor, helmet, gloves,
+  two rings and amulet slots. Inspect items to compare, equip, unequip or sell.
+  Enemies can drop gear and bosses guarantee an item; victory secures all drops.
+  Weapons roll within their damage range. Combat and loot replay on retries;
+  only victory advances that dungeon's seed. Gear changes take effect at camp.
+  Buy and drink potions under Supplies. Existing upgrades become equipped items
+  with their earned bonuses preserved. Saved gear and pushup power carry over;
+  step health and running dodge reset at local midnight.
 - **Progress:** view daily activity, running pace and routes, lifetime totals, and
   delete incorrect runs (including their saved routes).
 

@@ -15,6 +15,8 @@ it('has seven exclusive slots, accepts rings in either hand and ignores bag item
   expect(equipmentBonuses([{ item: GEAR.root_maul, slot: null }]).damageMin).toBe(5);
 });
 it('replays bounded integer rolls, includes both endpoints and retains state through JSON', () => {
+  // Fixed vector protects saved sequences against accidental RNG changes.
+  expect(randomInt(0, 0, 0xffffffff)).toEqual({ state: 1013904223, value: 1013904223 });
   let state = dungeonSeed(0, 0);
   const rolls: number[] = [];
   for (let i = 0; i < 500; i++) { const draw = randomInt(state, 20, 30); state = draw.state; rolls.push(draw.value); }

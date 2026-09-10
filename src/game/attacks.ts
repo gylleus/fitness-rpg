@@ -1,4 +1,4 @@
-/** Rates use integer basis points; meters make every outcome reproducible. */
+/** Integer basis-point rates; old saves use meters, new battles supply seeded rolls. */
 export const RATE_SCALE = 10_000;
 export type CombatMeters = { dodge: number; effects: Record<string, number> };
 export const emptyCombatMeters = (): CombatMeters => ({ dodge: 0, effects: {} });

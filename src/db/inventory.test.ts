@@ -4,7 +4,7 @@ import { createTestDb } from '../../test/db';
 import { giveItem } from '../../test/equipment';
 import { GEAR } from '../game/equipment';
 import { battleTurn, type BattleState } from '../game/combat';
-import { advanceDungeon, getGameSnapshot, getHero, retreatDungeon, savePushupWorkout, startDungeon } from './game';
+import { advanceDungeon, expireBattles, getGameSnapshot, getHero, retreatDungeon, savePushupWorkout, startDungeon } from './game';
 import { equipItem, getInventory, sellItem, unequipItem } from './inventory';
 import { dungeonRuns, dungeonSeeds, heroes, inventoryItems } from './schema';
 
@@ -93,6 +93,21 @@ it('replays the same full defeat after retry and keeps loot and seeds unchanged'
   expect(second.state).toEqual(first.state);
   expect(getInventory(db)).toHaveLength(2);
   expect(db.select().from(dungeonSeeds).get()?.victories).toBe(0);
+});
+
+it('retains the seed across midnight expiry and keeps other dungeon counters independent', () => {
+  const db = trained();
+  getHero(db);
+  db.update(heroes).set({ unlockedDungeon: 1 }).run();
+  const other = startDungeon(db, 1, now);
+  retreatDungeon(db, other.id);
+  expect(finish(db).status).toBe('victory');
+  const same = startDungeon(db, 1, now);
+  expect(same.state.rng).toEqual(other.state.rng);
+  const tomorrow = now + 24 * 60 * 60 * 1000;
+  expireBattles(db, tomorrow);
+  expect(startDungeon(db, 1, tomorrow).state.rng).toEqual(other.state.rng);
+  expect(db.select().from(dungeonSeeds).where(eq(dungeonSeeds.dungeonId, 1)).get()?.victories).toBe(0);
 });
 
 it('does not reroll on retreat or JSON reload, including dodge and item effects', () => {

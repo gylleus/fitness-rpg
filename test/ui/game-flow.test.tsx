@@ -132,6 +132,40 @@ async function navigate(path: '/dungeon' | '/forge' | '/progress' | '/') {
 }
 
 describe('first playable game flow', () => {
+  it('equips two found rings independently and locks their controls during combat', async () => {
+    giveItem(mockDb, GEAR.copper_ring);
+    giveItem(mockDb, GEAR.copper_ring);
+    await renderRouter(routes, { initialUrl: '/forge' });
+    await fireEvent.press(screen.getAllByRole('button', { name: 'Inspect Heavy Copper Ring' })[0]);
+    await press('Equip to Ring 1');
+    await press('Close item');
+    await press('Inspect Heavy Copper Ring');
+    await press('Equip to Ring 2');
+    await press('Close item');
+    expect(getGameSnapshot(mockDb).inventory.filter(item => item.slot?.startsWith('ring'))).toHaveLength(2);
+    expect(screen.getByRole('button', { name: 'Ring 1: Heavy Copper Ring' })).toBeEnabled();
+    expect(screen.getByRole('button', { name: 'Ring 2: Heavy Copper Ring' })).toBeEnabled();
+    await navigate('/dungeon');
+    await press('Enter dungeon  →');
+    await navigate('/forge');
+    await press('Ring 1: Heavy Copper Ring');
+    expect(screen.getByRole('button', { name: 'Unequip to bag' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Sell for 18 gold' })).toBeDisabled();
+  });
+
+  it('shows the actual boss reward and makes the won equipment inspectable in the bag', async () => {
+    savePushupWorkout(mockDb, { sourceKey: 'loot-training', startedAt: NOW - 60000, endedAt: NOW, validReps: 100, partialReps: 0 });
+    let run = gameRepository.startDungeon(mockDb, 0, NOW);
+    for (let i = 0; i < 200 && run.status === 'active'; i++) run = gameRepository.advanceDungeon(mockDb, run.id, run.state.tick, NOW)!;
+    expect(run.status).toBe('victory');
+    const boss = run.state.loot!.find(drop => drop.boss)!;
+    await renderRouter(routes, { initialUrl: '/dungeon' });
+    expect(screen.getByText(`Boss reward · ${boss.item.name}`)).toBeVisible();
+    await navigate('/forge');
+    await press(`Inspect ${boss.item.name}`);
+    expect(screen.getByRole('button', { name: `Sell for ${boss.item.sellValue} gold` })).toBeEnabled();
+  });
+
   it('starts the attack on arrival without an idle tick or waiting for the walk loop to finish', async () => {
     await renderRouter(routes, { initialUrl: '/dungeon' });
     await press('Enter dungeon  →');

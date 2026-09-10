@@ -47,8 +47,9 @@ export function startingEquipment(swordLevel = 0, armorLevel = 0, amuletOwned = 
 export function equipmentBonuses(items: readonly { item: GearItem; slot: EquipmentSlot | null }[]) {
   let damageMin = 5, damageMax = 9, health = 0, attackBonus = 0, coefficientBonus = 0;
   const effects: AttackEffect[] = [];
-  for (const { item, slot } of items) {
-    if (!slot || !fitsSlot(item, slot)) continue;
+  for (const slot of EQUIPMENT_SLOTS) {
+    const item = items.find(owned => owned.slot === slot)?.item;
+    if (!item || !fitsSlot(item, slot)) continue;
     if (slot === 'weapon') { damageMin = item.damageMin!; damageMax = item.damageMax!; }
     health += item.health ?? 0;
     attackBonus += item.attackBonus ?? 0;
