@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "entities": [
+    {
+      "manifest": "../../../player-sprites/sequences/barbarian-club-v1/export/manifest.json",
+      "actions": [
+        "idle",
+        "walk",
+        "attack",
+        "death"
+      ],
+      "variant": "nearest",
+      "frame_step": 1
+    },
+    {
+      "manifest": "../../../enemy-sprites/runs/wetlands-selected/exports/bog_toad/manifest.json",
+      "actions": [
+        "idle",
+        "walk",
+        "attack",
+        "death"
+      ],
+      "variant": "nearest",
+      "frame_step": 1
+    },
+    {
+      "manifest": "../../../enemy-sprites/runs/wetlands-selected/exports/drowned_corpse/manifest.json",
+      "actions": [
+        "idle",
+        "walk",
+        "attack",
+        "death"
+      ],
+      "variant": "nearest",
+      "frame_step": 1
+    },
+    {
+      "manifest": "../../../enemy-sprites/runs/wetlands-selected/exports/bog_hag/manifest.json",
+      "actions": [
+        "idle",
+        "walk",
+        "attack",
+        "death"
+      ],
+      "variant": "nearest",
+      "frame_step": 1
+    },
+    {
+      "manifest": "../../../enemy-sprites/runs/wetlands-selected/exports/root_hulk/manifest.json",
+      "actions": [
+        "idle",
+        "walk",
+        "attack",
+        "death"
+      ],
+      "variant": "nearest",
+      "frame_step": 1
+    },
+    {
+      "manifest": "../../../enemy-sprites/runs/wetlands-selected/exports/giant_water_strider/manifest.json",
+      "actions": [
+        "idle",
+        "walk",
+        "attack",
+        "death"
+      ],
+      "variant": "nearest",
+      "frame_step": 1
+    }
+  ]
+}

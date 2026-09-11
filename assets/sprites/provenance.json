@@ -1,5 +1,5 @@
 {
-  "recipe_sha256": "ddf2fead09a9c0204565c83260f5d54f6d0432b0add25e3d3f3420c1e127d99f",
+  "recipe_sha256": "9e6bb28309f04597f808abc45c0f623c4628479b86c99b8b2863fe413fe8819e",
   "entities": {
     "barbarian_player": {
       "manifest": "image-generation/player-sprites/sequences/barbarian-club-v1/export/manifest.json",
@@ -29,137 +29,137 @@
       }
     },
     "bog_toad": {
-      "manifest": "image-generation/enemy-sprites/runs/wetlands-selected/exports/bog_toad/manifest.json",
-      "sha256": "053c0685c2d762bc6ea222c3bc3c9cc64685285b7a4cf0db50a2bde6afdc5e29",
+      "manifest": "image-generation/enemy-sprites/sequences/wetlands-128-v1/bog_toad/export/manifest.json",
+      "sha256": "ab0ebf0b0d68baa9e20c2b970ae021323bb1e6112d77eb8106109a8a31551e08",
       "frame_step": 1,
       "sheets": {
         "idle": {
-          "atlas_sha256": "cf7f8d0d1fb405c72ed2bfc8ad9c7119ee9086cb6e25b505522c170065cdcd86",
-          "image_sha256": "c1023ef04f18c28f4cbe63b143fe18ba0288255559f729ae73a397584482687e",
-          "output_sha256": "c1023ef04f18c28f4cbe63b143fe18ba0288255559f729ae73a397584482687e"
+          "atlas_sha256": "b15cfbfa0f51e385237ea9e08b7541f6f77934bb102958ad7734a52c7be43f10",
+          "image_sha256": "beb114135a98f5474289792ae8657e252ea569c3f839501039ce321dd704bcd7",
+          "output_sha256": "e75d8352c5d6b52cf186ff65b8f7eb7d30ef097e0d25c5bf95963e3f3c6d96dc"
         },
         "walk": {
-          "atlas_sha256": "0f8a912b6f76496d900a369bf7c44a2187494a7362db26cf2faa58e728e443d9",
-          "image_sha256": "e3f043fab87e31a4951876eddfbd1b1fe30dfe506db55fcea015df5bc863b9c1",
-          "output_sha256": "e3f043fab87e31a4951876eddfbd1b1fe30dfe506db55fcea015df5bc863b9c1"
+          "atlas_sha256": "206eab70ba08f8d44616e9637ec3a45df744641aeddd6a6b688bc78773d5fa78",
+          "image_sha256": "16cd73c8f6c85a53a490c5faa20e85c0aac060d3f76c099035eae5acf11d8d7b",
+          "output_sha256": "a9ecaa3ebc5a61aba27fddaeac0ebe216eef650f4b8d1654c33cc4fc1a8d2f5b"
         },
         "attack": {
-          "atlas_sha256": "12dd98023ce2ddc1f0244a9a413ad5f8da75b20f0f006de01262e568a33d5353",
-          "image_sha256": "fc3770e1f8bfcf7c63a681c623afcb1607732ec23295fd7674963f2cd20b0ca1",
-          "output_sha256": "fc3770e1f8bfcf7c63a681c623afcb1607732ec23295fd7674963f2cd20b0ca1"
+          "atlas_sha256": "a96f17926f5577eecfaebe2793a4a5ab0944542818e3f584efba049f1ee1ade1",
+          "image_sha256": "dee795e6b4b8f9d38434a94e3068ef8a87a49e605c62195166e2b95cdabe428e",
+          "output_sha256": "63eeed66b4f4456555e3e77d70b6f3ae701edf2df565ad64b9febb122fd85b31"
         },
         "death": {
-          "atlas_sha256": "46d05e6950271db3a5b63ce2f6d920f63a1f7757fa3fe9db785b8baf4940bba1",
-          "image_sha256": "c793ab24b469962cce037d421c8973dcb46d7aba20ca914eb24d8dca1387ab2c",
-          "output_sha256": "c793ab24b469962cce037d421c8973dcb46d7aba20ca914eb24d8dca1387ab2c"
+          "atlas_sha256": "f158db3aae4a585edbcce163a5d352cecc75149a423db76c6ca459c352548b42",
+          "image_sha256": "1a33b4a16c9756d6d1c608a4e292b451252c73bcd9a74b1c25742670ade62a7b",
+          "output_sha256": "948203e4428edc2f3f4a856e46bac8e67ee08b32629ce8c764b75a2f61f00b9b"
         }
       }
     },
     "drowned_corpse": {
-      "manifest": "image-generation/enemy-sprites/runs/wetlands-selected/exports/drowned_corpse/manifest.json",
-      "sha256": "9657a2ed4a578523ab74d73375bf23f81a9648ff161e4faa703157848b0bd845",
+      "manifest": "image-generation/enemy-sprites/sequences/wetlands-128-v1/drowned_corpse/export/manifest.json",
+      "sha256": "1dbf35a6026546b8f06fc1449ccf39ca3963ffddeb1747c2678531f51ae4550f",
       "frame_step": 1,
       "sheets": {
         "idle": {
-          "atlas_sha256": "122e6a0a7e75a688e5c7fef95b2adb8e5e1ac7e3c0e676e9a6b4c91fca1c73eb",
-          "image_sha256": "d03863f45d762ce52fc944c7567c4ccb714a83b5e5d5a670270671383efa036e",
-          "output_sha256": "d03863f45d762ce52fc944c7567c4ccb714a83b5e5d5a670270671383efa036e"
+          "atlas_sha256": "e928b4a2a100b75b1911ceeb2a6ed4d0f20e7a0a47139029ca66a5ffb5e0615b",
+          "image_sha256": "3fbd7a3d6df6880b4b9d3444fea0bc2583a83405a8363c8cfd8652500774bac6",
+          "output_sha256": "d43248cb3db0bf3b4a983fa2acfdce8bb6f713650a39d5d87abb79dbc5e56179"
         },
         "walk": {
-          "atlas_sha256": "2d041ee8cce9cffa74401c94675806c5f2fd76762a363076b17659408e3d2e52",
-          "image_sha256": "fd9d207653337a4668c7d2d7770d9e0e19325b232b7b3e729bee7814507f2f7c",
-          "output_sha256": "fd9d207653337a4668c7d2d7770d9e0e19325b232b7b3e729bee7814507f2f7c"
+          "atlas_sha256": "b70db35bc88410ceafa0e1176477461be2bdbacf7de4ef105c54482b851e9b5e",
+          "image_sha256": "d5fef6e1215cae8617b46215e0799c9e63351e1e7838f26f3ae414409e36e00f",
+          "output_sha256": "33a5b206b0da8635ef9044d351ea6118250b094516a7e3802b4449ce55d79e0f"
         },
         "attack": {
-          "atlas_sha256": "eccad2024b1e23146925d41c0da0aa6c4182fbf545f50d179daa41e91d9e5049",
-          "image_sha256": "6bb3afab8cb3e4261df17cd148c52229dd6fa567e336ea8a0c7f5067c208e26c",
-          "output_sha256": "6bb3afab8cb3e4261df17cd148c52229dd6fa567e336ea8a0c7f5067c208e26c"
+          "atlas_sha256": "0e8e0f275b04b31bcdec1503f55bcd2c9f0d98bd95ef6c4fb71c8fbb2bcc6fe8",
+          "image_sha256": "d0d61f65c7c5eb2c776483eaae205382a58bfd765392a741f3ef3ee5330631c2",
+          "output_sha256": "cbc2e3a25bd459eb8f603b6cb72f58e178a281b0a6a02b37e731722ea002baf7"
         },
         "death": {
-          "atlas_sha256": "662647d4c8a1b5c902113cbec0573fc402c05c30db7c34a74c2a2a47cb0ef5d8",
-          "image_sha256": "9212479f3433f565b2e43df5be7e4cfd3fcea14a7547ac2e28e6aaf9d0fbf401",
-          "output_sha256": "9212479f3433f565b2e43df5be7e4cfd3fcea14a7547ac2e28e6aaf9d0fbf401"
+          "atlas_sha256": "b139e68f3f9f24942f1f10568bb15088588fa0716ebd22028c8edeaf871395c5",
+          "image_sha256": "315e753d0f1029e92bafee52b6c494bec5a86f2c4e06e04f6c856ab627dd5921",
+          "output_sha256": "f9a38617b21c03d7c2865205ca5702941b5ba45ba9bc90c45d72ce8b684fd146"
         }
       }
     },
     "bog_hag": {
-      "manifest": "image-generation/enemy-sprites/runs/wetlands-selected/exports/bog_hag/manifest.json",
-      "sha256": "8d6ac1f12ba58a5d9448dddf5c4d03c1ac260ee79d5256cdd9449077d445d666",
+      "manifest": "image-generation/enemy-sprites/sequences/wetlands-128-v1/bog_hag/export/manifest.json",
+      "sha256": "31e5ac6bda5efc056ab5dc8ae13dc88224c7f704ac5d5d57f564302fbfe01148",
       "frame_step": 1,
       "sheets": {
         "idle": {
-          "atlas_sha256": "80302e3eb0f3c7c794c5c5469bfa32ddbb6829f1fac51933b7fcaa18857a4e87",
-          "image_sha256": "79285409209e30cec856e58eb8cc88d69e00a3379d0287f9f3fb28ccd1d7ca70",
-          "output_sha256": "79285409209e30cec856e58eb8cc88d69e00a3379d0287f9f3fb28ccd1d7ca70"
+          "atlas_sha256": "706dc9adf66b2963997cba21695514837d11fdf08d69ae428b2f72ade24c1285",
+          "image_sha256": "cab2de9b60bab714c7801115edcaedbc24e39c425fcebcbe1df6211f01be2a15",
+          "output_sha256": "d1d6a68bc9eb79fd236ca6237ae80ae2644e0e2c0c63807affeef6269279f102"
         },
         "walk": {
-          "atlas_sha256": "8e83abe4a01df86a57680a16a98052897d5cbd4f8225a03d221e3e9b60810fc9",
-          "image_sha256": "0498097eb64e992f087972989c3bdb0acefcd887be9cd281c0b3a363d944824d",
-          "output_sha256": "0498097eb64e992f087972989c3bdb0acefcd887be9cd281c0b3a363d944824d"
+          "atlas_sha256": "bb4fe3ab0e77825caffe3055849e644af9809d1cc277a5187ebdffb3b7e7d47c",
+          "image_sha256": "d9a05d6d88dbcc5b52ae014bf38541ff80aaac8749837adc0e00a6e41d6bfe24",
+          "output_sha256": "f0a7a13b023a7fac43341ce636eb892fdeef5ef18c5f6e793cbff3ae38be3f69"
         },
         "attack": {
-          "atlas_sha256": "545bcf4b7fb2dab7100a1fe726c8be0aa92c33242cbff396e22765aab428838f",
-          "image_sha256": "addb888a4de8b41b0b414ef208a7e42df87a96c483d2e859752fc970411c1bb7",
-          "output_sha256": "addb888a4de8b41b0b414ef208a7e42df87a96c483d2e859752fc970411c1bb7"
+          "atlas_sha256": "7c8a62968b90871db3d7c0e8356958d2122a846309ec2d0b3bfb5fe7236a1d31",
+          "image_sha256": "ce3c575d25beabee2af2db9b10f33be8fe34e3fd4ffd3f3aae55f6ec38878538",
+          "output_sha256": "fc1e598edb054df64946297074a3aa2c084d3f8395d6111c58d63ea9b275371a"
         },
         "death": {
-          "atlas_sha256": "9ebfc78e4be9166e672de4772a311c814259ea13546ab7f85927ca6ecec2ec7a",
-          "image_sha256": "9e710e3f75c9b37fdf891ab6b9416d2493416fc1cb86eb1b34b2781f31859886",
-          "output_sha256": "9e710e3f75c9b37fdf891ab6b9416d2493416fc1cb86eb1b34b2781f31859886"
+          "atlas_sha256": "aaacb93154eb3c95998cdf20ec146d2e6020cb13e5a75eb5eee3052c03708da7",
+          "image_sha256": "80493e1d1276c4c3edc251e4ec4daeff213fffbabafb76548b1be4843bace1df",
+          "output_sha256": "8ee8893b9b2233a7e4ff06ab6af9277a0b4018759dbf9a63dc7ff60cf6720123"
         }
       }
     },
     "root_hulk": {
-      "manifest": "image-generation/enemy-sprites/runs/wetlands-selected/exports/root_hulk/manifest.json",
-      "sha256": "d0567270e98db22cb12a23b2cdd8d2a4212f25ec381b03410a5f9d7d3c3e02bd",
+      "manifest": "image-generation/enemy-sprites/sequences/wetlands-128-v1/root_hulk/export/manifest.json",
+      "sha256": "12ce5f29b10797fb94f3ae7ea5cb065e603024c3c611070f219ce4b7baddd518",
       "frame_step": 1,
       "sheets": {
         "idle": {
-          "atlas_sha256": "c0e9147a52005392dce3a2b11128d6180186218a595a06519710e5983e355b7c",
-          "image_sha256": "ef632c703568147734d0071f188b877a07a0114bfa7d7f706dacbd6cd6784cf3",
-          "output_sha256": "ef632c703568147734d0071f188b877a07a0114bfa7d7f706dacbd6cd6784cf3"
+          "atlas_sha256": "ca2cbf0414dd1b2eee5bf140c896d1841098f164a6c0204da5f69051375c4a12",
+          "image_sha256": "b2d7976c591fa33f8d54ef5d80a0f3b6f2d4bc98b5a3d8832af3292dc8bc03a1",
+          "output_sha256": "d29bb353cbee82e59f627c8c662d7447497d2100b489e1fa6d36d64b45835c6b"
         },
         "walk": {
-          "atlas_sha256": "5b9ce4d38e6ecc83415c21e1fcec0657d5fb3880cd5126be64e2b2fc713e3cf2",
-          "image_sha256": "39e8be1a6a9ddf77aa5654df58f740b8179d83fee81220ef10b78e529f5e3ed0",
-          "output_sha256": "39e8be1a6a9ddf77aa5654df58f740b8179d83fee81220ef10b78e529f5e3ed0"
+          "atlas_sha256": "211882162e21ac4fd5152a466c7c2825a68b495480fd6596f7031d9c7a8bc6ea",
+          "image_sha256": "847d1b0a2ff03c4a9afde148e70da4eeb90578e605c0a01798ae2750c2c49cf1",
+          "output_sha256": "5adc8e2b4f9de910060a4d1cb3680b7ffef2ec41ad5f47f3d9816a5741bb371f"
         },
         "attack": {
-          "atlas_sha256": "1b3dd5bb99b18b43b3b298d546b26d2599b8fb25ef7d212aeba452c49d2c865d",
-          "image_sha256": "3a33f1f14b54e58f4808922d8ee6b03380aaf03403927ba24b0b6800f143461b",
-          "output_sha256": "3a33f1f14b54e58f4808922d8ee6b03380aaf03403927ba24b0b6800f143461b"
+          "atlas_sha256": "b6d8bc550da2d0412abe6f51910445c99bad4db1b10439bdd634ed8f6b56aa52",
+          "image_sha256": "42011f3455b5c67da8dcc9a313d1e5776621ff0119b3e92000a80aa29eba8abf",
+          "output_sha256": "c2ae2ac4a578054fb319c3202687ed4296bea411dd5e35131fd123e00447a96e"
         },
         "death": {
-          "atlas_sha256": "4814cdf8850f3456cc1733ee69630c1ac702dab88f11d2129a19f0dbaddc42dc",
-          "image_sha256": "b4bca160ce6db0e0ce7003d2b412b39e65924b7b62bedbc386aed00671254daa",
-          "output_sha256": "b4bca160ce6db0e0ce7003d2b412b39e65924b7b62bedbc386aed00671254daa"
+          "atlas_sha256": "226603672fbe6cf06ac077a37c50d154c5ef38725b9a0ebbb9f25a2a90426ec8",
+          "image_sha256": "fbcbd014bccf5355131a87293fb3670696cf92694ecc8ccd5c2f2d1e3949e3f2",
+          "output_sha256": "fd68a4f6f8818505266328af665d014fa7dce471140fbf56ffdc787c39f70106"
         }
       }
     },
     "giant_water_strider": {
-      "manifest": "image-generation/enemy-sprites/runs/wetlands-selected/exports/giant_water_strider/manifest.json",
-      "sha256": "203b1a1f97cbbcecd24556ad75b8d2fb9ec377ef0544812db7ef3f83af2c778a",
+      "manifest": "image-generation/enemy-sprites/sequences/wetlands-128-v1/giant_water_strider/export/manifest.json",
+      "sha256": "0ce3e4e4874f994ff674c3b70ec4f33eda07da1ecc2b3ea8ee2dfad179cecd26",
       "frame_step": 1,
       "sheets": {
         "idle": {
-          "atlas_sha256": "1b584c1acded9d23cb006ceab3b1b37e80f50d9b7c727c1077e1dca4128592b8",
-          "image_sha256": "f15f4fce50c0b5a71691335180602a7388e195dada35071dca45cb725bf8aff9",
-          "output_sha256": "f15f4fce50c0b5a71691335180602a7388e195dada35071dca45cb725bf8aff9"
+          "atlas_sha256": "0b986662426b1ec1343ab23265754d2d5dee1e652f65ddb04e03759d28485881",
+          "image_sha256": "9195976684e2ef566932534ec1ab1952dc5acd85836c5e85926708ab11c33230",
+          "output_sha256": "83e9fa590e24574d40330ef0cc491839de0fb8f8563cc2e2a99d05b708db0022"
         },
         "walk": {
-          "atlas_sha256": "b40345a7201cb33df77c454ddcc4a585221435796dccbe8d6c007d75aa52a7c3",
-          "image_sha256": "c995c041de624ea551b8308892cc3f0aee80c31e76ce3883f238415db11e2006",
-          "output_sha256": "c995c041de624ea551b8308892cc3f0aee80c31e76ce3883f238415db11e2006"
+          "atlas_sha256": "324ba681bf99716ff9fbe6c79dd126f8570f268fe4b4da3d40b4ec19e9db88fc",
+          "image_sha256": "94fea36f22107feb5130d462f6d0267c9ce805f11d451a6ded3ab78a7ad430f2",
+          "output_sha256": "c0491d46e869b3d1f0ba0b0f63f05977b74c9ace136a8c6470b8f3ee39126c53"
         },
         "attack": {
-          "atlas_sha256": "d3d6cd6c87fc077d95059fdb3347b2ebdf61d48eda55ba278fe27497ea078983",
-          "image_sha256": "df29e9c98be0c67c1afb4ec4f0c947420effabd90d73db7c1d4330779bea5c4d",
-          "output_sha256": "df29e9c98be0c67c1afb4ec4f0c947420effabd90d73db7c1d4330779bea5c4d"
+          "atlas_sha256": "5e713991e3bf15bab886a49a2fbe5642302edf34111c964a73c621dee2cdec4f",
+          "image_sha256": "ab7b5b51eac58750281f226be52d6d64696a511d86d5c707171de56fa7ded121",
+          "output_sha256": "96b8113fc820e5c16335e58d5ffbfe0c850ed2d8fad5e221c2346d2409770366"
         },
         "death": {
-          "atlas_sha256": "030a91a35c730460d58ff31b9712bc220a7ebb2012e32e022155166c40fdffb6",
-          "image_sha256": "6564f85706c9b449cf39161e118e7f3cd2751179eeb9bbf19250d50168e2547d",
-          "output_sha256": "6564f85706c9b449cf39161e118e7f3cd2751179eeb9bbf19250d50168e2547d"
+          "atlas_sha256": "320f9ad64a0ed788a1458afc1d2e2997ea1e8d4fba72518e367f741c0eea98c1",
+          "image_sha256": "0a7afcb3cc8273b8f36d2d41ad2810c12ab516c081aecddbe226607ccbefa6dc",
+          "output_sha256": "832b01570c957cc6469b0259409f3ec6bf6626d388e7a6152d25ff5aaaad52bb"
         }
       }
     }

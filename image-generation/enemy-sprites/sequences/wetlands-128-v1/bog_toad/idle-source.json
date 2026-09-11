@@ -1,0 +1,11 @@
+{
+  "id": "bog_toad",
+  "action": "idle",
+  "backend": "built-in imagegen",
+  "image": "idle-source.png",
+  "generated_source": "/home/karl/.codex/generated_images/01a08d8c-6b71-7f11-b5d0-b81cf6073d02/exec-55e77d7f-bd45-4e03-8dad-4ed5e40a8144.png",
+  "prompt": "Use case: identity-preserve. Asset: eight-frame animation sprite sheet for a 128x128 side-scrolling RPG. Input is the exact enemy design. Match its identity, colors, material shading, outline thickness and detail level in every frame. Output ONE landscape sheet, ideally 2048x1024, EXACTLY 4 columns by 2 rows of equal square cells, 8 frames in row-major order. Each cell contains ONE complete pose of the SAME character, all facing LEFT, fixed side camera. Keep identical physical body scale across all 8 poses, fixed lighting and stable textures. Entire body, hands, feet and trailing parts fit WITHIN each cell with generous empty margins, no overlap between cells. Same ground baseline in every cell at 88% cell height; allow clearance ABOVE for raised limbs. Feet stay aligned in place; no camera motion or zoom. Background UNIFORM SOLID BLUE-GRAY #8b9bb4, easily removed later. No ground line, puddle, shadow, dust, speed lines, glow, text, labels, cell borders or checkerboard. Crisp pixel art, rich but controlled shading, not smooth painting. Final frame must follow the stated ending exactly.\nSubject invariants: A squat, heavy amphibian. Broad waist-high body, low head sunk in shoulders, massive folded hind thighs, short braced forelegs, four widely planted splayed feet. Thick warty peat-brown and dull-olive skin with mud creases. Pale yellow-gray belly folds and a loose drooping throat sac. Black protruding eyes under heavy lids; each has a SMALL HORIZONTAL WHITE STRIP across black, no iris. Wide downward mouth seam, aggrieved expression, no smile. No equipment.\nAnimation: Quiet looping idle: 1 low resting pose, four planted feet and sagging throat; 2-4 throat gradually inflates modestly with breathing, tiny body lift; 5-7 throat slowly deflates; 8 almost identical to 1 to loop. Feet never step. Black eye retains thin white horizontal strip, no colored iris.",
+  "reference_image": "reference-source.png",
+  "sha256": "09e3e66746a032bd41fc7e0ddb71ada87866fe2648b8812681a412d2d05b90a2",
+  "reference_sha256": "7ada87815df588ecebd520bfc5a7d1e544012d60db775a798d537c5897482927"
+}

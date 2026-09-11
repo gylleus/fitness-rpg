@@ -1,0 +1,68 @@
+{
+  "asset_id": "giant_water_strider",
+  "name": "Giant Water Strider",
+  "facing": "left",
+  "frame_size": [
+    128,
+    128
+  ],
+  "pivot": [
+    0.5443548387096774,
+    0.875
+  ],
+  "height_scale": 0.9,
+  "reference_idle_height_px": 92.90322580645162,
+  "shared_crop": [
+    50,
+    126,
+    546,
+    622
+  ],
+  "actions": {
+    "idle": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "walk": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "attack": {
+      "timing": {
+        "repeat": false
+      }
+    },
+    "death": {
+      "timing": {
+        "repeat": false
+      }
+    }
+  },
+  "source": {
+    "idle": {
+      "source": "idle-layout.png",
+      "sha256": "5038437234cfe4d2c0a3f692241adb317aecf45391490706cc427b9c590fb0a4"
+    },
+    "walk": {
+      "source": "walk-layout.png",
+      "sha256": "efe3a35e9fbfdd824bfd1e3ba39f2635b34e3728fe35ae4c67f65fca6724181f"
+    },
+    "attack": {
+      "source": "attack-layout.png",
+      "sha256": "d908a3e228cc36c826ac8f479e91c9f80307fad87c475fc9f5a0fb4163dbdbf8"
+    },
+    "death": {
+      "source": "death-layout.png",
+      "sha256": "6e9dcf9d66ae2b7e7cb57e4fd7acc0318f6aff708c002ac28393a693e7d542f2"
+    }
+  },
+  "backend": "built-in imagegen frame sheets, imported on CPU",
+  "recipe_sha256": "8d43eed8c379f23c6e04210d51624cc46ce7bb3aab84288c58625fda339d50c7",
+  "code_sha256": {
+    "sheet_import.py": "d6cc266480e76ab89ebfc739d88743b5d42fc58730b461b99f60f8c1782724b4",
+    "pixels.py": "fa49c9f048211472dc89c9e692b982ce88685c9c9ab82a0241f11502c270dbc4"
+  },
+  "framing": "Explicit source rectangles and ground origins; one union crop/scale for all actions."
+}

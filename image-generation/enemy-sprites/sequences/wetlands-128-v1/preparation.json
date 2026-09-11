@@ -1,0 +1,1196 @@
+{
+  "backend": "built-in imagegen sheets; deterministic CPU import",
+  "source_roster_sha256": "f8359ba0555b4741cac9e5f2a39b48e2bfc7620f73c7326514deacad8dcc051f",
+  "entities": {
+    "bog_toad": {
+      "actions": {
+        "idle": {
+          "source_image": "idle-source.png",
+          "source_sha256": "09e3e66746a032bd41fc7e0ddb71ada87866fe2648b8812681a412d2d05b90a2",
+          "source_boxes": [
+            [
+              33,
+              101,
+              437,
+              376
+            ],
+            [
+              476,
+              101,
+              881,
+              376
+            ],
+            [
+              912,
+              96,
+              1324,
+              376
+            ],
+            [
+              1356,
+              93,
+              1767,
+              376
+            ],
+            [
+              33,
+              538,
+              437,
+              819
+            ],
+            [
+              476,
+              539,
+              880,
+              819
+            ],
+            [
+              920,
+              543,
+              1324,
+              819
+            ],
+            [
+              1363,
+              544,
+              1767,
+              819
+            ]
+          ],
+          "ready_height": 275,
+          "action_scale": 0.9265784054133569,
+          "removed_detached_pixels": 1,
+          "frame_count": 8
+        },
+        "walk": {
+          "source_image": "walk-source.png",
+          "source_sha256": "db195a8c8e0cb276b506c8783366580a874a5bcc8538434c6951289ddb66b6b2",
+          "source_boxes": [
+            [
+              22,
+              111,
+              439,
+              384
+            ],
+            [
+              469,
+              111,
+              879,
+              384
+            ],
+            [
+              910,
+              111,
+              1299,
+              383
+            ],
+            [
+              1350,
+              111,
+              1758,
+              384
+            ],
+            [
+              18,
+              544,
+              438,
+              821
+            ],
+            [
+              467,
+              541,
+              872,
+              821
+            ],
+            [
+              910,
+              540,
+              1299,
+              820
+            ],
+            [
+              1355,
+              545,
+              1765,
+              821
+            ]
+          ],
+          "ready_height": 273,
+          "action_scale": 0.9333665255995353,
+          "removed_detached_pixels": 3,
+          "frame_count": 8
+        },
+        "attack": {
+          "source_image": "attack-source.png",
+          "source_sha256": "f2be20e5d07b7ae9a7f3d5243b24676fce02eadcf8bd253e3b9653f0ca714e1f",
+          "source_boxes": [
+            [
+              47,
+              114,
+              426,
+              380
+            ],
+            [
+              471,
+              153,
+              860,
+              381
+            ],
+            [
+              907,
+              104,
+              1302,
+              380
+            ],
+            [
+              1258,
+              85,
+              1753,
+              380
+            ],
+            [
+              19,
+              550,
+              426,
+              815
+            ],
+            [
+              459,
+              586,
+              871,
+              815
+            ],
+            [
+              906,
+              554,
+              1300,
+              815
+            ],
+            [
+              1362,
+              551,
+              1750,
+              818
+            ]
+          ],
+          "ready_height": 266,
+          "action_scale": 0.9579288025889967,
+          "removed_detached_pixels": 9,
+          "frame_count": 8
+        },
+        "death": {
+          "source_image": "death-source.png",
+          "source_sha256": "915c5d3f895a9a0bce85c8d458e23ec335366374ddaa6821a975ed59104afbb8",
+          "source_boxes": [
+            [
+              38,
+              129,
+              425,
+              406
+            ],
+            [
+              477,
+              148,
+              867,
+              406
+            ],
+            [
+              894,
+              192,
+              1310,
+              410
+            ],
+            [
+              1344,
+              144,
+              1742,
+              411
+            ],
+            [
+              21,
+              577,
+              433,
+              791
+            ],
+            [
+              460,
+              585,
+              871,
+              790
+            ],
+            [
+              903,
+              585,
+              1314,
+              790
+            ],
+            [
+              1346,
+              585,
+              1758,
+              790
+            ]
+          ],
+          "ready_height": 277,
+          "action_scale": 0.9198883086233687,
+          "removed_detached_pixels": 5,
+          "frame_count": 8
+        }
+      },
+      "target_ready_height": 254.80906148867314,
+      "manifest_sha256": "ab0ebf0b0d68baa9e20c2b970ae021323bb1e6112d77eb8106109a8a31551e08"
+    },
+    "drowned_corpse": {
+      "actions": {
+        "idle": {
+          "source_image": "idle-source.png",
+          "source_sha256": "622278e41a2e0e65a8cf11799d9787ff039e5d081abe7ddaf8e963d5edb1d5de",
+          "source_boxes": [
+            [
+              120,
+              26,
+              366,
+              441
+            ],
+            [
+              540,
+              29,
+              794,
+              441
+            ],
+            [
+              970,
+              41,
+              1238,
+              441
+            ],
+            [
+              1392,
+              59,
+              1669,
+              441
+            ],
+            [
+              104,
+              459,
+              372,
+              864
+            ],
+            [
+              534,
+              451,
+              805,
+              864
+            ],
+            [
+              963,
+              452,
+              1242,
+              864
+            ],
+            [
+              1417,
+              458,
+              1669,
+              864
+            ]
+          ],
+          "ready_height": 415,
+          "action_scale": 0.8674698795180723,
+          "removed_detached_pixels": 13,
+          "frame_count": 8
+        },
+        "walk": {
+          "source_image": "walk-source.png",
+          "source_sha256": "c5de84e8104c336fd0e8b60e9adf18fbaf0ecb7211aea6188f0be33e59f42096",
+          "source_boxes": [
+            [
+              110,
+              39,
+              374,
+              431
+            ],
+            [
+              538,
+              37,
+              792,
+              426
+            ],
+            [
+              985,
+              39,
+              1224,
+              431
+            ],
+            [
+              1421,
+              40,
+              1641,
+              426
+            ],
+            [
+              107,
+              471,
+              374,
+              854
+            ],
+            [
+              553,
+              470,
+              794,
+              855
+            ],
+            [
+              985,
+              471,
+              1222,
+              855
+            ],
+            [
+              1408,
+              471,
+              1669,
+              861
+            ]
+          ],
+          "ready_height": 392,
+          "action_scale": 0.9183673469387755,
+          "removed_detached_pixels": 5,
+          "frame_count": 8
+        },
+        "attack": {
+          "source_image": "attack-source.png",
+          "source_sha256": "81a6a7d0ad487f762d2aa44be73e216bd8ae178bcb2c3013226c5d09394004b5",
+          "source_boxes": [
+            [
+              125,
+              26,
+              373,
+              430
+            ],
+            [
+              506,
+              32,
+              823,
+              429
+            ],
+            [
+              916,
+              48,
+              1294,
+              429
+            ],
+            [
+              1299,
+              57,
+              1735,
+              429
+            ],
+            [
+              27,
+              467,
+              436,
+              856
+            ],
+            [
+              526,
+              467,
+              842,
+              859
+            ],
+            [
+              984,
+              463,
+              1249,
+              863
+            ],
+            [
+              1450,
+              462,
+              1698,
+              863
+            ]
+          ],
+          "ready_height": 404,
+          "action_scale": 0.8910891089108911,
+          "removed_detached_pixels": 50,
+          "frame_count": 8
+        },
+        "death": {
+          "source_image": "death-source.png",
+          "source_sha256": "b4c718641a6b20819c1676f67759bb5a21e27c60375af95ed684a3f93747e23f",
+          "source_boxes": [
+            [
+              100,
+              41,
+              335,
+              438
+            ],
+            [
+              527,
+              95,
+              778,
+              441
+            ],
+            [
+              964,
+              114,
+              1224,
+              445
+            ],
+            [
+              1422,
+              146,
+              1682,
+              442
+            ],
+            [
+              36,
+              588,
+              417,
+              804
+            ],
+            [
+              474,
+              655,
+              860,
+              812
+            ],
+            [
+              914,
+              670,
+              1304,
+              813
+            ],
+            [
+              1357,
+              670,
+              1747,
+              812
+            ]
+          ],
+          "ready_height": 397,
+          "action_scale": 0.906801007556675,
+          "removed_detached_pixels": 6,
+          "frame_count": 8
+        }
+      },
+      "target_ready_height": 360,
+      "manifest_sha256": "1dbf35a6026546b8f06fc1449ccf39ca3963ffddeb1747c2678531f51ae4550f"
+    },
+    "bog_hag": {
+      "actions": {
+        "idle": {
+          "source_image": "idle-source.png",
+          "source_sha256": "2b75728c7bb747deb8864542804e50db9c13d3c648259c6cda7ce5a9bd509487",
+          "source_boxes": [
+            [
+              108,
+              21,
+              394,
+              433
+            ],
+            [
+              541,
+              21,
+              826,
+              433
+            ],
+            [
+              984,
+              21,
+              1269,
+              433
+            ],
+            [
+              1427,
+              21,
+              1712,
+              433
+            ],
+            [
+              108,
+              459,
+              391,
+              872
+            ],
+            [
+              540,
+              461,
+              827,
+              872
+            ],
+            [
+              988,
+              463,
+              1275,
+              873
+            ],
+            [
+              1425,
+              461,
+              1713,
+              872
+            ]
+          ],
+          "ready_height": 412,
+          "action_scale": 0.8737864077669902,
+          "removed_detached_pixels": 103,
+          "frame_count": 8
+        },
+        "walk": {
+          "source_image": "walk-source.png",
+          "source_sha256": "61ea499569c61b92dbf45b1f272488440fcab5eeea81812f1def13bca9dced24",
+          "source_boxes": [
+            [
+              87,
+              26,
+              389,
+              430
+            ],
+            [
+              523,
+              32,
+              819,
+              430
+            ],
+            [
+              964,
+              32,
+              1261,
+              435
+            ],
+            [
+              1402,
+              34,
+              1710,
+              430
+            ],
+            [
+              84,
+              462,
+              389,
+              868
+            ],
+            [
+              523,
+              462,
+              822,
+              868
+            ],
+            [
+              964,
+              465,
+              1258,
+              870
+            ],
+            [
+              1408,
+              460,
+              1709,
+              868
+            ]
+          ],
+          "ready_height": 404,
+          "action_scale": 0.8910891089108911,
+          "removed_detached_pixels": 40,
+          "frame_count": 8
+        },
+        "attack": {
+          "source_image": "attack-source.png",
+          "source_sha256": "239e34595944c5616a104b8ceeee2deac485a6a28b74baf3ff7800bba0867bf6",
+          "source_boxes": [
+            [
+              120,
+              26,
+              402,
+              437
+            ],
+            [
+              485,
+              26,
+              819,
+              437
+            ],
+            [
+              874,
+              37,
+              1295,
+              437
+            ],
+            [
+              1333,
+              37,
+              1758,
+              437
+            ],
+            [
+              33,
+              468,
+              443,
+              876
+            ],
+            [
+              518,
+              465,
+              841,
+              876
+            ],
+            [
+              987,
+              466,
+              1273,
+              876
+            ],
+            [
+              1436,
+              466,
+              1718,
+              876
+            ]
+          ],
+          "ready_height": 411,
+          "action_scale": 0.8759124087591241,
+          "removed_detached_pixels": 29,
+          "frame_count": 8
+        },
+        "death": {
+          "source_image": "death-source.png",
+          "source_sha256": "e787c57871ff06a3aaece71ae85520e1724069e93722e0b15a5c5a3ad1f328d0",
+          "source_boxes": [
+            [
+              93,
+              44,
+              389,
+              479
+            ],
+            [
+              543,
+              21,
+              805,
+              482
+            ],
+            [
+              975,
+              116,
+              1255,
+              485
+            ],
+            [
+              1352,
+              137,
+              1727,
+              479
+            ],
+            [
+              15,
+              597,
+              438,
+              839
+            ],
+            [
+              466,
+              647,
+              871,
+              821
+            ],
+            [
+              905,
+              662,
+              1311,
+              821
+            ],
+            [
+              1346,
+              662,
+              1751,
+              821
+            ]
+          ],
+          "ready_height": 435,
+          "action_scale": 0.8275862068965517,
+          "removed_detached_pixels": 28,
+          "frame_count": 8
+        }
+      },
+      "target_ready_height": 360,
+      "manifest_sha256": "31e5ac6bda5efc056ab5dc8ae13dc88224c7f704ac5d5d57f564302fbfe01148"
+    },
+    "root_hulk": {
+      "actions": {
+        "idle": {
+          "source_image": "idle-source.png",
+          "source_sha256": "589216ffb178f344e21f0cb7b72e1c10e8f48193586eb635b93ca416f04d27dd",
+          "source_boxes": [
+            [
+              29,
+              19,
+              414,
+              433
+            ],
+            [
+              459,
+              46,
+              871,
+              433
+            ],
+            [
+              904,
+              67,
+              1317,
+              433
+            ],
+            [
+              1351,
+              28,
+              1746,
+              433
+            ],
+            [
+              25,
+              459,
+              424,
+              871
+            ],
+            [
+              468,
+              459,
+              868,
+              871
+            ],
+            [
+              908,
+              455,
+              1309,
+              871
+            ],
+            [
+              1356,
+              459,
+              1749,
+              871
+            ]
+          ],
+          "ready_height": 414,
+          "action_scale": 0.8695652173913043,
+          "removed_detached_pixels": 98,
+          "frame_count": 8
+        },
+        "walk": {
+          "source_image": "walk-source.png",
+          "source_sha256": "54af3eec787b71382f702ca8e28a77093016995218ff89cdbbd307c99c370fce",
+          "source_boxes": [
+            [
+              22,
+              25,
+              430,
+              420
+            ],
+            [
+              496,
+              25,
+              853,
+              423
+            ],
+            [
+              895,
+              24,
+              1313,
+              421
+            ],
+            [
+              1346,
+              24,
+              1749,
+              422
+            ],
+            [
+              23,
+              460,
+              430,
+              857
+            ],
+            [
+              481,
+              459,
+              853,
+              856
+            ],
+            [
+              895,
+              462,
+              1301,
+              852
+            ],
+            [
+              1344,
+              460,
+              1749,
+              858
+            ]
+          ],
+          "ready_height": 395,
+          "action_scale": 0.9113924050632911,
+          "removed_detached_pixels": 24,
+          "frame_count": 8
+        },
+        "attack": {
+          "source_image": "attack-source.png",
+          "source_sha256": "16af0415d18967e8af937bb24f05cf2baaa3cc5c19e0cdab960c99d39d6537dc",
+          "source_boxes": [
+            [
+              49,
+              105,
+              395,
+              447
+            ],
+            [
+              494,
+              47,
+              838,
+              446
+            ],
+            [
+              961,
+              9,
+              1270,
+              447
+            ],
+            [
+              1356,
+              170,
+              1744,
+              447
+            ],
+            [
+              29,
+              568,
+              423,
+              851
+            ],
+            [
+              477,
+              533,
+              871,
+              851
+            ],
+            [
+              919,
+              503,
+              1251,
+              852
+            ],
+            [
+              1378,
+              510,
+              1726,
+              852
+            ]
+          ],
+          "ready_height": 342,
+          "action_scale": 1.0526315789473684,
+          "removed_detached_pixels": 178,
+          "frame_count": 8
+        },
+        "death": {
+          "source_image": "death-source.png",
+          "source_sha256": "6330871e822708865797faccd519b4f17d70df47b2f0919f70a8c340c46ed1fa",
+          "source_boxes": [
+            [
+              28,
+              41,
+              399,
+              446
+            ],
+            [
+              468,
+              59,
+              844,
+              447
+            ],
+            [
+              901,
+              88,
+              1296,
+              446
+            ],
+            [
+              1343,
+              151,
+              1752,
+              447
+            ],
+            [
+              28,
+              557,
+              429,
+              803
+            ],
+            [
+              461,
+              604,
+              872,
+              807
+            ],
+            [
+              900,
+              627,
+              1310,
+              807
+            ],
+            [
+              1344,
+              627,
+              1754,
+              807
+            ]
+          ],
+          "ready_height": 405,
+          "action_scale": 0.8888888888888888,
+          "removed_detached_pixels": 338,
+          "frame_count": 8
+        }
+      },
+      "target_ready_height": 360,
+      "manifest_sha256": "12ce5f29b10797fb94f3ae7ea5cb065e603024c3c611070f219ce4b7baddd518"
+    },
+    "giant_water_strider": {
+      "actions": {
+        "idle": {
+          "source_image": "idle-source.png",
+          "source_sha256": "6ce1c682d4ae1bb8033da7a1daf50fa3ae675c531d2312c2466a37bdf7ca5768",
+          "source_boxes": [
+            [
+              51,
+              39,
+              372,
+              426
+            ],
+            [
+              493,
+              46,
+              815,
+              426
+            ],
+            [
+              936,
+              56,
+              1255,
+              426
+            ],
+            [
+              1381,
+              40,
+              1702,
+              426
+            ],
+            [
+              51,
+              479,
+              372,
+              865
+            ],
+            [
+              493,
+              479,
+              815,
+              865
+            ],
+            [
+              936,
+              491,
+              1255,
+              865
+            ],
+            [
+              1380,
+              479,
+              1702,
+              865
+            ]
+          ],
+          "ready_height": 387,
+          "action_scale": 0.9302325581395349,
+          "removed_detached_pixels": 0,
+          "frame_count": 8
+        },
+        "walk": {
+          "source_image": "walk-source.png",
+          "source_sha256": "137b07314e244e5d7b7f6800534e0294517be858403570d649a24a35a8b53c93",
+          "source_boxes": [
+            [
+              47,
+              36,
+              379,
+              426
+            ],
+            [
+              490,
+              36,
+              822,
+              424
+            ],
+            [
+              934,
+              36,
+              1265,
+              425
+            ],
+            [
+              1378,
+              36,
+              1709,
+              424
+            ],
+            [
+              47,
+              479,
+              385,
+              866
+            ],
+            [
+              490,
+              479,
+              822,
+              866
+            ],
+            [
+              934,
+              479,
+              1265,
+              866
+            ],
+            [
+              1377,
+              479,
+              1709,
+              866
+            ]
+          ],
+          "ready_height": 390,
+          "action_scale": 0.9230769230769231,
+          "removed_detached_pixels": 3,
+          "frame_count": 8
+        },
+        "attack": {
+          "source_image": "attack-source.png",
+          "source_sha256": "52953692cd2e49aa277fddbbbd46fa42660ac4137356f5af295e82b23f64ffc5",
+          "source_boxes": [
+            [
+              55,
+              48,
+              373,
+              419
+            ],
+            [
+              476,
+              37,
+              826,
+              419
+            ],
+            [
+              928,
+              36,
+              1236,
+              418
+            ],
+            [
+              1297,
+              62,
+              1716,
+              419
+            ],
+            [
+              46,
+              489,
+              416,
+              838
+            ],
+            [
+              494,
+              509,
+              853,
+              838
+            ],
+            [
+              912,
+              456,
+              1254,
+              838
+            ],
+            [
+              1375,
+              469,
+              1703,
+              838
+            ]
+          ],
+          "ready_height": 371,
+          "action_scale": 0.9703504043126685,
+          "removed_detached_pixels": 21,
+          "frame_count": 8
+        },
+        "death": {
+          "source_image": "death-source.png",
+          "source_sha256": "cacbf3cc3ba69bf1818f1e0c8dc27c7f5c0c9dafd69293eeab9581f7a36a95c8",
+          "source_boxes": [
+            [
+              51,
+              49,
+              389,
+              459
+            ],
+            [
+              479,
+              107,
+              833,
+              459
+            ],
+            [
+              902,
+              214,
+              1266,
+              459
+            ],
+            [
+              1330,
+              224,
+              1741,
+              456
+            ],
+            [
+              20,
+              643,
+              433,
+              841
+            ],
+            [
+              459,
+              662,
+              869,
+              834
+            ],
+            [
+              899,
+              662,
+              1306,
+              834
+            ],
+            [
+              1337,
+              662,
+              1742,
+              834
+            ]
+          ],
+          "ready_height": 410,
+          "action_scale": 0.8780487804878049,
+          "removed_detached_pixels": 26,
+          "frame_count": 8
+        }
+      },
+      "target_ready_height": 360,
+      "manifest_sha256": "0ce3e4e4874f994ff674c3b70ec4f33eda07da1ecc2b3ea8ee2dfad179cecd26"
+    }
+  }
+}

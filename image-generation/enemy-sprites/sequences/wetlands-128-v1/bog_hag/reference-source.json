@@ -1,0 +1,11 @@
+{
+  "id": "bog_hag",
+  "backend": "built-in imagegen",
+  "image": "reference-source.png",
+  "generated_source": "/home/karl/.codex/generated_images/01a08d8c-6b71-7f11-b5d0-b81cf6073d02/exec-e2985c9f-3065-4a0d-935a-2e75c1c1baa1.png",
+  "prompt": "Use case: stylized-concept. Asset: single production reference for a 128x128 pixel-art side-scrolling RPG enemy. Input image is STYLE ONLY: match the barbarian's crisp dark outlines, carefully grouped pixels, rich but controlled 3-4 tone material shading, readable volumetric anatomy and equal finish. Do not borrow human anatomy, clothing, blond hair or club. Draw ONE isolated full-body enemy facing LEFT in strict lateral profile, fixed side camera. Detailed 128px sprite aesthetic, not smooth painting, not coarse polygons, not photorealism, no dithering or noisy speckles. Light from upper-left. Every limb fully visible within ample padding. Background must be uniform solid blue-gray #8b9bb4 for color-key extraction. Do not imitate the reference's checkerboard. No ground, cast shadow, scenery, text, labels or frame. Reference standing/resting pose. Preserve subject identity exactly.\nSubject: A tall gaunt OLD woman in deep stoop. Very long arms, oversized hands, swollen knuckles and long crooked dirty claw nails. Wrinkled gray-green skin, dark wet forearms and shins, deeply creased long face, crooked broad nose, jutting jaw, SMALL PALE NON-GLOWING EYES. Rope-like wet black hair streaked gray. Coarse brown and charcoal layers, ragged uneven shawl, long muddy skirt, broad bare feet and long toes. Clearly elderly and unsettling, not youthful. No staff or weapons.",
+  "correction_prompt": null,
+  "style_reference": "/home/karl/repo/apps/fitness-rpg/image-generation/player-sprites/guides/barbarian-club-profile-v1.png",
+  "description": "A tall gaunt OLD woman in deep stoop. Very long arms, oversized hands, swollen knuckles and long crooked dirty claw nails. Wrinkled gray-green skin, dark wet forearms and shins, deeply creased long face, crooked broad nose, jutting jaw, SMALL PALE NON-GLOWING EYES. Rope-like wet black hair streaked gray. Coarse brown and charcoal layers, ragged uneven shawl, long muddy skirt, broad bare feet and long toes. Clearly elderly and unsettling, not youthful. No staff or weapons.",
+  "sha256": "d3c81455b7de356facdcfe2da7bd76ba152648c6419ec49e09a967fced26fa31"
+}

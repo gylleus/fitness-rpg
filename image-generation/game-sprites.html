@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game sprite preview</title>
+<style>
+  :root { color-scheme: dark; font: 15px system-ui; background: #111e22; color: #e4e9dc; }
+  body { max-width: 1100px; margin: 36px auto; padding: 0 20px; }
+  h1 { margin-bottom: 8px; } p { color: #adbbb1; line-height: 1.6; }
+  nav { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 24px 0; }
+  button,select { padding: 10px 14px; border: 1px solid #56704a; border-radius: 8px; background: #23382e; color: inherit; font: inherit; }
+  main { display: grid; grid-template-columns: repeat(auto-fit,minmax(310px,1fr)); gap: 16px; }
+  article { border: 1px solid #34473c; border-radius: 12px; overflow: hidden; background: #15231f; }
+  h2 { font-size: 16px; margin: 18px 18px 0; } small { display: block; margin: 0 18px 18px; color: #adbbb1; }
+  canvas { display: block; width: 100%; image-rendering: pixelated; }
+  a { color: #8ae3b1; }
+</style>
+<h1>Player & Wetlands animations</h1>
+<p>The exact transparent atlases bundled with the game. Idle and walk loop; attack returns to idle; death holds its final pose. Characters share a ground line and their authored relative heights.</p>
+<nav>
+  <label>Action <select id="action"><option>idle</option><option>walk</option><option>attack</option><option>death</option></select></label>
+  <label>Speed <select id="speed"><option value="1">1×</option><option value="0.5">½×</option><option value="2">2×</option></select></label>
+  <button id="pause">Pause</button><button id="restart">Restart</button>
+</nav>
+<main></main>
+<p>The Wetlands now use the regenerated 128px imagegen set, with eight poses per action, alongside the unchanged player. <a href="enemy-sprites/sequences/wetlands-128-v1/review.html">Open the portable review with pose controls</a> or <a href="enemy-sprites/sequences/wetlands-128-v1/README.md">read the generation and review notes</a>.</p>
+<script type="module">
+const {entities} = await fetch('../assets/sprites/catalog.json').then(r => r.json());
+const action = document.querySelector('#action'), speed = document.querySelector('#speed');
+let elapsed = 0, previous = performance.now(), playing = true;
+const cards = await Promise.all(Object.entries(entities).map(async ([id, entity]) => {
+  const article = document.createElement('article'), title = document.createElement('h2');
+  title.textContent = entity.name;
+  const canvas = document.createElement('canvas'); canvas.width = 340; canvas.height = 230;
+  const detail = document.createElement('small');
+  article.append(title, canvas, detail); document.querySelector('main').append(article);
+  const images = Object.fromEntries(await Promise.all(Object.entries(entity.actions).map(async ([name, clip]) => {
+    const image = new Image(); image.src = `../assets/sprites/${id}--${name}.png`; await image.decode(); return [clip.image, image];
+  })));
+  return {entity, canvas, detail, images};
+}));
+action.onchange = () => { elapsed = 0; };
+document.querySelector('#restart').onclick = () => { elapsed = 0; };
+document.querySelector('#pause').onclick = event => { playing = !playing; event.target.textContent = playing ? 'Pause' : 'Resume'; };
+function draw(now) {
+  if (playing) elapsed += (now - previous) * Number(speed.value); previous = now;
+  for (const {entity, canvas, detail, images} of cards) {
+    let clip = entity.actions[action.value], time = elapsed;
+    if (action.value === 'attack') {
+      if (time >= 720) { time -= 720; clip = entity.actions.idle; }
+      else time *= clip.duration / 720;
+    } else if (action.value === 'death') time *= clip.duration / 800;
+    if (clip.loop) time %= clip.duration;
+    let frame = clip.frames.at(-1), index = clip.frames.length - 1;
+    for (let i = 0; i < clip.frames.length; i++) { if (time < clip.frames[i].duration) { frame = clip.frames[i]; index = i; break; } time -= clip.frames[i].duration; }
+    const c = canvas.getContext('2d'); c.imageSmoothingEnabled = false; c.clearRect(0,0,340,230);
+    c.fillStyle = '#304635'; c.fillRect(0,195,340,35); c.fillStyle = '#56704a'; c.fillRect(0,195,340,3);
+    const scale = 120 * entity.heightScale / entity.idleHeight;
+    const [w,h] = entity.frameSize;
+    c.drawImage(images[clip.image],frame.x,frame.y,w,h,170-entity.pivot[0]*w*scale,195-entity.pivot[1]*h*scale,w*scale,h*scale);
+    detail.textContent = `${clip.image.split('/')[1]} · pose ${index+1}/${clip.frames.length} · ${entity.facing}-facing`;
+  }
+  requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);
+</script>
+</html>

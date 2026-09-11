@@ -1,0 +1,108 @@
+{
+  "frames": [
+    {
+      "filename": "frame-000.png",
+      "sha256": "f322a65eabfba6d3fd8c64b8958038ba4026c9d09085141106136735557fa714",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 128,
+        "h": 128
+      },
+      "duration": 100,
+      "source_frame": 0
+    },
+    {
+      "filename": "frame-001.png",
+      "sha256": "2d39c17c2326a7fc5476a91bb277e552106724a83fbdb7efa8712a4100496977",
+      "frame": {
+        "x": 128,
+        "y": 0,
+        "w": 128,
+        "h": 128
+      },
+      "duration": 100,
+      "source_frame": 1
+    },
+    {
+      "filename": "frame-002.png",
+      "sha256": "f3b3a319e7dbe977465d43524f83198522d0327007c5671c87faeb0532059245",
+      "frame": {
+        "x": 256,
+        "y": 0,
+        "w": 128,
+        "h": 128
+      },
+      "duration": 100,
+      "source_frame": 2
+    },
+    {
+      "filename": "frame-003.png",
+      "sha256": "509c02cd6d8373873ed6c58801573780defaa3614c91665ad05d0e8bdc110c6d",
+      "frame": {
+        "x": 384,
+        "y": 0,
+        "w": 128,
+        "h": 128
+      },
+      "duration": 100,
+      "source_frame": 3
+    },
+    {
+      "filename": "frame-004.png",
+      "sha256": "09cfcba2299fb4272e8a4f69427df32a72c6d15f3679c3532e567f8b9012b7ca",
+      "frame": {
+        "x": 0,
+        "y": 128,
+        "w": 128,
+        "h": 128
+      },
+      "duration": 100,
+      "source_frame": 4
+    },
+    {
+      "filename": "frame-005.png",
+      "sha256": "2bcea7eaf1bdb717318d45163141008c3193f6f4a2cdc1b1efde217dbf3e96ff",
+      "frame": {
+        "x": 128,
+        "y": 128,
+        "w": 128,
+        "h": 128
+      },
+      "duration": 100,
+      "source_frame": 5
+    },
+    {
+      "filename": "frame-006.png",
+      "sha256": "9ca20ed14a693efd8c03dda94af2e84798d8fa200c4793f5ddd4b011619975d2",
+      "frame": {
+        "x": 256,
+        "y": 128,
+        "w": 128,
+        "h": 128
+      },
+      "duration": 100,
+      "source_frame": 6
+    },
+    {
+      "filename": "frame-007.png",
+      "sha256": "c7fade71a6cce1994214b39a7eef9e1aa58d9adf759e930a20dc92defd345b9c",
+      "frame": {
+        "x": 384,
+        "y": 128,
+        "w": 128,
+        "h": 128
+      },
+      "duration": 100,
+      "source_frame": 7
+    }
+  ],
+  "meta": {
+    "image": "spritesheet.png",
+    "size": {
+      "w": 512,
+      "h": 256
+    },
+    "repeat": false
+  }
+}

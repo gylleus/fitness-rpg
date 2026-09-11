@@ -1,0 +1,68 @@
+{
+  "asset_id": "root_hulk",
+  "name": "Root Hulk",
+  "facing": "left",
+  "frame_size": [
+    128,
+    128
+  ],
+  "pivot": [
+    0.4904580152671756,
+    0.9408396946564885
+  ],
+  "height_scale": 1.2,
+  "reference_idle_height_px": 87.93893129770993,
+  "shared_crop": [
+    63,
+    67,
+    587,
+    591
+  ],
+  "actions": {
+    "idle": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "walk": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "attack": {
+      "timing": {
+        "repeat": false
+      }
+    },
+    "death": {
+      "timing": {
+        "repeat": false
+      }
+    }
+  },
+  "source": {
+    "idle": {
+      "source": "idle-layout.png",
+      "sha256": "882e1eb68e3328fe57f030339ca1f88bc35e553e30d8c7f1cb5e417d4b8cdef0"
+    },
+    "walk": {
+      "source": "walk-layout.png",
+      "sha256": "9a54e8fd153a37915930a32fc3b121110d99ecd02c89afbb1ba50006aa2b14c8"
+    },
+    "attack": {
+      "source": "attack-layout.png",
+      "sha256": "e4f88a92e2fd46edfcb4b785697fa29ee016ff6b7f703adc00d3a5c8e97f04d3"
+    },
+    "death": {
+      "source": "death-layout.png",
+      "sha256": "e9713b9f7a7273c98abee8bd07402e7b21ecd586442e5e0ea3bbd0c042caed60"
+    }
+  },
+  "backend": "built-in imagegen frame sheets, imported on CPU",
+  "recipe_sha256": "28e80128eb9468afae55d4f1ea4dd9c75492e088419158d5fbaa769233b16f6c",
+  "code_sha256": {
+    "sheet_import.py": "d6cc266480e76ab89ebfc739d88743b5d42fc58730b461b99f60f8c1782724b4",
+    "pixels.py": "fa49c9f048211472dc89c9e692b982ce88685c9c9ab82a0241f11502c270dbc4"
+  },
+  "framing": "Explicit source rectangles and ground origins; one union crop/scale for all actions."
+}

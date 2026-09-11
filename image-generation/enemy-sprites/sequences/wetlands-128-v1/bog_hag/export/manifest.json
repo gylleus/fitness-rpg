@@ -1,0 +1,68 @@
+{
+  "asset_id": "bog_hag",
+  "name": "Bog Hag",
+  "facing": "left",
+  "frame_size": [
+    128,
+    128
+  ],
+  "pivot": [
+    0.5851528384279476,
+    0.9170305676855895
+  ],
+  "height_scale": 1.15,
+  "reference_idle_height_px": 100.61135371179039,
+  "shared_crop": [
+    52,
+    140,
+    510,
+    598
+  ],
+  "actions": {
+    "idle": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "walk": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "attack": {
+      "timing": {
+        "repeat": false
+      }
+    },
+    "death": {
+      "timing": {
+        "repeat": false
+      }
+    }
+  },
+  "source": {
+    "idle": {
+      "source": "idle-layout.png",
+      "sha256": "d2a37b3bedefe11fc52db59c5d839ea4023197d1a6c1e2065851219bdd856504"
+    },
+    "walk": {
+      "source": "walk-layout.png",
+      "sha256": "f2b145acc9fff0d369664d3309ab24a6d06001a69d51cee0d3211fa96676d1f1"
+    },
+    "attack": {
+      "source": "attack-layout.png",
+      "sha256": "425b1a7d65d445ffe35c5fce6118708feb8f04d07097f3a74fb197160f6ecb6a"
+    },
+    "death": {
+      "source": "death-layout.png",
+      "sha256": "51fbd0ddedcee207194b8b333ba64ea7d0636eac253b44b2dbbc3f1196a73273"
+    }
+  },
+  "backend": "built-in imagegen frame sheets, imported on CPU",
+  "recipe_sha256": "c3e257c48616808ff1321a6fe1957ab860b887af038004f735d02044a7588970",
+  "code_sha256": {
+    "sheet_import.py": "d6cc266480e76ab89ebfc739d88743b5d42fc58730b461b99f60f8c1782724b4",
+    "pixels.py": "fa49c9f048211472dc89c9e692b982ce88685c9c9ab82a0241f11502c270dbc4"
+  },
+  "framing": "Explicit source rectangles and ground origins; one union crop/scale for all actions."
+}

@@ -1,0 +1,68 @@
+{
+  "asset_id": "drowned_corpse",
+  "name": "Drowned Corpse",
+  "facing": "left",
+  "frame_size": [
+    128,
+    128
+  ],
+  "pivot": [
+    0.5714285714285714,
+    0.8673469387755102
+  ],
+  "height_scale": 1.0,
+  "reference_idle_height_px": 94.04081632653062,
+  "shared_crop": [
+    40,
+    135,
+    530,
+    625
+  ],
+  "actions": {
+    "idle": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "walk": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "attack": {
+      "timing": {
+        "repeat": false
+      }
+    },
+    "death": {
+      "timing": {
+        "repeat": false
+      }
+    }
+  },
+  "source": {
+    "idle": {
+      "source": "idle-layout.png",
+      "sha256": "5988fdb418ad0dfae16fc960e861bd94fc656a3eff6524eb91c935259e5f79f7"
+    },
+    "walk": {
+      "source": "walk-layout.png",
+      "sha256": "ee8d1c5b67ea0ab97132322642546a2120eead8d6efa73d7238396aae9471ce9"
+    },
+    "attack": {
+      "source": "attack-layout.png",
+      "sha256": "50c008a13f934e5b9e9ea8abb3632b95be2d48de7af549b72a4b8e2f47ef7a89"
+    },
+    "death": {
+      "source": "death-layout.png",
+      "sha256": "7992fd3398f11c6c01b87a7533a041a092d8ee582c09140adffbd00b2dbf0d47"
+    }
+  },
+  "backend": "built-in imagegen frame sheets, imported on CPU",
+  "recipe_sha256": "6be7e03ebc12cca5a9e400e845925406b77ebe39d246c9ad1e8dc3eb442fa17a",
+  "code_sha256": {
+    "sheet_import.py": "d6cc266480e76ab89ebfc739d88743b5d42fc58730b461b99f60f8c1782724b4",
+    "pixels.py": "fa49c9f048211472dc89c9e692b982ce88685c9c9ab82a0241f11502c270dbc4"
+  },
+  "framing": "Explicit source rectangles and ground origins; one union crop/scale for all actions."
+}

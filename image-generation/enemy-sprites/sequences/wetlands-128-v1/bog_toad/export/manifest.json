@@ -1,0 +1,68 @@
+{
+  "asset_id": "bog_toad",
+  "name": "Bog Toad",
+  "facing": "left",
+  "frame_size": [
+    128,
+    128
+  ],
+  "pivot": [
+    0.59245960502693,
+    0.7755834829443446
+  ],
+  "height_scale": 0.55,
+  "reference_idle_height_px": 58.59964093357271,
+  "shared_crop": [
+    -10,
+    128,
+    547,
+    685
+  ],
+  "actions": {
+    "idle": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "walk": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "attack": {
+      "timing": {
+        "repeat": false
+      }
+    },
+    "death": {
+      "timing": {
+        "repeat": false
+      }
+    }
+  },
+  "source": {
+    "idle": {
+      "source": "idle-layout.png",
+      "sha256": "bd01d621e34e9f73f1d0aaa96c355ec211dccefc62ac8e06802267cdf8575b01"
+    },
+    "walk": {
+      "source": "walk-layout.png",
+      "sha256": "e5cfffe43b3cec62c97a6a47b00528d2d8774d34000e8b5921ef31a394bc149a"
+    },
+    "attack": {
+      "source": "attack-layout.png",
+      "sha256": "0bc1cdddc5a3717f7e34bbaeab2a73929bccee4396d5febedc47a4c38229867c"
+    },
+    "death": {
+      "source": "death-layout.png",
+      "sha256": "182257e84fff6d802b073c2cd55ba44b9e6e77daaf822a661f70bebadc91c920"
+    }
+  },
+  "backend": "built-in imagegen frame sheets, imported on CPU",
+  "recipe_sha256": "447852dbd9652c7568a503a7932242171e5ef2e74f227000ed7f86a983615956",
+  "code_sha256": {
+    "sheet_import.py": "d6cc266480e76ab89ebfc739d88743b5d42fc58730b461b99f60f8c1782724b4",
+    "pixels.py": "fa49c9f048211472dc89c9e692b982ce88685c9c9ab82a0241f11502c270dbc4"
+  },
+  "framing": "Explicit source rectangles and ground origins; one union crop/scale for all actions."
+}

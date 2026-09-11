@@ -1,0 +1,240 @@
+{
+  "source": "content/biomes/wetlands/ENEMIES.toml",
+  "source_sha256": "e9dcf952c851cc62adef75721e087a3c7d553204fe7c347e8de25b7e313a78dc",
+  "schema_version": 1,
+  "biome_id": "wetlands",
+  "encounters": [
+    {
+      "enemy_id": "bog_toad"
+    },
+    {
+      "enemy_id": "drowned_corpse"
+    },
+    {
+      "enemy_id": "bog_hag"
+    },
+    {
+      "enemy_id": "root_hulk"
+    },
+    {
+      "enemy_id": "giant_water_strider"
+    }
+  ],
+  "enemies": [
+    {
+      "id": "bog_toad",
+      "name": "Bog Toad",
+      "family": "beast",
+      "rank": "common",
+      "tier": 1,
+      "balance": "draft",
+      "description": "A large, heavy amphibian that rests low in the mud along the Wetlands' banks and pools. Its slumped posture conceals powerful hind legs that lift its body into a sudden forward lunge when disturbed.",
+      "visual_description": "The Bog Toad is a squat, heavy amphibian that reaches roughly waist height on an adult human. Its broad body bulges over four widely planted feet, with a low head that seems almost swallowed by its shoulders. Thick, warty skin covers its back and flanks, mottled in peat brown and dull olive. Mud packs the creases between the larger bumps, while its pale, yellow-gray underside hangs in damp folds just above the ground. A loose throat sac droops beneath its jaw, slowly swelling and settling with each breath.\n\nTwo protruding black eyes peer from beneath heavy lids. Each eye bears a small horizontal strip of white across its otherwise black surface, giving its patient stare an unsettling sharpness. Its enormous mouth forms a downward-curving seam across most of its face, giving it a permanently aggrieved expression. Short forelegs brace beneath its chest, ending in blunt, splayed toes. Behind them, massive folded thighs rise along either side of its belly. It rests with its weight settled into the mud, barely moving except to blink or swallow. When disturbed, its whole body lifts as the hind legs unfold, revealing considerably more height and reach than its slumped posture suggests.\n",
+      "quirk": "Its heavy lids and downturned mouth give it a permanently aggrieved expression, even while it sits motionless in the mud.",
+      "fallback_sprite": "slime",
+      "stats": {
+        "health": 55,
+        "attack": 10,
+        "gold": 10,
+        "xp": 15
+      },
+      "visual": {
+        "height_scale": 0.55,
+        "silhouette": "A broad, low body with a head sunk into the shoulders, protruding eyes, a drooping throat sac, short braced forelegs, and oversized folded hind thighs. Four splayed feet support a heavy belly close to the ground.",
+        "appearance": "Thick, warty skin mottled peat brown and dull olive, with mud packed between raised bumps. The underside and loose throat folds are pale yellow-gray. Both eyes are black, each with a small horizontal strip of white beneath a heavy lid. A wide, downturned mouth gives the face an aggrieved expression.",
+        "equipment": [],
+        "palette": [
+          "#3E3029",
+          "#62684A",
+          "#B4B095",
+          "#111311",
+          "#F2F1E9"
+        ],
+        "idle": "The body rests low over four planted feet. The loose throat sac slowly swells and settles with each breath, interrupted by an occasional heavy blink or swallow.",
+        "attack": "The forelegs brace and the massive hind legs unfold, lifting the heavy body into a short forward lunge. The forefeet catch its weight before the belly settles back toward the ground.",
+        "avoid": [
+          "colored irises",
+          "large white areas surrounding the eyes",
+          "a cheerful grin",
+          "slender hind legs",
+          "clothing or carried equipment"
+        ]
+      }
+    },
+    {
+      "id": "drowned_corpse",
+      "name": "Drowned Corpse",
+      "family": "undead",
+      "rank": "common",
+      "tier": 1,
+      "balance": "draft",
+      "description": "An animated human corpse bloated from prolonged immersion in the Wetlands. Its swollen body lurches through the shallows in sodden, split clothing, with empty blackened eye sockets and heavy feet that drag through the mud.",
+      "visual_description": "The Drowned Corpse is a swollen human cadaver with a distended belly, thickened limbs, and a head that sits low between its raised shoulders. Its skin is a cold, mottled gray, shaded green around the joints and dark purple beneath the chin. The flesh looks stretched and waxy across its stomach, gathering into heavy folds around its neck. Its face is broad and puffy, with swollen cheeks, slack lips, and empty eye sockets sunk beneath heavy lids. Both eyes are missing, leaving dark hollows rimmed with blackened skin. Sparse strands of dark hair cling flat to its scalp, with bits of duckweed caught around the ears.\n\nA sodden shirt stretches tightly across its body, its lower seams split around the protruding belly. The coarse fabric is stained brown below the old waterline, with pale patches across the shoulders. Frayed trousers cling to its thick legs, and its swollen feet bulge through the opened seams of ruined leather boots. Strands of weed trail from its collar and sleeves. Its arms hang slightly away from its sides, held out by the bulk of its torso, with thick fingers loosely curled. It walks with a slow, rolling sway, dragging each foot free of the mud before planting it again. Water drips from its cuffs and clothing as its heavy body lurches forward.\n",
+      "quirk": "Its swollen torso keeps its arms held awkwardly away from its sides as it drags each foot free of the mud.",
+      "fallback_sprite": "knight",
+      "stats": {
+        "health": 80,
+        "attack": 11,
+        "gold": 12,
+        "xp": 18
+      },
+      "visual": {
+        "height_scale": 1.0,
+        "silhouette": "A swollen human figure with a protruding belly, thick limbs, raised shoulders, and a low-set head. The arms hang away from the broad torso, while heavy feet and a rolling forward lean give its stance an uneven weight.",
+        "appearance": "Stretched, waxy gray skin with green shading around the joints and dark purple beneath the chin. Both eyes are missing; the empty sockets form dark hollows beneath heavy lids, with blackened skin around their rims. Sparse wet hair clings to a puffy head. A brown-stained coarse shirt splits at the lower seams, frayed trousers cling to swollen legs, and ruined leather boots gape around broad feet. Duckweed and trailing strands of weed cling to the head and clothing.",
+        "equipment": [
+          "sodden coarse shirt with split lower seams",
+          "frayed waterlogged trousers",
+          "ruined leather boots with opened seams"
+        ],
+        "palette": [
+          "#9BA8A1",
+          "#687569",
+          "#594B60",
+          "#141715",
+          "#665547",
+          "#A49B86"
+        ],
+        "idle": "The heavy body sways slowly over planted feet, with loose arms held away from the torso and thick fingers partly curled. Water drips from the cuffs and trouser hems; the empty eye sockets remain dark and still.",
+        "attack": "One arm swings forward as the body lurches after it. The trailing foot drags free of the mud and plants heavily to catch the corpse's weight, leaving its broad torso rocking before it settles.",
+        "avoid": [
+          "intact eyeballs",
+          "glowing eyes",
+          "visible irises or pupils",
+          "a lean skeletal build",
+          "weapons or armor"
+        ]
+      }
+    },
+    {
+      "id": "bog_hag",
+      "name": "Bog Hag",
+      "family": "fiend",
+      "rank": "common",
+      "tier": 1,
+      "balance": "draft",
+      "description": "A gaunt, long-limbed hag that wades through the Wetlands in sodden layers of coarse cloth. Her slow, deliberate movement gives way to a reaching clawing attack, raking her target with the long nails of her oversized hands.",
+      "visual_description": "The Bog Hag is a tall, gaunt figure whose deep stoop brings her head forward between narrow shoulders. Her arms hang unusually low, ending in oversized hands with swollen knuckles and long, crooked fingers. Gray-green skin lies in loose folds around her elbows and throat, darkening along her forearms and shins where it remains wet. Her face is long and deeply creased, with high cheekbones, a broad, crooked nose, and a lower jaw that juts slightly forward. Small, pale eyes sit beneath a heavy brow, watching from a face otherwise almost motionless. Tangled black hair, streaked with gray, hangs in wet ropes across her shoulders and down her back.\n\nLayers of coarse brown and charcoal cloth cling to her narrow body. A ragged shawl hangs unevenly from one shoulder, while the hem of her long skirt trails in the water, heavy with mud and strands of weed. Her bare feet are broad and flat, with long toes that spread as she plants them in the soft ground. Long, thick, discolored nails curve from her fingers, their edges chipped and packed with dirt. She wades with slow, deliberate steps, keeping her upper body remarkably still. Occasionally, one enormous hand gathers the sodden skirt away from her knees in a small, fussy gesture, while her gaze remains fixed ahead. When she attacks, she reaches forward with an oversized hand and claws across her target with her long, curved nails.\n",
+      "quirk": "She occasionally gathers her sodden skirt away from her knees with one enormous hand, keeping her gaze fixed ahead throughout the small, fussy gesture.",
+      "fallback_sprite": "knight",
+      "stats": {
+        "health": 90,
+        "attack": 14,
+        "gold": 14,
+        "xp": 20
+      },
+      "visual": {
+        "height_scale": 1.15,
+        "silhouette": "A tall, narrow figure bent into a deep stoop, with a forward-set head, unusually long arms, oversized knuckled hands, and long curved fingernails. A trailing skirt conceals much of the legs, ending above broad bare feet with splayed toes.",
+        "appearance": "Deeply creased gray-green skin with dark wet forearms and shins. A long face has high cheekbones, a broad crooked nose, a projecting lower jaw, and small pale eyes beneath a heavy brow. Black hair streaked with gray hangs in wet ropes. Coarse brown and charcoal garments cling to the gaunt body; an uneven shawl and mud-heavy skirt trail strands of weed. Long, thick, discolored nails curve from swollen fingers, with chipped edges packed with dirt.",
+        "equipment": [
+          "layered coarse brown and charcoal garments",
+          "ragged shawl hanging from one shoulder",
+          "long waterlogged skirt"
+        ],
+        "palette": [
+          "#788676",
+          "#4E6057",
+          "#252A28",
+          "#848780",
+          "#66584A",
+          "#383C39",
+          "#C4C6AF",
+          "#93876D"
+        ],
+        "idle": "She stands in a deep stoop with her long arms hanging low and her gaze fixed ahead. Her upper body remains nearly still while one hand occasionally lifts the sodden skirt clear of her knees and releases it.",
+        "attack": "She reaches forward with one long arm, spreads and hooks her fingers, then rakes an oversized hand across the target in a clawing swipe with her long, curved nails. Her shoulder turns with the strike before the hand drops back into its low resting position.",
+        "avoid": [
+          "missing eyes or empty sockets",
+          "glowing eyes",
+          "short or neatly trimmed fingernails",
+          "carried weapons or a staff",
+          "a youthful smooth-skinned face"
+        ]
+      }
+    },
+    {
+      "id": "root_hulk",
+      "name": "Root Hulk",
+      "family": "plant",
+      "rank": "elite",
+      "tier": 1,
+      "balance": "draft",
+      "description": "A massive, thick-bodied creature of interlocked dead roots and binding vines. It moves its dense wooden frame as a single creaking weight, raising both bundled fists to deliver a crushing overhead blow.",
+      "visual_description": "The Root Hulk is a massive creature formed from tangled vines and dead roots, standing a head taller than an adult human and almost twice as broad. Thick lengths of wood interlock into a dense torso, with thinner vines wound tightly around them like binding rope. Its shoulders are wide and uneven, one rising into a jagged ridge of broken root ends. Wet bark ranges from dark peat brown to weathered gray, with pale fibers exposed wherever the surface has split. Black mud fills the deeper gaps, and strands of dull green vine hang loosely from its chest and back.\n\nA flattened knot of wood forms its head, sunk directly between its shoulders without a visible neck. Two narrow, uneven hollows sit above a deep horizontal split, giving the rough surface the suggestion of a heavy, expressionless face. Its arms are thick and disproportionately long, ending in enormous fists of bundled roots with short, blunt projections resembling fingers. Short, sturdy legs support its weight, spreading into broad feet made from splayed root ends. Loose vines drag behind it and sway beneath its arms. It moves with its whole body, turning its shoulders whenever it shifts its head, while the tightly packed wood creaks against itself.\n",
+      "quirk": "It turns its entire shoulders whenever it shifts its head, making even a small glance a laborious movement of creaking wood.",
+      "fallback_sprite": "knight",
+      "stats": {
+        "health": 140,
+        "attack": 18,
+        "gold": 24,
+        "xp": 28
+      },
+      "visual": {
+        "height_scale": 1.2,
+        "silhouette": "A dense, broad torso with uneven shoulders, a low wooden knot for a head, long thick arms, and enormous bundled-root fists. Short sturdy legs end in wide splayed root feet, with loose vines hanging below the arms and trailing behind the body.",
+        "appearance": "Interlocked dead roots bound with tightly wound vines form the entire body. Wet bark is dark peat brown and weathered gray, split to expose pale fibers, with black mud lodged in the gaps. Dull green vines hang from the chest and back. One shoulder carries a jagged ridge of broken root ends. Two narrow uneven hollows and a deep horizontal split suggest an expressionless face in the flattened wooden head.",
+        "equipment": [],
+        "palette": [
+          "#3E3029",
+          "#292D24",
+          "#77776B",
+          "#B6A587",
+          "#62684A",
+          "#171B17"
+        ],
+        "idle": "It stands heavily over its broad root feet with both long arms hanging low. Small shifts pull the binding vines taut and make the packed wood creak. Its shoulders turn with its head while loose vines sway beneath the arms.",
+        "attack": "The Root Hulk spreads its feet and draws both heavy fists above its head, pulling the vines across its torso taut. It pitches forward and brings its fists down together in a crushing overhead blow. Loose root fibers and trailing vines whip forward with the impact. It then braces against its planted hands and heaves its upper body upright again.",
+        "avoid": [
+          "a slender frame",
+          "a leafy tree canopy or flowers",
+          "human flesh beneath the roots",
+          "glowing eyes",
+          "clothing or carried weapons"
+        ]
+      }
+    },
+    {
+      "id": "giant_water_strider",
+      "name": "Giant Water Strider",
+      "family": "beast",
+      "rank": "common",
+      "tier": 1,
+      "balance": "draft",
+      "description": "An otherworldly predator that balances above the Wetlands on two extremely long legs. Its pale plated body is shiny and slimy, and its flattened face opens into an enormous toothed mouth for an exaggerated snapping bite.",
+      "visual_description": "The Giant Water Strider balances on two extremely long legs, its narrow body suspended at an adult human's chest height. Each leg rises into a sharp angular bend before descending to a broad, dark pad that dimples the water. It has no arms or grasping limbs. Overlapping plates of smoky ivory and pale gray-green cover its body, their thin edges translucent enough to reveal dark, threadlike structures underneath. Its main body is shiny and slimy, with a slick coating that catches the light across the plates. Its tapered abdomen curves upward behind it, shifting slightly to counterbalance the weight of its broad head.\n\nThe head resembles a flattened mask, with clusters of tiny black eyes tucked beneath its upper rim. A thin horizontal seam stretches across almost the entire face. This seam opens into an enormous mouth: the lower jaw drops far below the head, while folded skin at the cheeks stretches outward, revealing a black interior crowded with uneven, interlocking teeth. The teeth are short and broad, with chipped ivory edges. Fully opened, the mouth is wider than the creature's narrow torso, making its otherwise delicate frame seem startlingly top-heavy. When its jaws close, the cheek folds tuck away and the face becomes almost expressionless again.\n",
+      "quirk": "Its enormous open mouth makes its delicate frame look startlingly top-heavy, before the cheek folds tuck away and restore its almost expressionless face.",
+      "fallback_sprite": "knight",
+      "stats": {
+        "health": 65,
+        "attack": 13,
+        "gold": 12,
+        "xp": 18
+      },
+      "visual": {
+        "height_scale": 0.9,
+        "silhouette": "A narrow elevated torso with an upturned tapered abdomen and a broad flattened head, supported by exactly two extremely long angular legs ending in wide dark pads. There are no arms or grasping limbs. The lowered jaw and outstretched cheek folds create an open mouth wider than the torso.",
+        "appearance": "Overlapping smoky ivory and pale gray-green plates have translucent edges with dark threadlike structures beneath them. A shiny, slimy coating covers the main body and catches light across the plates. Tiny black eyes cluster beneath the upper rim of the flattened head. A horizontal mouth seam opens into a vast black cavity with short, broad, uneven interlocking teeth and chipped ivory edges; folded cheek skin stretches outward as the lower jaw drops.",
+        "equipment": [],
+        "palette": [
+          "#D4D0BA",
+          "#B0BBB1",
+          "#737F76",
+          "#343E36",
+          "#101411",
+          "#EEEBD9"
+        ],
+        "idle": "It balances on its two widely planted legs with its mouth closed into a narrow seam. Small adjustments at the angular joints keep the body nearly still, while the tapered abdomen shifts to counterbalance the broad head. The coating on its main body shines as it subtly changes angle.",
+        "attack": "The strider braces its two legs and draws its head back, opening its jaws to their full, exaggerated width. It pitches its body forward and snaps the enormous mouth shut around its target with a hard clack. The force carries its head downward before its long legs straighten, pulling it back into balance as the mouth closes into a narrow seam again.",
+        "avoid": [
+          "more than two legs",
+          "arms or grasping limbs",
+          "a feeding spike, proboscis, or piercing mouthpart",
+          "a small or restrained bite",
+          "a dry matte main body",
+          "glowing eyes"
+        ]
+      }
+    }
+  ]
+}
