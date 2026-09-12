@@ -40,7 +40,7 @@ these initial presets do not require a motion-template library.
 Run from this directory:
 
 ```bash
-cd /home/karl/repo/apps/fitness-rpg/image-generation/sprite-animation
+cd /data/repo/apps/fitness-rpg/image-generation/sprite-animation
 
 # Separate supplemental venv; reuses the existing study's torch/CUDA packages.
 ../pyxelate-study/.venv/bin/python setup.py --environment
