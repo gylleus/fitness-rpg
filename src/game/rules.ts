@@ -40,8 +40,20 @@ export type FitnessDay = {
 };
 export type Hero = { gold: number; xp: number; swordLevel: number; armorLevel: number; unlockedDungeon: number; amuletOwned?: boolean };
 export type HeroStats = { attack: number; health: number; baseAttack: number; baseHealth: number; dailyHealth: number; level: number; dodgeBps: number;
+  armor?: number; critChanceBps?: number; critMultiplierBps?: number;
   baseDamageMin?: number; baseDamageMax?: number;
   pushups: number; pushupDamageCoefficient: number; damageMultiplier: number; attackEffects: AttackEffect[] };
+
+/** Diminishing returns: 25 armor = 20%, 100 = 50%, 300 = the 75% cap. */
+export function armorReduction(armor = 0) {
+  const rating = Number.isFinite(armor) ? Math.max(0, armor) : 0;
+  return Math.min(0.75, rating / (100 + rating));
+}
+
+export function damageAfterArmor(damage: number, armor = 0) {
+  if (!Number.isFinite(damage) || damage <= 0) return 0;
+  return Math.max(1, Math.round(damage * (1 - armorReduction(armor))));
+}
 
 /** Coefficient bonuses are additive, so equipment and future talents compose. */
 export function pushupPower(baseDamage: number, pushups: number, coefficient = BASE_PUSHUP_DAMAGE_COEFFICIENT) {
@@ -88,6 +100,7 @@ export function heroStats(hero: Hero, today: FitnessDay, pushups = today.pushups
   const pushupDamageCoefficient = BASE_PUSHUP_DAMAGE_COEFFICIENT + bonuses.coefficientBonus;
   const power = pushupPower(baseAttack, pushups, pushupDamageCoefficient);
   return { attack: power.damage, health: baseHealth + dailyHealth, baseAttack, baseDamageMin, baseDamageMax, baseHealth, dailyHealth, level,
+    armor: bonuses.armor, critChanceBps: bonuses.critChanceBps, critMultiplierBps: bonuses.critMultiplierBps,
     dodgeBps: today.agilityBps, pushups, pushupDamageCoefficient, damageMultiplier: power.multiplier, attackEffects: bonuses.effects };
 }
 

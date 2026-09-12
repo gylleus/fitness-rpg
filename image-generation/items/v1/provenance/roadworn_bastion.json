@@ -1,0 +1,15 @@
+{
+  "id": "roadworn_bastion",
+  "backend": "built-in imagegen",
+  "definition_sha256": "22032562283366967674ad5184a06d2a8f83c8d0505436bce152f6c543030b6e",
+  "original": "image-generation/items/v1/sources/roadworn_bastion.png",
+  "source_sha256": "1c3daee3659dcdf75b4669570bf8567dcd1db2b9cbc26931f9db19df4e377547",
+  "icon": "assets/items/roadworn_bastion.png",
+  "icon_sha256": "e00190f1cb9e0bf38998617d2f6c78d80c1881520da93a86f9b3d0f68e6128d2",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Roadworn Bastion. A massive dark iron breastplate is patched with three lighter steel squares of unequal size. Its thick rolled neck edge is worn bright, and broad tan leather straps buckle at the sides.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

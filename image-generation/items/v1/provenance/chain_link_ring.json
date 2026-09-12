@@ -1,0 +1,15 @@
+{
+  "id": "chain_link_ring",
+  "backend": "built-in imagegen",
+  "definition_sha256": "bb140f6588079db854b659f0553b6f01a13bc279154b6bfbbf911ad677f69811",
+  "original": "image-generation/items/v1/sources/chain_link_ring.png",
+  "source_sha256": "f05bf9a81a3a1995f0d073e4e05d10d871758fbcde77decfd55c8e0633d0b7db",
+  "icon": "assets/items/chain_link_ring.png",
+  "icon_sha256": "f925b06e2599cd8faf801a0e7e07d43ab322de407b8ab6f6de79a9ebab0dfafc",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Chain Link Ring. Two flattened iron chain links are welded side by side into a chunky ring. One link is nearly black and the other worn gray, with a small copper repair at their seam.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

@@ -1,0 +1,15 @@
+{
+  "id": "saltglass_sabre",
+  "backend": "built-in imagegen",
+  "definition_sha256": "ba71b86f5124e665d00c39ab6c7ead996e1817305b00735cc264331cb64db807",
+  "original": "image-generation/items/v1/sources/saltglass_sabre.png",
+  "source_sha256": "d197b44399f9f8068b9338ae7d7c6f2e4e83ec49d07706cb0605fa89c9d6a486",
+  "icon": "assets/items/saltglass_sabre.png",
+  "icon_sha256": "1553f3470af9bbe4513e03d36f0630edde685c24b503741827b136a277c9ad46",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Saltglass Sabre. A curved translucent smoky blade carries a milky white edge. Its heavy iron basket guard is crusted with salt, and faded green sharkskin covers a handle capped in tarnished silver.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

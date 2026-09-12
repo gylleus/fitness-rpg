@@ -1,0 +1,15 @@
+{
+  "id": "leather_gloves",
+  "backend": "built-in imagegen",
+  "definition_sha256": "c58a18b4d2dddb140f804713846b52bdadadaf5d9babd9ecac84775ec6d5c6dd",
+  "original": "image-generation/items/v1/sources/leather_gloves.png",
+  "source_sha256": "0a0b81234ca3d52ba240f2428edfcf36dff4ce4502e242cb515695a440098cea",
+  "icon": "assets/items/leather_gloves.png",
+  "icon_sha256": "1754d076cb0a18c3b3e48af6b30fc2b01e8a684646b78d4259e5efa7b0cd6494",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Worn Leather Gloves. A pair of short brown leather gloves has thick padded knuckles and blunt worn fingertips. Pale stitches repair the right thumb, while narrow wrist straps close with dull iron buckles.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

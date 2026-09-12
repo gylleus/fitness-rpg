@@ -1,0 +1,15 @@
+{
+  "id": "frost_hide_coat",
+  "backend": "built-in imagegen",
+  "definition_sha256": "1006ff2078a900f75584383f6a92ddf089d66497f1d013146422b06c320a0bda",
+  "original": "image-generation/items/v1/sources/frost_hide_coat.png",
+  "source_sha256": "3ca19b6f69ec22c32e171af6a2f7367f4ba3a6833089f8e5249636ea9df39801",
+  "icon": "assets/items/frost_hide_coat.png",
+  "icon_sha256": "19fde54567539ab06c5e871bfe71ac8c0bc819a50c078ac77cbefcea5e73c223",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Frost Hide Coat. A gray sealskin coat has a thick ivory fur collar and short broad sleeves. Dark leather bands cross the chest, and pale frost collects on the edges of its rough bone toggles.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

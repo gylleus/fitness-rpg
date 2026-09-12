@@ -29,7 +29,7 @@ it('converts legacy bonuses once, preserves resources and never regifts sold sta
   const snapshot = getGameSnapshot(db, now);
   expect(snapshot.inventory).toHaveLength(3);
   expect(snapshot.stats).toMatchObject({ baseDamageMin: 34, baseDamageMax: 44, baseHealth: 150, pushupDamageCoefficient: 0.11 });
-  expect(snapshot.hero).toMatchObject({ gold: 147, xp: 200, healthPotions: 2, inventoryVersion: 1 });
+  expect(snapshot.hero).toMatchObject({ gold: 147, xp: 200, healthPotions: 2, inventoryVersion: 2 });
   const club = snapshot.inventory.find(item => item.slot === 'weapon')!;
   unequipItem(db, 'weapon'); sellItem(db, club.id);
   expect(getGameSnapshot(db, now).inventory).toHaveLength(2);
@@ -80,7 +80,7 @@ it('locks gear during an expedition, keeps its snapshot and rolls back failed sa
   expect(getHero(db).gold).toBe(0);
   db.run('DROP TRIGGER fail_sale');
   sellItem(db, armor.id);
-  expect(getHero(db).gold).toBe(16);
+  expect(getHero(db).gold).toBe(GEAR.hide_armor.sellValue);
   expect(() => sellItem(db, armor.id)).toThrow(/sold/);
 });
 

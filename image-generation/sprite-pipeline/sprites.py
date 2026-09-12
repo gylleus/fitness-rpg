@@ -34,6 +34,7 @@ DEFAULT_ART = {
     "style": "Stylized weathered dark fantasy, exaggerated readable silhouettes, worn practical materials.",
     "lighting": "Restrained upper-left lighting, flat three-tone shading.",
     "facing": "left",
+    "view": "three_quarter",
     "avoid": ["photorealism", "cute mascot", "text", "watermark"],
 }
 
@@ -63,37 +64,92 @@ def looping(asset, action):
     return asset["animations"][action]["loop"] if "animations" in asset else action == "idle"
 
 
+def validate_animations(animations):
+    if not isinstance(animations, dict):
+        raise ValueError("animations must be a table")
+    for action, spec in animations.items():
+        if not re.fullmatch(r"[a-z][a-z0-9_]*", action) or action == "reference":
+            raise ValueError(f"Invalid or reserved action ID: {action}")
+        if not isinstance(spec, dict) or set(spec) != {"description", "loop"}:
+            raise ValueError(f"Animation {action} requires only description and loop")
+        if not isinstance(spec["description"], str) or not spec["description"].strip() or type(spec["loop"]) is not bool:
+            raise ValueError(f"Invalid animation {action} description or loop flag")
+        if action == "death" and spec["loop"]:
+            raise ValueError("Death must be a one-shot animation")
+
+
 def seed_for(asset_id, action, base):
     return int.from_bytes(hashlib.sha256(f"{base}:{asset_id}:{action}".encode()).digest()[:4], "big")
 
 
+def reference_override(asset, result):
+    """Explicit reference prompts bypass all automatic caption/style/view expansion."""
+    if "reference" in asset:
+        return {**result, "reference": asset["reference"]["prompt"],
+                "reference_negative": asset["reference"]["negative"],
+                "caption_source": "explicit assets.reference.prompt"}
+    return result
+
+
 def prompts(asset, art, facing, caption=None):
+    if asset.get("kind") == "background":
+        from backgrounds import prompts as background_prompts
+        return reference_override(asset, background_prompts(asset, art, caption))
     visual = asset["visual"]
     character = asset.get("kind", "character") in ("character", "player", "enemy")
     framing = "full body" if character else "entire object"
     invariants = "anatomy, face, equipment, silhouette and colors" if character else "shape, materials, parts, silhouette and colors"
+    profile = art.get("view", "three_quarter") == "profile"
+    angle = "strict side profile" if profile else "slight three-quarter turn"
+    orientation = ""
+    if profile:
+        orientation = (f"Pixel art {framing} sprite in strict {facing}-facing side profile. "
+                       "Orthographic 90-degree side view. "
+                       + (f"Head and body point toward the {facing} edge together. " if character else
+                          f"The object points toward the {facing} edge. ")
+                       + "Only the near side is visible; the far side is occluded. "
+                       "Flat lateral silhouette, fixed eye-level side-scroller camera. ")
+    camera = ("Locked eye-level side-scroller camera, strict side profile throughout. "
+              "No turning toward or away from the camera. " if profile else
+              "Locked eye-level side-scroller camera, side-on with a slight three-quarter turn. ")
     view = (f"pixel art, one {asset['name']}, {framing}, facing {facing}, side-on view for a "
-            "2D side-scroller, slight three-quarter turn, fixed eye-level camera. ")
+            f"2D side-scroller, {angle}, fixed eye-level camera. ")
     identity = " ".join(asset["visual_description"].split())
     equipment = ", ".join(visual["equipment"]) or "none"
-    source = (view + visual["silhouette"] + " " + identity +
+    source = ((orientation if profile else view) + visual["silhouette"] + " " + identity +
               f" Visible equipment: {equipment}. " + art["style"] + " " + art["lighting"] +
               " Single isolated subject centered with generous empty padding; plain flat light gray background, "
               "crisp dark outline, chunky pixel clusters, three-tone shading. All equipment fits inside the image.")
     negative = ", ".join(["front view", "back view", "isometric view", "top down", "looking at viewer",
         "multiple views", "sprite sheet", "duplicates", "cropped", "gradient background", "cast shadow",
         "checkerboard", "floor", "blurry", *art["avoid"], *visual.get("avoid", [])])
+    if profile:
+        # Keep unwanted views in the first CLIP chunk, ahead of long appearance avoids.
+        rejected_views = ["frontal view", "facing camera", "three-quarter view", "three-quarter angle",
+                          "looking at viewer", "turned toward camera"]
+        if character:
+            rejected_views += ["frontal face", "chest facing camera", "both shoulders facing viewer"]
+        negative = ", ".join(rejected_views) + ", " + negative
     motions = {}
     for action in asset.get("animations", {"idle": {}, "attack": {}}):
         timing = ("One complete motion cycle, then settle back into the exact starting pose. "
                   "Keep the ground contact or hovering center in place." if looping(asset, action) else
                   "One complete action: brief anticipation, decisive movement, follow-through, "
                   "then perform the described recovery or hold the described final pose. Do not repeat the action in this clip.")
+        if action == "walk":
+            timing = ("One continuous in-place gait cycle, returning to the same gait phase at the loop boundary without a pause. "
+                      "Keep the torso centered in the frame while the legs lift, pass and plant naturally. "
+                      "No net travel across the image; horizontal movement is supplied by the game. No turning or stopping.")
+        elif action == "death":
+            timing = ("One single death transition from the reference stance into the described collapsed pose. "
+                      "The creature loses its strength and falls, then remains completely motionless through the end. "
+                      "No recovery, standing up, revival, repeated fall, disappearing body or fade-out. "
+                      "Keep the fallen body and attached limbs visible inside the frame.")
         motions[action] = (
             f"The exact same single {asset['name']} as the reference, facing {facing} throughout. "
-            f"{motion(asset, action)} {timing} "
+            f"{orientation}{motion(asset, action)} {timing} "
             f"Preserve the reference {invariants}. "
-            "Locked eye-level side-scroller camera, side-on with a slight three-quarter turn. "
+            f"{camera}"
             "Keep the entire subject, equipment and effects inside the fixed frame with empty padding. "
             f"Plain uniform gray-blue background. {art['style']} {art['lighting']} Pixel art, crisp pixel clusters. "
             "Subject identity: " + identity)
@@ -101,12 +157,18 @@ def prompts(asset, art, facing, caption=None):
     if visual["equipment"]:
         automatic_caption += " Visible equipment: " + equipment + "."
     caption_text = caption["caption"] if caption else automatic_caption
-    compact = (f"A {facing}-facing profile view of {caption_text.rstrip('.')}. "
-               f"One isolated {framing} subject on plain gray. {art['style']} {art['lighting']} "
-               "Pixel art, chunky dark outline, flat colors.")
-    return {"reference": compact, "full_reference_context": source,
+    reference_view = f"strict {facing}-facing side profile" if profile else f"{facing}-facing profile view"
+    compact = (f"Pixel art game sprite, chunky pixels, flat colors, dark outline. "
+               f"A {reference_view} of {caption_text.rstrip('.')}. "
+               f"One isolated {framing} subject on plain gray. {art['style']} {art['lighting']}")
+    if profile:
+        # This is the actual SDXL prompt; full_reference_context is provenance only.
+        compact = (orientation + caption_text.rstrip(".") + ". "
+                   f"One isolated {framing} subject on plain gray. Chunky pixels, flat colors, dark outline. "
+                   f"{art['style']} {art['lighting']} Pure {facing}-facing side view of the entire subject.")
+    return reference_override(asset, {"reference": compact, "full_reference_context": source,
             "caption_source": "curated condensation of visual_description" if caption else "first sentence of visual_description",
-            "negative": negative + (", " + ", ".join(caption.get("avoid", [])) if caption else ""), "motions": motions}
+            "negative": negative + (", " + ", ".join(caption.get("avoid", [])) if caption else ""), "motions": motions})
 
 
 def definitions(path):
@@ -119,6 +181,8 @@ def definitions(path):
     art = {**DEFAULT_ART, **data.get("art", {})}
     if set(art) - set(DEFAULT_ART) or art["facing"] not in ("left", "right"):
         raise ValueError("Invalid art fields or facing")
+    if art["view"] not in ("profile", "three_quarter"):
+        raise ValueError("art.view must be profile or three_quarter")
     for key in ("style", "lighting"):
         if not isinstance(art[key], str) or not art[key].strip():
             raise ValueError(f"art.{key} must be nonempty text")
@@ -126,7 +190,7 @@ def definitions(path):
         raise ValueError("art.avoid must be text array")
     seen = set()
     for asset in data["assets"]:
-        if set(asset) - {"id", "name", "kind", "visual_description", "visual", "animations", "reference_caption"}:
+        if set(asset) - {"id", "name", "kind", "visual_description", "visual", "animations", "reference_caption", "reference", "canvas"}:
             raise ValueError("Unknown asset fields")
         for field in ("id", "name", "visual_description"):
             if not isinstance(asset.get(field), str) or not asset[field].strip():
@@ -136,10 +200,15 @@ def definitions(path):
             raise ValueError(f"Invalid or duplicate asset ID: {key}")
         seen.add(key)
         asset.setdefault("kind", "character")
-        if asset["kind"] not in ("character", "player", "enemy", "prop", "effect"):
-            raise ValueError("Asset kind must be character, player, enemy, prop or effect")
+        if asset["kind"] not in ("character", "player", "enemy", "prop", "effect", "background"):
+            raise ValueError("Asset kind must be character, player, enemy, prop, effect or background")
         if "reference_caption" in asset and (not isinstance(asset["reference_caption"], str) or not asset["reference_caption"].strip()):
             raise ValueError("reference_caption must be nonempty text")
+        if "reference" in asset:
+            spec = asset["reference"]
+            if (not isinstance(spec, dict) or set(spec) != {"prompt", "negative"}
+                    or any(not isinstance(v, str) or not v.strip() for v in spec.values())):
+                raise ValueError("reference requires only nonempty prompt and negative text")
         visual = asset.setdefault("visual", {})
         if not isinstance(visual, dict) or set(visual) - {"silhouette", "equipment", "palette", "height_scale", "anchor", "avoid"}:
             raise ValueError("Invalid visual fields")
@@ -157,16 +226,9 @@ def definitions(path):
                 raise ValueError(f"visual.{field} must be text array")
         if any(not re.fullmatch(r"#[0-9a-fA-F]{6}", c) for c in visual["palette"]):
             raise ValueError("visual.palette must contain #RRGGBB colors")
-        animations = asset.setdefault("animations", {})
-        if not isinstance(animations, dict):
-            raise ValueError("animations must be a table")
-        for action, spec in animations.items():
-            if not re.fullmatch(r"[a-z][a-z0-9_]*", action) or action == "reference":
-                raise ValueError(f"Invalid or reserved action ID: {action}")
-            if not isinstance(spec, dict) or set(spec) != {"description", "loop"}:
-                raise ValueError(f"Animation {action} requires only description and loop")
-            if not isinstance(spec["description"], str) or not spec["description"].strip() or type(spec["loop"]) is not bool:
-                raise ValueError(f"Invalid animation {action} description or loop flag")
+        validate_animations(asset.setdefault("animations", {}))
+        from backgrounds import validate
+        validate(asset)
     return data["assets"], art
 
 
@@ -191,6 +253,12 @@ def make_plan(args, assets, art, source):
     study = json.loads((STUDY / "config.json").read_text())
     generation = json.loads((WAN / "config.json").read_text())["generation"]
     captions = json.loads(args.captions.read_text()) if args.captions else {}
+    guides_path = getattr(args, "reference_guides", None)
+    guides = json.loads(guides_path.read_text()) if guides_path else {}
+    if not isinstance(guides, dict) or set(guides) - {a["id"] for a in assets}:
+        raise ValueError("Reference guide IDs must belong to the selected assets")
+    if guides and getattr(args, "guide_image", None):
+        raise ValueError("Use per-asset reference guides or one global guide, not both")
     planned = []
     for asset in assets:
         key = asset["id"]
@@ -201,6 +269,15 @@ def make_plan(args, assets, art, source):
             caption = {"caption": asset["reference_caption"]}
         planned.append({"asset": asset, "prompts": prompts(asset, art, facing, caption),
             "seeds": {act: seed_for(key, act, args.seed) for act in ["reference", *actions] if act == "reference" or act in asset["animations"]}})
+        if key in guides:
+            spec = guides[key]
+            if not isinstance(spec, dict) or set(spec) != {"image", "strength"} or type(spec["strength"]) not in (int, float) or not 0 < spec["strength"] <= 1:
+                raise ValueError("Each reference guide requires image and strength in (0, 1]")
+            path = (guides_path.resolve().parent / spec["image"]).resolve()
+            planned[-1]["reference_guide"] = {"image": os.path.relpath(path, args.run),
+                "strength": spec["strength"], "sha256": sha256(path)}
+    from reference_assets import plan_inputs
+    copies = plan_inputs(args, planned, facing)
     config = {"schema_version": 2, "facing": facing, "actions": actions,
         "export": {"size": size, "frame_step": step, "columns": 8, "margin": .08,
                    "palette": json.loads((BASE / "palette.json").read_text())},
@@ -216,11 +293,9 @@ def make_plan(args, assets, art, source):
         guide = args.guide_image.resolve()
         config["reference_generation"].update(guide_image=os.path.relpath(guide, args.run),
             guide_strength=args.guide_strength, guide_sha256=sha256(guide))
-    args.run.mkdir(parents=True, exist_ok=True)
+    from run_state import save_plan
+    save_plan(args, config, copies)
     target = args.run / "config.json"
-    if target.exists() and json.loads(target.read_text()) != config:
-        raise ValueError("Run already has different inputs/settings. Choose a new --run directory.")
-    save_json(target, config)
     print(f"Planned {len(planned)} assets / {sum(len(actions_for(config,e)) for e in planned)} animations: {target}", flush=True)
 
 
@@ -228,7 +303,7 @@ def plan(args):
     if not args.definition:
         raise ValueError("Use --definition PATH to an art-only TOML file")
     assets, art = definitions(args.definition)
-    source = {"adapter": "asset-definition", "path": str(args.definition.resolve().relative_to(REPO)),
+    source = {"adapter": "asset-definition", "path": os.path.relpath(args.definition.resolve(), REPO),
               "sha256": sha256(args.definition), "text": args.definition.read_text()}
     make_plan(args, assets, art, source)
 
@@ -244,11 +319,17 @@ def child(command, run, *extra):
 
 
 def main(enemy_adapter=False):
+    if not enemy_adapter and sys.argv[1:2] == ["bundle"]:
+        from runtime_assets import main as bundle_main
+        return bundle_main(sys.argv[2:])
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("command", choices=["plan", "references", "prepare", "animate", "export", "review", "package", "all"])
-    p.add_argument("--run", type=Path, required=not enemy_adapter,
-                   default=ROOT.parent / "enemy-sprites/runs/ashen-foundries-v2" if enemy_adapter else None)
+    p.add_argument("command", choices=["plan", "reference", "references", "prepare", "animate", "export", "review", "package", "all"])
+    p.add_argument("--run", type=Path, required=not enemy_adapter)
+    p.add_argument("--force", action="store_true",
+                   help="Replace the entire run before plan/reference/all; requires an explicit --run and definition/roster")
     p.add_argument("--definition", type=Path)
+    p.add_argument("--reference", type=Path, help="Authored pixel PNG or pixel-reference.json for one selected asset; skips SDXL")
+    p.add_argument("--reference-inputs", type=Path, help="JSON mapping asset IDs to pixel PNGs or pixel-reference.json files, relative to the mapping")
     p.add_argument("--asset", "--enemy", dest="asset", nargs="+")
     p.add_argument("--content-dir", type=Path, default=REPO / "content")
     p.add_argument("--roster", type=Path)
@@ -260,17 +341,37 @@ def main(enemy_adapter=False):
     p.add_argument("--frame-step", type=int)
     p.add_argument("--seed", type=int, default=83000)
     p.add_argument("--captions", type=Path)
+    p.add_argument("--motions", type=Path, help="Enemy adapter: supplemental named animations keyed by ID and checked against description hashes")
     p.add_argument("--reference-lora", type=float, default=.65)
     p.add_argument("--guide-image", type=Path, help="Optional local SDXL img2img pose/style guide")
+    p.add_argument("--reference-guides", type=Path, help="JSON mapping selected asset IDs to image (relative to JSON) and img2img strength")
     p.add_argument("--guide-strength", type=float, default=.6)
     p.add_argument("--mask-check-every", type=int, default=8)
     a = p.parse_args()
+    if a.force:
+        if a.command not in ("plan", "reference", "all"):
+            p.error("--force replaces a whole run; use it with plan, reference, or all")
+        if a.run is None or not (a.definition or a.roster or a.all_enemies):
+            p.error("--force requires an explicit --run and --definition, --roster, or --all-enemies")
+        if a.run.is_symlink():
+            p.error("--force cannot replace a symlinked run directory")
+    if a.run is None:
+        a.run = ROOT.parent / "enemy-sprites/runs/ashen-foundries-v2"
+    if (a.reference or a.reference_inputs) and a.command not in ("plan", "reference", "all"):
+        p.error("Select pixel reference inputs when planning a new run (plan, reference, or all)")
+    if (a.reference or a.reference_inputs) and (a.run.resolve() / "config.json").exists() and a.command != "plan" and not (a.definition or a.roster or a.all_enemies):
+        p.error("To change reference inputs, select a definition/roster and a new run directory")
     a.run = a.run.resolve()
     planner = plan
     if enemy_adapter or a.roster or a.all_enemies:
         from enemy_adapter import plan as planner
     if a.command == "plan":
         planner(a)
+    elif a.command == "reference":
+        if not (a.run / "config.json").exists() or a.definition or a.roster or a.all_enemies:
+            planner(a)
+        child("references", a.run)
+        child("prepare", a.run)
     elif a.command in ("references", "prepare"):
         import sprite_references
         getattr(sprite_references, "generate" if a.command == "references" else "prepare")(a.run)
@@ -281,7 +382,7 @@ def main(enemy_adapter=False):
             kwargs["mask_check_every"] = a.mask_check_every
         getattr(sprite_animations, a.command)(a.run, a.asset, a.action, **kwargs)
     else:
-        if not (a.run / "config.json").exists():
+        if not (a.run / "config.json").exists() or a.definition or a.roster or a.all_enemies:
             planner(a)
         child("references", a.run)
         child("prepare", a.run)

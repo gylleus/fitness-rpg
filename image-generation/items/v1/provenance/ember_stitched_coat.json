@@ -1,0 +1,15 @@
+{
+  "id": "ember_stitched_coat",
+  "backend": "built-in imagegen",
+  "definition_sha256": "f604ae86ea209e1efd83bac239a2e068ff3b4584cea27c9a826638a8dd230bf8",
+  "original": "image-generation/items/v1/sources/ember_stitched_coat.png",
+  "source_sha256": "9c6d7e99304cc7e47fc96b89e06b627b3cef182118db2f9d3901aac03e7efba6",
+  "icon": "assets/items/ember_stitched_coat.png",
+  "icon_sha256": "6d52f08af40ea6691f97522fad62f6f5acb96abff22aba32cc1a6a8deb720743",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Ember-stitched Coat. A deep brown quilted coat has thin copper wire stitches running along its chest channels. Small amber beads close the front, while a heavy black leather panel shields the lower torso.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

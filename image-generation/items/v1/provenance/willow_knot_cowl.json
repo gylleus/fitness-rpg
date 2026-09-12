@@ -1,0 +1,15 @@
+{
+  "id": "willow_knot_cowl",
+  "backend": "built-in imagegen",
+  "definition_sha256": "3fcce4f77d105babb8df8a2308ebbf638e3188d387d926a6728586c447f81687",
+  "original": "image-generation/items/v1/sources/willow_knot_cowl.png",
+  "source_sha256": "6a283f89c862b829abe166e6ace21bc12142e14c1a89aaa1f5a7dd3e77e9667a",
+  "icon": "assets/items/willow_knot_cowl.png",
+  "icon_sha256": "0cc67e675c9213425a1863ad1d0d9e1d553eb532296dc2e093aa02529982d597",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Willow Knot Cowl. A dark cloth cowl supports a thick twisted root arch over the brow. Pale exposed wood marks one knot above the open face, with two vine ties hanging beside the neck.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

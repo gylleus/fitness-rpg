@@ -1,0 +1,15 @@
+{
+  "id": "silver_vigil_locket",
+  "backend": "built-in imagegen",
+  "definition_sha256": "96978b3a665caab3778df9db8959a70592351e71ed101f4588a67bec4e279564",
+  "original": "image-generation/items/v1/sources/silver_vigil_locket.png",
+  "source_sha256": "7a3c6427c118723cf4b32e762f00958dc6b6b2efb52aa7ba7b101c21fdd87f3c",
+  "icon": "assets/items/silver_vigil_locket.png",
+  "icon_sha256": "7d955b2a9601099dcfd9d9474fa23f7d230323bf6c8046ca195c5fc0687bfd93",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Silver Vigil Locket. A narrow tarnished silver locket has a long arched lid and a blackened hinge. An unlettered recessed panel fills the front, and a short violet cord loops through its heavy top ring.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

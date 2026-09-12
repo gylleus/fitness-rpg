@@ -1,9 +1,18 @@
 # Local sprite generation
 
+Use `uv run sprites …` from the repository root for the shared pipeline,
+`uv run enemy-sprites …` for the enemy adapter, and `uv run sprite-python …`
+for supporting scripts and tests. See [Python tooling with uv](PYTHON.md) for
+setup and how the existing pinned GPU environment is preserved.
+
 Start with [the shared sprite pipeline](sprite-pipeline/README.md) for art-only
 character and prop definitions, or [the enemy adapter](enemy-sprites/README.md)
 for a canonical game roster. The [barbarian player example](player-sprites/README.md)
 uses the same rendering, masking, palette reduction and atlas export stages.
+
+The [reference-first workflows](sprite-pipeline/WORKFLOWS.md) cover independent
+design iteration, importing your own pixel PNG, animated props such as campfires,
+and static rectangular backgrounds that retain the full scene.
 
 Source code, dependency/model locks, download manifests, prompts and the small
 player pose guide are versioned. Model weights, Python environments, upstream

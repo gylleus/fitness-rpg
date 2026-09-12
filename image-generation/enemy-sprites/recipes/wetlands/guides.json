@@ -1,0 +1,22 @@
+{
+  "bog_toad": {
+    "image": "bog_toad-guide.png",
+    "strength": 0.3
+  },
+  "drowned_corpse": {
+    "image": "drowned_corpse-guide.png",
+    "strength": 0.62
+  },
+  "bog_hag": {
+    "image": "bog_hag-guide.png",
+    "strength": 0.62
+  },
+  "root_hulk": {
+    "image": "root_hulk-guide.png",
+    "strength": 0.62
+  },
+  "giant_water_strider": {
+    "image": "strider-guide.png",
+    "strength": 0.62
+  }
+}

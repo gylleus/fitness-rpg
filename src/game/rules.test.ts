@@ -19,6 +19,7 @@ describe('fitness power', () => {
   it('adds step health to permanent gear and levels', () => {
     expect(heroStats({ ...hero, xp: 250, swordLevel: 2, armorLevel: 1 }, fitnessDay(day, 20, 4, 3000), 20, startingEquipment(2, 1)))
       .toEqual({ level: 3, attack: 99, health: 160, baseAttack: 33, baseDamageMin: 28, baseDamageMax: 38, baseHealth: 130, dailyHealth: 30,
+        armor: 10, critChanceBps: 0, critMultiplierBps: 15000,
         dodgeBps: 0, pushups: 20, pushupDamageCoefficient: 0.1, damageMultiplier: 3, attackEffects: [] });
   });
   it('awards running dodge without multiplying or double-counting health', () => {

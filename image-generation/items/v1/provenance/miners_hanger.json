@@ -1,0 +1,15 @@
+{
+  "id": "miners_hanger",
+  "backend": "built-in imagegen",
+  "definition_sha256": "fcd377ab4bf7bd5e0bb5ad11589d84657eb8eea1634cc775347e84bc4dc0d816",
+  "original": "image-generation/items/v1/sources/miners_hanger.png",
+  "source_sha256": "2cf31d0085cc602864b0186ecf0d12577dc32c6a588e244f35c8ae8496da233e",
+  "icon": "assets/items/miners_hanger.png",
+  "icon_sha256": "7f92983a92e747156a1a30701e705381e53bb9eeb69b940ebcb4ed5fb08750ba",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Miner's Hanger. A compact curved blade ends in an angular clipped point. Ochre dust rests beneath its steel knuckle bow, and a squared wooden handle is fitted with three large mismatched rivets.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

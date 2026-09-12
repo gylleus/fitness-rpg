@@ -1,0 +1,15 @@
+{
+  "id": "stitched_coif",
+  "backend": "built-in imagegen",
+  "definition_sha256": "45d72e479fa540cb6c4a647ba53d483e75844367ce64187d24dd66c97ff26bf2",
+  "original": "image-generation/items/v1/sources/stitched_coif.png",
+  "source_sha256": "4232033c97623ea0fd46898f046b65dbe1f8c0dc032d7f18472860edf5951f38",
+  "icon": "assets/items/stitched_coif.png",
+  "icon_sha256": "5a6ec2ddc2bf17246fe336cbbff4754693e13a08d5a3a37754d8479b0e8ac3eb",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Stitched Coif. A close brown leather hood has a broad padded brow and an open face. Cream stitches join four uneven crown panels, and two short chin straps end in a single dull iron buckle.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

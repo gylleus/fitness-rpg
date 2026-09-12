@@ -1,0 +1,15 @@
+{
+  "id": "icebound_judgement",
+  "backend": "built-in imagegen",
+  "definition_sha256": "06452c0276354fa9c95edc7f1b2f4e7341e5c9ed6ab103fedfb344d44d476902",
+  "original": "image-generation/items/v1/sources/icebound_judgement.png",
+  "source_sha256": "2b275ca3412caba5f2c12a73def0b4c7b7c7efa598da10d8b27558e1c531fd7c",
+  "icon": "assets/items/icebound_judgement.png",
+  "icon_sha256": "06c68ebe8813397f62dc2d7f44a392b41264327a0f01cf106447c2bb50dfe82f",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Icebound Judgement. A massive double axe carries two straight-edged pale blades around a thick frozen center. Dark iron rivets pierce the blue ice, and coarse gray hide wraps the reinforced haft.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

@@ -1,0 +1,15 @@
+{
+  "id": "copper_ring",
+  "backend": "built-in imagegen",
+  "definition_sha256": "3d832b2b44363fbccce559a58aff5d5f4fb493dfa13812dbbe1bccb41613eabb",
+  "original": "image-generation/items/v1/sources/copper_ring.png",
+  "source_sha256": "87f0c9c3468a8e83b6f0cb4038340997bb5206f0c4d8d296191c5f1332ae224e",
+  "icon": "assets/items/copper_ring.png",
+  "icon_sha256": "74e9334d571d723e3dc3667697648e16c74de310367e83bf969dc9194a3dbd96",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Heavy Copper Ring. A thick plain copper band has a slightly flattened oval opening. Green patina fills two shallow dents on its outer face, while the broad inner edge remains warm and polished.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

@@ -1,0 +1,273 @@
+schema_version = 1
+category = "rings"
+kind = "ring"
+
+[generation]
+canvas = [64, 64]
+transparent = true
+style = "Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters."
+composition = "One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item."
+
+[[items]]
+id = "twisted_wire_ring"
+name = "Twisted Wire Ring"
+tier = 1
+rarity = "common"
+sell_value = 8
+description = "Three uneven strands of dark copper wire twist into a thick finger ring."
+visual_description = "Three uneven strands of dark copper wire twist into a thick finger ring. One strand ends in a small flattened knot, and the inner circle is polished bright by wear."
+stats = {  }
+modifiers = [{ stat = "health", value = 8 }]
+
+[[items]]
+id = "copper_ring"
+name = "Heavy Copper Ring"
+tier = 1
+rarity = "uncommon"
+sell_value = 21
+description = "A thick plain copper band has a slightly flattened oval opening."
+visual_description = "A thick plain copper band has a slightly flattened oval opening. Green patina fills two shallow dents on its outer face, while the broad inner edge remains warm and polished."
+stats = {  }
+modifiers = [{ stat = "damage", value = 2 }, { stat = "health", value = 5 }]
+
+[[items]]
+id = "reed_knot_ring"
+name = "Reed Knot Ring"
+tier = 1
+rarity = "common"
+sell_value = 10
+description = "A narrow bronze band carries a small flattened knot made from dark green braided reed."
+visual_description = "A narrow bronze band carries a small flattened knot made from dark green braided reed. Fine pale fibers fray from one loop beside two plain copper retaining claws."
+stats = {  }
+modifiers = [{ stat = "armor", value = 3 }]
+
+[[items]]
+id = "ferrymans_token"
+name = "Ferryman's Token"
+tier = 1
+rarity = "uncommon"
+sell_value = 23
+description = "A worn brass ring bears a small round dark coin mounted flat across the top."
+visual_description = "A worn brass ring bears a small round dark coin mounted flat across the top. A simple recessed boat shape survives on the coin beneath patches of green-black tarnish."
+stats = {  }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.005 }]
+
+[[items]]
+id = "bone_loop_ring"
+name = "Bone Loop Ring"
+tier = 1
+rarity = "uncommon"
+sell_value = 24
+description = "A thick yellow bone ring has an uneven rounded outer wall and a dark hairline crack."
+visual_description = "A thick yellow bone ring has an uneven rounded outer wall and a dark hairline crack. Two thin copper staples bridge the split beneath a single polished ivory knob."
+stats = {  }
+modifiers = [{ stat = "crit_chance_bps", value = 200 }]
+
+[[items]]
+id = "fen_eye_ring"
+name = "Fen Eye Ring"
+tier = 1
+rarity = "rare"
+sell_value = 45
+description = "A squat black iron ring holds a cloudy olive-green oval stone in four heavy claws."
+visual_description = "A squat black iron ring holds a cloudy olive-green oval stone in four heavy claws. A pale horizontal vein crosses the stone, and the broad shank is rough with shallow pits."
+stats = {  }
+modifiers = [{ stat = "crit_damage_bps", value = 1500 }]
+
+[[items]]
+id = "bellmetal_band"
+name = "Bellmetal Band"
+tier = 1
+rarity = "rare"
+sell_value = 46
+description = "A wide bronze ring has a gently flared upper rim like the lip of a small bell."
+visual_description = "A wide bronze ring has a gently flared upper rim like the lip of a small bell. One edge is visibly cracked, and dark green tarnish collects inside the split."
+stats = {  }
+modifiers = [{ stat = "health", value = 16 }]
+
+[[items]]
+id = "root_coil_ring"
+name = "Root Coil Ring"
+tier = 1
+rarity = "rare"
+sell_value = 47
+description = "A tiny dark willow root curls twice around an open finger ring."
+visual_description = "A tiny dark willow root curls twice around an open finger ring. Its pale cut tip rests against a thick wooden knot, secured by a short wrap of dull silver wire."
+stats = {  }
+modifiers = [{ stat = "damage", value = 3 }]
+
+[[items]]
+id = "coal_iron_ring"
+name = "Coal Iron Ring"
+tier = 2
+rarity = "common"
+sell_value = 19
+description = "A broad black iron band has a flat square face containing a rough charcoal chip."
+visual_description = "A broad black iron band has a flat square face containing a rough charcoal chip. Bright rubbed metal outlines the setting, with rusty brown pits along the sides."
+stats = {  }
+modifiers = [{ stat = "armor", value = 6 }]
+
+[[items]]
+id = "brass_rivet_ring"
+name = "Brass Rivet Ring"
+tier = 2
+rarity = "common"
+sell_value = 20
+description = "A heavy brass ring has a single oversized square rivet as its raised face."
+visual_description = "A heavy brass ring has a single oversized square rivet as its raised face. The rivet corners are rounded by wear, and two dark solder lines cross the thick band."
+stats = {  }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.005 }]
+
+[[items]]
+id = "quarry_agate_ring"
+name = "Quarry Agate Ring"
+tier = 2
+rarity = "common"
+sell_value = 16
+description = "A low steel setting holds a dull ochre agate cut into a wide oval."
+visual_description = "A low steel setting holds a dull ochre agate cut into a wide oval. Cream bands cross the stone beneath three squat claws, and dust darkens the narrow split shank."
+stats = {  }
+modifiers = [{ stat = "crit_chance_bps", value = 200 }]
+
+[[items]]
+id = "chain_link_ring"
+name = "Chain Link Ring"
+tier = 2
+rarity = "uncommon"
+sell_value = 41
+description = "Two flattened iron chain links are welded side by side into a chunky ring."
+visual_description = "Two flattened iron chain links are welded side by side into a chunky ring. One link is nearly black and the other worn gray, with a small copper repair at their seam."
+stats = {  }
+modifiers = [{ stat = "crit_damage_bps", value = 1500 }]
+
+[[items]]
+id = "ember_eye_ring"
+name = "Ember Eye Ring"
+tier = 2
+rarity = "uncommon"
+sell_value = 42
+description = "A deep red-brown stone sits in a heavy soot-black iron ring."
+visual_description = "A deep red-brown stone sits in a heavy soot-black iron ring. A restrained amber glint remains inside the stone, framed by four short blunt claws and a broad plain shank."
+stats = {  }
+modifiers = [{ stat = "health", value = 20 }]
+
+[[items]]
+id = "furnace_seal"
+name = "Furnace Seal"
+tier = 2
+rarity = "rare"
+sell_value = 93
+description = "A thick bronze signet ring has a square blackened face with a recessed anvil shape."
+visual_description = "A thick bronze signet ring has a square blackened face with a recessed anvil shape. Heat-blue marks edge the face, and a small chipped corner exposes warm metal beneath."
+stats = {  }
+modifiers = [{ stat = "damage", value = 4 }]
+
+[[items]]
+id = "oathkeepers_circle"
+name = "Oathkeeper's Circle"
+tier = 2
+rarity = "rare"
+sell_value = 94
+description = "A smooth bronze band is interrupted by one narrow vertical silver seam."
+visual_description = "A smooth bronze band is interrupted by one narrow vertical silver seam. Its outside remains darkly tarnished, while a shallow groove follows the entire inner circumference."
+stats = {  }
+modifiers = [{ stat = "armor", value = 10 }]
+
+[[items]]
+id = "slagstone_ring"
+name = "Slagstone Ring"
+tier = 2
+rarity = "rare"
+sell_value = 90
+description = "A porous charcoal-black stone bulges above a wide steel ring."
+visual_description = "A porous charcoal-black stone bulges above a wide steel ring. Three irregular iron prongs hold the stone, and a thin dull orange mineral line crosses its pitted face."
+stats = {  }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.01 }]
+
+[[items]]
+id = "frost_silver_band"
+name = "Frost Silver Band"
+tier = 3
+rarity = "common"
+sell_value = 25
+description = "A broad tarnished silver band has a jagged shallow ridge around its outer edge."
+visual_description = "A broad tarnished silver band has a jagged shallow ridge around its outer edge. White frost rests in the low points, leaving a clean pale inner circle."
+stats = {  }
+modifiers = [{ stat = "crit_chance_bps", value = 300 }]
+
+[[items]]
+id = "salt_pearl_ring"
+name = "Salt Pearl Ring"
+tier = 3
+rarity = "common"
+sell_value = 26
+description = "An uneven gray-white pearl is mounted on a faded teal enamel band."
+visual_description = "An uneven gray-white pearl is mounted on a faded teal enamel band. Salt crust fills the gaps beneath three tarnished silver claws, and a small chip breaks the enamel near the base."
+stats = {  }
+modifiers = [{ stat = "crit_damage_bps", value = 1500 }]
+
+[[items]]
+id = "antler_signet"
+name = "Antler Signet"
+tier = 3
+rarity = "common"
+sell_value = 27
+description = "A flat oval of yellow antler is set into a thick dark copper ring."
+visual_description = "A flat oval of yellow antler is set into a thick dark copper ring. A tiny natural dark pore marks its face, and simple crossed pins secure the bone at either end."
+stats = {  }
+modifiers = [{ stat = "health", value = 24 }]
+
+[[items]]
+id = "blue_iron_loop"
+name = "Blue Iron Loop"
+tier = 3
+rarity = "uncommon"
+sell_value = 64
+description = "A heavy deep-blue iron ring has an angular hexagonal opening and a broad flat top."
+visual_description = "A heavy deep-blue iron ring has an angular hexagonal opening and a broad flat top. Three pale scratches cross its face beside one dull silver replacement rivet."
+stats = {  }
+modifiers = [{ stat = "damage", value = 4 }]
+
+[[items]]
+id = "vigil_moon_ring"
+name = "Vigil Moon Ring"
+tier = 3
+rarity = "uncommon"
+sell_value = 60
+description = "A thin tarnished silver ring supports a dark blue crescent-shaped stone."
+visual_description = "A thin tarnished silver ring supports a dark blue crescent-shaped stone. Its blunt points curve inward above a blackened setting with two small pale chips along the rim."
+stats = {  }
+modifiers = [{ stat = "armor", value = 11 }]
+
+[[items]]
+id = "regents_signet"
+name = "Regent's Signet"
+tier = 3
+rarity = "rare"
+sell_value = 136
+description = "A white-metal signet ring bears a simple three-point crown above a dull blue inset."
+visual_description = "A white-metal signet ring bears a simple three-point crown above a dull blue inset. Small tarnished gold studs border the rectangular face on a thick smooth shank."
+stats = {  }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.0125 }]
+
+[[items]]
+id = "thawless_loop"
+name = "Thawless Loop"
+tier = 3
+rarity = "rare"
+sell_value = 137
+description = "A cloudy pale-blue crystal band is held together by three narrow black iron braces."
+visual_description = "A cloudy pale-blue crystal band is held together by three narrow black iron braces. Fine white cracks remain inside the translucent ring, and one outer corner is chipped flat."
+stats = {  }
+modifiers = [{ stat = "crit_chance_bps", value = 500 }]
+
+[[items]]
+id = "last_coin_ring"
+name = "Last Coin Ring"
+tier = 3
+rarity = "rare"
+sell_value = 138
+description = "A battered silver coin has been bent into a broad open ring."
+visual_description = "A battered silver coin has been bent into a broad open ring. Its raised rim survives at both edges, while the worn central face shows only an indistinct dark circular impression."
+stats = {  }
+modifiers = [{ stat = "crit_damage_bps", value = 2500 }]

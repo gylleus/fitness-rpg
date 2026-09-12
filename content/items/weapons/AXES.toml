@@ -1,0 +1,273 @@
+schema_version = 1
+category = "axes"
+kind = "weapon"
+
+[generation]
+canvas = [64, 64]
+transparent = true
+style = "Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters."
+composition = "One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item."
+
+[[items]]
+id = "camp_hatchet"
+name = "Camp Hatchet"
+tier = 1
+rarity = "common"
+sell_value = 8
+description = "A compact iron hatchet has a broad convex edge and a chipped upper corner."
+visual_description = "A compact iron hatchet has a broad convex edge and a chipped upper corner. Pale scraped wood marks the bent handle below the head, with brown leather around the lower grip."
+stats = { damage_min = 17, damage_max = 35 }
+modifiers = []
+
+[[items]]
+id = "peat_hook_axe"
+name = "Peat Hook Axe"
+tier = 1
+rarity = "common"
+sell_value = 9
+description = "A narrow iron axe blade drops into a long hooked beard."
+visual_description = "A narrow iron axe blade drops into a long hooked beard. Black peat stains coat its inner curve, and the short ash handle is repaired with a tightly wound copper band."
+stats = { damage_min = 18, damage_max = 36 }
+modifiers = []
+
+[[items]]
+id = "ferrymans_broad_axe"
+name = "Ferryman's Broad Axe"
+tier = 1
+rarity = "common"
+sell_value = 10
+description = "A wide asymmetrical axe head spreads from a stout tarred shaft."
+visual_description = "A wide asymmetrical axe head spreads from a stout tarred shaft. One face is flat and dark while the other catches worn silver-gray facets; a blue rope loop hangs at the butt."
+stats = { damage_min = 19, damage_max = 37 }
+modifiers = []
+
+[[items]]
+id = "rust_tooth_hatchet"
+name = "Rust Tooth Hatchet"
+tier = 1
+rarity = "uncommon"
+sell_value = 23
+description = "A squat iron hatchet has three blunt notches along the back of its head."
+visual_description = "A squat iron hatchet has three blunt notches along the back of its head. Deep rust fills the notches, contrasting with a newly sharpened pale edge and a rawhide-bound handle."
+stats = { damage_min = 21, damage_max = 41 }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.005 }]
+
+[[items]]
+id = "bone_lashed_axe"
+name = "Bone-lashed Axe"
+tier = 1
+rarity = "uncommon"
+sell_value = 24
+description = "A dark chipped stone blade is lashed against a forked wooden haft with pale sinew."
+visual_description = "A dark chipped stone blade is lashed against a forked wooden haft with pale sinew. A curved yellow bone brace supports the rear of the head above a narrow hide grip."
+stats = { damage_min = 22, damage_max = 42 }
+modifiers = [{ stat = "crit_chance_bps", value = 200 }]
+
+[[items]]
+id = "drowned_woodsman"
+name = "Drowned Woodsman"
+tier = 1
+rarity = "rare"
+sell_value = 45
+description = "A long-handled felling axe carries an oversized crescent of pitted gray iron."
+visual_description = "A long-handled felling axe carries an oversized crescent of pitted gray iron. Water-dark grain runs along its bent haft, and a strip of sodden green cloth trails from a split near the head."
+stats = { damage_min = 27, damage_max = 49 }
+modifiers = [{ stat = "crit_damage_bps", value = 1500 }]
+
+[[items]]
+id = "willow_crescent"
+name = "Willow Crescent"
+tier = 1
+rarity = "rare"
+sell_value = 46
+description = "A thin silver-gray crescent axe blade encloses a round opening at its root."
+visual_description = "A thin silver-gray crescent axe blade encloses a round opening at its root. Willow vines twist around the wooden socket, leaving the broad cutting edge and a small brass wedge exposed."
+stats = { damage_min = 25, damage_max = 47 }
+modifiers = [{ stat = "health", value = 16 }]
+
+[[items]]
+id = "bog_iron_beard"
+name = "Bog Iron Beard"
+tier = 1
+rarity = "rare"
+sell_value = 47
+description = "A heavy bearded axe has a thick dark-brown iron head with a porous hammered face."
+visual_description = "A heavy bearded axe has a thick dark-brown iron head with a porous hammered face. The downward beard ends in a blunt point, and cream linen binds the short blackened handle."
+stats = { damage_min = 26, damage_max = 48 }
+modifiers = [{ stat = "damage", value = 3 }]
+
+[[items]]
+id = "charcoal_splitter"
+name = "Charcoal Splitter"
+tier = 2
+rarity = "common"
+sell_value = 19
+description = "A thick wedge-shaped splitting axe has a charcoal-black head and a broad polished bevel."
+visual_description = "A thick wedge-shaped splitting axe has a charcoal-black head and a broad polished bevel. Gray ash collects around the socket above a red-brown shaft darkened at both ends."
+stats = { damage_min = 33, damage_max = 51 }
+modifiers = []
+
+[[items]]
+id = "smiths_half_moon"
+name = "Smith's Half Moon"
+tier = 2
+rarity = "common"
+sell_value = 20
+description = "A rounded steel axe head forms an almost complete half circle against its straight handle."
+visual_description = "A rounded steel axe head forms an almost complete half circle against its straight handle. Heat-blue streaks cross the metal, and a plain brass ferrule sits above the black leather grip."
+stats = { damage_min = 31, damage_max = 49 }
+modifiers = []
+
+[[items]]
+id = "quarry_pick_axe"
+name = "Quarry Pick Axe"
+tier = 2
+rarity = "common"
+sell_value = 16
+description = "A square-backed axe blade shares its iron socket with a short pointed pick."
+visual_description = "A square-backed axe blade shares its iron socket with a short pointed pick. Ochre chips cling to both faces, and three iron staples visibly mend the heavy wooden haft."
+stats = { damage_min = 32, damage_max = 50 }
+modifiers = []
+
+[[items]]
+id = "chain_notched_axe"
+name = "Chain-notched Axe"
+tier = 2
+rarity = "uncommon"
+sell_value = 41
+description = "A wide axe blade has a deep U-shaped notch in its upper back."
+visual_description = "A wide axe blade has a deep U-shaped notch in its upper back. A short loop of black chain sits through the opening above a copper-wrapped neck and dark leather handle."
+stats = { damage_min = 37, damage_max = 57 }
+modifiers = [{ stat = "crit_damage_bps", value = 1500 }]
+
+[[items]]
+id = "furnace_jaw"
+name = "Furnace Jaw"
+tier = 2
+rarity = "uncommon"
+sell_value = 42
+description = "A massive iron axe resembles an open angular jaw, its cutting edge forming a broad lower crescent."
+visual_description = "A massive iron axe resembles an open angular jaw, its cutting edge forming a broad lower crescent. Dim orange lines show between the layered plates, and the shaft is wrapped in gray cloth."
+stats = { damage_min = 35, damage_max = 55 }
+modifiers = [{ stat = "health", value = 20 }]
+
+[[items]]
+id = "cinder_wedge"
+name = "Cinder Wedge"
+tier = 2
+rarity = "rare"
+sell_value = 93
+description = "A triangular black steel axe head has two narrow glowing amber vents near the socket."
+visual_description = "A triangular black steel axe head has two narrow glowing amber vents near the socket. Its cutting face is thick and bluntly curved, while red leather binds a short square-section haft."
+stats = { damage_min = 40, damage_max = 62 }
+modifiers = [{ stat = "damage", value = 4 }]
+
+[[items]]
+id = "executioners_receipt"
+name = "Executioner's Receipt"
+tier = 2
+rarity = "rare"
+sell_value = 94
+description = "A very broad axe has a flat top, deep rectangular blade, and small pale tally cuts beside its socket."
+visual_description = "A very broad axe has a flat top, deep rectangular blade, and small pale tally cuts beside its socket. The dark iron head sits on a smooth unadorned oak shaft."
+stats = { damage_min = 41, damage_max = 63 }
+modifiers = [{ stat = "armor", value = 10 }]
+
+[[items]]
+id = "coalheart_double_axe"
+name = "Coalheart Double Axe"
+tier = 2
+rarity = "rare"
+sell_value = 90
+description = "Two unequal crescent blades spread from a heavy iron center containing a dull red stone."
+visual_description = "Two unequal crescent blades spread from a heavy iron center containing a dull red stone. The shorter blade is chipped at the tip, and the straight handle has wide black leather bands."
+stats = { damage_min = 39, damage_max = 61 }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.01 }]
+
+[[items]]
+id = "frostwood_hatchet"
+name = "Frostwood Hatchet"
+tier = 3
+rarity = "common"
+sell_value = 25
+description = "A pale steel hatchet has a short angular blade and a gray-white wooden handle."
+visual_description = "A pale steel hatchet has a short angular blade and a gray-white wooden handle. Blue frost gathers under its thick socket, and a soft hide loop hangs from the rounded butt."
+stats = { damage_min = 46, damage_max = 64 }
+modifiers = []
+
+[[items]]
+id = "saltbreaker"
+name = "Saltbreaker"
+tier = 3
+rarity = "common"
+sell_value = 26
+description = "A broad white-crusted axe head sits on a bleached driftwood haft."
+visual_description = "A broad white-crusted axe head sits on a bleached driftwood haft. A single dark crack crosses the rear hammer face, while muted teal cord holds a long split in the handle shut."
+stats = { damage_min = 47, damage_max = 65 }
+modifiers = []
+
+[[items]]
+id = "antler_beard_axe"
+name = "Antler Beard Axe"
+tier = 3
+rarity = "common"
+sell_value = 27
+description = "A dark iron axe carries a long hooked beard braced by a pale antler tine."
+visual_description = "A dark iron axe carries a long hooked beard braced by a pale antler tine. Copper pins hold the bone flush against the blade above a thick brown fur grip."
+stats = { damage_min = 45, damage_max = 63 }
+modifiers = []
+
+[[items]]
+id = "glacier_crescent"
+name = "Glacier Crescent"
+tier = 3
+rarity = "uncommon"
+sell_value = 64
+description = "A smooth pale-blue steel crescent is mounted on a slim black shaft."
+visual_description = "A smooth pale-blue steel crescent is mounted on a slim black shaft. Jagged frost crystals cling only to its upper spine, leaving a clean bright cutting edge above a white cloth grip."
+stats = { damage_min = 50, damage_max = 70 }
+modifiers = [{ stat = "damage", value = 4 }]
+
+[[items]]
+id = "silver_fen_reaver"
+name = "Silver Fen Reaver"
+tier = 3
+rarity = "uncommon"
+sell_value = 60
+description = "A tarnished silver axe head sweeps into two long downward points."
+visual_description = "A tarnished silver axe head sweeps into two long downward points. Dark reed-shaped grooves mark its broad face, and the black wooden haft is capped by a flattened bronze disk."
+stats = { damage_min = 51, damage_max = 71 }
+modifiers = [{ stat = "armor", value = 11 }]
+
+[[items]]
+id = "winter_tithe"
+name = "Winter Tithe"
+tier = 3
+rarity = "rare"
+sell_value = 136
+description = "A heavy rectangular axe blade has a small crown-shaped cutout beside the socket."
+visual_description = "A heavy rectangular axe blade has a small crown-shaped cutout beside the socket. Its white-metal face is streaked with blue tarnish, and wine-red leather circles the long handle."
+stats = { damage_min = 53, damage_max = 75 }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.0125 }]
+
+[[items]]
+id = "icebound_judgement"
+name = "Icebound Judgement"
+tier = 3
+rarity = "rare"
+sell_value = 137
+description = "A massive double axe carries two straight-edged pale blades around a thick frozen center."
+visual_description = "A massive double axe carries two straight-edged pale blades around a thick frozen center. Dark iron rivets pierce the blue ice, and coarse gray hide wraps the reinforced haft."
+stats = { damage_min = 54, damage_max = 76 }
+modifiers = [{ stat = "crit_chance_bps", value = 500 }]
+
+[[items]]
+id = "last_felling"
+name = "Last Felling"
+tier = 3
+rarity = "rare"
+sell_value = 138
+description = "A broad black axe has one bright silver cutting edge and a heavily repaired iron socket."
+visual_description = "A broad black axe has one bright silver cutting edge and a heavily repaired iron socket. Three pale wooden wedges fan from the top of its weathered shaft above a faded red grip."
+stats = { damage_min = 55, damage_max = 77 }
+modifiers = [{ stat = "crit_damage_bps", value = 2500 }]

@@ -1,0 +1,62 @@
+# Player — Barbarian
+# Working design for collaborative review.
+# Selected: male barbarian, huge upper body, high fighting guard, one wooden club.
+# Long blond hair, no beard, an enormous happy grin, and eyebrows hiding his eyes.
+# His fighting stance is low and deeply hunched, with his arms held high.
+# Clothing and colors apart from his hair remain unselected.
+# Strict right-facing side view applies to both the reference and animations.
+# Style inherits the shared sprite pipeline defaults.
+# The explicit SDXL reference prompts below keep the core traits in one text chunk.
+# The longer prose and reference caption remain available as design context.
+#
+# Design suggestions (not selected):
+# A bare chest would expose the exaggerated shoulders and arms. A short fur wrap
+# would reinforce a rough, primitive appearance; worn trousers would give him
+# more of a traveling adventurer's practicality. These are alternatives under
+# discussion, not selected clothing.
+
+schema_version = 1
+
+[art]
+facing = "right"
+view = "profile"
+
+[[assets]]
+id = "barbarian_player"
+name = "Barbarian"
+kind = "player"
+visual_description = """
+The player is a heavily built barbarian whose upper body dominates his silhouette. An enormous barrel chest and broad, rounded shoulders crowd around a small head and thick neck. Thick upper arms lead into oversized forearms and heavy hands. His waist narrows above comparatively short, sturdy legs, giving him a top-heavy solidity.
+
+Long blond hair falls past his shoulders and down his back in thick, unruly locks. Exceptionally bushy blond eyebrows overhang his eyes like a thick curtain, completely covering them. No part of either eye is visible beneath the dense tufts: no whites, pupils or narrow eye slits show through. His face is clean-shaven, with no beard or stubble. An enormously wide, happy, toothy grin stretches across his face, lifting his cheeks and pulling the corners of his mouth high. He looks delighted at the prospect of a fight.
+
+He crouches in a low, hulking fighting hunch, with one foot planted ahead of the other and his knees deeply bent. His upper back rounds and his enormous shoulders roll high and forward, crowding above his lowered head. His great chest projects forward over his bent legs, compressing his already thick body into a heavy, coiled silhouette. His elbows stay lifted in a compact fighting guard. His empty hand forms a heavy fist just ahead of his face, while his other hand holds a wooden club high beside his head, its blunt end angled back over his shoulder. The club thickens from a narrow, worn grip into an uneven head of knotted wood. His raised arms bunch around his lowered head and keep the club poised for a heavy swing.
+"""
+reference_caption = "one clean-shaven barbarian with a massive hunched upper body, huge arms, rounded back and lowered head, deeply bent knees and staggered feet, long blond hair, dense bushy blond eyebrows completely covering his eyes, an enormously wide happy toothy grin seen from the side, only the near cheek visible and the nose projecting in profile, arms held high in a compact guard, an empty fist ahead of his face and one knotted wooden club raised beside his head"
+
+[assets.reference]
+prompt = "pixel art, full body, right-facing side profile, muscular blond man, smooth bare chin, clean-shaven jaw, huge happy toothy grin, thick eyebrows hiding eyes, long hair behind shoulders, massive hunched torso, bent knees, staggered feet, arms raised in guard, one wooden club above shoulder, plain gray background, dark outline, flat colors"
+negative = "beard, moustache, mustache, stubble, facial hair, hairy chin, front view, frontal face, torso facing camera, three-quarter view, visible eyes, pupils, straight posture, lowered arms, axe, sword, shield, extra weapons, text, watermark, multiple characters, cropped body, photorealism"
+
+[assets.visual]
+silhouette = "Low, hulking side silhouette: a rounded upper back and huge shoulders above a lowered head, a narrow waist, deeply bent legs and staggered feet; raised arms form a compact guard, long hair falls down the back, and one thick club sits above the shoulder."
+equipment = ["one wooden club"]
+avoid = ["slender upper body", "upright standing pose", "straight back", "straight knees", "arms hanging at sides", "short hair", "dark hair", "beard", "stubble", "visible eyes", "visible eye whites", "visible pupils", "eye slits", "thin eyebrows", "small smile", "frown", "angry scowl", "axe", "sword", "shield", "metal club", "spiked club", "extra weapons"]
+
+[assets.animations.attack]
+description = """
+The barbarian makes one exaggerated club smash. From his deeply hunched high fighting guard, he bends his knees further and rocks his enormous upper body back without straightening his rounded back, drawing the club far behind and above his head in a pronounced windup. He drives his weight forward and swings the club through a huge overhead arc, smashing down in front of him with full force. His chest pitches forward and his knees sink under the heavy follow-through; his long blond hair trails the swing and whips forward as he stops. The same hand grips the single wooden club throughout, while his empty fist stays raised. His enormous happy grin remains on his clean-shaven face, and his bushy eyebrows completely cover his eyes throughout the motion. He hauls the club back up and settles into his original low, deeply hunched high guard, with both feet in their starting positions. His head, torso and hips remain in right-facing side profile throughout the windup, strike and recovery.
+"""
+loop = false
+
+[assets.animations.idle]
+description = "The barbarian breathes in his low, deeply hunched high guard, feet planted. His huge shoulders and chest rise and settle subtly; long blond hair sways down his back. His single wooden club stays raised, his clean-shaven face keeps its enormous happy grin, and his bushy eyebrows hide every part of his eyes. Remain in strict right-facing profile. Return to the original pose for a seamless breathing loop."
+loop = true
+
+[assets.animations.walk]
+description = "The barbarian walks in place in a low, heavy, right-facing side profile. His short bent legs alternate deliberate steps beneath his massive hunched torso, with no travel across the canvas. Both arms stay in a high compact guard with one wooden club above his shoulder. Long blond hair bounces slightly; keep the huge happy grin, bare chin and completely hidden eyes. Finish the full gait in the initial stance for a seamless loop."
+loop = true
+
+[assets.animations.death]
+description = "The barbarian collapses once. His enormous shoulders sag, his knees buckle and he drops to his knees before falling onto his side in front of him. His single wooden club lowers with his hand and comes to rest on the ground. He stays in right-facing profile, with long blond hair falling around his clean-shaven face and his eyes still hidden by thick eyebrows. End lying motionless on the ground; do not get up or repeat."
+loop = false

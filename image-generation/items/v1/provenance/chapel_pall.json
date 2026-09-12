@@ -1,0 +1,15 @@
+{
+  "id": "chapel_pall",
+  "backend": "built-in imagegen",
+  "definition_sha256": "9b07b015bcfe3723b6422b9a6ed50c905458abd8b0cfe6ba1aec0b046e9b7639",
+  "original": "image-generation/items/v1/sources/chapel_pall.png",
+  "source_sha256": "5c955e4777dd717ef72ab66bf2917e3ceaf5f7d4b305212330cfce9d8ae021b8",
+  "icon": "assets/items/chapel_pall.png",
+  "icon_sha256": "de4fd24e78c9c36e1771da401361e0b1a9aece9b00205fb6715e19c2ca79ceb2",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Chapel Pall. A faded gray padded vest has a high folded neck and a heavy bronze clasp shaped like a plain arch. Three dark vertical seams divide its broad chest above an uneven black hem.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

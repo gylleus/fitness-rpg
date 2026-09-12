@@ -1,0 +1,15 @@
+{
+  "id": "thawless_carapace",
+  "backend": "built-in imagegen",
+  "definition_sha256": "980489b26f97cba02687976660d4fdc69ccc2511f0520dd3f2383b1ac34e447f",
+  "original": "image-generation/items/v1/sources/thawless_carapace.png",
+  "source_sha256": "b8f2b24e4f2d172c96dd006ac9ba0a6e01b349588eee5449efd7eadbe54d6027",
+  "icon": "assets/items/thawless_carapace.png",
+  "icon_sha256": "77d50e3b0d6f0cb3d4900095278b2b52029e400e4ddac82ce5f65782d8c45046",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Thawless Carapace. Thick blue-white plates overlap like broken ice across a broad breastplate. Black iron braces hold their edges, and dense gray fur appears in the deep opening around the neck.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

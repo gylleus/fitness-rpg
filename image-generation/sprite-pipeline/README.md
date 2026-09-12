@@ -1,11 +1,22 @@
 # Reusable local sprite pipeline
 
+For the integrated player/Wetlands package, run `uv run sprites bundle`.
+See [runtime sprites](../../assets/sprites/README.md) for frame skipping,
+adding entity manifests, playback and the game preview. The selected player
+has [four generated sequences](../player-sprites/sequences/barbarian-club-v1/README.md).
+
 `sprites.py` is the shared renderer. `enemy_adapter.py` resolves canonical game
 enemy rosters into art inputs; an art-only TOML definition supplies players,
 other characters, isolated props, or effects without biome or combat fields.
 The original `enemy-sprites/batch.py` is now a compatibility entry point to the
 same implementation. Saved schema-1 enemy runs remain readable and resumable.
 New plans use schema 2 with `assets` and `asset_id`.
+
+Start with [the modular workflows](WORKFLOWS.md) to iterate on a player/enemy
+reference, animate a selected or hand-authored pixel PNG, generate a campfire,
+or export a static rectangular background. `reference` stops at a portable pixel
+reference and review page. `plan --reference PATH` snapshots that design for an
+independent animation run, bypassing SDXL and segmentation of the supplied art.
 
 The core stages are local SDXL + Pixel Art XL reference generation, BiRefNet
 background removal, optional Wan2.2 animation, SAM2 tracking, then shared framing,
@@ -16,16 +27,23 @@ palette mapping. It is not the stock `Pyx.transform()` operation.
 
 ## Definition and commands
 
-Run from the repository root with the installed environment. No new packages,
-downloads, hosted inference or credentials are needed for these commands.
+Run from the repository root with `uv`. The command selects the installed,
+pinned GPU environment; see [Python tooling](../PYTHON.md) for setup.
 
 ```bash
-image-generation/sprite-animation/.venv/bin/python image-generation/sprite-pipeline/sprites.py plan --definition image-generation/player-sprites/barbarian.toml --run image-generation/player-sprites/runs/NEW_RUN --seed 91004 --size 64 --frame-step 2
-image-generation/sprite-animation/.venv/bin/python image-generation/sprite-pipeline/sprites.py all --run image-generation/player-sprites/runs/NEW_RUN --mask-check-every 22
+uv run sprites plan --definition image-generation/player-sprites/barbarian.toml --run image-generation/player-sprites/runs/NEW_RUN --seed 91004 --size 64 --frame-step 2
+uv run sprites all --run image-generation/player-sprites/runs/NEW_RUN --mask-check-every 22
 ```
 
-Choose a new run directory for changed descriptions, seeds or generation
-settings. `config.json` preserves the original definition text, resolved art
+Rerunning the same command verifies and reuses completed stages. Changed
+descriptions, seeds or generation settings require a new run directory, or
+`--force` to replace the entire existing run (see [design iteration](WORKFLOWS.md)).
+Use `--force` with `plan`, `reference`, or `all`, supplying an explicit `--run`
+and `--definition`, `--roster`, or `--all-enemies`. This removes previous
+references, animations, exports and other files inside that run after validating
+the new plan and staging its pixel inputs. Keep recipes and input images outside
+the run directory. Individual stage commands continue to resume saved work.
+`config.json` preserves the original definition text, resolved art
 inputs, prompts, model revisions and seeds. Generation outputs record their
 hashes, dependency versions and settings. Completed stages are verified and
 reused on resume.
@@ -44,12 +62,30 @@ visual_description = "A squat wooden chest has a curved lid and two rusty iron b
 
 Each `[[assets]]` entry requires a stable snake_case `id`, `name`, and
 `visual_description`. `kind` is a descriptive tag (`character`, `player`, `enemy`,
-`prop`, `effect`), not a model selector. Optional `reference_caption` is a compact
+`prop`, `effect`); `background` selects the static full-scene adapter with an
+optional `canvas = [320, 180]`. Optional `reference_caption` is a compact
 reference prompt condensation stored beside the full prose. Optional `visual`
 fields are `silhouette`, `equipment`, `palette`, `height_scale`, `anchor`
 (`ground` or `floating`), and `avoid`. Source palette swatches are guidance;
 the current pixel backend uses the saved ENDESGA32 palette in
 `sprite-animation/palette.json`.
+
+For exact control of the reference text, supply both fields in `[assets.reference]`:
+
+```toml
+[assets.reference]
+prompt = "pixel art, full body, right-facing side profile, muscular blond man, smooth bare chin, wooden club, gray background"
+negative = "beard, moustache, stubble, frontal view, three-quarter view, text, watermark"
+```
+
+These replace the reference positive and negative prompts **verbatim** for any
+asset kind. No caption, art style, camera boilerplate or avoid list is appended;
+include the required view and visual traits yourself. The full appearance prose
+and animation prompts remain separate. Existing recipes without this table keep
+their automatic prompts. The player recipe uses this to keep both SDXL prompts
+within one 75-content-token chunk per encoder. The normal pipeline supports
+longer prompts, but extra text is not a guarantee of better adherence.
+Parentheses such as `(side view:1.5)` are not parsed as weights by this renderer.
 
 Named animations are optional and have explicit loop intent:
 
@@ -68,14 +104,22 @@ action guarantees. Write locomotion descriptions explicitly as moving in place.
 The one-shot timing prompt defers to the recovery or final pose described by the
 action, so a chest can remain open while a sword attack returns to guard.
 
-`[art]` optionally overrides `style`, `lighting`, `facing`, and `avoid`.
+`[art]` optionally overrides `style`, `lighting`, `facing`, `view`, and `avoid`.
+Set `view = "profile"` for strict side view in both the reference and animation
+prompts. This puts 90-degree side-view geometry and near/far-side occlusion at
+the start of the actual reference prompt, and prioritizes frontal/three-quarter
+views in the negative prompt. It is strong guidance, not a hard pose constraint.
+If text alone still turns the character toward the camera, supply a correctly
+oriented side-view image with `--guide-image PATH --guide-strength 0.4`; lower
+strength preserves more of the guide's composition, including unwanted details.
+The default, `"three_quarter"`, retains the slight three-quarter turn.
 `--facing right` overrides the definition. The current framing is an isolated
 subject with generous clearance for equipment and motion.
 
 For enemies, use the current curated catalog:
 
 ```bash
-image-generation/sprite-animation/.venv/bin/python image-generation/enemy-sprites/batch.py plan --roster content/biomes/wetlands/ENEMIES.toml --run image-generation/enemy-sprites/runs/NEW_RUN
+uv run enemy-sprites plan --roster content/biomes/wetlands/ENEMIES.toml --run image-generation/enemy-sprites/runs/NEW_RUN
 ```
 
 No discarded roster is restored. `--all-enemies` explicitly selects the current
@@ -85,7 +129,8 @@ supplies art defaults when the catalog has no shared art table.
 
 ## Review and export
 
-Individual commands are `references`, `prepare`, `animate`, `export`, `review`,
+`reference` plans and prepares a portable pixel reference plus an independent
+review page without animation. Individual commands are `references`, `prepare`, `animate`, `export`, `review`,
 and `package`; each takes `--run`. `animate --asset ID --action NAME` can resume
 one planned animation. `selection.json` may select a different source, crop, or
 horizontal mirror; that decision and the actual selected image provenance are
@@ -96,6 +141,13 @@ strength are saved. Lower strength preserves more of its structure; this is not
 a pose-skeleton constraint or a guarantee of correct anatomy. The selected
 source can also be an existing transparent PNG, skipping background inference.
 
+For a batch with different shapes, `plan --reference-guides PATH` reads a JSON
+mapping such as `{"bog_hag": {"image": "hag-guide.png", "strength": 0.62}}`.
+Image paths are relative to that JSON. Each selected asset can have its own
+guide; assets without one still use text-to-image. Guide content hashes and
+strengths are saved per asset, checked before inference and included in the
+bundle. This option cannot be combined with the global `--guide-image`.
+
 All new runs export a static `reference` in addition to their requested motions.
 Static-only assets skip animation model execution. One square union crop and
 ground pivot cover the reference and every frame of every planned motion for
@@ -104,7 +156,7 @@ preserves aspect ratios. Export requires all planned masks for that asset;
 `--action` selection applies to animation generation, not partial reframing.
 
 ```bash
-image-generation/sprite-animation/.venv/bin/python image-generation/sprite-pipeline/sprites.py export --run image-generation/player-sprites/runs/NEW_RUN --size 128 --frame-step 4
+uv run sprites export --run image-generation/player-sprites/runs/NEW_RUN --size 128 --frame-step 4
 ```
 
 Resolution (16–256 square pixels) and frame stride (1–16) can be changed without
@@ -131,9 +183,10 @@ the existing model weights and environment, not just the extracted ZIP.
 
 Characters and opaque isolated props fit this workflow. Effects can be described
 and animated, but single-object tracking and binary alpha are poor matches for
-detached sparks, translucent smoke, or soft glow. Full environments, seamless
-tiles, autotiles, UI layout and multi-layer parallax need separate composition
-and export adapters; they are not handled by the current subject/cutout pipeline.
+detached sparks, translucent smoke, or soft glow. Static full-scene backgrounds
+use the rectangular adapter described in [WORKFLOWS.md](WORKFLOWS.md), bypassing
+segmentation. Seamless tiles, autotiles, UI layout, animated backgrounds and
+multi-layer parallax still need separate composition and export adapters.
 
 The pipeline automates rendering and packaging, not art approval. The model can
 ignore facing, alter weapons or anatomy, drift in shading, and miss recovery or
@@ -146,8 +199,8 @@ transitions remain game-side work.
 ## Validation
 
 ```bash
-image-generation/sprite-animation/.venv/bin/python -m unittest discover -s image-generation/sprite-pipeline -p 'test_*.py' -v
-image-generation/sprite-animation/.venv/bin/python -m unittest discover -s image-generation/enemy-sprites -p 'test_*.py' -v
+uv run sprite-python -m unittest discover -s image-generation/sprite-pipeline -p 'test_*.py' -v
+uv run sprite-python -m unittest discover -s image-generation/enemy-sprites -p 'test_*.py' -v
 ```
 
 These test art-only definitions, named loop/one-shot actions, static prop export,

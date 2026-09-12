@@ -1,0 +1,15 @@
+{
+  "id": "furnace_jaw",
+  "backend": "built-in imagegen",
+  "definition_sha256": "347900af847aa8b73b5bf0c51bdf28c4e10b3eb4df22db0b9707f2c1c1434346",
+  "original": "image-generation/items/v1/sources/furnace_jaw.png",
+  "source_sha256": "3f57de8b10f31426e5fdcb5739b68f69511c0097c2a7e3395d96ca435c11c851",
+  "icon": "assets/items/furnace_jaw.png",
+  "icon_sha256": "085619c50410ec2cf96f0c2381719534267ec0f350279705f7503c37a468a85f",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Furnace Jaw. A massive iron axe resembles an open angular jaw, its cutting edge forming a broad lower crescent. Dim orange lines show between the layered plates, and the shaft is wrapped in gray cloth.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

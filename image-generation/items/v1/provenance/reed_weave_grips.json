@@ -1,0 +1,15 @@
+{
+  "id": "reed_weave_grips",
+  "backend": "built-in imagegen",
+  "definition_sha256": "ab894e1251bea7ca5c6cf8e8f7a031ef93288e71defb43da7e51598cf933c6db",
+  "original": "image-generation/items/v1/sources/reed_weave_grips.png",
+  "source_sha256": "fe396b37b0851e8a96202e2001d708bae0948cf88b2f99c86c794804d457c553",
+  "icon": "assets/items/reed_weave_grips.png",
+  "icon_sha256": "72c0b19563e561080bd281f2d137aab6e4967ac57438c872056368b4d2b7c179",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Reed-weave Grips. Short dark cloth gloves carry flat olive reed strips across the backs of the hands. Brown leather binds each knuckle row, leaving the fingers flexible beneath broad green wrist ties.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

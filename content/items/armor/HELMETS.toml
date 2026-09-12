@@ -1,0 +1,273 @@
+schema_version = 1
+category = "helmets"
+kind = "helmet"
+
+[generation]
+canvas = [64, 64]
+transparent = true
+style = "Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters."
+composition = "One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item."
+
+[[items]]
+id = "stitched_coif"
+name = "Stitched Coif"
+tier = 1
+rarity = "common"
+sell_value = 8
+description = "A close brown leather hood has a broad padded brow and an open face."
+visual_description = "A close brown leather hood has a broad padded brow and an open face. Cream stitches join four uneven crown panels, and two short chin straps end in a single dull iron buckle."
+stats = { armor = 6 }
+modifiers = []
+
+[[items]]
+id = "iron_helmet"
+name = "Dented Iron Helmet"
+tier = 1
+rarity = "common"
+sell_value = 9
+description = "A squat iron cap has a broad dent above its short nose guard."
+visual_description = "A squat iron cap has a broad dent above its short nose guard. Orange rust gathers around the rim rivets, and a narrow strip of dark leather hangs from the rear edge."
+stats = { armor = 8 }
+modifiers = []
+
+[[items]]
+id = "reed_crown_helm"
+name = "Reed Crown Helm"
+tier = 1
+rarity = "common"
+sell_value = 10
+description = "A round brown leather cap is reinforced by a low ring of tightly bundled olive reeds."
+visual_description = "A round brown leather cap is reinforced by a low ring of tightly bundled olive reeds. Two flat wooden strips cross the crown, and faded green ties secure the cheek flaps."
+stats = { armor = 8 }
+modifiers = []
+
+[[items]]
+id = "ferrymans_sallet"
+name = "Ferryman's Sallet"
+tier = 1
+rarity = "uncommon"
+sell_value = 23
+description = "A dark steel helmet has a long sloping rear and a short raised visor over a wide face opening."
+visual_description = "A dark steel helmet has a long sloping rear and a short raised visor over a wide face opening. Tar stains dull the crown, and a thin brass band follows the lower rim."
+stats = { armor = 10 }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.005 }]
+
+[[items]]
+id = "bone_brow_mask"
+name = "Bone Brow Mask"
+tier = 1
+rarity = "uncommon"
+sell_value = 24
+description = "A smooth yellowed bone brow plate covers the front of a black leather cap."
+visual_description = "A smooth yellowed bone brow plate covers the front of a black leather cap. A single dark vertical crack stops above the nose opening, while copper pins hold the plate at the temples."
+stats = { armor = 11 }
+modifiers = [{ stat = "crit_chance_bps", value = 200 }]
+
+[[items]]
+id = "bellkeepers_helm"
+name = "Bellkeeper's Helm"
+tier = 1
+rarity = "rare"
+sell_value = 45
+description = "A narrow bronze helmet resembles an upturned bell with an uneven flared rim."
+visual_description = "A narrow bronze helmet resembles an upturned bell with an uneven flared rim. A rectangular face slit interrupts the front, and green tarnish runs from a thick iron loop at the crown."
+stats = { armor = 16 }
+modifiers = [{ stat = "crit_damage_bps", value = 1500 }]
+
+[[items]]
+id = "sunken_guard_helm"
+name = "Sunken Guard Helm"
+tier = 1
+rarity = "rare"
+sell_value = 46
+description = "A round steel helmet has broad hinged cheek pieces and a broken short crest."
+visual_description = "A round steel helmet has broad hinged cheek pieces and a broken short crest. Dark green mineral streaks cross its gray face, and one cheek hinge is replaced by thick copper wire."
+stats = { armor = 14 }
+modifiers = [{ stat = "health", value = 16 }]
+
+[[items]]
+id = "willow_knot_cowl"
+name = "Willow Knot Cowl"
+tier = 1
+rarity = "rare"
+sell_value = 47
+description = "A dark cloth cowl supports a thick twisted root arch over the brow."
+visual_description = "A dark cloth cowl supports a thick twisted root arch over the brow. Pale exposed wood marks one knot above the open face, with two vine ties hanging beside the neck."
+stats = { armor = 15 }
+modifiers = [{ stat = "damage", value = 3 }]
+
+[[items]]
+id = "soot_padded_hood"
+name = "Soot-padded Hood"
+tier = 2
+rarity = "common"
+sell_value = 19
+description = "A charcoal quilted hood has a high round crown and thick tan cheek pads."
+visual_description = "A charcoal quilted hood has a high round crown and thick tan cheek pads. Its open face is bordered by black leather, and a repaired triangular patch sits above the right temple."
+stats = { armor = 17 }
+modifiers = []
+
+[[items]]
+id = "smiths_skullcap"
+name = "Smith's Skullcap"
+tier = 2
+rarity = "common"
+sell_value = 20
+description = "A heavy black iron skullcap has a flat crown and a broad raised brow ridge."
+visual_description = "A heavy black iron skullcap has a flat crown and a broad raised brow ridge. Heat-blue marks circle its rim, and two short leather straps fasten beneath a square brass clasp."
+stats = { armor = 15 }
+modifiers = []
+
+[[items]]
+id = "quarry_guard_helm"
+name = "Quarry Guard Helm"
+tier = 2
+rarity = "common"
+sell_value = 16
+description = "A thick steel helmet has a wide straight brim and a small projecting nose bar."
+visual_description = "A thick steel helmet has a wide straight brim and a small projecting nose bar. Ochre dust fills the crown seams, and a sturdy leather neck curtain hangs from large copper rivets."
+stats = { armor = 16 }
+modifiers = []
+
+[[items]]
+id = "chain_veil_hood"
+name = "Chain Veil Hood"
+tier = 2
+rarity = "uncommon"
+sell_value = 41
+description = "A dark padded cap carries a short curtain of large iron rings around the cheeks and neck."
+visual_description = "A dark padded cap carries a short curtain of large iron rings around the cheeks and neck. The face remains open beneath a broad silver-gray brow band with one missing rivet."
+stats = { armor = 21 }
+modifiers = [{ stat = "crit_damage_bps", value = 1500 }]
+
+[[items]]
+id = "furnace_visage"
+name = "Furnace Visage"
+tier = 2
+rarity = "uncommon"
+sell_value = 42
+description = "An angular black iron faceplate has two narrow horizontal eye openings and a row of square mouth vents."
+visual_description = "An angular black iron faceplate has two narrow horizontal eye openings and a row of square mouth vents. Muted orange metal shows inside the vents beneath a broad rounded crown."
+stats = { armor = 19 }
+modifiers = [{ stat = "health", value = 20 }]
+
+[[items]]
+id = "cinder_horn_helm"
+name = "Cinder Horn Helm"
+tier = 2
+rarity = "rare"
+sell_value = 93
+description = "A low black steel helmet has two short blunt hornlike projections made from layered metal."
+visual_description = "A low black steel helmet has two short blunt hornlike projections made from layered metal. Rust-red seams separate the layers, and gray padded cheek guards frame a large open face."
+stats = { armor = 24 }
+modifiers = [{ stat = "damage", value = 4 }]
+
+[[items]]
+id = "oathkeepers_bascinet"
+name = "Oathkeeper's Bascinet"
+tier = 2
+rarity = "rare"
+sell_value = 94
+description = "A pointed bronze helmet has a modest hinged visor with a thin straight eye slit."
+visual_description = "A pointed bronze helmet has a modest hinged visor with a thin straight eye slit. Green-black patina fills its seam, while a clean pale repair plate covers one side near the ear."
+stats = { armor = 25 }
+modifiers = [{ stat = "armor", value = 10 }]
+
+[[items]]
+id = "slag_crown"
+name = "Slag Crown"
+tier = 2
+rarity = "rare"
+sell_value = 90
+description = "A heavy iron cap bears three thick irregular slag ridges across its crown."
+visual_description = "A heavy iron cap bears three thick irregular slag ridges across its crown. Their porous charcoal surfaces contrast with a smooth bright brow strip and a dark brown padded neck guard."
+stats = { armor = 23 }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.01 }]
+
+[[items]]
+id = "frost_fur_cap"
+name = "Frost Fur Cap"
+tier = 3
+rarity = "common"
+sell_value = 25
+description = "A rounded gray leather cap has an oversized ivory fur band and two hanging ear flaps."
+visual_description = "A rounded gray leather cap has an oversized ivory fur band and two hanging ear flaps. Small blue-gray bone toggles close the flaps, and frost whitens one side of the fur."
+stats = { armor = 25 }
+modifiers = []
+
+[[items]]
+id = "saltwarden_helm"
+name = "Saltwarden Helm"
+tier = 3
+rarity = "common"
+sell_value = 26
+description = "A pale iron helmet has a deep face opening and a short rectangular nose guard."
+visual_description = "A pale iron helmet has a deep face opening and a short rectangular nose guard. White salt gathers along its rolled rim above a faded teal cloth neck wrap."
+stats = { armor = 26 }
+modifiers = []
+
+[[items]]
+id = "antler_guard_helm"
+name = "Antler Guard Helm"
+tier = 3
+rarity = "common"
+sell_value = 27
+description = "A dark iron cap carries two short outward-curving antlers at the temples."
+visual_description = "A dark iron cap carries two short outward-curving antlers at the temples. Their yellow bases are secured with copper plates, and a broad leather brow covers the lower edge."
+stats = { armor = 24 }
+modifiers = []
+
+[[items]]
+id = "blue_iron_sallet"
+name = "Blue Iron Sallet"
+tier = 3
+rarity = "uncommon"
+sell_value = 64
+description = "A deep-blue steel sallet has a long pointed tail and a low horizontal visor slit."
+visual_description = "A deep-blue steel sallet has a long pointed tail and a low horizontal visor slit. The smooth crown is interrupted by three pale dents, and dark indigo padding shows beneath the rim."
+stats = { armor = 29 }
+modifiers = [{ stat = "damage", value = 4 }]
+
+[[items]]
+id = "silver_vigil_mask"
+name = "Silver Vigil Mask"
+tier = 3
+rarity = "uncommon"
+sell_value = 60
+description = "A tarnished silver face mask has heavy rounded cheeks and two narrow empty eye openings."
+visual_description = "A tarnished silver face mask has heavy rounded cheeks and two narrow empty eye openings. It joins a close black leather hood with plain temple rivets and a small split beneath the chin."
+stats = { armor = 30 }
+modifiers = [{ stat = "armor", value = 11 }]
+
+[[items]]
+id = "pale_regents_helm"
+name = "Pale Regent's Helm"
+tier = 3
+rarity = "rare"
+sell_value = 136
+description = "A white-metal helmet rises into three modest crown points above an open face."
+visual_description = "A white-metal helmet rises into three modest crown points above an open face. One dull blue stone sits over the brow, and a dark indigo padded collar circles the broad neck opening."
+stats = { armor = 32 }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.0125 }]
+
+[[items]]
+id = "thawless_greathelm"
+name = "Thawless Greathelm"
+tier = 3
+rarity = "rare"
+sell_value = 137
+description = "A broad cylindrical steel helm has a flat frozen crown and a narrow cross-shaped face opening."
+visual_description = "A broad cylindrical steel helm has a flat frozen crown and a narrow cross-shaped face opening. Blue ice fills dents at the temples above a thick dark fur neck seal."
+stats = { armor = 33 }
+modifiers = [{ stat = "crit_chance_bps", value = 500 }]
+
+[[items]]
+id = "last_watch_helm"
+name = "Last Watch Helm"
+tier = 3
+rarity = "rare"
+sell_value = 138
+description = "A heavy black iron helmet has a short straight brim and one bright replacement cheek plate."
+visual_description = "A heavy black iron helmet has a short straight brim and one bright replacement cheek plate. Its low crown bears a deep old dent, while faded red cloth pads the open face."
+stats = { armor = 34 }
+modifiers = [{ stat = "crit_damage_bps", value = 2500 }]

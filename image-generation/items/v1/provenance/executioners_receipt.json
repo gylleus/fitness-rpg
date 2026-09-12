@@ -1,0 +1,15 @@
+{
+  "id": "executioners_receipt",
+  "backend": "built-in imagegen",
+  "definition_sha256": "cd117dc913c6345082055e5eb9ca78493e2305499fc80853d82b1365b71bbca2",
+  "original": "image-generation/items/v1/sources/executioners_receipt.png",
+  "source_sha256": "51c7c8b63211ef620f8cca92a66d1e1026328ed8c516a508392988a98f310c0a",
+  "icon": "assets/items/executioners_receipt.png",
+  "icon_sha256": "263213440b19cee0d038dfd212959350b908ab4228f06e119ec3c76b5a6509e4",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Executioner's Receipt. A very broad axe has a flat top, deep rectangular blade, and small pale tally cuts beside its socket. The dark iron head sits on a smooth unadorned oak shaft.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

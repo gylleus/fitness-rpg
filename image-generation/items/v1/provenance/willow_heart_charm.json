@@ -1,0 +1,21 @@
+{
+  "id": "willow_heart_charm",
+  "backend": "built-in imagegen",
+  "definition_sha256": "cf5dd21eea480ac7acc0c072e0fb61e2092aa00d77b75c8091d75bbd689ca627",
+  "original": "image-generation/items/v1/sources/willow_heart_charm.png",
+  "source_sha256": "8b6c768db0e67cd914e5b629d67baf3bc34f438b52b81993d34cf6dda0b3d5a1",
+  "icon": "assets/items/willow_heart_charm.png",
+  "icon_sha256": "17249297c8a48ae42786b9fedcc16f10f271b51102d8f77d35607d525372d5be",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick transparent-border trim and Point fit within 56x56; original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Willow Heart Charm. A twisted dark willow knot forms a lopsided heart-shaped pendant with a small empty opening. Pale cut wood marks one side, and thin green vines attach it to a brown cord.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.\nCRITICAL NECKLACE FRAMING: Draw the WHOLE small necklace laid out flat as a compact closed oval cord or chain above its pendant. The ENTIRE top curve of the CLOSED oval must be visible. The cord/chain does NOT lead upward out of the image. Keep a very generous empty transparent margin on all four sides. Make the WHOLE object only 65% of the square canvas height and width maximum, centered. All visible pixels, including every piece of cord or chain, must be comfortably inside the canvas. True transparent PNG alpha; do NOT draw any checkerboard, gray surface, paper, texture or background. One entire necklace only, with complete cord or chain and pendant, no wearer. Favor bold simple 64x64 pixel clusters.",
+  "supersedes": {
+    "archive": "image-generation/items/v1/sources/rejected/willow_heart_charm-3a31e85d47e8",
+    "source_sha256": "8b6c768db0e67cd914e5b629d67baf3bc34f438b52b81993d34cf6dda0b3d5a1",
+    "icon_sha256": "3a31e85d47e88163997071b899c020fbb69ef80f2dea00af30f249447492335b",
+    "reason": "Replaced after visual and pixel-boundary review"
+  }
+}

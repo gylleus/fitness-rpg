@@ -1,0 +1,15 @@
+{
+  "id": "wooden_club",
+  "backend": "built-in imagegen",
+  "definition_sha256": "635b13ff4a6382d34d05298229c7b67b2c387eccbb7a7e400df463cf6a36f74d",
+  "original": "image-generation/items/v1/sources/wooden_club.png",
+  "source_sha256": "9d3bee3e2cee0c5e3ff8b794cc29c93b98807b18b03cc5f11331421e838a4d8d",
+  "icon": "assets/items/wooden_club.png",
+  "icon_sha256": "d24090af421089ff3a7652eea7b3a5206de2baae55c780cc38bdbad1ec70fbc2",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Wooden Club. A thick knotted oak club swells into an uneven round head. Dark growth rings cross its cut end, and a short strip of frayed brown linen winds around the narrow grip.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

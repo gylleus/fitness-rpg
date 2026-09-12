@@ -1,0 +1,15 @@
+{
+  "id": "blue_watch_medallion",
+  "backend": "built-in imagegen",
+  "definition_sha256": "4df5112313fd97c31cf3a5704d2151060218ade4c69436626e7f0c5e2ab7817f",
+  "original": "image-generation/items/v1/sources/blue_watch_medallion.png",
+  "source_sha256": "0b6955520b1d2f8a60fc29f66067abd4ffb8fcefe83d91b6ada461ec2b0a6e77",
+  "icon": "assets/items/blue_watch_medallion.png",
+  "icon_sha256": "92f19ba5a6aef9c69060f5f07c3c965e6510226328d75c1193933844e05c72cd",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Blue Watch Medallion. A round deep-blue iron medallion has a raised narrow rim and a plain dark center. Three small silver pins line its lower half beneath a thick gray cord and squared suspension loop.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

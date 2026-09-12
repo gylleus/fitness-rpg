@@ -1,0 +1,15 @@
+{
+  "id": "ember_in_a_bottle",
+  "backend": "built-in imagegen",
+  "definition_sha256": "c3b7422836b86adc136dd0c0f0d45126c6b715af917b5726310c503f75e98fd5",
+  "original": "image-generation/items/v1/sources/ember_in_a_bottle.png",
+  "source_sha256": "410a031c9fb6378e38424a804e01631a5c4ee3d321abf76c80429a450d81363a",
+  "icon": "assets/items/ember_in_a_bottle.png",
+  "icon_sha256": "bb32763673bb79d1de917c9cb6afb99ce203e15dff0967e28d1ebcdd420f3e78",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Ember in a Bottle. A tiny smoky glass vial holds a dim amber coal beneath a black iron stopper. A narrow wire cage protects the vial, and a short brown cord passes through the stopper ring.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

@@ -1,0 +1,3456 @@
+{
+  "schemaVersion": 1,
+  "items": {
+    "wooden_club": {
+      "version": 2,
+      "definitionId": "wooden_club",
+      "name": "Wooden Club",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "common",
+      "tier": 1,
+      "description": "A thick knotted oak club swells into an uneven round head.",
+      "visualDescription": "A thick knotted oak club swells into an uneven round head. Dark growth rings cross its cut end, and a short strip of frayed brown linen winds around the narrow grip.",
+      "sellValue": 5,
+      "modifiers": [],
+      "damageMin": 20,
+      "damageMax": 30
+    },
+    "iron_club": {
+      "version": 2,
+      "definitionId": "iron_club",
+      "name": "Iron-bound Club",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "uncommon",
+      "tier": 1,
+      "description": "Three broad black iron bands squeeze the cracked head of a stout wooden club.",
+      "visualDescription": "Three broad black iron bands squeeze the cracked head of a stout wooden club. Square rivets stand proud of the metal, and the oily leather grip ends in a battered iron cap.",
+      "sellValue": 21,
+      "modifiers": [],
+      "damageMin": 24,
+      "damageMax": 38
+    },
+    "ferrymans_cudgel": {
+      "version": 2,
+      "definitionId": "ferrymans_cudgel",
+      "name": "Ferryman's Cudgel",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "common",
+      "tier": 1,
+      "description": "A pale driftwood cudgel has a flattened paddle-shaped head and one blunt brass stud.",
+      "visualDescription": "A pale driftwood cudgel has a flattened paddle-shaped head and one blunt brass stud. Tar blackens the lower shaft while a faded blue cord loops through the butt.",
+      "sellValue": 10,
+      "modifiers": [],
+      "damageMin": 22,
+      "damageMax": 32
+    },
+    "peat_cutters_mallet": {
+      "version": 2,
+      "definitionId": "peat_cutters_mallet",
+      "name": "Peat Cutter's Mallet",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "uncommon",
+      "tier": 1,
+      "description": "A rectangular bog-oak mallet head sits crosswise on a short crooked handle.",
+      "visualDescription": "A rectangular bog-oak mallet head sits crosswise on a short crooked handle. Peat stains fill the grain, and two rawhide straps hold a visibly split corner together.",
+      "sellValue": 23,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.005
+        }
+      ],
+      "damageMin": 24,
+      "damageMax": 36
+    },
+    "chapel_bell_mace": {
+      "version": 2,
+      "definitionId": "chapel_bell_mace",
+      "name": "Chapel Bell Mace",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "uncommon",
+      "tier": 1,
+      "description": "A small cracked bronze bell forms the hollow head of a dark ash mace.",
+      "visualDescription": "A small cracked bronze bell forms the hollow head of a dark ash mace. Its flared rim is dented inward, with a dull green patina around the iron mounting bolt.",
+      "sellValue": 24,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 200
+        }
+      ],
+      "damageMin": 25,
+      "damageMax": 37
+    },
+    "root_maul": {
+      "version": 2,
+      "definitionId": "root_maul",
+      "name": "Knotted Root Maul",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A heavy ball of interlocked dark roots crowns a long bent haft.",
+      "visualDescription": "A heavy ball of interlocked dark roots crowns a long bent haft. Pale exposed wood marks the largest knots, and thin binding vines tighten around the neck above a rough hide grip.",
+      "sellValue": 45,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 1000
+        }
+      ],
+      "damageMin": 30,
+      "damageMax": 46
+    },
+    "leechkeepers_pestle": {
+      "version": 2,
+      "definitionId": "leechkeepers_pestle",
+      "name": "Leechkeeper's Pestle",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A swollen gray stone pestle is banded to a narrow handle with green-black leather.",
+      "visualDescription": "A swollen gray stone pestle is banded to a narrow handle with green-black leather. Its bulbous head bears a single shallow spiral groove clogged with dried marsh silt.",
+      "sellValue": 46,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 16
+        }
+      ],
+      "damageMin": 28,
+      "damageMax": 42
+    },
+    "grave_marker_hammer": {
+      "version": 2,
+      "definitionId": "grave_marker_hammer",
+      "name": "Grave Marker Hammer",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A squat chipped granite marker forms a hammer head above an iron socket.",
+      "visualDescription": "A squat chipped granite marker forms a hammer head above an iron socket. An unlettered recessed panel interrupts one face, and the handle is wrapped in nearly white burial cloth.",
+      "sellValue": 47,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 3
+        }
+      ],
+      "damageMin": 29,
+      "damageMax": 43
+    },
+    "forge_slag_mace": {
+      "version": 2,
+      "definitionId": "forge_slag_mace",
+      "name": "Forge Slag Mace",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "common",
+      "tier": 2,
+      "description": "A lopsided lump of porous charcoal-black slag encloses an iron mace head.",
+      "visualDescription": "A lopsided lump of porous charcoal-black slag encloses an iron mace head. Rust-red cracks cross the crust, while a broad copper collar separates it from a straight soot-dark handle.",
+      "sellValue": 19,
+      "modifiers": [],
+      "damageMin": 36,
+      "damageMax": 46
+    },
+    "flanged_iron_mace": {
+      "version": 2,
+      "definitionId": "flanged_iron_mace",
+      "name": "Flanged Iron Mace",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "common",
+      "tier": 2,
+      "description": "Six thick triangular iron flanges surround a blunt central spike.",
+      "visualDescription": "Six thick triangular iron flanges surround a blunt central spike. Bright wear runs along their leading edges, and the black leather grip sits between two simple hexagonal guards.",
+      "sellValue": 20,
+      "modifiers": [],
+      "damageMin": 34,
+      "damageMax": 44
+    },
+    "quarry_sledge": {
+      "version": 2,
+      "definitionId": "quarry_sledge",
+      "name": "Quarry Sledge",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "common",
+      "tier": 2,
+      "description": "A long-handled sledge carries an oversized rectangular steel block with rounded battered corners.",
+      "visualDescription": "A long-handled sledge carries an oversized rectangular steel block with rounded battered corners. Ochre quarry dust coats its faces, and a red cloth knot marks a repaired hickory shaft.",
+      "sellValue": 16,
+      "modifiers": [],
+      "damageMin": 35,
+      "damageMax": 45
+    },
+    "chainbound_cudgel": {
+      "version": 2,
+      "definitionId": "chainbound_cudgel",
+      "name": "Chainbound Cudgel",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "uncommon",
+      "tier": 2,
+      "description": "A short hardwood cudgel is buried beneath three tight turns of heavy iron chain.",
+      "visualDescription": "A short hardwood cudgel is buried beneath three tight turns of heavy iron chain. One empty link hangs against its flank, and copper wire secures the chain above a narrow leather handle.",
+      "sellValue": 41,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 1500
+        }
+      ],
+      "damageMin": 40,
+      "damageMax": 52
+    },
+    "ashwood_warhammer": {
+      "version": 2,
+      "definitionId": "ashwood_warhammer",
+      "name": "Ashwood Warhammer",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "uncommon",
+      "tier": 2,
+      "description": "A slim ash shaft supports a square steel striking face and a short hooked rear beak.",
+      "visualDescription": "A slim ash shaft supports a square steel striking face and a short hooked rear beak. The pale handle has dark scorch rings and a small weighted ring at its base.",
+      "sellValue": 42,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 20
+        }
+      ],
+      "damageMin": 38,
+      "damageMax": 50
+    },
+    "embersmiths_maul": {
+      "version": 2,
+      "definitionId": "embersmiths_maul",
+      "name": "Embersmith's Maul",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "A broad iron maul glows a restrained dull orange through two seams in its square head.",
+      "visualDescription": "A broad iron maul glows a restrained dull orange through two seams in its square head. Layered heat-dark plates cover the sides, and the thick handle is wrapped in gray insulating cloth.",
+      "sellValue": 93,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 4
+        }
+      ],
+      "damageMin": 43,
+      "damageMax": 57
+    },
+    "oathweight": {
+      "version": 2,
+      "definitionId": "oathweight",
+      "name": "Oathweight",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "A heavy octagonal bronze weight is pinned to a straight black haft.",
+      "visualDescription": "A heavy octagonal bronze weight is pinned to a straight black haft. One face carries a simple deeply inset balance-scale shape, and the leather grip is repaired with tidy cream stitches.",
+      "sellValue": 94,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 10
+        }
+      ],
+      "damageMin": 44,
+      "damageMax": 58
+    },
+    "iron_thistle": {
+      "version": 2,
+      "definitionId": "iron_thistle",
+      "name": "Iron Thistle",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "A dense iron mace head spreads into short blunt petal-shaped fins like a closed thistle.",
+      "visualDescription": "A dense iron mace head spreads into short blunt petal-shaped fins like a closed thistle. Tarnished violet steel catches the edges above a thin stemlike haft with a broad round pommel.",
+      "sellValue": 90,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.01
+        }
+      ],
+      "damageMin": 42,
+      "damageMax": 56
+    },
+    "frostbound_pestle": {
+      "version": 2,
+      "definitionId": "frostbound_pestle",
+      "name": "Frostbound Pestle",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "common",
+      "tier": 3,
+      "description": "An elongated white stone head narrows into a cold blue iron socket.",
+      "visualDescription": "An elongated white stone head narrows into a cold blue iron socket. Frost collects inside the chipped top, while layered gray sealskin wraps the handle almost to the head.",
+      "sellValue": 25,
+      "modifiers": [],
+      "damageMin": 49,
+      "damageMax": 59
+    },
+    "antler_crowned_mace": {
+      "version": 2,
+      "definitionId": "antler_crowned_mace",
+      "name": "Antler-crowned Mace",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "common",
+      "tier": 3,
+      "description": "Four worn antler tines curl upward around a dark steel mace head.",
+      "visualDescription": "Four worn antler tines curl upward around a dark steel mace head. The bone is yellow at the bases and ivory at the tips; a red-brown hide grip fills the short haft.",
+      "sellValue": 26,
+      "modifiers": [],
+      "damageMin": 50,
+      "damageMax": 60
+    },
+    "blackglass_hammer": {
+      "version": 2,
+      "definitionId": "blackglass_hammer",
+      "name": "Blackglass Hammer",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "common",
+      "tier": 3,
+      "description": "A square block of smoky black volcanic glass is trapped in a thick iron cage.",
+      "visualDescription": "A square block of smoky black volcanic glass is trapped in a thick iron cage. Broad chipped facets expose translucent brown edges, and a flat metal handle ends in a leather loop.",
+      "sellValue": 27,
+      "modifiers": [],
+      "damageMin": 48,
+      "damageMax": 58
+    },
+    "saltwarden_mace": {
+      "version": 2,
+      "definitionId": "saltwarden_mace",
+      "name": "Saltwarden Mace",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "uncommon",
+      "tier": 3,
+      "description": "A white-crusted iron mace carries four broad hooked flanges and a capped tip.",
+      "visualDescription": "A white-crusted iron mace carries four broad hooked flanges and a capped tip. Salt deposits gather beneath the flange roots; faded teal cord binds a handle scarred by rope wear.",
+      "sellValue": 64,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 4
+        }
+      ],
+      "damageMin": 53,
+      "damageMax": 65
+    },
+    "silver_knuckle_maul": {
+      "version": 2,
+      "definitionId": "silver_knuckle_maul",
+      "name": "Silver Knuckle Maul",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "uncommon",
+      "tier": 3,
+      "description": "A massive silvered iron fist forms the striking head, its four knuckles flattened by use.",
+      "visualDescription": "A massive silvered iron fist forms the striking head, its four knuckles flattened by use. Tarnish darkens the spaces between the fingers, and the haft has a heavy dark-blue leather sleeve.",
+      "sellValue": 60,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 11
+        }
+      ],
+      "damageMin": 54,
+      "damageMax": 66
+    },
+    "winter_bell": {
+      "version": 2,
+      "definitionId": "winter_bell",
+      "name": "Winter Bell",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A narrow blue-gray bell with an uneven frozen rim hangs rigidly from an iron mace socket.",
+      "visualDescription": "A narrow blue-gray bell with an uneven frozen rim hangs rigidly from an iron mace socket. Two pale cracks climb the bell wall, and a short shaft wears coarse white wool bindings.",
+      "sellValue": 136,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.0125
+        }
+      ],
+      "damageMin": 56,
+      "damageMax": 70
+    },
+    "last_word": {
+      "version": 2,
+      "definitionId": "last_word",
+      "name": "Last Word",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A long black iron hammer has an exaggeratedly small flat striking face and a broad counterweight.",
+      "visualDescription": "A long black iron hammer has an exaggeratedly small flat striking face and a broad counterweight. A single warm brass rivet marks its side, and red leather circles the squared grip.",
+      "sellValue": 137,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 500
+        }
+      ],
+      "damageMin": 57,
+      "damageMax": 71
+    },
+    "king_under_stone": {
+      "version": 2,
+      "definitionId": "king_under_stone",
+      "name": "King Under Stone",
+      "kind": "weapon",
+      "category": "maces",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A heavy crowned stone head sits on a short iron shaft, its three blunt crown points chipped unevenly.",
+      "visualDescription": "A heavy crowned stone head sits on a short iron shaft, its three blunt crown points chipped unevenly. Moss-green veins cross the dark granite above a collar of tarnished gold.",
+      "sellValue": 138,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 2500
+        }
+      ],
+      "damageMin": 58,
+      "damageMax": 72
+    },
+    "ditch_blade": {
+      "version": 2,
+      "definitionId": "ditch_blade",
+      "name": "Ditch Blade",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "common",
+      "tier": 1,
+      "description": "A short broad iron sword has a crooked tip and a deep notch near the middle.",
+      "visualDescription": "A short broad iron sword has a crooked tip and a deep notch near the middle. Its plain crossguard bends forward on one side, and muddy cloth binds the exposed wooden tang.",
+      "sellValue": 8,
+      "modifiers": [],
+      "damageMin": 23,
+      "damageMax": 27
+    },
+    "reedknife": {
+      "version": 2,
+      "definitionId": "reedknife",
+      "name": "Reedknife",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "common",
+      "tier": 1,
+      "description": "A narrow leaf-shaped bronze blade rises from a small oval guard.",
+      "visualDescription": "A narrow leaf-shaped bronze blade rises from a small oval guard. Green tarnish follows the central ridge, while a tightly woven reed grip is capped with a dark wooden bead.",
+      "sellValue": 9,
+      "modifiers": [],
+      "damageMin": 24,
+      "damageMax": 28
+    },
+    "rusted_arming_sword": {
+      "version": 2,
+      "definitionId": "rusted_arming_sword",
+      "name": "Rusted Arming Sword",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "common",
+      "tier": 1,
+      "description": "A straight double-edged sword has orange rust islands across a dull steel fuller.",
+      "visualDescription": "A straight double-edged sword has orange rust islands across a dull steel fuller. The simple iron crossguard remains square, and a faded red leather grip ends in a disk pommel.",
+      "sellValue": 10,
+      "modifiers": [],
+      "damageMin": 25,
+      "damageMax": 29
+    },
+    "ferrymans_falchion": {
+      "version": 2,
+      "definitionId": "ferrymans_falchion",
+      "name": "Ferryman's Falchion",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "uncommon",
+      "tier": 1,
+      "description": "A broad single-edged falchion widens toward its rounded clipped tip.",
+      "visualDescription": "A broad single-edged falchion widens toward its rounded clipped tip. Dark water stains stripe the blade, and a brass hook guard curves over a tarred rope handle.",
+      "sellValue": 23,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.005
+        }
+      ],
+      "damageMin": 27,
+      "damageMax": 33
+    },
+    "bone_hilted_shortblade": {
+      "version": 2,
+      "definitionId": "bone_hilted_shortblade",
+      "name": "Bone-hilted Shortblade",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "uncommon",
+      "tier": 1,
+      "description": "A squat triangular steel blade is fitted to a polished yellow-bone handle.",
+      "visualDescription": "A squat triangular steel blade is fitted to a polished yellow-bone handle. Two black pins cross the bone, and the tiny crescent guard has been filed smooth on its inner edge.",
+      "sellValue": 24,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 200
+        }
+      ],
+      "damageMin": 28,
+      "damageMax": 34
+    },
+    "sunken_officers_sabre": {
+      "version": 2,
+      "definitionId": "sunken_officers_sabre",
+      "name": "Sunken Officer's Sabre",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A gently curved silver-gray sabre carries a basket guard clogged with green patina.",
+      "visualDescription": "A gently curved silver-gray sabre carries a basket guard clogged with green patina. The grip's midnight-blue covering is split down one side, exposing pale wood beneath a heavy brass cap.",
+      "sellValue": 45,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 1500
+        }
+      ],
+      "damageMin": 33,
+      "damageMax": 41
+    },
+    "willow_splitter": {
+      "version": 2,
+      "definitionId": "willow_splitter",
+      "name": "Willow Splitter",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A long narrow sword has a dark blade split into two shallow prongs at the tip.",
+      "visualDescription": "A long narrow sword has a dark blade split into two shallow prongs at the tip. A twisted willow-root guard spreads over the handle, where muted green cord follows the grain.",
+      "sellValue": 46,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 16
+        }
+      ],
+      "damageMin": 31,
+      "damageMax": 39
+    },
+    "chapel_watch_sword": {
+      "version": 2,
+      "definitionId": "chapel_watch_sword",
+      "name": "Chapel Watch Sword",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A broad straight sword has a short fuller ending in a small round hole.",
+      "visualDescription": "A broad straight sword has a short fuller ending in a small round hole. Its iron guard resembles a low chapel arch, and the grip wears orderly strips of charcoal-gray cloth.",
+      "sellValue": 47,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 3
+        }
+      ],
+      "damageMin": 32,
+      "damageMax": 40
+    },
+    "coal_edge": {
+      "version": 2,
+      "definitionId": "coal_edge",
+      "name": "Coal Edge",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "common",
+      "tier": 2,
+      "description": "A thick single-edged sword carries a black crust along its spine and a clean gray cutting edge.",
+      "visualDescription": "A thick single-edged sword carries a black crust along its spine and a clean gray cutting edge. A square bronze guard frames the grip, which is wrapped in heat-stiffened brown hide.",
+      "sellValue": 19,
+      "modifiers": [],
+      "damageMin": 39,
+      "damageMax": 43
+    },
+    "miners_hanger": {
+      "version": 2,
+      "definitionId": "miners_hanger",
+      "name": "Miner's Hanger",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "common",
+      "tier": 2,
+      "description": "A compact curved blade ends in an angular clipped point.",
+      "visualDescription": "A compact curved blade ends in an angular clipped point. Ochre dust rests beneath its steel knuckle bow, and a squared wooden handle is fitted with three large mismatched rivets.",
+      "sellValue": 20,
+      "modifiers": [],
+      "damageMin": 37,
+      "damageMax": 41
+    },
+    "scarred_longsword": {
+      "version": 2,
+      "definitionId": "scarred_longsword",
+      "name": "Scarred Longsword",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "common",
+      "tier": 2,
+      "description": "A long steel blade is scored by three deep diagonal scars above a wide crossguard.",
+      "visualDescription": "A long steel blade is scored by three deep diagonal scars above a wide crossguard. The two-handed grip alternates worn black and tan leather, finishing in a heavy faceted iron pommel.",
+      "sellValue": 16,
+      "modifiers": [],
+      "damageMin": 38,
+      "damageMax": 42
+    },
+    "brass_guard_estoc": {
+      "version": 2,
+      "definitionId": "brass_guard_estoc",
+      "name": "Brass-guard Estoc",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "uncommon",
+      "tier": 2,
+      "description": "An extremely narrow triangular sword blade extends from a large dull brass crossguard.",
+      "visualDescription": "An extremely narrow triangular sword blade extends from a large dull brass crossguard. The leather grip is slim and straight, with a small pear-shaped pommel and no decorative stones.",
+      "sellValue": 41,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 1500
+        }
+      ],
+      "damageMin": 43,
+      "damageMax": 49
+    },
+    "furnace_cleaver": {
+      "version": 2,
+      "definitionId": "furnace_cleaver",
+      "name": "Furnace Cleaver",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "uncommon",
+      "tier": 2,
+      "description": "An oversized rectangular sword blade has a blunt upper corner and two circular holes near its spine.",
+      "visualDescription": "An oversized rectangular sword blade has a blunt upper corner and two circular holes near its spine. Heat-blue metal surrounds each hole, and the short handle has a wide black iron guard.",
+      "sellValue": 42,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 20
+        }
+      ],
+      "damageMin": 41,
+      "damageMax": 47
+    },
+    "red_seam_blade": {
+      "version": 2,
+      "definitionId": "red_seam_blade",
+      "name": "Red Seam Blade",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "A charcoal-gray blade holds a hair-thin crimson seam down its fuller.",
+      "visualDescription": "A charcoal-gray blade holds a hair-thin crimson seam down its fuller. Its chipped edges stay dark, while copper bands reinforce a square guard and a deep brown leather handle.",
+      "sellValue": 93,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 4
+        }
+      ],
+      "damageMin": 46,
+      "damageMax": 54
+    },
+    "widows_measure": {
+      "version": 2,
+      "definitionId": "widows_measure",
+      "name": "Widow's Measure",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "A very long slender sword carries regularly spaced shallow cuts along one flat face.",
+      "visualDescription": "A very long slender sword carries regularly spaced shallow cuts along one flat face. The narrow silver guard curves downward like tired shoulders above a smooth gray bone grip.",
+      "sellValue": 94,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 10
+        }
+      ],
+      "damageMin": 47,
+      "damageMax": 55
+    },
+    "ember_vow": {
+      "version": 2,
+      "definitionId": "ember_vow",
+      "name": "Ember Vow",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "A broad steel sword has a warm amber stone buried flush in its heavy iron guard.",
+      "visualDescription": "A broad steel sword has a warm amber stone buried flush in its heavy iron guard. Soot darkens the blade base, and a short trailing strip of red cloth hangs from the pommel.",
+      "sellValue": 90,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.01
+        }
+      ],
+      "damageMin": 45,
+      "damageMax": 53
+    },
+    "rime_arming_sword": {
+      "version": 2,
+      "definitionId": "rime_arming_sword",
+      "name": "Rime Arming Sword",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "common",
+      "tier": 3,
+      "description": "A pale blue steel sword has a broad flat blade and blunt angular shoulders.",
+      "visualDescription": "A pale blue steel sword has a broad flat blade and blunt angular shoulders. White frost clings to one side of the crossguard, and the grip is wrapped in thick gray leather.",
+      "sellValue": 25,
+      "modifiers": [],
+      "damageMin": 52,
+      "damageMax": 56
+    },
+    "saltglass_sabre": {
+      "version": 2,
+      "definitionId": "saltglass_sabre",
+      "name": "Saltglass Sabre",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "common",
+      "tier": 3,
+      "description": "A curved translucent smoky blade carries a milky white edge.",
+      "visualDescription": "A curved translucent smoky blade carries a milky white edge. Its heavy iron basket guard is crusted with salt, and faded green sharkskin covers a handle capped in tarnished silver.",
+      "sellValue": 26,
+      "modifiers": [],
+      "damageMin": 53,
+      "damageMax": 57
+    },
+    "black_ice_rapier": {
+      "version": 2,
+      "definitionId": "black_ice_rapier",
+      "name": "Black Ice Rapier",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "common",
+      "tier": 3,
+      "description": "A thin blue-black blade extends from a cage of three sweeping iron guard bars.",
+      "visualDescription": "A thin blue-black blade extends from a cage of three sweeping iron guard bars. Its point is glass-bright, and a black leather grip ends in a small sharply faceted crystal pommel.",
+      "sellValue": 27,
+      "modifiers": [],
+      "damageMin": 51,
+      "damageMax": 55
+    },
+    "antler_guard_blade": {
+      "version": 2,
+      "definitionId": "antler_guard_blade",
+      "name": "Antler-guard Blade",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "uncommon",
+      "tier": 3,
+      "description": "A rough silvered blade sits above a crossguard made from two short outward-curving antler branches.",
+      "visualDescription": "A rough silvered blade sits above a crossguard made from two short outward-curving antler branches. The yellowed bone is bound with copper wire around a narrow burgundy handle.",
+      "sellValue": 64,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 4
+        }
+      ],
+      "damageMin": 56,
+      "damageMax": 62
+    },
+    "watchfire_sword": {
+      "version": 2,
+      "definitionId": "watchfire_sword",
+      "name": "Watchfire Sword",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "uncommon",
+      "tier": 3,
+      "description": "A long dark blade contains three dim amber insets near the hilt.",
+      "visualDescription": "A long dark blade contains three dim amber insets near the hilt. Broad straight quillons protect a white cloth grip, while the round pommel is deeply smoke-stained on one side.",
+      "sellValue": 60,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 11
+        }
+      ],
+      "damageMin": 57,
+      "damageMax": 63
+    },
+    "pale_regents_edge": {
+      "version": 2,
+      "definitionId": "pale_regents_edge",
+      "name": "Pale Regent's Edge",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A wide white-metal sword tapers to a sharply squared point.",
+      "visualDescription": "A wide white-metal sword tapers to a sharply squared point. Its small crown-shaped guard holds one dull blue cabochon, and dark indigo leather wraps the long symmetrical handle.",
+      "sellValue": 136,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.0125
+        }
+      ],
+      "damageMin": 59,
+      "damageMax": 67
+    },
+    "thawless_blade": {
+      "version": 2,
+      "definitionId": "thawless_blade",
+      "name": "Thawless Blade",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A heavy curved steel blade has a ragged pale-blue crystalline ridge along its spine.",
+      "visualDescription": "A heavy curved steel blade has a ragged pale-blue crystalline ridge along its spine. The plain guard is almost hidden by frost, and a layered sealskin grip ends in a black iron ring.",
+      "sellValue": 137,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 500
+        }
+      ],
+      "damageMin": 60,
+      "damageMax": 68
+    },
+    "road_ends_here": {
+      "version": 2,
+      "definitionId": "road_ends_here",
+      "name": "Road Ends Here",
+      "kind": "weapon",
+      "category": "swords",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A broad weathered sword has a nearly square tip and a single bright repaired patch in its dark blade.",
+      "visualDescription": "A broad weathered sword has a nearly square tip and a single bright repaired patch in its dark blade. The thick bronze crossguard is plain, and its scarred oak grip has no wrapping.",
+      "sellValue": 138,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 2500
+        }
+      ],
+      "damageMin": 61,
+      "damageMax": 69
+    },
+    "camp_hatchet": {
+      "version": 2,
+      "definitionId": "camp_hatchet",
+      "name": "Camp Hatchet",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "common",
+      "tier": 1,
+      "description": "A compact iron hatchet has a broad convex edge and a chipped upper corner.",
+      "visualDescription": "A compact iron hatchet has a broad convex edge and a chipped upper corner. Pale scraped wood marks the bent handle below the head, with brown leather around the lower grip.",
+      "sellValue": 8,
+      "modifiers": [],
+      "damageMin": 17,
+      "damageMax": 35
+    },
+    "peat_hook_axe": {
+      "version": 2,
+      "definitionId": "peat_hook_axe",
+      "name": "Peat Hook Axe",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "common",
+      "tier": 1,
+      "description": "A narrow iron axe blade drops into a long hooked beard.",
+      "visualDescription": "A narrow iron axe blade drops into a long hooked beard. Black peat stains coat its inner curve, and the short ash handle is repaired with a tightly wound copper band.",
+      "sellValue": 9,
+      "modifiers": [],
+      "damageMin": 18,
+      "damageMax": 36
+    },
+    "ferrymans_broad_axe": {
+      "version": 2,
+      "definitionId": "ferrymans_broad_axe",
+      "name": "Ferryman's Broad Axe",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "common",
+      "tier": 1,
+      "description": "A wide asymmetrical axe head spreads from a stout tarred shaft.",
+      "visualDescription": "A wide asymmetrical axe head spreads from a stout tarred shaft. One face is flat and dark while the other catches worn silver-gray facets; a blue rope loop hangs at the butt.",
+      "sellValue": 10,
+      "modifiers": [],
+      "damageMin": 19,
+      "damageMax": 37
+    },
+    "rust_tooth_hatchet": {
+      "version": 2,
+      "definitionId": "rust_tooth_hatchet",
+      "name": "Rust Tooth Hatchet",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "uncommon",
+      "tier": 1,
+      "description": "A squat iron hatchet has three blunt notches along the back of its head.",
+      "visualDescription": "A squat iron hatchet has three blunt notches along the back of its head. Deep rust fills the notches, contrasting with a newly sharpened pale edge and a rawhide-bound handle.",
+      "sellValue": 23,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.005
+        }
+      ],
+      "damageMin": 21,
+      "damageMax": 41
+    },
+    "bone_lashed_axe": {
+      "version": 2,
+      "definitionId": "bone_lashed_axe",
+      "name": "Bone-lashed Axe",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "uncommon",
+      "tier": 1,
+      "description": "A dark chipped stone blade is lashed against a forked wooden haft with pale sinew.",
+      "visualDescription": "A dark chipped stone blade is lashed against a forked wooden haft with pale sinew. A curved yellow bone brace supports the rear of the head above a narrow hide grip.",
+      "sellValue": 24,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 200
+        }
+      ],
+      "damageMin": 22,
+      "damageMax": 42
+    },
+    "drowned_woodsman": {
+      "version": 2,
+      "definitionId": "drowned_woodsman",
+      "name": "Drowned Woodsman",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A long-handled felling axe carries an oversized crescent of pitted gray iron.",
+      "visualDescription": "A long-handled felling axe carries an oversized crescent of pitted gray iron. Water-dark grain runs along its bent haft, and a strip of sodden green cloth trails from a split near the head.",
+      "sellValue": 45,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 1500
+        }
+      ],
+      "damageMin": 27,
+      "damageMax": 49
+    },
+    "willow_crescent": {
+      "version": 2,
+      "definitionId": "willow_crescent",
+      "name": "Willow Crescent",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A thin silver-gray crescent axe blade encloses a round opening at its root.",
+      "visualDescription": "A thin silver-gray crescent axe blade encloses a round opening at its root. Willow vines twist around the wooden socket, leaving the broad cutting edge and a small brass wedge exposed.",
+      "sellValue": 46,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 16
+        }
+      ],
+      "damageMin": 25,
+      "damageMax": 47
+    },
+    "bog_iron_beard": {
+      "version": 2,
+      "definitionId": "bog_iron_beard",
+      "name": "Bog Iron Beard",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A heavy bearded axe has a thick dark-brown iron head with a porous hammered face.",
+      "visualDescription": "A heavy bearded axe has a thick dark-brown iron head with a porous hammered face. The downward beard ends in a blunt point, and cream linen binds the short blackened handle.",
+      "sellValue": 47,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 3
+        }
+      ],
+      "damageMin": 26,
+      "damageMax": 48
+    },
+    "charcoal_splitter": {
+      "version": 2,
+      "definitionId": "charcoal_splitter",
+      "name": "Charcoal Splitter",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "common",
+      "tier": 2,
+      "description": "A thick wedge-shaped splitting axe has a charcoal-black head and a broad polished bevel.",
+      "visualDescription": "A thick wedge-shaped splitting axe has a charcoal-black head and a broad polished bevel. Gray ash collects around the socket above a red-brown shaft darkened at both ends.",
+      "sellValue": 19,
+      "modifiers": [],
+      "damageMin": 33,
+      "damageMax": 51
+    },
+    "smiths_half_moon": {
+      "version": 2,
+      "definitionId": "smiths_half_moon",
+      "name": "Smith's Half Moon",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "common",
+      "tier": 2,
+      "description": "A rounded steel axe head forms an almost complete half circle against its straight handle.",
+      "visualDescription": "A rounded steel axe head forms an almost complete half circle against its straight handle. Heat-blue streaks cross the metal, and a plain brass ferrule sits above the black leather grip.",
+      "sellValue": 20,
+      "modifiers": [],
+      "damageMin": 31,
+      "damageMax": 49
+    },
+    "quarry_pick_axe": {
+      "version": 2,
+      "definitionId": "quarry_pick_axe",
+      "name": "Quarry Pick Axe",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "common",
+      "tier": 2,
+      "description": "A square-backed axe blade shares its iron socket with a short pointed pick.",
+      "visualDescription": "A square-backed axe blade shares its iron socket with a short pointed pick. Ochre chips cling to both faces, and three iron staples visibly mend the heavy wooden haft.",
+      "sellValue": 16,
+      "modifiers": [],
+      "damageMin": 32,
+      "damageMax": 50
+    },
+    "chain_notched_axe": {
+      "version": 2,
+      "definitionId": "chain_notched_axe",
+      "name": "Chain-notched Axe",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "uncommon",
+      "tier": 2,
+      "description": "A wide axe blade has a deep U-shaped notch in its upper back.",
+      "visualDescription": "A wide axe blade has a deep U-shaped notch in its upper back. A short loop of black chain sits through the opening above a copper-wrapped neck and dark leather handle.",
+      "sellValue": 41,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 1500
+        }
+      ],
+      "damageMin": 37,
+      "damageMax": 57
+    },
+    "furnace_jaw": {
+      "version": 2,
+      "definitionId": "furnace_jaw",
+      "name": "Furnace Jaw",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "uncommon",
+      "tier": 2,
+      "description": "A massive iron axe resembles an open angular jaw, its cutting edge forming a broad lower crescent.",
+      "visualDescription": "A massive iron axe resembles an open angular jaw, its cutting edge forming a broad lower crescent. Dim orange lines show between the layered plates, and the shaft is wrapped in gray cloth.",
+      "sellValue": 42,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 20
+        }
+      ],
+      "damageMin": 35,
+      "damageMax": 55
+    },
+    "cinder_wedge": {
+      "version": 2,
+      "definitionId": "cinder_wedge",
+      "name": "Cinder Wedge",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "A triangular black steel axe head has two narrow glowing amber vents near the socket.",
+      "visualDescription": "A triangular black steel axe head has two narrow glowing amber vents near the socket. Its cutting face is thick and bluntly curved, while red leather binds a short square-section haft.",
+      "sellValue": 93,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 4
+        }
+      ],
+      "damageMin": 40,
+      "damageMax": 62
+    },
+    "executioners_receipt": {
+      "version": 2,
+      "definitionId": "executioners_receipt",
+      "name": "Executioner's Receipt",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "A very broad axe has a flat top, deep rectangular blade, and small pale tally cuts beside its socket.",
+      "visualDescription": "A very broad axe has a flat top, deep rectangular blade, and small pale tally cuts beside its socket. The dark iron head sits on a smooth unadorned oak shaft.",
+      "sellValue": 94,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 10
+        }
+      ],
+      "damageMin": 41,
+      "damageMax": 63
+    },
+    "coalheart_double_axe": {
+      "version": 2,
+      "definitionId": "coalheart_double_axe",
+      "name": "Coalheart Double Axe",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "Two unequal crescent blades spread from a heavy iron center containing a dull red stone.",
+      "visualDescription": "Two unequal crescent blades spread from a heavy iron center containing a dull red stone. The shorter blade is chipped at the tip, and the straight handle has wide black leather bands.",
+      "sellValue": 90,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.01
+        }
+      ],
+      "damageMin": 39,
+      "damageMax": 61
+    },
+    "frostwood_hatchet": {
+      "version": 2,
+      "definitionId": "frostwood_hatchet",
+      "name": "Frostwood Hatchet",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "common",
+      "tier": 3,
+      "description": "A pale steel hatchet has a short angular blade and a gray-white wooden handle.",
+      "visualDescription": "A pale steel hatchet has a short angular blade and a gray-white wooden handle. Blue frost gathers under its thick socket, and a soft hide loop hangs from the rounded butt.",
+      "sellValue": 25,
+      "modifiers": [],
+      "damageMin": 46,
+      "damageMax": 64
+    },
+    "saltbreaker": {
+      "version": 2,
+      "definitionId": "saltbreaker",
+      "name": "Saltbreaker",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "common",
+      "tier": 3,
+      "description": "A broad white-crusted axe head sits on a bleached driftwood haft.",
+      "visualDescription": "A broad white-crusted axe head sits on a bleached driftwood haft. A single dark crack crosses the rear hammer face, while muted teal cord holds a long split in the handle shut.",
+      "sellValue": 26,
+      "modifiers": [],
+      "damageMin": 47,
+      "damageMax": 65
+    },
+    "antler_beard_axe": {
+      "version": 2,
+      "definitionId": "antler_beard_axe",
+      "name": "Antler Beard Axe",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "common",
+      "tier": 3,
+      "description": "A dark iron axe carries a long hooked beard braced by a pale antler tine.",
+      "visualDescription": "A dark iron axe carries a long hooked beard braced by a pale antler tine. Copper pins hold the bone flush against the blade above a thick brown fur grip.",
+      "sellValue": 27,
+      "modifiers": [],
+      "damageMin": 45,
+      "damageMax": 63
+    },
+    "glacier_crescent": {
+      "version": 2,
+      "definitionId": "glacier_crescent",
+      "name": "Glacier Crescent",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "uncommon",
+      "tier": 3,
+      "description": "A smooth pale-blue steel crescent is mounted on a slim black shaft.",
+      "visualDescription": "A smooth pale-blue steel crescent is mounted on a slim black shaft. Jagged frost crystals cling only to its upper spine, leaving a clean bright cutting edge above a white cloth grip.",
+      "sellValue": 64,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 4
+        }
+      ],
+      "damageMin": 50,
+      "damageMax": 70
+    },
+    "silver_fen_reaver": {
+      "version": 2,
+      "definitionId": "silver_fen_reaver",
+      "name": "Silver Fen Reaver",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "uncommon",
+      "tier": 3,
+      "description": "A tarnished silver axe head sweeps into two long downward points.",
+      "visualDescription": "A tarnished silver axe head sweeps into two long downward points. Dark reed-shaped grooves mark its broad face, and the black wooden haft is capped by a flattened bronze disk.",
+      "sellValue": 60,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 11
+        }
+      ],
+      "damageMin": 51,
+      "damageMax": 71
+    },
+    "winter_tithe": {
+      "version": 2,
+      "definitionId": "winter_tithe",
+      "name": "Winter Tithe",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A heavy rectangular axe blade has a small crown-shaped cutout beside the socket.",
+      "visualDescription": "A heavy rectangular axe blade has a small crown-shaped cutout beside the socket. Its white-metal face is streaked with blue tarnish, and wine-red leather circles the long handle.",
+      "sellValue": 136,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.0125
+        }
+      ],
+      "damageMin": 53,
+      "damageMax": 75
+    },
+    "icebound_judgement": {
+      "version": 2,
+      "definitionId": "icebound_judgement",
+      "name": "Icebound Judgement",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A massive double axe carries two straight-edged pale blades around a thick frozen center.",
+      "visualDescription": "A massive double axe carries two straight-edged pale blades around a thick frozen center. Dark iron rivets pierce the blue ice, and coarse gray hide wraps the reinforced haft.",
+      "sellValue": 137,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 500
+        }
+      ],
+      "damageMin": 54,
+      "damageMax": 76
+    },
+    "last_felling": {
+      "version": 2,
+      "definitionId": "last_felling",
+      "name": "Last Felling",
+      "kind": "weapon",
+      "category": "axes",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A broad black axe has one bright silver cutting edge and a heavily repaired iron socket.",
+      "visualDescription": "A broad black axe has one bright silver cutting edge and a heavily repaired iron socket. Three pale wooden wedges fan from the top of its weathered shaft above a faded red grip.",
+      "sellValue": 138,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 2500
+        }
+      ],
+      "damageMin": 55,
+      "damageMax": 77
+    },
+    "travel_wraps": {
+      "version": 2,
+      "definitionId": "travel_wraps",
+      "name": "Travel Wraps",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "common",
+      "tier": 1,
+      "description": "A sleeveless wrap of coarse brown cloth crosses the chest with an uneven overlap.",
+      "visualDescription": "A sleeveless wrap of coarse brown cloth crosses the chest with an uneven overlap. Large cream stitches repair the lower hem, and a narrow leather belt passes through two tarnished buckles.",
+      "sellValue": 3,
+      "modifiers": [],
+      "armor": 2
+    },
+    "hide_armor": {
+      "version": 2,
+      "definitionId": "hide_armor",
+      "name": "Patched Hide Armor",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "common",
+      "tier": 1,
+      "description": "A squat sleeveless hide vest has overlapping dark-brown panels and broad rawhide shoulder straps.",
+      "visualDescription": "A squat sleeveless hide vest has overlapping dark-brown panels and broad rawhide shoulder straps. An oversized pale patch covers one side of the chest, held by thick crooked stitches.",
+      "sellValue": 9,
+      "modifiers": [],
+      "armor": 12
+    },
+    "reed_woven_vest": {
+      "version": 2,
+      "definitionId": "reed_woven_vest",
+      "name": "Reed-woven Vest",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "common",
+      "tier": 1,
+      "description": "Flattened olive reeds form a rigid vest with a dark cloth lining visible at its neck.",
+      "visualDescription": "Flattened olive reeds form a rigid vest with a dark cloth lining visible at its neck. Horizontal leather bands hold the stalks together, and the bottom edge breaks into a rough uneven fringe.",
+      "sellValue": 10,
+      "modifiers": [],
+      "armor": 12
+    },
+    "ferrymans_jack": {
+      "version": 2,
+      "definitionId": "ferrymans_jack",
+      "name": "Ferryman's Jack",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "uncommon",
+      "tier": 1,
+      "description": "A short tar-dark leather coat has a broad folded collar and brass toggle fasteners.",
+      "visualDescription": "A short tar-dark leather coat has a broad folded collar and brass toggle fasteners. Pale rope abrasions mark one shoulder, and a faded blue patch reinforces the chest beneath the collar.",
+      "sellValue": 23,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.005
+        }
+      ],
+      "armor": 14
+    },
+    "rust_ring_shirt": {
+      "version": 2,
+      "definitionId": "rust_ring_shirt",
+      "name": "Rust Ring Shirt",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "uncommon",
+      "tier": 1,
+      "description": "A sleeveless shirt of large rust-brown iron rings hangs over ragged charcoal cloth.",
+      "visualDescription": "A sleeveless shirt of large rust-brown iron rings hangs over ragged charcoal cloth. Several brighter replacement rings interrupt the chest, while the lower edge droops unevenly on the right.",
+      "sellValue": 24,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 200
+        }
+      ],
+      "armor": 15
+    },
+    "bark_armor": {
+      "version": 2,
+      "definitionId": "bark_armor",
+      "name": "Bound Bark Armor",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "Thick overlapping slabs of wet dark bark form a broad chest piece.",
+      "visualDescription": "Thick overlapping slabs of wet dark bark form a broad chest piece. Pale fibrous edges show beneath tight green-black vines, and one small knot bulges from the upper left plate.",
+      "sellValue": 45,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 8
+        }
+      ],
+      "armor": 24
+    },
+    "bogwatch_cuirass": {
+      "version": 2,
+      "definitionId": "bogwatch_cuirass",
+      "name": "Bogwatch Cuirass",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A dull iron breastplate has a swollen rounded chest and a short skirt of three hanging plates.",
+      "visualDescription": "A dull iron breastplate has a swollen rounded chest and a short skirt of three hanging plates. Green water stains trail from the shoulder rivets over a torn brown leather backing.",
+      "sellValue": 46,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 16
+        }
+      ],
+      "armor": 18
+    },
+    "chapel_pall": {
+      "version": 2,
+      "definitionId": "chapel_pall",
+      "name": "Chapel Pall",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A faded gray padded vest has a high folded neck and a heavy bronze clasp shaped like a plain arch.",
+      "visualDescription": "A faded gray padded vest has a high folded neck and a heavy bronze clasp shaped like a plain arch. Three dark vertical seams divide its broad chest above an uneven black hem.",
+      "sellValue": 47,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 3
+        }
+      ],
+      "armor": 19
+    },
+    "coalstained_gambeson": {
+      "version": 2,
+      "definitionId": "coalstained_gambeson",
+      "name": "Coalstained Gambeson",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "common",
+      "tier": 2,
+      "description": "A thick quilted coat has wide charcoal-gray vertical channels and singed tan cuffs.",
+      "visualDescription": "A thick quilted coat has wide charcoal-gray vertical channels and singed tan cuffs. Its leather front ties are mismatched, and a large soot-black patch covers the lower belly.",
+      "sellValue": 19,
+      "modifiers": [],
+      "armor": 26
+    },
+    "iron_scale_vest": {
+      "version": 2,
+      "definitionId": "iron_scale_vest",
+      "name": "Iron Scale Vest",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "common",
+      "tier": 2,
+      "description": "Rows of broad overlapping iron scales cover a sleeveless brown leather vest.",
+      "visualDescription": "Rows of broad overlapping iron scales cover a sleeveless brown leather vest. The scales are darker near the waist, with two pale replacements below a thick square neck opening.",
+      "sellValue": 20,
+      "modifiers": [],
+      "armor": 24
+    },
+    "quarry_plate": {
+      "version": 2,
+      "definitionId": "quarry_plate",
+      "name": "Quarry Plate",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "common",
+      "tier": 2,
+      "description": "A heavy flat steel breastplate has a reinforced rectangular belly panel and broad leather straps.",
+      "visualDescription": "A heavy flat steel breastplate has a reinforced rectangular belly panel and broad leather straps. Ochre dust outlines its oversized rivets, and one shoulder strap is reinforced with copper wire.",
+      "sellValue": 16,
+      "modifiers": [],
+      "armor": 25
+    },
+    "chain_apron": {
+      "version": 2,
+      "definitionId": "chain_apron",
+      "name": "Chain Apron",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "uncommon",
+      "tier": 2,
+      "description": "A long panel of dark chainmail hangs from a broad padded neck yoke.",
+      "visualDescription": "A long panel of dark chainmail hangs from a broad padded neck yoke. A leather waist belt interrupts the rings, and the lower corners are folded back with mismatched iron hooks.",
+      "sellValue": 41,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 1500
+        }
+      ],
+      "armor": 30
+    },
+    "furnace_guard": {
+      "version": 2,
+      "definitionId": "furnace_guard",
+      "name": "Furnace Guard",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "uncommon",
+      "tier": 2,
+      "description": "A thick iron chest shell has stepped overlapping plates and a high soot-black collar.",
+      "visualDescription": "A thick iron chest shell has stepped overlapping plates and a high soot-black collar. Dull orange heat stains rim the central plate, and gray padded fabric shows between the broad shoulder pieces.",
+      "sellValue": 42,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 20
+        }
+      ],
+      "armor": 28
+    },
+    "ember_stitched_coat": {
+      "version": 2,
+      "definitionId": "ember_stitched_coat",
+      "name": "Ember-stitched Coat",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "A deep brown quilted coat has thin copper wire stitches running along its chest channels.",
+      "visualDescription": "A deep brown quilted coat has thin copper wire stitches running along its chest channels. Small amber beads close the front, while a heavy black leather panel shields the lower torso.",
+      "sellValue": 93,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 4
+        }
+      ],
+      "armor": 33
+    },
+    "oathbound_breastplate": {
+      "version": 2,
+      "definitionId": "oathbound_breastplate",
+      "name": "Oathbound Breastplate",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "A broad bronze breastplate carries a simple recessed vertical bar down its center.",
+      "visualDescription": "A broad bronze breastplate carries a simple recessed vertical bar down its center. Dark tarnish pools under the shoulder flares, and neat cream stitching edges the visible black leather lining.",
+      "sellValue": 94,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 10
+        }
+      ],
+      "armor": 34
+    },
+    "slag_knight_harness": {
+      "version": 2,
+      "definitionId": "slag_knight_harness",
+      "name": "Slag Knight Harness",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "Angular black steel plates overlap across a thick torso harness.",
+      "visualDescription": "Angular black steel plates overlap across a thick torso harness. Porous slag clings to one shoulder, while a narrow clean silver repair line crosses the otherwise dull breastplate.",
+      "sellValue": 90,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.01
+        }
+      ],
+      "armor": 32
+    },
+    "frost_hide_coat": {
+      "version": 2,
+      "definitionId": "frost_hide_coat",
+      "name": "Frost Hide Coat",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "common",
+      "tier": 3,
+      "description": "A gray sealskin coat has a thick ivory fur collar and short broad sleeves.",
+      "visualDescription": "A gray sealskin coat has a thick ivory fur collar and short broad sleeves. Dark leather bands cross the chest, and pale frost collects on the edges of its rough bone toggles.",
+      "sellValue": 25,
+      "modifiers": [],
+      "armor": 39
+    },
+    "saltwarden_hauberk": {
+      "version": 2,
+      "definitionId": "saltwarden_hauberk",
+      "name": "Saltwarden Hauberk",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "common",
+      "tier": 3,
+      "description": "A long silver-gray ring shirt hangs beneath a heavy teal leather shoulder yoke.",
+      "visualDescription": "A long silver-gray ring shirt hangs beneath a heavy teal leather shoulder yoke. White salt crust interrupts the lower rings, and a broad weathered belt pulls the waist slightly askew.",
+      "sellValue": 26,
+      "modifiers": [],
+      "armor": 40
+    },
+    "antler_scale_harness": {
+      "version": 2,
+      "definitionId": "antler_scale_harness",
+      "name": "Antler Scale Harness",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "common",
+      "tier": 3,
+      "description": "Flattened yellow antler plates overlap across dark brown leather.",
+      "visualDescription": "Flattened yellow antler plates overlap across dark brown leather. Each plate has two visible copper pins, and a narrow strip of coarse black fur softens the high chest opening.",
+      "sellValue": 27,
+      "modifiers": [],
+      "armor": 38
+    },
+    "blue_iron_cuirass": {
+      "version": 2,
+      "definitionId": "blue_iron_cuirass",
+      "name": "Blue Iron Cuirass",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "uncommon",
+      "tier": 3,
+      "description": "A smooth deep-blue iron breastplate has an angular central ridge and two broad squared shoulder tabs.",
+      "visualDescription": "A smooth deep-blue iron breastplate has an angular central ridge and two broad squared shoulder tabs. Small pale dents scatter over the belly above a layered skirt of gray metal strips.",
+      "sellValue": 64,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 4
+        }
+      ],
+      "armor": 43
+    },
+    "silver_mourning_mail": {
+      "version": 2,
+      "definitionId": "silver_mourning_mail",
+      "name": "Silver Mourning Mail",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "uncommon",
+      "tier": 3,
+      "description": "Fine tarnished silver rings cover a long black padded vest.",
+      "visualDescription": "Fine tarnished silver rings cover a long black padded vest. An unadorned white-metal clasp closes the neck, and the lower chain edge is bordered by a thin strip of faded violet cloth.",
+      "sellValue": 60,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 11
+        }
+      ],
+      "armor": 44
+    },
+    "regents_empty_harness": {
+      "version": 2,
+      "definitionId": "regents_empty_harness",
+      "name": "Regent's Empty Harness",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A pale steel chest harness has exaggeratedly broad shoulders and a narrow segmented waist.",
+      "visualDescription": "A pale steel chest harness has exaggeratedly broad shoulders and a narrow segmented waist. A small three-point crown is raised at the collar above dark indigo lining and tarnished gold rivets.",
+      "sellValue": 136,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.0125
+        }
+      ],
+      "armor": 46
+    },
+    "thawless_carapace": {
+      "version": 2,
+      "definitionId": "thawless_carapace",
+      "name": "Thawless Carapace",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "Thick blue-white plates overlap like broken ice across a broad breastplate.",
+      "visualDescription": "Thick blue-white plates overlap like broken ice across a broad breastplate. Black iron braces hold their edges, and dense gray fur appears in the deep opening around the neck.",
+      "sellValue": 137,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 500
+        }
+      ],
+      "armor": 47
+    },
+    "roadworn_bastion": {
+      "version": 2,
+      "definitionId": "roadworn_bastion",
+      "name": "Roadworn Bastion",
+      "kind": "armor",
+      "category": "body_armor",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A massive dark iron breastplate is patched with three lighter steel squares of unequal size.",
+      "visualDescription": "A massive dark iron breastplate is patched with three lighter steel squares of unequal size. Its thick rolled neck edge is worn bright, and broad tan leather straps buckle at the sides.",
+      "sellValue": 138,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 2500
+        }
+      ],
+      "armor": 48
+    },
+    "stitched_coif": {
+      "version": 2,
+      "definitionId": "stitched_coif",
+      "name": "Stitched Coif",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "common",
+      "tier": 1,
+      "description": "A close brown leather hood has a broad padded brow and an open face.",
+      "visualDescription": "A close brown leather hood has a broad padded brow and an open face. Cream stitches join four uneven crown panels, and two short chin straps end in a single dull iron buckle.",
+      "sellValue": 8,
+      "modifiers": [],
+      "armor": 6
+    },
+    "iron_helmet": {
+      "version": 2,
+      "definitionId": "iron_helmet",
+      "name": "Dented Iron Helmet",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "common",
+      "tier": 1,
+      "description": "A squat iron cap has a broad dent above its short nose guard.",
+      "visualDescription": "A squat iron cap has a broad dent above its short nose guard. Orange rust gathers around the rim rivets, and a narrow strip of dark leather hangs from the rear edge.",
+      "sellValue": 9,
+      "modifiers": [],
+      "armor": 8
+    },
+    "reed_crown_helm": {
+      "version": 2,
+      "definitionId": "reed_crown_helm",
+      "name": "Reed Crown Helm",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "common",
+      "tier": 1,
+      "description": "A round brown leather cap is reinforced by a low ring of tightly bundled olive reeds.",
+      "visualDescription": "A round brown leather cap is reinforced by a low ring of tightly bundled olive reeds. Two flat wooden strips cross the crown, and faded green ties secure the cheek flaps.",
+      "sellValue": 10,
+      "modifiers": [],
+      "armor": 8
+    },
+    "ferrymans_sallet": {
+      "version": 2,
+      "definitionId": "ferrymans_sallet",
+      "name": "Ferryman's Sallet",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "uncommon",
+      "tier": 1,
+      "description": "A dark steel helmet has a long sloping rear and a short raised visor over a wide face opening.",
+      "visualDescription": "A dark steel helmet has a long sloping rear and a short raised visor over a wide face opening. Tar stains dull the crown, and a thin brass band follows the lower rim.",
+      "sellValue": 23,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.005
+        }
+      ],
+      "armor": 10
+    },
+    "bone_brow_mask": {
+      "version": 2,
+      "definitionId": "bone_brow_mask",
+      "name": "Bone Brow Mask",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "uncommon",
+      "tier": 1,
+      "description": "A smooth yellowed bone brow plate covers the front of a black leather cap.",
+      "visualDescription": "A smooth yellowed bone brow plate covers the front of a black leather cap. A single dark vertical crack stops above the nose opening, while copper pins hold the plate at the temples.",
+      "sellValue": 24,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 200
+        }
+      ],
+      "armor": 11
+    },
+    "bellkeepers_helm": {
+      "version": 2,
+      "definitionId": "bellkeepers_helm",
+      "name": "Bellkeeper's Helm",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A narrow bronze helmet resembles an upturned bell with an uneven flared rim.",
+      "visualDescription": "A narrow bronze helmet resembles an upturned bell with an uneven flared rim. A rectangular face slit interrupts the front, and green tarnish runs from a thick iron loop at the crown.",
+      "sellValue": 45,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 1500
+        }
+      ],
+      "armor": 16
+    },
+    "sunken_guard_helm": {
+      "version": 2,
+      "definitionId": "sunken_guard_helm",
+      "name": "Sunken Guard Helm",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A round steel helmet has broad hinged cheek pieces and a broken short crest.",
+      "visualDescription": "A round steel helmet has broad hinged cheek pieces and a broken short crest. Dark green mineral streaks cross its gray face, and one cheek hinge is replaced by thick copper wire.",
+      "sellValue": 46,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 16
+        }
+      ],
+      "armor": 14
+    },
+    "willow_knot_cowl": {
+      "version": 2,
+      "definitionId": "willow_knot_cowl",
+      "name": "Willow Knot Cowl",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A dark cloth cowl supports a thick twisted root arch over the brow.",
+      "visualDescription": "A dark cloth cowl supports a thick twisted root arch over the brow. Pale exposed wood marks one knot above the open face, with two vine ties hanging beside the neck.",
+      "sellValue": 47,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 3
+        }
+      ],
+      "armor": 15
+    },
+    "soot_padded_hood": {
+      "version": 2,
+      "definitionId": "soot_padded_hood",
+      "name": "Soot-padded Hood",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "common",
+      "tier": 2,
+      "description": "A charcoal quilted hood has a high round crown and thick tan cheek pads.",
+      "visualDescription": "A charcoal quilted hood has a high round crown and thick tan cheek pads. Its open face is bordered by black leather, and a repaired triangular patch sits above the right temple.",
+      "sellValue": 19,
+      "modifiers": [],
+      "armor": 17
+    },
+    "smiths_skullcap": {
+      "version": 2,
+      "definitionId": "smiths_skullcap",
+      "name": "Smith's Skullcap",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "common",
+      "tier": 2,
+      "description": "A heavy black iron skullcap has a flat crown and a broad raised brow ridge.",
+      "visualDescription": "A heavy black iron skullcap has a flat crown and a broad raised brow ridge. Heat-blue marks circle its rim, and two short leather straps fasten beneath a square brass clasp.",
+      "sellValue": 20,
+      "modifiers": [],
+      "armor": 15
+    },
+    "quarry_guard_helm": {
+      "version": 2,
+      "definitionId": "quarry_guard_helm",
+      "name": "Quarry Guard Helm",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "common",
+      "tier": 2,
+      "description": "A thick steel helmet has a wide straight brim and a small projecting nose bar.",
+      "visualDescription": "A thick steel helmet has a wide straight brim and a small projecting nose bar. Ochre dust fills the crown seams, and a sturdy leather neck curtain hangs from large copper rivets.",
+      "sellValue": 16,
+      "modifiers": [],
+      "armor": 16
+    },
+    "chain_veil_hood": {
+      "version": 2,
+      "definitionId": "chain_veil_hood",
+      "name": "Chain Veil Hood",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "uncommon",
+      "tier": 2,
+      "description": "A dark padded cap carries a short curtain of large iron rings around the cheeks and neck.",
+      "visualDescription": "A dark padded cap carries a short curtain of large iron rings around the cheeks and neck. The face remains open beneath a broad silver-gray brow band with one missing rivet.",
+      "sellValue": 41,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 1500
+        }
+      ],
+      "armor": 21
+    },
+    "furnace_visage": {
+      "version": 2,
+      "definitionId": "furnace_visage",
+      "name": "Furnace Visage",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "uncommon",
+      "tier": 2,
+      "description": "An angular black iron faceplate has two narrow horizontal eye openings and a row of square mouth vents.",
+      "visualDescription": "An angular black iron faceplate has two narrow horizontal eye openings and a row of square mouth vents. Muted orange metal shows inside the vents beneath a broad rounded crown.",
+      "sellValue": 42,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 20
+        }
+      ],
+      "armor": 19
+    },
+    "cinder_horn_helm": {
+      "version": 2,
+      "definitionId": "cinder_horn_helm",
+      "name": "Cinder Horn Helm",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "A low black steel helmet has two short blunt hornlike projections made from layered metal.",
+      "visualDescription": "A low black steel helmet has two short blunt hornlike projections made from layered metal. Rust-red seams separate the layers, and gray padded cheek guards frame a large open face.",
+      "sellValue": 93,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 4
+        }
+      ],
+      "armor": 24
+    },
+    "oathkeepers_bascinet": {
+      "version": 2,
+      "definitionId": "oathkeepers_bascinet",
+      "name": "Oathkeeper's Bascinet",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "A pointed bronze helmet has a modest hinged visor with a thin straight eye slit.",
+      "visualDescription": "A pointed bronze helmet has a modest hinged visor with a thin straight eye slit. Green-black patina fills its seam, while a clean pale repair plate covers one side near the ear.",
+      "sellValue": 94,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 10
+        }
+      ],
+      "armor": 25
+    },
+    "slag_crown": {
+      "version": 2,
+      "definitionId": "slag_crown",
+      "name": "Slag Crown",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "A heavy iron cap bears three thick irregular slag ridges across its crown.",
+      "visualDescription": "A heavy iron cap bears three thick irregular slag ridges across its crown. Their porous charcoal surfaces contrast with a smooth bright brow strip and a dark brown padded neck guard.",
+      "sellValue": 90,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.01
+        }
+      ],
+      "armor": 23
+    },
+    "frost_fur_cap": {
+      "version": 2,
+      "definitionId": "frost_fur_cap",
+      "name": "Frost Fur Cap",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "common",
+      "tier": 3,
+      "description": "A rounded gray leather cap has an oversized ivory fur band and two hanging ear flaps.",
+      "visualDescription": "A rounded gray leather cap has an oversized ivory fur band and two hanging ear flaps. Small blue-gray bone toggles close the flaps, and frost whitens one side of the fur.",
+      "sellValue": 25,
+      "modifiers": [],
+      "armor": 25
+    },
+    "saltwarden_helm": {
+      "version": 2,
+      "definitionId": "saltwarden_helm",
+      "name": "Saltwarden Helm",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "common",
+      "tier": 3,
+      "description": "A pale iron helmet has a deep face opening and a short rectangular nose guard.",
+      "visualDescription": "A pale iron helmet has a deep face opening and a short rectangular nose guard. White salt gathers along its rolled rim above a faded teal cloth neck wrap.",
+      "sellValue": 26,
+      "modifiers": [],
+      "armor": 26
+    },
+    "antler_guard_helm": {
+      "version": 2,
+      "definitionId": "antler_guard_helm",
+      "name": "Antler Guard Helm",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "common",
+      "tier": 3,
+      "description": "A dark iron cap carries two short outward-curving antlers at the temples.",
+      "visualDescription": "A dark iron cap carries two short outward-curving antlers at the temples. Their yellow bases are secured with copper plates, and a broad leather brow covers the lower edge.",
+      "sellValue": 27,
+      "modifiers": [],
+      "armor": 24
+    },
+    "blue_iron_sallet": {
+      "version": 2,
+      "definitionId": "blue_iron_sallet",
+      "name": "Blue Iron Sallet",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "uncommon",
+      "tier": 3,
+      "description": "A deep-blue steel sallet has a long pointed tail and a low horizontal visor slit.",
+      "visualDescription": "A deep-blue steel sallet has a long pointed tail and a low horizontal visor slit. The smooth crown is interrupted by three pale dents, and dark indigo padding shows beneath the rim.",
+      "sellValue": 64,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 4
+        }
+      ],
+      "armor": 29
+    },
+    "silver_vigil_mask": {
+      "version": 2,
+      "definitionId": "silver_vigil_mask",
+      "name": "Silver Vigil Mask",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "uncommon",
+      "tier": 3,
+      "description": "A tarnished silver face mask has heavy rounded cheeks and two narrow empty eye openings.",
+      "visualDescription": "A tarnished silver face mask has heavy rounded cheeks and two narrow empty eye openings. It joins a close black leather hood with plain temple rivets and a small split beneath the chin.",
+      "sellValue": 60,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 11
+        }
+      ],
+      "armor": 30
+    },
+    "pale_regents_helm": {
+      "version": 2,
+      "definitionId": "pale_regents_helm",
+      "name": "Pale Regent's Helm",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A white-metal helmet rises into three modest crown points above an open face.",
+      "visualDescription": "A white-metal helmet rises into three modest crown points above an open face. One dull blue stone sits over the brow, and a dark indigo padded collar circles the broad neck opening.",
+      "sellValue": 136,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.0125
+        }
+      ],
+      "armor": 32
+    },
+    "thawless_greathelm": {
+      "version": 2,
+      "definitionId": "thawless_greathelm",
+      "name": "Thawless Greathelm",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A broad cylindrical steel helm has a flat frozen crown and a narrow cross-shaped face opening.",
+      "visualDescription": "A broad cylindrical steel helm has a flat frozen crown and a narrow cross-shaped face opening. Blue ice fills dents at the temples above a thick dark fur neck seal.",
+      "sellValue": 137,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 500
+        }
+      ],
+      "armor": 33
+    },
+    "last_watch_helm": {
+      "version": 2,
+      "definitionId": "last_watch_helm",
+      "name": "Last Watch Helm",
+      "kind": "helmet",
+      "category": "helmets",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A heavy black iron helmet has a short straight brim and one bright replacement cheek plate.",
+      "visualDescription": "A heavy black iron helmet has a short straight brim and one bright replacement cheek plate. Its low crown bears a deep old dent, while faded red cloth pads the open face.",
+      "sellValue": 138,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 2500
+        }
+      ],
+      "armor": 34
+    },
+    "linen_handwraps": {
+      "version": 2,
+      "definitionId": "linen_handwraps",
+      "name": "Linen Handwraps",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "common",
+      "tier": 1,
+      "description": "Two compact bundles of coarse cream handwraps have open finger ends and broad crossing wrist bands.",
+      "visualDescription": "Two compact bundles of coarse cream handwraps have open finger ends and broad crossing wrist bands. Brown stains mark the knuckles, and one loose frayed tail curls beside the cuff.",
+      "sellValue": 8,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 8
+        }
+      ],
+      "armor": 3
+    },
+    "leather_gloves": {
+      "version": 2,
+      "definitionId": "leather_gloves",
+      "name": "Worn Leather Gloves",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "common",
+      "tier": 1,
+      "description": "A pair of short brown leather gloves has thick padded knuckles and blunt worn fingertips.",
+      "visualDescription": "A pair of short brown leather gloves has thick padded knuckles and blunt worn fingertips. Pale stitches repair the right thumb, while narrow wrist straps close with dull iron buckles.",
+      "sellValue": 9,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 2
+        }
+      ],
+      "armor": 4
+    },
+    "reed_weave_grips": {
+      "version": 2,
+      "definitionId": "reed_weave_grips",
+      "name": "Reed-weave Grips",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "common",
+      "tier": 1,
+      "description": "Short dark cloth gloves carry flat olive reed strips across the backs of the hands.",
+      "visualDescription": "Short dark cloth gloves carry flat olive reed strips across the backs of the hands. Brown leather binds each knuckle row, leaving the fingers flexible beneath broad green wrist ties.",
+      "sellValue": 10,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 3
+        }
+      ],
+      "armor": 5
+    },
+    "ferrymans_mitts": {
+      "version": 2,
+      "definitionId": "ferrymans_mitts",
+      "name": "Ferryman's Mitts",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "uncommon",
+      "tier": 1,
+      "description": "A pair of tar-dark leather mitts has separate thumbs and heavily reinforced palms.",
+      "visualDescription": "A pair of tar-dark leather mitts has separate thumbs and heavily reinforced palms. Faded blue rope winds around the cuffs, and pale scrape marks cross the broad curled fingers.",
+      "sellValue": 23,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.005
+        }
+      ],
+      "armor": 7
+    },
+    "bone_knuckle_gloves": {
+      "version": 2,
+      "definitionId": "bone_knuckle_gloves",
+      "name": "Bone Knuckle Gloves",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "uncommon",
+      "tier": 1,
+      "description": "Four small yellow bone plates cover each glove's knuckles above dark brown leather fingers.",
+      "visualDescription": "Four small yellow bone plates cover each glove's knuckles above dark brown leather fingers. Copper wire holds the plates in place, and uneven cream stitches edge the short cuffs.",
+      "sellValue": 24,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 200
+        }
+      ],
+      "armor": 8
+    },
+    "bogwatch_gauntlets": {
+      "version": 2,
+      "definitionId": "bogwatch_gauntlets",
+      "name": "Bogwatch Gauntlets",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "Short iron gauntlets have broad rounded knuckle shells and overlapping finger plates.",
+      "visualDescription": "Short iron gauntlets have broad rounded knuckle shells and overlapping finger plates. Green water stains collect at the hinges above torn brown leather cuffs with large square buckles.",
+      "sellValue": 45,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 1500
+        }
+      ],
+      "armor": 13
+    },
+    "rootbound_grips": {
+      "version": 2,
+      "definitionId": "rootbound_grips",
+      "name": "Rootbound Grips",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "Twisted dark roots form a cage over thick black leather gloves.",
+      "visualDescription": "Twisted dark roots form a cage over thick black leather gloves. Pale cut ends protrude near the knuckles, while thin green vines wrap the wrists in three tight bands.",
+      "sellValue": 46,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 16
+        }
+      ],
+      "armor": 11
+    },
+    "bellrope_gloves": {
+      "version": 2,
+      "definitionId": "bellrope_gloves",
+      "name": "Bellrope Gloves",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A pair of heavy gray leather gloves has broad brass palms folded into loose fists.",
+      "visualDescription": "A pair of heavy gray leather gloves has broad brass palms folded into loose fists. Rope scars stripe the metal, and thick charcoal cloth wraps extend well past the wrists.",
+      "sellValue": 47,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 3
+        }
+      ],
+      "armor": 12
+    },
+    "coalstained_gloves": {
+      "version": 2,
+      "definitionId": "coalstained_gloves",
+      "name": "Coalstained Gloves",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "common",
+      "tier": 2,
+      "description": "Thick tan work gloves are blackened across their broad fingertips and palms.",
+      "visualDescription": "Thick tan work gloves are blackened across their broad fingertips and palms. Long cuffs have diagonal quilted seams, with a red-brown leather patch repairing one wrist.",
+      "sellValue": 19,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 6
+        }
+      ],
+      "armor": 11
+    },
+    "iron_rivet_grips": {
+      "version": 2,
+      "definitionId": "iron_rivet_grips",
+      "name": "Iron Rivet Grips",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "common",
+      "tier": 2,
+      "description": "A row of large square iron rivets crosses each dark leather knuckle pad.",
+      "visualDescription": "A row of large square iron rivets crosses each dark leather knuckle pad. Narrow steel plates protect the backs of the fingers, and plain leather straps tighten the low cuffs.",
+      "sellValue": 20,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.005
+        }
+      ],
+      "armor": 9
+    },
+    "quarry_handguards": {
+      "version": 2,
+      "definitionId": "quarry_handguards",
+      "name": "Quarry Handguards",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "common",
+      "tier": 2,
+      "description": "Broad steel handguards sit over short ochre-dusted leather gloves.",
+      "visualDescription": "Broad steel handguards sit over short ochre-dusted leather gloves. Each back plate has two deep grooves, and thick copper pins attach the separate wrist braces.",
+      "sellValue": 16,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 200
+        }
+      ],
+      "armor": 10
+    },
+    "chainback_gloves": {
+      "version": 2,
+      "definitionId": "chainback_gloves",
+      "name": "Chainback Gloves",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "uncommon",
+      "tier": 2,
+      "description": "Large dark iron rings form flexible patches over the backs of brown gloves.",
+      "visualDescription": "Large dark iron rings form flexible patches over the backs of brown gloves. Bare leather palms curl inward, and two bright replacement links stand out beside one thumb.",
+      "sellValue": 41,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 1500
+        }
+      ],
+      "armor": 15
+    },
+    "furnace_fists": {
+      "version": 2,
+      "definitionId": "furnace_fists",
+      "name": "Furnace Fists",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "uncommon",
+      "tier": 2,
+      "description": "Oversized black iron gauntlets have square knuckle blocks and deep overlapping finger plates.",
+      "visualDescription": "Oversized black iron gauntlets have square knuckle blocks and deep overlapping finger plates. Dull amber seams appear between the plates above long gray padded cuffs.",
+      "sellValue": 42,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 20
+        }
+      ],
+      "armor": 13
+    },
+    "ember_thread_grips": {
+      "version": 2,
+      "definitionId": "ember_thread_grips",
+      "name": "Ember Thread Grips",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "Fine copper stitches divide the dark red leather backs of two gloves into narrow panels.",
+      "visualDescription": "Fine copper stitches divide the dark red leather backs of two gloves into narrow panels. Small muted amber beads fasten the wrists, with soot darkening the raised knuckles.",
+      "sellValue": 93,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 4
+        }
+      ],
+      "armor": 18
+    },
+    "oathbound_gauntlets": {
+      "version": 2,
+      "definitionId": "oathbound_gauntlets",
+      "name": "Oathbound Gauntlets",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "Smooth bronze gauntlets have broad rectangular backs and neatly articulated fingers.",
+      "visualDescription": "Smooth bronze gauntlets have broad rectangular backs and neatly articulated fingers. Dark tarnish outlines each joint, while ivory cloth peeks from short square-edged cuffs.",
+      "sellValue": 94,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 10
+        }
+      ],
+      "armor": 19
+    },
+    "slag_knuckle_mitts": {
+      "version": 2,
+      "definitionId": "slag_knuckle_mitts",
+      "name": "Slag Knuckle Mitts",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "Thick black leather mitts support irregular charcoal slag blocks across the knuckles.",
+      "visualDescription": "Thick black leather mitts support irregular charcoal slag blocks across the knuckles. Three bright iron pins pierce each block above broad straps of scorched brown hide.",
+      "sellValue": 90,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.01
+        }
+      ],
+      "armor": 17
+    },
+    "frost_fur_mittens": {
+      "version": 2,
+      "definitionId": "frost_fur_mittens",
+      "name": "Frost Fur Mittens",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "common",
+      "tier": 3,
+      "description": "Soft gray leather mittens have wide ivory fur cuffs and stubby separate thumbs.",
+      "visualDescription": "Soft gray leather mittens have wide ivory fur cuffs and stubby separate thumbs. Pale blue stitching follows their outer seams, and frost catches in the fur near the wrists.",
+      "sellValue": 25,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 300
+        }
+      ],
+      "armor": 16
+    },
+    "saltwarden_gloves": {
+      "version": 2,
+      "definitionId": "saltwarden_gloves",
+      "name": "Saltwarden Gloves",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "common",
+      "tier": 3,
+      "description": "Faded teal leather gloves have white salt crust around the finger joints.",
+      "visualDescription": "Faded teal leather gloves have white salt crust around the finger joints. Small gray steel plates protect the knuckles, and long narrow straps spiral around each wrist.",
+      "sellValue": 26,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 1500
+        }
+      ],
+      "armor": 17
+    },
+    "antler_plated_grips": {
+      "version": 2,
+      "definitionId": "antler_plated_grips",
+      "name": "Antler-plated Grips",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "common",
+      "tier": 3,
+      "description": "Flattened yellow antler segments cover the backs and fingers of dark brown gloves.",
+      "visualDescription": "Flattened yellow antler segments cover the backs and fingers of dark brown gloves. Copper pins join the segments above black fur cuffs with a single rough bone toggle each.",
+      "sellValue": 27,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 24
+        }
+      ],
+      "armor": 15
+    },
+    "blue_iron_gauntlets": {
+      "version": 2,
+      "definitionId": "blue_iron_gauntlets",
+      "name": "Blue Iron Gauntlets",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "uncommon",
+      "tier": 3,
+      "description": "Deep-blue steel gauntlets carry high angular ridges over the knuckles.",
+      "visualDescription": "Deep-blue steel gauntlets carry high angular ridges over the knuckles. Their finger joints show pale polished edges, and short indigo padded cuffs flare slightly outward.",
+      "sellValue": 64,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 4
+        }
+      ],
+      "armor": 20
+    },
+    "silver_pallbearers": {
+      "version": 2,
+      "definitionId": "silver_pallbearers",
+      "name": "Silver Pallbearers",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "uncommon",
+      "tier": 3,
+      "description": "Fine silver ringmail covers a pair of long black gloves.",
+      "visualDescription": "Fine silver ringmail covers a pair of long black gloves. A plain bright plate reinforces each palm heel, while narrow violet bands close the wrists without visible buckles.",
+      "sellValue": 60,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 11
+        }
+      ],
+      "armor": 21
+    },
+    "regents_cold_hands": {
+      "version": 2,
+      "definitionId": "regents_cold_hands",
+      "name": "Regent's Cold Hands",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "Pale steel gauntlets have unusually long narrow fingers and a small raised crown on each back plate.",
+      "visualDescription": "Pale steel gauntlets have unusually long narrow fingers and a small raised crown on each back plate. Tarnished gold rivets connect the knuckles above dark blue cuffs.",
+      "sellValue": 136,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.0125
+        }
+      ],
+      "armor": 23
+    },
+    "thawless_grasp": {
+      "version": 2,
+      "definitionId": "thawless_grasp",
+      "name": "Thawless Grasp",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "Thick blue-white ice plates are trapped in a black iron frame over heavy gloves.",
+      "visualDescription": "Thick blue-white ice plates are trapped in a black iron frame over heavy gloves. Broad dark fingertips remain exposed, and gray fur seals the deep wrist openings.",
+      "sellValue": 137,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 500
+        }
+      ],
+      "armor": 24
+    },
+    "last_hold": {
+      "version": 2,
+      "definitionId": "last_hold",
+      "name": "Last Hold",
+      "kind": "gloves",
+      "category": "gloves",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A pair of broad black gauntlets has three mismatched silver repair plates across the hands.",
+      "visualDescription": "A pair of broad black gauntlets has three mismatched silver repair plates across the hands. The blunt finger ends are worn bright, and faded red leather straps hang from the cuffs.",
+      "sellValue": 138,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 2500
+        }
+      ],
+      "armor": 25
+    },
+    "twisted_wire_ring": {
+      "version": 2,
+      "definitionId": "twisted_wire_ring",
+      "name": "Twisted Wire Ring",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "common",
+      "tier": 1,
+      "description": "Three uneven strands of dark copper wire twist into a thick finger ring.",
+      "visualDescription": "Three uneven strands of dark copper wire twist into a thick finger ring. One strand ends in a small flattened knot, and the inner circle is polished bright by wear.",
+      "sellValue": 8,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 8
+        }
+      ]
+    },
+    "copper_ring": {
+      "version": 2,
+      "definitionId": "copper_ring",
+      "name": "Heavy Copper Ring",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "uncommon",
+      "tier": 1,
+      "description": "A thick plain copper band has a slightly flattened oval opening.",
+      "visualDescription": "A thick plain copper band has a slightly flattened oval opening. Green patina fills two shallow dents on its outer face, while the broad inner edge remains warm and polished.",
+      "sellValue": 21,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 2
+        },
+        {
+          "stat": "health",
+          "value": 5
+        }
+      ]
+    },
+    "reed_knot_ring": {
+      "version": 2,
+      "definitionId": "reed_knot_ring",
+      "name": "Reed Knot Ring",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "common",
+      "tier": 1,
+      "description": "A narrow bronze band carries a small flattened knot made from dark green braided reed.",
+      "visualDescription": "A narrow bronze band carries a small flattened knot made from dark green braided reed. Fine pale fibers fray from one loop beside two plain copper retaining claws.",
+      "sellValue": 10,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 3
+        }
+      ]
+    },
+    "ferrymans_token": {
+      "version": 2,
+      "definitionId": "ferrymans_token",
+      "name": "Ferryman's Token",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "uncommon",
+      "tier": 1,
+      "description": "A worn brass ring bears a small round dark coin mounted flat across the top.",
+      "visualDescription": "A worn brass ring bears a small round dark coin mounted flat across the top. A simple recessed boat shape survives on the coin beneath patches of green-black tarnish.",
+      "sellValue": 23,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.005
+        }
+      ]
+    },
+    "bone_loop_ring": {
+      "version": 2,
+      "definitionId": "bone_loop_ring",
+      "name": "Bone Loop Ring",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "uncommon",
+      "tier": 1,
+      "description": "A thick yellow bone ring has an uneven rounded outer wall and a dark hairline crack.",
+      "visualDescription": "A thick yellow bone ring has an uneven rounded outer wall and a dark hairline crack. Two thin copper staples bridge the split beneath a single polished ivory knob.",
+      "sellValue": 24,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 200
+        }
+      ]
+    },
+    "fen_eye_ring": {
+      "version": 2,
+      "definitionId": "fen_eye_ring",
+      "name": "Fen Eye Ring",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A squat black iron ring holds a cloudy olive-green oval stone in four heavy claws.",
+      "visualDescription": "A squat black iron ring holds a cloudy olive-green oval stone in four heavy claws. A pale horizontal vein crosses the stone, and the broad shank is rough with shallow pits.",
+      "sellValue": 45,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 1500
+        }
+      ]
+    },
+    "bellmetal_band": {
+      "version": 2,
+      "definitionId": "bellmetal_band",
+      "name": "Bellmetal Band",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A wide bronze ring has a gently flared upper rim like the lip of a small bell.",
+      "visualDescription": "A wide bronze ring has a gently flared upper rim like the lip of a small bell. One edge is visibly cracked, and dark green tarnish collects inside the split.",
+      "sellValue": 46,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 16
+        }
+      ]
+    },
+    "root_coil_ring": {
+      "version": 2,
+      "definitionId": "root_coil_ring",
+      "name": "Root Coil Ring",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A tiny dark willow root curls twice around an open finger ring.",
+      "visualDescription": "A tiny dark willow root curls twice around an open finger ring. Its pale cut tip rests against a thick wooden knot, secured by a short wrap of dull silver wire.",
+      "sellValue": 47,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 3
+        }
+      ]
+    },
+    "coal_iron_ring": {
+      "version": 2,
+      "definitionId": "coal_iron_ring",
+      "name": "Coal Iron Ring",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "common",
+      "tier": 2,
+      "description": "A broad black iron band has a flat square face containing a rough charcoal chip.",
+      "visualDescription": "A broad black iron band has a flat square face containing a rough charcoal chip. Bright rubbed metal outlines the setting, with rusty brown pits along the sides.",
+      "sellValue": 19,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 6
+        }
+      ]
+    },
+    "brass_rivet_ring": {
+      "version": 2,
+      "definitionId": "brass_rivet_ring",
+      "name": "Brass Rivet Ring",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "common",
+      "tier": 2,
+      "description": "A heavy brass ring has a single oversized square rivet as its raised face.",
+      "visualDescription": "A heavy brass ring has a single oversized square rivet as its raised face. The rivet corners are rounded by wear, and two dark solder lines cross the thick band.",
+      "sellValue": 20,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.005
+        }
+      ]
+    },
+    "quarry_agate_ring": {
+      "version": 2,
+      "definitionId": "quarry_agate_ring",
+      "name": "Quarry Agate Ring",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "common",
+      "tier": 2,
+      "description": "A low steel setting holds a dull ochre agate cut into a wide oval.",
+      "visualDescription": "A low steel setting holds a dull ochre agate cut into a wide oval. Cream bands cross the stone beneath three squat claws, and dust darkens the narrow split shank.",
+      "sellValue": 16,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 200
+        }
+      ]
+    },
+    "chain_link_ring": {
+      "version": 2,
+      "definitionId": "chain_link_ring",
+      "name": "Chain Link Ring",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "uncommon",
+      "tier": 2,
+      "description": "Two flattened iron chain links are welded side by side into a chunky ring.",
+      "visualDescription": "Two flattened iron chain links are welded side by side into a chunky ring. One link is nearly black and the other worn gray, with a small copper repair at their seam.",
+      "sellValue": 41,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 1500
+        }
+      ]
+    },
+    "ember_eye_ring": {
+      "version": 2,
+      "definitionId": "ember_eye_ring",
+      "name": "Ember Eye Ring",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "uncommon",
+      "tier": 2,
+      "description": "A deep red-brown stone sits in a heavy soot-black iron ring.",
+      "visualDescription": "A deep red-brown stone sits in a heavy soot-black iron ring. A restrained amber glint remains inside the stone, framed by four short blunt claws and a broad plain shank.",
+      "sellValue": 42,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 20
+        }
+      ]
+    },
+    "furnace_seal": {
+      "version": 2,
+      "definitionId": "furnace_seal",
+      "name": "Furnace Seal",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "A thick bronze signet ring has a square blackened face with a recessed anvil shape.",
+      "visualDescription": "A thick bronze signet ring has a square blackened face with a recessed anvil shape. Heat-blue marks edge the face, and a small chipped corner exposes warm metal beneath.",
+      "sellValue": 93,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 4
+        }
+      ]
+    },
+    "oathkeepers_circle": {
+      "version": 2,
+      "definitionId": "oathkeepers_circle",
+      "name": "Oathkeeper's Circle",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "A smooth bronze band is interrupted by one narrow vertical silver seam.",
+      "visualDescription": "A smooth bronze band is interrupted by one narrow vertical silver seam. Its outside remains darkly tarnished, while a shallow groove follows the entire inner circumference.",
+      "sellValue": 94,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 10
+        }
+      ]
+    },
+    "slagstone_ring": {
+      "version": 2,
+      "definitionId": "slagstone_ring",
+      "name": "Slagstone Ring",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "A porous charcoal-black stone bulges above a wide steel ring.",
+      "visualDescription": "A porous charcoal-black stone bulges above a wide steel ring. Three irregular iron prongs hold the stone, and a thin dull orange mineral line crosses its pitted face.",
+      "sellValue": 90,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.01
+        }
+      ]
+    },
+    "frost_silver_band": {
+      "version": 2,
+      "definitionId": "frost_silver_band",
+      "name": "Frost Silver Band",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "common",
+      "tier": 3,
+      "description": "A broad tarnished silver band has a jagged shallow ridge around its outer edge.",
+      "visualDescription": "A broad tarnished silver band has a jagged shallow ridge around its outer edge. White frost rests in the low points, leaving a clean pale inner circle.",
+      "sellValue": 25,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 300
+        }
+      ]
+    },
+    "salt_pearl_ring": {
+      "version": 2,
+      "definitionId": "salt_pearl_ring",
+      "name": "Salt Pearl Ring",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "common",
+      "tier": 3,
+      "description": "An uneven gray-white pearl is mounted on a faded teal enamel band.",
+      "visualDescription": "An uneven gray-white pearl is mounted on a faded teal enamel band. Salt crust fills the gaps beneath three tarnished silver claws, and a small chip breaks the enamel near the base.",
+      "sellValue": 26,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 1500
+        }
+      ]
+    },
+    "antler_signet": {
+      "version": 2,
+      "definitionId": "antler_signet",
+      "name": "Antler Signet",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "common",
+      "tier": 3,
+      "description": "A flat oval of yellow antler is set into a thick dark copper ring.",
+      "visualDescription": "A flat oval of yellow antler is set into a thick dark copper ring. A tiny natural dark pore marks its face, and simple crossed pins secure the bone at either end.",
+      "sellValue": 27,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 24
+        }
+      ]
+    },
+    "blue_iron_loop": {
+      "version": 2,
+      "definitionId": "blue_iron_loop",
+      "name": "Blue Iron Loop",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "uncommon",
+      "tier": 3,
+      "description": "A heavy deep-blue iron ring has an angular hexagonal opening and a broad flat top.",
+      "visualDescription": "A heavy deep-blue iron ring has an angular hexagonal opening and a broad flat top. Three pale scratches cross its face beside one dull silver replacement rivet.",
+      "sellValue": 64,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 4
+        }
+      ]
+    },
+    "vigil_moon_ring": {
+      "version": 2,
+      "definitionId": "vigil_moon_ring",
+      "name": "Vigil Moon Ring",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "uncommon",
+      "tier": 3,
+      "description": "A thin tarnished silver ring supports a dark blue crescent-shaped stone.",
+      "visualDescription": "A thin tarnished silver ring supports a dark blue crescent-shaped stone. Its blunt points curve inward above a blackened setting with two small pale chips along the rim.",
+      "sellValue": 60,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 11
+        }
+      ]
+    },
+    "regents_signet": {
+      "version": 2,
+      "definitionId": "regents_signet",
+      "name": "Regent's Signet",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A white-metal signet ring bears a simple three-point crown above a dull blue inset.",
+      "visualDescription": "A white-metal signet ring bears a simple three-point crown above a dull blue inset. Small tarnished gold studs border the rectangular face on a thick smooth shank.",
+      "sellValue": 136,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.0125
+        }
+      ]
+    },
+    "thawless_loop": {
+      "version": 2,
+      "definitionId": "thawless_loop",
+      "name": "Thawless Loop",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A cloudy pale-blue crystal band is held together by three narrow black iron braces.",
+      "visualDescription": "A cloudy pale-blue crystal band is held together by three narrow black iron braces. Fine white cracks remain inside the translucent ring, and one outer corner is chipped flat.",
+      "sellValue": 137,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 500
+        }
+      ]
+    },
+    "last_coin_ring": {
+      "version": 2,
+      "definitionId": "last_coin_ring",
+      "name": "Last Coin Ring",
+      "kind": "ring",
+      "category": "rings",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A battered silver coin has been bent into a broad open ring.",
+      "visualDescription": "A battered silver coin has been bent into a broad open ring. Its raised rim survives at both edges, while the worn central face shows only an indistinct dark circular impression.",
+      "sellValue": 138,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 2500
+        }
+      ]
+    },
+    "pebble_on_cord": {
+      "version": 2,
+      "definitionId": "pebble_on_cord",
+      "name": "Pebble on a Cord",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "common",
+      "tier": 1,
+      "description": "A flat dark river pebble hangs from a short doubled brown cord through a drilled hole.",
+      "visualDescription": "A flat dark river pebble hangs from a short doubled brown cord through a drilled hole. One side carries a pale natural stripe, and the cord ends in a large uneven knot.",
+      "sellValue": 8,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 8
+        }
+      ]
+    },
+    "iron_tooth_charm": {
+      "version": 2,
+      "definitionId": "iron_tooth_charm",
+      "name": "Iron Tooth Charm",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "common",
+      "tier": 1,
+      "description": "A blunt iron wedge shaped like a broken tooth hangs from a thin leather thong.",
+      "visualDescription": "A blunt iron wedge shaped like a broken tooth hangs from a thin leather thong. Orange rust fills its shallow pits, while a simple copper loop passes through the wide top.",
+      "sellValue": 9,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 1
+        }
+      ]
+    },
+    "reed_braid_charm": {
+      "version": 2,
+      "definitionId": "reed_braid_charm",
+      "name": "Reed Braid Charm",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "common",
+      "tier": 1,
+      "description": "A small oval of braided olive reeds encloses an empty center.",
+      "visualDescription": "A small oval of braided olive reeds encloses an empty center. Pale fibers fray near a dark leather suspension loop, and two short bronze beads weigh the lower end.",
+      "sellValue": 10,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 3
+        }
+      ]
+    },
+    "ferrymans_obol": {
+      "version": 2,
+      "definitionId": "ferrymans_obol",
+      "name": "Ferryman's Obol",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "uncommon",
+      "tier": 1,
+      "description": "A worn bronze coin hangs from a black cord through an off-center hole.",
+      "visualDescription": "A worn bronze coin hangs from a black cord through an off-center hole. A simple boat-shaped groove remains on its green-stained face, and the lower rim is chipped into a small crescent.",
+      "sellValue": 23,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.005
+        }
+      ]
+    },
+    "bone_toggle_pendant": {
+      "version": 2,
+      "definitionId": "bone_toggle_pendant",
+      "name": "Bone Toggle Pendant",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "uncommon",
+      "tier": 1,
+      "description": "A short yellowed bone toggle hangs horizontally from two loops of dark thread.",
+      "visualDescription": "A short yellowed bone toggle hangs horizontally from two loops of dark thread. Its blunt ends are polished ivory, and a fine copper wire repair circles a crack near the middle.",
+      "sellValue": 24,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 200
+        }
+      ]
+    },
+    "restraint_amulet": {
+      "version": 2,
+      "definitionId": "restraint_amulet",
+      "name": "Amulet of Restraint",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A small heavy iron ring encloses a straight bronze bar on a short black leather cord.",
+      "visualDescription": "A small heavy iron ring encloses a straight bronze bar on a short black leather cord. The bar is worn bright at its center, while the outer ring carries deep dark hammer marks.",
+      "sellValue": 75,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.01
+        }
+      ]
+    },
+    "drowned_bell_charm": {
+      "version": 2,
+      "definitionId": "drowned_bell_charm",
+      "name": "Drowned Bell Charm",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A tiny narrow bronze bell hangs from a twisted gray cord with no visible clapper.",
+      "visualDescription": "A tiny narrow bronze bell hangs from a twisted gray cord with no visible clapper. Its cracked flared lip is green with patina, and a dark water stain circles the upper shoulder.",
+      "sellValue": 46,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 16
+        }
+      ]
+    },
+    "willow_heart_charm": {
+      "version": 2,
+      "definitionId": "willow_heart_charm",
+      "name": "Willow Heart Charm",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "rare",
+      "tier": 1,
+      "description": "A twisted dark willow knot forms a lopsided heart-shaped pendant with a small empty opening.",
+      "visualDescription": "A twisted dark willow knot forms a lopsided heart-shaped pendant with a small empty opening. Pale cut wood marks one side, and thin green vines attach it to a brown cord.",
+      "sellValue": 47,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 3
+        }
+      ]
+    },
+    "coal_cage_pendant": {
+      "version": 2,
+      "definitionId": "coal_cage_pendant",
+      "name": "Coal Cage Pendant",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "common",
+      "tier": 2,
+      "description": "A rough charcoal lump sits inside a small square iron cage on a short chain.",
+      "visualDescription": "A rough charcoal lump sits inside a small square iron cage on a short chain. Bright worn corners interrupt the cage's black surface, and one bar is repaired with copper wire.",
+      "sellValue": 19,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 6
+        }
+      ]
+    },
+    "smiths_thumbprint": {
+      "version": 2,
+      "definitionId": "smiths_thumbprint",
+      "name": "Smith's Thumbprint",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "common",
+      "tier": 2,
+      "description": "A thick oval bronze pendant carries one deep rounded thumb-shaped depression.",
+      "visualDescription": "A thick oval bronze pendant carries one deep rounded thumb-shaped depression. Soot darkens the hollow, and a broad iron loop joins the weight to a short red-brown leather cord.",
+      "sellValue": 20,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.005
+        }
+      ]
+    },
+    "quarry_spirit_stone": {
+      "version": 2,
+      "definitionId": "quarry_spirit_stone",
+      "name": "Quarry Spirit Stone",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "common",
+      "tier": 2,
+      "description": "A long rough ochre crystal hangs point downward inside two plain gray iron bands.",
+      "visualDescription": "A long rough ochre crystal hangs point downward inside two plain gray iron bands. Cream mineral streaks cross its cloudy sides beneath a heavy black cord loop.",
+      "sellValue": 16,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 200
+        }
+      ]
+    },
+    "broken_chain_charm": {
+      "version": 2,
+      "definitionId": "broken_chain_charm",
+      "name": "Broken Chain Charm",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "uncommon",
+      "tier": 2,
+      "description": "Three large flattened iron links hang from a dark leather necklace loop.",
+      "visualDescription": "Three large flattened iron links hang from a dark leather necklace loop. The lowest link is split open at one corner, exposing bright metal against the pitted charcoal-gray surface.",
+      "sellValue": 41,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 1500
+        }
+      ]
+    },
+    "ember_in_a_bottle": {
+      "version": 2,
+      "definitionId": "ember_in_a_bottle",
+      "name": "Ember in a Bottle",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "uncommon",
+      "tier": 2,
+      "description": "A tiny smoky glass vial holds a dim amber coal beneath a black iron stopper.",
+      "visualDescription": "A tiny smoky glass vial holds a dim amber coal beneath a black iron stopper. A narrow wire cage protects the vial, and a short brown cord passes through the stopper ring.",
+      "sellValue": 42,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 20
+        }
+      ]
+    },
+    "furnace_key": {
+      "version": 2,
+      "definitionId": "furnace_key",
+      "name": "Furnace Key",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "A thick black iron key hangs from a short chain, its broad rectangular teeth glowing dull rust-red.",
+      "visualDescription": "A thick black iron key hangs from a short chain, its broad rectangular teeth glowing dull rust-red. The circular bow has a single copper repair plate fixed by two large rivets.",
+      "sellValue": 93,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 4
+        }
+      ]
+    },
+    "oath_weight_pendant": {
+      "version": 2,
+      "definitionId": "oath_weight_pendant",
+      "name": "Oath Weight Pendant",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "A small octagonal bronze weight hangs from a flat silver-gray chain.",
+      "visualDescription": "A small octagonal bronze weight hangs from a flat silver-gray chain. One face carries a simple recessed vertical line, and dark tarnish outlines its worn bevels.",
+      "sellValue": 94,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 10
+        }
+      ]
+    },
+    "slag_heart": {
+      "version": 2,
+      "definitionId": "slag_heart",
+      "name": "Slag Heart",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "rare",
+      "tier": 2,
+      "description": "A porous black stone pendant has a heavy uneven teardrop silhouette.",
+      "visualDescription": "A porous black stone pendant has a heavy uneven teardrop silhouette. A thin amber mineral seam crosses its widest part beneath three dull iron claws and a soot-dark cloth cord.",
+      "sellValue": 90,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.01
+        }
+      ]
+    },
+    "frostbound_teardrop": {
+      "version": 2,
+      "definitionId": "frostbound_teardrop",
+      "name": "Frostbound Teardrop",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "common",
+      "tier": 3,
+      "description": "A cloudy pale-blue stone hangs in a long teardrop shape from a tarnished silver loop.",
+      "visualDescription": "A cloudy pale-blue stone hangs in a long teardrop shape from a tarnished silver loop. Fine white cracks remain beneath its smooth face, and gray thread wraps the narrow neck.",
+      "sellValue": 25,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 300
+        }
+      ]
+    },
+    "saltglass_vial": {
+      "version": 2,
+      "definitionId": "saltglass_vial",
+      "name": "Saltglass Vial",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "common",
+      "tier": 3,
+      "description": "A squat translucent smoky vial hangs from a faded teal cord inside a white-crusted iron cage.",
+      "visualDescription": "A squat translucent smoky vial hangs from a faded teal cord inside a white-crusted iron cage. Its pale sealed contents are still, and a broad silver-gray stopper sits slightly crooked.",
+      "sellValue": 26,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 1500
+        }
+      ]
+    },
+    "antler_tally": {
+      "version": 2,
+      "definitionId": "antler_tally",
+      "name": "Antler Tally",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "common",
+      "tier": 3,
+      "description": "A short flat strip of yellow antler hangs from a dark brown thong.",
+      "visualDescription": "A short flat strip of yellow antler hangs from a dark brown thong. Five deep diagonal cuts cross its face, and a small copper staple bridges a split below the suspension hole.",
+      "sellValue": 27,
+      "modifiers": [
+        {
+          "stat": "health",
+          "value": 24
+        }
+      ]
+    },
+    "blue_watch_medallion": {
+      "version": 2,
+      "definitionId": "blue_watch_medallion",
+      "name": "Blue Watch Medallion",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "uncommon",
+      "tier": 3,
+      "description": "A round deep-blue iron medallion has a raised narrow rim and a plain dark center.",
+      "visualDescription": "A round deep-blue iron medallion has a raised narrow rim and a plain dark center. Three small silver pins line its lower half beneath a thick gray cord and squared suspension loop.",
+      "sellValue": 64,
+      "modifiers": [
+        {
+          "stat": "damage",
+          "value": 4
+        }
+      ]
+    },
+    "silver_vigil_locket": {
+      "version": 2,
+      "definitionId": "silver_vigil_locket",
+      "name": "Silver Vigil Locket",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "uncommon",
+      "tier": 3,
+      "description": "A narrow tarnished silver locket has a long arched lid and a blackened hinge.",
+      "visualDescription": "A narrow tarnished silver locket has a long arched lid and a blackened hinge. An unlettered recessed panel fills the front, and a short violet cord loops through its heavy top ring.",
+      "sellValue": 60,
+      "modifiers": [
+        {
+          "stat": "armor",
+          "value": 11
+        }
+      ]
+    },
+    "regents_last_seal": {
+      "version": 2,
+      "definitionId": "regents_last_seal",
+      "name": "Regent's Last Seal",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A rectangular white-metal pendant bears a modest three-point crown above a dull blue stone.",
+      "visualDescription": "A rectangular white-metal pendant bears a modest three-point crown above a dull blue stone. Tarnished gold rivets secure its corners, and a flat dark chain passes through the top edge.",
+      "sellValue": 136,
+      "modifiers": [
+        {
+          "stat": "pushup_damage_coefficient",
+          "value": 0.0125
+        }
+      ]
+    },
+    "thawless_reliquary": {
+      "version": 2,
+      "definitionId": "thawless_reliquary",
+      "name": "Thawless Reliquary",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A small black iron reliquary encloses a cloudy blue-white crystal behind three narrow bars.",
+      "visualDescription": "A small black iron reliquary encloses a cloudy blue-white crystal behind three narrow bars. Frost gathers under its steep little roof, and a rough gray cord supports the heavy frame.",
+      "sellValue": 137,
+      "modifiers": [
+        {
+          "stat": "crit_chance_bps",
+          "value": 500
+        }
+      ]
+    },
+    "roadkeepers_knot": {
+      "version": 2,
+      "definitionId": "roadkeepers_knot",
+      "name": "Roadkeeper's Knot",
+      "kind": "amulet",
+      "category": "amulets",
+      "rarity": "rare",
+      "tier": 3,
+      "description": "A thick loop of weathered red-brown leather twists around a plain silver ring.",
+      "visualDescription": "A thick loop of weathered red-brown leather twists around a plain silver ring. Three small dark iron beads sit below the knot, and a pale repaired seam crosses the upper loop.",
+      "sellValue": 138,
+      "modifiers": [
+        {
+          "stat": "crit_damage_bps",
+          "value": 2500
+        }
+      ]
+    }
+  }
+}

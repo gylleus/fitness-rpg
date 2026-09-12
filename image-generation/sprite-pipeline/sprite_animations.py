@@ -20,10 +20,16 @@ def selected(config, enemies=None):
 
 
 def animate(run, enemies=None, action=None, mask_check_every=8):
+    config = load(run)
+    candidates = selected(config, enemies)
+    if not any(actions_for(config, entry) for entry in candidates):
+        if action:
+            raise ValueError("Selected assets do not define the requested action")
+        print("Static-only assets: no animation inference needed", flush=True)
+        return
     import run as wan_run
     from common import COMFY_REV, SAM_REV, PYX_REV
     from pipeline import worker
-    config = load(run)
     if type(mask_check_every) is not int or mask_check_every < 1:
         raise ValueError("Mask diagnostic interval must be a positive integer")
     if action and action not in config["actions"]:
@@ -34,6 +40,8 @@ def animate(run, enemies=None, action=None, mask_check_every=8):
             continue
         key = subject(entry)["id"]
         reference = run / "references" / key / "reference.png"
+        from reference_assets import verify_prepared
+        verify_prepared(reference.parent)
         for act in ([action] if action else actions_for(config, entry)):
             out = run / "animations" / key / act
             out.mkdir(parents=True, exist_ok=True)
@@ -205,6 +213,10 @@ def export(run, enemies=None, action=None, size=None, frame_step=None):
     size, columns = options["size"], options["columns"]
     for entry in selected(config, enemies):
         key = subject(entry)["id"]
+        if subject(entry).get("kind") == "background":
+            from backgrounds import export as export_background
+            export_background(run, entry, options, suffix)
+            continue
         reference = Image.open(run / "references" / key / "reference-cutout.png").convert("RGBA")
         source_meta = json.loads((run / "references" / key / "source.json").read_text())
         frames, paths = {}, {}
@@ -221,7 +233,7 @@ def export(run, enemies=None, action=None, size=None, frame_step=None):
         # Include the ground origin in the fit, including below hovering bodies.
         # This measurement-only marker is never added to any sprite pixels.
         origin = Image.new("RGBA", reference.size)
-        origin.putpixel(tuple(round(source_meta["pivot"][i]*512) for i in (0,1)), (255,255,255,255))
+        origin.putpixel(tuple(min(511, max(0, round(source_meta["pivot"][i]*512))) for i in (0,1)), (255,255,255,255))
         combined.append(origin)
         _, box = fixed_crop(combined, options["margin"])
         side = box[2]-box[0]
@@ -281,7 +293,7 @@ def export(run, enemies=None, action=None, size=None, frame_step=None):
                     rows.append((f"{key} / {act} / {label} / {size}px / step {options['frame_step']}",
                         [(str(schedule["indices"][i]), displayed[i]) for i in chosen]))
                     if schedule["repeat"] and len(displayed) >= 2:
-                        comparison([(f"{key} {label} actual idle wrap",
+                        comparison([(f"{key} {label} actual {act} wrap",
                             [(str(schedule["indices"][i]), displayed[i]) for i in (-2,-1,0,1)])], dest / "wrap.png")
                 if act == "reference":
                     continue
@@ -315,6 +327,7 @@ def review(run, enemies=None, action=None, size=None, frame_step=None):
         for act, result in manifest["actions"].items():
             folder = f"{export_root}/{key}/{act}"
             records.append({"name": subject(entry)["name"], id_field(config): key, "action": act,
+                "kind": subject(entry).get("kind", "enemy"),
                 "direction": "Static ready pose from the selected reference." if act == "reference" else motion(subject(entry), act),
                 "folder": folder, "timing": result["timing"],
                 "height_scale": manifest["height_scale"], "reference_review": reference_reviews.get(key, {}),
@@ -331,6 +344,8 @@ def review(run, enemies=None, action=None, size=None, frame_step=None):
     payload = json.dumps(records).replace("<", "\\u003c")
     template = (ROOT / "viewer.html").read_text()
     template = template.replace('href="comparison.png"', f'href="comparison{suffix}.png"').replace('href="index.json"', f'href="index{suffix}.json"')
+    if (run / "reference-review.html").exists():
+        template = template.replace('href="references.png"', 'href="reference-review.html"')
     (run / f"review{suffix}.html").write_text(template.replace("__DATA__", payload))
     save_json(run / f"index{suffix}.json", {"planned_assets": len(entries(config)),
         "completed_animations": sum(r["action"] != "reference" for r in records),
@@ -352,6 +367,7 @@ def package(run, enemies=None, action=None):
     paths = [p for folder in run.glob("exports*") if folder.is_dir() for p in folder.rglob("*") if p.is_file()]
     paths.extend(p for p in run.glob("*") if p.is_file() and p.suffix in (".png", ".html", ".json", ".md"))
     paths.extend(p for p in (run / "references").rglob("*") if p.is_file())
+    paths.extend(p for p in (run / "inputs").rglob("*") if p.is_file())
     archive = run / ("sprites.zip" if "assets" in config else "enemy-sprites.zip")
     with ZipFile(archive, "w", ZIP_DEFLATED) as z:
         for path in sorted(set(paths)):
@@ -370,6 +386,10 @@ def package(run, enemies=None, action=None):
             z.write(guide, "guide/"+guide.name)
             if guide.with_suffix(".json").exists():
                 z.write(guide.with_suffix(".json"), "guide/"+guide.with_suffix(".json").name)
+        for entry in entries(config):
+            if entry.get("reference_guide"):
+                guide = (run / entry["reference_guide"]["image"]).resolve()
+                z.write(guide, f"guide/{subject(entry)['id']}{guide.suffix}")
         for path in (BASE / "requirements.lock.txt", STUDY / "requirements.lock.txt", BASE / "models.lock.json", WAN / "models.lock.json"):
             z.write(path, "provenance/"+path.parent.name+"/"+path.name)
         for folder in (BASE, WAN):

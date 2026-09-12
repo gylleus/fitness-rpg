@@ -1,0 +1,15 @@
+{
+  "id": "silver_knuckle_maul",
+  "backend": "built-in imagegen",
+  "definition_sha256": "884035c528265cdc44242690d164bf6b1d4ecc27f775733c94e34ca3a68a081d",
+  "original": "image-generation/items/v1/sources/silver_knuckle_maul.png",
+  "source_sha256": "1a79b7ca5536fb88576a92836dbb5d3f40fed73405efee9570d25b11781e3d73",
+  "icon": "assets/items/silver_knuckle_maul.png",
+  "icon_sha256": "61c85704a0b7878fce63e929705be835f2931916cc48fdce5a5373f1081eff36",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Silver Knuckle Maul. A massive silvered iron fist forms the striking head, its four knuckles flattened by use. Tarnish darkens the spaces between the fingers, and the haft has a heavy dark-blue leather sleeve.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

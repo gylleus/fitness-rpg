@@ -1,5 +1,6 @@
 import argparse
 import json
+import hashlib
 from pathlib import Path
 import shutil
 import tempfile
@@ -11,6 +12,49 @@ from references import token_chunks, reference_anchor
 
 
 class BatchTests(unittest.TestCase):
+    def test_supplemental_walk_and_death_preserve_canonical_actions(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / "content"
+            self.fixture(root)
+            source = batch.load_content(root)
+            supplements = {}
+            for key, enemy in source["enemies"].items():
+                supplements[key] = {"source_sha256": hashlib.sha256(enemy["visual_description"].encode()).hexdigest(),
+                    "animations": {"walk": {"description": "Alternates its feet in place.", "loop": True},
+                                   "death": {"description": "Falls onto its side and remains still.", "loop": False}}}
+            motions = Path(temp) / "motions.json"
+            motions.write_text(json.dumps(supplements))
+            args = argparse.Namespace(content_dir=root, all_enemies=False, roster=root / "fixture_a/ENEMIES.toml",
+                enemy=None, facing="left", size=64, frame_step=2, seed=92001,
+                actions=["idle", "attack", "walk", "death"], run=Path(temp) / "run", captions=None,
+                reference_lora=.5, motions=motions)
+            batch.plan(args)
+            config = batch.load(args.run)
+            for entry in config["assets"]:
+                asset = entry["asset"]
+                self.assertEqual(batch.actions_for(config, entry), args.actions)
+                self.assertEqual([batch.looping(asset, a) for a in args.actions], [True, False, True, False])
+                for action in ("idle", "attack"):
+                    self.assertEqual(batch.motion(asset, action), source["enemies"][asset["id"]]["visual"][action])
+                self.assertIn("legs lift, pass and plant", entry["prompts"]["motions"]["walk"])
+                self.assertIn("No recovery, standing up, revival", entry["prompts"]["motions"]["death"])
+                self.assertNotIn("described recovery", entry["prompts"]["motions"]["death"])
+            self.assertEqual(batch.load_content(root), source)
+            supplements["test_enemy_a"]["source_sha256"] = "stale"
+            motions.write_text(json.dumps(supplements))
+            with self.assertRaisesRegex(ValueError, "stale"):
+                batch.plan(args)
+
+    def test_missing_motion_for_one_enemy_is_not_silently_skipped(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / "content"
+            self.fixture(root)
+            args = argparse.Namespace(content_dir=root, all_enemies=False, roster=root / "fixture_a/ENEMIES.toml",
+                enemy=None, facing="left", size=64, frame_step=2, seed=1, actions=["idle", "walk"],
+                run=Path(temp) / "run", captions=None, reference_lora=.5, motions=None)
+            with self.assertRaisesRegex(ValueError, "lacks requested animations"):
+                batch.plan(args)
+
     def fixture(self, root):
         from test_content import BIOME_FIXTURE, ENEMY_FIXTURE
         manifest = "schema_version = 1\n"

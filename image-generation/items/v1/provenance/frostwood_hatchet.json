@@ -1,0 +1,15 @@
+{
+  "id": "frostwood_hatchet",
+  "backend": "built-in imagegen",
+  "definition_sha256": "2395ba61e410d4d05b60c454cc736506dcf95fa9b6343234d49fe7399fffdcaa",
+  "original": "image-generation/items/v1/sources/frostwood_hatchet.png",
+  "source_sha256": "a57d4850c1a67ad94d23e5bb9ea6731b97e189790d2b5debba981d585e6dfb80",
+  "icon": "assets/items/frostwood_hatchet.png",
+  "icon_sha256": "23c3ecd79765740509673de628f6707dbec0f81ccd44b3a636e986bdf75ef256",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Frostwood Hatchet. A pale steel hatchet has a short angular blade and a gray-white wooden handle. Blue frost gathers under its thick socket, and a soft hide loop hangs from the rounded butt.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

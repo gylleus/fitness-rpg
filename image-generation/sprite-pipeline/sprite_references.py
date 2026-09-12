@@ -2,6 +2,7 @@
 import importlib.metadata
 import json
 import math
+import os
 from pathlib import Path
 import time
 
@@ -51,14 +52,19 @@ def conditioning(pipe, prompt, negative):
         "chunks": count, "truncated_tokens": 0}
 
 
+def reference_text(entry):
+    prompts = entry["prompts"]
+    return prompts["reference"], prompts.get("reference_negative", prompts["negative"])
+
+
 def generate(run):
-    import torch
-    from diffusers import AutoencoderKL, DPMSolverMultistepScheduler, StableDiffusionXLPipeline, StableDiffusionXLImg2ImgPipeline
-    from PIL import Image
-    from PIL.PngImagePlugin import PngInfo
     config = load(run)
     needed = []
     for entry in entries(config):
+        if entry.get("reference_input"):
+            from reference_assets import verify_input
+            verify_input(run, entry)
+            continue
         path = run / "originals" / (subject(entry)["id"] + ".png")
         if path.exists():
             record = json.loads(path.with_suffix(".json").read_text())
@@ -69,6 +75,10 @@ def generate(run):
     if not needed:
         print("All original references already verified", flush=True)
         return
+    import torch
+    from diffusers import AutoencoderKL, DPMSolverMultistepScheduler, StableDiffusionXLPipeline, StableDiffusionXLImg2ImgPipeline
+    from PIL import Image
+    from PIL.PngImagePlugin import PngInfo
     if not torch.cuda.is_available():
         raise RuntimeError("Local CUDA device unavailable")
     torch.set_num_threads(4)
@@ -78,7 +88,8 @@ def generate(run):
     torch.use_deterministic_algorithms(True)
     settings = config["reference_generation"]
     vae = AutoencoderKL.from_pretrained(STUDY / "models/vae", torch_dtype=torch.float16, local_files_only=True)
-    pipeline_class = StableDiffusionXLImg2ImgPipeline if settings.get("guide_image") else StableDiffusionXLPipeline
+    guided_only = bool(settings.get("guide_image")) or all(e.get("reference_guide") for e, _ in needed)
+    pipeline_class = StableDiffusionXLImg2ImgPipeline if guided_only else StableDiffusionXLPipeline
     pipe = pipeline_class.from_pretrained(STUDY / "models/sdxl", vae=vae, variant="fp16",
         torch_dtype=torch.float16, use_safetensors=True, local_files_only=True, add_watermarker=False)
     pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config,
@@ -86,6 +97,7 @@ def generate(run):
     pipe.load_lora_weights(str(STUDY / "models/pixel-art-xl"), weight_name="pixel-art-xl.safetensors", adapter_name="pixel")
     pipe.set_adapters("pixel", adapter_weights=settings["lora"]["weight"])
     pipe.to("cuda")
+    image_pipe = (pipe if guided_only else StableDiffusionXLImg2ImgPipeline.from_pipe(pipe)) if any(e.get("reference_guide") for e, _ in needed) else pipe
     save_json(run / "reference-environment.json", {"gpu": torch.cuda.get_device_name(),
         "vram": torch.cuda.get_device_properties(0).total_memory, "configuration": settings,
         "scheduler": dict(pipe.scheduler.config), "generator_device": "cpu", "deterministic": True,
@@ -95,16 +107,20 @@ def generate(run):
     for entry, path in needed:
         print("Generating reference:", subject(entry)["id"], flush=True)
         started = time.monotonic()
-        embeds, text_settings = conditioning(pipe, entry["prompts"]["reference"], entry["prompts"]["negative"])
+        embeds, text_settings = conditioning(pipe, *reference_text(entry))
         kwargs = {k: settings["generation"][k] for k in ("width", "height", "num_inference_steps", "guidance_scale")}
+        if subject(entry).get("kind") == "background":
+            from backgrounds import generation_size
+            kwargs.update(generation_size(subject(entry)))
         guide = None
-        if settings.get("guide_image"):
-            guide_path = (run / settings["guide_image"]).resolve()
-            if settings.get("guide_sha256") and sha256(guide_path) != settings["guide_sha256"]:
+        guide_spec = entry.get("reference_guide") or ({"image": settings["guide_image"], "strength": settings["guide_strength"], "sha256": settings["guide_sha256"]} if settings.get("guide_image") else None)
+        if guide_spec:
+            guide_path = (run / guide_spec["image"]).resolve()
+            if sha256(guide_path) != guide_spec["sha256"]:
                 raise ValueError("Guide image hash differs from the run plan")
-            guide = {"image": settings["guide_image"], "sha256": sha256(guide_path), "strength": settings["guide_strength"]}
-            kwargs.update(image=Image.open(guide_path).convert("RGB"), strength=settings["guide_strength"])
-        image = pipe(**embeds, **kwargs,
+            guide = dict(guide_spec)
+            kwargs.update(image=Image.open(guide_path).convert("RGB"), strength=guide_spec["strength"])
+        image = (image_pipe if guide else pipe)(**embeds, **kwargs,
             generator=torch.Generator(device="cpu").manual_seed(entry["seeds"]["reference"])).images[0]
         record = {"entry": entry, "settings": settings, "conditioning": text_settings, "guide": guide,
             "seconds": time.monotonic()-started, "size": list(image.size), "mode": image.mode}
@@ -135,6 +151,7 @@ def prepare(run):
     from PIL import Image, ImageOps
     from masking import biref_session, extract
     from pixels import fixed_crop, convert, comparison
+    from reference_assets import prepare_input, publish, review, verify_prepared
     config = load(run)
     selections_path = run / "selection.json"
     selections = json.loads(selections_path.read_text()) if selections_path.exists() else {}
@@ -143,6 +160,15 @@ def prepare(run):
     for entry in entries(config):
         key = subject(entry)["id"]
         selection = selections.get(key, {})
+        if entry.get("reference_input"):
+            if selection:
+                raise ValueError("Edit the supplied pixel PNG and plan a new run instead of using selection.json")
+            prepare_input(run, entry)
+            continue
+        if subject(entry).get("kind") == "background":
+            from backgrounds import prepare as prepare_background
+            prepare_background(run, entry, selection)
+            continue
         original = (run / selection.get("source", f"originals/{key}.png")).resolve()
         selected_image = Image.open(original).convert("RGBA")
         if selection.get("crop"):
@@ -167,7 +193,7 @@ def prepare(run):
             bg.alpha_composite(enlarged)
             bg.convert("RGB").save(out / "reference.png")
             save_json(record_path, {"original_sha256": sha256(original), "mask_method": method,
-                "original": str(original.relative_to(ROOT.parent)), "selection": selection,
+                "original": os.path.relpath(original, ROOT.parent), "selection": selection,
                 "original_record": (json.loads(original.with_suffix(".json").read_text()) if original.with_suffix(".json").exists()
                                     else {"origin": "provided image", "generation_metadata": "unavailable"}),
                 "crop": box, "native_size": 128, "upscale": 4, "background": "#8b9bb4",
@@ -177,13 +203,20 @@ def prepare(run):
                 "source_palette": subject(entry)["visual"]["palette"], "output_palette": "ENDESGA 32",
                 "note": "Source palette guides prose colors; visible output is mapped to ENDESGA32. Scale is a display ratio, not source-image resolution."})
         else:
-            record = json.loads(record_path.read_text())
+            record = verify_prepared(out)
             if record["original_sha256"] != sha256(original) or record["reference_sha256"] != sha256(out / "reference.png") or record.get("selection", {}) != selection:
                 raise ValueError("Prepared reference hash mismatch")
             # Pivot metadata can evolve without changing any conditioning pixels.
             record.update(reference_anchor(Image.open(out / "native-128.png").convert("RGBA"), subject(entry)["visual"]))
             save_json(record_path, record)
+        record = json.loads(record_path.read_text())
+        if "prepared_sha256" not in record:
+            record["prepared_sha256"] = {p.name: sha256(p) for p in out.glob("*.png")}
+            save_json(record_path, record)
+        publish(run, entry)
         rows.append((key, [("selected source", selected_image.resize((128,128), Image.Resampling.NEAREST)),
                            ("masked, ENDESGA", Image.open(out / "native-128.png"))]))
         print("Prepared", key, flush=True)
-    comparison(rows, run / "references.png")
+    if rows:
+        comparison(rows, run / "references.png")
+    review(run)

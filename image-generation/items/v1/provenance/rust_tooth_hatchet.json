@@ -1,0 +1,15 @@
+{
+  "id": "rust_tooth_hatchet",
+  "backend": "built-in imagegen",
+  "definition_sha256": "952aecb72abdbad4b192ed46835a4131742241fb483bfef38286b422c4b6f267",
+  "original": "image-generation/items/v1/sources/rust_tooth_hatchet.png",
+  "source_sha256": "0b7947c4017175f9148194bd0e4c8a98e5805ea385a7d4e52fced701fbcf64b6",
+  "icon": "assets/items/rust_tooth_hatchet.png",
+  "icon_sha256": "9e2b63ed11502eb22c5c272e04247d419ddcd8103b090d5a38183d8d7db28e0a",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Rust Tooth Hatchet. A squat iron hatchet has three blunt notches along the back of its head. Deep rust fills the notches, contrasting with a newly sharpened pale edge and a rawhide-bound handle.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

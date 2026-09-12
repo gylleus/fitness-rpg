@@ -1,0 +1,68 @@
+{
+  "asset_id": "barbarian_player",
+  "name": "Barbarian",
+  "facing": "right",
+  "frame_size": [
+    128,
+    128
+  ],
+  "pivot": [
+    0.4713493530499076,
+    0.8835489833641405
+  ],
+  "height_scale": 1,
+  "reference_idle_height_px": 94.40295748613678,
+  "shared_crop": [
+    65,
+    82,
+    606,
+    623
+  ],
+  "actions": {
+    "idle": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "walk": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "attack": {
+      "timing": {
+        "repeat": false
+      }
+    },
+    "death": {
+      "timing": {
+        "repeat": false
+      }
+    }
+  },
+  "source": {
+    "idle": {
+      "source": "idle.png",
+      "sha256": "7ada42799930804e76c452e02cb505eeccfb94d725fe11862ed81741037c8dc0"
+    },
+    "walk": {
+      "source": "walk.png",
+      "sha256": "2c26ba4b9448c6b99a4464e120fb25b60c1b3da56ce301371ffa1941ef3f8a24"
+    },
+    "attack": {
+      "source": "attack.png",
+      "sha256": "0ffe9929e0cfaa1400e9e8d95f33ff19111690304018651144a4e4aa8f3e7d39"
+    },
+    "death": {
+      "source": "death.png",
+      "sha256": "88db3234fc7908a9f5f22ed934d9936f44b12b05664b61f75c685114d8b8c24e"
+    }
+  },
+  "backend": "built-in imagegen frame sheets, imported on CPU",
+  "recipe_sha256": "9dbce2a2f12592f75f67f59f453509c0fcdb2cdb5a5e6b53cdaa69cd0b71f4a1",
+  "code_sha256": {
+    "sheet_import.py": "d6cc266480e76ab89ebfc739d88743b5d42fc58730b461b99f60f8c1782724b4",
+    "pixels.py": "fa49c9f048211472dc89c9e692b982ce88685c9c9ab82a0241f11502c270dbc4"
+  },
+  "framing": "Explicit source rectangles and ground origins; one union crop/scale for all actions."
+}

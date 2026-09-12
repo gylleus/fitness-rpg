@@ -1,0 +1,25 @@
+[project]
+name = "fitness-rpg-tools"
+version = "0.1.0"
+description = "Repository commands for authored content and the local sprite pipeline"
+requires-python = ">=3.12,<3.13"
+dependencies = []
+
+[project.scripts]
+sprites = "frpg_tools.cli:sprites"
+enemy-sprites = "frpg_tools.cli:enemy_sprites"
+sprite-python = "frpg_tools.cli:sprite_python"
+sprite-setup = "frpg_tools.cli:sprite_setup"
+content = "frpg_tools.cli:content"
+
+[build-system]
+requires = ["uv_build==0.12.5"]
+build-backend = "uv_build"
+
+[tool.uv]
+required-version = ">=0.12.5"
+cache-dir = ".cache/uv"
+
+[tool.uv.build-backend]
+module-name = "frpg_tools"
+module-root = "tools/python"

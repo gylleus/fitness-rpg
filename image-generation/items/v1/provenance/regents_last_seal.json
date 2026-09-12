@@ -1,0 +1,21 @@
+{
+  "id": "regents_last_seal",
+  "backend": "built-in imagegen",
+  "definition_sha256": "22a8b4c71f0a90d3f2be9cfe14b453764d3ba3a1ec4380dfca95e408f01f361f",
+  "original": "image-generation/items/v1/sources/regents_last_seal.png",
+  "source_sha256": "f6ddf27158d6a6ab6d171d69a38f5bfa17dc63ffc7dc2abcf2d61bddcc14ae35",
+  "icon": "assets/items/regents_last_seal.png",
+  "icon_sha256": "45a5e25f82d45a5295a8887ea5d2a1f32aec7883d6de1bc7a6446f1f08ffa907",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick transparent-border trim and Point fit within 56x56; original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Regent's Last Seal. A rectangular white-metal pendant bears a modest three-point crown above a dull blue stone. Tarnished gold rivets secure its corners, and a flat dark chain passes through the top edge.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.\nCRITICAL NECKLACE FRAMING: Draw the WHOLE small necklace laid out flat as a compact closed oval cord or chain above its pendant. The ENTIRE top curve of the CLOSED oval must be visible. The cord/chain does NOT lead upward out of the image. Keep a very generous empty transparent margin on all four sides. Make the WHOLE object only 65% of the square canvas height and width maximum, centered. All visible pixels, including every piece of cord or chain, must be comfortably inside the canvas. True transparent PNG alpha; do NOT draw any checkerboard, gray surface, paper, texture or background. One entire necklace only, with complete cord or chain and pendant, no wearer. Favor bold simple 64x64 pixel clusters.",
+  "supersedes": {
+    "archive": "image-generation/items/v1/sources/rejected/regents_last_seal-f857e7e6230a",
+    "source_sha256": "f6ddf27158d6a6ab6d171d69a38f5bfa17dc63ffc7dc2abcf2d61bddcc14ae35",
+    "icon_sha256": "f857e7e6230ac7ec8aae3e3be3db3548f2edc8fc5a8f3ff40bfde0b2b7e327fb",
+    "reason": "Replaced after visual and pixel-boundary review"
+  }
+}

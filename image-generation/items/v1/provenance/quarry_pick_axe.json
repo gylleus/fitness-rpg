@@ -1,0 +1,15 @@
+{
+  "id": "quarry_pick_axe",
+  "backend": "built-in imagegen",
+  "definition_sha256": "ae6bf5994c1607ac73d2614b973dc941dd4a6e8543a7046c01316a9485cf6681",
+  "original": "image-generation/items/v1/sources/quarry_pick_axe.png",
+  "source_sha256": "525c771dfdacebff9b2114832127cc50c46f416dff79f3bc4b101c789bdb9a13",
+  "icon": "assets/items/quarry_pick_axe.png",
+  "icon_sha256": "ff32114a5f92290bb84e227d59a7a4951e2ccbbc397330e606e5dd00e051990f",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Quarry Pick Axe. A square-backed axe blade shares its iron socket with a short pointed pick. Ochre chips cling to both faces, and three iron staples visibly mend the heavy wooden haft.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

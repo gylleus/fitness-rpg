@@ -1,0 +1,15 @@
+{
+  "id": "last_coin_ring",
+  "backend": "built-in imagegen",
+  "definition_sha256": "b6c8b6143d5d6ea4d01526ebf9d4f43ca9f4b323c666562ce1def8b2ce484071",
+  "original": "image-generation/items/v1/sources/last_coin_ring.png",
+  "source_sha256": "69075c9b57e85f357cc878b2d42752f007f9047904bc150ed500f56364f01a42",
+  "icon": "assets/items/last_coin_ring.png",
+  "icon_sha256": "ced8d852b437bf9e0779249deccd47e87fdb2ed83d6cd3c189e6f7612e531b7d",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Last Coin Ring. A battered silver coin has been bent into a broad open ring. Its raised rim survives at both edges, while the worn central face shows only an indistinct dark circular impression.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

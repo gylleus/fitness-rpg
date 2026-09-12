@@ -1,0 +1,15 @@
+{
+  "id": "brass_guard_estoc",
+  "backend": "built-in imagegen",
+  "definition_sha256": "d47bb50f6de3afa5664e87ead6f4ff9f9a297c94a4fc662ab3746a4ebced732f",
+  "original": "image-generation/items/v1/sources/brass_guard_estoc.png",
+  "source_sha256": "9228f1790004ab90e6f8aa9473dc649a0e77ec8e3f2b81fd510b2472d1183f09",
+  "icon": "assets/items/brass_guard_estoc.png",
+  "icon_sha256": "80c0ea676e8792043bc195c99354cea8337508b4d4fc4eac53a5cf3de0e1a2c3",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Brass-guard Estoc. An extremely narrow triangular sword blade extends from a large dull brass crossguard. The leather grip is slim and straight, with a small pear-shaped pommel and no decorative stones.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

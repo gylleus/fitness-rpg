@@ -1,0 +1,15 @@
+{
+  "id": "charcoal_splitter",
+  "backend": "built-in imagegen",
+  "definition_sha256": "3c6ec2cd93cc2ab54ce6828d7d149b675b633225036f791b32f03144c80fbb4a",
+  "original": "image-generation/items/v1/sources/charcoal_splitter.png",
+  "source_sha256": "e632ca05e3a523fa0a784042b86471fbb5edbc31dc19b9e87127673de30e901b",
+  "icon": "assets/items/charcoal_splitter.png",
+  "icon_sha256": "421876abfcc6ca33b5c8c64a4e6b3b655e1c07797b2fb656a751d4c5546e451f",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Charcoal Splitter. A thick wedge-shaped splitting axe has a charcoal-black head and a broad polished bevel. Gray ash collects around the socket above a red-brown shaft darkened at both ends.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

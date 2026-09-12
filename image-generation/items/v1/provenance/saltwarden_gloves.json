@@ -1,0 +1,15 @@
+{
+  "id": "saltwarden_gloves",
+  "backend": "built-in imagegen",
+  "definition_sha256": "34f3952ecf9c8484ec26a22597cb9083c1f033a88e41f61ff423250852d80fb1",
+  "original": "image-generation/items/v1/sources/saltwarden_gloves.png",
+  "source_sha256": "76f8ba50a709231d705473f3cde66b67735376a21d9790bf3d0821bc30ff5eea",
+  "icon": "assets/items/saltwarden_gloves.png",
+  "icon_sha256": "33c17ac97d27346f578dd4effbfc35d0544d81fa0444b99cbfadb55a49cc4874",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Saltwarden Gloves. Faded teal leather gloves have white salt crust around the finger joints. Small gray steel plates protect the knuckles, and long narrow straps spiral around each wrist.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

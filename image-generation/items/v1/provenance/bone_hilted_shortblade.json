@@ -1,0 +1,15 @@
+{
+  "id": "bone_hilted_shortblade",
+  "backend": "built-in imagegen",
+  "definition_sha256": "a64e629c22701d271ced1e6a76e62629fce2b6ab796ec10eb767245981ad7b27",
+  "original": "image-generation/items/v1/sources/bone_hilted_shortblade.png",
+  "source_sha256": "d07b28fcd8d36643c98e4f92e081fb4c415b18b9706e806380ddad7d71d80603",
+  "icon": "assets/items/bone_hilted_shortblade.png",
+  "icon_sha256": "695a1bc855c0aaa637fb3fd09cab668e4e86c5d265c0fecad69857d3d5356250",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Bone-hilted Shortblade. A squat triangular steel blade is fitted to a polished yellow-bone handle. Two black pins cross the bone, and the tiny crescent guard has been filed smooth on its inner edge.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

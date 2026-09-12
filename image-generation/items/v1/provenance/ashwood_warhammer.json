@@ -1,0 +1,15 @@
+{
+  "id": "ashwood_warhammer",
+  "backend": "built-in imagegen",
+  "definition_sha256": "c01cf2df20681ba34b9182fb7faa1921569d62c6c41c4ee32ac31edd9edd8354",
+  "original": "image-generation/items/v1/sources/ashwood_warhammer.png",
+  "source_sha256": "e351a008cdef3c8c8849bdd45b31e93d675244516d161410826347c2a3701503",
+  "icon": "assets/items/ashwood_warhammer.png",
+  "icon_sha256": "503e25506d12b64bd05635c3ab52b160149d69db5fee65a1e1f849ba654fb019",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Ashwood Warhammer. A slim ash shaft supports a square steel striking face and a short hooked rear beak. The pale handle has dark scorch rings and a small weighted ring at its base.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

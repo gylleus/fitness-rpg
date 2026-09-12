@@ -8,6 +8,7 @@ import { attackPower, CHALLENGES, dayStart, fitnessDay, heroStats, localDay, nex
 import { FOCUS_ATTACKS, HEALING_HP, POTIONS, type Potion } from '../game/items';
 import { getEquipped, getInventory, initializeInventory } from './inventory';
 import { dungeonSeed } from '../game/random';
+import { upgradeGear } from '../game/equipment';
 
 // Both production Expo SQLite and the test SQLite driver execute synchronously.
 // Never put an async callback inside these transactions.
@@ -16,7 +17,7 @@ export type GameDb = BaseSQLiteDatabase<'sync', unknown, typeof schema>;
 export function getHero(db: GameDb) {
   db.insert(heroes).values({ id: 1 }).onConflictDoNothing().run();
   const hero = db.select().from(heroes).where(eq(heroes.id, 1)).get()!;
-  if (hero.inventoryVersion < 1) { initializeInventory(db); return { ...hero, inventoryVersion: 1 }; }
+  if (hero.inventoryVersion < 2) { initializeInventory(db); return { ...hero, inventoryVersion: 2 }; }
   return hero;
 }
 
@@ -155,7 +156,7 @@ export function startDungeon(db: GameDb, dungeonId: number, now = Date.now()) {
     const day = localDay(now);
     const stats = heroStats(hero, getFitnessDay(tx, day), getSavedPushups(tx), getEquipped(tx));
     const health = availableHealth(hero, stats.health, day);
-    if (health <= 0) throw new Error('Your hero needs more health. Walk, drink a healing potion, equip better armor, or return tomorrow.');
+    if (health <= 0) throw new Error('Your hero needs more health. Walk, drink a healing potion, equip health bonuses, or return tomorrow.');
     tx.insert(dungeonSeeds).values({ dungeonId }).onConflictDoNothing().run();
     const generation = tx.select().from(dungeonSeeds).where(eq(dungeonSeeds.dungeonId, dungeonId)).get()!.victories;
     const state = beginBattle(dungeonId, day, stats, health, { focusAttacks: hero.focusAttacks,
@@ -181,6 +182,9 @@ export function advanceDungeon(db: GameDb, id: number, expectedTick: number, now
       // health does not refill the hero on victory; the exact remaining HP stays.
       const maxHealth = heroStats({ ...hero, xp: hero.xp + next.xp }, getFitnessDay(tx, next.day), getSavedPushups(tx), getEquipped(tx)).health;
       if (next.rng) {
+        // A pre-catalog run can finish after the bag migration. The awarded
+        // snapshot and result preview must show the same upgraded item.
+        if (next.loot) next.loot = next.loot.map(drop => ({ ...drop, item: upgradeGear(drop.item) }));
         for (const [i, drop] of (next.loot ?? []).entries()) {
           tx.insert(inventoryItems).values({ item: drop.item, slot: null, acquiredAt: now, sourceKey: `run:${id}:loot:${i}` }).run();
         }

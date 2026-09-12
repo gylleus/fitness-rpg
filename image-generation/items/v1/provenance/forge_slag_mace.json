@@ -1,0 +1,15 @@
+{
+  "id": "forge_slag_mace",
+  "backend": "built-in imagegen",
+  "definition_sha256": "58a88e74a98c8d621b2462ae1a603d0abe5740b2c0e8144e7698246ce7260a9d",
+  "original": "image-generation/items/v1/sources/forge_slag_mace.png",
+  "source_sha256": "bb6b3e037ae51989694367724ea2a66eb2c750961aba937af85990b8d42f194d",
+  "icon": "assets/items/forge_slag_mace.png",
+  "icon_sha256": "d03ab352769cf32b8e1be8a1e36f7376031fa2d840b96e7d864d32d6d8f5608d",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Forge Slag Mace. A lopsided lump of porous charcoal-black slag encloses an iron mace head. Rust-red cracks cross the crust, while a broad copper collar separates it from a straight soot-dark handle.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

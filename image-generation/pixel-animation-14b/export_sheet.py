@@ -29,12 +29,16 @@ def skip_frames(loop, frame_step=1):
     if len(indices) != len(durations) or len(indices) < 2 or any(d <= 0 for d in durations):
         raise ValueError("Invalid source loop")
     positions = list(range(0, len(indices), frame_step))
+    # A one-shot's settled ending is meaningful (especially death). Keep it
+    # even when the stride misses it, borrowing its hold from the prior group.
+    if loop.get("repeat") is False and positions[-1] != len(indices) - 1:
+        positions.append(len(indices) - 1)
     if len(positions) < 2:
         raise ValueError("Frame step must retain at least two poses")
     return {**loop, "indices": [indices[p] for p in positions],
-        "durations_ms": [sum(durations[p:p + frame_step]) for p in positions],
+        "durations_ms": [sum(durations[p:end]) for p, end in zip(positions, positions[1:] + [len(indices)])],
         "frame_step": frame_step,
-        "selection": "Every Nth displayed source frame; omitted frame times extend the previous pose, including the final partial group. Full cycle duration preserved."}
+        "selection": "Every Nth displayed source frame, plus the final pose for one-shots. Omitted frame times extend the previous pose. Full duration preserved."}
 
 
 def verify(folder, size, count, duration, columns):

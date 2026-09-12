@@ -1,0 +1,15 @@
+{
+  "id": "ferrymans_obol",
+  "backend": "built-in imagegen",
+  "definition_sha256": "5851791a50e50a4008afab3a1091d48dbf34a3cb10233b13d60ac9de5baf39d8",
+  "original": "image-generation/items/v1/sources/ferrymans_obol.png",
+  "source_sha256": "49437a840bbbf9ce77e909bf30998fb8eba0ccd8a688f79cfae581814e8fe053",
+  "icon": "assets/items/ferrymans_obol.png",
+  "icon_sha256": "11af415754b4203f4363302c5d6cd3dc1bbc86576e85c2a7903948dc21d9cef5",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Ferryman's Obol. A worn bronze coin hangs from a black cord through an off-center hole. A simple boat-shaped groove remains on its green-stained face, and the lower rim is chipped into a small crescent.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

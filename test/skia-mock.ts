@@ -6,10 +6,13 @@ jest.mock('@shopify/react-native-skia', () => {
   const { createElement } = require('react');
   const image = {};
   return {
-    Canvas: View, Group: View,
+    Canvas: View, Group: View, Image: View, Rect: View,
+    ImageShader: (props: Record<string, unknown>) => createElement(View, { ...props, testID: 'native-scene-shader' }),
     Atlas: (props: Record<string, unknown>) => createElement(View, { ...props, testID: 'native-sprite-atlas' }),
     FilterMode: { Nearest: 0 }, MipmapMode: { None: 0 },
     Skia: { RSXform: (scos: number, ssin: number, tx: number, ty: number) => ({ scos, ssin, tx, ty }) },
     useImage: () => image,
   };
 });
+
+jest.mock('react-native-reanimated', () => require('./shared-value-mock'));

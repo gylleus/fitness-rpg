@@ -41,12 +41,12 @@ It contains the exact prompts used, even if the general prompt builder evolves.
 All commands run from the repository root with the existing local environment:
 
 ```bash
-image-generation/sprite-animation/.venv/bin/python image-generation/sprite-pipeline/sprites.py references --run image-generation/player-sprites/runs/barbarian-v6
-image-generation/sprite-animation/.venv/bin/python image-generation/sprite-pipeline/sprites.py prepare --run image-generation/player-sprites/runs/barbarian-v6
-image-generation/sprite-animation/.venv/bin/python image-generation/sprite-pipeline/sprites.py animate --run image-generation/player-sprites/runs/barbarian-v6 --mask-check-every 22
-image-generation/sprite-animation/.venv/bin/python image-generation/sprite-pipeline/sprites.py export --run image-generation/player-sprites/runs/barbarian-v6
-image-generation/sprite-animation/.venv/bin/python image-generation/sprite-pipeline/sprites.py review --run image-generation/player-sprites/runs/barbarian-v6
-image-generation/sprite-animation/.venv/bin/python image-generation/sprite-pipeline/sprites.py package --run image-generation/player-sprites/runs/barbarian-v6
+uv run sprites references --run image-generation/player-sprites/runs/barbarian-v6
+uv run sprites prepare --run image-generation/player-sprites/runs/barbarian-v6
+uv run sprites animate --run image-generation/player-sprites/runs/barbarian-v6 --mask-check-every 22
+uv run sprites export --run image-generation/player-sprites/runs/barbarian-v6
+uv run sprites review --run image-generation/player-sprites/runs/barbarian-v6
+uv run sprites package --run image-generation/player-sprites/runs/barbarian-v6
 ```
 
 `all --run image-generation/player-sprites/runs/barbarian-v6 --mask-check-every 22`
@@ -55,8 +55,8 @@ To experiment with a new definition or seed, use a new run directory and the
 current planner instead of replanning an old recipe:
 
 ```bash
-image-generation/sprite-animation/.venv/bin/python image-generation/sprite-pipeline/sprites.py plan --definition image-generation/player-sprites/barbarian.toml --run image-generation/player-sprites/runs/NEW_RUN --seed 91006 --reference-lora 0.35 --guide-image image-generation/player-sprites/guides/barbarian-profile.png --guide-strength 0.72 --size 64 --frame-step 2
-image-generation/sprite-animation/.venv/bin/python image-generation/sprite-pipeline/sprites.py all --run image-generation/player-sprites/runs/NEW_RUN --mask-check-every 22
+uv run sprites plan --definition image-generation/player-sprites/barbarian.toml --run image-generation/player-sprites/runs/NEW_RUN --seed 91006 --reference-lora 0.35 --guide-image image-generation/player-sprites/guides/barbarian-profile.png --guide-strength 0.72 --size 64 --frame-step 2
+uv run sprites all --run image-generation/player-sprites/runs/NEW_RUN --mask-check-every 22
 ```
 
 The pose guide is a recorded crop of the left subject in trial v2, resized with
@@ -66,8 +66,8 @@ To rebuild it from the saved trial:
 ```bash
 mkdir -p image-generation/player-sprites/runs/barbarian-v2
 cp -n image-generation/player-sprites/recipes/barbarian-v2.json image-generation/player-sprites/runs/barbarian-v2/config.json
-image-generation/sprite-animation/.venv/bin/python image-generation/sprite-pipeline/sprites.py references --run image-generation/player-sprites/runs/barbarian-v2
-image-generation/sprite-animation/.venv/bin/python image-generation/player-sprites/rebuild_guide.py
+uv run sprites references --run image-generation/player-sprites/runs/barbarian-v2
+uv run sprite-python image-generation/player-sprites/rebuild_guide.py
 ```
 
 The crop recipe includes both source-file and decoded-pixel hashes. Rebuilding
@@ -106,7 +106,7 @@ durations, source frame indices, pivot, and scale when integrating into the game
 To change pixel resolution or cadence without regenerating the video:
 
 ```bash
-image-generation/sprite-animation/.venv/bin/python image-generation/sprite-pipeline/sprites.py export --run image-generation/player-sprites/runs/barbarian-v6 --size 128 --frame-step 4
+uv run sprites export --run image-generation/player-sprites/runs/barbarian-v6 --size 128 --frame-step 4
 ```
 
 The new export goes to a separate directory. A walk/run cycle, hurt, death,

@@ -8,6 +8,7 @@ from pathlib import Path
 import re
 import sys
 import tomllib
+from item_catalog import load_items
 
 CONTENT_ROOT = Path(__file__).resolve().parents[1] / "content"
 ID = re.compile(r"[a-z][a-z0-9]*(?:_[a-z0-9]+)*\Z")
@@ -232,7 +233,8 @@ def validate_biome(biome, asset_ids):
 def load_content(root=CONTENT_ROOT):
     """Load all definition owners before resolving encounters, regardless of file order."""
     manifest = read_toml(root, "catalog.toml")
-    shape(manifest, ("schema_version", "biomes"), "catalog.toml", ("shared_enemies_file",))
+    shape(manifest, ("schema_version", "biomes"), "catalog.toml", ("shared_enemies_file", "item_files"))
+    items = load_items(root, manifest.get("item_files", []))
     shared = {"catalog": {}, "combat": {}, "art": {}, "dungeons": [], "enemies": []}
     sources = set()
     if "shared_enemies_file" in manifest:
@@ -304,7 +306,7 @@ def load_content(root=CONTENT_ROOT):
         require(all(key in enemies for key in dungeon["enemy_ids"]), f"{dungeon['id']}: unknown enemy ID")
         require(enemies[dungeon["enemy_ids"][-1]]["rank"] == "boss", f"{dungeon['id']}: final enemy must be a boss")
     return {"schema_version": 1, "catalog": catalog, "art": shared["art"], "combat": shared["combat"],
-            "dungeons": shared["dungeons"], "enemies": enemies, "biomes": biomes}
+            "dungeons": shared["dungeons"], "enemies": enemies, "biomes": biomes, "items": items}
 
 
 def resolved_export(content, biome_id=None):
@@ -317,7 +319,7 @@ def resolved_export(content, biome_id=None):
         encounters = [{**entry, "enemy": content["enemies"][entry["enemy_id"]]} for entry in biome["encounters"]]
         biomes.append({**biome, "encounters": encounters})
     return {"schema_version": 1, "catalog": content["catalog"], "art": content["art"],
-            "combat": content["combat"], "biomes": biomes}
+            "combat": content["combat"], "biomes": biomes, "items": list(content["items"].values())}
 
 
 def main():
@@ -337,7 +339,7 @@ def main():
             else:
                 Path(args.export_json).write_text(output, encoding="utf-8")
         count = sum(len(biome["encounters"]) for biome in content["biomes"].values())
-        print(f"Valid: {len(content['biomes'])} biomes, {len(content['enemies'])} enemies, {count} encounters.",
+        print(f"Valid: {len(content['biomes'])} biomes, {len(content['enemies'])} enemies, {count} encounters, {len(content['items'])} items.",
               file=sys.stderr if args.export_json == "-" else sys.stdout)
     except (OSError, ValueError) as error:
         parser.exit(1, f"Content error: {error}\n")

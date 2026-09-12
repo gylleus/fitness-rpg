@@ -10,6 +10,40 @@ import sprite_animations as animations
 
 
 class AssetTests(unittest.TestCase):
+    def test_per_asset_guides_record_content_and_reject_stale_replans(self):
+        from PIL import Image
+        assets, art = sprites.definitions(sprites.ROOT.parent / "player-sprites/barbarian.toml")
+        key = assets[0]["id"]
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            guide = root / "guide.png"
+            Image.new("RGB", (16, 16), "gray").save(guide)
+            mapping = root / "guides.json"
+            mapping.write_text(json.dumps({key: {"image": "guide.png", "strength": .6}}))
+            args = self.args(root / "run")
+            args.reference_guides = mapping
+            sprites.make_plan(args, assets, art, {})
+            spec = sprites.load(args.run)["assets"][0]["reference_guide"]
+            self.assertEqual(spec["image"], "../guide.png")
+            self.assertEqual(spec["sha256"], sprites.sha256(guide))
+            Image.new("RGB", (16, 16), "black").save(guide)
+            with self.assertRaisesRegex(ValueError, "different inputs/settings"):
+                sprites.make_plan(args, assets, art, {})
+            mapping.write_text(json.dumps({"unknown": {"image": "guide.png", "strength": .6}}))
+            with self.assertRaisesRegex(ValueError, "selected assets"):
+                sprites.make_plan(args, assets, art, {})
+
+    def test_death_is_one_shot_and_walk_timing_keeps_the_cycle(self):
+        with self.assertRaisesRegex(ValueError, "one-shot"):
+            sprites.validate_animations({"death": {"description": "Falls.", "loop": True}})
+        walk = animations.timing(45, 16, "walk", 2, True)
+        death = animations.timing(45, 16, "death", 2, False)
+        self.assertEqual(walk["indices"], list(range(0, 44, 2)))
+        self.assertEqual(death["indices"], list(range(0, 45, 2)))
+        self.assertEqual(sum(walk["durations_ms"]), 2750)
+        self.assertEqual(sum(death["durations_ms"]), 2812)
+        self.assertFalse(death["repeat"])
+
     def args(self, root):
         return argparse.Namespace(run=root, size=64, frame_step=2, facing="right", asset=None,
                                   actions=None, seed=1, reference_lora=.65, captions=None)

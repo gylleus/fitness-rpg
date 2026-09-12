@@ -1,0 +1,273 @@
+schema_version = 1
+category = "body_armor"
+kind = "armor"
+
+[generation]
+canvas = [64, 64]
+transparent = true
+style = "Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters."
+composition = "One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item."
+
+[[items]]
+id = "travel_wraps"
+name = "Travel Wraps"
+tier = 1
+rarity = "common"
+sell_value = 3
+description = "A sleeveless wrap of coarse brown cloth crosses the chest with an uneven overlap."
+visual_description = "A sleeveless wrap of coarse brown cloth crosses the chest with an uneven overlap. Large cream stitches repair the lower hem, and a narrow leather belt passes through two tarnished buckles."
+stats = { armor = 2 }
+modifiers = []
+
+[[items]]
+id = "hide_armor"
+name = "Patched Hide Armor"
+tier = 1
+rarity = "common"
+sell_value = 9
+description = "A squat sleeveless hide vest has overlapping dark-brown panels and broad rawhide shoulder straps."
+visual_description = "A squat sleeveless hide vest has overlapping dark-brown panels and broad rawhide shoulder straps. An oversized pale patch covers one side of the chest, held by thick crooked stitches."
+stats = { armor = 12 }
+modifiers = []
+
+[[items]]
+id = "reed_woven_vest"
+name = "Reed-woven Vest"
+tier = 1
+rarity = "common"
+sell_value = 10
+description = "Flattened olive reeds form a rigid vest with a dark cloth lining visible at its neck."
+visual_description = "Flattened olive reeds form a rigid vest with a dark cloth lining visible at its neck. Horizontal leather bands hold the stalks together, and the bottom edge breaks into a rough uneven fringe."
+stats = { armor = 12 }
+modifiers = []
+
+[[items]]
+id = "ferrymans_jack"
+name = "Ferryman's Jack"
+tier = 1
+rarity = "uncommon"
+sell_value = 23
+description = "A short tar-dark leather coat has a broad folded collar and brass toggle fasteners."
+visual_description = "A short tar-dark leather coat has a broad folded collar and brass toggle fasteners. Pale rope abrasions mark one shoulder, and a faded blue patch reinforces the chest beneath the collar."
+stats = { armor = 14 }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.005 }]
+
+[[items]]
+id = "rust_ring_shirt"
+name = "Rust Ring Shirt"
+tier = 1
+rarity = "uncommon"
+sell_value = 24
+description = "A sleeveless shirt of large rust-brown iron rings hangs over ragged charcoal cloth."
+visual_description = "A sleeveless shirt of large rust-brown iron rings hangs over ragged charcoal cloth. Several brighter replacement rings interrupt the chest, while the lower edge droops unevenly on the right."
+stats = { armor = 15 }
+modifiers = [{ stat = "crit_chance_bps", value = 200 }]
+
+[[items]]
+id = "bark_armor"
+name = "Bound Bark Armor"
+tier = 1
+rarity = "rare"
+sell_value = 45
+description = "Thick overlapping slabs of wet dark bark form a broad chest piece."
+visual_description = "Thick overlapping slabs of wet dark bark form a broad chest piece. Pale fibrous edges show beneath tight green-black vines, and one small knot bulges from the upper left plate."
+stats = { armor = 24 }
+modifiers = [{ stat = "health", value = 8 }]
+
+[[items]]
+id = "bogwatch_cuirass"
+name = "Bogwatch Cuirass"
+tier = 1
+rarity = "rare"
+sell_value = 46
+description = "A dull iron breastplate has a swollen rounded chest and a short skirt of three hanging plates."
+visual_description = "A dull iron breastplate has a swollen rounded chest and a short skirt of three hanging plates. Green water stains trail from the shoulder rivets over a torn brown leather backing."
+stats = { armor = 18 }
+modifiers = [{ stat = "health", value = 16 }]
+
+[[items]]
+id = "chapel_pall"
+name = "Chapel Pall"
+tier = 1
+rarity = "rare"
+sell_value = 47
+description = "A faded gray padded vest has a high folded neck and a heavy bronze clasp shaped like a plain arch."
+visual_description = "A faded gray padded vest has a high folded neck and a heavy bronze clasp shaped like a plain arch. Three dark vertical seams divide its broad chest above an uneven black hem."
+stats = { armor = 19 }
+modifiers = [{ stat = "damage", value = 3 }]
+
+[[items]]
+id = "coalstained_gambeson"
+name = "Coalstained Gambeson"
+tier = 2
+rarity = "common"
+sell_value = 19
+description = "A thick quilted coat has wide charcoal-gray vertical channels and singed tan cuffs."
+visual_description = "A thick quilted coat has wide charcoal-gray vertical channels and singed tan cuffs. Its leather front ties are mismatched, and a large soot-black patch covers the lower belly."
+stats = { armor = 26 }
+modifiers = []
+
+[[items]]
+id = "iron_scale_vest"
+name = "Iron Scale Vest"
+tier = 2
+rarity = "common"
+sell_value = 20
+description = "Rows of broad overlapping iron scales cover a sleeveless brown leather vest."
+visual_description = "Rows of broad overlapping iron scales cover a sleeveless brown leather vest. The scales are darker near the waist, with two pale replacements below a thick square neck opening."
+stats = { armor = 24 }
+modifiers = []
+
+[[items]]
+id = "quarry_plate"
+name = "Quarry Plate"
+tier = 2
+rarity = "common"
+sell_value = 16
+description = "A heavy flat steel breastplate has a reinforced rectangular belly panel and broad leather straps."
+visual_description = "A heavy flat steel breastplate has a reinforced rectangular belly panel and broad leather straps. Ochre dust outlines its oversized rivets, and one shoulder strap is reinforced with copper wire."
+stats = { armor = 25 }
+modifiers = []
+
+[[items]]
+id = "chain_apron"
+name = "Chain Apron"
+tier = 2
+rarity = "uncommon"
+sell_value = 41
+description = "A long panel of dark chainmail hangs from a broad padded neck yoke."
+visual_description = "A long panel of dark chainmail hangs from a broad padded neck yoke. A leather waist belt interrupts the rings, and the lower corners are folded back with mismatched iron hooks."
+stats = { armor = 30 }
+modifiers = [{ stat = "crit_damage_bps", value = 1500 }]
+
+[[items]]
+id = "furnace_guard"
+name = "Furnace Guard"
+tier = 2
+rarity = "uncommon"
+sell_value = 42
+description = "A thick iron chest shell has stepped overlapping plates and a high soot-black collar."
+visual_description = "A thick iron chest shell has stepped overlapping plates and a high soot-black collar. Dull orange heat stains rim the central plate, and gray padded fabric shows between the broad shoulder pieces."
+stats = { armor = 28 }
+modifiers = [{ stat = "health", value = 20 }]
+
+[[items]]
+id = "ember_stitched_coat"
+name = "Ember-stitched Coat"
+tier = 2
+rarity = "rare"
+sell_value = 93
+description = "A deep brown quilted coat has thin copper wire stitches running along its chest channels."
+visual_description = "A deep brown quilted coat has thin copper wire stitches running along its chest channels. Small amber beads close the front, while a heavy black leather panel shields the lower torso."
+stats = { armor = 33 }
+modifiers = [{ stat = "damage", value = 4 }]
+
+[[items]]
+id = "oathbound_breastplate"
+name = "Oathbound Breastplate"
+tier = 2
+rarity = "rare"
+sell_value = 94
+description = "A broad bronze breastplate carries a simple recessed vertical bar down its center."
+visual_description = "A broad bronze breastplate carries a simple recessed vertical bar down its center. Dark tarnish pools under the shoulder flares, and neat cream stitching edges the visible black leather lining."
+stats = { armor = 34 }
+modifiers = [{ stat = "armor", value = 10 }]
+
+[[items]]
+id = "slag_knight_harness"
+name = "Slag Knight Harness"
+tier = 2
+rarity = "rare"
+sell_value = 90
+description = "Angular black steel plates overlap across a thick torso harness."
+visual_description = "Angular black steel plates overlap across a thick torso harness. Porous slag clings to one shoulder, while a narrow clean silver repair line crosses the otherwise dull breastplate."
+stats = { armor = 32 }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.01 }]
+
+[[items]]
+id = "frost_hide_coat"
+name = "Frost Hide Coat"
+tier = 3
+rarity = "common"
+sell_value = 25
+description = "A gray sealskin coat has a thick ivory fur collar and short broad sleeves."
+visual_description = "A gray sealskin coat has a thick ivory fur collar and short broad sleeves. Dark leather bands cross the chest, and pale frost collects on the edges of its rough bone toggles."
+stats = { armor = 39 }
+modifiers = []
+
+[[items]]
+id = "saltwarden_hauberk"
+name = "Saltwarden Hauberk"
+tier = 3
+rarity = "common"
+sell_value = 26
+description = "A long silver-gray ring shirt hangs beneath a heavy teal leather shoulder yoke."
+visual_description = "A long silver-gray ring shirt hangs beneath a heavy teal leather shoulder yoke. White salt crust interrupts the lower rings, and a broad weathered belt pulls the waist slightly askew."
+stats = { armor = 40 }
+modifiers = []
+
+[[items]]
+id = "antler_scale_harness"
+name = "Antler Scale Harness"
+tier = 3
+rarity = "common"
+sell_value = 27
+description = "Flattened yellow antler plates overlap across dark brown leather."
+visual_description = "Flattened yellow antler plates overlap across dark brown leather. Each plate has two visible copper pins, and a narrow strip of coarse black fur softens the high chest opening."
+stats = { armor = 38 }
+modifiers = []
+
+[[items]]
+id = "blue_iron_cuirass"
+name = "Blue Iron Cuirass"
+tier = 3
+rarity = "uncommon"
+sell_value = 64
+description = "A smooth deep-blue iron breastplate has an angular central ridge and two broad squared shoulder tabs."
+visual_description = "A smooth deep-blue iron breastplate has an angular central ridge and two broad squared shoulder tabs. Small pale dents scatter over the belly above a layered skirt of gray metal strips."
+stats = { armor = 43 }
+modifiers = [{ stat = "damage", value = 4 }]
+
+[[items]]
+id = "silver_mourning_mail"
+name = "Silver Mourning Mail"
+tier = 3
+rarity = "uncommon"
+sell_value = 60
+description = "Fine tarnished silver rings cover a long black padded vest."
+visual_description = "Fine tarnished silver rings cover a long black padded vest. An unadorned white-metal clasp closes the neck, and the lower chain edge is bordered by a thin strip of faded violet cloth."
+stats = { armor = 44 }
+modifiers = [{ stat = "armor", value = 11 }]
+
+[[items]]
+id = "regents_empty_harness"
+name = "Regent's Empty Harness"
+tier = 3
+rarity = "rare"
+sell_value = 136
+description = "A pale steel chest harness has exaggeratedly broad shoulders and a narrow segmented waist."
+visual_description = "A pale steel chest harness has exaggeratedly broad shoulders and a narrow segmented waist. A small three-point crown is raised at the collar above dark indigo lining and tarnished gold rivets."
+stats = { armor = 46 }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.0125 }]
+
+[[items]]
+id = "thawless_carapace"
+name = "Thawless Carapace"
+tier = 3
+rarity = "rare"
+sell_value = 137
+description = "Thick blue-white plates overlap like broken ice across a broad breastplate."
+visual_description = "Thick blue-white plates overlap like broken ice across a broad breastplate. Black iron braces hold their edges, and dense gray fur appears in the deep opening around the neck."
+stats = { armor = 47 }
+modifiers = [{ stat = "crit_chance_bps", value = 500 }]
+
+[[items]]
+id = "roadworn_bastion"
+name = "Roadworn Bastion"
+tier = 3
+rarity = "rare"
+sell_value = 138
+description = "A massive dark iron breastplate is patched with three lighter steel squares of unequal size."
+visual_description = "A massive dark iron breastplate is patched with three lighter steel squares of unequal size. Its thick rolled neck edge is worn bright, and broad tan leather straps buckle at the sides."
+stats = { armor = 48 }
+modifiers = [{ stat = "crit_damage_bps", value = 2500 }]

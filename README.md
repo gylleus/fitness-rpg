@@ -82,6 +82,12 @@ recorded fixtures instead of by doing pushups on every code change.
 
 ## Development
 
+Python content and image-generation tools use [uv](https://docs.astral.sh/uv/).
+Run `uv sync --locked`, then `uv run content` to validate game content or
+`uv run sprites --help` for sprite generation. See
+[Python setup and commands](image-generation/PYTHON.md) for reference generation
+and the pinned GPU environment.
+
 With [just](https://github.com/casey/just) installed, run `just android` to build,
 install, and open the development app on your connected phone. For later sessions,
 run `just start` and scan the terminal QR code with your phone on the same Wi-Fi.

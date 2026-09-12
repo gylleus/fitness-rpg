@@ -1,17 +1,23 @@
 import { eq, isNotNull, sql } from 'drizzle-orm';
 import type { GameDb } from './game';
 import { dungeonRuns, heroes, inventoryItems } from './schema';
-import { fitsSlot, startingEquipment, type EquipmentSlot } from '../game/equipment';
+import { fitsSlot, startingEquipment, upgradeGear, type EquipmentSlot } from '../game/equipment';
 
 /** Convert old upgrades once. Sold starter gear is never recreated on reload. */
 export function initializeInventory(db: GameDb) {
   db.transaction(tx => {
     const hero = tx.select().from(heroes).where(eq(heroes.id, 1)).get();
-    if (!hero || hero.inventoryVersion >= 1) return;
-    for (const { item, slot } of startingEquipment(hero.swordLevel, hero.armorLevel, hero.amuletOwned)) {
-      tx.insert(inventoryItems).values({ item, slot, acquiredAt: Date.now(), sourceKey: `legacy:${slot}` }).run();
+    if (!hero || hero.inventoryVersion >= 2) return;
+    if (hero.inventoryVersion < 1) {
+      for (const { item, slot } of startingEquipment(hero.swordLevel, hero.armorLevel, hero.amuletOwned)) {
+        tx.insert(inventoryItems).values({ item, slot, acquiredAt: Date.now(), sourceKey: `legacy:${slot}` }).run();
+      }
+    } else {
+      for (const owned of tx.select().from(inventoryItems).all()) {
+        tx.update(inventoryItems).set({ item: upgradeGear(owned.item) }).where(eq(inventoryItems.id, owned.id)).run();
+      }
     }
-    tx.update(heroes).set({ inventoryVersion: 1 }).where(eq(heroes.id, 1)).run();
+    tx.update(heroes).set({ inventoryVersion: 2 }).where(eq(heroes.id, 1)).run();
   });
 }
 

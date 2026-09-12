@@ -1,0 +1,15 @@
+{
+  "id": "coalstained_gloves",
+  "backend": "built-in imagegen",
+  "definition_sha256": "0703d7be23db432601e67fbf757c6f6b66340ab68459ed800af046e4a743c1e9",
+  "original": "image-generation/items/v1/sources/coalstained_gloves.png",
+  "source_sha256": "5f60720790d0b907178ccbcd14fccd5e2a642e2517da45ae301af7568607bd82",
+  "icon": "assets/items/coalstained_gloves.png",
+  "icon_sha256": "7c08546b41d9d85730a6b45fdebd6bc71189a3f54fc453e7c32b9eb273d0765f",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Coalstained Gloves. Thick tan work gloves are blackened across their broad fingertips and palms. Long cuffs have diagonal quilted seams, with a red-brown leather patch repairing one wrist.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

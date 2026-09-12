@@ -1,0 +1,273 @@
+schema_version = 1
+category = "amulets"
+kind = "amulet"
+
+[generation]
+canvas = [64, 64]
+transparent = true
+style = "Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters."
+composition = "One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item."
+
+[[items]]
+id = "pebble_on_cord"
+name = "Pebble on a Cord"
+tier = 1
+rarity = "common"
+sell_value = 8
+description = "A flat dark river pebble hangs from a short doubled brown cord through a drilled hole."
+visual_description = "A flat dark river pebble hangs from a short doubled brown cord through a drilled hole. One side carries a pale natural stripe, and the cord ends in a large uneven knot."
+stats = {  }
+modifiers = [{ stat = "health", value = 8 }]
+
+[[items]]
+id = "iron_tooth_charm"
+name = "Iron Tooth Charm"
+tier = 1
+rarity = "common"
+sell_value = 9
+description = "A blunt iron wedge shaped like a broken tooth hangs from a thin leather thong."
+visual_description = "A blunt iron wedge shaped like a broken tooth hangs from a thin leather thong. Orange rust fills its shallow pits, while a simple copper loop passes through the wide top."
+stats = {  }
+modifiers = [{ stat = "damage", value = 1 }]
+
+[[items]]
+id = "reed_braid_charm"
+name = "Reed Braid Charm"
+tier = 1
+rarity = "common"
+sell_value = 10
+description = "A small oval of braided olive reeds encloses an empty center."
+visual_description = "A small oval of braided olive reeds encloses an empty center. Pale fibers fray near a dark leather suspension loop, and two short bronze beads weigh the lower end."
+stats = {  }
+modifiers = [{ stat = "armor", value = 3 }]
+
+[[items]]
+id = "ferrymans_obol"
+name = "Ferryman's Obol"
+tier = 1
+rarity = "uncommon"
+sell_value = 23
+description = "A worn bronze coin hangs from a black cord through an off-center hole."
+visual_description = "A worn bronze coin hangs from a black cord through an off-center hole. A simple boat-shaped groove remains on its green-stained face, and the lower rim is chipped into a small crescent."
+stats = {  }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.005 }]
+
+[[items]]
+id = "bone_toggle_pendant"
+name = "Bone Toggle Pendant"
+tier = 1
+rarity = "uncommon"
+sell_value = 24
+description = "A short yellowed bone toggle hangs horizontally from two loops of dark thread."
+visual_description = "A short yellowed bone toggle hangs horizontally from two loops of dark thread. Its blunt ends are polished ivory, and a fine copper wire repair circles a crack near the middle."
+stats = {  }
+modifiers = [{ stat = "crit_chance_bps", value = 200 }]
+
+[[items]]
+id = "restraint_amulet"
+name = "Amulet of Restraint"
+tier = 1
+rarity = "rare"
+sell_value = 75
+description = "A small heavy iron ring encloses a straight bronze bar on a short black leather cord."
+visual_description = "A small heavy iron ring encloses a straight bronze bar on a short black leather cord. The bar is worn bright at its center, while the outer ring carries deep dark hammer marks."
+stats = {  }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.01 }]
+
+[[items]]
+id = "drowned_bell_charm"
+name = "Drowned Bell Charm"
+tier = 1
+rarity = "rare"
+sell_value = 46
+description = "A tiny narrow bronze bell hangs from a twisted gray cord with no visible clapper."
+visual_description = "A tiny narrow bronze bell hangs from a twisted gray cord with no visible clapper. Its cracked flared lip is green with patina, and a dark water stain circles the upper shoulder."
+stats = {  }
+modifiers = [{ stat = "health", value = 16 }]
+
+[[items]]
+id = "willow_heart_charm"
+name = "Willow Heart Charm"
+tier = 1
+rarity = "rare"
+sell_value = 47
+description = "A twisted dark willow knot forms a lopsided heart-shaped pendant with a small empty opening."
+visual_description = "A twisted dark willow knot forms a lopsided heart-shaped pendant with a small empty opening. Pale cut wood marks one side, and thin green vines attach it to a brown cord."
+stats = {  }
+modifiers = [{ stat = "damage", value = 3 }]
+
+[[items]]
+id = "coal_cage_pendant"
+name = "Coal Cage Pendant"
+tier = 2
+rarity = "common"
+sell_value = 19
+description = "A rough charcoal lump sits inside a small square iron cage on a short chain."
+visual_description = "A rough charcoal lump sits inside a small square iron cage on a short chain. Bright worn corners interrupt the cage's black surface, and one bar is repaired with copper wire."
+stats = {  }
+modifiers = [{ stat = "armor", value = 6 }]
+
+[[items]]
+id = "smiths_thumbprint"
+name = "Smith's Thumbprint"
+tier = 2
+rarity = "common"
+sell_value = 20
+description = "A thick oval bronze pendant carries one deep rounded thumb-shaped depression."
+visual_description = "A thick oval bronze pendant carries one deep rounded thumb-shaped depression. Soot darkens the hollow, and a broad iron loop joins the weight to a short red-brown leather cord."
+stats = {  }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.005 }]
+
+[[items]]
+id = "quarry_spirit_stone"
+name = "Quarry Spirit Stone"
+tier = 2
+rarity = "common"
+sell_value = 16
+description = "A long rough ochre crystal hangs point downward inside two plain gray iron bands."
+visual_description = "A long rough ochre crystal hangs point downward inside two plain gray iron bands. Cream mineral streaks cross its cloudy sides beneath a heavy black cord loop."
+stats = {  }
+modifiers = [{ stat = "crit_chance_bps", value = 200 }]
+
+[[items]]
+id = "broken_chain_charm"
+name = "Broken Chain Charm"
+tier = 2
+rarity = "uncommon"
+sell_value = 41
+description = "Three large flattened iron links hang from a dark leather necklace loop."
+visual_description = "Three large flattened iron links hang from a dark leather necklace loop. The lowest link is split open at one corner, exposing bright metal against the pitted charcoal-gray surface."
+stats = {  }
+modifiers = [{ stat = "crit_damage_bps", value = 1500 }]
+
+[[items]]
+id = "ember_in_a_bottle"
+name = "Ember in a Bottle"
+tier = 2
+rarity = "uncommon"
+sell_value = 42
+description = "A tiny smoky glass vial holds a dim amber coal beneath a black iron stopper."
+visual_description = "A tiny smoky glass vial holds a dim amber coal beneath a black iron stopper. A narrow wire cage protects the vial, and a short brown cord passes through the stopper ring."
+stats = {  }
+modifiers = [{ stat = "health", value = 20 }]
+
+[[items]]
+id = "furnace_key"
+name = "Furnace Key"
+tier = 2
+rarity = "rare"
+sell_value = 93
+description = "A thick black iron key hangs from a short chain, its broad rectangular teeth glowing dull rust-red."
+visual_description = "A thick black iron key hangs from a short chain, its broad rectangular teeth glowing dull rust-red. The circular bow has a single copper repair plate fixed by two large rivets."
+stats = {  }
+modifiers = [{ stat = "damage", value = 4 }]
+
+[[items]]
+id = "oath_weight_pendant"
+name = "Oath Weight Pendant"
+tier = 2
+rarity = "rare"
+sell_value = 94
+description = "A small octagonal bronze weight hangs from a flat silver-gray chain."
+visual_description = "A small octagonal bronze weight hangs from a flat silver-gray chain. One face carries a simple recessed vertical line, and dark tarnish outlines its worn bevels."
+stats = {  }
+modifiers = [{ stat = "armor", value = 10 }]
+
+[[items]]
+id = "slag_heart"
+name = "Slag Heart"
+tier = 2
+rarity = "rare"
+sell_value = 90
+description = "A porous black stone pendant has a heavy uneven teardrop silhouette."
+visual_description = "A porous black stone pendant has a heavy uneven teardrop silhouette. A thin amber mineral seam crosses its widest part beneath three dull iron claws and a soot-dark cloth cord."
+stats = {  }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.01 }]
+
+[[items]]
+id = "frostbound_teardrop"
+name = "Frostbound Teardrop"
+tier = 3
+rarity = "common"
+sell_value = 25
+description = "A cloudy pale-blue stone hangs in a long teardrop shape from a tarnished silver loop."
+visual_description = "A cloudy pale-blue stone hangs in a long teardrop shape from a tarnished silver loop. Fine white cracks remain beneath its smooth face, and gray thread wraps the narrow neck."
+stats = {  }
+modifiers = [{ stat = "crit_chance_bps", value = 300 }]
+
+[[items]]
+id = "saltglass_vial"
+name = "Saltglass Vial"
+tier = 3
+rarity = "common"
+sell_value = 26
+description = "A squat translucent smoky vial hangs from a faded teal cord inside a white-crusted iron cage."
+visual_description = "A squat translucent smoky vial hangs from a faded teal cord inside a white-crusted iron cage. Its pale sealed contents are still, and a broad silver-gray stopper sits slightly crooked."
+stats = {  }
+modifiers = [{ stat = "crit_damage_bps", value = 1500 }]
+
+[[items]]
+id = "antler_tally"
+name = "Antler Tally"
+tier = 3
+rarity = "common"
+sell_value = 27
+description = "A short flat strip of yellow antler hangs from a dark brown thong."
+visual_description = "A short flat strip of yellow antler hangs from a dark brown thong. Five deep diagonal cuts cross its face, and a small copper staple bridges a split below the suspension hole."
+stats = {  }
+modifiers = [{ stat = "health", value = 24 }]
+
+[[items]]
+id = "blue_watch_medallion"
+name = "Blue Watch Medallion"
+tier = 3
+rarity = "uncommon"
+sell_value = 64
+description = "A round deep-blue iron medallion has a raised narrow rim and a plain dark center."
+visual_description = "A round deep-blue iron medallion has a raised narrow rim and a plain dark center. Three small silver pins line its lower half beneath a thick gray cord and squared suspension loop."
+stats = {  }
+modifiers = [{ stat = "damage", value = 4 }]
+
+[[items]]
+id = "silver_vigil_locket"
+name = "Silver Vigil Locket"
+tier = 3
+rarity = "uncommon"
+sell_value = 60
+description = "A narrow tarnished silver locket has a long arched lid and a blackened hinge."
+visual_description = "A narrow tarnished silver locket has a long arched lid and a blackened hinge. An unlettered recessed panel fills the front, and a short violet cord loops through its heavy top ring."
+stats = {  }
+modifiers = [{ stat = "armor", value = 11 }]
+
+[[items]]
+id = "regents_last_seal"
+name = "Regent's Last Seal"
+tier = 3
+rarity = "rare"
+sell_value = 136
+description = "A rectangular white-metal pendant bears a modest three-point crown above a dull blue stone."
+visual_description = "A rectangular white-metal pendant bears a modest three-point crown above a dull blue stone. Tarnished gold rivets secure its corners, and a flat dark chain passes through the top edge."
+stats = {  }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.0125 }]
+
+[[items]]
+id = "thawless_reliquary"
+name = "Thawless Reliquary"
+tier = 3
+rarity = "rare"
+sell_value = 137
+description = "A small black iron reliquary encloses a cloudy blue-white crystal behind three narrow bars."
+visual_description = "A small black iron reliquary encloses a cloudy blue-white crystal behind three narrow bars. Frost gathers under its steep little roof, and a rough gray cord supports the heavy frame."
+stats = {  }
+modifiers = [{ stat = "crit_chance_bps", value = 500 }]
+
+[[items]]
+id = "roadkeepers_knot"
+name = "Roadkeeper's Knot"
+tier = 3
+rarity = "rare"
+sell_value = 138
+description = "A thick loop of weathered red-brown leather twists around a plain silver ring."
+visual_description = "A thick loop of weathered red-brown leather twists around a plain silver ring. Three small dark iron beads sit below the knot, and a pale repaired seam crosses the upper loop."
+stats = {  }
+modifiers = [{ stat = "crit_damage_bps", value = 2500 }]

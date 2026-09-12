@@ -1,0 +1,15 @@
+{
+  "id": "bone_loop_ring",
+  "backend": "built-in imagegen",
+  "definition_sha256": "752bf13b56ec742218787e1f01f297866eb525c415685385653b6bba7af52d92",
+  "original": "image-generation/items/v1/sources/bone_loop_ring.png",
+  "source_sha256": "1c9f908008fe218ba1cef7ebc4b3dd9c16700c4e57acfb5546ab7a9280fcb830",
+  "icon": "assets/items/bone_loop_ring.png",
+  "icon_sha256": "5c774760e681e07bb293615289b44387a07983b16f4222c00bc8a93ea93b80ec",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Bone Loop Ring. A thick yellow bone ring has an uneven rounded outer wall and a dark hairline crack. Two thin copper staples bridge the split beneath a single polished ivory knob.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

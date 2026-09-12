@@ -1,0 +1,15 @@
+{
+  "id": "frost_fur_cap",
+  "backend": "built-in imagegen",
+  "definition_sha256": "d9217afe07d65f380017fd45cbf98beefcdc0a4b6d9b2d46f2ec7f645435af2f",
+  "original": "image-generation/items/v1/sources/frost_fur_cap.png",
+  "source_sha256": "8c772f87f13d7e406e14637f65e0a553be6bcd9b310cd0d3537ad634623682de",
+  "icon": "assets/items/frost_fur_cap.png",
+  "icon_sha256": "28e6732fc4fea74d53c4bdea15c53641f199c220593ed462c85f8a8cda393d07",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Frost Fur Cap. A rounded gray leather cap has an oversized ivory fur band and two hanging ear flaps. Small blue-gray bone toggles close the flaps, and frost whitens one side of the fur.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

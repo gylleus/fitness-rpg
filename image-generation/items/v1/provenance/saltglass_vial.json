@@ -1,0 +1,15 @@
+{
+  "id": "saltglass_vial",
+  "backend": "built-in imagegen",
+  "definition_sha256": "a9ea0672077e028c10cbc60a0e99aa9a458abd4a09f3ce89967f13cf8b008a53",
+  "original": "image-generation/items/v1/sources/saltglass_vial.png",
+  "source_sha256": "288191ccedf5a65d4106d915e7f5222d5310d08d7abc2bcff9974e61f320375d",
+  "icon": "assets/items/saltglass_vial.png",
+  "icon_sha256": "c6942e18eea45bc9133eeef44475107f0fac8fb7186000d36a51fc75830af261",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Saltglass Vial. A squat translucent smoky vial hangs from a faded teal cord inside a white-crusted iron cage. Its pale sealed contents are still, and a broad silver-gray stopper sits slightly crooked.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

@@ -68,6 +68,7 @@ jest.mock('../../src/pose/usePoseCamera', () => ({
 jest.mock('react-native-reanimated/mock', () => {
   const React = jest.requireActual<typeof import('react')>('react');
   return {
+    ...require('../shared-value-mock'),
     default: { call: () => {} },
     runOnJS: (callback: unknown) => callback,
     useAnimatedReaction: (prepare: () => number, react: (value: number, previous: null) => void) => {
@@ -150,7 +151,7 @@ describe('first playable game flow', () => {
     await navigate('/forge');
     await press('Ring 1: Heavy Copper Ring');
     expect(screen.getByRole('button', { name: 'Unequip to bag' })).toBeDisabled();
-    expect(screen.getByRole('button', { name: 'Sell for 18 gold' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: `Sell for ${GEAR.copper_ring.sellValue} gold` })).toBeDisabled();
   });
 
   it('shows the actual boss reward and makes the won equipment inspectable in the bag', async () => {
@@ -160,10 +161,51 @@ describe('first playable game flow', () => {
     expect(run.status).toBe('victory');
     const boss = run.state.loot!.find(drop => drop.boss)!;
     await renderRouter(routes, { initialUrl: '/dungeon' });
-    expect(screen.getByText(`Boss reward · ${boss.item.name}`)).toBeVisible();
+    expect(screen.getByRole('button', { name: `Preview loot ${boss.item.name}` })).toBeVisible();
+    await press(`Preview loot ${boss.item.name}`);
+    expect(screen.getByText(boss.item.visualDescription!)).toBeVisible();
+    expect(screen.getByText('Secured in your bag. Equip it from Inventory at camp.')).toBeVisible();
+    await press('Close item');
+    await act(async () => { router.push('/expedition'); });
+    await press(`Preview loot ${boss.item.name}`);
+    expect(screen.getByText(boss.item.visualDescription!)).toBeVisible();
+    await press('Close item');
     await navigate('/forge');
     await press(`Inspect ${boss.item.name}`);
     expect(screen.getByRole('button', { name: `Sell for ${boss.item.sellValue} gold` })).toBeEnabled();
+  });
+
+  it('filters, searches and pages a large bag while keeping item inspection available', async () => {
+    for (const item of Object.values(GEAR).slice(1, 31)) giveItem(mockDb, item);
+    await renderRouter(routes, { initialUrl: '/forge' });
+    expect(screen.getAllByRole('button', { name: /^Inspect / })).toHaveLength(24);
+    await press('Show more items');
+    expect(screen.getAllByRole('button', { name: /^Inspect / })).toHaveLength(30);
+    await press('Swords');
+    expect(screen.queryByRole('button', { name: 'Inspect Iron-bound Club' })).toBeNull();
+    await fireEvent.changeText(screen.getByLabelText('Search your bag'), 'ditch');
+    expect(screen.getAllByRole('button', { name: /^Inspect / })).toHaveLength(1);
+    await press('Inspect Ditch Blade');
+    expect(screen.getByTestId('equipment-comparison')).toBeVisible();
+    await press('Close item');
+    await fireEvent.changeText(screen.getByLabelText('Search your bag'), 'does not exist');
+    expect(screen.getByText('No items match this search.')).toBeVisible();
+    await fireEvent.changeText(screen.getByLabelText('Search your bag'), '');
+    await press('All gear');
+    await press('Sort: name');
+    expect(screen.getAllByRole('button', { name: /^Inspect / })[0].props.accessibilityLabel).toBe('Inspect Antler-crowned Mace');
+  });
+
+  it('previews protection before equipping armor and keeps maximum health separate', async () => {
+    giveItem(mockDb, GEAR.hide_armor);
+    await renderRouter(routes, { initialUrl: '/forge' });
+    await press('Inspect Patched Hide Armor');
+    expect(screen.getByText('2 → 12 (+10)')).toBeVisible();
+    expect(screen.getByText(GEAR.hide_armor.visualDescription!)).toBeVisible();
+    await press('Equip to Armor');
+    expect(getGameSnapshot(mockDb).stats).toMatchObject({ armor: 12, health: 100 });
+    await press('Close item');
+    expect(screen.getByText('12 armor · 10.7% damage reduction')).toBeVisible();
   });
 
   it('starts the attack on arrival without an idle tick or waiting for the walk loop to finish', async () => {

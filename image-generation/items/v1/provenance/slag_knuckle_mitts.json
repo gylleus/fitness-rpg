@@ -1,0 +1,15 @@
+{
+  "id": "slag_knuckle_mitts",
+  "backend": "built-in imagegen",
+  "definition_sha256": "4f2b999bdd12022876599feebea6986ffbbc19055a38719a0cf38c0701cb06da",
+  "original": "image-generation/items/v1/sources/slag_knuckle_mitts.png",
+  "source_sha256": "66d1c61d5ca72d5811ce06b11fcef29ddd0924f9447da3d8cc897d35a998385e",
+  "icon": "assets/items/slag_knuckle_mitts.png",
+  "icon_sha256": "b878b3472b8884ebe1a96c00285fe18246d27c5644ac95a5f3c1eba5202bd00a",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Slag Knuckle Mitts. Thick black leather mitts support irregular charcoal slag blocks across the knuckles. Three bright iron pins pierce each block above broad straps of scorched brown hide.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

@@ -1,0 +1,2 @@
+# Full-resolution originals are retained locally; ship the 64px exports.
+sources/

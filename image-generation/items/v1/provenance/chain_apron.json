@@ -1,0 +1,15 @@
+{
+  "id": "chain_apron",
+  "backend": "built-in imagegen",
+  "definition_sha256": "6b92eedcf9b454e6e594bb16694fd7afd1bdb7608ddaff9347671733ceffc4e1",
+  "original": "image-generation/items/v1/sources/chain_apron.png",
+  "source_sha256": "8bdaa78146ba4c326a9b4dd474f93765f4620dc6523eed2d12cc0f709d393ed8",
+  "icon": "assets/items/chain_apron.png",
+  "icon_sha256": "63054eadd1b35c78585301bb6dd721ccb1b17285fbafeb5d49f88580391c4b63",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Chain Apron. A long panel of dark chainmail hangs from a broad padded neck yoke. A leather waist belt interrupts the rings, and the lower corners are folded back with mismatched iron hooks.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

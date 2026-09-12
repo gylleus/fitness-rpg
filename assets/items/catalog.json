@@ -1,0 +1,1541 @@
+{
+  "schemaVersion": 1,
+  "icons": {
+    "wooden_club": {
+      "file": "assets/items/wooden_club.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "d24090af421089ff3a7652eea7b3a5206de2baae55c780cc38bdbad1ec70fbc2"
+    },
+    "iron_club": {
+      "file": "assets/items/iron_club.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "5b1e3b9f9168fa8b9a6330b706259184717e37bc5cde43c0358313297e4845b1"
+    },
+    "ferrymans_cudgel": {
+      "file": "assets/items/ferrymans_cudgel.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "9f93bd76fe38347f63398be97b773582da041084f68ab6f8e9e2ad050856ecc5"
+    },
+    "peat_cutters_mallet": {
+      "file": "assets/items/peat_cutters_mallet.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "6df195acc1b87beda81bb7d8ac1afcd7a6f6bb7ca4eec6380ceb303f3409139b"
+    },
+    "chapel_bell_mace": {
+      "file": "assets/items/chapel_bell_mace.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "900537a5bd23a4e52e63553c6d74726aee0cd0718471ec15488311e16c20298b"
+    },
+    "root_maul": {
+      "file": "assets/items/root_maul.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "5213b750b4832f0975775838f64f551ecee69489fdb664ca5ac08bd89bf21f52"
+    },
+    "leechkeepers_pestle": {
+      "file": "assets/items/leechkeepers_pestle.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "19edb7c6e4087938bb5326aa334d1ec5197c82ae04ba28b34aee533423c78049"
+    },
+    "grave_marker_hammer": {
+      "file": "assets/items/grave_marker_hammer.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "115589d4f5ead7492a8afc3bc9ee0fe37b796f422388cc706113a5d8a3d107a4"
+    },
+    "forge_slag_mace": {
+      "file": "assets/items/forge_slag_mace.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "d03ab352769cf32b8e1be8a1e36f7376031fa2d840b96e7d864d32d6d8f5608d"
+    },
+    "flanged_iron_mace": {
+      "file": "assets/items/flanged_iron_mace.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "6f24e38144d7168c6155d7935e3c8819f9f605fc2944e4e3cab8b59bf1b4b101"
+    },
+    "quarry_sledge": {
+      "file": "assets/items/quarry_sledge.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f47a9d726940e2a02b83b2ee536cae9159c05f8478f443c21b0fd10b61aea90c"
+    },
+    "chainbound_cudgel": {
+      "file": "assets/items/chainbound_cudgel.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "ea68de9a1b7cd05a72cf0ce6d240ce62d60a30fb8c0ee3846a1652d76423c035"
+    },
+    "ashwood_warhammer": {
+      "file": "assets/items/ashwood_warhammer.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "503e25506d12b64bd05635c3ab52b160149d69db5fee65a1e1f849ba654fb019"
+    },
+    "embersmiths_maul": {
+      "file": "assets/items/embersmiths_maul.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "63451e0be4641654caa4037edef5f09bbef8c22fcc29bfe3e9c85abb37cc0fbd"
+    },
+    "oathweight": {
+      "file": "assets/items/oathweight.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "c39156fe1dd4bb63904e3c4a632dd10f0907e2c3b1157227e9642f740be44ef7"
+    },
+    "iron_thistle": {
+      "file": "assets/items/iron_thistle.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "82d071fe6362832ff82edacf9c3fee9f2ed8df8fedfdc359df6be6e790847c6c"
+    },
+    "frostbound_pestle": {
+      "file": "assets/items/frostbound_pestle.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "ee22267ed508e40cb503fd1a1a05eedb8b6ca97e203d44b713f556f4612c122f"
+    },
+    "antler_crowned_mace": {
+      "file": "assets/items/antler_crowned_mace.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "2fff7044ad91489ebf26d221941a48b2be481add00f73d25eb878ef09385258f"
+    },
+    "blackglass_hammer": {
+      "file": "assets/items/blackglass_hammer.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "2723e2b33a9c53ed267a13dcc49fa7d7e621ea076ff8fe1a15051c28b5ab0c37"
+    },
+    "saltwarden_mace": {
+      "file": "assets/items/saltwarden_mace.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "5e797db0b7f866fa07784f1e98c3e6e965721c26d5555f0e9de265186f8496fa"
+    },
+    "silver_knuckle_maul": {
+      "file": "assets/items/silver_knuckle_maul.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "61c85704a0b7878fce63e929705be835f2931916cc48fdce5a5373f1081eff36"
+    },
+    "winter_bell": {
+      "file": "assets/items/winter_bell.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "a451a6e3b68ec5dd06fb21905ec45365d063331ddea8e35b08695e224ca4d221"
+    },
+    "last_word": {
+      "file": "assets/items/last_word.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "0a75cb622f2f6c7a4709e08e299ac1a5328942ebc25362938d0b27650a08f292"
+    },
+    "king_under_stone": {
+      "file": "assets/items/king_under_stone.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "6f1294b4c442068a37720dfe3c8db295f97344435b6f875f2f73124b2afcf213"
+    },
+    "ditch_blade": {
+      "file": "assets/items/ditch_blade.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "39df205dc3c1842faf24ac61b18b2a700f1d5823413a8973da1d55ad70435c4c"
+    },
+    "reedknife": {
+      "file": "assets/items/reedknife.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "bd07b4a71db76a0ca3f1f3736acca2fecd63c7c0073a783c9a8562fe0160b04d"
+    },
+    "rusted_arming_sword": {
+      "file": "assets/items/rusted_arming_sword.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "ac56c66e69f4271ab5a99705ebcaa51cc6b885b640f7bf1ef754e7a6db1feb9e"
+    },
+    "ferrymans_falchion": {
+      "file": "assets/items/ferrymans_falchion.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "fd66f16e2332074c1bfea7f5934770ef370ff099932d4707640f30ea1cdd9021"
+    },
+    "bone_hilted_shortblade": {
+      "file": "assets/items/bone_hilted_shortblade.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "695a1bc855c0aaa637fb3fd09cab668e4e86c5d265c0fecad69857d3d5356250"
+    },
+    "sunken_officers_sabre": {
+      "file": "assets/items/sunken_officers_sabre.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "549bde39fb1fb2a04cc72856e53f496b2a45f8094a343e099c3611669a9ad29b"
+    },
+    "willow_splitter": {
+      "file": "assets/items/willow_splitter.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "ebeccf1e94be956c0aca0f35e2b8c96455503d3d4f6e25d7a23af99c17af30ad"
+    },
+    "chapel_watch_sword": {
+      "file": "assets/items/chapel_watch_sword.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "2109bc7240ef054c06edf3e84cc86776d898c8f640306f45c945678c244c9842"
+    },
+    "coal_edge": {
+      "file": "assets/items/coal_edge.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "ff34e17641268e293bdd05cd17744b2473ad2cc0e8734b6d2afdc206808631f2"
+    },
+    "miners_hanger": {
+      "file": "assets/items/miners_hanger.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "7f92983a92e747156a1a30701e705381e53bb9eeb69b940ebcb4ed5fb08750ba"
+    },
+    "scarred_longsword": {
+      "file": "assets/items/scarred_longsword.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "558d5b383762d96dd706c4b6d130a800a7bb20017f58c194cb70d4f093d7b6a8"
+    },
+    "brass_guard_estoc": {
+      "file": "assets/items/brass_guard_estoc.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "80c0ea676e8792043bc195c99354cea8337508b4d4fc4eac53a5cf3de0e1a2c3"
+    },
+    "furnace_cleaver": {
+      "file": "assets/items/furnace_cleaver.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "76f1cb37fe03afcadc3df058e4fc7f3bae02f57530a8e2f9f1ae64a91d1cdbab"
+    },
+    "red_seam_blade": {
+      "file": "assets/items/red_seam_blade.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "4c5d43612a480d89a5f87b68111e67b4ee54cccfa711d9a7cc73f595c60ba4ef"
+    },
+    "widows_measure": {
+      "file": "assets/items/widows_measure.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "4d532da49fab25c924147689bda1ad144f1ca15c32c89ba6ecdd6d6df53748ec"
+    },
+    "ember_vow": {
+      "file": "assets/items/ember_vow.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "2fa5a35038b6e675f4a840e9768f7ca1f5c4733d8c7f2e1f0815d99e6de93e9b"
+    },
+    "rime_arming_sword": {
+      "file": "assets/items/rime_arming_sword.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f489d9a6b38a48496eb5c1c1ba2b2f19b1da67fdf1ce909a6708bb9211a3dfb1"
+    },
+    "saltglass_sabre": {
+      "file": "assets/items/saltglass_sabre.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "1553f3470af9bbe4513e03d36f0630edde685c24b503741827b136a277c9ad46"
+    },
+    "black_ice_rapier": {
+      "file": "assets/items/black_ice_rapier.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "b8be39370aadbccde031c128cd9e01465daf43845fdd5c1e02556390beaed203"
+    },
+    "antler_guard_blade": {
+      "file": "assets/items/antler_guard_blade.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "398cd0e792704fedb4f7fa0b83a77cd7bd7ee9e7d45540b32d73ea3243536497"
+    },
+    "watchfire_sword": {
+      "file": "assets/items/watchfire_sword.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "e906960cb04cb23c30a269b87672d2e7f1116c2b404f358195979913382ef80e"
+    },
+    "pale_regents_edge": {
+      "file": "assets/items/pale_regents_edge.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "286dd73c9fa795697f2b9f79dee9928a414b20e9e525d7191e87697318632f82"
+    },
+    "thawless_blade": {
+      "file": "assets/items/thawless_blade.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "2036f541430328a19a31e8e010bac786879f156f6b7e4fbd1b6cfd4d9eb457b1"
+    },
+    "road_ends_here": {
+      "file": "assets/items/road_ends_here.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "6950ff92f2f5cbc9da951aaf3d2c1f474d68fa1a2691c6d2e5854989399a3687"
+    },
+    "camp_hatchet": {
+      "file": "assets/items/camp_hatchet.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "5223540e49cb57fc96373916fcaa6c48f89e11f95c07b0d522c63d3db96a0a4e"
+    },
+    "peat_hook_axe": {
+      "file": "assets/items/peat_hook_axe.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "e5019ef123ed9115a1f549fd0a7819ad622d3f44c9e0083281712e40154de526"
+    },
+    "ferrymans_broad_axe": {
+      "file": "assets/items/ferrymans_broad_axe.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "9479a90b537820bdb12f4a49fd3f8449410cb64b40207941f7effaed82cb8972"
+    },
+    "rust_tooth_hatchet": {
+      "file": "assets/items/rust_tooth_hatchet.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "9e2b63ed11502eb22c5c272e04247d419ddcd8103b090d5a38183d8d7db28e0a"
+    },
+    "bone_lashed_axe": {
+      "file": "assets/items/bone_lashed_axe.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "0a2bfd3c0b03171298e5f32149c2a99cbb7fee23ec9e2caa56d49bae7648669f"
+    },
+    "drowned_woodsman": {
+      "file": "assets/items/drowned_woodsman.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "e90753551493c543fa4ad19edd3fc021e3884bb47840ad54b5d5d292cdd7d95f"
+    },
+    "willow_crescent": {
+      "file": "assets/items/willow_crescent.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "51a65430f7d8f8f18a68bfe57bd114e1fdb246d8e3cc98db2b58cac276317e80"
+    },
+    "bog_iron_beard": {
+      "file": "assets/items/bog_iron_beard.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "60e44e1efb604fc2caa3030afa5814b22821630d9a8f4781c9bdb19effa4f00f"
+    },
+    "charcoal_splitter": {
+      "file": "assets/items/charcoal_splitter.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "421876abfcc6ca33b5c8c64a4e6b3b655e1c07797b2fb656a751d4c5546e451f"
+    },
+    "smiths_half_moon": {
+      "file": "assets/items/smiths_half_moon.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "e256acac5cb83c6199c454170fea683a194b24a95593e78274ac13c86f23b9e3"
+    },
+    "quarry_pick_axe": {
+      "file": "assets/items/quarry_pick_axe.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "ff32114a5f92290bb84e227d59a7a4951e2ccbbc397330e606e5dd00e051990f"
+    },
+    "chain_notched_axe": {
+      "file": "assets/items/chain_notched_axe.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "4208377c25ac61fb58bc50fb9647175910c88be156675a4a25469b0a0ac149c7"
+    },
+    "furnace_jaw": {
+      "file": "assets/items/furnace_jaw.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "085619c50410ec2cf96f0c2381719534267ec0f350279705f7503c37a468a85f"
+    },
+    "cinder_wedge": {
+      "file": "assets/items/cinder_wedge.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "19d407ae1e027fe792cd2d58cdf10727f65b2ba1a4ba5c41d63d1312975eeb41"
+    },
+    "executioners_receipt": {
+      "file": "assets/items/executioners_receipt.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "263213440b19cee0d038dfd212959350b908ab4228f06e119ec3c76b5a6509e4"
+    },
+    "coalheart_double_axe": {
+      "file": "assets/items/coalheart_double_axe.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "61c49511de663a1670471de260418021d55b1af90e30a01568ce572ea382f066"
+    },
+    "frostwood_hatchet": {
+      "file": "assets/items/frostwood_hatchet.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "23c3ecd79765740509673de628f6707dbec0f81ccd44b3a636e986bdf75ef256"
+    },
+    "saltbreaker": {
+      "file": "assets/items/saltbreaker.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "d4f0ed651925b9837f8eb474295e161ba915dc6e91b8c9f5056142c93040a41b"
+    },
+    "antler_beard_axe": {
+      "file": "assets/items/antler_beard_axe.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "03c5e8d107b23654c9b481ccdc45246a5d579c7e3cabb853918c33dd11cabec7"
+    },
+    "glacier_crescent": {
+      "file": "assets/items/glacier_crescent.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "de752b30edae939b43eb1223101403348cf17b566b3e63ef44c93917152b6a8c"
+    },
+    "silver_fen_reaver": {
+      "file": "assets/items/silver_fen_reaver.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "167107932803060bb6ea604eec7dd2901c5372ae7b9a40ff77428905f5176ac1"
+    },
+    "winter_tithe": {
+      "file": "assets/items/winter_tithe.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "5d0304225b4d286972553164d9f311f5217a81b946019bb0a2087645a1860f3b"
+    },
+    "icebound_judgement": {
+      "file": "assets/items/icebound_judgement.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "06c68ebe8813397f62dc2d7f44a392b41264327a0f01cf106447c2bb50dfe82f"
+    },
+    "last_felling": {
+      "file": "assets/items/last_felling.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "115fa940ba2c2ee16f7e3dec041cc059c36e3f0b41647b8200213a079d7fe4d0"
+    },
+    "travel_wraps": {
+      "file": "assets/items/travel_wraps.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "17b80cac1151371c329d2d1f0596d55d54f2ad0a277e59283ae157747c280a61"
+    },
+    "hide_armor": {
+      "file": "assets/items/hide_armor.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "8cc7890c44e2f749cff336b59e9dcc7928d813cba8c6a7aad6b4c50ed2b8074f"
+    },
+    "reed_woven_vest": {
+      "file": "assets/items/reed_woven_vest.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "9d50b2e600e8d430bdc0c071cd653a2062d5e12d27e0c1c0d3887091e476216f"
+    },
+    "ferrymans_jack": {
+      "file": "assets/items/ferrymans_jack.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "de5414f58543174bcdad852e7c6b23127e614861db1c2220b3436df238b39f90"
+    },
+    "rust_ring_shirt": {
+      "file": "assets/items/rust_ring_shirt.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "c18df7bd43eba4a6d6763e9b1bb8dc75a65b4c8f844c5bec0c98448c30b171f0"
+    },
+    "bark_armor": {
+      "file": "assets/items/bark_armor.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "e212cd4cc90e65f98a60205a83dcd52f640466d1d96f6f056e865d482f005367"
+    },
+    "bogwatch_cuirass": {
+      "file": "assets/items/bogwatch_cuirass.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "2f4ecd72e68bfce4cc4606212cc0d5b51d85f70578b532512bc9dccec0923071"
+    },
+    "chapel_pall": {
+      "file": "assets/items/chapel_pall.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "de4fd24e78c9c36e1771da401361e0b1a9aece9b00205fb6715e19c2ca79ceb2"
+    },
+    "coalstained_gambeson": {
+      "file": "assets/items/coalstained_gambeson.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "ea2bc958f23156c62d08ec80d790c276136357270f12c213804754f53145c0eb"
+    },
+    "iron_scale_vest": {
+      "file": "assets/items/iron_scale_vest.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "0b986fd5b942a27442ffa474e12575d0ffa15123a1af5bc70ed2d6f66e5e7c17"
+    },
+    "quarry_plate": {
+      "file": "assets/items/quarry_plate.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "5ea4b21876fe93adbef71e15e5402bde6e673790da0b0ace0c3369682e5fb611"
+    },
+    "chain_apron": {
+      "file": "assets/items/chain_apron.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "63054eadd1b35c78585301bb6dd721ccb1b17285fbafeb5d49f88580391c4b63"
+    },
+    "furnace_guard": {
+      "file": "assets/items/furnace_guard.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "6d68c4b1331486ba60ed6a89978bb631a7b74081d60984ce55182f1a40d6964b"
+    },
+    "ember_stitched_coat": {
+      "file": "assets/items/ember_stitched_coat.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "6d52f08af40ea6691f97522fad62f6f5acb96abff22aba32cc1a6a8deb720743"
+    },
+    "oathbound_breastplate": {
+      "file": "assets/items/oathbound_breastplate.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "86ca30b296ef0fdd04c31ee726c0877bfc0acf7a34e5952d3dd2343c8499d517"
+    },
+    "slag_knight_harness": {
+      "file": "assets/items/slag_knight_harness.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "444215ccbd98ae4f56307dd96b373e84dd688e88689b094ed2d87ac5a88e98bc"
+    },
+    "frost_hide_coat": {
+      "file": "assets/items/frost_hide_coat.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "19fde54567539ab06c5e871bfe71ac8c0bc819a50c078ac77cbefcea5e73c223"
+    },
+    "saltwarden_hauberk": {
+      "file": "assets/items/saltwarden_hauberk.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "00e58444b1ddb25fe7380d87539ead15c4e4e2232f21a5ed9a790d4b188b0842"
+    },
+    "antler_scale_harness": {
+      "file": "assets/items/antler_scale_harness.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "824a5b447df3b3624b1acf09d861594b3ae795cdc4f32243f0243bc698f8cdf3"
+    },
+    "blue_iron_cuirass": {
+      "file": "assets/items/blue_iron_cuirass.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f893c9b287af7246ec0c5f697dbcdc1e3117ed488143c16e6242006a7b56acaf"
+    },
+    "silver_mourning_mail": {
+      "file": "assets/items/silver_mourning_mail.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "e512b00f44ea635affcd29fa09cbbed859a41d6cf586ca37d540a0ac6247d32f"
+    },
+    "regents_empty_harness": {
+      "file": "assets/items/regents_empty_harness.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "2d9bed39a9aa8b6705e371491defc6cdb7cd30d5cfc3df076526fdc639fec7eb"
+    },
+    "thawless_carapace": {
+      "file": "assets/items/thawless_carapace.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "77d50e3b0d6f0cb3d4900095278b2b52029e400e4ddac82ce5f65782d8c45046"
+    },
+    "roadworn_bastion": {
+      "file": "assets/items/roadworn_bastion.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "e00190f1cb9e0bf38998617d2f6c78d80c1881520da93a86f9b3d0f68e6128d2"
+    },
+    "stitched_coif": {
+      "file": "assets/items/stitched_coif.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "5a6ec2ddc2bf17246fe336cbbff4754693e13a08d5a3a37754d8479b0e8ac3eb"
+    },
+    "iron_helmet": {
+      "file": "assets/items/iron_helmet.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "2b47bc128eb634584d70143963517a7960c538501cab4d46f0cb26982bd862f9"
+    },
+    "reed_crown_helm": {
+      "file": "assets/items/reed_crown_helm.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "d8065003a637f0a0ca76e8b729945a9c33a424344686a0e8b2840297afbf145e"
+    },
+    "ferrymans_sallet": {
+      "file": "assets/items/ferrymans_sallet.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "3cc0bc50fe65d6d6051478b4c501c5264b906bd5cac048fe7f91aa7fabadb43d"
+    },
+    "bone_brow_mask": {
+      "file": "assets/items/bone_brow_mask.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "15ed25c1372edefb44e4f9f3fd9cbf52bc83fa57c8fc4882b90bd1bf0f3c9a5c"
+    },
+    "bellkeepers_helm": {
+      "file": "assets/items/bellkeepers_helm.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "a55017656f9fef1fa6f7e7fa291624a6021ce2a8db464684817bd5487f26a4bb"
+    },
+    "sunken_guard_helm": {
+      "file": "assets/items/sunken_guard_helm.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "7e6de6b79cd1e9b1b8b5dfa61a8e44c1f00f725ebd6189940cd759cc15600432"
+    },
+    "willow_knot_cowl": {
+      "file": "assets/items/willow_knot_cowl.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "0cc67e675c9213425a1863ad1d0d9e1d553eb532296dc2e093aa02529982d597"
+    },
+    "soot_padded_hood": {
+      "file": "assets/items/soot_padded_hood.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "7d8454e18adc5010a90279858faa7b4ecfc7594b76a84f281ca4873901d5e213"
+    },
+    "smiths_skullcap": {
+      "file": "assets/items/smiths_skullcap.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "e7b55530f5051ef93a6db348176122c9355c475ae86be787b58da95e8daa39e1"
+    },
+    "quarry_guard_helm": {
+      "file": "assets/items/quarry_guard_helm.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "bbc830617c1988dd5610326a811d5bb7891d13a434906225bc8a5975eb7c624a"
+    },
+    "chain_veil_hood": {
+      "file": "assets/items/chain_veil_hood.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "0c3f2786024db2b084a4aa5ad57e111b20cb896198eea78b74360fbcf28b111a"
+    },
+    "furnace_visage": {
+      "file": "assets/items/furnace_visage.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "fe60dec43151e3e1f84322d9c46774c7c92493c0375edf11a46a7b62d757e799"
+    },
+    "cinder_horn_helm": {
+      "file": "assets/items/cinder_horn_helm.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "5ea349ac76e193f2ed7cec221eac903b9039e13c5c1d623c1cac61dbc52168fb"
+    },
+    "oathkeepers_bascinet": {
+      "file": "assets/items/oathkeepers_bascinet.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "58f64f30c7e0140ca1ae2346425ed8a8440fb83cda08cccf41d3d2bb8d379152"
+    },
+    "slag_crown": {
+      "file": "assets/items/slag_crown.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "934321abea4ae6afaf5da2017c9cf109e4b02540d32e1c833b2f424171aa5222"
+    },
+    "frost_fur_cap": {
+      "file": "assets/items/frost_fur_cap.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "28e6732fc4fea74d53c4bdea15c53641f199c220593ed462c85f8a8cda393d07"
+    },
+    "saltwarden_helm": {
+      "file": "assets/items/saltwarden_helm.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "0820cf9e7eb3d80eff89825ecc9dca9f37980a2c832bf84308d09b238d1ad1b5"
+    },
+    "antler_guard_helm": {
+      "file": "assets/items/antler_guard_helm.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "b4adee8f61f85b06822108450ee244756be9c50f3e1f8f4e6f830b3752ec4594"
+    },
+    "blue_iron_sallet": {
+      "file": "assets/items/blue_iron_sallet.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "3102cf7a414bcd220456b2a017d826ad77c27512e689d6b311089bc4f6038230"
+    },
+    "silver_vigil_mask": {
+      "file": "assets/items/silver_vigil_mask.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "41a14f5363e8a758bbd3426d0b9ff6a412426cf58146354a39a46e71ca6e4dea"
+    },
+    "pale_regents_helm": {
+      "file": "assets/items/pale_regents_helm.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "e6ea13dec9e3a7545b206896953d05be494f7638189bb34d18a1e752615d0134"
+    },
+    "thawless_greathelm": {
+      "file": "assets/items/thawless_greathelm.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "1fd946b450616b5b5f7ee844ab4e09d194aafb96b29b5de03f4508fefd49d29c"
+    },
+    "last_watch_helm": {
+      "file": "assets/items/last_watch_helm.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "3bcf45a4dbc6de321e4754f559e13232a94b89bf487ce63025b3e16ed35cd48f"
+    },
+    "linen_handwraps": {
+      "file": "assets/items/linen_handwraps.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "5e4d6c16ee4d2863648c9e4b52b897673e6a79d72c55caae8eaef6d5837c9316"
+    },
+    "leather_gloves": {
+      "file": "assets/items/leather_gloves.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "1754d076cb0a18c3b3e48af6b30fc2b01e8a684646b78d4259e5efa7b0cd6494"
+    },
+    "reed_weave_grips": {
+      "file": "assets/items/reed_weave_grips.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "72c0b19563e561080bd281f2d137aab6e4967ac57438c872056368b4d2b7c179"
+    },
+    "ferrymans_mitts": {
+      "file": "assets/items/ferrymans_mitts.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "06bf4efb5a55e9d750dcc2e4b265e34001d725230e97b8b8f5c63b70157615d8"
+    },
+    "bone_knuckle_gloves": {
+      "file": "assets/items/bone_knuckle_gloves.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "3c81e208ce985ff1c005955a2cf1807cd4d1a3f374b7dc8b649ca533333d02ba"
+    },
+    "bogwatch_gauntlets": {
+      "file": "assets/items/bogwatch_gauntlets.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "8201d7c46a62418095e0cf01b74f833e03a8bfd37eb73af50b3f3dc69b10e2e8"
+    },
+    "rootbound_grips": {
+      "file": "assets/items/rootbound_grips.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "d11bbd6cdb907df429b7a252282d067379a88af1f953926cd9c9579021d541f0"
+    },
+    "bellrope_gloves": {
+      "file": "assets/items/bellrope_gloves.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "89ceef98d65261a312446a0936040cda373bb6927f014d77de2eba2d832cd59e"
+    },
+    "coalstained_gloves": {
+      "file": "assets/items/coalstained_gloves.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "7c08546b41d9d85730a6b45fdebd6bc71189a3f54fc453e7c32b9eb273d0765f"
+    },
+    "iron_rivet_grips": {
+      "file": "assets/items/iron_rivet_grips.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "d2750bf0606f15f438990c04c088e603f9a484bf7126aa2e86529e871bbc5f36"
+    },
+    "quarry_handguards": {
+      "file": "assets/items/quarry_handguards.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "e9268e3bda0d87e131a820c1010e24e81891738e35d0f3ec60714dc6ecc1779a"
+    },
+    "chainback_gloves": {
+      "file": "assets/items/chainback_gloves.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "186b13534b6fc74e6996d539eca4b87a28c746d02a518251ec3221a92a723f22"
+    },
+    "furnace_fists": {
+      "file": "assets/items/furnace_fists.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "1c2f776885f640400fb8b3f19a267d40050c083533237f643b61eb580e019c49"
+    },
+    "ember_thread_grips": {
+      "file": "assets/items/ember_thread_grips.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "6ad9ceadcedaa95cde61eeba0e74bf2bafc4b385f77c7c5a411824d6f7a0b74d"
+    },
+    "oathbound_gauntlets": {
+      "file": "assets/items/oathbound_gauntlets.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "0b85049ac44432e0070be1cca97e4d535e8fd1a7238c647cf6ed9da6719b8a93"
+    },
+    "slag_knuckle_mitts": {
+      "file": "assets/items/slag_knuckle_mitts.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "b878b3472b8884ebe1a96c00285fe18246d27c5644ac95a5f3c1eba5202bd00a"
+    },
+    "frost_fur_mittens": {
+      "file": "assets/items/frost_fur_mittens.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "02a770e0255899127596096d4a8e582541f9f0c2cb68fc164a232d8eaaec32e1"
+    },
+    "saltwarden_gloves": {
+      "file": "assets/items/saltwarden_gloves.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "33c17ac97d27346f578dd4effbfc35d0544d81fa0444b99cbfadb55a49cc4874"
+    },
+    "antler_plated_grips": {
+      "file": "assets/items/antler_plated_grips.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "55a70b3fbbbefd3d11478f240e215550140be6a55099e79b36ad67d7be6187fb"
+    },
+    "blue_iron_gauntlets": {
+      "file": "assets/items/blue_iron_gauntlets.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "131fedfff4d868b03972468a41ac81159cac4c9e24ac8a08069683870c021795"
+    },
+    "silver_pallbearers": {
+      "file": "assets/items/silver_pallbearers.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f88a43835edeebb2df012862a40267ac8307811195da46a1d0e217f05a2a9183"
+    },
+    "regents_cold_hands": {
+      "file": "assets/items/regents_cold_hands.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "d9c1ffc51a717d4fe98773185d06646da23fba839829c27ffb0c75e27fe73f0c"
+    },
+    "thawless_grasp": {
+      "file": "assets/items/thawless_grasp.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "3c1428662417dc4cec3159f4ccf5add5c5c7bb2c42f951862f98a7d5b3037ec0"
+    },
+    "last_hold": {
+      "file": "assets/items/last_hold.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "ba162893959ee824ae3974dabd81d5005e1236b9e2f0d5922a41231ba5cd9119"
+    },
+    "twisted_wire_ring": {
+      "file": "assets/items/twisted_wire_ring.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f16e46722cc19d186802a46314ec15ae434ba3a25f60c09e6feeede82408d479"
+    },
+    "copper_ring": {
+      "file": "assets/items/copper_ring.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "74e9334d571d723e3dc3667697648e16c74de310367e83bf969dc9194a3dbd96"
+    },
+    "reed_knot_ring": {
+      "file": "assets/items/reed_knot_ring.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f348073323fd02c3a910a0e9cfcc21705496d6f5b39c6718f9556dfa913e3ded"
+    },
+    "ferrymans_token": {
+      "file": "assets/items/ferrymans_token.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "86974336a22700476c3c99651d1131047f1645693d1288229fa4bfc4dad2b13b"
+    },
+    "bone_loop_ring": {
+      "file": "assets/items/bone_loop_ring.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "5c774760e681e07bb293615289b44387a07983b16f4222c00bc8a93ea93b80ec"
+    },
+    "fen_eye_ring": {
+      "file": "assets/items/fen_eye_ring.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "78fd283247107f34577b3013a211f037fe48770f5379417fd5b73388e20cfe14"
+    },
+    "bellmetal_band": {
+      "file": "assets/items/bellmetal_band.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "bee4397a090b56bcf1d975560a2a513eaf285e5823bf9415dac93da4334ffcc1"
+    },
+    "root_coil_ring": {
+      "file": "assets/items/root_coil_ring.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "3136287f908876cc0d97730ecdf20e1a5aa9d00970683b5eac764e2519cea0eb"
+    },
+    "coal_iron_ring": {
+      "file": "assets/items/coal_iron_ring.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f20844f19c35e09a33d3286605a7550823ae27bc3009c8034a6f86a8cfd0e4ae"
+    },
+    "brass_rivet_ring": {
+      "file": "assets/items/brass_rivet_ring.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "ce8a6b8ec763ea3d129c34aa0e41a9a7a8fcb6c43daebbf18b82ccef5907ca65"
+    },
+    "quarry_agate_ring": {
+      "file": "assets/items/quarry_agate_ring.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "8170732ae143d397f5930bedd5cf14b0c254f2bdb96811aebd6fc25ca7c09467"
+    },
+    "chain_link_ring": {
+      "file": "assets/items/chain_link_ring.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f925b06e2599cd8faf801a0e7e07d43ab322de407b8ab6f6de79a9ebab0dfafc"
+    },
+    "ember_eye_ring": {
+      "file": "assets/items/ember_eye_ring.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "b5fe59a7dc7a02061f7710ca52faa698f0f969cc1d1730c37e00c37f76166901"
+    },
+    "furnace_seal": {
+      "file": "assets/items/furnace_seal.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "4f6ed4b769fa670a459e2797b3c0179d08ca99a10ae125da14a1352b83468055"
+    },
+    "oathkeepers_circle": {
+      "file": "assets/items/oathkeepers_circle.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "515ca4f566712e61998890b794ecd1178d19cf2dace79fa90af3b4e3dc498c57"
+    },
+    "slagstone_ring": {
+      "file": "assets/items/slagstone_ring.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "df561ed2af0f92203081b4ea943df84a97e060bdddac2e1aa0946c7e30441b7e"
+    },
+    "frost_silver_band": {
+      "file": "assets/items/frost_silver_band.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f6dd3db8d050682c6116e4276703ab03920fde93dafc4b79cd357fd81a6dff84"
+    },
+    "salt_pearl_ring": {
+      "file": "assets/items/salt_pearl_ring.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "e686522c81c17b886453fdc719ee1e70aba6558ff1b5050cd2571770ba5f108d"
+    },
+    "antler_signet": {
+      "file": "assets/items/antler_signet.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "5e75925ecc11fcaa639df97572815236f4b04a3f92bce4410796d102aff7c52f"
+    },
+    "blue_iron_loop": {
+      "file": "assets/items/blue_iron_loop.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "8b7066a3ac32e25912179fa37b28db2c876fc264d19f9263332d2a6fadf5070f"
+    },
+    "vigil_moon_ring": {
+      "file": "assets/items/vigil_moon_ring.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "2cd26fb28003b36aec79aa753339d665042df6573ac54b4be08620aa9cea4777"
+    },
+    "regents_signet": {
+      "file": "assets/items/regents_signet.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "1f18944b009360af6b0554d69d80a26a22aca536561f1c2aea528e7d789e1a33"
+    },
+    "thawless_loop": {
+      "file": "assets/items/thawless_loop.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "a1d60811051584734a02bdcc54dd1f0fe8c752a550852e9f299ab61a416841b1"
+    },
+    "last_coin_ring": {
+      "file": "assets/items/last_coin_ring.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "ced8d852b437bf9e0779249deccd47e87fdb2ed83d6cd3c189e6f7612e531b7d"
+    },
+    "pebble_on_cord": {
+      "file": "assets/items/pebble_on_cord.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "35f8cfd28e1f50a5720a5d1992114ae2849852da2afe17413a4982fdaa348e03"
+    },
+    "iron_tooth_charm": {
+      "file": "assets/items/iron_tooth_charm.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "5fe9c7b1fdfa3f5b230e128673b7d4c25f4d2fb1b2a79e3e4411538bbeb5f361"
+    },
+    "reed_braid_charm": {
+      "file": "assets/items/reed_braid_charm.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "e4fb92f34a21bf9c77406f9dcce8a8b94e58de967a6e39644f6a01148fadbdf2"
+    },
+    "ferrymans_obol": {
+      "file": "assets/items/ferrymans_obol.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "11af415754b4203f4363302c5d6cd3dc1bbc86576e85c2a7903948dc21d9cef5"
+    },
+    "bone_toggle_pendant": {
+      "file": "assets/items/bone_toggle_pendant.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "997c88d8303c9632e1c7d53942891233e624ee5347147043ac8f563870ec3517"
+    },
+    "restraint_amulet": {
+      "file": "assets/items/restraint_amulet.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "ee07e3d3e75a56ba53ad2844ca55c017bbeaade86aae87c509965ad84e8119ac"
+    },
+    "drowned_bell_charm": {
+      "file": "assets/items/drowned_bell_charm.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "c3f6ab84d389bbe83ae4eb5d11391e95a9c4beb162ec0a8961dbc91f2c142edb"
+    },
+    "willow_heart_charm": {
+      "file": "assets/items/willow_heart_charm.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "17249297c8a48ae42786b9fedcc16f10f271b51102d8f77d35607d525372d5be"
+    },
+    "coal_cage_pendant": {
+      "file": "assets/items/coal_cage_pendant.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f9c2ff440a1f9dd05853624bab58fa20617ba85fc6de4418632e4b21ef11c89e"
+    },
+    "smiths_thumbprint": {
+      "file": "assets/items/smiths_thumbprint.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "89af464a6fab7ef2ca7e3fb3baf4c8382f55cbd7950334e58f09f872c9c4a3f6"
+    },
+    "quarry_spirit_stone": {
+      "file": "assets/items/quarry_spirit_stone.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f935411b2f63b2e120e3b3622d000446edf803e6fd234379f17d552d728d34b9"
+    },
+    "broken_chain_charm": {
+      "file": "assets/items/broken_chain_charm.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "eab8634bb9c6c0c832089a3f39bd8e9db86236bc0dd995fefc50523da21da726"
+    },
+    "ember_in_a_bottle": {
+      "file": "assets/items/ember_in_a_bottle.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "bb32763673bb79d1de917c9cb6afb99ce203e15dff0967e28d1ebcdd420f3e78"
+    },
+    "furnace_key": {
+      "file": "assets/items/furnace_key.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "29a3a4d31c092b7cce185262d24c123c2ce586d4f586bacb0db98ecb43446e8c"
+    },
+    "oath_weight_pendant": {
+      "file": "assets/items/oath_weight_pendant.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "cf0a25171062dee781422b464b01d6391390de1543f1c4384456428d8a0f261b"
+    },
+    "slag_heart": {
+      "file": "assets/items/slag_heart.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "dc2e9156b871406ff16e2030a7534ae339c82099cd5808fecb9923ccc6b26784"
+    },
+    "frostbound_teardrop": {
+      "file": "assets/items/frostbound_teardrop.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "a1b63a7547ad3e76f1ea0f6508fd2d71dcc5c360718806720ba008d425fd8f10"
+    },
+    "saltglass_vial": {
+      "file": "assets/items/saltglass_vial.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "c6942e18eea45bc9133eeef44475107f0fac8fb7186000d36a51fc75830af261"
+    },
+    "antler_tally": {
+      "file": "assets/items/antler_tally.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "3c2c4271500de70497f80b25a3855b507fa59d5cec5a72c66a0762782fd06251"
+    },
+    "blue_watch_medallion": {
+      "file": "assets/items/blue_watch_medallion.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "92f19ba5a6aef9c69060f5f07c3c965e6510226328d75c1193933844e05c72cd"
+    },
+    "silver_vigil_locket": {
+      "file": "assets/items/silver_vigil_locket.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "7d955b2a9601099dcfd9d9474fa23f7d230323bf6c8046ca195c5fc0687bfd93"
+    },
+    "regents_last_seal": {
+      "file": "assets/items/regents_last_seal.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "45a5e25f82d45a5295a8887ea5d2a1f32aec7883d6de1bc7a6446f1f08ffa907"
+    },
+    "thawless_reliquary": {
+      "file": "assets/items/thawless_reliquary.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "863a846436dd2d6ad0148c33bc56d6bdf20a1c432668234bd3ee01f3b31048ad"
+    },
+    "roadkeepers_knot": {
+      "file": "assets/items/roadkeepers_knot.png",
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "56ca5c626055c9937a1eaecba229b8b1d63de3ce484c32383bc05e85094170b8"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "silver_pallbearers",
+  "backend": "built-in imagegen",
+  "definition_sha256": "ccc174484200801b7241e0567337af9383048a148a838610bba7e03a5ea9a876",
+  "original": "image-generation/items/v1/sources/silver_pallbearers.png",
+  "source_sha256": "336a12ad37702dfb9db87dcca9dc92d76debee993c200a72174eebe925b658cc",
+  "icon": "assets/items/silver_pallbearers.png",
+  "icon_sha256": "f88a43835edeebb2df012862a40267ac8307811195da46a1d0e217f05a2a9183",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Silver Pallbearers. Fine silver ringmail covers a pair of long black gloves. A plain bright plate reinforces each palm heel, while narrow violet bands close the wrists without visible buckles.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

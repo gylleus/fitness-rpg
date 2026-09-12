@@ -1,0 +1,273 @@
+schema_version = 1
+category = "gloves"
+kind = "gloves"
+
+[generation]
+canvas = [64, 64]
+transparent = true
+style = "Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters."
+composition = "One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item."
+
+[[items]]
+id = "linen_handwraps"
+name = "Linen Handwraps"
+tier = 1
+rarity = "common"
+sell_value = 8
+description = "Two compact bundles of coarse cream handwraps have open finger ends and broad crossing wrist bands."
+visual_description = "Two compact bundles of coarse cream handwraps have open finger ends and broad crossing wrist bands. Brown stains mark the knuckles, and one loose frayed tail curls beside the cuff."
+stats = { armor = 3 }
+modifiers = [{ stat = "health", value = 8 }]
+
+[[items]]
+id = "leather_gloves"
+name = "Worn Leather Gloves"
+tier = 1
+rarity = "common"
+sell_value = 9
+description = "A pair of short brown leather gloves has thick padded knuckles and blunt worn fingertips."
+visual_description = "A pair of short brown leather gloves has thick padded knuckles and blunt worn fingertips. Pale stitches repair the right thumb, while narrow wrist straps close with dull iron buckles."
+stats = { armor = 4 }
+modifiers = [{ stat = "damage", value = 2 }]
+
+[[items]]
+id = "reed_weave_grips"
+name = "Reed-weave Grips"
+tier = 1
+rarity = "common"
+sell_value = 10
+description = "Short dark cloth gloves carry flat olive reed strips across the backs of the hands."
+visual_description = "Short dark cloth gloves carry flat olive reed strips across the backs of the hands. Brown leather binds each knuckle row, leaving the fingers flexible beneath broad green wrist ties."
+stats = { armor = 5 }
+modifiers = [{ stat = "armor", value = 3 }]
+
+[[items]]
+id = "ferrymans_mitts"
+name = "Ferryman's Mitts"
+tier = 1
+rarity = "uncommon"
+sell_value = 23
+description = "A pair of tar-dark leather mitts has separate thumbs and heavily reinforced palms."
+visual_description = "A pair of tar-dark leather mitts has separate thumbs and heavily reinforced palms. Faded blue rope winds around the cuffs, and pale scrape marks cross the broad curled fingers."
+stats = { armor = 7 }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.005 }]
+
+[[items]]
+id = "bone_knuckle_gloves"
+name = "Bone Knuckle Gloves"
+tier = 1
+rarity = "uncommon"
+sell_value = 24
+description = "Four small yellow bone plates cover each glove's knuckles above dark brown leather fingers."
+visual_description = "Four small yellow bone plates cover each glove's knuckles above dark brown leather fingers. Copper wire holds the plates in place, and uneven cream stitches edge the short cuffs."
+stats = { armor = 8 }
+modifiers = [{ stat = "crit_chance_bps", value = 200 }]
+
+[[items]]
+id = "bogwatch_gauntlets"
+name = "Bogwatch Gauntlets"
+tier = 1
+rarity = "rare"
+sell_value = 45
+description = "Short iron gauntlets have broad rounded knuckle shells and overlapping finger plates."
+visual_description = "Short iron gauntlets have broad rounded knuckle shells and overlapping finger plates. Green water stains collect at the hinges above torn brown leather cuffs with large square buckles."
+stats = { armor = 13 }
+modifiers = [{ stat = "crit_damage_bps", value = 1500 }]
+
+[[items]]
+id = "rootbound_grips"
+name = "Rootbound Grips"
+tier = 1
+rarity = "rare"
+sell_value = 46
+description = "Twisted dark roots form a cage over thick black leather gloves."
+visual_description = "Twisted dark roots form a cage over thick black leather gloves. Pale cut ends protrude near the knuckles, while thin green vines wrap the wrists in three tight bands."
+stats = { armor = 11 }
+modifiers = [{ stat = "health", value = 16 }]
+
+[[items]]
+id = "bellrope_gloves"
+name = "Bellrope Gloves"
+tier = 1
+rarity = "rare"
+sell_value = 47
+description = "A pair of heavy gray leather gloves has broad brass palms folded into loose fists."
+visual_description = "A pair of heavy gray leather gloves has broad brass palms folded into loose fists. Rope scars stripe the metal, and thick charcoal cloth wraps extend well past the wrists."
+stats = { armor = 12 }
+modifiers = [{ stat = "damage", value = 3 }]
+
+[[items]]
+id = "coalstained_gloves"
+name = "Coalstained Gloves"
+tier = 2
+rarity = "common"
+sell_value = 19
+description = "Thick tan work gloves are blackened across their broad fingertips and palms."
+visual_description = "Thick tan work gloves are blackened across their broad fingertips and palms. Long cuffs have diagonal quilted seams, with a red-brown leather patch repairing one wrist."
+stats = { armor = 11 }
+modifiers = [{ stat = "armor", value = 6 }]
+
+[[items]]
+id = "iron_rivet_grips"
+name = "Iron Rivet Grips"
+tier = 2
+rarity = "common"
+sell_value = 20
+description = "A row of large square iron rivets crosses each dark leather knuckle pad."
+visual_description = "A row of large square iron rivets crosses each dark leather knuckle pad. Narrow steel plates protect the backs of the fingers, and plain leather straps tighten the low cuffs."
+stats = { armor = 9 }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.005 }]
+
+[[items]]
+id = "quarry_handguards"
+name = "Quarry Handguards"
+tier = 2
+rarity = "common"
+sell_value = 16
+description = "Broad steel handguards sit over short ochre-dusted leather gloves."
+visual_description = "Broad steel handguards sit over short ochre-dusted leather gloves. Each back plate has two deep grooves, and thick copper pins attach the separate wrist braces."
+stats = { armor = 10 }
+modifiers = [{ stat = "crit_chance_bps", value = 200 }]
+
+[[items]]
+id = "chainback_gloves"
+name = "Chainback Gloves"
+tier = 2
+rarity = "uncommon"
+sell_value = 41
+description = "Large dark iron rings form flexible patches over the backs of brown gloves."
+visual_description = "Large dark iron rings form flexible patches over the backs of brown gloves. Bare leather palms curl inward, and two bright replacement links stand out beside one thumb."
+stats = { armor = 15 }
+modifiers = [{ stat = "crit_damage_bps", value = 1500 }]
+
+[[items]]
+id = "furnace_fists"
+name = "Furnace Fists"
+tier = 2
+rarity = "uncommon"
+sell_value = 42
+description = "Oversized black iron gauntlets have square knuckle blocks and deep overlapping finger plates."
+visual_description = "Oversized black iron gauntlets have square knuckle blocks and deep overlapping finger plates. Dull amber seams appear between the plates above long gray padded cuffs."
+stats = { armor = 13 }
+modifiers = [{ stat = "health", value = 20 }]
+
+[[items]]
+id = "ember_thread_grips"
+name = "Ember Thread Grips"
+tier = 2
+rarity = "rare"
+sell_value = 93
+description = "Fine copper stitches divide the dark red leather backs of two gloves into narrow panels."
+visual_description = "Fine copper stitches divide the dark red leather backs of two gloves into narrow panels. Small muted amber beads fasten the wrists, with soot darkening the raised knuckles."
+stats = { armor = 18 }
+modifiers = [{ stat = "damage", value = 4 }]
+
+[[items]]
+id = "oathbound_gauntlets"
+name = "Oathbound Gauntlets"
+tier = 2
+rarity = "rare"
+sell_value = 94
+description = "Smooth bronze gauntlets have broad rectangular backs and neatly articulated fingers."
+visual_description = "Smooth bronze gauntlets have broad rectangular backs and neatly articulated fingers. Dark tarnish outlines each joint, while ivory cloth peeks from short square-edged cuffs."
+stats = { armor = 19 }
+modifiers = [{ stat = "armor", value = 10 }]
+
+[[items]]
+id = "slag_knuckle_mitts"
+name = "Slag Knuckle Mitts"
+tier = 2
+rarity = "rare"
+sell_value = 90
+description = "Thick black leather mitts support irregular charcoal slag blocks across the knuckles."
+visual_description = "Thick black leather mitts support irregular charcoal slag blocks across the knuckles. Three bright iron pins pierce each block above broad straps of scorched brown hide."
+stats = { armor = 17 }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.01 }]
+
+[[items]]
+id = "frost_fur_mittens"
+name = "Frost Fur Mittens"
+tier = 3
+rarity = "common"
+sell_value = 25
+description = "Soft gray leather mittens have wide ivory fur cuffs and stubby separate thumbs."
+visual_description = "Soft gray leather mittens have wide ivory fur cuffs and stubby separate thumbs. Pale blue stitching follows their outer seams, and frost catches in the fur near the wrists."
+stats = { armor = 16 }
+modifiers = [{ stat = "crit_chance_bps", value = 300 }]
+
+[[items]]
+id = "saltwarden_gloves"
+name = "Saltwarden Gloves"
+tier = 3
+rarity = "common"
+sell_value = 26
+description = "Faded teal leather gloves have white salt crust around the finger joints."
+visual_description = "Faded teal leather gloves have white salt crust around the finger joints. Small gray steel plates protect the knuckles, and long narrow straps spiral around each wrist."
+stats = { armor = 17 }
+modifiers = [{ stat = "crit_damage_bps", value = 1500 }]
+
+[[items]]
+id = "antler_plated_grips"
+name = "Antler-plated Grips"
+tier = 3
+rarity = "common"
+sell_value = 27
+description = "Flattened yellow antler segments cover the backs and fingers of dark brown gloves."
+visual_description = "Flattened yellow antler segments cover the backs and fingers of dark brown gloves. Copper pins join the segments above black fur cuffs with a single rough bone toggle each."
+stats = { armor = 15 }
+modifiers = [{ stat = "health", value = 24 }]
+
+[[items]]
+id = "blue_iron_gauntlets"
+name = "Blue Iron Gauntlets"
+tier = 3
+rarity = "uncommon"
+sell_value = 64
+description = "Deep-blue steel gauntlets carry high angular ridges over the knuckles."
+visual_description = "Deep-blue steel gauntlets carry high angular ridges over the knuckles. Their finger joints show pale polished edges, and short indigo padded cuffs flare slightly outward."
+stats = { armor = 20 }
+modifiers = [{ stat = "damage", value = 4 }]
+
+[[items]]
+id = "silver_pallbearers"
+name = "Silver Pallbearers"
+tier = 3
+rarity = "uncommon"
+sell_value = 60
+description = "Fine silver ringmail covers a pair of long black gloves."
+visual_description = "Fine silver ringmail covers a pair of long black gloves. A plain bright plate reinforces each palm heel, while narrow violet bands close the wrists without visible buckles."
+stats = { armor = 21 }
+modifiers = [{ stat = "armor", value = 11 }]
+
+[[items]]
+id = "regents_cold_hands"
+name = "Regent's Cold Hands"
+tier = 3
+rarity = "rare"
+sell_value = 136
+description = "Pale steel gauntlets have unusually long narrow fingers and a small raised crown on each back plate."
+visual_description = "Pale steel gauntlets have unusually long narrow fingers and a small raised crown on each back plate. Tarnished gold rivets connect the knuckles above dark blue cuffs."
+stats = { armor = 23 }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.0125 }]
+
+[[items]]
+id = "thawless_grasp"
+name = "Thawless Grasp"
+tier = 3
+rarity = "rare"
+sell_value = 137
+description = "Thick blue-white ice plates are trapped in a black iron frame over heavy gloves."
+visual_description = "Thick blue-white ice plates are trapped in a black iron frame over heavy gloves. Broad dark fingertips remain exposed, and gray fur seals the deep wrist openings."
+stats = { armor = 24 }
+modifiers = [{ stat = "crit_chance_bps", value = 500 }]
+
+[[items]]
+id = "last_hold"
+name = "Last Hold"
+tier = 3
+rarity = "rare"
+sell_value = 138
+description = "A pair of broad black gauntlets has three mismatched silver repair plates across the hands."
+visual_description = "A pair of broad black gauntlets has three mismatched silver repair plates across the hands. The blunt finger ends are worn bright, and faded red leather straps hang from the cuffs."
+stats = { armor = 25 }
+modifiers = [{ stat = "crit_damage_bps", value = 2500 }]

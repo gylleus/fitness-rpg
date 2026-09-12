@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "type": "pixel-reference",
+  "asset_id": "barbarian_player",
+  "kind": "player",
+  "name": "Barbarian",
+  "facing": "right",
+  "image": {
+    "path": "pixel-reference.png",
+    "sha256": "d484d6010333d56136be62a27d318af15be8c46e0d6d604d8dc19a2d873717dc"
+  },
+  "source": {
+    "original_sha256": "58d9e1f184a07487449eb9a99102b6174d633882712971e4b819eaa3a72f515c",
+    "mask_method": "birefnet-general",
+    "original": "player-sprites/guides/barbarian-club-profile-v1.png",
+    "selection": {
+      "source": "../../../player-sprites/guides/barbarian-club-profile-v1.png"
+    },
+    "original_record": {
+      "type": "imagegen-reference",
+      "backend": "built-in imagegen",
+      "image": "barbarian-club-profile-v1.png",
+      "prompt": "Edit the supplied barbarian sprite into a usable player reference for a side-scrolling game. Use the input only for chunky pixel-art style, exaggerated massive upper body, long blond hair and worn clothing/colors. Correct the pose and face. Output ONE isolated full-body character on actual transparent alpha, preferably a 512x512 PNG with generous padding, no sheet or other views. The ENTIRE character is in a perfectly lateral RIGHT-FACING SIDE PROFILE: head, nose, mouth, chest, pelvis, knees and feet all point RIGHT, as though walking along a horizontal platform. Camera looks directly at the character's left side at 90 degrees. Show exactly one cheek and the projecting nose in silhouette. The far shoulder and far side of the chest are hidden behind the near side. Absolutely no frontal torso, no three-quarter view, no head turned toward the camera. He has a huge hunched rounded back and enormous shoulders, small low head, deeply bent knees and staggered feet. Both arms are held high in a compact fighting guard, near hand holding ONE thick knotted WOODEN CLUB raised back above the shoulder, empty fist held forward near the face. Extremely wide HAPPY toothy grin, delighted to fight. His chin, cheeks and upper lip are entirely bare smooth skin: NO BEARD, NO MOUSTACHE, NO STUBBLE. Long blond scalp hair falls behind the shoulder and down the back, kept completely distinct from the bare jaw and mouth. Dense overhanging bushy blond EYEBROWS completely hide the eyes; no visible eye whites, pupils or eye slits. Strong chunky pixel clusters, dark outline, limited earthy palette, hard flat three-tone shading. No ground, no shadow, no scenery, no text, no frame, no extra weapon. The two overriding requirements are the strict full-body side orientation and clearly visible clean-shaven chin.",
+      "input_role": "Previously displayed frontal barbarian sprite used for visual style and proportions.",
+      "art_status": "Candidate; clothing remains unselected in PLAYER.toml.",
+      "output_note": "Tool output is a 1254x1254 RGB PNG with a drawn checkerboard. The repo's normal CPU reference preparation removes the background and produces the transparent pixel reference."
+    },
+    "crop": [
+      -436,
+      -449,
+      1721,
+      1708
+    ],
+    "native_size": 128,
+    "upscale": 4,
+    "background": "#8b9bb4",
+    "pivot": [
+      0.4609375,
+      0.7421875
+    ],
+    "anchor": "ground",
+    "reference_ground_gap_px": 0,
+    "anchor_policy": "Ground-contact band; hovering assets use imaginary ground 20% of idle silhouette height below the body",
+    "reference_idle_bbox": [
+      42,
+      33,
+      86,
+      95
+    ],
+    "height_scale": 1.0,
+    "reference_sha256": "7af50280cf80594102c441dd4c188118866ec7e356e8657637648e695a0bfca5",
+    "source_palette": [],
+    "output_palette": "ENDESGA 32",
+    "note": "Source palette guides prose colors; visible output is mapped to ENDESGA32. Scale is a display ratio, not source-image resolution.",
+    "prepared_sha256": {
+      "reference-cutout.png": "8c46605a0d7b5ad70b1591b5faaf772ccf9ba6af915dec1313cf15c72ee51b7a",
+      "native-128.png": "d484d6010333d56136be62a27d318af15be8c46e0d6d604d8dc19a2d873717dc",
+      "reference.png": "7af50280cf80594102c441dd4c188118866ec7e356e8657637648e695a0bfca5",
+      "source-cutout.png": "8ac14f83da2c69f15b9e55637ed48850a318ab772b52c31ea62ad7464eb29b10"
+    }
+  },
+  "art_status": "Candidate; publishing is not art approval",
+  "pivot": [
+    0.4609375,
+    0.7421875
+  ],
+  "anchor": "ground",
+  "conditioning": {
+    "path": "reference.png",
+    "sha256": "7af50280cf80594102c441dd4c188118866ec7e356e8657637648e695a0bfca5"
+  },
+  "cutout": {
+    "path": "reference-cutout.png",
+    "sha256": "8c46605a0d7b5ad70b1591b5faaf772ccf9ba6af915dec1313cf15c72ee51b7a"
+  }
+}

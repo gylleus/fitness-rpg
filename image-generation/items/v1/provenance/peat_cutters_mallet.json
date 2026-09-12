@@ -1,0 +1,15 @@
+{
+  "id": "peat_cutters_mallet",
+  "backend": "built-in imagegen",
+  "definition_sha256": "40ed44eab2ba11b9b52f269d03e73e083a8e43a848150e999564ae076315e982",
+  "original": "image-generation/items/v1/sources/peat_cutters_mallet.png",
+  "source_sha256": "59c01fdf4c5933e955bef6d4856ff089608dc38326e6d2075c77c712adc6e427",
+  "icon": "assets/items/peat_cutters_mallet.png",
+  "icon_sha256": "6df195acc1b87beda81bb7d8ac1afcd7a6f6bb7ca4eec6380ceb303f3409139b",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Peat Cutter's Mallet. A rectangular bog-oak mallet head sits crosswise on a short crooked handle. Peat stains fill the grain, and two rawhide straps hold a visibly split corner together.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

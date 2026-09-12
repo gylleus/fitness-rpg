@@ -1,0 +1,15 @@
+{
+  "id": "quarry_sledge",
+  "backend": "built-in imagegen",
+  "definition_sha256": "a7785dd08a883c1e93786a6daf9b90953c445b2a97499e089cd62949e30c4de8",
+  "original": "image-generation/items/v1/sources/quarry_sledge.png",
+  "source_sha256": "03b21bb2b9d48b3e63c75e09f4190d4a7a18ddbd0494fc2d7ad274373bda27e2",
+  "icon": "assets/items/quarry_sledge.png",
+  "icon_sha256": "f47a9d726940e2a02b83b2ee536cae9159c05f8478f443c21b0fd10b61aea90c",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Quarry Sledge. A long-handled sledge carries an oversized rectangular steel block with rounded battered corners. Ochre quarry dust coats its faces, and a red cloth knot marks a repaired hickory shaft.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

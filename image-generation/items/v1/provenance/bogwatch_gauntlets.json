@@ -1,0 +1,15 @@
+{
+  "id": "bogwatch_gauntlets",
+  "backend": "built-in imagegen",
+  "definition_sha256": "5951b681c23cb35e59f92d3d79803f902d8f6f849ac4845ad5f0f03c2353aced",
+  "original": "image-generation/items/v1/sources/bogwatch_gauntlets.png",
+  "source_sha256": "8bd6e85f60725d5d5ab7922eb9c92c39817a5734171ff5bf84be4509a9e484a2",
+  "icon": "assets/items/bogwatch_gauntlets.png",
+  "icon_sha256": "8201d7c46a62418095e0cf01b74f833e03a8bfd37eb73af50b3f3dc69b10e2e8",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Bogwatch Gauntlets. Short iron gauntlets have broad rounded knuckle shells and overlapping finger plates. Green water stains collect at the hinges above torn brown leather cuffs with large square buckles.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

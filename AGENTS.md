@@ -136,6 +136,17 @@ bd prime                # Refresh Beads context
 **Architecture in one line:** issues live in a local Dolt DB; sync uses `refs/dolt/data` on your git remote; `.beads/issues.jsonl` is a passive export. See https://github.com/gastownhall/beads/blob/main/docs/SYNC_CONCEPTS.md for details and anti-patterns.
 <!-- END BEADS CODEX SETUP -->
 
+## Python Tooling
+
+Use `uv` for Python commands. The root `pyproject.toml` and `uv.lock` manage
+lightweight tooling: `uv run content` and `uv run python ...`. For image
+generation use `uv run sprites ...`, `uv run enemy-sprites ...`, or
+`uv run sprite-python ...` for helper scripts/tests. These select the existing
+pinned GPU environment; do not install ML packages into the root `.venv` or
+sync the root uv project into the inherited sprite/study environments.
+See `image-generation/PYTHON.md` for setup. Use `uv add` for root dependencies
+and retain both `pyproject.toml` and `uv.lock` changes.
+
 ## Enemy Design
 
 For `design-enemy` requests or collaborative biome enemy design, read and follow

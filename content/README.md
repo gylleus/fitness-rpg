@@ -18,20 +18,23 @@ For guided enemy curation, use the repository's
 appearance and attack, and saves both to TOML after the draft is accepted.
 
 The app still uses `src/game/combat.ts`. Authored content does not automatically
-change the existing runtime dungeons or enemies.
+change runtime dungeons or enemies. The first runtime expedition now uses a
+compact Wetlands roster snapshot, refreshed explicitly with
+`uv run python scripts/runtime_roster.py --biome wetlands --output src/game/rosters/wetlands.json`.
+See [runtime sprites](../assets/sprites/README.md) for the corresponding animation package.
 
 ## Validate and export
 
-[scripts/content.py](../scripts/content.py) requires Python 3.11+ and uses only
-the standard library. From the repository root:
+[scripts/content.py](../scripts/content.py) uses only the standard library.
+The root uv project selects Python 3.12.9. From the repository root:
 
 ```sh
-python3.12 scripts/content.py
-python3.12 scripts/content.py --export-json /tmp/game-content.json
-python3.12 -m unittest discover -s scripts -p 'test_content.py'
+uv run content
+uv run content --export-json /tmp/game-content.json
+uv run python -m unittest discover -s scripts -p 'test_content.py'
 ```
 
-Any Python 3.11+ interpreter can replace `python3.12`. The tool accepts an empty
+The underlying script supports Python 3.11+. The tool accepts an empty
 catalog and exports an empty `biomes` array. Shared `catalog`, `art`, and `combat`
 metadata are empty objects when no shared catalog is registered.
 

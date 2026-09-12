@@ -45,12 +45,15 @@ describe('victory stakes', () => {
     expect(startDungeon(db, 0, now).state.entryHp).toBe(replay.state.entryHp);
     db.$client.close();
   });
-  it('more steps and armor add available health without clearing existing damage', () => {
+  it('separates armor from health bonuses without clearing existing damage', () => {
     const db = trained();
     const win = finish(db, startDungeon(db, 0, now));
     saveStepTotal(db, day, 22000);
     expect(getGameSnapshot(db, now).currentHealth).toBe(win.state.heroHp + 20);
     giveItem(db, GEAR.hide_armor, 'armor');
+    expect(getGameSnapshot(db, now).currentHealth).toBe(win.state.heroHp + 20);
+    expect(getGameSnapshot(db, now).stats.armor).toBe(12);
+    giveItem(db, { ...GEAR.hide_armor, modifiers: [{ stat: 'health', value: 25 }] }, 'armor');
     expect(getGameSnapshot(db, now).currentHealth).toBe(win.state.heroHp + 45);
     const tomorrow = new Date(2026, 8, 7, 12).getTime();
     const next = getGameSnapshot(db, tomorrow);

@@ -10,6 +10,11 @@
 .beads-credential-key
 .beads/proxieddb/
 
+# Python tooling
+/.venv/
+__pycache__/
+*.py[cod]
+
 # Node / Expo
 node_modules/
 .expo/

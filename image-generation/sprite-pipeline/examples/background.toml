@@ -1,0 +1,9 @@
+# Generation example only; not a new biome or approved game location.
+schema_version = 1
+
+[[assets]]
+id = "old_road"
+name = "Old road background"
+kind = "background"
+canvas = [320, 180]
+visual_description = "An old dirt road crosses the foreground beneath a broken stone arch. Worn blocks and coarse grass line its edges. Dark trees stand beyond low ruined walls, with distant hills fading beneath an overcast sky."

@@ -1,0 +1,15 @@
+{
+  "id": "leechkeepers_pestle",
+  "backend": "built-in imagegen",
+  "definition_sha256": "11212efb3404be318932a45c7f12aa9af0eccef77955007d44641ac0040436f0",
+  "original": "image-generation/items/v1/sources/leechkeepers_pestle.png",
+  "source_sha256": "e859d5e355271162961a537e1544460ba46f3b2c976cacf9f153971e7b4b58c6",
+  "icon": "assets/items/leechkeepers_pestle.png",
+  "icon_sha256": "19edb7c6e4087938bb5326aa334d1ec5197c82ae04ba28b34aee533423c78049",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Leechkeeper's Pestle. A swollen gray stone pestle is banded to a narrow handle with green-black leather. Its bulbous head bears a single shallow spiral groove clogged with dried marsh silt.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

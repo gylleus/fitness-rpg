@@ -1,5 +1,10 @@
 # Environments and enemy membership are curated with the user.
 schema_version = 1
+item_files = [
+  "items/weapons/MACES.toml", "items/weapons/SWORDS.toml", "items/weapons/AXES.toml",
+  "items/armor/BODY_ARMOR.toml", "items/armor/HELMETS.toml", "items/armor/GLOVES.toml",
+  "items/accessories/RINGS.toml", "items/accessories/AMULETS.toml",
+]
 
 [[biomes]]
 id = "wetlands"

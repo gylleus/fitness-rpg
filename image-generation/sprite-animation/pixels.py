@@ -60,23 +60,25 @@ def map_palette(rgb, colors=None, metric="ciede2000"):
 
 def convert(rgba, size, method="conservative", mask_resize="coverage", threshold=128, color_metric="ciede2000"):
     from pyxelate import Pal, Pyx
-    if rgba.size[0] != rgba.size[1]:
+    rectangular = isinstance(size, (tuple, list))
+    if not rectangular and rgba.size[0] != rgba.size[1]:
         raise ValueError("Use one square, aspect-preserving clip crop before conversion")
+    width, height = size if rectangular else (size, size)
     rgba = rgba.convert("RGBA")
     rgb = extend_foreground(rgba)
     colors = palette_colors()
     if method == "nearest":
-        reduced = rgb.resize((size, size), Image.Resampling.NEAREST)
+        reduced = rgb.resize((width, height), Image.Resampling.NEAREST)
     elif method == "conservative":
-        geometry = Pyx(width=size, height=size, palette=Pal.from_rgb(colors.tolist()),
+        geometry = Pyx(width=width, height=height, palette=Pal.from_rgb(colors.tolist()),
                        svd=False, dither="none", sobel=3, depth=1)
-        working = resize(np.asarray(rgb), (size * 3, size * 3), anti_aliasing=True)
+        working = resize(np.asarray(rgb), (height * 3, width * 3), anti_aliasing=True)
         working = geometry._pyxelate(geometry._median(working))
         reduced = Image.fromarray(np.clip(np.rint(working * 255), 0, 255).astype(np.uint8))
     else:
         raise ValueError(method)
     result = np.array(map_palette(reduced, colors, color_metric).convert("RGBA"))
-    alpha = rgba.getchannel("A").resize((size, size), Image.Resampling.BOX
+    alpha = rgba.getchannel("A").resize((width, height), Image.Resampling.BOX
         if mask_resize == "coverage" else Image.Resampling.NEAREST)
     result[..., 3] = (np.asarray(alpha) >= threshold).astype(np.uint8) * 255
     result[result[..., 3] == 0, :3] = 0

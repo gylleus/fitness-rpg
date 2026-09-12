@@ -1,11 +1,11 @@
-import { attackPower, type HeroStats } from './rules';
+import { attackPower, damageAfterArmor, type HeroStats } from './rules';
 import { advanceMeter, emptyCombatMeters, resolveAttack, type CombatMeters } from './attacks';
 import wetlands from './rosters/wetlands.json';
 import { rollLoot, type LootDrop } from './equipment';
 import { randomInt, seedFor } from './random';
 
 export type Enemy = { id?: string; name: string; health: number; attack: number; gold: number; xp: number; sprite: 'slime' | 'wolf' | 'knight' | 'boss' };
-export type Dungeon = { id: number; name: string; subtitle: string; color: string; enemies: Enemy[] };
+export type Dungeon = { id: number; biomeId?: string; name: string; subtitle: string; color: string; enemies: Enemy[] };
 // Pre-snapshot saves retain their original enemies and balances.
 const LEGACY_DUNGEONS: Dungeon[] = [
   { id: 0, name: 'Mossfall Hollow', subtitle: 'Something stirs beneath the roots.', color: '#8ae3b1', enemies: [
@@ -29,7 +29,7 @@ const LEGACY_DUNGEONS: Dungeon[] = [
 ];
 // Expedition order is a game rule, independent of the biome's random spawn pool.
 export const DUNGEONS: Dungeon[] = [
-  { id: 0, name: wetlands.name, subtitle: 'A path through reeds, dark pools and tangled roots.', color: '#8ae3b1',
+  { id: 0, biomeId: wetlands.biome_id, name: wetlands.name, subtitle: 'A path through reeds, dark pools and tangled roots.', color: '#8ae3b1',
     enemies: (['bog_toad', 'drowned_corpse', 'giant_water_strider', 'bog_hag', 'root_hulk'] as const)
       .map(id => wetlands.enemies[id] as Enemy) },
   ...LEGACY_DUNGEONS.slice(1),
@@ -156,9 +156,10 @@ export function battleTurn(current: BattleState): BattleState {
       : advanceMeter(current.meters.dodge, current.stats.dodgeBps);
     next.meters = { ...current.meters, dodge: dodge.meter };
     next.lastAction = dodge.triggered ? 'dodge' : 'hit';
-    next.heroHp = Math.max(0, current.heroHp - (dodge.triggered ? 0 : enemy.attack));
-    next.impacts.push({ target: 'hero', encounter: current.encounter, kind: dodge.triggered ? 'miss' : 'damage', amount: dodge.triggered ? 0 : enemy.attack });
-    next.log.push(dodge.triggered ? `Dodge! ${enemy.name} misses.` : `${enemy.name} hits you for ${enemy.attack}.`);
+    const damage = dodge.triggered ? 0 : damageAfterArmor(enemy.attack, current.stats.armor);
+    next.heroHp = Math.max(0, current.heroHp - damage);
+    next.impacts.push({ target: 'hero', encounter: current.encounter, kind: dodge.triggered ? 'miss' : 'damage', amount: damage });
+    next.log.push(dodge.triggered ? `Dodge! ${enemy.name} misses.` : `${enemy.name} hits you for ${damage}.`);
     next.turn = 'hero';
     if (next.heroHp === 0) {
       next.status = 'defeat';

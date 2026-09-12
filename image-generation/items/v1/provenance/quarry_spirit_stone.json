@@ -1,0 +1,15 @@
+{
+  "id": "quarry_spirit_stone",
+  "backend": "built-in imagegen",
+  "definition_sha256": "316c8d32a36de029c0e42218000e2024f3ef1fd0f599b918898635237a19b546",
+  "original": "image-generation/items/v1/sources/quarry_spirit_stone.png",
+  "source_sha256": "c5a2e835b09975623cab99902bf2d4a98a90f3627be9a75c2619003d593f70c3",
+  "icon": "assets/items/quarry_spirit_stone.png",
+  "icon_sha256": "f935411b2f63b2e120e3b3622d000446edf803e6fd234379f17d552d728d34b9",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Quarry Spirit Stone. A long rough ochre crystal hangs point downward inside two plain gray iron bands. Cream mineral streaks cross its cloudy sides beneath a heavy black cord loop.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

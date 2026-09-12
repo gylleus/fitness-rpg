@@ -1,0 +1,15 @@
+{
+  "id": "antler_tally",
+  "backend": "built-in imagegen",
+  "definition_sha256": "9c11cdb1e9f37b9f3799048e28b96baf020b872b09f7f5071be72d36b3c1ce40",
+  "original": "image-generation/items/v1/sources/antler_tally.png",
+  "source_sha256": "2826e537338a0320a8868ffa3616bbbd1c333fd02250706a8edcd577eed00901",
+  "icon": "assets/items/antler_tally.png",
+  "icon_sha256": "3c2c4271500de70497f80b25a3855b507fa59d5cec5a72c66a0762782fd06251",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Antler Tally. A short flat strip of yellow antler hangs from a dark brown thong. Five deep diagonal cuts cross its face, and a small copper staple bridges a split below the suspension hole.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

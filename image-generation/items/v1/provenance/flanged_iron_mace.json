@@ -1,0 +1,15 @@
+{
+  "id": "flanged_iron_mace",
+  "backend": "built-in imagegen",
+  "definition_sha256": "6b1167a3a560b5b6c9772dece9c6d18e737262944d6a429ea7fe6344c4df17f0",
+  "original": "image-generation/items/v1/sources/flanged_iron_mace.png",
+  "source_sha256": "510847f8f3557c6183aea2b9dbf27993c0cbc0b71fc54b4e09f74c28e314b3e8",
+  "icon": "assets/items/flanged_iron_mace.png",
+  "icon_sha256": "6f24e38144d7168c6155d7935e3c8819f9f605fc2944e4e3cab8b59bf1b4b101",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Flanged Iron Mace. Six thick triangular iron flanges surround a blunt central spike. Bright wear runs along their leading edges, and the black leather grip sits between two simple hexagonal guards.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

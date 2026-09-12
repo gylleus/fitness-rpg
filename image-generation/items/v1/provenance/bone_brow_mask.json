@@ -1,0 +1,15 @@
+{
+  "id": "bone_brow_mask",
+  "backend": "built-in imagegen",
+  "definition_sha256": "442fbeb05c792c4790ff90619fcb80586c69cfcd659d39948bb538ea35a70e62",
+  "original": "image-generation/items/v1/sources/bone_brow_mask.png",
+  "source_sha256": "eb88dc18fae4d3ace5cd6bf7062b22688a3e5fb5565bf657e6e8eddbdfb6fa86",
+  "icon": "assets/items/bone_brow_mask.png",
+  "icon_sha256": "15ed25c1372edefb44e4f9f3fd9cbf52bc83fa57c8fc4882b90bd1bf0f3c9a5c",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Bone Brow Mask. A smooth yellowed bone brow plate covers the front of a black leather cap. A single dark vertical crack stops above the nose opening, while copper pins hold the plate at the temples.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

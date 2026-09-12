@@ -4,6 +4,7 @@ import { db } from '../../src/db/client';
 import { dismissDungeonResult, startDungeon } from '../../src/db/game';
 import { DUNGEONS, battleDungeon } from '../../src/game/combat';
 import { useGame } from '../../src/game/GameProvider';
+import { LootRewards } from '../../src/ui/LootRewards';
 import { multiplierLabel } from '../../src/game/items';
 import { EntitySprite } from '../../src/ui/EntitySprite';
 import { Button, Card, colors, Gold, PageHeading, Screen, ui } from '../../src/ui/theme';
@@ -27,7 +28,7 @@ export default function DungeonScreen() {
       </> : <>
         <Text style={ui.body}>This expedition has ended. You are back at camp with {data.currentHealth} / {data.stats.health} HP. Your saved pushups still power every attack.</Text>
         <Text style={ui.body}>{run.status === 'victory' ? `Victory · ${run.state.gold} gold · ${run.state.xp} XP earned` : 'No loot earned. Entry health is restored.'}</Text>
-        {run.status === 'victory' && (run.state.loot ?? []).map((drop, i) => <Text key={i} style={[ui.body, { color: colors.green }]}>{drop.boss ? 'Boss reward' : 'Loot'} · {drop.item.name}</Text>)}
+        {run.status === 'victory' && <LootRewards loot={run.state.loot ?? []} />}
         <Button secondary label="Choose a new expedition" onPress={() => perform(() => dismissDungeonResult(db, run.id))} />
         <Button label="Try this dungeon again" disabled={data.currentHealth <= 0} onPress={() => enter(run.state.dungeonId)} />
       </>}
@@ -40,7 +41,7 @@ export default function DungeonScreen() {
       <Text style={ui.small}>Defeat the boss to secure the entire bounty. Wins carry health; failed attempts restore entry health and award no loot. Enemies can drop items; bosses guarantee an item. Combat and loot rolls repeat after failure. Only victory changes this dungeon’s rolls. Training and equipment take effect on your next expedition.</Text>
       {!active && data.currentHealth <= 0 && <Card>
         <Text style={ui.heading}>Recover health before setting out</Text>
-        <Text style={ui.body}>Sync your steps, use a healing potion, or equip better armor to recover health. Daily health also resets tomorrow.</Text>
+        <Text style={ui.body}>Sync your steps, use a healing potion, or equip health bonuses to recover health. Daily health also resets tomorrow.</Text>
         <Button label="Sync steps for health" onPress={() => router.push('/health')} />
         <Button secondary label="Open inventory" onPress={() => router.navigate('/forge')} />
       </Card>}

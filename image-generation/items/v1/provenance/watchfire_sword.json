@@ -1,0 +1,15 @@
+{
+  "id": "watchfire_sword",
+  "backend": "built-in imagegen",
+  "definition_sha256": "b7068c6386c4f737764130d2e1903b80b31109eb179b970b2476a9b44ef7aa7b",
+  "original": "image-generation/items/v1/sources/watchfire_sword.png",
+  "source_sha256": "0b53d705ddb2a22ea05bedef01986f1f7b51c22736ea0368cb1964917888c951",
+  "icon": "assets/items/watchfire_sword.png",
+  "icon_sha256": "e906960cb04cb23c30a269b87672d2e7f1116c2b404f358195979913382ef80e",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Watchfire Sword. A long dark blade contains three dim amber insets near the hilt. Broad straight quillons protect a white cloth grip, while the round pommel is deeply smoke-stained on one side.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

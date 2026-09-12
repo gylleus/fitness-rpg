@@ -1,0 +1,15 @@
+{
+  "id": "willow_splitter",
+  "backend": "built-in imagegen",
+  "definition_sha256": "4bf66d059025ea6bed6567c7741e62dd317dfed833ab0e022a62e1e8d1c9a223",
+  "original": "image-generation/items/v1/sources/willow_splitter.png",
+  "source_sha256": "b364b21dd25ec7e03666c7973c154499c9f675140ec28757ed5fd854394682dd",
+  "icon": "assets/items/willow_splitter.png",
+  "icon_sha256": "ebeccf1e94be956c0aca0f35e2b8c96455503d3d4f6e25d7a23af99c17af30ad",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Willow Splitter. A long narrow sword has a dark blade split into two shallow prongs at the tip. A twisted willow-root guard spreads over the handle, where muted green cord follows the grain.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

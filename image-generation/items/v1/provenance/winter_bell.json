@@ -1,0 +1,15 @@
+{
+  "id": "winter_bell",
+  "backend": "built-in imagegen",
+  "definition_sha256": "48b3732dfbb5cd8a768711a95d570e0b5f0720615d2bb63f1aee9ef82c8babcd",
+  "original": "image-generation/items/v1/sources/winter_bell.png",
+  "source_sha256": "e43d31b97831c40f6b93a7ce84e73f7d8b2ebb1a566e428627c0a7b6dc753716",
+  "icon": "assets/items/winter_bell.png",
+  "icon_sha256": "a451a6e3b68ec5dd06fb21905ec45365d063331ddea8e35b08695e224ca4d221",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Winter Bell. A narrow blue-gray bell with an uneven frozen rim hangs rigidly from an iron mace socket. Two pale cracks climb the bell wall, and a short shaft wears coarse white wool bindings.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

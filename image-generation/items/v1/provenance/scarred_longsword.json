@@ -1,0 +1,15 @@
+{
+  "id": "scarred_longsword",
+  "backend": "built-in imagegen",
+  "definition_sha256": "513dfd2887ebcaeb496714048f5e174c6a77fd487b6081b995c9cbd56a7ef133",
+  "original": "image-generation/items/v1/sources/scarred_longsword.png",
+  "source_sha256": "b719ed94e3b52e7435403124f99f1792756b028036a7c1bb2f12792abc868015",
+  "icon": "assets/items/scarred_longsword.png",
+  "icon_sha256": "558d5b383762d96dd706c4b6d130a800a7bb20017f58c194cb70d4f093d7b6a8",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Scarred Longsword. A long steel blade is scored by three deep diagonal scars above a wide crossguard. The two-handed grip alternates worn black and tan leather, finishing in a heavy faceted iron pommel.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

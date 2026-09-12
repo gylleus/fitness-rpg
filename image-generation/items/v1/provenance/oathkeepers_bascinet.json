@@ -1,0 +1,15 @@
+{
+  "id": "oathkeepers_bascinet",
+  "backend": "built-in imagegen",
+  "definition_sha256": "b26cdbd4548383bc3ddc654380058aff15704ee15a4b257f6f873a1e3a4ac9e1",
+  "original": "image-generation/items/v1/sources/oathkeepers_bascinet.png",
+  "source_sha256": "33a00f1c3f5d8d8fef3c8450bd0c6d03cf20f7bd4f834c4f32ca11187b0124ba",
+  "icon": "assets/items/oathkeepers_bascinet.png",
+  "icon_sha256": "58f64f30c7e0140ca1ae2346425ed8a8440fb83cda08cccf41d3d2bb8d379152",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Oathkeeper's Bascinet. A pointed bronze helmet has a modest hinged visor with a thin straight eye slit. Green-black patina fills its seam, while a clean pale repair plate covers one side near the ear.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

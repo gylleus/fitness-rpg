@@ -1,0 +1,67 @@
+{
+  "bog_toad": {
+    "source_sha256": "95bed4907395e83b385856cc81fb2da4ba8d8d1b95e9decd6df5f37cef3df78b",
+    "animations": {
+      "walk": {
+        "description": "The toad makes a low four-legged shuffling gait in place, alternating its short forefeet while the powerful folded hind legs push and reset beneath the body. The belly stays close to the imaginary ground and the throat sac sways gently. Each foot lifts and plants; the body does not travel across the frame.",
+        "loop": true
+      },
+      "death": {
+        "description": "The toad suddenly weakens, its forelegs buckle and its heavy belly drops. It rolls partly onto its side, letting the folded hind legs relax and the throat sac sag. It settles into a low inert heap with the limbs attached and stays completely still.",
+        "loop": false
+      }
+    }
+  },
+  "drowned_corpse": {
+    "source_sha256": "a381a2a4e0a39983d6962a9ee58f27d9a4528ed1af03b7a87510737db06abe48",
+    "animations": {
+      "walk": {
+        "description": "The corpse walks in place with a slow rolling sway, dragging one heavy boot backward, lifting it free and planting it while the other leg takes its weight. Its bloated belly rolls gently and its loose arms swing awkwardly away from the torso. It keeps its head facing the same direction and its empty sockets remain dark.",
+        "loop": true
+      },
+      "death": {
+        "description": "The corpse loses its balance, its knees buckle and its heavy torso pitches forward. It drops onto its knees and falls onto its side, the arms and boots going limp. The body remains fully visible as it settles on the ground and stays motionless with dark empty eye sockets.",
+        "loop": false
+      }
+    }
+  },
+  "bog_hag": {
+    "source_sha256": "1dbe704f91247bb76beedff6ae62beee7b7a20a2c9b5535ee522142630347bb5",
+    "animations": {
+      "walk": {
+        "description": "The hag walks slowly in place with deliberate alternating barefoot steps beneath her skirt. Her narrow upper body stays stooped and unusually still; the long arms hang and sway slightly, and the muddy skirt brushes her ankles. Her face and pale eyes keep looking ahead in the same direction.",
+        "loop": true
+      },
+      "death": {
+        "description": "The hag recoils and loses her strength. Her oversized hands fall slack as her knees fold beneath the skirt. She sinks to the ground, topples onto her side and curls into a small collapsed shape, with hair and shawl settling around her. She remains completely still without rising or vanishing.",
+        "loop": false
+      }
+    }
+  },
+  "root_hulk": {
+    "source_sha256": "6aae6414580d2e4fbd1d2090198e129f0200f89068ec699e40041998844ecfd0",
+    "animations": {
+      "walk": {
+        "description": "The root hulk advances in place with slow heavy alternating steps, lifting a broad root foot, swinging it past the planted leg and setting it down. Its dense torso rocks as a single block while its long heavy fists counter-swing slightly. Trailing vines sway without creating new limbs or leaves.",
+        "loop": true
+      },
+      "death": {
+        "description": "The binding vines loosen as the root hulk loses its strength. Its knees fold and its huge fists strike the ground, then its dense torso slumps down between its arms. The attached wooden limbs fold into a heavy low heap of roots. Loose vines settle and the whole heap remains completely still.",
+        "loop": false
+      }
+    }
+  },
+  "giant_water_strider": {
+    "source_sha256": "e0ff4b61fd28cd9cee7ca1137363abc115ace6d6421b3577c0b6ba3a97ca9999",
+    "animations": {
+      "walk": {
+        "description": "The creature walks in place on exactly two extremely long angular legs. One broad pad lifts, swings forward and plants as the other pad bears the weight, then the legs alternate. Its narrow elevated body stays nearly level, and the upturned abdomen counterbalances each step. The mouth stays closed; no arms or additional legs appear.",
+        "loop": true
+      },
+      "death": {
+        "description": "The two long legs buckle outward and fold at their angular joints. The elevated plated body drops between them and tips onto its side, while the broad head rests on the ground and the mouth hangs slightly slack. Both legs and pads stay attached and visible. The creature settles fully and remains motionless without creating arms or extra legs.",
+        "loop": false
+      }
+    }
+  }
+}

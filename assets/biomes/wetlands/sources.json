@@ -1,0 +1,47 @@
+{
+  "sky": {
+    "id": "wetlands_overcast_sky",
+    "source": "image-generation/scene-samples/wetlands-v1/wetlands_overcast_sky.png",
+    "sha256": "c64c5ced7b3bea0bd796f90146aa964a4a00f954d53aa799696f4dd412019e99",
+    "size": [
+      1672,
+      941
+    ]
+  },
+  "distant": {
+    "id": "wetlands_distant_silhouettes",
+    "source": "image-generation/scene-samples/wetlands-v1/wetlands_distant_silhouettes.png",
+    "sha256": "6c1346b8e1737c5e91508c440ada0aaba519d7a18d7e893045c8e4902ca3ee74",
+    "size": [
+      1672,
+      941
+    ]
+  },
+  "banks": {
+    "id": "wetlands_reed_banks",
+    "source": "image-generation/scene-samples/wetlands-v1/wetlands_reed_banks.png",
+    "sha256": "59f681084074fbc3bfa56f30aed8ad3d385a42b83648bf5f26e0f4c19220a8ef",
+    "size": [
+      1672,
+      941
+    ]
+  },
+  "ground": {
+    "id": "wetlands_raised_peat_path",
+    "source": "image-generation/scene-samples/wetlands-v1/wetlands_raised_peat_path.png",
+    "sha256": "7ac7914cd6c5962816f8a751e095643614d734bd9252a9605140660cf27f341c",
+    "size": [
+      2048,
+      768
+    ]
+  },
+  "willow": {
+    "id": "wetlands_leaning_willow",
+    "source": "image-generation/scene-samples/wetlands-v1/wetlands_leaning_willow.png",
+    "sha256": "fbb46a7e511d8cc39426d2c540e16e34f0a85854d58850cad9cb8741813d4f59",
+    "size": [
+      1086,
+      1448
+    ]
+  }
+}

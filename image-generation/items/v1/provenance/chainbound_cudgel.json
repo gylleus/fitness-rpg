@@ -1,0 +1,15 @@
+{
+  "id": "chainbound_cudgel",
+  "backend": "built-in imagegen",
+  "definition_sha256": "5c3497611c02f04d1ae715dbe8a4d32001c5430a309bf42b36d65c55c21adb3d",
+  "original": "image-generation/items/v1/sources/chainbound_cudgel.png",
+  "source_sha256": "46e85770d4009a7085a08b8e1b50c11780dabebbbe38368246e9c53dfc919b49",
+  "icon": "assets/items/chainbound_cudgel.png",
+  "icon_sha256": "ea68de9a1b7cd05a72cf0ce6d240ce62d60a30fb8c0ee3846a1652d76423c035",
+  "target": [
+    64,
+    64
+  ],
+  "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Chainbound Cudgel. A short hardwood cudgel is buried beneath three tight turns of heavy iron chain. One empty link hangs against its flank, and copper wire secures the chain above a narrow leather handle.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+}

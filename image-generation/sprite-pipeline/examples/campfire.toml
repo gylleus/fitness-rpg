@@ -1,0 +1,12 @@
+# Generation example only; not registered as approved game content.
+schema_version = 1
+
+[[assets]]
+id = "campfire"
+name = "Campfire"
+kind = "prop"
+visual_description = "A small orange flame rises from three crossed, blackened logs. Red embers sit between their split ends, surrounded by a low ring of soot-dark stones."
+
+[assets.animations.burn]
+description = "The attached orange flame curls upward and flickers through one cycle while the logs, embers and stones stay fixed. The flame stays connected to the logs, returning to its starting shape without detached sparks or drifting smoke."
+loop = true

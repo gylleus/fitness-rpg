@@ -1,0 +1,273 @@
+schema_version = 1
+category = "swords"
+kind = "weapon"
+
+[generation]
+canvas = [64, 64]
+transparent = true
+style = "Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters."
+composition = "One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item."
+
+[[items]]
+id = "ditch_blade"
+name = "Ditch Blade"
+tier = 1
+rarity = "common"
+sell_value = 8
+description = "A short broad iron sword has a crooked tip and a deep notch near the middle."
+visual_description = "A short broad iron sword has a crooked tip and a deep notch near the middle. Its plain crossguard bends forward on one side, and muddy cloth binds the exposed wooden tang."
+stats = { damage_min = 23, damage_max = 27 }
+modifiers = []
+
+[[items]]
+id = "reedknife"
+name = "Reedknife"
+tier = 1
+rarity = "common"
+sell_value = 9
+description = "A narrow leaf-shaped bronze blade rises from a small oval guard."
+visual_description = "A narrow leaf-shaped bronze blade rises from a small oval guard. Green tarnish follows the central ridge, while a tightly woven reed grip is capped with a dark wooden bead."
+stats = { damage_min = 24, damage_max = 28 }
+modifiers = []
+
+[[items]]
+id = "rusted_arming_sword"
+name = "Rusted Arming Sword"
+tier = 1
+rarity = "common"
+sell_value = 10
+description = "A straight double-edged sword has orange rust islands across a dull steel fuller."
+visual_description = "A straight double-edged sword has orange rust islands across a dull steel fuller. The simple iron crossguard remains square, and a faded red leather grip ends in a disk pommel."
+stats = { damage_min = 25, damage_max = 29 }
+modifiers = []
+
+[[items]]
+id = "ferrymans_falchion"
+name = "Ferryman's Falchion"
+tier = 1
+rarity = "uncommon"
+sell_value = 23
+description = "A broad single-edged falchion widens toward its rounded clipped tip."
+visual_description = "A broad single-edged falchion widens toward its rounded clipped tip. Dark water stains stripe the blade, and a brass hook guard curves over a tarred rope handle."
+stats = { damage_min = 27, damage_max = 33 }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.005 }]
+
+[[items]]
+id = "bone_hilted_shortblade"
+name = "Bone-hilted Shortblade"
+tier = 1
+rarity = "uncommon"
+sell_value = 24
+description = "A squat triangular steel blade is fitted to a polished yellow-bone handle."
+visual_description = "A squat triangular steel blade is fitted to a polished yellow-bone handle. Two black pins cross the bone, and the tiny crescent guard has been filed smooth on its inner edge."
+stats = { damage_min = 28, damage_max = 34 }
+modifiers = [{ stat = "crit_chance_bps", value = 200 }]
+
+[[items]]
+id = "sunken_officers_sabre"
+name = "Sunken Officer's Sabre"
+tier = 1
+rarity = "rare"
+sell_value = 45
+description = "A gently curved silver-gray sabre carries a basket guard clogged with green patina."
+visual_description = "A gently curved silver-gray sabre carries a basket guard clogged with green patina. The grip's midnight-blue covering is split down one side, exposing pale wood beneath a heavy brass cap."
+stats = { damage_min = 33, damage_max = 41 }
+modifiers = [{ stat = "crit_damage_bps", value = 1500 }]
+
+[[items]]
+id = "willow_splitter"
+name = "Willow Splitter"
+tier = 1
+rarity = "rare"
+sell_value = 46
+description = "A long narrow sword has a dark blade split into two shallow prongs at the tip."
+visual_description = "A long narrow sword has a dark blade split into two shallow prongs at the tip. A twisted willow-root guard spreads over the handle, where muted green cord follows the grain."
+stats = { damage_min = 31, damage_max = 39 }
+modifiers = [{ stat = "health", value = 16 }]
+
+[[items]]
+id = "chapel_watch_sword"
+name = "Chapel Watch Sword"
+tier = 1
+rarity = "rare"
+sell_value = 47
+description = "A broad straight sword has a short fuller ending in a small round hole."
+visual_description = "A broad straight sword has a short fuller ending in a small round hole. Its iron guard resembles a low chapel arch, and the grip wears orderly strips of charcoal-gray cloth."
+stats = { damage_min = 32, damage_max = 40 }
+modifiers = [{ stat = "damage", value = 3 }]
+
+[[items]]
+id = "coal_edge"
+name = "Coal Edge"
+tier = 2
+rarity = "common"
+sell_value = 19
+description = "A thick single-edged sword carries a black crust along its spine and a clean gray cutting edge."
+visual_description = "A thick single-edged sword carries a black crust along its spine and a clean gray cutting edge. A square bronze guard frames the grip, which is wrapped in heat-stiffened brown hide."
+stats = { damage_min = 39, damage_max = 43 }
+modifiers = []
+
+[[items]]
+id = "miners_hanger"
+name = "Miner's Hanger"
+tier = 2
+rarity = "common"
+sell_value = 20
+description = "A compact curved blade ends in an angular clipped point."
+visual_description = "A compact curved blade ends in an angular clipped point. Ochre dust rests beneath its steel knuckle bow, and a squared wooden handle is fitted with three large mismatched rivets."
+stats = { damage_min = 37, damage_max = 41 }
+modifiers = []
+
+[[items]]
+id = "scarred_longsword"
+name = "Scarred Longsword"
+tier = 2
+rarity = "common"
+sell_value = 16
+description = "A long steel blade is scored by three deep diagonal scars above a wide crossguard."
+visual_description = "A long steel blade is scored by three deep diagonal scars above a wide crossguard. The two-handed grip alternates worn black and tan leather, finishing in a heavy faceted iron pommel."
+stats = { damage_min = 38, damage_max = 42 }
+modifiers = []
+
+[[items]]
+id = "brass_guard_estoc"
+name = "Brass-guard Estoc"
+tier = 2
+rarity = "uncommon"
+sell_value = 41
+description = "An extremely narrow triangular sword blade extends from a large dull brass crossguard."
+visual_description = "An extremely narrow triangular sword blade extends from a large dull brass crossguard. The leather grip is slim and straight, with a small pear-shaped pommel and no decorative stones."
+stats = { damage_min = 43, damage_max = 49 }
+modifiers = [{ stat = "crit_damage_bps", value = 1500 }]
+
+[[items]]
+id = "furnace_cleaver"
+name = "Furnace Cleaver"
+tier = 2
+rarity = "uncommon"
+sell_value = 42
+description = "An oversized rectangular sword blade has a blunt upper corner and two circular holes near its spine."
+visual_description = "An oversized rectangular sword blade has a blunt upper corner and two circular holes near its spine. Heat-blue metal surrounds each hole, and the short handle has a wide black iron guard."
+stats = { damage_min = 41, damage_max = 47 }
+modifiers = [{ stat = "health", value = 20 }]
+
+[[items]]
+id = "red_seam_blade"
+name = "Red Seam Blade"
+tier = 2
+rarity = "rare"
+sell_value = 93
+description = "A charcoal-gray blade holds a hair-thin crimson seam down its fuller."
+visual_description = "A charcoal-gray blade holds a hair-thin crimson seam down its fuller. Its chipped edges stay dark, while copper bands reinforce a square guard and a deep brown leather handle."
+stats = { damage_min = 46, damage_max = 54 }
+modifiers = [{ stat = "damage", value = 4 }]
+
+[[items]]
+id = "widows_measure"
+name = "Widow's Measure"
+tier = 2
+rarity = "rare"
+sell_value = 94
+description = "A very long slender sword carries regularly spaced shallow cuts along one flat face."
+visual_description = "A very long slender sword carries regularly spaced shallow cuts along one flat face. The narrow silver guard curves downward like tired shoulders above a smooth gray bone grip."
+stats = { damage_min = 47, damage_max = 55 }
+modifiers = [{ stat = "armor", value = 10 }]
+
+[[items]]
+id = "ember_vow"
+name = "Ember Vow"
+tier = 2
+rarity = "rare"
+sell_value = 90
+description = "A broad steel sword has a warm amber stone buried flush in its heavy iron guard."
+visual_description = "A broad steel sword has a warm amber stone buried flush in its heavy iron guard. Soot darkens the blade base, and a short trailing strip of red cloth hangs from the pommel."
+stats = { damage_min = 45, damage_max = 53 }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.01 }]
+
+[[items]]
+id = "rime_arming_sword"
+name = "Rime Arming Sword"
+tier = 3
+rarity = "common"
+sell_value = 25
+description = "A pale blue steel sword has a broad flat blade and blunt angular shoulders."
+visual_description = "A pale blue steel sword has a broad flat blade and blunt angular shoulders. White frost clings to one side of the crossguard, and the grip is wrapped in thick gray leather."
+stats = { damage_min = 52, damage_max = 56 }
+modifiers = []
+
+[[items]]
+id = "saltglass_sabre"
+name = "Saltglass Sabre"
+tier = 3
+rarity = "common"
+sell_value = 26
+description = "A curved translucent smoky blade carries a milky white edge."
+visual_description = "A curved translucent smoky blade carries a milky white edge. Its heavy iron basket guard is crusted with salt, and faded green sharkskin covers a handle capped in tarnished silver."
+stats = { damage_min = 53, damage_max = 57 }
+modifiers = []
+
+[[items]]
+id = "black_ice_rapier"
+name = "Black Ice Rapier"
+tier = 3
+rarity = "common"
+sell_value = 27
+description = "A thin blue-black blade extends from a cage of three sweeping iron guard bars."
+visual_description = "A thin blue-black blade extends from a cage of three sweeping iron guard bars. Its point is glass-bright, and a black leather grip ends in a small sharply faceted crystal pommel."
+stats = { damage_min = 51, damage_max = 55 }
+modifiers = []
+
+[[items]]
+id = "antler_guard_blade"
+name = "Antler-guard Blade"
+tier = 3
+rarity = "uncommon"
+sell_value = 64
+description = "A rough silvered blade sits above a crossguard made from two short outward-curving antler branches."
+visual_description = "A rough silvered blade sits above a crossguard made from two short outward-curving antler branches. The yellowed bone is bound with copper wire around a narrow burgundy handle."
+stats = { damage_min = 56, damage_max = 62 }
+modifiers = [{ stat = "damage", value = 4 }]
+
+[[items]]
+id = "watchfire_sword"
+name = "Watchfire Sword"
+tier = 3
+rarity = "uncommon"
+sell_value = 60
+description = "A long dark blade contains three dim amber insets near the hilt."
+visual_description = "A long dark blade contains three dim amber insets near the hilt. Broad straight quillons protect a white cloth grip, while the round pommel is deeply smoke-stained on one side."
+stats = { damage_min = 57, damage_max = 63 }
+modifiers = [{ stat = "armor", value = 11 }]
+
+[[items]]
+id = "pale_regents_edge"
+name = "Pale Regent's Edge"
+tier = 3
+rarity = "rare"
+sell_value = 136
+description = "A wide white-metal sword tapers to a sharply squared point."
+visual_description = "A wide white-metal sword tapers to a sharply squared point. Its small crown-shaped guard holds one dull blue cabochon, and dark indigo leather wraps the long symmetrical handle."
+stats = { damage_min = 59, damage_max = 67 }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.0125 }]
+
+[[items]]
+id = "thawless_blade"
+name = "Thawless Blade"
+tier = 3
+rarity = "rare"
+sell_value = 137
+description = "A heavy curved steel blade has a ragged pale-blue crystalline ridge along its spine."
+visual_description = "A heavy curved steel blade has a ragged pale-blue crystalline ridge along its spine. The plain guard is almost hidden by frost, and a layered sealskin grip ends in a black iron ring."
+stats = { damage_min = 60, damage_max = 68 }
+modifiers = [{ stat = "crit_chance_bps", value = 500 }]
+
+[[items]]
+id = "road_ends_here"
+name = "Road Ends Here"
+tier = 3
+rarity = "rare"
+sell_value = 138
+description = "A broad weathered sword has a nearly square tip and a single bright repaired patch in its dark blade."
+visual_description = "A broad weathered sword has a nearly square tip and a single bright repaired patch in its dark blade. The thick bronze crossguard is plain, and its scarred oak grip has no wrapping."
+stats = { damage_min = 61, damage_max = 69 }
+modifiers = [{ stat = "crit_damage_bps", value = 2500 }]

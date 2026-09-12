@@ -1,0 +1,273 @@
+schema_version = 1
+category = "maces"
+kind = "weapon"
+
+[generation]
+canvas = [64, 64]
+transparent = true
+style = "Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters."
+composition = "One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item."
+
+[[items]]
+id = "wooden_club"
+name = "Wooden Club"
+tier = 1
+rarity = "common"
+sell_value = 5
+description = "A thick knotted oak club swells into an uneven round head."
+visual_description = "A thick knotted oak club swells into an uneven round head. Dark growth rings cross its cut end, and a short strip of frayed brown linen winds around the narrow grip."
+stats = { damage_min = 20, damage_max = 30 }
+modifiers = []
+
+[[items]]
+id = "iron_club"
+name = "Iron-bound Club"
+tier = 1
+rarity = "uncommon"
+sell_value = 21
+description = "Three broad black iron bands squeeze the cracked head of a stout wooden club."
+visual_description = "Three broad black iron bands squeeze the cracked head of a stout wooden club. Square rivets stand proud of the metal, and the oily leather grip ends in a battered iron cap."
+stats = { damage_min = 24, damage_max = 38 }
+modifiers = []
+
+[[items]]
+id = "ferrymans_cudgel"
+name = "Ferryman's Cudgel"
+tier = 1
+rarity = "common"
+sell_value = 10
+description = "A pale driftwood cudgel has a flattened paddle-shaped head and one blunt brass stud."
+visual_description = "A pale driftwood cudgel has a flattened paddle-shaped head and one blunt brass stud. Tar blackens the lower shaft while a faded blue cord loops through the butt."
+stats = { damage_min = 22, damage_max = 32 }
+modifiers = []
+
+[[items]]
+id = "peat_cutters_mallet"
+name = "Peat Cutter's Mallet"
+tier = 1
+rarity = "uncommon"
+sell_value = 23
+description = "A rectangular bog-oak mallet head sits crosswise on a short crooked handle."
+visual_description = "A rectangular bog-oak mallet head sits crosswise on a short crooked handle. Peat stains fill the grain, and two rawhide straps hold a visibly split corner together."
+stats = { damage_min = 24, damage_max = 36 }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.005 }]
+
+[[items]]
+id = "chapel_bell_mace"
+name = "Chapel Bell Mace"
+tier = 1
+rarity = "uncommon"
+sell_value = 24
+description = "A small cracked bronze bell forms the hollow head of a dark ash mace."
+visual_description = "A small cracked bronze bell forms the hollow head of a dark ash mace. Its flared rim is dented inward, with a dull green patina around the iron mounting bolt."
+stats = { damage_min = 25, damage_max = 37 }
+modifiers = [{ stat = "crit_chance_bps", value = 200 }]
+
+[[items]]
+id = "root_maul"
+name = "Knotted Root Maul"
+tier = 1
+rarity = "rare"
+sell_value = 45
+description = "A heavy ball of interlocked dark roots crowns a long bent haft."
+visual_description = "A heavy ball of interlocked dark roots crowns a long bent haft. Pale exposed wood marks the largest knots, and thin binding vines tighten around the neck above a rough hide grip."
+stats = { damage_min = 30, damage_max = 46 }
+modifiers = [{ stat = "crit_damage_bps", value = 1000 }]
+
+[[items]]
+id = "leechkeepers_pestle"
+name = "Leechkeeper's Pestle"
+tier = 1
+rarity = "rare"
+sell_value = 46
+description = "A swollen gray stone pestle is banded to a narrow handle with green-black leather."
+visual_description = "A swollen gray stone pestle is banded to a narrow handle with green-black leather. Its bulbous head bears a single shallow spiral groove clogged with dried marsh silt."
+stats = { damage_min = 28, damage_max = 42 }
+modifiers = [{ stat = "health", value = 16 }]
+
+[[items]]
+id = "grave_marker_hammer"
+name = "Grave Marker Hammer"
+tier = 1
+rarity = "rare"
+sell_value = 47
+description = "A squat chipped granite marker forms a hammer head above an iron socket."
+visual_description = "A squat chipped granite marker forms a hammer head above an iron socket. An unlettered recessed panel interrupts one face, and the handle is wrapped in nearly white burial cloth."
+stats = { damage_min = 29, damage_max = 43 }
+modifiers = [{ stat = "damage", value = 3 }]
+
+[[items]]
+id = "forge_slag_mace"
+name = "Forge Slag Mace"
+tier = 2
+rarity = "common"
+sell_value = 19
+description = "A lopsided lump of porous charcoal-black slag encloses an iron mace head."
+visual_description = "A lopsided lump of porous charcoal-black slag encloses an iron mace head. Rust-red cracks cross the crust, while a broad copper collar separates it from a straight soot-dark handle."
+stats = { damage_min = 36, damage_max = 46 }
+modifiers = []
+
+[[items]]
+id = "flanged_iron_mace"
+name = "Flanged Iron Mace"
+tier = 2
+rarity = "common"
+sell_value = 20
+description = "Six thick triangular iron flanges surround a blunt central spike."
+visual_description = "Six thick triangular iron flanges surround a blunt central spike. Bright wear runs along their leading edges, and the black leather grip sits between two simple hexagonal guards."
+stats = { damage_min = 34, damage_max = 44 }
+modifiers = []
+
+[[items]]
+id = "quarry_sledge"
+name = "Quarry Sledge"
+tier = 2
+rarity = "common"
+sell_value = 16
+description = "A long-handled sledge carries an oversized rectangular steel block with rounded battered corners."
+visual_description = "A long-handled sledge carries an oversized rectangular steel block with rounded battered corners. Ochre quarry dust coats its faces, and a red cloth knot marks a repaired hickory shaft."
+stats = { damage_min = 35, damage_max = 45 }
+modifiers = []
+
+[[items]]
+id = "chainbound_cudgel"
+name = "Chainbound Cudgel"
+tier = 2
+rarity = "uncommon"
+sell_value = 41
+description = "A short hardwood cudgel is buried beneath three tight turns of heavy iron chain."
+visual_description = "A short hardwood cudgel is buried beneath three tight turns of heavy iron chain. One empty link hangs against its flank, and copper wire secures the chain above a narrow leather handle."
+stats = { damage_min = 40, damage_max = 52 }
+modifiers = [{ stat = "crit_damage_bps", value = 1500 }]
+
+[[items]]
+id = "ashwood_warhammer"
+name = "Ashwood Warhammer"
+tier = 2
+rarity = "uncommon"
+sell_value = 42
+description = "A slim ash shaft supports a square steel striking face and a short hooked rear beak."
+visual_description = "A slim ash shaft supports a square steel striking face and a short hooked rear beak. The pale handle has dark scorch rings and a small weighted ring at its base."
+stats = { damage_min = 38, damage_max = 50 }
+modifiers = [{ stat = "health", value = 20 }]
+
+[[items]]
+id = "embersmiths_maul"
+name = "Embersmith's Maul"
+tier = 2
+rarity = "rare"
+sell_value = 93
+description = "A broad iron maul glows a restrained dull orange through two seams in its square head."
+visual_description = "A broad iron maul glows a restrained dull orange through two seams in its square head. Layered heat-dark plates cover the sides, and the thick handle is wrapped in gray insulating cloth."
+stats = { damage_min = 43, damage_max = 57 }
+modifiers = [{ stat = "damage", value = 4 }]
+
+[[items]]
+id = "oathweight"
+name = "Oathweight"
+tier = 2
+rarity = "rare"
+sell_value = 94
+description = "A heavy octagonal bronze weight is pinned to a straight black haft."
+visual_description = "A heavy octagonal bronze weight is pinned to a straight black haft. One face carries a simple deeply inset balance-scale shape, and the leather grip is repaired with tidy cream stitches."
+stats = { damage_min = 44, damage_max = 58 }
+modifiers = [{ stat = "armor", value = 10 }]
+
+[[items]]
+id = "iron_thistle"
+name = "Iron Thistle"
+tier = 2
+rarity = "rare"
+sell_value = 90
+description = "A dense iron mace head spreads into short blunt petal-shaped fins like a closed thistle."
+visual_description = "A dense iron mace head spreads into short blunt petal-shaped fins like a closed thistle. Tarnished violet steel catches the edges above a thin stemlike haft with a broad round pommel."
+stats = { damage_min = 42, damage_max = 56 }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.01 }]
+
+[[items]]
+id = "frostbound_pestle"
+name = "Frostbound Pestle"
+tier = 3
+rarity = "common"
+sell_value = 25
+description = "An elongated white stone head narrows into a cold blue iron socket."
+visual_description = "An elongated white stone head narrows into a cold blue iron socket. Frost collects inside the chipped top, while layered gray sealskin wraps the handle almost to the head."
+stats = { damage_min = 49, damage_max = 59 }
+modifiers = []
+
+[[items]]
+id = "antler_crowned_mace"
+name = "Antler-crowned Mace"
+tier = 3
+rarity = "common"
+sell_value = 26
+description = "Four worn antler tines curl upward around a dark steel mace head."
+visual_description = "Four worn antler tines curl upward around a dark steel mace head. The bone is yellow at the bases and ivory at the tips; a red-brown hide grip fills the short haft."
+stats = { damage_min = 50, damage_max = 60 }
+modifiers = []
+
+[[items]]
+id = "blackglass_hammer"
+name = "Blackglass Hammer"
+tier = 3
+rarity = "common"
+sell_value = 27
+description = "A square block of smoky black volcanic glass is trapped in a thick iron cage."
+visual_description = "A square block of smoky black volcanic glass is trapped in a thick iron cage. Broad chipped facets expose translucent brown edges, and a flat metal handle ends in a leather loop."
+stats = { damage_min = 48, damage_max = 58 }
+modifiers = []
+
+[[items]]
+id = "saltwarden_mace"
+name = "Saltwarden Mace"
+tier = 3
+rarity = "uncommon"
+sell_value = 64
+description = "A white-crusted iron mace carries four broad hooked flanges and a capped tip."
+visual_description = "A white-crusted iron mace carries four broad hooked flanges and a capped tip. Salt deposits gather beneath the flange roots; faded teal cord binds a handle scarred by rope wear."
+stats = { damage_min = 53, damage_max = 65 }
+modifiers = [{ stat = "damage", value = 4 }]
+
+[[items]]
+id = "silver_knuckle_maul"
+name = "Silver Knuckle Maul"
+tier = 3
+rarity = "uncommon"
+sell_value = 60
+description = "A massive silvered iron fist forms the striking head, its four knuckles flattened by use."
+visual_description = "A massive silvered iron fist forms the striking head, its four knuckles flattened by use. Tarnish darkens the spaces between the fingers, and the haft has a heavy dark-blue leather sleeve."
+stats = { damage_min = 54, damage_max = 66 }
+modifiers = [{ stat = "armor", value = 11 }]
+
+[[items]]
+id = "winter_bell"
+name = "Winter Bell"
+tier = 3
+rarity = "rare"
+sell_value = 136
+description = "A narrow blue-gray bell with an uneven frozen rim hangs rigidly from an iron mace socket."
+visual_description = "A narrow blue-gray bell with an uneven frozen rim hangs rigidly from an iron mace socket. Two pale cracks climb the bell wall, and a short shaft wears coarse white wool bindings."
+stats = { damage_min = 56, damage_max = 70 }
+modifiers = [{ stat = "pushup_damage_coefficient", value = 0.0125 }]
+
+[[items]]
+id = "last_word"
+name = "Last Word"
+tier = 3
+rarity = "rare"
+sell_value = 137
+description = "A long black iron hammer has an exaggeratedly small flat striking face and a broad counterweight."
+visual_description = "A long black iron hammer has an exaggeratedly small flat striking face and a broad counterweight. A single warm brass rivet marks its side, and red leather circles the squared grip."
+stats = { damage_min = 57, damage_max = 71 }
+modifiers = [{ stat = "crit_chance_bps", value = 500 }]
+
+[[items]]
+id = "king_under_stone"
+name = "King Under Stone"
+tier = 3
+rarity = "rare"
+sell_value = 138
+description = "A heavy crowned stone head sits on a short iron shaft, its three blunt crown points chipped unevenly."
+visual_description = "A heavy crowned stone head sits on a short iron shaft, its three blunt crown points chipped unevenly. Moss-green veins cross the dark granite above a collar of tarnished gold."
+stats = { damage_min = 58, damage_max = 72 }
+modifiers = [{ stat = "crit_damage_bps", value = 2500 }]
