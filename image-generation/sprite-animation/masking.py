@@ -60,6 +60,8 @@ def source(input_path, out, size=512, background="#8b9bb4"):
 def track(input_dir, out, check_every=8):
     import torch
     from sam2.build_sam import build_sam2_video_predictor
+    from runtime import device_name, tracking_context
+    device = device_name()
     paths = sorted(input_dir.glob("*.png"))
     if len(paths) < 2:
         raise ValueError("Tracking requires at least two ordered PNG frames")
@@ -90,9 +92,9 @@ def track(input_dir, out, check_every=8):
     if not checkpoint.exists():
         raise RuntimeError("Missing SAM2 checkpoint")
     predictor = build_sam2_video_predictor("configs/sam2.1/sam2.1_hiera_t.yaml",
-        str(checkpoint), device="cuda", apply_postprocessing=False)
+        str(checkpoint), device=device, apply_postprocessing=False)
     agreement = {}
-    with torch.inference_mode(), torch.autocast("cuda", dtype=torch.bfloat16):
+    with torch.inference_mode(), tracking_context(device):
         state = predictor.init_state(str(sam_input), offload_video_to_cpu=True,
                                      offload_state_to_cpu=True)
         predictor.add_new_mask(state, frame_idx=0, obj_id=1, mask=check_masks[0])
@@ -111,7 +113,7 @@ def track(input_dir, out, check_every=8):
             rgba.putalpha(mask)
             rgba.save(cutouts / f"{i:05d}.png")
             mask.save(masks / f"{i:05d}.png")
-    save_json(out / "tracking.json", {"tracker": "SAM2.1 Hiera tiny", "initialization": "BiRefNet mask, frame 0",
+    save_json(out / "tracking.json", {"tracker": "SAM2.1 Hiera tiny", "device": device, "initialization": "BiRefNet mask, frame 0",
         "check_every": check_every, "check_indices": checks,
         "frames": len(paths), "biref_check_iou": agreement,
         "min_check_iou": min(agreement.values()), "postprocessing": False,

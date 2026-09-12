@@ -6,6 +6,7 @@ import argparse
 import importlib.metadata as metadata
 import json
 import os
+import platform
 from pathlib import Path
 import shutil
 import subprocess
@@ -13,7 +14,7 @@ import sys
 import tarfile
 from concurrent.futures import ThreadPoolExecutor
 
-from common import ROOT, STUDY, COMFY_REV, SAM_REV, download, fast_download, model_dir, save_json, sha256
+from common import ROOT, STUDY, COMFY_REV, SAM_REV, PYX_REV, download, fast_download, model_dir, save_json, sha256
 
 
 def run(*args, **kwargs):
@@ -55,6 +56,9 @@ def source(name, repo, revision):
 
 
 def environment():
+    if sys.platform == "darwin":
+        mac_environment()
+        return
     base = STUDY / ".venv/bin/python"
     if not base.exists():
         raise RuntimeError(f"Install the existing study runtime first: {base}")
@@ -94,9 +98,56 @@ def environment():
     (ROOT / "metadata/runtime-versions.json").write_text(versions)
 
 
+def mac_environment():
+    if platform.machine() != "arm64":
+        raise RuntimeError("Mac sprite setup requires native ARM64 Python on Apple Silicon (not Rosetta).")
+    env = ROOT / ".venv-macos"
+    python = env / "bin/python"
+    if not python.exists():
+        run("uv", "venv", "--python", "3.12.9", env)
+    run("uv", "pip", "sync", "--python", python,
+        ROOT / "requirements-macos.lock.txt")
+    # The bootstrap interpreter can be the dependency-free root environment.
+    run(python, "-c", "import setup; setup.mac_sources()", cwd=ROOT)
+
+
+def mac_sources():
+    env = ROOT / ".venv-macos"
+    python = env / "bin/python"
+    # No inherited study .pth, Linux wheels or CUDA extension builds on Mac.
+    source("ComfyUI", "Comfy-Org/ComfyUI", COMFY_REV)
+    source("sam2", "facebookresearch/sam2", SAM_REV)
+    source("pyxelate", "sedthh/pyxelate", PYX_REV)
+    site = next((env / "lib").glob("python*/site-packages"))
+    (site / "sprite-upstreams.pth").write_text(
+        str(ROOT / "vendor/sam2") + "\n" + str(ROOT / "vendor/pyxelate") + "\n")
+    run("uv", "pip", "check", "--python", python)
+    run(python, "-c", "import torch,torchvision,torchaudio,rembg,sam2,pyxelate; print('Runtime imports OK; MPS:',torch.backends.mps.is_available())")
+    versions = subprocess.check_output([str(python), "-c",
+        "import importlib.metadata as m,json; print(json.dumps({d.metadata['Name']:d.version for d in m.distributions()},indent=2))"]).decode()
+    (ROOT / "metadata/runtime-versions-macos.json").write_text(versions)
+
+
+def reference_models(verify_only=False):
+    """Reuse pinned study model files without downloading its Linux wheel cache."""
+    entries = json.loads((STUDY / "metadata/model-downloads.json").read_text())
+    checksums = json.loads((STUDY / "metadata/model-checksums.json").read_text())
+    for entry in entries:
+        relative = "models/" + entry["path"].split("/models/", 1)[1]
+        dest = STUDY / relative
+        digest = entry.get("sha256") or checksums[relative]
+        if verify_only:
+            if not dest.is_file() or dest.stat().st_size != entry["size"] or sha256(dest) != digest:
+                raise RuntimeError(f"Missing or changed reference model: {dest}")
+        else:
+            print("Verifying/downloading", relative, flush=True)
+            download(entry["url"], dest, digest, size=entry["size"])
+
+
 def models(group, verify_only=False, jobs=3, fast=False):
     entries = json.loads((ROOT / "models.lock.json").read_text())["models"]
-    entries = [m for m in entries if group == "all" or m["group"] == group]
+    entries = [m for m in entries if group == "all" or m["group"] == group
+               or (group == "encoder" and m["path"].startswith("comfy/text_encoders/"))]
     root = model_dir()
     root.mkdir(parents=True, exist_ok=True)
     missing_bytes = sum(max(0, m["bytes"] - ((root / (m["path"] + ".part")).stat().st_size
@@ -124,17 +175,20 @@ def models(group, verify_only=False, jobs=3, fast=False):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--environment", action="store_true")
-    p.add_argument("--models", choices=["all", "segmentation", "motion"])
+    p.add_argument("--models", choices=["all", "segmentation", "motion", "reference", "encoder"])
     p.add_argument("--verify-only", action="store_true")
     p.add_argument("--jobs", type=int, choices=[1, 2, 3], default=3)
     p.add_argument("--fast", action="store_true", help="Official HF parallel-range download; restarts incomplete fast transfers")
     a = p.parse_args()
     if not a.environment and not a.models:
-        p.error("Choose --environment and/or --models all|segmentation|motion")
+        p.error("Choose --environment and/or --models all|segmentation|motion|reference|encoder")
     if a.environment:
         environment()
     if a.models:
-        models(a.models, a.verify_only, a.jobs, a.fast)
+        if a.models == "reference":
+            reference_models(a.verify_only)
+        else:
+            models(a.models, a.verify_only, a.jobs, a.fast)
 
 
 if __name__ == "__main__":

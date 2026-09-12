@@ -14,6 +14,7 @@ import requests
 
 from common import ROOT, model_dir, save_json
 from resources import ProcessMonitor
+from runtime import configured_device, comfy_flags, inference_timeout
 
 
 def workflow(reference, prompt, negative, settings, seed):
@@ -22,7 +23,7 @@ def workflow(reference, prompt, negative, settings, seed):
         raise ValueError("Wan size must be divisible by 32; length must be 4n+1")
     return {
         "1": {"class_type": "UNETLoader", "inputs": {"unet_name": "wan2.2_ti2v_5B_fp16.safetensors", "weight_dtype": "default"}},
-        "2": {"class_type": "CLIPLoader", "inputs": {"clip_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors", "type": "wan", "device": "default"}},
+        "2": {"class_type": "CLIPLoader", "inputs": {"clip_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors", "type": "wan", "device": "cpu" if configured_device() == "mps" else "default"}},
         "3": {"class_type": "VAELoader", "inputs": {"vae_name": "wan2.2_vae.safetensors"}},
         "4": {"class_type": "CLIPTextEncode", "inputs": {"clip": ["2", 0], "text": prompt}},
         "5": {"class_type": "CLIPTextEncode", "inputs": {"clip": ["2", 0], "text": negative}},
@@ -40,6 +41,8 @@ def workflow(reference, prompt, negative, settings, seed):
 
 @contextmanager
 def server(out, port=8189):
+    from runtime import device_name
+    device_name()
     out = Path(out).resolve()
     out.mkdir(parents=True, exist_ok=True)
     for directory in ("comfy-output", "comfy-input", "comfy-user"):
@@ -53,7 +56,7 @@ def server(out, port=8189):
         "diffusion_models": "diffusion_models", "text_encoders": "text_encoders", "vae": "vae"}})
     command = [sys.executable, str(ROOT / "vendor/ComfyUI/main.py"), "--listen", "127.0.0.1",
         "--port", str(port), "--disable-auto-launch", "--disable-all-custom-nodes",
-        "--preview-method", "none", "--lowvram", "--reserve-vram", "1",
+        "--preview-method", "none", *comfy_flags("1"),
         "--extra-model-paths-config", str(model_config), "--output-directory", str(out / "comfy-output"),
         "--input-directory", str(out / "comfy-input"), "--user-directory", str(out / "comfy-user"),
         "--database-url", "sqlite:///" + str(out / "comfy-user/comfyui.db")]
@@ -90,7 +93,8 @@ def server(out, port=8189):
         monitor.stop()
 
 
-def generate(reference, out, preset, settings, seed, port=8189, timeout=3600):
+def generate(reference, out, preset, settings, seed, port=8189, timeout=None):
+    timeout = inference_timeout() if timeout is None else timeout
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     started = time.monotonic()

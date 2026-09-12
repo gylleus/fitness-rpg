@@ -60,12 +60,19 @@ def provenance():
 def doctor():
     import torch
     import psutil
+    from runtime import device_name, device_metadata
+    try:
+        device = device_name()
+        hardware = device_metadata(device)
+    except (RuntimeError, ValueError) as exc:
+        device = None
+        hardware = {"device": None, "gpu": None, "device_error": str(exc)}
     root = model_dir()
     existing = root
     while not existing.exists():
         existing = existing.parent
     entries = json.loads((ROOT / "models.lock.json").read_text())["models"]
-    report = {"cuda_available": torch.cuda.is_available(), "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
+    report = {**hardware, "cuda_available": torch.cuda.is_available(), "mps_available": torch.backends.mps.is_available(),
         "vram_GiB": torch.cuda.get_device_properties(0).total_memory / 2**30 if torch.cuda.is_available() else None,
         "ram_available_GiB": psutil.virtual_memory().available / 2**30,
         "disk_free_GiB": shutil.disk_usage(existing).free / 2**30, "model_dir": str(root),
@@ -73,7 +80,7 @@ def doctor():
         "sam2_source_present": (ROOT / "vendor/sam2/sam2").exists(),
         "models": [{"path": m["path"], "present_with_expected_size": (root / m["path"]).exists()
             and (root / m["path"]).stat().st_size == m["bytes"]} for m in entries]}
-    report["ready_for_generation"] = report["cuda_available"] and all(m["present_with_expected_size"] for m in report["models"]) and report["comfy_source_present"] and report["sam2_source_present"]
+    report["ready_for_generation"] = device is not None and all(m["present_with_expected_size"] for m in report["models"]) and report["comfy_source_present"] and report["sam2_source_present"]
     report["note"] = "Size check only. run performs full model checksums before inference."
     save_json(ROOT / "metadata/doctor.json", report)
     print(json.dumps(report, indent=2))

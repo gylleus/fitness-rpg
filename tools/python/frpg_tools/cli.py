@@ -12,13 +12,19 @@ ROOT = Path(__file__).resolve().parents[3]
 
 
 def _exec(python, *prefix):
+    if sys.platform == "darwin":
+        # Must be set before torch is imported, including in child workers.
+        os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
     # Do not resolve the interpreter symlink: its venv path selects site-packages.
     os.execv(str(python), [str(python), *map(str, prefix), *sys.argv[1:]])
 
 
 def _sprite_python():
-    python = ROOT / "image-generation/sprite-animation/.venv/bin/python"
+    env = ".venv-macos" if sys.platform == "darwin" else ".venv"
+    python = ROOT / "image-generation/sprite-animation" / env / "bin/python"
     if not python.is_file() or not os.access(python, os.X_OK):
+        if sys.platform == "darwin":
+            raise SystemExit("Sprite runtime is not installed. Run: uv run sprite-setup --environment")
         raise SystemExit(
             "Sprite runtime is not installed. From the repo root, run:\n"
             "  bash image-generation/pyxelate-study/setup.sh\n"
@@ -45,6 +51,11 @@ def sprite_setup():
     # Setup creates the supplemental environment from the study runtime. This
     # also works before the sprite environment exists, without installing ML
     # packages into the root project's .venv.
+    if sys.platform == "darwin":
+        existing = ROOT / "image-generation/sprite-animation/.venv-macos/bin/python"
+        python = existing if existing.is_file() else Path(sys.executable)
+        _exec(python, ROOT / "image-generation/sprite-animation/setup.py")
+        return
     python = ROOT / "image-generation/pyxelate-study/.venv/bin/python"
     if not python.is_file() or not os.access(python, os.X_OK):
         raise SystemExit("Install the study runtime first: bash image-generation/pyxelate-study/setup.sh")

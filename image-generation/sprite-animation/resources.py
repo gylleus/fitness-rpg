@@ -1,5 +1,6 @@
 """Low-frequency measurements for owned inference subprocesses."""
 import json
+import shutil
 from pathlib import Path
 import subprocess
 import threading
@@ -29,10 +30,11 @@ class ProcessMonitor:
                     record["process_rss_MiB"] = process.memory_info().rss / 2**20
                     record["system_available_RAM_MiB"] = psutil.virtual_memory().available / 2**20
                     record["system_swap_used_MiB"] = psutil.swap_memory().used / 2**20
-                    query = subprocess.check_output(["nvidia-smi", "--query-gpu=memory.used,utilization.gpu",
-                        "--format=csv,noheader,nounits", "-i", "0"], timeout=5).decode().strip().split(",")
-                    record["whole_GPU_used_MiB"] = float(query[0])
-                    record["whole_GPU_utilization_percent"] = float(query[1])
+                    if shutil.which("nvidia-smi"):
+                        query = subprocess.check_output(["nvidia-smi", "--query-gpu=memory.used,utilization.gpu",
+                            "--format=csv,noheader,nounits", "-i", "0"], timeout=5).decode().strip().split(",")
+                        record["whole_GPU_used_MiB"] = float(query[0])
+                        record["whole_GPU_utilization_percent"] = float(query[1])
                 except (psutil.Error, subprocess.SubprocessError, OSError, ValueError) as exc:
                     record["measurement_error"] = str(exc)
                 self.samples.append(record)

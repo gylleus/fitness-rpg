@@ -5,6 +5,11 @@ Use `uv run sprites …` from the repository root for the shared pipeline,
 for supporting scripts and tests. See [Python tooling with uv](PYTHON.md) for
 setup and how the existing pinned GPU environment is preserved.
 
+Apple Silicon uses a separate Mac runtime and MPS device selection. Follow
+[Apple Silicon setup](PYTHON.md#apple-silicon-setup) for reference generation,
+segmentation and the additional Wan FP16 conversion. Linux keeps its CUDA
+runtime and original FP8 animation weights.
+
 Start with [the shared sprite pipeline](sprite-pipeline/README.md) for art-only
 character and prop definitions, or [the enemy adapter](enemy-sprites/README.md)
 for a canonical game roster. The [barbarian player example](player-sprites/README.md)

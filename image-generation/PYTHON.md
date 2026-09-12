@@ -47,7 +47,89 @@ uv run sprite-python -m unittest discover -s image-generation/enemy-sprites -p '
 uv run sprite-python -m unittest discover -s image-generation/sprite-animation -p 'test_*.py' -v
 ```
 
-## GPU environment and setup
+## Apple Silicon setup
+
+Use native ARM64 Python on macOS 14 or later. The Mac runtime is a separate
+Python 3.12.9 environment in `sprite-animation/.venv-macos`, with
+`requirements-macos.lock.txt` pins including torch 2.8.0. The root environment
+remains lightweight. Linux environments, CUDA locks and model originals are
+preserved. Run from the repository root:
+
+```bash
+uv sync --locked
+uv run sprite-setup --environment
+uv run sprite-setup --models reference
+uv run sprite-setup --models segmentation
+uv run sprites reference \
+  --definition content/players/PLAYER.toml \
+  --run image-generation/sprite-pipeline/runs/mac-reference-v1
+```
+
+SDXL and SAM2 select MPS on Apple Silicon; CUDA remains the default on Linux.
+BiRefNet runs on CPU on both platforms. SDXL enables attention and VAE slicing
+on Mac, and SAM2 uses FP32 without CUDA autocast. The launcher enables
+`PYTORCH_ENABLE_MPS_FALLBACK=1` before importing torch, unless explicitly set by
+the caller. Some operations can consequently run on CPU. Seeds and prompts
+are preserved; different backends and precision can produce different pixels.
+Device metadata is saved with generated references and masks.
+
+For the shared **Wan 2.2 14B animation** path, also run:
+
+```bash
+# Download only the shared encoder, rather than the historical 5B pilot.
+uv run sprite-setup --models encoder
+uv run sprite-python image-generation/pixel-animation-14b/setup_models.py
+
+# Mac only: prepare scale-correct FP16 copies of both FP8 experts.
+uv run sprite-python image-generation/pixel-animation-14b/prepare_macos.py
+uv run sprite-python image-generation/pixel-animation-14b/prepare_macos.py --verify-only
+```
+
+Then use the usual `sprites plan`, `all`, or individual stages from
+[the workflow guide](sprite-pipeline/WORKFLOWS.md), choosing a new run directory.
+The Mac runner verifies and selects the converted expert files. It keeps the
+text encoder and video VAE on CPU, uses FP16 diffusion with split attention,
+and retains separate high/low expert processes and the lossless latent handoff.
+Linux continues using the original FP8 files and launch flags.
+
+Conversion writes one tensor at a time, multiplies each quantized weight by its
+stored scale in FP32, then rounds to FP16 and removes quantization controls.
+This needs roughly **53 GiB of extra disk** for the two converted experts.
+Allow approximately **120 GiB free** for a fresh complete setup and working
+space. FP16 increases animation memory use; 48 GB is shared with macOS and other
+applications. A real render/memory benchmark is still needed to establish Wan
+performance and memory fit on this Mac. Tensor conversion tests alone do not
+establish successful full-model inference.
+
+`SPRITE_DEVICE=auto` is the default. Set `SPRITE_DEVICE=cuda`, `mps`, or `cpu`
+explicitly for diagnostics. GPU selection fails when the requested device is
+unavailable; CPU inference must be requested explicitly. Animation timeouts
+default to four hours on Mac and one hour on Linux. Set
+`SPRITE_INFERENCE_TIMEOUT` to a positive number of seconds to override this.
+Owned servers still stop on completion, error or timeout. Use a new run when
+switching inference backends; saved exports can be reviewed or re-exported
+without regeneration.
+
+Setup downloads require internet access. Generation does not download models.
+Rerun `sprite-setup --environment` after an interrupted install. The study
+`setup.sh` detects macOS before downloading Linux wheels. Archived study/batch
+scripts retain their original CUDA behavior; use shared `sprites` commands on Mac.
+
+Validation after setup:
+
+```bash
+uv run sprite-python -m unittest discover -s image-generation/sprite-animation -p 'test_*.py' -v
+uv run sprite-python -m unittest discover -s image-generation/sprite-pipeline -p 'test_*.py' -v
+uv run sprite-python -m unittest discover -s image-generation/enemy-sprites -p 'test_*.py' -v
+uv run sprite-python -m unittest discover -s image-generation/pixel-animation-14b -p 'test_*.py' -v
+```
+
+Platform/launcher checks also run without ML dependencies:
+`uv run python -m unittest discover -s image-generation/sprite-animation -p test_runtime.py`.
+Conversion tests exercise real tensor scaling, safetensors decoding, reuse and
+corruption rejection without loading Wan.
+
+## Linux GPU environment and setup
 
 The installed GPU stack stays in
 `image-generation/sprite-animation/.venv`, which inherits packages from
@@ -63,8 +145,8 @@ source revisions. `uv sync` operates on the root `.venv`; do not point
 cannot represent the inherited `.pth` package arrangement safely. See uv's
 [project syncing documentation](https://docs.astral.sh/uv/concepts/projects/sync/).
 
-On this machine the GPU runtime and models are already installed. For a fresh
-checkout, the existing setup procedure is:
+Existing Linux workspaces can continue using their installed GPU runtime and
+models. For a fresh Linux checkout, the setup procedure remains:
 
 ```bash
 # Downloads the pinned study wheels/models and installs its uv environment.

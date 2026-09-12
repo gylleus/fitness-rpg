@@ -30,6 +30,7 @@ def animate(run, enemies=None, action=None, mask_check_every=8):
     import run as wan_run
     from common import COMFY_REV, SAM_REV, PYX_REV
     from pipeline import worker
+    from runtime import configured_device
     if type(mask_check_every) is not int or mask_check_every < 1:
         raise ValueError("Mask diagnostic interval must be a positive integer")
     if action and action not in config["actions"]:
@@ -50,6 +51,8 @@ def animate(run, enemies=None, action=None, mask_check_every=8):
             preset = {"prompt": entry["prompts"]["motions"][act], "negative": entry["prompts"]["negative"]}
             contract = {id_field(config): key, "action": act, "preset": preset, "generation": settings,
                 "reference_sha256": sha256(reference), "model_manifest_sha256": config["model_manifest_sha256"]}
+            if configured_device() == "mps":
+                contract["runtime_profile"] = "mps-fp16-v1"
             saved = out / "config.json"
             if saved.exists() and json.loads(saved.read_text()) != contract:
                 raise ValueError(f"Existing animation contract differs: {out}")
@@ -149,12 +152,13 @@ def animate(run, enemies=None, action=None, mask_check_every=8):
 
 
 def submit(url, proc, graph, out):
+    from runtime import inference_timeout
     import requests
     r = requests.post(url + "/prompt", json={"prompt": graph, "client_id": str(uuid.uuid4())}, timeout=30)
     save_json(out / "submission.json", r.json())
     r.raise_for_status()
     prompt_id = r.json()["prompt_id"]
-    deadline = time.monotonic()+3600
+    deadline = time.monotonic()+inference_timeout()
     while time.monotonic() < deadline:
         if proc.poll() is not None:
             raise RuntimeError("Owned ComfyUI process exited; see shared expert session log")
@@ -390,7 +394,7 @@ def package(run, enemies=None, action=None):
             if entry.get("reference_guide"):
                 guide = (run / entry["reference_guide"]["image"]).resolve()
                 z.write(guide, f"guide/{subject(entry)['id']}{guide.suffix}")
-        for path in (BASE / "requirements.lock.txt", STUDY / "requirements.lock.txt", BASE / "models.lock.json", WAN / "models.lock.json"):
+        for path in (BASE / "requirements.lock.txt", BASE / "requirements-macos.lock.txt", STUDY / "requirements.lock.txt", BASE / "models.lock.json", WAN / "models.lock.json"):
             z.write(path, "provenance/"+path.parent.name+"/"+path.name)
         for folder in (BASE, WAN):
             for path in folder.glob("*.py"):

@@ -1,5 +1,9 @@
 # Reusable local sprite pipeline
 
+See [Python setup](../PYTHON.md) for Linux/CUDA and Apple Silicon/MPS runtimes.
+Mac animation uses separately converted FP16 experts; Linux retains its FP8
+weights. The same commands handle reference generation, processing and export.
+
 For the integrated player/Wetlands package, run `uv run sprites bundle`.
 See [runtime sprites](../../assets/sprites/README.md) for frame skipping,
 adding entity manifests, playback and the game preview. The selected player

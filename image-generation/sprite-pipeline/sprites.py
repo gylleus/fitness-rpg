@@ -274,7 +274,9 @@ def make_plan(args, assets, art, source):
             if not isinstance(spec, dict) or set(spec) != {"image", "strength"} or type(spec["strength"]) not in (int, float) or not 0 < spec["strength"] <= 1:
                 raise ValueError("Each reference guide requires image and strength in (0, 1]")
             path = (guides_path.resolve().parent / spec["image"]).resolve()
-            planned[-1]["reference_guide"] = {"image": os.path.relpath(path, args.run),
+            # Resolve both ends: macOS /var aliases /private/var. Keep args.run
+            # unchanged so save_plan can still reject a symlinked run itself.
+            planned[-1]["reference_guide"] = {"image": os.path.relpath(path, args.run.resolve()),
                 "strength": spec["strength"], "sha256": sha256(path)}
     from reference_assets import plan_inputs
     copies = plan_inputs(args, planned, facing)
@@ -291,7 +293,7 @@ def make_plan(args, assets, art, source):
         if not 0 < args.guide_strength <= 1:
             raise ValueError("Guide strength must be above 0 and at most 1")
         guide = args.guide_image.resolve()
-        config["reference_generation"].update(guide_image=os.path.relpath(guide, args.run),
+        config["reference_generation"].update(guide_image=os.path.relpath(guide, args.run.resolve()),
             guide_strength=args.guide_strength, guide_sha256=sha256(guide))
     from run_state import save_plan
     save_plan(args, config, copies)

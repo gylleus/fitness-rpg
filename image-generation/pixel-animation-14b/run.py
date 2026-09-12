@@ -22,6 +22,7 @@ sys.path.insert(0, str(BASE))
 import requests
 from common import COMFY_REV, save_json, sha256
 from resources import ProcessMonitor
+from runtime import configured_device, comfy_flags, inference_timeout
 
 
 def workflow(reference, preset, settings, stage, latent="handoff.latent"):
@@ -37,6 +38,9 @@ def workflow(reference, preset, settings, stage, latent="handoff.latent"):
         "5": {"class_type": "CLIPTextEncode", "inputs": {"clip": ["2", 0], "text": preset["negative"]}},
         "6": {"class_type": "LoadImage", "inputs": {"image": reference}},
     }
+    if configured_device() == "mps":
+        from prepare_macos import model_name
+        graph["1"]["inputs"]["unet_name"] = model_name(stage)
     model = ["1", 0]
     if settings.get("distilled", True):
         graph["12"] = {"class_type": "LoraLoaderModelOnly", "inputs": {"model": model,
@@ -74,6 +78,11 @@ def workflow(reference, preset, settings, stage, latent="handoff.latent"):
 
 @contextmanager
 def server(out, port=8190):
+    from runtime import device_name
+    device_name()  # Fail before launching ComfyUI if the requested GPU is absent.
+    if configured_device() == "mps":
+        from prepare_macos import prepare
+        prepare(verify_only=True)
     for sub in ("input", "output", "user"):
         (out / sub).mkdir(parents=True, exist_ok=True)
     with socket.socket() as sock:
@@ -84,8 +93,8 @@ def server(out, port=8190):
         "diffusion_models": "diffusion_models", "loras": "loras", "vae": "vae",
         "text_encoders": str(BASE / "models/comfy/text_encoders")}})
     cmd = [sys.executable, str(BASE / "vendor/ComfyUI/main.py"), "--listen", "127.0.0.1", "--port", str(port),
-        "--disable-auto-launch", "--disable-all-custom-nodes", "--preview-method", "none", "--lowvram",
-        "--reserve-vram", "1.5", "--extra-model-paths-config", str(paths), "--input-directory", str(out / "input"),
+        "--disable-auto-launch", "--disable-all-custom-nodes", "--preview-method", "none", *comfy_flags(),
+        "--extra-model-paths-config", str(paths), "--input-directory", str(out / "input"),
         "--output-directory", str(out / "output"), "--user-directory", str(out / "user"),
         "--database-url", "sqlite:///" + str(out / "user/comfy.db")]
     save_json(out / "command.json", cmd)
@@ -132,7 +141,7 @@ def execute_stage(out, reference, preset, settings, stage, handoff=None, port=81
         save_json(out / "submission.json", r.json())
         r.raise_for_status()
         prompt_id = r.json()["prompt_id"]
-        deadline = time.monotonic() + 3600
+        deadline = time.monotonic() + inference_timeout()
         while time.monotonic() < deadline:
             if proc.poll() is not None:
                 raise RuntimeError(f"ComfyUI died ({proc.returncode}), see {out / 'comfy.log'}")
@@ -148,7 +157,7 @@ def execute_stage(out, reference, preset, settings, stage, handoff=None, port=81
                     break
             time.sleep(2)
         else:
-            raise TimeoutError("Expert exceeded one hour")
+            raise TimeoutError("Expert exceeded SPRITE_INFERENCE_TIMEOUT")
     key = "latents" if stage == "high" else "images"
     items = result["outputs"]["11"][key]
     if len(items) != (1 if stage == "high" else settings["length"]):

@@ -5,6 +5,12 @@ adapter** with its Wan 2.2 I2V A14B base, then tests first/last-frame conditioni
 Everything stays local. It reuses the previous experiment's Python runtime,
 pinned ComfyUI, BiRefNet, SAM2, Pyxelate and source cutouts.
 
+For Apple Silicon, follow [the Mac setup guide](../PYTHON.md#apple-silicon-setup).
+`prepare_macos.py` creates separate FP16 expert files with the FP8 weight scales
+baked in and records hashes. Mac commands select those files automatically;
+Linux continues using the original FP8 experts. The RTX 3090 results below
+are not Mac performance measurements.
+
 Start with [measured results and recommendations](RESULTS.md) and the
 [offline comparison player](outputs/review.html).
 

@@ -2,6 +2,12 @@
 set -euo pipefail
 cd -- "$(dirname -- "$0")"
 
+if [ "$(uname -s)" = Darwin ]; then
+  echo "On Apple Silicon, run from the repo root: uv run sprite-setup --environment" >&2
+  echo "Then download reference weights: uv run sprite-setup --models reference" >&2
+  exit 1
+fi
+
 # Python 3.10 / Linux x86_64; wheel manifest records exact files and SHA-256.
 if [ ! -x .venv/bin/python ]; then
   uv venv .venv --python python3.10 --no-cache

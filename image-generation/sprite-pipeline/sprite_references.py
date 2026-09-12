@@ -39,7 +39,7 @@ def conditioning(pipe, prompt, negative):
         for side_index, side in enumerate(ids):
             features = []
             for index, (tokens, tokenizer, encoder) in enumerate(zip(side, tokenizers, encoders)):
-                chunks = torch.tensor(token_chunks(tokens, tokenizer, count, repeat=side_index == 1), device="cuda")
+                chunks = torch.tensor(token_chunks(tokens, tokenizer, count, repeat=side_index == 1), device=encoder.device)
                 output = encoder(chunks, output_hidden_states=True)
                 features.append(output.hidden_states[-2].flatten(0, 1).unsqueeze(0))
                 if index == 1:
@@ -79,28 +79,27 @@ def generate(run):
     from diffusers import AutoencoderKL, DPMSolverMultistepScheduler, StableDiffusionXLPipeline, StableDiffusionXLImg2ImgPipeline
     from PIL import Image
     from PIL.PngImagePlugin import PngInfo
-    if not torch.cuda.is_available():
-        raise RuntimeError("Local CUDA device unavailable")
-    torch.set_num_threads(4)
-    torch.backends.cuda.matmul.allow_tf32 = False
-    torch.backends.cudnn.allow_tf32 = False
-    torch.backends.cudnn.benchmark = False
-    torch.use_deterministic_algorithms(True)
+    from runtime import device_name, configure_reference, device_metadata
+    device = device_name()
+    configure_reference(device)
+    dtype = torch.float32 if device == "cpu" else torch.float16
     settings = config["reference_generation"]
-    vae = AutoencoderKL.from_pretrained(STUDY / "models/vae", torch_dtype=torch.float16, local_files_only=True)
+    vae = AutoencoderKL.from_pretrained(STUDY / "models/vae", torch_dtype=dtype, local_files_only=True)
     guided_only = bool(settings.get("guide_image")) or all(e.get("reference_guide") for e, _ in needed)
     pipeline_class = StableDiffusionXLImg2ImgPipeline if guided_only else StableDiffusionXLPipeline
     pipe = pipeline_class.from_pretrained(STUDY / "models/sdxl", vae=vae, variant="fp16",
-        torch_dtype=torch.float16, use_safetensors=True, local_files_only=True, add_watermarker=False)
+        torch_dtype=dtype, use_safetensors=True, local_files_only=True, add_watermarker=False)
     pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config,
         algorithm_type="dpmsolver++", solver_order=2, use_karras_sigmas=True)
     pipe.load_lora_weights(str(STUDY / "models/pixel-art-xl"), weight_name="pixel-art-xl.safetensors", adapter_name="pixel")
     pipe.set_adapters("pixel", adapter_weights=settings["lora"]["weight"])
-    pipe.to("cuda")
+    pipe.to(device)
+    if device == "mps":
+        pipe.enable_attention_slicing()
+        pipe.enable_vae_slicing()
     image_pipe = (pipe if guided_only else StableDiffusionXLImg2ImgPipeline.from_pipe(pipe)) if any(e.get("reference_guide") for e, _ in needed) else pipe
-    save_json(run / "reference-environment.json", {"gpu": torch.cuda.get_device_name(),
-        "vram": torch.cuda.get_device_properties(0).total_memory, "configuration": settings,
-        "scheduler": dict(pipe.scheduler.config), "generator_device": "cpu", "deterministic": True,
+    save_json(run / "reference-environment.json", {**device_metadata(device), "configuration": settings,
+        "scheduler": dict(pipe.scheduler.config), "generator_device": "cpu", "deterministic": device == "cuda",
         "packages": {p: importlib.metadata.version(p) for p in
             ("torch", "diffusers", "transformers", "accelerate", "peft", "numpy", "pillow", "tomli")},
         "script_sha256": sha256(Path(__file__))})
