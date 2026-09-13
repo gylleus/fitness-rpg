@@ -16,8 +16,9 @@ The complete descriptions are in the canonical
 The runtime encounters follow this order, ending with the gnoll boss.
 
 Each immutable `sheet-source.png` was generated with built-in imagegen using
-the adjacent exact `prompt.txt`. `sources.json` records source and prompt
-checksums. The four source rows are idle, walk, attack and death; six columns
+the adjacent `prompt.txt`. `sources.json` retains the verbatim generation
+prompt as well as source and prompt checksums; the readable text file has
+trailing whitespace normalized. The four source rows are idle, walk, attack and death; six columns
 hold the authored poses. `roster.json` retains the generation-time design
 snapshot; subsequent chapter-four balancing lives in canonical content.
 

@@ -44,7 +44,7 @@ def main():
                          "backend": "built-in imagegen; ENDESGA32 nearest CPU export"}
         if key == "slate_path":
             # Source top edge is at y=380, with the first complete opaque row
-            # at y=383. The exported walkable surface is row 36, not row 24.
+            # at y=382. The exported walkable surface is row 36, not row 24.
             manifest[key]["surface_y"] = 36
     for key in ("landscape", "timber_gallery", "sunken_cavern"):
         source = HERE.parent / "hollow-delve-v1/backgrounds" / f"hollow_delve_{key}.png"
