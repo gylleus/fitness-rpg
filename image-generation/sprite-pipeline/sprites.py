@@ -321,6 +321,9 @@ def child(command, run, *extra):
 
 
 def main(enemy_adapter=False):
+    if sys.argv[1:2] == ["import-sheets"]:
+        from authored_sheets import main as sheets_main
+        return sheets_main(sys.argv[2:])
     if not enemy_adapter and sys.argv[1:2] == ["bundle"]:
         from runtime_assets import main as bundle_main
         return bundle_main(sys.argv[2:])
