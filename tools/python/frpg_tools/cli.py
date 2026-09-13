@@ -42,6 +42,12 @@ def enemy_sprites():
     _exec(_sprite_python(), ROOT / "image-generation/enemy-sprites/batch.py")
 
 
+def biome_assets():
+    # Planning needs only the root interpreter; importing pixels uses the pinned runtime.
+    python = sys.executable if not sys.argv[1:] or sys.argv[1] in ("plan", "definition", "--help") else _sprite_python()
+    _exec(python, ROOT / "image-generation/biome-assets/biome_assets.py")
+
+
 def sprite_python():
     """Run a helper, module or test with the complete pinned sprite dependencies."""
     _exec(_sprite_python())

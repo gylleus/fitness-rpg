@@ -8,6 +8,7 @@ dependencies = []
 [project.scripts]
 sprites = "frpg_tools.cli:sprites"
 enemy-sprites = "frpg_tools.cli:enemy_sprites"
+biome-assets = "frpg_tools.cli:biome_assets"
 sprite-python = "frpg_tools.cli:sprite_python"
 sprite-setup = "frpg_tools.cli:sprite_setup"
 content = "frpg_tools.cli:content"

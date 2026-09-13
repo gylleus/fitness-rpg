@@ -1,5 +1,10 @@
 # Local sprite generation
 
+Start new biome work with the [biome asset interface and prompt guide](biome-assets/README.md):
+`uv run biome-assets plan --biome ID --out PLAN.json`. It covers backgrounds,
+ground, props and enemy references using one shared style profile. Current enemy
+sheet imports use [shared extraction recipes](sprite-pipeline/AUTHORED_SHEETS.md).
+
 Use `uv run sprites …` from the repository root for the shared pipeline,
 `uv run enemy-sprites …` for the enemy adapter, and `uv run sprite-python …`
 for supporting scripts and tests. See [Python tooling with uv](PYTHON.md) for

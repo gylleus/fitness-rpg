@@ -1,0 +1,10 @@
+schema_version = 1
+id = "readable-dark-fantasy-v1"
+style = "Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks."
+background = "Low detail and low local contrast. Two or three broad value masses; distant shapes lose detail and contrast. Keep the combat band behind the entire route quiet. Use sparse large rock, cloud or foliage shapes, with only a few edge accents."
+prop = "Medium detail concentrated at the outer silhouette and a few identifying features. Keep interior shading grouped. Show one complete isolated object with a clear support contact."
+enemy = "Highest silhouette clarity and controlled contrast in the scene. Consistent body proportions and equipment across poses, deliberate grouped shading, no fine stippled texture. Strict left-facing side profile."
+ground = "A readable continuous walking lip with sparse low-contrast material marks. Keep the surface level and separate from scenery and actors."
+avoid = ["photorealism", "intricate microtexture", "dense cracks or hatching", "single-pixel speckle", "dithering", "dramatic spotlights", "bloom", "soft airbrushed edges", "text", "watermarks", "UI", "painted checkerboard", "isometric or overhead view", "a road receding to a vanishing point"]
+walk = "Six ordered poses of an anatomy-appropriate walk in place: ready contact, weight shift, passing pose, opposite contact, opposite weight shift, return toward the starting contact. No horizontal travel across cells."
+death = "Six ordered poses: recoil, loss of support, falling, floor contact, settling, fully inert corpse resting on its actual support. The last pose stays down."
