@@ -1,0 +1,58 @@
+# Revised cave backgrounds: concise prompts, each within one CLIP chunk.
+schema_version = 1
+
+[[assets]]
+id = "hollow_delve_landscape"
+name = "Hollow Delve cave landscape"
+kind = "background"
+canvas = [640, 360]
+visual_description = """
+A broad natural cavern opens around an old haulage path cut into damp limestone.
+Water darkens the blue-grey rock beneath blunt stalactites. Uneven timber
+supports and rusted iron brackets mark the excavated sections; their feet sit
+on stacks of stone shims. Two small oil lamps cast dull amber pools across the
+worn rock. Thin shelves of pale fungus follow a seepage line on the rear wall.
+Beyond the path, overlapping rock ledges fall away into a quiet, dark hollow.
+Loose gravel and a narrow drainage channel collect at the edge of the raised
+walking shelf, leaving its middle clear.
+"""
+
+[assets.reference]
+prompt = "pixel art, underground limestone cavern, dark craggy rock walls, stalactites hanging from ceiling, flat rocky ground across bottom, side view, side-scrolling game background, distant shadowy recesses, two amber lamps, sparse pale fungus, muted blue grey stone, chunky pixels, flat colors, no characters"
+negative = "furniture, cabinets, shelving, room, sky, sunlight, characters, text, watermark, interface, isometric, perspective path, photorealistic, neon, blur, isolated object, plain background"
+
+[[assets]]
+id = "hollow_delve_timber_gallery"
+name = "Hollow Delve timber gallery"
+kind = "background"
+canvas = [640, 360]
+visual_description = """
+A low excavated gallery follows a seam through damp blue-grey limestone.
+Heavy dark timber uprights brace the rear wall, their feet resting on stacks of
+stone shims. Rusted iron straps bind split beams. Two small oil lamps hang from
+iron hooks. A level haulage shelf is worn smooth through its middle, with loose
+gravel and a shallow drainage groove along the back edge. Uneven rock presses
+between the supports, and dark recesses open beyond the last pools of lamplight.
+"""
+
+[assets.reference]
+prompt = "pixel art, abandoned underground mine, rough stone tunnel walls, massive timber support beams, stalactites, flat dirt ground across bottom, side view, side-scrolling game background, small amber oil lamps, dark recesses, muted blue grey stone and worn brown wood, chunky pixels, flat colors, no characters"
+negative = "furniture, cabinets, shelving, room, sky, sunlight, characters, text, watermark, interface, isometric, perspective path, photorealistic, neon, blur, isolated object, plain background"
+
+[[assets]]
+id = "hollow_delve_sunken_cavern"
+name = "Hollow Delve sunken cavern"
+kind = "background"
+canvas = [640, 360]
+visual_description = """
+A raised limestone shelf skirts a wide underground pool. Thin trickles darken
+the cavern wall, and blunt stalactites hang over water almost black in the
+recesses. Broken rock ledges overlap on the far bank. Sparse pale fungus clings
+to damp shelves close to the waterline. A single hooded oil lamp rests in a
+rock niche above the path, its small amber reflection caught in the still pool.
+The walking shelf remains dry and level above the water.
+"""
+
+[assets.reference]
+prompt = "pixel art, underground cavern lake, dark limestone walls and ceiling, stalactites reflected in still water, continuous flat rocky ground across bottom in front of water, side view, side-scrolling game background, pale fungus, one small amber lantern, muted blue grey stone, chunky pixels, flat colors, no characters"
+negative = "furniture, cabinets, shelving, room, sky, sunlight, characters, text, watermark, interface, isometric, perspective path, photorealistic, neon, blur, isolated object, plain background"

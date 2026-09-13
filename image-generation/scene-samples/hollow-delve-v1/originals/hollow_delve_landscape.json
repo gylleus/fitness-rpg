@@ -1,0 +1,93 @@
+{
+  "entry": {
+    "asset": {
+      "id": "hollow_delve_landscape",
+      "name": "Hollow Delve cave landscape",
+      "kind": "background",
+      "canvas": [
+        640,
+        360
+      ],
+      "visual_description": "A broad natural cavern opens around an old haulage path cut into damp limestone.\nWater darkens the blue-grey rock beneath blunt stalactites. Uneven timber\nsupports and rusted iron brackets mark the excavated sections; their feet sit\non stacks of stone shims. Two small oil lamps cast dull amber pools across the\nworn rock. Thin shelves of pale fungus follow a seepage line on the rear wall.\nBeyond the path, overlapping rock ledges fall away into a quiet, dark hollow.\nLoose gravel and a narrow drainage channel collect at the edge of the raised\nwalking shelf, leaving its middle clear.\n",
+      "reference": {
+        "prompt": "pixel art, empty underground limestone cavern, dark craggy rock walls, stalactites hanging from ceiling, flat rocky ground across bottom, side view, side-scrolling game background, distant shadowy recesses, two amber lamps, sparse pale fungus, muted blue grey stone, chunky pixels, flat colors",
+        "negative": "people, person, human, men, women, characters, creatures, monsters, player, sprites, furniture, cabinets, shelving, sky, sunlight, text, watermark, interface, isometric, perspective path, photorealistic, neon, blur, isolated object, plain background"
+      },
+      "visual": {
+        "silhouette": "",
+        "equipment": [],
+        "palette": [],
+        "height_scale": 1.0,
+        "anchor": "ground",
+        "avoid": []
+      },
+      "animations": {}
+    },
+    "prompts": {
+      "reference": "pixel art, empty underground limestone cavern, dark craggy rock walls, stalactites hanging from ceiling, flat rocky ground across bottom, side view, side-scrolling game background, distant shadowy recesses, two amber lamps, sparse pale fungus, muted blue grey stone, chunky pixels, flat colors",
+      "full_reference_context": "A broad natural cavern opens around an old haulage path cut into damp limestone.\nWater darkens the blue-grey rock beneath blunt stalactites. Uneven timber\nsupports and rusted iron brackets mark the excavated sections; their feet sit\non stacks of stone shims. Two small oil lamps cast dull amber pools across the\nworn rock. Thin shelves of pale fungus follow a seepage line on the rear wall.\nBeyond the path, overlapping rock ledges fall away into a quiet, dark hollow.\nLoose gravel and a narrow drainage channel collect at the edge of the raised\nwalking shelf, leaving its middle clear.\n",
+      "caption_source": "explicit assets.reference.prompt",
+      "negative": "text, watermark, frame border, sprite sheet, isolated object, plain studio background, photorealism, cute mascot, text, watermark",
+      "motions": {},
+      "reference_negative": "people, person, human, men, women, characters, creatures, monsters, player, sprites, furniture, cabinets, shelving, sky, sunlight, text, watermark, interface, isometric, perspective path, photorealistic, neon, blur, isolated object, plain background"
+    },
+    "seeds": {
+      "reference": 4169135124
+    }
+  },
+  "settings": {
+    "base_model": {
+      "id": "stabilityai/stable-diffusion-xl-base-1.0",
+      "revision": "462165984030d82259a11f4367a4eed129e94a7b"
+    },
+    "lora": {
+      "id": "nerijs/pixel-art-xl",
+      "revision": "8bf4a4d9ea283e00a51fafda8e0539f8248ea037",
+      "weight": 0.65
+    },
+    "vae": {
+      "id": "madebyollin/sdxl-vae-fp16-fix",
+      "revision": "207b116dae70ace3637169f1ddd2434b91b3a8cd"
+    },
+    "generation": {
+      "width": 1024,
+      "height": 1024,
+      "num_inference_steps": 30,
+      "guidance_scale": 7.0,
+      "scheduler": "DPMSolverMultistepScheduler",
+      "algorithm_type": "dpmsolver++",
+      "solver_order": 2,
+      "use_karras_sigmas": true,
+      "dtype": "float16",
+      "refiner": false
+    }
+  },
+  "conditioning": {
+    "mode": "75-content-token CLIP chunks, concatenated penultimate states, first CLIP-G pool; negative chunks repeated to match length",
+    "positive_token_counts": [
+      63,
+      63
+    ],
+    "negative_token_counts": [
+      57,
+      57
+    ],
+    "chunks": 1,
+    "truncated_tokens": 0
+  },
+  "guide": null,
+  "runtime": {
+    "device": "mps",
+    "dtype": "torch.float16",
+    "attention_processors": [
+      "AttnProcessor2_0"
+    ]
+  },
+  "seconds": 42.54461950005498,
+  "size": [
+    1024,
+    576
+  ],
+  "mode": "RGB",
+  "sha256": "084fcde414aa9ddf1e4f4a0564e698edb5298aa7e5670a90fd1c9365fea34cae"
+}

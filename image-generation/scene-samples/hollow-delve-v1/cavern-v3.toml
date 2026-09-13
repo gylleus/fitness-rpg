@@ -1,0 +1,22 @@
+# Cavern revision: exclude figures from the background.
+schema_version = 1
+
+[[assets]]
+id = "hollow_delve_landscape"
+name = "Hollow Delve cave landscape"
+kind = "background"
+canvas = [640, 360]
+visual_description = """
+A broad natural cavern opens around an old haulage path cut into damp limestone.
+Water darkens the blue-grey rock beneath blunt stalactites. Uneven timber
+supports and rusted iron brackets mark the excavated sections; their feet sit
+on stacks of stone shims. Two small oil lamps cast dull amber pools across the
+worn rock. Thin shelves of pale fungus follow a seepage line on the rear wall.
+Beyond the path, overlapping rock ledges fall away into a quiet, dark hollow.
+Loose gravel and a narrow drainage channel collect at the edge of the raised
+walking shelf, leaving its middle clear.
+"""
+
+[assets.reference]
+prompt = "pixel art, empty underground limestone cavern, dark craggy rock walls, stalactites hanging from ceiling, flat rocky ground across bottom, side view, side-scrolling game background, distant shadowy recesses, two amber lamps, sparse pale fungus, muted blue grey stone, chunky pixels, flat colors"
+negative = "people, person, human, men, women, characters, creatures, monsters, player, sprites, furniture, cabinets, shelving, sky, sunlight, text, watermark, interface, isometric, perspective path, photorealistic, neon, blur, isolated object, plain background"

@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "validated_at_utc": "2026-09-13T00:18:05.196218+00:00",
+  "machine": "Apple M3 Max",
+  "pipeline_code_commit": "3ac60f089a1b55b9ef1f077ef5ef85599e2a68a6",
+  "stages_passed": [
+    "reference generation on MPS",
+    "pixel preparation",
+    "nearest and Pyxelate export",
+    "review",
+    "package"
+  ],
+  "validation": {
+    "sprite_pipeline_tests": 40,
+    "sprite_animation_tests": 22,
+    "wan_helper_tests": 11,
+    "enemy_adapter_tests": 8,
+    "content_tests": 16,
+    "installed_dependency_check": "98 packages compatible",
+    "source_and_export_hashes": true,
+    "png_readability": true,
+    "opaque_640x360_palette_exports": true
+  },
+  "limitations": [
+    "Static opaque scene candidates; not seamless tiles or separated parallax layers.",
+    "Ground placement and collision are not validated. The lake needs a separate foreground walking surface.",
+    "Wan animation and SAM2 model inference were not exercised by this background test.",
+    "MPS output is not guaranteed bit-identical across runs or to CUDA output."
+  ],
+  "assets": [
+    {
+      "id": "hollow_delve_landscape",
+      "name": "Hollow Delve cave landscape",
+      "run": "image-generation/sprite-pipeline/runs/hollow-delve-cavern-v3",
+      "recipe": "image-generation/scene-samples/hollow-delve-v1/cavern-v3.toml",
+      "seed": 4169135124,
+      "render_seconds": 42.54461950005498,
+      "runtime": {
+        "device": "mps",
+        "dtype": "torch.float16",
+        "attention_processors": [
+          "AttnProcessor2_0"
+        ]
+      },
+      "original": {
+        "file": "originals/hollow_delve_landscape.png",
+        "sha256": "084fcde414aa9ddf1e4f4a0564e698edb5298aa7e5670a90fd1c9365fea34cae",
+        "size": [
+          1024,
+          576
+        ]
+      },
+      "source_pipeline_package_sha256": "e31025823fef772641fff231bdb2b414fe73090a0aeea52abc90f42a6df665dd",
+      "nearest": {
+        "file": "backgrounds/hollow_delve_landscape.png",
+        "sha256": "33a7a23ff629e4cf01bad583797755c5cb5c85df0257144cb3871f21adfd45c3",
+        "size": [
+          640,
+          360
+        ],
+        "opaque": true,
+        "palette": "ENDESGA 32",
+        "color_count": 22
+      },
+      "pyxelate": {
+        "file": "pyxelate/hollow_delve_landscape.png",
+        "sha256": "1d2530ed9c8faaa9342eb8d3a717814bed0036549419b6482208a9213169b4ae",
+        "size": [
+          640,
+          360
+        ],
+        "opaque": true,
+        "palette": "ENDESGA 32",
+        "color_count": 25
+      }
+    },
+    {
+      "id": "hollow_delve_timber_gallery",
+      "name": "Hollow Delve timber gallery",
+      "run": "image-generation/sprite-pipeline/runs/hollow-delve-backgrounds-v2",
+      "recipe": "image-generation/scene-samples/hollow-delve-v1/backgrounds-v2.toml",
+      "seed": 159315017,
+      "render_seconds": 46.15915520803537,
+      "runtime": {
+        "device": "mps",
+        "dtype": "torch.float16",
+        "attention_processors": [
+          "AttnProcessor2_0"
+        ]
+      },
+      "original": {
+        "file": "originals/hollow_delve_timber_gallery.png",
+        "sha256": "0f2e44637880746fbba84c7b961fdcaf7fb6f3b055abb14e0c4227441801fc08",
+        "size": [
+          1024,
+          576
+        ]
+      },
+      "source_pipeline_package_sha256": "fab283dcf7792c2cf64088f577016bf8a3067fa7fd2948ba1247b84b90268077",
+      "nearest": {
+        "file": "backgrounds/hollow_delve_timber_gallery.png",
+        "sha256": "62e88f5bdf8a0e0df741dca6158029fb474789e4f92636d7e36c4bb4c50d25a8",
+        "size": [
+          640,
+          360
+        ],
+        "opaque": true,
+        "palette": "ENDESGA 32",
+        "color_count": 16
+      },
+      "pyxelate": {
+        "file": "pyxelate/hollow_delve_timber_gallery.png",
+        "sha256": "721af191c7d3a4b6769fbc37dd3e56aac60a87b544cf28c39f2cea770efc58bf",
+        "size": [
+          640,
+          360
+        ],
+        "opaque": true,
+        "palette": "ENDESGA 32",
+        "color_count": 16
+      }
+    },
+    {
+      "id": "hollow_delve_sunken_cavern",
+      "name": "Hollow Delve sunken cavern",
+      "run": "image-generation/sprite-pipeline/runs/hollow-delve-backgrounds-v2",
+      "recipe": "image-generation/scene-samples/hollow-delve-v1/backgrounds-v2.toml",
+      "seed": 3516607207,
+      "render_seconds": 44.24906054197345,
+      "runtime": {
+        "device": "mps",
+        "dtype": "torch.float16",
+        "attention_processors": [
+          "AttnProcessor2_0"
+        ]
+      },
+      "original": {
+        "file": "originals/hollow_delve_sunken_cavern.png",
+        "sha256": "33f1f81c6ecdb299d9c7b7accffb68f5706a6388214102c35b5fa22b61a7a6bc",
+        "size": [
+          1024,
+          576
+        ]
+      },
+      "source_pipeline_package_sha256": "fab283dcf7792c2cf64088f577016bf8a3067fa7fd2948ba1247b84b90268077",
+      "nearest": {
+        "file": "backgrounds/hollow_delve_sunken_cavern.png",
+        "sha256": "34a73c3dc9671cd0fb170484918506142922767c53dd0090f7409bd850272d28",
+        "size": [
+          640,
+          360
+        ],
+        "opaque": true,
+        "palette": "ENDESGA 32",
+        "color_count": 24
+      },
+      "pyxelate": {
+        "file": "pyxelate/hollow_delve_sunken_cavern.png",
+        "sha256": "c26e8de3b50eaab89d45220719f51fc3a02b0b6838ec90c3557bf8ae24fabbc3",
+        "size": [
+          640,
+          360
+        ],
+        "opaque": true,
+        "palette": "ENDESGA 32",
+        "color_count": 24
+      }
+    }
+  ]
+}

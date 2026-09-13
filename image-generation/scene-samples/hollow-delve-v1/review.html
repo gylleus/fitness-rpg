@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hollow Delve cave backgrounds</title><style>
+*{box-sizing:border-box}body{margin:0;background:#181425;color:#ead4aa;font:16px/1.5 system-ui,sans-serif;padding:24px}
+header{max-width:900px;margin-bottom:24px}h1{margin:0}h2{font-size:19px;margin:0 0 12px}p{margin:10px 0}a{color:#8ac4da}
+label{display:inline-flex;gap:12px;align-items:center}select{font:inherit;background:#262b44;color:#ead4aa;padding:8px;border:1px solid #5a6988;border-radius:6px}
+main{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,640px),1fr));gap:24px}
+article{padding:16px;background:#262b44;border-radius:8px}img{display:block;max-width:100%;height:auto;image-rendering:pixelated}
+body.original img{image-rendering:auto}footer{max-width:900px;margin-top:24px;color:#aab1be}
+</style></head><body><header><h1>Hollow Delve</h1>
+<p>Three cave background candidates generated locally on Apple M3 Max.</p>
+<p><a href="proof.json">Generation and validation record</a></p>
+<label>Preview <select id="variant"><option value="nearest">Palette mapped</option><option value="pyxelate">Pyxelate</option><option value="original">Original SDXL render</option></select></label>
+</header><main><article><h2>Hollow Delve cave landscape</h2><img data-id="hollow_delve_landscape" src="backgrounds/hollow_delve_landscape.png" width="640" height="360" alt="Hollow Delve cave landscape"><p>640 × 360 export · <a data-download="hollow_delve_landscape" href="backgrounds/hollow_delve_landscape.png">PNG</a> · <a href="originals/hollow_delve_landscape.png">Original render</a> · 42.5s render</p></article><article><h2>Hollow Delve timber gallery</h2><img data-id="hollow_delve_timber_gallery" src="backgrounds/hollow_delve_timber_gallery.png" width="640" height="360" alt="Hollow Delve timber gallery"><p>640 × 360 export · <a data-download="hollow_delve_timber_gallery" href="backgrounds/hollow_delve_timber_gallery.png">PNG</a> · <a href="originals/hollow_delve_timber_gallery.png">Original render</a> · 46.2s render</p></article><article><h2>Hollow Delve sunken cavern</h2><img data-id="hollow_delve_sunken_cavern" src="backgrounds/hollow_delve_sunken_cavern.png" width="640" height="360" alt="Hollow Delve sunken cavern"><p>640 × 360 export · <a data-download="hollow_delve_sunken_cavern" href="backgrounds/hollow_delve_sunken_cavern.png">PNG</a> · <a href="originals/hollow_delve_sunken_cavern.png">Original render</a> · 44.2s render</p></article></main><footer>
+<p>Full scene candidates for reviewing atmosphere. Ground placement, tile seams and separate background layers still need design work.</p>
+</footer><script>
+const assets={"hollow_delve_landscape": {"nearest": "backgrounds/hollow_delve_landscape.png", "pyxelate": "pyxelate/hollow_delve_landscape.png", "original": "originals/hollow_delve_landscape.png"}, "hollow_delve_timber_gallery": {"nearest": "backgrounds/hollow_delve_timber_gallery.png", "pyxelate": "pyxelate/hollow_delve_timber_gallery.png", "original": "originals/hollow_delve_timber_gallery.png"}, "hollow_delve_sunken_cavern": {"nearest": "backgrounds/hollow_delve_sunken_cavern.png", "pyxelate": "pyxelate/hollow_delve_sunken_cavern.png", "original": "originals/hollow_delve_sunken_cavern.png"}};
+document.getElementById('variant').addEventListener('change',event=>{
+ const variant=event.target.value;
+ document.body.classList.toggle('original',variant==='original');
+ document.querySelectorAll('img[data-id]').forEach(image=>{image.src=assets[image.dataset.id][variant];});
+ document.querySelectorAll('a[data-download]').forEach(link=>{link.href=assets[link.dataset.download][variant];});
+});
+</script></body></html>

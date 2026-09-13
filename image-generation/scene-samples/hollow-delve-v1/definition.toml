@@ -1,0 +1,46 @@
+# First landscape draft for the user's underground cave dungeon.
+# "Hollow Delve" is a working name; this is an art recipe for review.
+schema_version = 1
+
+[art]
+style = "Weathered dark fantasy pixel art, chunky readable pixel clusters, restrained detail, worn practical materials."
+lighting = "Dim blue-grey ambient light, small pools of amber lamplight, flat three-tone shading with readable shadows."
+avoid = ["photorealism", "cute cartoon", "neon colors", "text", "watermark", "characters", "monsters", "interface"]
+
+[[assets]]
+id = "hollow_delve_landscape"
+name = "Hollow Delve cave landscape"
+kind = "background"
+canvas = [640, 360]
+visual_description = """
+A broad natural cavern opens around an old haulage path cut into damp limestone.
+Water darkens the blue-grey rock beneath blunt stalactites. Uneven timber
+supports and rusted iron brackets mark the excavated sections; their feet sit
+on stacks of stone shims. Two small oil lamps cast dull amber pools across the
+worn rock. Thin shelves of pale fungus follow a seepage line on the rear wall.
+Beyond the path, overlapping rock ledges fall away into a quiet, dark hollow.
+Loose gravel and a narrow drainage channel collect at the edge of the raised
+walking shelf, leaving its middle clear.
+"""
+
+[assets.reference]
+prompt = """
+Pixel art underground cave dungeon background for a 2D side-scrolling game.
+Wide horizontal composition, orthographic side view, camera facing the cavern
+wall. A continuous level walking shelf crosses the entire image left to right,
+its top at four fifths of the image height. Broad damp blue-grey limestone
+walls, blunt ceiling stalactites, a few old timber supports behind the path,
+rusted iron brackets, two small amber oil lamps. Sparse pale fungus beside a
+seepage line. Dark layered rock ledges recede behind the shelf. Keep the middle
+of the scene simple and dim, with readable rock shapes behind future characters.
+Natural cave dominates the scene. Weathered dark fantasy, muted slate and earth
+colors, chunky crisp pixel clusters, flat three-tone shading. Full opaque scene
+fills the frame.
+"""
+negative = """
+first person view, looking down a tunnel, central vanishing point, isometric,
+top down, diagonal walking path, stairs across path, blocked walkway, daylight,
+open sky, castle interior, elaborate masonry, neon crystals, glowing rainbow
+mushrooms, characters, monsters, bones, gore, text, watermark, interface,
+sprite sheet, checkerboard, photorealism, smooth gradients, blur, cute cartoon
+"""

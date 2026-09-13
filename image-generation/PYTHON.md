@@ -76,6 +76,10 @@ the caller. Some operations can consequently run on CPU. Seeds and prompts
 are preserved; different backends and precision can produce different pixels.
 Device metadata is saved with generated references and masks.
 
+The [Hollow Delve background trial](scene-samples/hollow-delve-v1/README.md)
+validates local SDXL generation, pixel preparation, export and packaging on
+the 48 GB M3 Max. It includes selected PNGs and device/seed/hash records.
+
 For the shared **Wan 2.2 14B animation** path, also run:
 
 ```bash

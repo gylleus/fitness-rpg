@@ -1,0 +1,224 @@
+{
+  "schema_version": 2,
+  "facing": "left",
+  "actions": [],
+  "export": {
+    "size": 64,
+    "frame_step": 2,
+    "columns": 8,
+    "margin": 0.08,
+    "palette": {
+      "name": "ENDESGA 32",
+      "author": "ENDESGA",
+      "source": "https://lospec.com/palette-list/endesga-32",
+      "description": "User-selected ENDESGA 32 palette. Hex values and order match the supplied list and Lospec source.",
+      "colors": [
+        "#be4a2f",
+        "#d77643",
+        "#ead4aa",
+        "#e4a672",
+        "#b86f50",
+        "#733e39",
+        "#3e2731",
+        "#a22633",
+        "#e43b44",
+        "#f77622",
+        "#feae34",
+        "#fee761",
+        "#63c74d",
+        "#3e8948",
+        "#265c42",
+        "#193c3e",
+        "#124e89",
+        "#0099db",
+        "#2ce8f5",
+        "#ffffff",
+        "#c0cbdc",
+        "#8b9bb4",
+        "#5a6988",
+        "#3a4466",
+        "#262b44",
+        "#181425",
+        "#ff0044",
+        "#68386c",
+        "#b55088",
+        "#f6757a",
+        "#e8b796",
+        "#c28569"
+      ]
+    }
+  },
+  "art": {
+    "style": "Stylized weathered dark fantasy, exaggerated readable silhouettes, worn practical materials.",
+    "lighting": "Restrained upper-left lighting, flat three-tone shading.",
+    "facing": "left",
+    "view": "three_quarter",
+    "avoid": [
+      "photorealism",
+      "cute mascot",
+      "text",
+      "watermark"
+    ]
+  },
+  "assets": [
+    {
+      "asset": {
+        "id": "hollow_delve_landscape",
+        "name": "Hollow Delve cave landscape",
+        "kind": "background",
+        "canvas": [
+          640,
+          360
+        ],
+        "visual_description": "A broad natural cavern opens around an old haulage path cut into damp limestone.\nWater darkens the blue-grey rock beneath blunt stalactites. Uneven timber\nsupports and rusted iron brackets mark the excavated sections; their feet sit\non stacks of stone shims. Two small oil lamps cast dull amber pools across the\nworn rock. Thin shelves of pale fungus follow a seepage line on the rear wall.\nBeyond the path, overlapping rock ledges fall away into a quiet, dark hollow.\nLoose gravel and a narrow drainage channel collect at the edge of the raised\nwalking shelf, leaving its middle clear.\n",
+        "reference": {
+          "prompt": "pixel art, underground limestone cavern, dark craggy rock walls, stalactites hanging from ceiling, flat rocky ground across bottom, side view, side-scrolling game background, distant shadowy recesses, two amber lamps, sparse pale fungus, muted blue grey stone, chunky pixels, flat colors, no characters",
+          "negative": "furniture, cabinets, shelving, room, sky, sunlight, characters, text, watermark, interface, isometric, perspective path, photorealistic, neon, blur, isolated object, plain background"
+        },
+        "visual": {
+          "silhouette": "",
+          "equipment": [],
+          "palette": [],
+          "height_scale": 1.0,
+          "anchor": "ground",
+          "avoid": []
+        },
+        "animations": {}
+      },
+      "prompts": {
+        "reference": "pixel art, underground limestone cavern, dark craggy rock walls, stalactites hanging from ceiling, flat rocky ground across bottom, side view, side-scrolling game background, distant shadowy recesses, two amber lamps, sparse pale fungus, muted blue grey stone, chunky pixels, flat colors, no characters",
+        "full_reference_context": "A broad natural cavern opens around an old haulage path cut into damp limestone.\nWater darkens the blue-grey rock beneath blunt stalactites. Uneven timber\nsupports and rusted iron brackets mark the excavated sections; their feet sit\non stacks of stone shims. Two small oil lamps cast dull amber pools across the\nworn rock. Thin shelves of pale fungus follow a seepage line on the rear wall.\nBeyond the path, overlapping rock ledges fall away into a quiet, dark hollow.\nLoose gravel and a narrow drainage channel collect at the edge of the raised\nwalking shelf, leaving its middle clear.\n",
+        "caption_source": "explicit assets.reference.prompt",
+        "negative": "text, watermark, frame border, sprite sheet, isolated object, plain studio background, photorealism, cute mascot, text, watermark",
+        "motions": {},
+        "reference_negative": "furniture, cabinets, shelving, room, sky, sunlight, characters, text, watermark, interface, isometric, perspective path, photorealistic, neon, blur, isolated object, plain background"
+      },
+      "seeds": {
+        "reference": 4169135124
+      }
+    },
+    {
+      "asset": {
+        "id": "hollow_delve_timber_gallery",
+        "name": "Hollow Delve timber gallery",
+        "kind": "background",
+        "canvas": [
+          640,
+          360
+        ],
+        "visual_description": "A low excavated gallery follows a seam through damp blue-grey limestone.\nHeavy dark timber uprights brace the rear wall, their feet resting on stacks of\nstone shims. Rusted iron straps bind split beams. Two small oil lamps hang from\niron hooks. A level haulage shelf is worn smooth through its middle, with loose\ngravel and a shallow drainage groove along the back edge. Uneven rock presses\nbetween the supports, and dark recesses open beyond the last pools of lamplight.\n",
+        "reference": {
+          "prompt": "pixel art, abandoned underground mine, rough stone tunnel walls, massive timber support beams, stalactites, flat dirt ground across bottom, side view, side-scrolling game background, small amber oil lamps, dark recesses, muted blue grey stone and worn brown wood, chunky pixels, flat colors, no characters",
+          "negative": "furniture, cabinets, shelving, room, sky, sunlight, characters, text, watermark, interface, isometric, perspective path, photorealistic, neon, blur, isolated object, plain background"
+        },
+        "visual": {
+          "silhouette": "",
+          "equipment": [],
+          "palette": [],
+          "height_scale": 1.0,
+          "anchor": "ground",
+          "avoid": []
+        },
+        "animations": {}
+      },
+      "prompts": {
+        "reference": "pixel art, abandoned underground mine, rough stone tunnel walls, massive timber support beams, stalactites, flat dirt ground across bottom, side view, side-scrolling game background, small amber oil lamps, dark recesses, muted blue grey stone and worn brown wood, chunky pixels, flat colors, no characters",
+        "full_reference_context": "A low excavated gallery follows a seam through damp blue-grey limestone.\nHeavy dark timber uprights brace the rear wall, their feet resting on stacks of\nstone shims. Rusted iron straps bind split beams. Two small oil lamps hang from\niron hooks. A level haulage shelf is worn smooth through its middle, with loose\ngravel and a shallow drainage groove along the back edge. Uneven rock presses\nbetween the supports, and dark recesses open beyond the last pools of lamplight.\n",
+        "caption_source": "explicit assets.reference.prompt",
+        "negative": "text, watermark, frame border, sprite sheet, isolated object, plain studio background, photorealism, cute mascot, text, watermark",
+        "motions": {},
+        "reference_negative": "furniture, cabinets, shelving, room, sky, sunlight, characters, text, watermark, interface, isometric, perspective path, photorealistic, neon, blur, isolated object, plain background"
+      },
+      "seeds": {
+        "reference": 159315017
+      }
+    },
+    {
+      "asset": {
+        "id": "hollow_delve_sunken_cavern",
+        "name": "Hollow Delve sunken cavern",
+        "kind": "background",
+        "canvas": [
+          640,
+          360
+        ],
+        "visual_description": "A raised limestone shelf skirts a wide underground pool. Thin trickles darken\nthe cavern wall, and blunt stalactites hang over water almost black in the\nrecesses. Broken rock ledges overlap on the far bank. Sparse pale fungus clings\nto damp shelves close to the waterline. A single hooded oil lamp rests in a\nrock niche above the path, its small amber reflection caught in the still pool.\nThe walking shelf remains dry and level above the water.\n",
+        "reference": {
+          "prompt": "pixel art, underground cavern lake, dark limestone walls and ceiling, stalactites reflected in still water, continuous flat rocky ground across bottom in front of water, side view, side-scrolling game background, pale fungus, one small amber lantern, muted blue grey stone, chunky pixels, flat colors, no characters",
+          "negative": "furniture, cabinets, shelving, room, sky, sunlight, characters, text, watermark, interface, isometric, perspective path, photorealistic, neon, blur, isolated object, plain background"
+        },
+        "visual": {
+          "silhouette": "",
+          "equipment": [],
+          "palette": [],
+          "height_scale": 1.0,
+          "anchor": "ground",
+          "avoid": []
+        },
+        "animations": {}
+      },
+      "prompts": {
+        "reference": "pixel art, underground cavern lake, dark limestone walls and ceiling, stalactites reflected in still water, continuous flat rocky ground across bottom in front of water, side view, side-scrolling game background, pale fungus, one small amber lantern, muted blue grey stone, chunky pixels, flat colors, no characters",
+        "full_reference_context": "A raised limestone shelf skirts a wide underground pool. Thin trickles darken\nthe cavern wall, and blunt stalactites hang over water almost black in the\nrecesses. Broken rock ledges overlap on the far bank. Sparse pale fungus clings\nto damp shelves close to the waterline. A single hooded oil lamp rests in a\nrock niche above the path, its small amber reflection caught in the still pool.\nThe walking shelf remains dry and level above the water.\n",
+        "caption_source": "explicit assets.reference.prompt",
+        "negative": "text, watermark, frame border, sprite sheet, isolated object, plain studio background, photorealism, cute mascot, text, watermark",
+        "motions": {},
+        "reference_negative": "furniture, cabinets, shelving, room, sky, sunlight, characters, text, watermark, interface, isometric, perspective path, photorealistic, neon, blur, isolated object, plain background"
+      },
+      "seeds": {
+        "reference": 3516607207
+      }
+    }
+  ],
+  "source": {
+    "adapter": "asset-definition",
+    "path": "image-generation/scene-samples/hollow-delve-v1/backgrounds-v2.toml",
+    "sha256": "c89a10d859ab1a5b77f1f4eb821b475576574c83c8371a13047d357ef425598b",
+    "text": "# Revised cave backgrounds: concise prompts, each within one CLIP chunk.\nschema_version = 1\n\n[[assets]]\nid = \"hollow_delve_landscape\"\nname = \"Hollow Delve cave landscape\"\nkind = \"background\"\ncanvas = [640, 360]\nvisual_description = \"\"\"\nA broad natural cavern opens around an old haulage path cut into damp limestone.\nWater darkens the blue-grey rock beneath blunt stalactites. Uneven timber\nsupports and rusted iron brackets mark the excavated sections; their feet sit\non stacks of stone shims. Two small oil lamps cast dull amber pools across the\nworn rock. Thin shelves of pale fungus follow a seepage line on the rear wall.\nBeyond the path, overlapping rock ledges fall away into a quiet, dark hollow.\nLoose gravel and a narrow drainage channel collect at the edge of the raised\nwalking shelf, leaving its middle clear.\n\"\"\"\n\n[assets.reference]\nprompt = \"pixel art, underground limestone cavern, dark craggy rock walls, stalactites hanging from ceiling, flat rocky ground across bottom, side view, side-scrolling game background, distant shadowy recesses, two amber lamps, sparse pale fungus, muted blue grey stone, chunky pixels, flat colors, no characters\"\nnegative = \"furniture, cabinets, shelving, room, sky, sunlight, characters, text, watermark, interface, isometric, perspective path, photorealistic, neon, blur, isolated object, plain background\"\n\n[[assets]]\nid = \"hollow_delve_timber_gallery\"\nname = \"Hollow Delve timber gallery\"\nkind = \"background\"\ncanvas = [640, 360]\nvisual_description = \"\"\"\nA low excavated gallery follows a seam through damp blue-grey limestone.\nHeavy dark timber uprights brace the rear wall, their feet resting on stacks of\nstone shims. Rusted iron straps bind split beams. Two small oil lamps hang from\niron hooks. A level haulage shelf is worn smooth through its middle, with loose\ngravel and a shallow drainage groove along the back edge. Uneven rock presses\nbetween the supports, and dark recesses open beyond the last pools of lamplight.\n\"\"\"\n\n[assets.reference]\nprompt = \"pixel art, abandoned underground mine, rough stone tunnel walls, massive timber support beams, stalactites, flat dirt ground across bottom, side view, side-scrolling game background, small amber oil lamps, dark recesses, muted blue grey stone and worn brown wood, chunky pixels, flat colors, no characters\"\nnegative = \"furniture, cabinets, shelving, room, sky, sunlight, characters, text, watermark, interface, isometric, perspective path, photorealistic, neon, blur, isolated object, plain background\"\n\n[[assets]]\nid = \"hollow_delve_sunken_cavern\"\nname = \"Hollow Delve sunken cavern\"\nkind = \"background\"\ncanvas = [640, 360]\nvisual_description = \"\"\"\nA raised limestone shelf skirts a wide underground pool. Thin trickles darken\nthe cavern wall, and blunt stalactites hang over water almost black in the\nrecesses. Broken rock ledges overlap on the far bank. Sparse pale fungus clings\nto damp shelves close to the waterline. A single hooded oil lamp rests in a\nrock niche above the path, its small amber reflection caught in the still pool.\nThe walking shelf remains dry and level above the water.\n\"\"\"\n\n[assets.reference]\nprompt = \"pixel art, underground cavern lake, dark limestone walls and ceiling, stalactites reflected in still water, continuous flat rocky ground across bottom in front of water, side view, side-scrolling game background, pale fungus, one small amber lantern, muted blue grey stone, chunky pixels, flat colors, no characters\"\nnegative = \"furniture, cabinets, shelving, room, sky, sunlight, characters, text, watermark, interface, isometric, perspective path, photorealistic, neon, blur, isolated object, plain background\"\n"
+  },
+  "reference_generation": {
+    "base_model": {
+      "id": "stabilityai/stable-diffusion-xl-base-1.0",
+      "revision": "462165984030d82259a11f4367a4eed129e94a7b"
+    },
+    "lora": {
+      "id": "nerijs/pixel-art-xl",
+      "revision": "8bf4a4d9ea283e00a51fafda8e0539f8248ea037",
+      "weight": 0.65
+    },
+    "vae": {
+      "id": "madebyollin/sdxl-vae-fp16-fix",
+      "revision": "207b116dae70ace3637169f1ddd2434b91b3a8cd"
+    },
+    "generation": {
+      "width": 1024,
+      "height": 1024,
+      "num_inference_steps": 30,
+      "guidance_scale": 7.0,
+      "scheduler": "DPMSolverMultistepScheduler",
+      "algorithm_type": "dpmsolver++",
+      "solver_order": 2,
+      "use_karras_sigmas": true,
+      "dtype": "float16",
+      "refiner": false
+    }
+  },
+  "animation_generation": {
+    "size": 512,
+    "length": 45,
+    "fps": 16,
+    "steps": 4,
+    "split_step": 2,
+    "cfg": 1.0,
+    "shift": 5.0,
+    "sampler": "ddim",
+    "distilled": true,
+    "pixel_lora": 1.0,
+    "end_condition": false,
+    "seed": 72001
+  },
+  "model_manifest_sha256": {
+    "pixel-animation-14b/models.lock.json": "6699432aa440e90055d991c7675753cf97a9eb54962222bfc4fc5fb7ca24b43d",
+    "sprite-animation/models.lock.json": "5130ba7a677a230d145cc611755cfa34c742670ff9ff8098e8d4fac0caad5ee3"
+  }
+}

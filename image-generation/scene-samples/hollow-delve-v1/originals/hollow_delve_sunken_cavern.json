@@ -1,0 +1,93 @@
+{
+  "entry": {
+    "asset": {
+      "id": "hollow_delve_sunken_cavern",
+      "name": "Hollow Delve sunken cavern",
+      "kind": "background",
+      "canvas": [
+        640,
+        360
+      ],
+      "visual_description": "A raised limestone shelf skirts a wide underground pool. Thin trickles darken\nthe cavern wall, and blunt stalactites hang over water almost black in the\nrecesses. Broken rock ledges overlap on the far bank. Sparse pale fungus clings\nto damp shelves close to the waterline. A single hooded oil lamp rests in a\nrock niche above the path, its small amber reflection caught in the still pool.\nThe walking shelf remains dry and level above the water.\n",
+      "reference": {
+        "prompt": "pixel art, underground cavern lake, dark limestone walls and ceiling, stalactites reflected in still water, continuous flat rocky ground across bottom in front of water, side view, side-scrolling game background, pale fungus, one small amber lantern, muted blue grey stone, chunky pixels, flat colors, no characters",
+        "negative": "furniture, cabinets, shelving, room, sky, sunlight, characters, text, watermark, interface, isometric, perspective path, photorealistic, neon, blur, isolated object, plain background"
+      },
+      "visual": {
+        "silhouette": "",
+        "equipment": [],
+        "palette": [],
+        "height_scale": 1.0,
+        "anchor": "ground",
+        "avoid": []
+      },
+      "animations": {}
+    },
+    "prompts": {
+      "reference": "pixel art, underground cavern lake, dark limestone walls and ceiling, stalactites reflected in still water, continuous flat rocky ground across bottom in front of water, side view, side-scrolling game background, pale fungus, one small amber lantern, muted blue grey stone, chunky pixels, flat colors, no characters",
+      "full_reference_context": "A raised limestone shelf skirts a wide underground pool. Thin trickles darken\nthe cavern wall, and blunt stalactites hang over water almost black in the\nrecesses. Broken rock ledges overlap on the far bank. Sparse pale fungus clings\nto damp shelves close to the waterline. A single hooded oil lamp rests in a\nrock niche above the path, its small amber reflection caught in the still pool.\nThe walking shelf remains dry and level above the water.\n",
+      "caption_source": "explicit assets.reference.prompt",
+      "negative": "text, watermark, frame border, sprite sheet, isolated object, plain studio background, photorealism, cute mascot, text, watermark",
+      "motions": {},
+      "reference_negative": "furniture, cabinets, shelving, room, sky, sunlight, characters, text, watermark, interface, isometric, perspective path, photorealistic, neon, blur, isolated object, plain background"
+    },
+    "seeds": {
+      "reference": 3516607207
+    }
+  },
+  "settings": {
+    "base_model": {
+      "id": "stabilityai/stable-diffusion-xl-base-1.0",
+      "revision": "462165984030d82259a11f4367a4eed129e94a7b"
+    },
+    "lora": {
+      "id": "nerijs/pixel-art-xl",
+      "revision": "8bf4a4d9ea283e00a51fafda8e0539f8248ea037",
+      "weight": 0.65
+    },
+    "vae": {
+      "id": "madebyollin/sdxl-vae-fp16-fix",
+      "revision": "207b116dae70ace3637169f1ddd2434b91b3a8cd"
+    },
+    "generation": {
+      "width": 1024,
+      "height": 1024,
+      "num_inference_steps": 30,
+      "guidance_scale": 7.0,
+      "scheduler": "DPMSolverMultistepScheduler",
+      "algorithm_type": "dpmsolver++",
+      "solver_order": 2,
+      "use_karras_sigmas": true,
+      "dtype": "float16",
+      "refiner": false
+    }
+  },
+  "conditioning": {
+    "mode": "75-content-token CLIP chunks, concatenated penultimate states, first CLIP-G pool; negative chunks repeated to match length",
+    "positive_token_counts": [
+      64,
+      64
+    ],
+    "negative_token_counts": [
+      40,
+      40
+    ],
+    "chunks": 1,
+    "truncated_tokens": 0
+  },
+  "guide": null,
+  "runtime": {
+    "device": "mps",
+    "dtype": "torch.float16",
+    "attention_processors": [
+      "AttnProcessor2_0"
+    ]
+  },
+  "seconds": 44.24906054197345,
+  "size": [
+    1024,
+    576
+  ],
+  "mode": "RGB",
+  "sha256": "33f1f81c6ecdb299d9c7b7accffb68f5706a6388214102c35b5fa22b61a7a6bc"
+}

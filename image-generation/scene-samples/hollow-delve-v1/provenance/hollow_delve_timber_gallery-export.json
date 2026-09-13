@@ -1,0 +1,78 @@
+{
+  "asset_id": "hollow_delve_timber_gallery",
+  "name": "Hollow Delve timber gallery",
+  "kind": "background",
+  "frame_size": [
+    640,
+    360
+  ],
+  "pivot": null,
+  "height_scale": null,
+  "palette": {
+    "name": "ENDESGA 32",
+    "author": "ENDESGA",
+    "source": "https://lospec.com/palette-list/endesga-32",
+    "description": "User-selected ENDESGA 32 palette. Hex values and order match the supplied list and Lospec source.",
+    "colors": [
+      "#be4a2f",
+      "#d77643",
+      "#ead4aa",
+      "#e4a672",
+      "#b86f50",
+      "#733e39",
+      "#3e2731",
+      "#a22633",
+      "#e43b44",
+      "#f77622",
+      "#feae34",
+      "#fee761",
+      "#63c74d",
+      "#3e8948",
+      "#265c42",
+      "#193c3e",
+      "#124e89",
+      "#0099db",
+      "#2ce8f5",
+      "#ffffff",
+      "#c0cbdc",
+      "#8b9bb4",
+      "#5a6988",
+      "#3a4466",
+      "#262b44",
+      "#181425",
+      "#ff0044",
+      "#68386c",
+      "#b55088",
+      "#f6757a",
+      "#e8b796",
+      "#c28569"
+    ]
+  },
+  "framing": "Full opaque scene, aspect-preserving fit; no foreground crop or ground anchor",
+  "source_reference_sha256": "62e88f5bdf8a0e0df741dca6158029fb474789e4f92636d7e36c4bb4c50d25a8",
+  "actions": {
+    "reference": {
+      "timing": {
+        "indices": [
+          0
+        ],
+        "durations_ms": [
+          1000
+        ],
+        "repeat": false,
+        "action": "reference"
+      },
+      "variants": {
+        "nearest": {
+          "frame_sha256": "62e88f5bdf8a0e0df741dca6158029fb474789e4f92636d7e36c4bb4c50d25a8",
+          "opaque": true
+        },
+        "pyxelate": {
+          "frame_sha256": "721af191c7d3a4b6769fbc37dd3e56aac60a87b544cf28c39f2cea770efc58bf",
+          "opaque": true
+        }
+      }
+    }
+  },
+  "art_status": "Candidate"
+}

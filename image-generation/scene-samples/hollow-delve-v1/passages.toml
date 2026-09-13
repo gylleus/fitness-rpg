@@ -1,0 +1,53 @@
+# Additional landscape candidates for the underground cave dungeon.
+schema_version = 1
+
+[art]
+style = "Weathered dark fantasy pixel art, muted slate and earth colors, chunky crisp pixel clusters, flat three-tone shading."
+lighting = "Dim blue-grey ambient light with small pools of amber oil-lamp light; readable dark rock shapes."
+avoid = ["first person view", "looking down a tunnel", "central vanishing point", "isometric", "top down", "diagonal path", "stairs across path", "blocked walkway", "daylight", "open sky", "castle interior", "neon colors", "glowing crystals", "characters", "monsters", "text", "watermark", "interface", "checkerboard", "photorealism", "blur"]
+
+[[assets]]
+id = "hollow_delve_timber_gallery"
+name = "Hollow Delve timber gallery"
+kind = "background"
+canvas = [640, 360]
+visual_description = """
+A low excavated gallery follows a seam through damp blue-grey limestone.
+Heavy dark timber uprights brace the rear wall, their feet resting on stacks of
+stone shims. Rusted iron straps bind split beams. Two small oil lamps hang from
+iron hooks. A level haulage shelf is worn smooth through its middle, with loose
+gravel and a shallow drainage groove along the back edge. Uneven rock presses
+between the supports, and dark recesses open beyond the last pools of lamplight.
+"""
+reference_caption = """
+An underground mining gallery in strict orthographic side view, camera facing
+the rear wall. A continuous level stone walking shelf spans the image left to
+right, its top at four fifths of the image height. Behind it stand a few dark
+timber supports, rusted iron straps, damp blue-grey limestone and two small
+amber oil lamps. Low natural rock ceiling, worn haulage path, sparse loose
+gravel. Broad subdued rock shapes leave the middle of the scene clear for
+characters. Wide horizontal side-scroller composition.
+"""
+
+[[assets]]
+id = "hollow_delve_sunken_cavern"
+name = "Hollow Delve sunken cavern"
+kind = "background"
+canvas = [640, 360]
+visual_description = """
+A raised limestone shelf skirts a wide underground pool. Thin trickles darken
+the cavern wall, and blunt stalactites hang over water almost black in the
+recesses. Broken rock ledges overlap on the far bank. Sparse pale fungus clings
+to damp shelves close to the waterline. A single hooded oil lamp rests in a
+rock niche above the path, its small amber reflection caught in the still pool.
+The walking shelf remains dry and level above the water.
+"""
+reference_caption = """
+A broad underground pool cavern in strict orthographic side view, camera facing
+the cavern wall. A continuous level dry stone walking shelf crosses the entire
+foreground left to right, its top at four fifths of the image height. Behind the
+path lies a dark still pool beneath damp blue-grey limestone, blunt ceiling
+stalactites and overlapping distant rock ledges. Sparse pale fungus and one
+small amber oil lamp in a rock niche. Broad quiet shadows behind future
+characters. Wide horizontal side-scroller composition.
+"""
