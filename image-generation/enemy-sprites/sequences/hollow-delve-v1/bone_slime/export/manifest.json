@@ -1,0 +1,68 @@
+{
+  "asset_id": "bone_slime",
+  "name": "Bone Slime",
+  "facing": "left",
+  "frame_size": [
+    128,
+    128
+  ],
+  "pivot": [
+    0.5650969529085873,
+    0.7119113573407202
+  ],
+  "height_scale": 0.45,
+  "reference_idle_height_px": 40.066481994459835,
+  "shared_crop": [
+    116,
+    303,
+    477,
+    664
+  ],
+  "actions": {
+    "idle": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "walk": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "attack": {
+      "timing": {
+        "repeat": false
+      }
+    },
+    "death": {
+      "timing": {
+        "repeat": false
+      }
+    }
+  },
+  "source": {
+    "idle": {
+      "source": "idle-layout.png",
+      "sha256": "f0355f9c893236debbe2f2d821aed2f32b02f4f16b919cd3155daebd849f84b0"
+    },
+    "walk": {
+      "source": "walk-layout.png",
+      "sha256": "53e3cf79c8d3f517a1f108f136e6fc07157e310f73a14a51290f9b81a9c52930"
+    },
+    "attack": {
+      "source": "attack-layout.png",
+      "sha256": "270a72c7636ea8db804397727c3e1de9a666fcf90ad3704f8136e205b82c5881"
+    },
+    "death": {
+      "source": "death-layout.png",
+      "sha256": "5daf91a6e30e7f82bad255f606a8f0a7e8ed939f1c19d4dcb91305e68da9b2cb"
+    }
+  },
+  "backend": "built-in imagegen frame sheet; deterministic CPU import",
+  "recipe_sha256": "6cf7138e35d587eb49af42bf6fa19a96010e528f6b1f2f338a031ddaf315779c",
+  "code_sha256": {
+    "sheet_import.py": "d6cc266480e76ab89ebfc739d88743b5d42fc58730b461b99f60f8c1782724b4",
+    "pixels.py": "fa49c9f048211472dc89c9e692b982ce88685c9c9ab82a0241f11502c270dbc4"
+  },
+  "framing": "Explicit source rectangles and ground origins; one union crop/scale for all actions."
+}

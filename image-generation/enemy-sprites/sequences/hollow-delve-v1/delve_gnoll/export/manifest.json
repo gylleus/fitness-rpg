@@ -1,0 +1,68 @@
+{
+  "asset_id": "delve_gnoll",
+  "name": "Delve Gnoll",
+  "facing": "left",
+  "frame_size": [
+    128,
+    128
+  ],
+  "pivot": [
+    0.512280701754386,
+    0.9403508771929825
+  ],
+  "height_scale": 1.12,
+  "reference_idle_height_px": 99.25614035087719,
+  "shared_crop": [
+    174,
+    292,
+    459,
+    577
+  ],
+  "actions": {
+    "idle": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "walk": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "attack": {
+      "timing": {
+        "repeat": false
+      }
+    },
+    "death": {
+      "timing": {
+        "repeat": false
+      }
+    }
+  },
+  "source": {
+    "idle": {
+      "source": "idle-layout.png",
+      "sha256": "1d6dc36e4e30398a1aa49b02e3ce8e3831c818d3f8f301b4d19870a9b7096d95"
+    },
+    "walk": {
+      "source": "walk-layout.png",
+      "sha256": "da1b6632afca4ebe3608350f1b75b7de2c821d1c9ff261266c18f28c1a75d2fe"
+    },
+    "attack": {
+      "source": "attack-layout.png",
+      "sha256": "f423607248aa4cdfc102c422d366e9401fb087b51c837dc0c5dcfb78cc514f82"
+    },
+    "death": {
+      "source": "death-layout.png",
+      "sha256": "8eb732003ae7403cd1d538a7394e111ac7765efb8e7ae5897e00ec3cd713e2bb"
+    }
+  },
+  "backend": "built-in imagegen frame sheet; deterministic CPU import",
+  "recipe_sha256": "aa91f37abc81673df97951577376feafce7f1d1f2dafb6240f347e231e2eb883",
+  "code_sha256": {
+    "sheet_import.py": "d6cc266480e76ab89ebfc739d88743b5d42fc58730b461b99f60f8c1782724b4",
+    "pixels.py": "fa49c9f048211472dc89c9e692b982ce88685c9c9ab82a0241f11502c270dbc4"
+  },
+  "framing": "Explicit source rectangles and ground origins; one union crop/scale for all actions."
+}

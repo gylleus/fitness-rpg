@@ -17,6 +17,8 @@ from pixels import palette_colors
 
 def main():
     catalog = json.loads((ROOT / "assets/sprites/catalog.json").read_text())
+    selected = {"barbarian_player", *[enemy["id"] for enemy in json.loads((HERE / "roster.json").read_text())["enemies"]]}
+    catalog["entities"] = {key: entity for key, entity in catalog["entities"].items() if key in selected}
     allowed = set(map(tuple, palette_colors()))
     report = {"frames": 0, "actions": 0, "frame_size": [128, 128], "entities": {}}
     pictures = {}

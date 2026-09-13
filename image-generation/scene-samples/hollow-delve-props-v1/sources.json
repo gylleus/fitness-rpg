@@ -1,0 +1,65 @@
+{
+  "hollow_delve_fungus_stump": {
+    "sha256": "412cb694a7d9c8dee1ee7de7df160746a5a922abaf98273387910ad397c46439",
+    "prompt": "hollow_delve_fungus_stump.prompt.txt",
+    "prompt_sha256": "830d648b433bfaa7bce35a4a6e4c7183237adc4b16f73827385e4ca694402d2c",
+    "backend": "built-in imagegen",
+    "generated": "2026-09-13"
+  },
+  "hollow_delve_tool_cache": {
+    "sha256": "51a309576f36f1929fc64a4e70a93462b1610605b504d154830de7a41adcc053",
+    "prompt": "hollow_delve_tool_cache.prompt.txt",
+    "prompt_sha256": "4640edf1d54b1dd4cc9b72fab39425b3a4c937b282db2916751ad0276456c7ba",
+    "backend": "built-in imagegen",
+    "generated": "2026-09-13"
+  },
+  "hollow_delve_bone_heap": {
+    "sha256": "66e77c5540a84b4e799f730ace99ab06b28f18bdbe2e6081b0db8c50dd949f21",
+    "prompt": "hollow_delve_bone_heap.prompt.txt",
+    "prompt_sha256": "5277b95f3be266590164513fb150d0ae6d161e8382ea6e2ed156c112d306c680",
+    "backend": "built-in imagegen",
+    "generated": "2026-09-13"
+  },
+  "hollow_delve_ore_cart": {
+    "sha256": "5baa4e0048cd7372ceb7c4b9792c971aefd1afef8f468ca70387204f6511eb64",
+    "prompt": "hollow_delve_ore_cart.prompt.txt",
+    "prompt_sha256": "faa0009809567d981c10d9d1a03b82ced47f4980122f32fb77f61eae878c3d74",
+    "backend": "built-in imagegen",
+    "generated": "2026-09-13"
+  },
+  "hollow_delve_stalagmites": {
+    "sha256": "9090113dc8513797f855e5ce32f2a218e4d0a98bc54a95b767cd56909c1d0ba6",
+    "prompt": "hollow_delve_stalagmites.prompt.txt",
+    "prompt_sha256": "31231917760f41e03d2e86e158dc0ab541cf730d785fe10da9d71e75940202e7",
+    "backend": "built-in imagegen",
+    "generated": "2026-09-13"
+  },
+  "hollow_delve_quartz_cluster": {
+    "sha256": "876ee40470bdef3911bce830f06d5f82e9923107dfb26b3dbb61d0185ad0c1f1",
+    "prompt": "hollow_delve_quartz_cluster.prompt.txt",
+    "prompt_sha256": "aa0d588b949d6af61f3f023e80d51a7d166ef9f843723e652b65ca2792856756",
+    "backend": "built-in imagegen",
+    "generated": "2026-09-13"
+  },
+  "hollow_delve_slate_path": {
+    "sha256": "f1a029a819a4a6f45641c3ea44bad65b5d45816a693e96bfd9e87d4fd7205e51",
+    "prompt": "hollow_delve_slate_path.prompt.txt",
+    "prompt_sha256": "f613ac83abb8dbd95f29c161fe59685892322ed68330817bb1d676ea75c13f15",
+    "backend": "built-in imagegen",
+    "generated": "2026-09-13"
+  },
+  "hollow_delve_webbed_arch": {
+    "sha256": "8002c01025e24b10d7686464a9789d682c12fc217b1a06f5289527daca43743e",
+    "prompt": "hollow_delve_webbed_arch.prompt.txt",
+    "prompt_sha256": "c5e2be2fd7ef654d01cd9cd9da131848df5adfed8f0c0c5eb4dae451fa6d39eb",
+    "backend": "built-in imagegen",
+    "generated": "2026-09-13"
+  },
+  "hollow_delve_mine_support": {
+    "sha256": "7b13f59546da2b6ca11e270acce8a18ec452b176883ea31e1f09095750e5e482",
+    "prompt": "hollow_delve_mine_support.prompt.txt",
+    "prompt_sha256": "3509158d2ffb31b3fff50c5ac0f6b8181cf016ef967d10dbb01a0937b9233664",
+    "backend": "built-in imagegen",
+    "generated": "2026-09-13"
+  }
+}

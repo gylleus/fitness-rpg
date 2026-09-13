@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "asset_id": "giant_cave_spider",
+  "name": "Giant Cave Spider",
+  "facing": "left",
+  "size": 128,
+  "height_scale": 0.6,
+  "backend": "built-in imagegen frame sheet; deterministic CPU import",
+  "layout_note": "Alpha-connected extraction, fixed grid-column x anchor, floor-aligned attached pixels. One scale and union crop across all 24 poses; no per-frame resizing.",
+  "actions": {
+    "idle": {
+      "image": "idle-layout.png",
+      "sha256": "52b45e2755f8b554e0db93c8f2ba0d93c2fd33be15d1b94facdd3a2c02fd4cbc",
+      "loop": true,
+      "durations_ms": [
+        180,
+        180,
+        180,
+        180,
+        180,
+        180
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            320,
+            560
+          ]
+        },
+        {
+          "rect": [
+            640,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            960,
+            560
+          ]
+        },
+        {
+          "rect": [
+            1280,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            1600,
+            560
+          ]
+        },
+        {
+          "rect": [
+            1920,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            2240,
+            560
+          ]
+        },
+        {
+          "rect": [
+            0,
+            640,
+            640,
+            640
+          ],
+          "origin": [
+            320,
+            1200
+          ]
+        },
+        {
+          "rect": [
+            640,
+            640,
+            640,
+            640
+          ],
+          "origin": [
+            960,
+            1200
+          ]
+        }
+      ]
+    },
+    "walk": {
+      "image": "walk-layout.png",
+      "sha256": "23926a3ae1b0d700b7428bebe88a3f5ec3b2a922783af74b7d57b80fbfdb9591",
+      "loop": true,
+      "durations_ms": [
+        110,
+        110,
+        110,
+        110,
+        110,
+        110
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            320,
+            560
+          ]
+        },
+        {
+          "rect": [
+            640,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            960,
+            560
+          ]
+        },
+        {
+          "rect": [
+            1280,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            1600,
+            560
+          ]
+        },
+        {
+          "rect": [
+            1920,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            2240,
+            560
+          ]
+        },
+        {
+          "rect": [
+            0,
+            640,
+            640,
+            640
+          ],
+          "origin": [
+            320,
+            1200
+          ]
+        },
+        {
+          "rect": [
+            640,
+            640,
+            640,
+            640
+          ],
+          "origin": [
+            960,
+            1200
+          ]
+        }
+      ]
+    },
+    "attack": {
+      "image": "attack-layout.png",
+      "sha256": "5e75e1f19675c251a696aa74ef8f695a00cab1da6c0558c1f27714cb01dba324",
+      "loop": false,
+      "durations_ms": [
+        100,
+        160,
+        100,
+        80,
+        140,
+        140
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            320,
+            560
+          ]
+        },
+        {
+          "rect": [
+            640,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            960,
+            560
+          ]
+        },
+        {
+          "rect": [
+            1280,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            1600,
+            560
+          ]
+        },
+        {
+          "rect": [
+            1920,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            2240,
+            560
+          ]
+        },
+        {
+          "rect": [
+            0,
+            640,
+            640,
+            640
+          ],
+          "origin": [
+            320,
+            1200
+          ]
+        },
+        {
+          "rect": [
+            640,
+            640,
+            640,
+            640
+          ],
+          "origin": [
+            960,
+            1200
+          ]
+        }
+      ]
+    },
+    "death": {
+      "image": "death-layout.png",
+      "sha256": "30d5dd5242838f23b6a7d53926c790c67c05bbf786a696beff88372cb70f31f7",
+      "loop": false,
+      "durations_ms": [
+        100,
+        120,
+        130,
+        140,
+        160,
+        250
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            320,
+            560
+          ]
+        },
+        {
+          "rect": [
+            640,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            960,
+            560
+          ]
+        },
+        {
+          "rect": [
+            1280,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            1600,
+            560
+          ]
+        },
+        {
+          "rect": [
+            1920,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            2240,
+            560
+          ]
+        },
+        {
+          "rect": [
+            0,
+            640,
+            640,
+            640
+          ],
+          "origin": [
+            320,
+            1200
+          ]
+        },
+        {
+          "rect": [
+            640,
+            640,
+            640,
+            640
+          ],
+          "origin": [
+            960,
+            1200
+          ]
+        }
+      ]
+    }
+  }
+}

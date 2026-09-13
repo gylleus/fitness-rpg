@@ -66,6 +66,61 @@
       ],
       "variant": "nearest",
       "frame_step": 1
+    },
+    {
+      "manifest": "enemy-sprites/sequences/hollow-delve-v1/troglodyte/export/manifest.json",
+      "actions": [
+        "idle",
+        "walk",
+        "attack",
+        "death"
+      ],
+      "variant": "nearest",
+      "frame_step": 1
+    },
+    {
+      "manifest": "enemy-sprites/sequences/hollow-delve-v1/giant_cave_spider/export/manifest.json",
+      "actions": [
+        "idle",
+        "walk",
+        "attack",
+        "death"
+      ],
+      "variant": "nearest",
+      "frame_step": 1
+    },
+    {
+      "manifest": "enemy-sprites/sequences/hollow-delve-v1/bone_slime/export/manifest.json",
+      "actions": [
+        "idle",
+        "walk",
+        "attack",
+        "death"
+      ],
+      "variant": "nearest",
+      "frame_step": 1
+    },
+    {
+      "manifest": "enemy-sprites/sequences/hollow-delve-v1/delve_dwarf/export/manifest.json",
+      "actions": [
+        "idle",
+        "walk",
+        "attack",
+        "death"
+      ],
+      "variant": "nearest",
+      "frame_step": 1
+    },
+    {
+      "manifest": "enemy-sprites/sequences/hollow-delve-v1/delve_gnoll/export/manifest.json",
+      "actions": [
+        "idle",
+        "walk",
+        "attack",
+        "death"
+      ],
+      "variant": "nearest",
+      "frame_step": 1
     }
   ]
 }

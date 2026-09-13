@@ -1,0 +1,198 @@
+{
+  "mine_support": {
+    "id": "hollow_delve_mine_support",
+    "source": "image-generation/scene-samples/hollow-delve-props-v1/hollow_delve_mine_support.png",
+    "source_sha256": "7b13f59546da2b6ca11e270acce8a18ec452b176883ea31e1f09095750e5e482",
+    "sha256": "4909a45d360a6b135d1a9adea2fbeede95ceeec11ae42c4e9423b69f3f1578c3",
+    "size": [
+      192,
+      192
+    ],
+    "bounds": [
+      5,
+      15,
+      189,
+      175
+    ],
+    "height_scale": 2.3,
+    "backend": "built-in imagegen; ENDESGA32 nearest CPU export"
+  },
+  "webbed_arch": {
+    "id": "hollow_delve_webbed_arch",
+    "source": "image-generation/scene-samples/hollow-delve-props-v1/hollow_delve_webbed_arch.png",
+    "source_sha256": "8002c01025e24b10d7686464a9789d682c12fc217b1a06f5289527daca43743e",
+    "sha256": "1ad049da075dc701450f65bd287f0ff7e0c781ace6f8bff0183b7cbcf6a9010a",
+    "size": [
+      192,
+      192
+    ],
+    "bounds": [
+      8,
+      13,
+      185,
+      177
+    ],
+    "height_scale": 2.1,
+    "backend": "built-in imagegen; ENDESGA32 nearest CPU export"
+  },
+  "ore_cart": {
+    "id": "hollow_delve_ore_cart",
+    "source": "image-generation/scene-samples/hollow-delve-props-v1/hollow_delve_ore_cart.png",
+    "source_sha256": "5baa4e0048cd7372ceb7c4b9792c971aefd1afef8f468ca70387204f6511eb64",
+    "sha256": "250c4a3bd4e5b08ed96181e127f6d8c1445ade5c322ad8a748460af8e43ee5bb",
+    "size": [
+      160,
+      128
+    ],
+    "bounds": [
+      24,
+      35,
+      140,
+      106
+    ],
+    "height_scale": 0.8,
+    "backend": "built-in imagegen; ENDESGA32 nearest CPU export"
+  },
+  "quartz_cluster": {
+    "id": "hollow_delve_quartz_cluster",
+    "source": "image-generation/scene-samples/hollow-delve-props-v1/hollow_delve_quartz_cluster.png",
+    "source_sha256": "876ee40470bdef3911bce830f06d5f82e9923107dfb26b3dbb61d0185ad0c1f1",
+    "sha256": "9e3cd7f50c242a6e44eb805b8e666d5ac3a496d80585553e54b9ca86e4062f5c",
+    "size": [
+      128,
+      128
+    ],
+    "bounds": [
+      24,
+      17,
+      102,
+      111
+    ],
+    "height_scale": 0.65,
+    "backend": "built-in imagegen; ENDESGA32 nearest CPU export"
+  },
+  "fungus_stump": {
+    "id": "hollow_delve_fungus_stump",
+    "source": "image-generation/scene-samples/hollow-delve-props-v1/hollow_delve_fungus_stump.png",
+    "source_sha256": "412cb694a7d9c8dee1ee7de7df160746a5a922abaf98273387910ad397c46439",
+    "sha256": "829a8dd5aff38158b9b991dd9ca45a788b4db9b7b27745dc634b8cc6a2055a8f",
+    "size": [
+      96,
+      128
+    ],
+    "bounds": [
+      18,
+      13,
+      77,
+      117
+    ],
+    "height_scale": 0.55,
+    "backend": "built-in imagegen; ENDESGA32 nearest CPU export"
+  },
+  "bone_heap": {
+    "id": "hollow_delve_bone_heap",
+    "source": "image-generation/scene-samples/hollow-delve-props-v1/hollow_delve_bone_heap.png",
+    "source_sha256": "66e77c5540a84b4e799f730ace99ab06b28f18bdbe2e6081b0db8c50dd949f21",
+    "sha256": "9f38644f7559ba07c6f91405267fb36453bfd65e28acf078c0f10db663ab7b12",
+    "size": [
+      128,
+      64
+    ],
+    "bounds": [
+      12,
+      16,
+      116,
+      56
+    ],
+    "height_scale": 0.25,
+    "backend": "built-in imagegen; ENDESGA32 nearest CPU export"
+  },
+  "stalagmites": {
+    "id": "hollow_delve_stalagmites",
+    "source": "image-generation/scene-samples/hollow-delve-props-v1/hollow_delve_stalagmites.png",
+    "source_sha256": "9090113dc8513797f855e5ce32f2a218e4d0a98bc54a95b767cd56909c1d0ba6",
+    "sha256": "c5d8a0891ff85aeb61368d991d311f37b2c183dd59f7ecb004cff379689c7a7b",
+    "size": [
+      128,
+      160
+    ],
+    "bounds": [
+      13,
+      15,
+      118,
+      147
+    ],
+    "height_scale": 1.0,
+    "backend": "built-in imagegen; ENDESGA32 nearest CPU export"
+  },
+  "tool_cache": {
+    "id": "hollow_delve_tool_cache",
+    "source": "image-generation/scene-samples/hollow-delve-props-v1/hollow_delve_tool_cache.png",
+    "source_sha256": "51a309576f36f1929fc64a4e70a93462b1610605b504d154830de7a41adcc053",
+    "sha256": "41321c66e9018f90f1f8b6f0653745ca5902175902b24cbf516487e16410c085",
+    "size": [
+      128,
+      128
+    ],
+    "bounds": [
+      18,
+      19,
+      116,
+      111
+    ],
+    "height_scale": 0.65,
+    "backend": "built-in imagegen; ENDESGA32 nearest CPU export"
+  },
+  "slate_path": {
+    "id": "hollow_delve_slate_path",
+    "source": "image-generation/scene-samples/hollow-delve-props-v1/hollow_delve_slate_path.png",
+    "source_sha256": "f1a029a819a4a6f45641c3ea44bad65b5d45816a693e96bfd9e87d4fd7205e51",
+    "sha256": "be04c45533ff414ae44fa9b86f3f957daf91f12b12b6c31ee2b336e0ebb895dd",
+    "size": [
+      256,
+      96
+    ],
+    "bounds": [
+      0,
+      36,
+      256,
+      96
+    ],
+    "height_scale": null,
+    "backend": "built-in imagegen; ENDESGA32 nearest CPU export",
+    "surface_y": 36
+  },
+  "landscape": {
+    "id": "hollow_delve_landscape",
+    "source": "image-generation/scene-samples/hollow-delve-v1/backgrounds/hollow_delve_landscape.png",
+    "source_sha256": "33a7a23ff629e4cf01bad583797755c5cb5c85df0257144cb3871f21adfd45c3",
+    "sha256": "33a7a23ff629e4cf01bad583797755c5cb5c85df0257144cb3871f21adfd45c3",
+    "size": [
+      640,
+      360
+    ],
+    "backend": "local SDXL; see hollow-delve-v1/provenance"
+  },
+  "timber_gallery": {
+    "id": "hollow_delve_timber_gallery",
+    "source": "image-generation/scene-samples/hollow-delve-v1/backgrounds/hollow_delve_timber_gallery.png",
+    "source_sha256": "62e88f5bdf8a0e0df741dca6158029fb474789e4f92636d7e36c4bb4c50d25a8",
+    "sha256": "62e88f5bdf8a0e0df741dca6158029fb474789e4f92636d7e36c4bb4c50d25a8",
+    "size": [
+      640,
+      360
+    ],
+    "backend": "local SDXL; see hollow-delve-v1/provenance"
+  },
+  "sunken_cavern": {
+    "id": "hollow_delve_sunken_cavern",
+    "source": "image-generation/scene-samples/hollow-delve-v1/backgrounds/hollow_delve_sunken_cavern.png",
+    "source_sha256": "34a73c3dc9671cd0fb170484918506142922767c53dd0090f7409bd850272d28",
+    "sha256": "34a73c3dc9671cd0fb170484918506142922767c53dd0090f7409bd850272d28",
+    "size": [
+      640,
+      360
+    ],
+    "backend": "local SDXL; see hollow-delve-v1/provenance"
+  }
+}

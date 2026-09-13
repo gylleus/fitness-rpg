@@ -1,0 +1,68 @@
+{
+  "asset_id": "giant_cave_spider",
+  "name": "Giant Cave Spider",
+  "facing": "left",
+  "frame_size": [
+    128,
+    128
+  ],
+  "pivot": [
+    0.4965277777777778,
+    0.78125
+  ],
+  "height_scale": 0.6,
+  "reference_idle_height_px": 60.44444444444444,
+  "shared_crop": [
+    177,
+    335,
+    465,
+    623
+  ],
+  "actions": {
+    "idle": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "walk": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "attack": {
+      "timing": {
+        "repeat": false
+      }
+    },
+    "death": {
+      "timing": {
+        "repeat": false
+      }
+    }
+  },
+  "source": {
+    "idle": {
+      "source": "idle-layout.png",
+      "sha256": "52b45e2755f8b554e0db93c8f2ba0d93c2fd33be15d1b94facdd3a2c02fd4cbc"
+    },
+    "walk": {
+      "source": "walk-layout.png",
+      "sha256": "23926a3ae1b0d700b7428bebe88a3f5ec3b2a922783af74b7d57b80fbfdb9591"
+    },
+    "attack": {
+      "source": "attack-layout.png",
+      "sha256": "5e75e1f19675c251a696aa74ef8f695a00cab1da6c0558c1f27714cb01dba324"
+    },
+    "death": {
+      "source": "death-layout.png",
+      "sha256": "30d5dd5242838f23b6a7d53926c790c67c05bbf786a696beff88372cb70f31f7"
+    }
+  },
+  "backend": "built-in imagegen frame sheet; deterministic CPU import",
+  "recipe_sha256": "19027f0d9862b3c7a7a6263c9396cce8a77ad5d94d23c90645c717eb0c279387",
+  "code_sha256": {
+    "sheet_import.py": "d6cc266480e76ab89ebfc739d88743b5d42fc58730b461b99f60f8c1782724b4",
+    "pixels.py": "fa49c9f048211472dc89c9e692b982ce88685c9c9ab82a0241f11502c270dbc4"
+  },
+  "framing": "Explicit source rectangles and ground origins; one union crop/scale for all actions."
+}
