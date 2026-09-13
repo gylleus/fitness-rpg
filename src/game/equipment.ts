@@ -1,13 +1,14 @@
 import type { AttackEffect } from './attacks';
 import catalog from './catalog/items.json';
 import { randomInt, seedFor } from './random';
+import { categoryWeaponType, isWeaponType, type WeaponType } from './weapons';
 
 export const EQUIPMENT_SLOTS = ['weapon', 'armor', 'helmet', 'gloves', 'ring1', 'ring2', 'amulet'] as const;
 export type EquipmentSlot = typeof EQUIPMENT_SLOTS[number];
 export type ItemKind = Exclude<EquipmentSlot, 'ring1' | 'ring2'> | 'ring';
-export type ItemCategory = 'maces' | 'swords' | 'axes' | 'body_armor' | 'helmets' | 'gloves' | 'rings' | 'amulets';
+export type ItemCategory = 'maces' | 'swords' | 'axes' | 'fist_weapons' | 'body_armor' | 'helmets' | 'gloves' | 'rings' | 'amulets';
 export const CATEGORY_LABELS: Record<ItemCategory, string> = {
-  maces: 'Maces', swords: 'Swords', axes: 'Axes', body_armor: 'Body armor', helmets: 'Helmets', gloves: 'Gloves', rings: 'Rings', amulets: 'Amulets',
+  maces: 'Maces', swords: 'Swords', axes: 'Axes', fist_weapons: 'Fist weapons', body_armor: 'Body armor', helmets: 'Helmets', gloves: 'Gloves', rings: 'Rings', amulets: 'Amulets',
 };
 export const SLOT_LABELS: Record<EquipmentSlot, string> = {
   weapon: 'Weapon', armor: 'Armor', helmet: 'Helmet', gloves: 'Gloves', ring1: 'Ring 1', ring2: 'Ring 2', amulet: 'Amulet',
@@ -17,6 +18,8 @@ export type ItemModifier = { stat: ModifierStat; value: number; affix?: string }
 export type GearItem = {
   version?: 2; definitionId: string; name: string; kind: ItemKind; rarity: 'common' | 'uncommon' | 'rare';
   category?: ItemCategory; tier?: number; description?: string; visualDescription?: string;
+  /** Optional only because historical earned-item snapshots predate classes. */
+  weaponType?: WeaponType;
   sellValue: number; damageMin?: number; damageMax?: number; armor?: number; modifiers?: ItemModifier[];
   /** Legacy flat bonuses remain readable so earned gear and saved runs survive. */
   health?: number; attackBonus?: number; coefficientBonus?: number; effects?: AttackEffect[];
@@ -25,6 +28,17 @@ export type OwnedItem = { id: number; item: GearItem; slot: EquipmentSlot | null
 
 /** Generated from validated content/items TOML; earned gear stores a snapshot. */
 export const GEAR: Record<string, GearItem> = catalog.items as Record<string, GearItem>;
+
+/** Resolve metadata without replacing any saved rolls, names or bonuses. */
+export function itemWeaponType(item: GearItem | undefined): WeaponType | undefined {
+  if (item?.kind !== 'weapon') return undefined;
+  if (isWeaponType(item.weaponType)) return item.weaponType;
+  return categoryWeaponType(item.category) ?? GEAR[item.definitionId]?.weaponType ?? 'mace';
+}
+
+export function equippedWeaponType(items: readonly { item: GearItem; slot: EquipmentSlot | null }[]): WeaponType {
+  return itemWeaponType(items.find(owned => owned.slot === 'weapon')?.item) ?? 'fist';
+}
 
 export function fitsSlot(item: GearItem, slot: EquipmentSlot) {
   return EQUIPMENT_SLOTS.includes(slot) && (item.kind === 'ring' ? slot === 'ring1' || slot === 'ring2' : item.kind === slot);

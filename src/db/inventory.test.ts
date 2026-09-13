@@ -65,6 +65,19 @@ it('replaces gear without losing either item and handles duplicate rings indepen
   expect(getGameSnapshot(db, now).stats.baseDamageMin).toBe(32);
 });
 
+it('snapshots the equipped weapon class for the whole run, including reload and bare hands', () => {
+  const db = database();
+  const axe = giveItem(db, Object.values(GEAR).find(item => item.weaponType === 'axe')!);
+  equipItem(db, axe.id, 'weapon');
+  const run = startDungeon(db, 0, now);
+  expect(run.state.weaponType).toBe('axe');
+  expect(db.select().from(dungeonRuns).get()?.state.weaponType).toBe('axe');
+  expect(battleTurn(JSON.parse(JSON.stringify(run.state))).weaponType).toBe('axe');
+  retreatDungeon(db, run.id);
+  unequipItem(db, 'weapon');
+  expect(startDungeon(db, 0, now).state.weaponType).toBe('fist');
+});
+
 it('locks gear during an expedition, keeps its snapshot and rolls back failed sales', () => {
   const db = database();
   const armor = giveItem(db, GEAR.hide_armor);

@@ -4,6 +4,7 @@ import wetlands from './rosters/wetlands.json';
 import hollowDelve from './rosters/hollow_delve.json';
 import { rollLoot, type LootDrop } from './equipment';
 import { randomInt, seedFor } from './random';
+import type { WeaponType } from './weapons';
 
 export type Enemy = { id?: string; name: string; health: number; attack: number; gold: number; xp: number; sprite: 'slime' | 'wolf' | 'knight' | 'boss' };
 export type Dungeon = { id: number; biomeId?: string; name: string; subtitle: string; color: string; enemies: Enemy[] };
@@ -55,6 +56,8 @@ export type BattleState = {
   dungeonId: number;
   /** Snapshot the roster so future content/art additions cannot change this run. */
   dungeon?: Dungeon;
+  /** Visual loadout at entry; absent on old runs that used the mace knight. */
+  weaponType?: WeaponType;
   day: string;
   stats: HeroStats;
   heroHp: number;
@@ -83,11 +86,12 @@ export function battleDungeon(battle: BattleState): Dungeon {
 }
 
 export function beginBattle(dungeonId: number, day: string, stats: HeroStats, entryHp = stats.health,
-  resources: { focusAttacks?: number; meters?: CombatMeters; seed?: number; generation?: number } = {}): BattleState {
+  resources: { focusAttacks?: number; meters?: CombatMeters; seed?: number; generation?: number; weaponType?: WeaponType } = {}): BattleState {
   const dungeon = DUNGEONS[dungeonId];
   if (!dungeon) throw new Error('Dungeon not found.');
   const seeded = resources.seed !== undefined;
   return { rulesVersion: seeded ? 3 : 2,
+    weaponType: resources.weaponType ?? 'mace',
     ...(seeded ? { rng: { seed: resources.seed!, state: seedFor(`combat-v1:${resources.seed}`), generation: resources.generation ?? 0 },
       loot: [], lootPlan: dungeon.enemies.flatMap((_, i) => rollLoot(resources.seed!, i, i === dungeon.enemies.length - 1, dungeonId)) } : {}),
     dungeonId, dungeon: { ...dungeon, enemies: dungeon.enemies.map(enemy => ({ ...enemy })) }, day, stats, heroHp: entryHp, entryHp, enemyHp: dungeon.enemies[0].health, encounter: 0, defeated: 0,

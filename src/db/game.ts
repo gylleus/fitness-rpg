@@ -8,7 +8,7 @@ import { attackPower, CHALLENGES, dayStart, fitnessDay, heroStats, localDay, nex
 import { FOCUS_ATTACKS, HEALING_HP, POTIONS, type Potion } from '../game/items';
 import { getEquipped, getInventory, initializeInventory } from './inventory';
 import { dungeonSeed } from '../game/random';
-import { upgradeGear } from '../game/equipment';
+import { equippedWeaponType, upgradeGear } from '../game/equipment';
 
 // Both production Expo SQLite and the test SQLite driver execute synchronously.
 // Never put an async callback inside these transactions.
@@ -154,13 +154,14 @@ export function startDungeon(db: GameDb, dungeonId: number, now = Date.now()) {
     const hero = getHero(tx);
     if (!Number.isInteger(dungeonId) || !DUNGEONS[dungeonId] || dungeonId > hero.unlockedDungeon) throw new Error('Defeat the previous boss to unlock this dungeon.');
     const day = localDay(now);
-    const stats = heroStats(hero, getFitnessDay(tx, day), getSavedPushups(tx), getEquipped(tx));
+    const equipped = getEquipped(tx);
+    const stats = heroStats(hero, getFitnessDay(tx, day), getSavedPushups(tx), equipped);
     const health = availableHealth(hero, stats.health, day);
     if (health <= 0) throw new Error('Your hero needs more health. Walk, drink a healing potion, equip health bonuses, or return tomorrow.');
     tx.insert(dungeonSeeds).values({ dungeonId }).onConflictDoNothing().run();
     const generation = tx.select().from(dungeonSeeds).where(eq(dungeonSeeds.dungeonId, dungeonId)).get()!.victories;
     const state = beginBattle(dungeonId, day, stats, health, { focusAttacks: hero.focusAttacks,
-      seed: dungeonSeed(dungeonId, generation), generation });
+      seed: dungeonSeed(dungeonId, generation), generation, weaponType: equippedWeaponType(equipped) });
     return tx.insert(dungeonRuns).values({ startedAt: now, state, status: 'active' }).returning().get();
   });
 }

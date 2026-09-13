@@ -13,6 +13,7 @@
       "visualDescription": "A thick knotted oak club swells into an uneven round head. Dark growth rings cross its cut end, and a short strip of frayed brown linen winds around the narrow grip.",
       "sellValue": 5,
       "modifiers": [],
+      "weaponType": "mace",
       "damageMin": 20,
       "damageMax": 30
     },
@@ -28,6 +29,7 @@
       "visualDescription": "Three broad black iron bands squeeze the cracked head of a stout wooden club. Square rivets stand proud of the metal, and the oily leather grip ends in a battered iron cap.",
       "sellValue": 21,
       "modifiers": [],
+      "weaponType": "mace",
       "damageMin": 24,
       "damageMax": 38
     },
@@ -43,6 +45,7 @@
       "visualDescription": "A pale driftwood cudgel has a flattened paddle-shaped head and one blunt brass stud. Tar blackens the lower shaft while a faded blue cord loops through the butt.",
       "sellValue": 10,
       "modifiers": [],
+      "weaponType": "mace",
       "damageMin": 22,
       "damageMax": 32
     },
@@ -63,6 +66,7 @@
           "value": 0.005
         }
       ],
+      "weaponType": "mace",
       "damageMin": 24,
       "damageMax": 36
     },
@@ -83,6 +87,7 @@
           "value": 200
         }
       ],
+      "weaponType": "mace",
       "damageMin": 25,
       "damageMax": 37
     },
@@ -103,6 +108,7 @@
           "value": 1000
         }
       ],
+      "weaponType": "mace",
       "damageMin": 30,
       "damageMax": 46
     },
@@ -123,6 +129,7 @@
           "value": 16
         }
       ],
+      "weaponType": "mace",
       "damageMin": 28,
       "damageMax": 42
     },
@@ -143,6 +150,7 @@
           "value": 3
         }
       ],
+      "weaponType": "mace",
       "damageMin": 29,
       "damageMax": 43
     },
@@ -158,6 +166,7 @@
       "visualDescription": "A lopsided lump of porous charcoal-black slag encloses an iron mace head. Rust-red cracks cross the crust, while a broad copper collar separates it from a straight soot-dark handle.",
       "sellValue": 19,
       "modifiers": [],
+      "weaponType": "mace",
       "damageMin": 36,
       "damageMax": 46
     },
@@ -173,6 +182,7 @@
       "visualDescription": "Six thick triangular iron flanges surround a blunt central spike. Bright wear runs along their leading edges, and the black leather grip sits between two simple hexagonal guards.",
       "sellValue": 20,
       "modifiers": [],
+      "weaponType": "mace",
       "damageMin": 34,
       "damageMax": 44
     },
@@ -188,6 +198,7 @@
       "visualDescription": "A long-handled sledge carries an oversized rectangular steel block with rounded battered corners. Ochre quarry dust coats its faces, and a red cloth knot marks a repaired hickory shaft.",
       "sellValue": 16,
       "modifiers": [],
+      "weaponType": "mace",
       "damageMin": 35,
       "damageMax": 45
     },
@@ -208,6 +219,7 @@
           "value": 1500
         }
       ],
+      "weaponType": "mace",
       "damageMin": 40,
       "damageMax": 52
     },
@@ -228,6 +240,7 @@
           "value": 20
         }
       ],
+      "weaponType": "mace",
       "damageMin": 38,
       "damageMax": 50
     },
@@ -248,6 +261,7 @@
           "value": 4
         }
       ],
+      "weaponType": "mace",
       "damageMin": 43,
       "damageMax": 57
     },
@@ -268,6 +282,7 @@
           "value": 10
         }
       ],
+      "weaponType": "mace",
       "damageMin": 44,
       "damageMax": 58
     },
@@ -288,6 +303,7 @@
           "value": 0.01
         }
       ],
+      "weaponType": "mace",
       "damageMin": 42,
       "damageMax": 56
     },
@@ -303,6 +319,7 @@
       "visualDescription": "An elongated white stone head narrows into a cold blue iron socket. Frost collects inside the chipped top, while layered gray sealskin wraps the handle almost to the head.",
       "sellValue": 25,
       "modifiers": [],
+      "weaponType": "mace",
       "damageMin": 49,
       "damageMax": 59
     },
@@ -318,6 +335,7 @@
       "visualDescription": "Four worn antler tines curl upward around a dark steel mace head. The bone is yellow at the bases and ivory at the tips; a red-brown hide grip fills the short haft.",
       "sellValue": 26,
       "modifiers": [],
+      "weaponType": "mace",
       "damageMin": 50,
       "damageMax": 60
     },
@@ -333,6 +351,7 @@
       "visualDescription": "A square block of smoky black volcanic glass is trapped in a thick iron cage. Broad chipped facets expose translucent brown edges, and a flat metal handle ends in a leather loop.",
       "sellValue": 27,
       "modifiers": [],
+      "weaponType": "mace",
       "damageMin": 48,
       "damageMax": 58
     },
@@ -353,6 +372,7 @@
           "value": 4
         }
       ],
+      "weaponType": "mace",
       "damageMin": 53,
       "damageMax": 65
     },
@@ -373,6 +393,7 @@
           "value": 11
         }
       ],
+      "weaponType": "mace",
       "damageMin": 54,
       "damageMax": 66
     },
@@ -393,6 +414,7 @@
           "value": 0.0125
         }
       ],
+      "weaponType": "mace",
       "damageMin": 56,
       "damageMax": 70
     },
@@ -413,6 +435,7 @@
           "value": 500
         }
       ],
+      "weaponType": "mace",
       "damageMin": 57,
       "damageMax": 71
     },
@@ -433,6 +456,7 @@
           "value": 2500
         }
       ],
+      "weaponType": "mace",
       "damageMin": 58,
       "damageMax": 72
     },
@@ -448,6 +472,7 @@
       "visualDescription": "A short broad iron sword has a crooked tip and a deep notch near the middle. Its plain crossguard bends forward on one side, and muddy cloth binds the exposed wooden tang.",
       "sellValue": 8,
       "modifiers": [],
+      "weaponType": "sword",
       "damageMin": 23,
       "damageMax": 27
     },
@@ -463,6 +488,7 @@
       "visualDescription": "A narrow leaf-shaped bronze blade rises from a small oval guard. Green tarnish follows the central ridge, while a tightly woven reed grip is capped with a dark wooden bead.",
       "sellValue": 9,
       "modifiers": [],
+      "weaponType": "sword",
       "damageMin": 24,
       "damageMax": 28
     },
@@ -478,6 +504,7 @@
       "visualDescription": "A straight double-edged sword has orange rust islands across a dull steel fuller. The simple iron crossguard remains square, and a faded red leather grip ends in a disk pommel.",
       "sellValue": 10,
       "modifiers": [],
+      "weaponType": "sword",
       "damageMin": 25,
       "damageMax": 29
     },
@@ -498,6 +525,7 @@
           "value": 0.005
         }
       ],
+      "weaponType": "sword",
       "damageMin": 27,
       "damageMax": 33
     },
@@ -518,6 +546,7 @@
           "value": 200
         }
       ],
+      "weaponType": "sword",
       "damageMin": 28,
       "damageMax": 34
     },
@@ -538,6 +567,7 @@
           "value": 1500
         }
       ],
+      "weaponType": "sword",
       "damageMin": 33,
       "damageMax": 41
     },
@@ -558,6 +588,7 @@
           "value": 16
         }
       ],
+      "weaponType": "sword",
       "damageMin": 31,
       "damageMax": 39
     },
@@ -578,6 +609,7 @@
           "value": 3
         }
       ],
+      "weaponType": "sword",
       "damageMin": 32,
       "damageMax": 40
     },
@@ -593,6 +625,7 @@
       "visualDescription": "A thick single-edged sword carries a black crust along its spine and a clean gray cutting edge. A square bronze guard frames the grip, which is wrapped in heat-stiffened brown hide.",
       "sellValue": 19,
       "modifiers": [],
+      "weaponType": "sword",
       "damageMin": 39,
       "damageMax": 43
     },
@@ -608,6 +641,7 @@
       "visualDescription": "A compact curved blade ends in an angular clipped point. Ochre dust rests beneath its steel knuckle bow, and a squared wooden handle is fitted with three large mismatched rivets.",
       "sellValue": 20,
       "modifiers": [],
+      "weaponType": "sword",
       "damageMin": 37,
       "damageMax": 41
     },
@@ -623,6 +657,7 @@
       "visualDescription": "A long steel blade is scored by three deep diagonal scars above a wide crossguard. The two-handed grip alternates worn black and tan leather, finishing in a heavy faceted iron pommel.",
       "sellValue": 16,
       "modifiers": [],
+      "weaponType": "sword",
       "damageMin": 38,
       "damageMax": 42
     },
@@ -643,6 +678,7 @@
           "value": 1500
         }
       ],
+      "weaponType": "sword",
       "damageMin": 43,
       "damageMax": 49
     },
@@ -663,6 +699,7 @@
           "value": 20
         }
       ],
+      "weaponType": "sword",
       "damageMin": 41,
       "damageMax": 47
     },
@@ -683,6 +720,7 @@
           "value": 4
         }
       ],
+      "weaponType": "sword",
       "damageMin": 46,
       "damageMax": 54
     },
@@ -703,6 +741,7 @@
           "value": 10
         }
       ],
+      "weaponType": "sword",
       "damageMin": 47,
       "damageMax": 55
     },
@@ -723,6 +762,7 @@
           "value": 0.01
         }
       ],
+      "weaponType": "sword",
       "damageMin": 45,
       "damageMax": 53
     },
@@ -738,6 +778,7 @@
       "visualDescription": "A pale blue steel sword has a broad flat blade and blunt angular shoulders. White frost clings to one side of the crossguard, and the grip is wrapped in thick gray leather.",
       "sellValue": 25,
       "modifiers": [],
+      "weaponType": "sword",
       "damageMin": 52,
       "damageMax": 56
     },
@@ -753,6 +794,7 @@
       "visualDescription": "A curved translucent smoky blade carries a milky white edge. Its heavy iron basket guard is crusted with salt, and faded green sharkskin covers a handle capped in tarnished silver.",
       "sellValue": 26,
       "modifiers": [],
+      "weaponType": "sword",
       "damageMin": 53,
       "damageMax": 57
     },
@@ -768,6 +810,7 @@
       "visualDescription": "A thin blue-black blade extends from a cage of three sweeping iron guard bars. Its point is glass-bright, and a black leather grip ends in a small sharply faceted crystal pommel.",
       "sellValue": 27,
       "modifiers": [],
+      "weaponType": "sword",
       "damageMin": 51,
       "damageMax": 55
     },
@@ -788,6 +831,7 @@
           "value": 4
         }
       ],
+      "weaponType": "sword",
       "damageMin": 56,
       "damageMax": 62
     },
@@ -808,6 +852,7 @@
           "value": 11
         }
       ],
+      "weaponType": "sword",
       "damageMin": 57,
       "damageMax": 63
     },
@@ -828,6 +873,7 @@
           "value": 0.0125
         }
       ],
+      "weaponType": "sword",
       "damageMin": 59,
       "damageMax": 67
     },
@@ -848,6 +894,7 @@
           "value": 500
         }
       ],
+      "weaponType": "sword",
       "damageMin": 60,
       "damageMax": 68
     },
@@ -868,6 +915,7 @@
           "value": 2500
         }
       ],
+      "weaponType": "sword",
       "damageMin": 61,
       "damageMax": 69
     },
@@ -883,6 +931,7 @@
       "visualDescription": "A compact iron hatchet has a broad convex edge and a chipped upper corner. Pale scraped wood marks the bent handle below the head, with brown leather around the lower grip.",
       "sellValue": 8,
       "modifiers": [],
+      "weaponType": "axe",
       "damageMin": 17,
       "damageMax": 35
     },
@@ -898,6 +947,7 @@
       "visualDescription": "A narrow iron axe blade drops into a long hooked beard. Black peat stains coat its inner curve, and the short ash handle is repaired with a tightly wound copper band.",
       "sellValue": 9,
       "modifiers": [],
+      "weaponType": "axe",
       "damageMin": 18,
       "damageMax": 36
     },
@@ -913,6 +963,7 @@
       "visualDescription": "A wide asymmetrical axe head spreads from a stout tarred shaft. One face is flat and dark while the other catches worn silver-gray facets; a blue rope loop hangs at the butt.",
       "sellValue": 10,
       "modifiers": [],
+      "weaponType": "axe",
       "damageMin": 19,
       "damageMax": 37
     },
@@ -933,6 +984,7 @@
           "value": 0.005
         }
       ],
+      "weaponType": "axe",
       "damageMin": 21,
       "damageMax": 41
     },
@@ -953,6 +1005,7 @@
           "value": 200
         }
       ],
+      "weaponType": "axe",
       "damageMin": 22,
       "damageMax": 42
     },
@@ -973,6 +1026,7 @@
           "value": 1500
         }
       ],
+      "weaponType": "axe",
       "damageMin": 27,
       "damageMax": 49
     },
@@ -993,6 +1047,7 @@
           "value": 16
         }
       ],
+      "weaponType": "axe",
       "damageMin": 25,
       "damageMax": 47
     },
@@ -1013,6 +1068,7 @@
           "value": 3
         }
       ],
+      "weaponType": "axe",
       "damageMin": 26,
       "damageMax": 48
     },
@@ -1028,6 +1084,7 @@
       "visualDescription": "A thick wedge-shaped splitting axe has a charcoal-black head and a broad polished bevel. Gray ash collects around the socket above a red-brown shaft darkened at both ends.",
       "sellValue": 19,
       "modifiers": [],
+      "weaponType": "axe",
       "damageMin": 33,
       "damageMax": 51
     },
@@ -1043,6 +1100,7 @@
       "visualDescription": "A rounded steel axe head forms an almost complete half circle against its straight handle. Heat-blue streaks cross the metal, and a plain brass ferrule sits above the black leather grip.",
       "sellValue": 20,
       "modifiers": [],
+      "weaponType": "axe",
       "damageMin": 31,
       "damageMax": 49
     },
@@ -1058,6 +1116,7 @@
       "visualDescription": "A square-backed axe blade shares its iron socket with a short pointed pick. Ochre chips cling to both faces, and three iron staples visibly mend the heavy wooden haft.",
       "sellValue": 16,
       "modifiers": [],
+      "weaponType": "axe",
       "damageMin": 32,
       "damageMax": 50
     },
@@ -1078,6 +1137,7 @@
           "value": 1500
         }
       ],
+      "weaponType": "axe",
       "damageMin": 37,
       "damageMax": 57
     },
@@ -1098,6 +1158,7 @@
           "value": 20
         }
       ],
+      "weaponType": "axe",
       "damageMin": 35,
       "damageMax": 55
     },
@@ -1118,6 +1179,7 @@
           "value": 4
         }
       ],
+      "weaponType": "axe",
       "damageMin": 40,
       "damageMax": 62
     },
@@ -1138,6 +1200,7 @@
           "value": 10
         }
       ],
+      "weaponType": "axe",
       "damageMin": 41,
       "damageMax": 63
     },
@@ -1158,6 +1221,7 @@
           "value": 0.01
         }
       ],
+      "weaponType": "axe",
       "damageMin": 39,
       "damageMax": 61
     },
@@ -1173,6 +1237,7 @@
       "visualDescription": "A pale steel hatchet has a short angular blade and a gray-white wooden handle. Blue frost gathers under its thick socket, and a soft hide loop hangs from the rounded butt.",
       "sellValue": 25,
       "modifiers": [],
+      "weaponType": "axe",
       "damageMin": 46,
       "damageMax": 64
     },
@@ -1188,6 +1253,7 @@
       "visualDescription": "A broad white-crusted axe head sits on a bleached driftwood haft. A single dark crack crosses the rear hammer face, while muted teal cord holds a long split in the handle shut.",
       "sellValue": 26,
       "modifiers": [],
+      "weaponType": "axe",
       "damageMin": 47,
       "damageMax": 65
     },
@@ -1203,6 +1269,7 @@
       "visualDescription": "A dark iron axe carries a long hooked beard braced by a pale antler tine. Copper pins hold the bone flush against the blade above a thick brown fur grip.",
       "sellValue": 27,
       "modifiers": [],
+      "weaponType": "axe",
       "damageMin": 45,
       "damageMax": 63
     },
@@ -1223,6 +1290,7 @@
           "value": 4
         }
       ],
+      "weaponType": "axe",
       "damageMin": 50,
       "damageMax": 70
     },
@@ -1243,6 +1311,7 @@
           "value": 11
         }
       ],
+      "weaponType": "axe",
       "damageMin": 51,
       "damageMax": 71
     },
@@ -1263,6 +1332,7 @@
           "value": 0.0125
         }
       ],
+      "weaponType": "axe",
       "damageMin": 53,
       "damageMax": 75
     },
@@ -1283,6 +1353,7 @@
           "value": 500
         }
       ],
+      "weaponType": "axe",
       "damageMin": 54,
       "damageMax": 76
     },
@@ -1303,6 +1374,7 @@
           "value": 2500
         }
       ],
+      "weaponType": "axe",
       "damageMin": 55,
       "damageMax": 77
     },

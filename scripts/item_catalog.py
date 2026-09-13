@@ -9,7 +9,8 @@ import re
 import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
-KINDS = {'maces': 'weapon', 'swords': 'weapon', 'axes': 'weapon', 'body_armor': 'armor',
+WEAPON_TYPES = {'maces': 'mace', 'swords': 'sword', 'axes': 'axe', 'fist_weapons': 'fist'}
+KINDS = {**dict.fromkeys(WEAPON_TYPES, 'weapon'), 'body_armor': 'armor',
          'helmets': 'helmet', 'gloves': 'gloves', 'rings': 'ring', 'amulets': 'amulet'}
 MODIFIERS = {'health': 500, 'armor': 300, 'damage': 100,
              'pushup_damage_coefficient': .1, 'crit_chance_bps': 10000, 'crit_damage_bps': 30000}
@@ -95,6 +96,8 @@ def runtime_catalog(items):
             'category': item['category'], 'rarity': item['rarity'], 'tier': item['tier'],
             'description': item['description'], 'visualDescription': item['visual_description'],
             'sellValue': item['sell_value'], 'modifiers': item['modifiers']}
+        if item['kind'] == 'weapon':
+            definitions[key]['weaponType'] = WEAPON_TYPES[item['category']]
         for authored, runtime in [('damage_min', 'damageMin'), ('damage_max', 'damageMax'), ('armor', 'armor')]:
             if authored in stats:
                 definitions[key][runtime] = stats[authored]

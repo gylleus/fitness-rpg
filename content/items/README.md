@@ -74,3 +74,17 @@ It never regifts sold starters or rewrites active battle snapshots. The health
 on old armor stays as a separate legacy bonus; newly authored armor uses its
 explicit armor rating plus any listed modifiers. New stats take effect on the
 next expedition.
+
+## Weapon classes and player art
+
+The exporter adds `weaponType` to weapon definitions from the library category:
+`maces` → `mace` (including clubs and hammers), `axes` → `axe`, `swords` →
+`sword`, and `fist_weapons` → `fist`. Fist libraries are supported by validation;
+the current catalog still contains the original 192 items. Gloves remain armor.
+Each class shares one standard weapon appearance on the player regardless of
+item design or rarity. Bare hands use the fist set.
+
+Old earned items resolve their class from saved category or stable definition
+ID without changing rolled stats. Unknown legacy weapons retain the mace
+appearance. New expeditions snapshot the equipped class, and old expeditions
+without this field retain the mace appearance they originally used.

@@ -4,7 +4,7 @@ import tempfile
 import tomllib
 import unittest
 
-from item_catalog import KINDS, ROOT, load_items, runtime_catalog, icon_prompts
+from item_catalog import KINDS, WEAPON_TYPES, ROOT, load_items, runtime_catalog, icon_prompts
 
 
 class ItemCatalogTest(unittest.TestCase):
@@ -15,7 +15,7 @@ class ItemCatalogTest(unittest.TestCase):
     def test_catalog_and_exports_are_complete_and_current(self):
         items = load_items(self.root, self.files)
         self.assertGreaterEqual(len(items), 192)
-        self.assertEqual({item['category'] for item in items.values()}, set(KINDS))
+        self.assertEqual({item['category'] for item in items.values()}, set(KINDS) - {'fist_weapons'})
         for category in {item['category'] for item in items.values()}:
             self.assertGreaterEqual(sum(item['category'] == category for item in items.values()), 24)
         self.assertEqual(runtime_catalog(items), json.loads((ROOT / 'src/game/catalog/items.json').read_text()))
@@ -28,6 +28,15 @@ class ItemCatalogTest(unittest.TestCase):
         for files in [[self.files[0], self.files[0]], ['missing.toml'], ['../package.json']]:
             with self.subTest(files=files), self.assertRaises((ValueError, OSError)):
                 load_items(self.root, files)
+
+    def test_weapon_classes_export_for_each_supported_library(self):
+        source = (self.root / self.files[0]).read_text()
+        for category, weapon_type in WEAPON_TYPES.items():
+            with self.subTest(category=category), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                (root / 'items.toml').write_text(source.replace('category = "maces"', f'category = "{category}"'))
+                definitions = runtime_catalog(load_items(root, ['items.toml']))['items']
+                self.assertEqual({item['weaponType'] for item in definitions.values()}, {weapon_type})
 
     def test_rejects_invalid_stats_modifiers_and_generation_contracts(self):
         source = (self.root / self.files[0]).read_text()
