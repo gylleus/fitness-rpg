@@ -20,7 +20,7 @@ export default function Camp() {
   return <Screen>
     <PageHeading eyebrow="Fitness RPG / your daily adventure" title="Welcome to camp." right={<Gold amount={hero.gold} />} />
     <Card>
-      <View style={ui.between}><View style={{ gap: 4 }}><Text style={ui.heading}>The Wayfarer</Text><Text style={ui.small}>BARBARIAN · LEVEL {stats.level}</Text></View><Text style={{ color: colors.green, fontSize: 12, fontWeight: '700' }}>READY TO ROAM</Text></View>
+      <View style={ui.between}><View style={{ gap: 4 }}><Text style={ui.heading}>The Wayfarer</Text><Text style={ui.small}>KNIGHT · LEVEL {stats.level}</Text></View><Text style={{ color: colors.green, fontSize: 12, fontWeight: '700' }}>READY TO ROAM</Text></View>
       <CampScene />
       <View style={ui.between}><Text style={ui.small}>Adventure experience</Text><Text style={ui.small}>{hero.xp % 100} / 100 XP</Text></View>
       <Meter value={hero.xp % 100} max={100} color={colors.gold} label="Experience toward next level" />

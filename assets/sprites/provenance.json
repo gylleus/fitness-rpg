@@ -1,30 +1,30 @@
 {
-  "recipe_sha256": "17a36d3c68ba5f6f00415d6f143e7ec10bcc8a5ee454d1fbe8d6d8a6c32aa152",
+  "recipe_sha256": "fb57a127f1b6f24e85ef594b8f9eb74ddfd05877fdf61bef7c09fbbca7b962e8",
   "entities": {
     "barbarian_player": {
-      "manifest": "image-generation/player-sprites/sequences/barbarian-club-v1/export/manifest.json",
-      "sha256": "0bb8870852516a184d7d301355f3e53d6085ef26fc17b259da07e8e7479d71e0",
+      "manifest": "image-generation/player-sprites/sequences/knight-mace-v1/export/manifest.json",
+      "sha256": "1e9e93a74f72dea68c36e7f23cf4d36d86f290cd461e78535e6371a934a0d92c",
       "frame_step": 1,
       "sheets": {
         "idle": {
-          "atlas_sha256": "0c6522729178d7ada0ac3beb5f0b880a74a33ded02427a49911514c111e7511a",
-          "image_sha256": "1c72727d7c97795f741dd453690e17a4ff1c360819b27a719e0af16435530618",
-          "output_sha256": "2afaea92e40b9d1e60a7f6891a7931d972e91c1554dc0dff7652f07fde89a832"
+          "atlas_sha256": "c8119c504b33bb95ab2359f1b42dca55b5993a61a1fea292d4fd184777add6fc",
+          "image_sha256": "e186540b8755bba9dcb092826460e0844726ea8e629a999977f51b6077901588",
+          "output_sha256": "fbbbc4df0224c0c1829ff9968ce67e80e0701b66b1711266722113a25dddaa45"
         },
         "walk": {
-          "atlas_sha256": "0c45847b22fe209fd380c46cdb01f654c163fd2839ebcf656f727e2d3652a3b9",
-          "image_sha256": "1ce36b01c2e67bc486baa2881925b1c1aabd798af2dc3fcc9778ab9b9f65b153",
-          "output_sha256": "80b42e14b2112d3e41b89fdb0c6db1b14eab230075f1b39310f89744a64d0e21"
+          "atlas_sha256": "1b04e45e8871837feb3e1468d560e469cbcbcc2999db80b1eb597f6427f2159d",
+          "image_sha256": "5486137c2fa6d837415a887f6638f1600ef7627fac5361d9f83f527df0c2966c",
+          "output_sha256": "2ec359cc49e9cd3e5eae9eee4a64a0452247147b4559fdc4e32d8d1589b23329"
         },
         "attack": {
-          "atlas_sha256": "e317d837ad780bdf0c967ce5198cff7544126eab571b1d5209c135c77e1755c1",
-          "image_sha256": "575d529a3a396cbb161c4ac54d2c49e5161fe34cf9161757c6426815ed0eab21",
-          "output_sha256": "b8605f79b08b78119b14faf7cab526a6fd77822a9212e3822f474030b3b9e8ad"
+          "atlas_sha256": "ab99782268a2ef3a55a4fcd4f3a3a19aa549c07c7226882ae61aad3422c451db",
+          "image_sha256": "223673933e1683bf3d4a26a824d7ebb614bf5fd49c3a395819b6da6002840200",
+          "output_sha256": "cbc01f4f462e1da3646e18b54f134d586783b176a784684e729f9895a4723bdb"
         },
         "death": {
-          "atlas_sha256": "4757dbe38a25509377efa693e64027783b3f08f2692b7c87ef1548dcb4519a83",
-          "image_sha256": "ec71781e0bdbc5073db0011042f33eca9a8c3ae2826017a5e7329568607e606f",
-          "output_sha256": "ce6ffb5bb68ad98b593c8bcc534d0e154aed16e8df76b8911f52ab54337df213"
+          "atlas_sha256": "dbe9d4b08accfe4c8f168ca1fd1c0638529fe9413e955c663bdcfec1b0170792",
+          "image_sha256": "e929dd3892659b6b66039100f206cd8b07ef01acf4616ed9282f15824d735860",
+          "output_sha256": "8645d9ce901340089716b572a547a30725bd4daf07b5786b7f8834f63f21fa01"
         }
       }
     },

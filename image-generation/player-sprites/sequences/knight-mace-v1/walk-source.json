@@ -1,0 +1,31 @@
+{
+  "backend": "built-in imagegen",
+  "source": "walk-source.png",
+  "sha256": "719bb5d1de9ae54fefd4e641862a4ec028c6237cd7bcd8e621365ccf035954ce",
+  "prompt": "walk-prompt.txt",
+  "key_edit_prompt": "walk-key-prompt.txt",
+  "reference": "sheet-source.png",
+  "background": [
+    255,
+    0,
+    255
+  ],
+  "scale": 0.484375,
+  "origins_x": [
+    306,
+    790,
+    1282,
+    306,
+    790,
+    1282
+  ],
+  "ground_contacts_y": [
+    488,
+    487,
+    488,
+    976,
+    977,
+    977
+  ],
+  "key_rule": "red-green > 40 and blue-green > 40"
+}

@@ -49,7 +49,7 @@ export default function ExpeditionScreen() {
     <DungeonJourney key={run.id} battle={battle} playing={focused && foreground && playing} speed={speed} fullScreen />
     <View style={[styles.hud, { top: Math.max(10, insets.top), left: Math.max(16, insets.left), right: Math.max(16, insets.right) }]}>
       <View style={[styles.health, { maxWidth: 260 }]}>
-        <Text numberOfLines={1} style={styles.name}>BARBARIAN · {battle.heroHp}/{battle.stats.health} HP</Text>
+        <Text numberOfLines={1} style={styles.name}>KNIGHT · {battle.heroHp}/{battle.stats.health} HP</Text>
         <Meter value={battle.heroHp} max={battle.stats.health} label="Hero health" />
         <Text style={ui.small}>{power.minDamage}–{power.maxDamage} damage · {multiplierLabel(power.multiplier)} power</Text>
         <Text style={ui.small}>{battle.stats.armor ?? 0} armor · {(armorReduction(battle.stats.armor) * 100).toFixed(1)}% reduction</Text>

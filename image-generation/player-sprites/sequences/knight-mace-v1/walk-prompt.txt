@@ -1,0 +1,12 @@
+Use case: stylized-concept.
+Asset type: transparent 2D pixel-game walking animation sheet.
+Input image role: visual character reference ONLY. Recreate exactly this closed-helmet steel knight, burgundy short cloth skirt, leather straps, thick articulated armor, ONE spiked spherical iron mace on a short handle. Match his shape, armor, colors, facing and crisp pixel shading.
+Generate ONLY six full-body WALK poses, arranged as THREE equal columns by TWO equal rows, read left to right, top to bottom. True transparent RGBA background, no floor or shadow, no text or labels, no border. Generous transparent cell margins, every boot and mace spike intact. Same scale in all six cells.
+CRITICAL: this must show a COMPLETE ALTERNATING WALK CYCLE to the RIGHT, including passing poses. Do not repeat a pose with the same foot forward in every frame. The left and right boots exchange which is ahead. Whole body stays at a fixed center within each cell; walk in place. The helmet keeps pointing right and never faces the viewer.
+Pose 1: right leg extended forward with right heel touching down, left leg extended behind with toe supporting.
+Pose 2: right boot planted under the body bearing weight, left knee bent and left boot lifted passing beneath the hips; feet close together horizontally.
+Pose 3: left leg reaching forward, right leg behind with heel lifting; left heel about to touch.
+Pose 4: left leg fully forward and supporting, right leg fully back and toe lifting, the opposite stance from pose 1.
+Pose 5: left boot planted under body bearing weight, right knee bent with right boot lifted passing under hips, feet close together horizontally.
+Pose 6: right leg reaching forward, left leg behind with heel lifting, preparing to return seamlessly to pose 1.
+The mace is carried securely up near the forward shoulder, with small balanced arm motion and slight armored body bob. Do not attack, jump, crouch, glide, or keep one boot fixed in all frames. All grounded boot soles meet the same baseline within each row. No extra weapon, shield, cape, bare face or hair.

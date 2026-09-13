@@ -123,7 +123,7 @@ it('interrupts an unfinished walk pose immediately and reaches the strike at 180
   expect(view.getByTestId('entity-sprite-canvas')).toBe(canvas);
   expect(view.getByTestId('native-sprite-atlas').props.sprites[0].x).toBe(0);
   await act(() => { jest.advanceTimersByTime(HERO_ATTACK_IMPACT_MS); });
-  expect(view.getByTestId('native-sprite-atlas').props.sprites[0].x).toBe(4 * 128);
+  expect(view.getByTestId('native-sprite-atlas').props.sprites[0].x).toBe(3 * 128);
 });
 
 it('shows each fresh hit once, keeps it over the defeated enemy and removes it after floating', async () => {
@@ -157,7 +157,9 @@ it('freezes while paused, resumes remaining hold, changes speed, restarts repeat
   expect(result.current.index).toBe(1);
   expect(jest.getTimerCount()).toBe(0);
   await rerender({ playing: true, speed: 2, event: 1 });
-  await act(() => { jest.advanceTimersByTime(25); });
+  await act(() => { jest.advanceTimersByTime(64); });
+  expect(result.current.index).toBe(1);
+  await act(() => { jest.advanceTimersByTime(1); });
   expect(result.current.index).toBe(2);
   await act(() => { jest.advanceTimersByTime(300); });
   expect(result.current.clip).toBe(player.actions.idle);
@@ -171,7 +173,7 @@ it('freezes while paused, resumes remaining hold, changes speed, restarts repeat
 it('finishes death while the battle is terminal and never loops it', async () => {
   const { result } = await renderHook(() => useSpritePlayback(player, 'death', undefined, true, 1, 800));
   await act(() => { jest.advanceTimersByTime(10000); });
-  expect(result.current.index).toBe(7);
+  expect(result.current.index).toBe(5);
   expect(result.current.clip).toBe(player.actions.death);
   expect(jest.getTimerCount()).toBe(0);
 });

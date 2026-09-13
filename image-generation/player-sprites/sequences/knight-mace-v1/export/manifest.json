@@ -1,0 +1,68 @@
+{
+  "asset_id": "barbarian_player",
+  "name": "Knight",
+  "facing": "right",
+  "frame_size": [
+    128,
+    128
+  ],
+  "pivot": [
+    0.5341246290801187,
+    0.8694362017804155
+  ],
+  "height_scale": 1,
+  "reference_idle_height_px": 82.42136498516321,
+  "shared_crop": [
+    140,
+    267,
+    477,
+    604
+  ],
+  "actions": {
+    "idle": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "walk": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "attack": {
+      "timing": {
+        "repeat": false
+      }
+    },
+    "death": {
+      "timing": {
+        "repeat": false
+      }
+    }
+  },
+  "source": {
+    "idle": {
+      "source": "idle-layout.png",
+      "sha256": "4ccd3715602c43f32d237e3c6c78f9aec82125d619ad6a18b45eab92303f7123"
+    },
+    "walk": {
+      "source": "walk-layout.png",
+      "sha256": "945982bf091ec04923e5ddb86ff5899eb30b5365f8b1e55f019a22e571fbfac2"
+    },
+    "attack": {
+      "source": "attack-layout.png",
+      "sha256": "1d64777a544f13d9dcf693ebdeb982fd6ae4f31404f2493161c056ebf1c4ef6d"
+    },
+    "death": {
+      "source": "death-layout.png",
+      "sha256": "bd5f0d0228548aa627422c1f308897770aedbf2ba90a0bb859b1a2083071a3b9"
+    }
+  },
+  "backend": "built-in imagegen frame sheet; deterministic CPU import",
+  "recipe_sha256": "036c8519c34d22c4bb1149d3e8127089626e15dca170606da4cf519fa6e5fe2d",
+  "code_sha256": {
+    "sheet_import.py": "d6cc266480e76ab89ebfc739d88743b5d42fc58730b461b99f60f8c1782724b4",
+    "pixels.py": "fa49c9f048211472dc89c9e692b982ce88685c9c9ab82a0241f11502c270dbc4"
+  },
+  "framing": "Explicit source rectangles and ground origins; one union crop/scale for all actions."
+}
