@@ -68,7 +68,7 @@
       "frame_step": 1
     },
     {
-      "manifest": "enemy-sprites/sequences/hollow-delve-v1/troglodyte/export/manifest.json",
+      "manifest": "enemy-sprites/sequences/hollow-delve-v2/troglodyte/export/manifest.json",
       "actions": [
         "idle",
         "walk",
@@ -101,7 +101,7 @@
       "frame_step": 1
     },
     {
-      "manifest": "enemy-sprites/sequences/hollow-delve-v1/delve_dwarf/export/manifest.json",
+      "manifest": "enemy-sprites/sequences/hollow-delve-v2/delve_dwarf/export/manifest.json",
       "actions": [
         "idle",
         "walk",

@@ -1,0 +1,68 @@
+{
+  "asset_id": "troglodyte",
+  "name": "Troglodyte",
+  "facing": "left",
+  "frame_size": [
+    128,
+    128
+  ],
+  "pivot": [
+    0.5375,
+    0.78125
+  ],
+  "height_scale": 0.95,
+  "reference_idle_height_px": 63.2,
+  "shared_crop": [
+    148,
+    310,
+    468,
+    630
+  ],
+  "actions": {
+    "idle": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "walk": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "attack": {
+      "timing": {
+        "repeat": false
+      }
+    },
+    "death": {
+      "timing": {
+        "repeat": false
+      }
+    }
+  },
+  "source": {
+    "idle": {
+      "source": "idle-layout.png",
+      "sha256": "fe74e6895e2bc1530371f4a54d5a985786025e2a89fa4ba6333446c1a9dbd23c"
+    },
+    "walk": {
+      "source": "walk-layout.png",
+      "sha256": "a9abab2fb6046cf8e51c9ac4b282350ecbd1637ae7fd6967a08e7fb65bac5f70"
+    },
+    "attack": {
+      "source": "attack-layout.png",
+      "sha256": "d8d2ff1af9cd08eeb1b16c687a3dc4429a52a8a56ca0be4340fe0a803383a0ba"
+    },
+    "death": {
+      "source": "death-layout.png",
+      "sha256": "2c489c6d4f7a06f00f36c7cc59d01757da030e416c1fc8fdde535fc1541b43b3"
+    }
+  },
+  "backend": "built-in imagegen frame sheet; deterministic CPU import",
+  "recipe_sha256": "5156f939fffc92acf35d56879bdb4fbedf73c184e883fbcf7935704345e2526a",
+  "code_sha256": {
+    "sheet_import.py": "d6cc266480e76ab89ebfc739d88743b5d42fc58730b461b99f60f8c1782724b4",
+    "pixels.py": "fa49c9f048211472dc89c9e692b982ce88685c9c9ab82a0241f11502c270dbc4"
+  },
+  "framing": "Explicit source rectangles and ground origins; one union crop/scale for all actions."
+}

@@ -16,6 +16,9 @@ Its [portable animated review](../../image-generation/enemy-sprites/sequences/we
 includes the unchanged player for comparison.
 The [Hollow Delve roster](../../image-generation/enemy-sprites/sequences/hollow-delve-v1/README.md)
 contains troglodytes, cave spiders, bone slimes, beardless dwarves and gnolls.
+The [v2 revisions](../../image-generation/enemy-sprites/sequences/hollow-delve-v2/README.md)
+replace the troglodyte with a hunched, tailed creature and give the dwarf red
+eyes and an axe, with boot-based contacts during the downward chop.
 
 For a choppier package, keeping every second **exported** pose:
 

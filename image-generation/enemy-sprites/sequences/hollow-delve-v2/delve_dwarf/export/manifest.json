@@ -1,0 +1,68 @@
+{
+  "asset_id": "delve_dwarf",
+  "name": "Delve Dwarf",
+  "facing": "left",
+  "frame_size": [
+    128,
+    128
+  ],
+  "pivot": [
+    0.5220338983050847,
+    0.888135593220339
+  ],
+  "height_scale": 0.72,
+  "reference_idle_height_px": 86.77966101694915,
+  "shared_crop": [
+    166,
+    298,
+    461,
+    593
+  ],
+  "actions": {
+    "idle": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "walk": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "attack": {
+      "timing": {
+        "repeat": false
+      }
+    },
+    "death": {
+      "timing": {
+        "repeat": false
+      }
+    }
+  },
+  "source": {
+    "idle": {
+      "source": "idle-layout.png",
+      "sha256": "8bd5743a3435354b75e1cdc1363b8ce846d11101d1a1f0ec85740bf0703d75ce"
+    },
+    "walk": {
+      "source": "walk-layout.png",
+      "sha256": "66de1d887dadba28151a1f3dc551b796375fc517d87741ab0f1cbc310f03c45d"
+    },
+    "attack": {
+      "source": "attack-layout.png",
+      "sha256": "a9df665a0ddd9fbe1692d740d57ef647fe92c5e495a7eaaf2a86e8a038139401"
+    },
+    "death": {
+      "source": "death-layout.png",
+      "sha256": "ca219477e08ba4c41b4f0afa6e328ca5242258e6e993f2f70d688803e173e484"
+    }
+  },
+  "backend": "built-in imagegen frame sheet; deterministic CPU import",
+  "recipe_sha256": "92191ca830f5f9697f3c1a8f9f230e649bc481d5692395da682a09379f4019d8",
+  "code_sha256": {
+    "sheet_import.py": "d6cc266480e76ab89ebfc739d88743b5d42fc58730b461b99f60f8c1782724b4",
+    "pixels.py": "fa49c9f048211472dc89c9e692b982ce88685c9c9ab82a0241f11502c270dbc4"
+  },
+  "framing": "Explicit source rectangles and ground origins; one union crop/scale for all actions."
+}

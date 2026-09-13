@@ -1,5 +1,5 @@
 {
-  "recipe_sha256": "531c4b307f7a53053d0c391e992c0146a686562647c7a8a1c554d320a7baa893",
+  "recipe_sha256": "17a36d3c68ba5f6f00415d6f143e7ec10bcc8a5ee454d1fbe8d6d8a6c32aa152",
   "entities": {
     "barbarian_player": {
       "manifest": "image-generation/player-sprites/sequences/barbarian-club-v1/export/manifest.json",
@@ -164,29 +164,29 @@
       }
     },
     "troglodyte": {
-      "manifest": "image-generation/enemy-sprites/sequences/hollow-delve-v1/troglodyte/export/manifest.json",
-      "sha256": "e7fca62ba61351c1c4f737792c0408c8a51df6e649ce41b7b1b1ddadb5dd7ff6",
+      "manifest": "image-generation/enemy-sprites/sequences/hollow-delve-v2/troglodyte/export/manifest.json",
+      "sha256": "f96b2b496cb03b144744c8e8682084e1d2c7d927eff3469ac9d95aa55de72c6e",
       "frame_step": 1,
       "sheets": {
         "idle": {
-          "atlas_sha256": "52de51541817d053e87a1f4319527ef3376c411a1b383f44dcd38e44cde6d431",
-          "image_sha256": "c4b5d0badd6b9ade2027e8db3eb7dd1c68227fe3b36087f4b8dafdcca8e6e76b",
-          "output_sha256": "2efae42a8bad171b6f2aa444646c834d518c5660258f1ff5724157c08fe1d212"
+          "atlas_sha256": "1cf232e6e1c4c918bdfe2c84e05751c46ad8251d43d41d02847ffdf8623c25f5",
+          "image_sha256": "14770e0e8c2341b62e7715338cb998d9480c9a4cc153e7f7792bfe078bb015a2",
+          "output_sha256": "c1c356992ab147616ec9bed67a0c48c047faaea9e8bb9a016e513da1e9d92cac"
         },
         "walk": {
-          "atlas_sha256": "775ac5285c76dc00832ee0114ced33680ab14c8ff1786e4b3ad085629a466005",
-          "image_sha256": "1dae75f86dacac6600684f77f0aec80df55f7c20febe821db7d8bcbccd82bb85",
-          "output_sha256": "83fe63b203bd39fa137d9152f380dace14ef0466af0f56648fe8de0dd3e7036f"
+          "atlas_sha256": "ad405e18c460a0302b447c4f63ff2250c089cbc323e7879136b7f399cda8d7e5",
+          "image_sha256": "3902b8935442953915c7c9feaf2ce1989c79cb063d6ddc959b2bd2a3c766a08a",
+          "output_sha256": "1093d15afa6c5b41cfe09047e10f233430c5d42c3a4b6e3e49409a9cac3f3be9"
         },
         "attack": {
-          "atlas_sha256": "f8183f8d12faa6e235233f36623f8e10b1fb695e78e7914c16f56c4d5d134102",
-          "image_sha256": "dbb2f160301534fb2b4486af54f6ce8c3bb937d0d05bdc5a25b6ae4d6c409b28",
-          "output_sha256": "4fd8d7dbfaae24add70cbd4ded3771d076ed224e3960d9f5b1c34f3f05135393"
+          "atlas_sha256": "f7670b465771b79fd66b8f8bd3d7e5c94ba067b6b03757474f2b9157ed564577",
+          "image_sha256": "f5222179820e7988488f66f162a2fa475b0c8b4a1bd81aeee9e6d5cf4ae373d8",
+          "output_sha256": "08c823f699bec542d93685665a673fa7cca040262eaa0f74ef0844558679c17e"
         },
         "death": {
-          "atlas_sha256": "e99c235b71467bf9c564fa376647957794bbe9d162f0dd061a7c3a1bcf0ae74d",
-          "image_sha256": "2813b6e69708503d6ae8bfe4313599bad7e1904bc293677e93eb90e6b8832b5a",
-          "output_sha256": "5246c2c845c546032d431a2b55ebdc237df8758dd94cd89ef919b4124faef29f"
+          "atlas_sha256": "d998b6b31dd1f9125f3470bc0bfed105751f39da8f6db8e24fc1a33de2564a2d",
+          "image_sha256": "1fdf49a487a0c15da3b182740c13f0ade37bc09a255e3149421bb2d3991daead",
+          "output_sha256": "e964e2f5b84990e3b1bfc1597ead83825a1077cd05b19db6fb581b7575ecfc6b"
         }
       }
     },
@@ -245,29 +245,29 @@
       }
     },
     "delve_dwarf": {
-      "manifest": "image-generation/enemy-sprites/sequences/hollow-delve-v1/delve_dwarf/export/manifest.json",
-      "sha256": "e14abdd356ef957693a2013b059af7fb5792cd59126662fa2fe814c8e843b31b",
+      "manifest": "image-generation/enemy-sprites/sequences/hollow-delve-v2/delve_dwarf/export/manifest.json",
+      "sha256": "3c39061aef34d1d0f4b9effcb4ad79db086b456e1a8ca1986e41f5f46d1ab78e",
       "frame_step": 1,
       "sheets": {
         "idle": {
-          "atlas_sha256": "3771872aee95961178d64e4a03b9c88779a40aaa99eb0f28ff975bf1605de96d",
-          "image_sha256": "8aee29d8ba0023d9e86fde21be1473e55272ecd3f40aa1700c53f89d80d05e25",
-          "output_sha256": "8fa6e7050b6ff3bb281b8ba09dc8b2e42deb35f5e5d1688ce2d845dc8cedec76"
+          "atlas_sha256": "abc966b35bbf9f7cc797919bb729b1c86db1d5e01baf73a2b8e4e3028310df68",
+          "image_sha256": "1caae7e6d5131f4c069f14f7fcf8de998444baaad6c8b757fea0f8f1fe18e60b",
+          "output_sha256": "40a7a616dc1cb525111c076f4b575c13056c00864dc2e013821895906afa50b6"
         },
         "walk": {
-          "atlas_sha256": "08f7d565d651b8a4752d77c71a3a1ad2f3910ab9fc0ef4c35d70da7ef67bd00d",
-          "image_sha256": "26c6952a6ef1cd0aaa1b84f4fdcb5db2c67bf7ec94608570ddf6db5a6eb36579",
-          "output_sha256": "70094e10178f83d9534e20be2eb7b58d1471aad136b249e3b6eebb82bdbc02b9"
+          "atlas_sha256": "147fc04499d3221e6c5451a0843d85c248e8f57ddd82d65415c6b3eef7392c19",
+          "image_sha256": "76ba38855f12af1493c8b03281b408469d0adc40dbab79ffa2792bc1f636d607",
+          "output_sha256": "4460547a0843320342f40adc1e395dc4bb003b04b3c1cd2a21e990d7b6454ba8"
         },
         "attack": {
-          "atlas_sha256": "055a125c36b17624b3ffb45687c6a26aa83ceb3357abd31b18c3d54e16b2822e",
-          "image_sha256": "cd002d96d2bb61461bb666312a04ca09170069486e66eefcaa3760a1ea0793c4",
-          "output_sha256": "c71fc5bf107ed1e28906bd2a4c9706236e952937f6f3146de936e31cd9530023"
+          "atlas_sha256": "cb756b0b08e483c7c3508850747a6f732db36b3404f8ab532a0e95f673e655ac",
+          "image_sha256": "9a386fcc08e2be331dbb6944a13df8552a5a57f9bb748f5479365b417c6594d9",
+          "output_sha256": "e56a1775ba0b1dccc3b5d179cd98c0685da035238e1d8c689369dbd1b9392e89"
         },
         "death": {
-          "atlas_sha256": "5db16339cb70e95377cc25eea238d1e698597e0094abb774ee0579c089657aec",
-          "image_sha256": "67b79777059ad8a3e376370109a7a1e9d76c952d07286ef56334c245934c640b",
-          "output_sha256": "8ad82747e1c45690ed4212d0aab1f6a1a50a46e77aa59ba302a5cb31a4e7ef0a"
+          "atlas_sha256": "3486cf226b5e4aa90edff61b9494bc776c2465839bae51467654baba425b9425",
+          "image_sha256": "30b8d6bec5974e6a8ec4eb32019a11213f94177bf9dbd65e978a307aa4c84f19",
+          "output_sha256": "69cdd1ee7dcefb4bf725d1a7867e8733279297d82cf8e6a01ae87f5183cd9579"
         }
       }
     },

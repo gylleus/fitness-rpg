@@ -1,0 +1,153 @@
+{
+  "frames": 48,
+  "entities": {
+    "troglodyte": {
+      "actions": {
+        "idle": {
+          "frames": 6,
+          "duration_ms": 1080,
+          "ground_error_px": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "red_accent_pixels": null
+        },
+        "walk": {
+          "frames": 6,
+          "duration_ms": 660,
+          "ground_error_px": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "red_accent_pixels": null
+        },
+        "attack": {
+          "frames": 6,
+          "duration_ms": 720,
+          "ground_error_px": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "red_accent_pixels": null
+        },
+        "death": {
+          "frames": 6,
+          "duration_ms": 900,
+          "ground_error_px": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "red_accent_pixels": null
+        }
+      },
+      "pivot": [
+        0.5375,
+        0.78125
+      ]
+    },
+    "delve_dwarf": {
+      "actions": {
+        "idle": {
+          "frames": 6,
+          "duration_ms": 1080,
+          "ground_error_px": [
+            -0.319,
+            -0.319,
+            -0.319,
+            -0.319,
+            -0.319,
+            -0.319
+          ],
+          "red_accent_pixels": [
+            2,
+            4,
+            5,
+            4,
+            4,
+            5
+          ]
+        },
+        "walk": {
+          "frames": 6,
+          "duration_ms": 660,
+          "ground_error_px": [
+            -0.319,
+            -0.319,
+            -0.319,
+            -0.319,
+            -0.319,
+            -0.319
+          ],
+          "red_accent_pixels": [
+            5,
+            4,
+            4,
+            4,
+            4,
+            5
+          ]
+        },
+        "attack": {
+          "frames": 6,
+          "duration_ms": 720,
+          "ground_error_px": [
+            -0.319,
+            -0.319,
+            -0.319,
+            -0.319,
+            -0.319,
+            -0.319
+          ],
+          "red_accent_pixels": [
+            5,
+            4,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        "death": {
+          "frames": 6,
+          "duration_ms": 900,
+          "ground_error_px": [
+            -0.319,
+            -0.319,
+            -0.319,
+            -0.319,
+            -0.319,
+            -0.319
+          ],
+          "red_accent_pixels": [
+            3,
+            4,
+            5,
+            3,
+            1,
+            3
+          ]
+        }
+      },
+      "pivot": [
+        0.5220338983050847,
+        0.888135593220339
+      ]
+    }
+  }
+}

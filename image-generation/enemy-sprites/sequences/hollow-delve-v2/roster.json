@@ -1,0 +1,101 @@
+{
+  "enemies": [
+    {
+      "id": "troglodyte",
+      "name": "Troglodyte",
+      "family": "human",
+      "rank": "common",
+      "tier": 4,
+      "balance": "draft",
+      "description": "A blind cave creature that creeps on deeply bent legs beneath an arched back. Long grasping arms probe ahead while a thick, hairless tail balances its low body.",
+      "visual_description": "The Troglodyte carries its body in a deep, permanent hunch. Its ridged back arches above its low head, and its nearly horizontal torso narrows into a sunken belly between long, folded limbs. The shoulders rise like blunt knobs beneath pale gray-green skin. A wet film gathers in strings below the elbows and in the loose folds around its throat. Its broad, flattened head projects from the chest without an upright neck. Wrinkled skin seals both eye depressions beneath a heavy brow; a wide nose and a split-looking mouth full of uneven teeth occupy the blunt face.\n\nLarge cupped ears flare sideways, one folded along the rim. Its oversized hands almost reach the floor, with long fingers and hooked, dirty nails. Deeply bent hind legs end in broad splayed feet. A thick, tapering, hairless tail grows from the base of its spine and curves behind the body, its fleshy folds slick with the same slime as its back. A ragged strip of hide covers its hips beneath the tail root. Chalk dust cakes its toes and knuckles. It holds one probing hand ahead of its face and cocks its head as though waiting for an objection from the wall, while its tail makes a slow balancing curve behind it.\n",
+      "quirk": "It pauses with its head cocked after tapping a wall, as if waiting for the wall to answer.",
+      "fallback_sprite": "knight",
+      "stats": {
+        "health": 380,
+        "attack": 40,
+        "gold": 44,
+        "xp": 48
+      },
+      "visual": {
+        "height_scale": 0.95,
+        "silhouette": "Deeply hunched cave creature with a nearly horizontal spine, high knotted shoulders, low broad head, extremely long grasping forearms, folded hind legs, splayed feet and a thick tapering fleshy tail.",
+        "appearance": "Slimy pale gray-green folded skin, sealed eyeless depressions, sideways cupped ears, wide nostrils and uneven teeth. Hairless tail curves behind the body; chalk dust cakes toes and knuckles. A stained hide loincloth covers its hips.",
+        "equipment": [
+          "stained hide loincloth",
+          "plain cord belt"
+        ],
+        "palette": [
+          "#A6B6AA",
+          "#718B7A",
+          "#D0CEC0",
+          "#504B40",
+          "#273333"
+        ],
+        "idle": "Its arched back rises slightly with each breath while its head stays low. Both splayed feet remain planted; the fingers of its probing hand curl and release as the fleshy tail shifts gently behind it for balance.",
+        "attack": "It compresses its folded legs and draws one long arm beneath its chest, then thrusts its low shoulders forward into a broad clawing rake. The tail curls the other way to balance the strike. Its front foot braces before the arm withdraws and the body settles into its deep listening crouch.",
+        "avoid": [
+          "upright human posture",
+          "visible eyeballs or glowing eye sockets",
+          "hair",
+          "reptilian scales",
+          "carried weapons",
+          "missing tail",
+          "exposed genitals",
+          "a cheerful expression"
+        ]
+      }
+    },
+    {
+      "id": "delve_dwarf",
+      "name": "Delve Dwarf",
+      "family": "dwarf",
+      "rank": "elite",
+      "tier": 4,
+      "balance": "draft",
+      "description": "A hostile dwarf encountered in the abandoned workings, short and unnervingly broad, with a hairless face, red eyes and a heavy iron axe. This individual guards its tools with silent, disproportionate anger.",
+      "visual_description": "The Delve Dwarf barely reaches an adult human's chest, but its barrel-shaped torso is nearly as broad as it is tall. A large bald head sits directly between sloping shoulders on a neck almost hidden by thick folds. Its clean-shaven face is broad and flattened, with a low shelf of brow, close-set ember-red eyes, a short blunt nose and a thin horizontal mouth. Small hot-red centers hold steady inside dark, bruised sockets. The jaw is wide and smoothly hairless. Ash-gray skin darkens to violet around the deep creases of its elbows, and chalky dust settles over the crown of its head. Its expression barely changes when the rest of its body moves.\n\nBulky forearms hang beside the compressed torso, ending in large square hands with thick fingers. Short bowed legs terminate in broad, cracked leather boots. A sleeveless charcoal work tunic, patched leather apron and narrow iron belt enclose its heavy frame; one apron corner has been cut away to stop it catching beneath a knee. It grips a heavy iron axe with a broad crescent blade and a short, dark wooden haft bound in worn leather. Rust pits the cheek of the blade, but its chipped cutting edge has been ground bright. It holds the axe low beside its boot and squares its stance in tiny adjustments, taking considerable trouble to occupy the exact middle of the passage.\n",
+      "quirk": "It makes tiny sideways adjustments until it blocks the passage with apparently exact satisfaction.",
+      "fallback_sprite": "knight",
+      "stats": {
+        "health": 720,
+        "attack": 55,
+        "gold": 76,
+        "xp": 80
+      },
+      "visual": {
+        "height_scale": 0.72,
+        "silhouette": "Very short, immensely broad humanoid; bald flattened head sunk between shoulders, barrel torso, huge square hands, bulky forearms and short bowed legs. A heavy axe with a broad crescent blade on a short haft.",
+        "appearance": "Completely beardless, bald ash-gray dwarf with small ember-red eyes in dark sockets, wide smooth jaw and thin mouth. Chalk dust, charcoal sleeveless tunic, patched dark leather apron, iron belt and cracked broad boots.",
+        "equipment": [
+          "heavy crescent-bladed iron axe with leather-bound wooden haft",
+          "sleeveless charcoal work tunic",
+          "patched leather apron",
+          "narrow iron belt",
+          "broad cracked leather boots"
+        ],
+        "palette": [
+          "#969499",
+          "#615D73",
+          "#C8C3B4",
+          "#37363D",
+          "#675044",
+          "#85888D",
+          "#E83B3B"
+        ],
+        "idle": "It breathes through its nose and tightens its square hands around the low axe haft, keeping both short legs firmly planted and its red eyes fixed ahead.",
+        "attack": "It takes the axe in both hands, bends its short knees and lifts the broad iron blade above one shoulder. Its torso rolls forward into a heavy descending chop while both boots brace against the floor. It pulls the blade back across its body and lowers the axe beside its boot.",
+        "avoid": [
+          "beard or moustache",
+          "head hair",
+          "horned helmet",
+          "Viking costume",
+          "heroic smiling fantasy dwarf",
+          "slender build",
+          "exposed genitals",
+          "giant stature"
+        ]
+      }
+    }
+  ]
+}

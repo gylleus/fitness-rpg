@@ -1,0 +1,84 @@
+{
+  "frames": [
+    {
+      "filename": "frame-000.png",
+      "sha256": "88a4cb5c454837f530a5b1daba397991ff5ddfb8f745058e8994fdf86a09b270",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 128,
+        "h": 128
+      },
+      "duration": 110,
+      "source_frame": 0
+    },
+    {
+      "filename": "frame-001.png",
+      "sha256": "e49a539471f097009320cf698dd99362938c0a0196ca715474c2ea51bb4cba29",
+      "frame": {
+        "x": 128,
+        "y": 0,
+        "w": 128,
+        "h": 128
+      },
+      "duration": 110,
+      "source_frame": 1
+    },
+    {
+      "filename": "frame-002.png",
+      "sha256": "63ca46934b8895a78dd28d59aa7465b4315de96e0618f3c8315ade39d5f5361f",
+      "frame": {
+        "x": 256,
+        "y": 0,
+        "w": 128,
+        "h": 128
+      },
+      "duration": 110,
+      "source_frame": 2
+    },
+    {
+      "filename": "frame-003.png",
+      "sha256": "e40c2181da14fa945163c80f4e79acbc198426c5d07f7b7f858e30a1f9effce0",
+      "frame": {
+        "x": 384,
+        "y": 0,
+        "w": 128,
+        "h": 128
+      },
+      "duration": 110,
+      "source_frame": 3
+    },
+    {
+      "filename": "frame-004.png",
+      "sha256": "143da39a0bb30d30b47297484c19b1b95ff81e793159add8bcf847701b4ef2bd",
+      "frame": {
+        "x": 0,
+        "y": 128,
+        "w": 128,
+        "h": 128
+      },
+      "duration": 110,
+      "source_frame": 4
+    },
+    {
+      "filename": "frame-005.png",
+      "sha256": "1cf7fa3cecfa60a26ad1be672b6346a817b405e7c3b8df5285367c443ad741ad",
+      "frame": {
+        "x": 128,
+        "y": 128,
+        "w": 128,
+        "h": 128
+      },
+      "duration": 110,
+      "source_frame": 5
+    }
+  ],
+  "meta": {
+    "image": "spritesheet.png",
+    "size": {
+      "w": 512,
+      "h": 256
+    },
+    "repeat": true
+  }
+}

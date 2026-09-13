@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "asset_id": "delve_dwarf",
+  "name": "Delve Dwarf",
+  "facing": "left",
+  "size": 128,
+  "height_scale": 0.72,
+  "backend": "built-in imagegen frame sheet; deterministic CPU import",
+  "layout_note": "Alpha-connected extraction and fixed grid-column x anchor. Reviewed support contacts keep boots grounded when weapons extend below them. One scale and union crop across all 24 poses; no per-frame resizing.",
+  "actions": {
+    "idle": {
+      "image": "idle-layout.png",
+      "sha256": "8bd5743a3435354b75e1cdc1363b8ce846d11101d1a1f0ec85740bf0703d75ce",
+      "loop": true,
+      "durations_ms": [
+        180,
+        180,
+        180,
+        180,
+        180,
+        180
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            320,
+            560
+          ]
+        },
+        {
+          "rect": [
+            640,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            960,
+            560
+          ]
+        },
+        {
+          "rect": [
+            1280,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            1600,
+            560
+          ]
+        },
+        {
+          "rect": [
+            1920,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            2240,
+            560
+          ]
+        },
+        {
+          "rect": [
+            0,
+            640,
+            640,
+            640
+          ],
+          "origin": [
+            320,
+            1200
+          ]
+        },
+        {
+          "rect": [
+            640,
+            640,
+            640,
+            640
+          ],
+          "origin": [
+            960,
+            1200
+          ]
+        }
+      ]
+    },
+    "walk": {
+      "image": "walk-layout.png",
+      "sha256": "66de1d887dadba28151a1f3dc551b796375fc517d87741ab0f1cbc310f03c45d",
+      "loop": true,
+      "durations_ms": [
+        110,
+        110,
+        110,
+        110,
+        110,
+        110
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            320,
+            560
+          ]
+        },
+        {
+          "rect": [
+            640,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            960,
+            560
+          ]
+        },
+        {
+          "rect": [
+            1280,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            1600,
+            560
+          ]
+        },
+        {
+          "rect": [
+            1920,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            2240,
+            560
+          ]
+        },
+        {
+          "rect": [
+            0,
+            640,
+            640,
+            640
+          ],
+          "origin": [
+            320,
+            1200
+          ]
+        },
+        {
+          "rect": [
+            640,
+            640,
+            640,
+            640
+          ],
+          "origin": [
+            960,
+            1200
+          ]
+        }
+      ]
+    },
+    "attack": {
+      "image": "attack-layout.png",
+      "sha256": "a9df665a0ddd9fbe1692d740d57ef647fe92c5e495a7eaaf2a86e8a038139401",
+      "loop": false,
+      "durations_ms": [
+        100,
+        160,
+        100,
+        80,
+        140,
+        140
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            320,
+            560
+          ]
+        },
+        {
+          "rect": [
+            640,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            960,
+            560
+          ]
+        },
+        {
+          "rect": [
+            1280,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            1600,
+            560
+          ]
+        },
+        {
+          "rect": [
+            1920,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            2240,
+            560
+          ]
+        },
+        {
+          "rect": [
+            0,
+            640,
+            640,
+            640
+          ],
+          "origin": [
+            320,
+            1200
+          ]
+        },
+        {
+          "rect": [
+            640,
+            640,
+            640,
+            640
+          ],
+          "origin": [
+            960,
+            1200
+          ]
+        }
+      ]
+    },
+    "death": {
+      "image": "death-layout.png",
+      "sha256": "ca219477e08ba4c41b4f0afa6e328ca5242258e6e993f2f70d688803e173e484",
+      "loop": false,
+      "durations_ms": [
+        100,
+        120,
+        130,
+        140,
+        160,
+        250
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            320,
+            560
+          ]
+        },
+        {
+          "rect": [
+            640,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            960,
+            560
+          ]
+        },
+        {
+          "rect": [
+            1280,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            1600,
+            560
+          ]
+        },
+        {
+          "rect": [
+            1920,
+            0,
+            640,
+            640
+          ],
+          "origin": [
+            2240,
+            560
+          ]
+        },
+        {
+          "rect": [
+            0,
+            640,
+            640,
+            640
+          ],
+          "origin": [
+            320,
+            1200
+          ]
+        },
+        {
+          "rect": [
+            640,
+            640,
+            640,
+            640
+          ],
+          "origin": [
+            960,
+            1200
+          ]
+        }
+      ]
+    }
+  }
+}
