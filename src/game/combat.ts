@@ -1,6 +1,7 @@
 import { attackPower, damageAfterArmor, type HeroStats } from './rules';
 import { advanceMeter, emptyCombatMeters, resolveAttack, type CombatMeters } from './attacks';
 import wetlands from './rosters/wetlands.json';
+import hollowDelve from './rosters/hollow_delve.json';
 import { rollLoot, type LootDrop } from './equipment';
 import { randomInt, seedFor } from './random';
 
@@ -33,6 +34,10 @@ export const DUNGEONS: Dungeon[] = [
     enemies: (['bog_toad', 'drowned_corpse', 'giant_water_strider', 'bog_hag', 'root_hulk'] as const)
       .map(id => wetlands.enemies[id] as Enemy) },
   ...LEGACY_DUNGEONS.slice(1),
+  { id: 3, biomeId: hollowDelve.biome_id, name: hollowDelve.name,
+    subtitle: 'Blind hunters beneath the abandoned mines.', color: '#a4b8a0',
+    enemies: (['troglodyte', 'giant_cave_spider', 'bone_slime', 'delve_dwarf', 'delve_gnoll'] as const)
+      .map(id => hollowDelve.enemies[id] as Enemy) },
 ];
 export type BattleStatus = 'active' | 'victory' | 'defeat' | 'exhausted' | 'retreated' | 'expired';
 export type BattleImpact = {

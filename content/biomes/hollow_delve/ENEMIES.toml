@@ -18,7 +18,7 @@ id = "troglodyte"
 name = "Troglodyte"
 family = "human"
 rank = "common"
-tier = 2
+tier = 4
 balance = "draft"
 description = "A blind, slimy cave humanoid that feels its way through the abandoned galleries. Its bent posture and hesitant probing conceal the reach of its long arms."
 visual_description = """
@@ -29,10 +29,10 @@ Large cupped ears stand away from its skull, one folded along the rim. Five long
 quirk = "It pauses with its head cocked after tapping a wall, as if waiting for the wall to answer."
 fallback_sprite = "knight"
 [enemies.stats]
-health = 120
-attack = 17
-gold = 16
-xp = 22
+health = 380
+attack = 40
+gold = 44
+xp = 48
 [enemies.visual]
 height_scale = 0.95
 silhouette = "Stooped hairless humanlike creature with a projecting head, cupped ears, long hanging forearms, narrow chest, loose belly and flat splayed feet."
@@ -48,7 +48,7 @@ id = "giant_cave_spider"
 name = "Giant Cave Spider"
 family = "beast"
 rank = "common"
-tier = 2
+tier = 4
 balance = "draft"
 description = "A heavy cave spider with a swollen abdomen and long hooked legs. Dust catches in its coarse hairs while its paired fangs remain dark and polished."
 visual_description = """
@@ -59,10 +59,10 @@ Eight small, glossy black eyes crowd the front of its low head, with the middle 
 quirk = "It repeatedly clears the same old strand of silk from a forefoot without appearing to make progress."
 fallback_sprite = "wolf"
 [enemies.stats]
-health = 145
-attack = 20
-gold = 18
-xp = 25
+health = 450
+attack = 44
+gold = 48
+xp = 52
 [enemies.visual]
 height_scale = 0.6
 silhouette = "Low two-part spider body with a large rear abdomen, eight angular legs in four pairs, short mouth palps and two downward fangs."
@@ -78,7 +78,7 @@ id = "bone_slime"
 name = "Bone Slime"
 family = "ooze"
 rank = "common"
-tier = 2
+tier = 4
 balance = "draft"
 description = "A translucent green blob containing a humanoid skull, ribs and long bones. Its borrowed remains drift through the jelly whenever it changes direction."
 visual_description = """
@@ -89,10 +89,10 @@ A yellowed humanoid skull floats near the front of the mass with its empty socke
 quirk = "Its skull takes an extra moment to face the direction the rest of it has already chosen."
 fallback_sprite = "slime"
 [enemies.stats]
-health = 160
-attack = 19
-gold = 20
-xp = 26
+health = 500
+attack = 43
+gold = 50
+xp = 56
 [enemies.visual]
 height_scale = 0.45
 silhouette = "Broad, low green jelly mound with rounded basal lobes and a clearly enclosed humanoid skull and scattered bones; no limbs or own face."
@@ -108,7 +108,7 @@ id = "delve_dwarf"
 name = "Delve Dwarf"
 family = "dwarf"
 rank = "elite"
-tier = 2
+tier = 4
 balance = "draft"
 description = "A hostile dwarf encountered in the abandoned workings, short and unnervingly broad, with a hairless face and a heavy stone-breaking maul. This individual guards its tools with silent, disproportionate anger."
 visual_description = """
@@ -119,10 +119,10 @@ Bulky forearms hang beside the compressed torso, ending in large square hands wi
 quirk = "It makes tiny sideways adjustments until it blocks the passage with apparently exact satisfaction."
 fallback_sprite = "knight"
 [enemies.stats]
-health = 245
-attack = 25
-gold = 34
-xp = 38
+health = 720
+attack = 55
+gold = 76
+xp = 80
 [enemies.visual]
 height_scale = 0.72
 silhouette = "Very short, immensely broad humanoid; bald flattened head sunk between shoulders, barrel torso, huge square hands, bulky forearms and short bowed legs. Short mining maul with rectangular iron head."
@@ -138,7 +138,7 @@ id = "delve_gnoll"
 name = "Delve Gnoll"
 family = "beast"
 rank = "boss"
-tier = 2
+tier = 4
 balance = "draft"
 description = "A large hyena-headed scavenger that claims the deeper galleries. A forward-heavy stance and a scarred iron cleaver make this gnoll the strongest obstacle on the route."
 visual_description = """
@@ -149,10 +149,10 @@ Its long arms end in broad, clawed hands, while bent hocks lift the heels of its
 quirk = "It keeps chewing long after its mouth is empty, looking increasingly dissatisfied."
 fallback_sprite = "boss"
 [enemies.stats]
-health = 330
-attack = 30
-gold = 65
-xp = 58
+health = 980
+attack = 62
+gold = 170
+xp = 130
 [enemies.visual]
 height_scale = 1.12
 silhouette = "Tall hunched hyena humanoid with high shoulders, black neck mane, long muzzle, rounded ears, long arms, digitigrade legs, broad paw feet and short tail. One broad cleaver."

@@ -21,6 +21,25 @@ function finish(db: ReturnType<typeof createTestDb>, run: ReturnType<typeof star
   return run;
 }
 describe('victory stakes', () => {
+  it('unlocks Hollow Delve by clearing Frostbound Keep and persists its complete roster', () => {
+    const db = trained();
+    getHero(db);
+    expect(() => startDungeon(db, 3, now)).toThrow('Defeat the previous boss');
+    db.update(heroes).set({ unlockedDungeon: 2 }).run();
+    let run = startDungeon(db, 2, now);
+    // Exercise the real victory transaction from a saved final combat beat.
+    const state = { ...run.state, encounter: 3, defeated: 3, phase: 'fighting' as const,
+      turn: 'hero' as const, enemyHp: 1 };
+    db.update(dungeonRuns).set({ state }).where(eq(dungeonRuns.id, run.id)).run();
+    run = advanceDungeon(db, run.id, state.tick, now)!;
+    expect(run.status).toBe('victory');
+    expect(getHero(db).unlockedDungeon).toBe(3);
+    const delve = startDungeon(db, 3, now);
+    expect(delve.state.dungeon?.biomeId).toBe('hollow_delve');
+    expect(delve.state.dungeon?.enemies).toEqual(DUNGEONS[3].enemies);
+    expect(db.select().from(dungeonRuns).where(eq(dungeonRuns.id, delve.id)).get()?.state.dungeon).toEqual(DUNGEONS[3]);
+    db.$client.close();
+  });
   it('banks the whole bounty once and carries exact remaining health into a replay', () => {
     const db = trained();
     let run = startDungeon(db, 0, now);

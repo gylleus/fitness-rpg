@@ -28,6 +28,8 @@ async function main() {
   const { drawOffscreen, makeOffscreenSurface, Group, ColorType, AlphaType } = headless;
   const exports = { ...headless, Skia };
   const { WetlandsArtwork } = loadProduction('src/scenes/WetlandsArtwork.tsx', exports);
+  const { HollowDelveArtwork } = loadProduction('src/scenes/HollowDelveArtwork.tsx', exports);
+  const { delveBackgroundX, delvePropOffset, delveTransition, hollowDelveLayout } = loadProduction('src/scenes/hollowDelve.ts', exports);
   const { sceneryOffset, wetlandsLayout, willowOffset } = loadProduction('src/scenes/wetlands.ts', exports);
   const { SpriteTile } = loadProduction('src/sprites/SpriteTile.tsx', exports);
   const { spriteGeometry } = loadProduction('src/sprites/playback.ts', exports);
@@ -54,7 +56,17 @@ async function main() {
     assert.deepEqual([image.width(), image.height()], sources[key].size);
     return [key, image];
   }));
-  const actors = Object.fromEntries(['barbarian_player', 'bog_toad', 'root_hulk'].map(id =>
+  const delveSources = require('../assets/biomes/hollow_delve/sources.json');
+  const delveImages = Object.fromEntries(Object.entries(delveSources).map(([key, spec]) => {
+    const file = `assets/biomes/hollow_delve/${key}.png`;
+    assert.equal(createHash('sha256').update(fs.readFileSync(path.join(root, file))).digest('hex'), spec.sha256);
+    assert.equal(createHash('sha256').update(fs.readFileSync(path.join(root, spec.source))).digest('hex'), spec.source_sha256);
+    const image = decode(file);
+    assert.deepEqual([image.width(), image.height()], spec.size);
+    return [key, image];
+  }));
+  const delveEnemies = ['troglodyte', 'giant_cave_spider', 'bone_slime', 'delve_dwarf', 'delve_gnoll'];
+  const actors = Object.fromEntries(['barbarian_player', 'bog_toad', 'root_hulk', ...delveEnemies].map(id =>
     [id, decode(`assets/sprites/${id}--idle.png`)]));
   fs.mkdirSync(output, { recursive: true });
   let renders = 0;
@@ -81,6 +93,26 @@ async function main() {
     try { renders++; return await drawOffscreen(surface, React.createElement(Group, null, ...nodes)); }
     finally { surface.dispose(); }
   }
+  async function renderDelve(layout, position, selected = delveImages, enemy) {
+    const camera = layout.width * 0.22 - position;
+    const surface = makeOffscreenSurface(layout.width, layout.height);
+    const nodes = [React.createElement(HollowDelveArtwork, { key: 'scenery', images: selected, layout,
+      background: { ...layout.background, x: delveBackgroundX(camera, layout.background.width, layout.width) },
+      ground: { ...layout.ground, x: sceneryOffset(camera, 1, layout.ground.width) },
+      props: [{ translateX: delvePropOffset(camera, layout.propPeriod) }],
+      galleryOpacity: delveTransition(position, 500), cavernOpacity: delveTransition(position, 1100) })];
+    if (enemy) for (const [id, x, facing] of [['barbarian_player', layout.width * 0.22, 'right'],
+      [enemy, layout.width * 0.22 + 80, 'left']]) {
+      const entity = catalog.entities[id];
+      const geometry = spriteGeometry(entity, layout.ground.width / 256 * 64, facing);
+      nodes.push(React.createElement(Group, { key: id,
+        transform: [{ translateX: x + geometry.left }, { translateY: layout.groundY + geometry.top }] },
+      React.createElement(SpriteTile, { image: actors[id], frame: entity.actions.idle.frames[0],
+        frameSize: entity.frameSize, scale: geometry.scale, flipped: geometry.flipped })));
+    }
+    try { renders++; return await drawOffscreen(surface, React.createElement(Group, null, ...nodes)); }
+    finally { surface.dispose(); }
+  }
   try {
     for (const [name, width, height, groundY, heroHeight] of [
       ['compact', 300, 240, 198, 92], ['portrait', 390, 844, 754, 140],
@@ -94,6 +126,13 @@ async function main() {
         fs.writeFileSync(path.join(output, `${name}-${pose}.png`), image.encodeToBytes());
         image.dispose();
       }
+      for (const [index, enemy] of delveEnemies.entries()) {
+        const image = await renderDelve(hollowDelveLayout(width, height, groundY, heroHeight), 280 + index * 320, delveImages, enemy);
+        const rgba = pixels(image, width, height);
+        for (let i = 3; i < rgba.length; i += 4) assert.equal(rgba[i], 255, `Hollow Delve ${name}: uncovered pixel`);
+        fs.writeFileSync(path.join(output, `hollow-delve-${name}-${enemy}.png`), image.encodeToBytes());
+        image.dispose();
+      }
     }
     // Use integer scales/periods so every sampled pixel must match. Each
     // mirrored strip repeats after two source widths; props repeat every 700.
@@ -105,8 +144,17 @@ async function main() {
       assert.deepEqual(pixels(first, 640, 360), pixels(repeat, 640, 360), `${key}: repeat changed the rendered pixels`);
       first.dispose(); repeat.dispose();
     }
+    const delveLayout = hollowDelveLayout(640, 360, 288, 64);
+    for (const [keys, period] of [[['slate_path'], 512],
+      [['mine_support', 'webbed_arch', 'ore_cart', 'quartz_cluster', 'fungus_stump', 'bone_heap', 'stalagmites', 'tool_cache'], 1920]]) {
+      const selected = Object.fromEntries(Object.keys(delveImages).map(key => [key, keys.includes(key) ? delveImages[key] : null]));
+      const first = await renderDelve(delveLayout, 300, selected);
+      const repeat = await renderDelve(delveLayout, 300 + period, selected);
+      assert.deepEqual(pixels(first, 640, 360), pixels(repeat, 640, 360), 'Hollow Delve: ground/props repeat changed pixels');
+      first.dispose(); repeat.dispose();
+    }
     fs.writeFileSync(path.join(output, 'report.json'), JSON.stringify({ renderer: 'real Skia / CanvasKit', renders,
-      checks: ['five bundled source hashes and dimensions', 'opaque viewport at four sizes and two encounters',
+      checks: ['17 bundled source hashes and dimensions', 'opaque viewport at four sizes, Wetlands and all five Hollow Delve encounters',
         'production sprites on the shared ground baseline', 'pixel-exact mirrored background/ground and prop repetition'] }, null, 2) + '\n');
     console.log(`Scene rendering passed: ${renders} real-Skia renders. Artifacts: ${output}`);
   } finally { decoded.forEach(image => image.dispose()); }

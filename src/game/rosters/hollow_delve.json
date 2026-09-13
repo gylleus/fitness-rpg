@@ -1,0 +1,51 @@
+{
+  "biome_id": "hollow_delve",
+  "name": "Hollow Delve",
+  "enemies": {
+    "troglodyte": {
+      "id": "troglodyte",
+      "name": "Troglodyte",
+      "health": 380,
+      "attack": 40,
+      "gold": 44,
+      "xp": 48,
+      "sprite": "knight"
+    },
+    "giant_cave_spider": {
+      "id": "giant_cave_spider",
+      "name": "Giant Cave Spider",
+      "health": 450,
+      "attack": 44,
+      "gold": 48,
+      "xp": 52,
+      "sprite": "wolf"
+    },
+    "bone_slime": {
+      "id": "bone_slime",
+      "name": "Bone Slime",
+      "health": 500,
+      "attack": 43,
+      "gold": 50,
+      "xp": 56,
+      "sprite": "slime"
+    },
+    "delve_dwarf": {
+      "id": "delve_dwarf",
+      "name": "Delve Dwarf",
+      "health": 720,
+      "attack": 55,
+      "gold": 76,
+      "xp": 80,
+      "sprite": "knight"
+    },
+    "delve_gnoll": {
+      "id": "delve_gnoll",
+      "name": "Delve Gnoll",
+      "health": 980,
+      "attack": 62,
+      "gold": 170,
+      "xp": 130,
+      "sprite": "boss"
+    }
+  }
+}
