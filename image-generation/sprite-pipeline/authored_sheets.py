@@ -108,6 +108,8 @@ def validate(recipe):
                 values = spec.get(field)
                 if values is not None and (len(values) != len(indices) or any(type(n) not in (int, float) or not math.isfinite(n) for n in values)):
                     raise ValueError(f"{field} needs one finite value per pose")
+            if "ground_contacts_y" in spec and "lift" in spec:
+                raise ValueError("Choose ground_contacts_y or lift, not both")
 
 
 def align(asset, sources):
@@ -124,10 +126,11 @@ def align(asset, sources):
                             for action, data in actions.items() for pose in data["poses"]])
         for action, data in actions.items():
             first = data["boxes"][0]
-            center = (first[0] + first[2]) / 2
-            columns = asset["sources"][asset["actions"][action]["source"]]["columns"]
+            spec = asset["actions"][action]
+            columns = asset["sources"][spec["source"]]["columns"]
+            center = (first[0] + first[2]) / 2 - (spec["indices"][0] % columns) * data["column_width"]
             for i, box in enumerate(data["boxes"]):
-                anchor = center + (i % columns) * data["column_width"]
+                anchor = center + (spec["indices"][i] % columns) * data["column_width"]
                 extent = max(anchor - box[0], box[2] - anchor)
                 if extent <= 0:
                     raise ValueError("Pose does not overlap its authored column anchor")
@@ -139,6 +142,8 @@ def align(asset, sources):
         factor = target / heights[action] if target is not None else 1
         first = (data if target is not None else sources[spec["source"]])["boxes"][0]
         center = (first[0] + first[2]) / 2
+        if target is not None:
+            center -= (spec["indices"][0] % source_spec["columns"]) * data["column_width"]
         sheet = Image.new("RGBA", (2560, math.ceil(len(data["poses"]) / 4) * 640))
         frames = []
         for i, (pose, box) in enumerate(zip(data["poses"], data["boxes"])):

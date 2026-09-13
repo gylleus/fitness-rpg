@@ -58,6 +58,22 @@ class AuthoredSheetsTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Expected 3 connected poses"):
             extract(self.root / "sheet.png", {**self.source, "columns": 3})
 
+    def test_reordered_ready_poses_keep_their_authored_columns(self):
+        self.asset["scale_mode"] = "ready_pose"
+        self.asset["actions"]["attack"]["indices"] = [1, 0]
+        data = extract(self.root / "sheet.png", self.source)
+        sheet, _, record = align(self.asset, {"sheet": data})["attack"]
+        first = sheet.crop((0, 0, 640, 640)).getbbox()
+        second = sheet.crop((640, 0, 1280, 640)).getbbox()
+        self.assertEqual(record["action_scale"], 9)
+        self.assertAlmostEqual(first[0] - second[0], 5 * record["action_scale"], delta=1)
+        self.assertEqual(first[3] - first[1], second[3] - second[1])
+
+    def test_conflicting_contact_corrections_rejected(self):
+        self.asset["actions"]["attack"].update(ground_contacts_y=[60, 60], lift=[0, 24])
+        with self.assertRaisesRegex(ValueError, "not both"):
+            validate({"schema_version": 1, "assets": [self.asset]})
+
     def test_bottom_overflow_rejected(self):
         self.asset["actions"]["attack"]["ground_contacts_y"] = [0, -100]
         with self.assertRaisesRegex(ValueError, "exceeds shared canvas"):
