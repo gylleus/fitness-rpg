@@ -97,6 +97,18 @@ def bundle(recipe_path, out, registry, frame_step=None):
                     frames.append({"x": x, "y": y, "duration": duration, "sourceFrame": records[index]["source_frame"]})
                 filename = f"{key}--{action}.png"
                 packed.save(staging/filename)
+                # Different Pillow/zlib versions can encode identical pixels
+                # differently. Preserve existing bytes when only packaging a
+                # new actor, avoiding unrelated asset/hash churn.
+                existing = out / filename
+                if existing.exists():
+                    try:
+                        with Image.open(existing) as previous:
+                            same = previous.size == packed.size and previous.convert("RGBA").tobytes() == packed.tobytes()
+                        if same:
+                            (staging/filename).write_bytes(existing.read_bytes())
+                    except OSError:
+                        pass  # A corrupt old PNG is replaced by the valid atlas.
                 image_key = f"{key}/{action}"
                 images[image_key] = filename
                 entity["actions"][action] = {"image": image_key, "loop": repeat,

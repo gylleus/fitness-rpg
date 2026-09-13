@@ -65,6 +65,25 @@ class RuntimeAssetsTests(unittest.TestCase):
             self.assertEqual((output/"catalog.json").read_text(), "keep existing package")
             self.assertFalse((root/"generated.ts").exists())
 
+    def test_rebundle_preserves_existing_encoding_and_updates_changed_pixels(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.fixture(root)
+            bundle(root/"bundle.json", root/"game", root/"generated.ts")
+            path = root/"game/test_actor--idle.png"
+            with Image.open(path) as image:
+                pixels = image.copy()
+            pixels.save(path, compress_level=0)
+            original = path.read_bytes()
+            bundle(root/"bundle.json", root/"game", root/"generated.ts")
+            self.assertEqual(path.read_bytes(), original)
+            provenance = json.loads((root/"game/provenance.json").read_text())
+            self.assertEqual(provenance['entities']['test_actor']['sheets']['idle']['output_sha256'], sprites.sha256(path))
+            pixels.putpixel((0, 0), (255, 0, 0, 255))
+            pixels.save(path)
+            bundle(root/"bundle.json", root/"game", root/"generated.ts")
+            self.assertEqual(Image.open(path).getpixel((0, 0)), (0, 0, 0, 0))
+
 
 if __name__ == "__main__":
     unittest.main()
