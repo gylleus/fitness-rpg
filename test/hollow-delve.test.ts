@@ -4,7 +4,8 @@ import { fitnessDay, heroStats } from '../src/game/rules';
 import catalog from '../assets/sprites/catalog.json';
 import type { SpriteCatalog } from '../src/sprites/types';
 import { sampleSprite } from '../src/sprites/playback';
-import { delveBackgroundX, delvePropOffset, delveTransition, hollowDelveLayout } from '../src/scenes/hollowDelve';
+import { delveBackgroundX, delveTransition, hollowDelveLayout } from '../src/scenes/hollowDelve';
+import { visibleScenery } from '../src/scenes/sceneryAtlas';
 import sources from '../assets/biomes/hollow_delve/sources.json';
 import roster from '../src/game/rosters/hollow_delve.json';
 
@@ -49,16 +50,16 @@ it.each([[300, 240, 198, 92], [390, 844, 754, 140], [844, 390, 300, 126.5], [320
   'keeps cave surfaces grounded and pans inside painted edges at %ix%i', (width, height, groundY, heroHeight) => {
     const layout = hollowDelveLayout(width, height, groundY, heroHeight);
     expect(layout.ground.y + sources.slate_path.surface_y / sources.slate_path.size[1] * layout.ground.height).toBeCloseTo(groundY);
-    for (const prop of layout.props) {
-      expect(prop.y + sources[prop.key].bounds[3] / sources[prop.key].size[1] * prop.height).toBeCloseTo(groundY);
+    for (const prop of layout.scenery.props) {
+      expect(prop.y + prop.height).toBeCloseTo(groundY);
     }
     for (const camera of [100, -254, -1560, -10_000_000]) {
       const x = delveBackgroundX(camera, layout.background.width, width);
       expect(x).toBeLessThanOrEqual(0);
       expect(x + layout.background.width).toBeGreaterThanOrEqual(width - 1e-6);
-      const offset = delvePropOffset(camera, layout.propPeriod);
-      expect(offset).toBeGreaterThanOrEqual(-layout.propPeriod);
-      expect(offset + (layout.propCopies - 1) * layout.propPeriod).toBeGreaterThanOrEqual(width);
+      const visible = visibleScenery(layout.scenery, camera);
+      expect(visible.keys.length).toBeGreaterThan(0);
+      expect(visibleScenery(layout.scenery, camera - layout.scenery.period)).toEqual(visible);
     }
     expect(delveTransition(0, 500)).toBe(0);
     expect(delveTransition(610, 500)).toBe(0.5);

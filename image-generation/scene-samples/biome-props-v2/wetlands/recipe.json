@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "biome_id": "wetlands",
+  "alpha_threshold": 128,
+  "max_prop_edge": 240,
+  "atlas_width": 2048,
+  "padding": 2,
+  "sheets": [
+    {
+      "image": "sheet-1.png",
+      "prompt_file": "sheet-1.prompt.txt",
+      "columns": 4,
+      "rows": 4,
+      "props": [
+        "wetlands_channel_marker",
+        "wetlands_obsolete_road_marker",
+        "wetlands_wicker_fish_traps",
+        "wetlands_collapsed_net_rack",
+        "wetlands_unlit_lantern",
+        "wetlands_reed_clump",
+        "wetlands_willow_roots",
+        "wetlands_shelf_fungi",
+        "wetlands_flood_debris",
+        "wetlands_sinking_fence",
+        "wetlands_leaning_willow",
+        "wetlands_dead_willow",
+        "wetlands_ruined_stilt_cottage",
+        "wetlands_slumped_peat_stack",
+        "wetlands_mossy_boulder",
+        "wetlands_cattail_cluster"
+      ],
+      "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
+      "regions": {
+        "wetlands_obsolete_road_marker": [
+          385,
+          4,
+          567,
+          306
+        ],
+        "wetlands_collapsed_net_rack": [
+          964,
+          5,
+          1235,
+          305
+        ],
+        "wetlands_channel_marker": [
+          93,
+          10,
+          296,
+          306
+        ],
+        "wetlands_wicker_fish_traps": [
+          634,
+          85,
+          939,
+          313
+        ],
+        "wetlands_reed_clump": [
+          324,
+          313,
+          601,
+          623
+        ],
+        "wetlands_unlit_lantern": [
+          70,
+          321,
+          255,
+          620
+        ],
+        "wetlands_shelf_fungi": [
+          1006,
+          324,
+          1213,
+          624
+        ],
+        "wetlands_willow_roots": [
+          624,
+          350,
+          940,
+          622
+        ],
+        "wetlands_leaning_willow": [
+          638,
+          632,
+          942,
+          941
+        ],
+        "wetlands_dead_willow": [
+          959,
+          637,
+          1243,
+          940
+        ],
+        "wetlands_flood_debris": [
+          9,
+          662,
+          314,
+          932
+        ],
+        "wetlands_sinking_fence": [
+          320,
+          707,
+          628,
+          924
+        ],
+        "wetlands_ruined_stilt_cottage": [
+          8,
+          943,
+          314,
+          1240
+        ],
+        "wetlands_cattail_cluster": [
+          962,
+          945,
+          1244,
+          1242
+        ],
+        "wetlands_mossy_boulder": [
+          640,
+          996,
+          935,
+          1229
+        ],
+        "wetlands_slumped_peat_stack": [
+          316,
+          999,
+          627,
+          1232
+        ]
+      }
+    },
+    {
+      "image": "sheet-2.png",
+      "prompt_file": "sheet-2.prompt.txt",
+      "columns": 4,
+      "rows": 4,
+      "props": [
+        "wetlands_broken_jetty_posts",
+        "wetlands_rotting_log",
+        "wetlands_rusted_anchor",
+        "wetlands_abandoned_wheelbarrow",
+        "wetlands_reed_basket",
+        "wetlands_torn_sack",
+        "wetlands_mossy_milestone",
+        "wetlands_snail_shells",
+        "wetlands_driftwood_stump",
+        "wetlands_marsh_iris",
+        "wetlands_empty_crab_cage",
+        "wetlands_broken_cartwheel",
+        "wetlands_weathered_shrine",
+        "wetlands_clay_jars",
+        "wetlands_flooded_wooden_gate",
+        "wetlands_peat_cutting_spade"
+      ],
+      "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
+      "regions": {
+        "wetlands_broken_jetty_posts": [
+          12,
+          44,
+          316,
+          301
+        ],
+        "wetlands_rusted_anchor": [
+          650,
+          71,
+          930,
+          301
+        ],
+        "wetlands_rotting_log": [
+          322,
+          113,
+          633,
+          301
+        ],
+        "wetlands_abandoned_wheelbarrow": [
+          945,
+          122,
+          1242,
+          298
+        ],
+        "wetlands_mossy_milestone": [
+          657,
+          327,
+          921,
+          599
+        ],
+        "wetlands_torn_sack": [
+          324,
+          370,
+          633,
+          598
+        ],
+        "wetlands_reed_basket": [
+          17,
+          427,
+          295,
+          597
+        ],
+        "wetlands_snail_shells": [
+          950,
+          444,
+          1240,
+          595
+        ],
+        "wetlands_driftwood_stump": [
+          11,
+          616,
+          339,
+          906
+        ],
+        "wetlands_marsh_iris": [
+          349,
+          624,
+          601,
+          906
+        ],
+        "wetlands_broken_cartwheel": [
+          953,
+          663,
+          1242,
+          907
+        ],
+        "wetlands_empty_crab_cage": [
+          627,
+          735,
+          940,
+          908
+        ],
+        "wetlands_weathered_shrine": [
+          22,
+          912,
+          293,
+          1213
+        ],
+        "wetlands_peat_cutting_spade": [
+          993,
+          918,
+          1211,
+          1213
+        ],
+        "wetlands_flooded_wooden_gate": [
+          622,
+          964,
+          954,
+          1206
+        ],
+        "wetlands_clay_jars": [
+          337,
+          1000,
+          609,
+          1208
+        ]
+      }
+    }
+  ],
+  "region_note": "Reviewed alpha-connected bounds with three source pixels of guard space; generated silhouettes occasionally cross nominal grid lines."
+}

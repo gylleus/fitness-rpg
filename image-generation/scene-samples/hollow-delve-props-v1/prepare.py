@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Package generated props and the authored cave backgrounds for the game.
+"""Reproduce the historical v1 scenery package.
+
+Current runtime art uses biome-props-v2 and hollow-delve-backgrounds-v4.
 
 uv run sprite-python image-generation/scene-samples/hollow-delve-props-v1/prepare.py
 """
@@ -27,7 +29,8 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     sources = json.loads((HERE / "sources.json").read_text())
     content = tomllib.loads((ROOT / "content/biomes/hollow_delve/SCENERY.toml").read_text())
-    specs = [(s["id"], s["generation"]["canvas"], s["generation"]["height_scale"]) for s in content["scenery"]]
+    specs = [(s["id"], s["generation"]["canvas"], s["generation"]["height_scale"])
+             for s in content["scenery"] if s["id"] in sources]
     specs.append(("hollow_delve_slate_path", [256, 96], None))
     manifest = {}
     for asset_id, size, height_scale in specs:

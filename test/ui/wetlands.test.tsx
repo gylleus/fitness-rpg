@@ -19,11 +19,18 @@ it('follows the existing position, retains it across checkpoints and resize, and
   const offsets = () => view.getAllByTestId('native-scene-shader').map(shader => shader.props.rect.value.x);
   const initialCamera = 390 * 0.22 - 600;
   expect(offsets()).toEqual([initialCamera * 0.15, initialCamera * 0.35, initialCamera]);
+  const atlas = () => view.getByTestId('native-sprite-atlas');
+  const initialTransforms = atlas().props.transforms.value;
+  expect(initialTransforms.length).toBeGreaterThan(0);
   await act(() => { position.setValue(640); });
+  expect(atlas().props.transforms.value).not.toEqual(initialTransforms);
+  const movedTransforms = atlas().props.transforms.value;
   // A combat checkpoint can lag the native position. It must never rewind it.
   await view.rerender(<WetlandsBackdrop {...props} initialPosition={620} />);
   expect(view.getByTestId('wetlands-scenery')).toBe(canvas);
   expect(offsets()[2]).toBe(390 * 0.22 - 640);
+  expect(atlas().props.transforms.value).toEqual(movedTransforms);
+  expect(atlas().props.sprites.value).toHaveLength(movedTransforms.length);
   await view.rerender(<WetlandsBackdrop {...props} width={844} initialPosition={620} />);
   expect(offsets()[2]).toBe(844 * 0.22 - 640);
   expect(subscribe).toHaveBeenCalledTimes(1);

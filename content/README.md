@@ -4,8 +4,9 @@ The authored environments and enemies are being rebuilt through user-led curatio
 [catalog.toml](catalog.toml) registers [Wetlands](biomes/wetlands/BIOME.toml)
 and [Hollow Delve](biomes/hollow_delve/BIOME.toml). Wetlands has five marsh
 enemies. Hollow Delve has a Troglodyte, Giant Cave Spider, Bone Slime, Delve
-Dwarf and Delve Gnoll, with eight isolated cave props and decorations in
+Dwarf and Delve Gnoll, with 32 isolated cave props and decorations in
 [SCENERY.toml](biomes/hollow_delve/SCENERY.toml). Combat values remain provisional.
+Wetlands has 32 generated ground props and three additional waterline concepts.
 There is no shared roster. New content will be developed within the scope
 discussed with the user.
 
@@ -169,12 +170,14 @@ enemy spawn conditions. Enemy eligibility remains entirely in `ENEMIES.toml`.
 
 `load_content()` and resolved JSON expose the library as each biome's `scenery`
 array (empty when no file is registered), alongside background and ground data.
-The content validator checks the files and their composition contracts. The
-sprite CLI does not yet consume these scene definitions: its existing background
-adapter exports opaque static scenes, and its prop adapter exports square sprites.
-Transparent scene layers, rectangular scenery, seamless joins, asset bundling and
-runtime placement still need the corresponding pipeline/runtime adapters. Model
-settings, seeds, generated output paths and measured pivots belong in asset runs.
+The content validator checks the files and their composition contracts.
+[The scenery atlas pipeline](../image-generation/scene-samples/biome-props-v2/README.md)
+packs reviewed generated cutouts into one texture per biome, using these IDs and
+height scales. The current runtime places ground-anchored props behind the path;
+waterline concepts remain eligible for future pool placement. Each expedition
+uses a stable visual shuffle without advancing combat randomness. Generation
+prompts, source hashes, extraction regions and measured pivots live with the art
+recipes and runtime atlas manifests.
 
 ## Enemy field contract
 

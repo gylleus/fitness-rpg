@@ -52,9 +52,9 @@ export function DungeonJourney({ battle, playing, speed, fullScreen = false }: {
   return <View onLayout={e => { setWidth(e.nativeEvent.layout.width); setHeight(e.nativeEvent.layout.height); }} accessibilityLabel={battle.phase === 'travelling' ? 'Your hero walks right through the dungeon' : 'Your hero attacks the enemy on the path'}
     style={{ height: fullScreen ? '100%' : 240, width: '100%', overflow: 'hidden', borderRadius: fullScreen ? 0 : 16, backgroundColor: '#111e22' }}>
     {wetlands ? <WetlandsBackdrop width={width} height={height} groundY={groundY} heroHeight={heroHeight}
-      position={position} initialPosition={journeyTarget(battle)} /> : hollowDelve ?
+      position={position} initialPosition={journeyTarget(battle)} seed={battle.rng?.seed ?? dungeon.id} /> : hollowDelve ?
       <HollowDelveBackdrop width={width} height={height} groundY={groundY} heroHeight={heroHeight}
-      position={position} initialPosition={journeyTarget(battle)} /> : <>
+      position={position} initialPosition={journeyTarget(battle)} seed={battle.rng?.seed ?? dungeon.id} /> : <>
     <View style={{ position: 'absolute', top: 24, right: 30, width: 33, height: 33, borderRadius: 20, backgroundColor: dungeon.color, opacity: 0.5 }} />
     <Animated.View style={{ position: 'absolute', bottom: fullScreen ? 90 : 42, width: 2400, height: 190, transform: [{ translateX: parallax }] }}>
       {Array.from({ length: 18 }, (_, i) => <View key={i} style={{ position: 'absolute', left: i * 130 - 80, bottom: 0, height: 100 + i % 3 * 28, width: 66, backgroundColor: i % 2 ? '#23382e' : '#1b302b', borderTopLeftRadius: 40, borderTopRightRadius: 40, opacity: 0.8 }} />)}

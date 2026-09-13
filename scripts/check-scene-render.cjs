@@ -9,15 +9,25 @@ const ts = require('typescript');
 const { LoadSkiaWeb } = require('@shopify/react-native-skia/lib/commonjs/web/LoadSkiaWeb');
 const root = path.resolve(__dirname, '..');
 const output = path.resolve(process.argv[2] ?? '/tmp/frpg-scene-render-audit');
+const productionModules = new Map();
 
 function loadProduction(file, skia) {
   const absolute = path.join(root, file);
+  if (productionModules.has(absolute)) return productionModules.get(absolute).exports;
   const code = ts.transpileModule(fs.readFileSync(absolute, 'utf8'), {
     compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX },
   }).outputText;
   const module = { exports: {} };
-  new Function('require', 'module', 'exports', code)(id => id === '@shopify/react-native-skia' ? skia :
-    require(id.startsWith('.') ? path.resolve(path.dirname(absolute), id) : id), module, module.exports);
+  productionModules.set(absolute, module);
+  new Function('require', 'module', 'exports', code)(id => {
+    if (id === '@shopify/react-native-skia') return skia;
+    if (!id.startsWith('.')) return require(id);
+    const resolved = path.resolve(path.dirname(absolute), id);
+    for (const suffix of ['.ts', '.tsx']) if (fs.existsSync(resolved + suffix)) {
+      return loadProduction(path.relative(root, resolved + suffix), skia);
+    }
+    return require(resolved);
+  }, module, module.exports);
   return module.exports;
 }
 
@@ -29,8 +39,10 @@ async function main() {
   const exports = { ...headless, Skia };
   const { WetlandsArtwork } = loadProduction('src/scenes/WetlandsArtwork.tsx', exports);
   const { HollowDelveArtwork } = loadProduction('src/scenes/HollowDelveArtwork.tsx', exports);
-  const { delveBackgroundX, delvePropOffset, delveTransition, hollowDelveLayout } = loadProduction('src/scenes/hollowDelve.ts', exports);
-  const { sceneryOffset, wetlandsLayout, willowOffset } = loadProduction('src/scenes/wetlands.ts', exports);
+  const { delveBackgroundX, delveTransition, hollowDelveLayout } = loadProduction('src/scenes/hollowDelve.ts', exports);
+  const { sceneryOffset, wetlandsLayout } = loadProduction('src/scenes/wetlands.ts', exports);
+  const { visibleScenery } = loadProduction('src/scenes/sceneryAtlas.ts', exports);
+  const { SceneryAtlasArtwork } = loadProduction('src/scenes/SceneryAtlasArtwork.tsx', exports);
   const { SpriteTile } = loadProduction('src/sprites/SpriteTile.tsx', exports);
   const { spriteGeometry } = loadProduction('src/sprites/playback.ts', exports);
   const catalog = require('../assets/sprites/catalog.json');
@@ -70,13 +82,18 @@ async function main() {
     [id, decode(`assets/sprites/${id}--idle.png`)]));
   fs.mkdirSync(output, { recursive: true });
   let renders = 0;
+  function atlasDrawing(layout, camera) {
+    const visible = visibleScenery(layout.scenery, camera);
+    return { propSprites: visible.sprites,
+      propTransforms: visible.transforms.map(t => Skia.RSXform(t.scos, t.ssin, t.tx, t.ty)) };
+  }
   async function render(layout, camera, selected = images, withActors = false, boss = false) {
     const surface = makeOffscreenSurface(layout.width, layout.height);
     const props = { images: selected, layout,
       distant: { ...layout.distant, x: sceneryOffset(camera, 0.15, layout.distant.width) },
       banks: { ...layout.banks, x: sceneryOffset(camera, 0.35, layout.banks.width) },
       ground: { ...layout.ground, x: sceneryOffset(camera, 1, layout.ground.width) },
-      willows: [{ translateX: willowOffset(camera, layout.willowSpacing) }] };
+      ...atlasDrawing(layout, camera) };
     const nodes = [React.createElement(WetlandsArtwork, { ...props, key: 'scenery' })];
     if (withActors) {
       const heroHeight = layout.ground.width / 256 * 64;
@@ -99,7 +116,7 @@ async function main() {
     const nodes = [React.createElement(HollowDelveArtwork, { key: 'scenery', images: selected, layout,
       background: { ...layout.background, x: delveBackgroundX(camera, layout.background.width, layout.width) },
       ground: { ...layout.ground, x: sceneryOffset(camera, 1, layout.ground.width) },
-      props: [{ translateX: delvePropOffset(camera, layout.propPeriod) }],
+      ...atlasDrawing(layout, camera),
       galleryOpacity: delveTransition(position, 500), cavernOpacity: delveTransition(position, 1100) })];
     if (enemy) for (const [id, x, facing] of [['barbarian_player', layout.width * 0.22, 'right'],
       [enemy, layout.width * 0.22 + 80, 'left']]) {
@@ -135,10 +152,11 @@ async function main() {
       }
     }
     // Use integer scales/periods so every sampled pixel must match. Each
-    // mirrored strip repeats after two source widths; props repeat every 700.
+    // mirrored strip repeats after two source widths; the prop library repeats
+    // after its full spatial period and keeps the same culling at both ends.
     const layout = wetlandsLayout(640, 360, 288, 64);
-    for (const [key, period] of [['distant', 1280 / 0.15], ['banks', 1280 / 0.35], ['ground', 512], ['willow', 700]]) {
-      const selected = { sky: null, distant: null, banks: null, ground: null, willow: null, [key]: images[key] };
+    for (const [key, period] of [['distant', 1280 / 0.15], ['banks', 1280 / 0.35], ['ground', 512], ['props', layout.scenery.period]]) {
+      const selected = { sky: null, distant: null, banks: null, ground: null, props: null, [key]: images[key] };
       const first = await render(layout, 0, selected);
       const repeat = await render(layout, -period, selected);
       assert.deepEqual(pixels(first, 640, 360), pixels(repeat, 640, 360), `${key}: repeat changed the rendered pixels`);
@@ -146,16 +164,36 @@ async function main() {
     }
     const delveLayout = hollowDelveLayout(640, 360, 288, 64);
     for (const [keys, period] of [[['slate_path'], 512],
-      [['mine_support', 'webbed_arch', 'ore_cart', 'quartz_cluster', 'fungus_stump', 'bone_heap', 'stalagmites', 'tool_cache'], 1920]]) {
+      [['props'], delveLayout.scenery.period]]) {
       const selected = Object.fromEntries(Object.keys(delveImages).map(key => [key, keys.includes(key) ? delveImages[key] : null]));
       const first = await renderDelve(delveLayout, 300, selected);
       const repeat = await renderDelve(delveLayout, 300 + period, selected);
       assert.deepEqual(pixels(first, 640, 360), pixels(repeat, 640, 360), 'Hollow Delve: ground/props repeat changed pixels');
       first.dispose(); repeat.dispose();
     }
-    fs.writeFileSync(path.join(output, 'report.json'), JSON.stringify({ renderer: 'real Skia / CanvasKit', renders,
-      checks: ['17 bundled source hashes and dimensions', 'opaque viewport at four sizes, Wetlands and all five Hollow Delve encounters',
-        'production sprites on the shared ground baseline', 'pixel-exact mirrored background/ground and prop repetition'] }, null, 2) + '\n');
+    let propCrops = 0;
+    for (const [biome, image] of [['wetlands', images.props], ['hollow_delve', delveImages.props]]) {
+      const atlas = require(`../assets/biomes/${biome}/props.json`);
+      assert(Object.keys(atlas.props).length >= 32);
+      assert.equal(createHash('sha256').update(fs.readFileSync(path.join(root, `assets/biomes/${biome}/props.png`))).digest('hex'), atlas.sha256);
+      for (const [key, prop] of Object.entries(atlas.props)) {
+        const { width, height } = prop.frame;
+        assert.equal(createHash('sha256').update(fs.readFileSync(path.join(root, prop.source.image))).digest('hex'), prop.source.sha256);
+        assert.equal(prop.anchor[1], height, `${key}: anchor includes transparent bottom padding`);
+        const surface = makeOffscreenSurface(width, height);
+        const crop = await drawOffscreen(surface, React.createElement(SceneryAtlasArtwork, {
+          image, sprites: [prop.frame], transforms: [Skia.RSXform(1, 0, 0, 0)] }));
+        const rgba = pixels(crop, width, height);
+        assert.equal(createHash('sha256').update(rgba).digest('hex'), prop.pixels_sha256, `${key}: rendered atlas crop differs from prepared pixels`);
+        assert(Array.from({ length: width }, (_, x) => rgba[((height-1)*width+x)*4+3]).some(a => a === 255), `${key}: empty bottom row creates a floating prop`);
+        assert(Array.from({ length: width }, (_, x) => rgba[x*4+3]).some(a => a === 255), `${key}: untrimmed top edge`);
+        crop.dispose(); surface.dispose(); propCrops++; renders++;
+      }
+    }
+    fs.writeFileSync(path.join(output, 'report.json'), JSON.stringify({ renderer: 'real Skia / CanvasKit', renders, propCrops,
+      checks: ['10 runtime texture hashes and dimensions; original generated prop source hashes', 'opaque viewport at four sizes, Wetlands and all five Hollow Delve encounters',
+        '64 exact prop atlas crops with nonempty contact rows', 'production sprites on the shared ground baseline',
+        'pixel-exact mirrored background/ground and culled atlas repetition'] }, null, 2) + '\n');
     console.log(`Scene rendering passed: ${renders} real-Skia renders. Artifacts: ${output}`);
   } finally { decoded.forEach(image => image.dispose()); }
 }

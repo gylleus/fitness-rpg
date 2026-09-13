@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "biome_id": "hollow_delve",
+  "alpha_threshold": 128,
+  "max_prop_edge": 240,
+  "atlas_width": 2048,
+  "padding": 2,
+  "sheets": [
+    {
+      "image": "sheet-1.png",
+      "prompt_file": "sheet-1.prompt.txt",
+      "columns": 4,
+      "rows": 4,
+      "props": [
+        "hollow_delve_mine_support",
+        "hollow_delve_webbed_arch",
+        "hollow_delve_ore_cart",
+        "hollow_delve_quartz_cluster",
+        "hollow_delve_fungus_stump",
+        "hollow_delve_bone_heap",
+        "hollow_delve_stalagmites",
+        "hollow_delve_tool_cache",
+        "hollow_delve_rusted_bucket",
+        "hollow_delve_ore_sacks",
+        "hollow_delve_crystal_geode",
+        "hollow_delve_broken_barrel",
+        "hollow_delve_rusted_winch",
+        "hollow_delve_collapsed_ladder",
+        "hollow_delve_mine_signpost",
+        "hollow_delve_vent_grate"
+      ],
+      "sha256": "a6fa0dd11d55baeb64bec83b094089a93d1a7132835e75bbddf650de1e083b39",
+      "regions": {
+        "hollow_delve_mine_support": [
+          22,
+          31,
+          316,
+          306
+        ],
+        "hollow_delve_webbed_arch": [
+          334,
+          43,
+          630,
+          303
+        ],
+        "hollow_delve_quartz_cluster": [
+          960,
+          47,
+          1214,
+          305
+        ],
+        "hollow_delve_ore_cart": [
+          654,
+          103,
+          932,
+          308
+        ],
+        "hollow_delve_fungus_stump": [
+          26,
+          331,
+          286,
+          609
+        ],
+        "hollow_delve_stalagmites": [
+          643,
+          332,
+          923,
+          609
+        ],
+        "hollow_delve_tool_cache": [
+          954,
+          349,
+          1227,
+          617
+        ],
+        "hollow_delve_bone_heap": [
+          322,
+          440,
+          627,
+          616
+        ],
+        "hollow_delve_broken_barrel": [
+          953,
+          642,
+          1212,
+          890
+        ],
+        "hollow_delve_crystal_geode": [
+          639,
+          661,
+          933,
+          884
+        ],
+        "hollow_delve_rusted_bucket": [
+          58,
+          663,
+          270,
+          886
+        ],
+        "hollow_delve_ore_sacks": [
+          318,
+          668,
+          628,
+          890
+        ],
+        "hollow_delve_mine_signpost": [
+          687,
+          895,
+          902,
+          1209
+        ],
+        "hollow_delve_collapsed_ladder": [
+          339,
+          907,
+          627,
+          1212
+        ],
+        "hollow_delve_rusted_winch": [
+          23,
+          933,
+          320,
+          1203
+        ],
+        "hollow_delve_vent_grate": [
+          939,
+          944,
+          1232,
+          1203
+        ]
+      }
+    },
+    {
+      "image": "sheet-2.png",
+      "prompt_file": "sheet-2.prompt.txt",
+      "columns": 4,
+      "rows": 4,
+      "props": [
+        "hollow_delve_abandoned_anvil",
+        "hollow_delve_stone_brazier",
+        "hollow_delve_calcite_column",
+        "hollow_delve_iron_ore_vein",
+        "hollow_delve_cave_mushrooms",
+        "hollow_delve_egg_sac_cluster",
+        "hollow_delve_cocooned_bones",
+        "hollow_delve_chain_post",
+        "hollow_delve_discarded_shield",
+        "hollow_delve_miners_pack",
+        "hollow_delve_limestone_rubble",
+        "hollow_delve_rotted_bridge_trestle",
+        "hollow_delve_drainage_pipe",
+        "hollow_delve_cracked_urn",
+        "hollow_delve_stone_idol",
+        "hollow_delve_wooden_barricade"
+      ],
+      "sha256": "9852116c4bdc87107b90b6e21934d50631bfb329e681c44195f943def82ea376",
+      "regions": {
+        "hollow_delve_calcite_column": [
+          705,
+          9,
+          878,
+          307
+        ],
+        "hollow_delve_iron_ore_vein": [
+          973,
+          10,
+          1235,
+          305
+        ],
+        "hollow_delve_stone_brazier": [
+          350,
+          49,
+          596,
+          306
+        ],
+        "hollow_delve_abandoned_anvil": [
+          21,
+          74,
+          287,
+          302
+        ],
+        "hollow_delve_chain_post": [
+          953,
+          322,
+          1248,
+          609
+        ],
+        "hollow_delve_egg_sac_cluster": [
+          323,
+          363,
+          622,
+          601
+        ],
+        "hollow_delve_cave_mushrooms": [
+          10,
+          382,
+          310,
+          600
+        ],
+        "hollow_delve_cocooned_bones": [
+          632,
+          429,
+          940,
+          607
+        ],
+        "hollow_delve_rotted_bridge_trestle": [
+          956,
+          640,
+          1241,
+          894
+        ],
+        "hollow_delve_discarded_shield": [
+          13,
+          644,
+          298,
+          898
+        ],
+        "hollow_delve_miners_pack": [
+          321,
+          668,
+          620,
+          897
+        ],
+        "hollow_delve_limestone_rubble": [
+          632,
+          673,
+          940,
+          894
+        ],
+        "hollow_delve_stone_idol": [
+          652,
+          930,
+          902,
+          1223
+        ],
+        "hollow_delve_drainage_pipe": [
+          11,
+          953,
+          288,
+          1221
+        ],
+        "hollow_delve_cracked_urn": [
+          357,
+          956,
+          595,
+          1221
+        ],
+        "hollow_delve_wooden_barricade": [
+          931,
+          998,
+          1251,
+          1216
+        ]
+      }
+    }
+  ],
+  "region_note": "Reviewed alpha-connected bounds with three source pixels of guard space; generated silhouettes occasionally cross nominal grid lines."
+}

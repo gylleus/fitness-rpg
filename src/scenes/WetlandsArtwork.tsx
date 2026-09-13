@@ -1,16 +1,17 @@
 import { FilterMode, Group, Image, ImageShader, MipmapMode, Rect, type SkImage } from '@shopify/react-native-skia';
 import type { ComponentProps } from 'react';
 import type { WetlandsLayout } from './wetlands';
+import { SceneryAtlasArtwork, type ScenerySprites, type SceneryTransforms } from './SceneryAtlasArtwork';
 
-export type WetlandsImages = Record<'sky' | 'distant' | 'banks' | 'ground' | 'willow', SkImage | null>;
+export type WetlandsImages = Record<'sky' | 'distant' | 'banks' | 'ground' | 'props', SkImage | null>;
 type ShaderRect = ComponentProps<typeof ImageShader>['rect'];
-type Transform = ComponentProps<typeof Group>['transform'];
 const sampling = { filter: FilterMode.Nearest, mipmap: MipmapMode.None };
 
 /** Production drawing nodes, also rendered by the real-Skia scene audit. */
-export function WetlandsArtwork({ images, layout, distant, banks, ground, willows }: {
+export function WetlandsArtwork({ images, layout, distant, banks, ground, propSprites, propTransforms }: {
   images: WetlandsImages; layout: WetlandsLayout;
-  distant: ShaderRect; banks: ShaderRect; ground: ShaderRect; willows: Transform;
+  distant: ShaderRect; banks: ShaderRect; ground: ShaderRect;
+  propSprites: ScenerySprites; propTransforms: SceneryTransforms;
 }) {
   const { width, height } = layout;
   return <Group>
@@ -22,10 +23,7 @@ export function WetlandsArtwork({ images, layout, distant, banks, ground, willow
     {images.banks && <Rect x={0} y={0} width={width} height={height}>
       <ImageShader image={images.banks} rect={banks} fit="fill" tx="mirror" ty="clamp" sampling={sampling} />
     </Rect>}
-    {images.willow && <Group transform={willows}>
-      {Array.from({ length: layout.willowCount }, (_, i) => <Image key={i} image={images.willow}
-        {...layout.willow} x={layout.willow.x + i * layout.willowSpacing} fit="fill" sampling={sampling} />)}
-    </Group>}
+    <SceneryAtlasArtwork image={images.props} sprites={propSprites} transforms={propTransforms} />
     <Rect x={0} y={layout.groundY} width={width} height={height - layout.groundY} color="#302c29" />
     {images.ground && <Rect x={0} y={0} width={width} height={height}>
       <ImageShader image={images.ground} rect={ground} fit="fill" tx="mirror" ty="clamp" sampling={sampling} />

@@ -208,3 +208,201 @@ height_scale = 1.0
 layers = ["behind_path"]
 anchor = "waterline"
 composition = "A single low wall fragment with attached fallen blocks and step, seen from the side. The silt line near the base identifies the waterline anchor. Exclude water, reflections, buildings and the rest of the ruin; preserve clear gaps between the upper broken stones."
+
+[[scenery]]
+id = "wetlands_mossy_boulder"
+name = "Moss-covered boulder"
+visual_description = "A squat gray boulder rests on a broad muddy base. Thick olive moss covers its upper fractures, with wet dark stone exposed beneath a pale silt line."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.75
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "wetlands_cattail_cluster"
+name = "Bent cattails"
+visual_description = "A tight clump of thick reeds rises from a compact root crown. Brown cattail heads bend at uneven heights, and broken yellow leaves fold around the anchored stems."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.9
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "wetlands_broken_jetty_posts"
+name = "Broken jetty posts"
+visual_description = "Three rotting timber posts stand on broad exposed roots and attached braces. A short broken plank bridges two posts, with dark flood stains along their lower ends."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 1.1
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "wetlands_rotting_log"
+name = "Hollow marsh log"
+visual_description = "A hollow fallen log lies on a flattened side. Peeling wet bark reveals pale rotten wood, and moss grows around the dark opening and broken branch stubs."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.5
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "wetlands_rusted_anchor"
+name = "Abandoned marsh anchor"
+visual_description = "A small heavily rusted anchor lies tilted against a low mossy stone. Its hooked arms and short attached chain settle together into a stable tangled base."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.6
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "wetlands_abandoned_wheelbarrow"
+name = "Rotting wheelbarrow"
+visual_description = "A narrow wooden wheelbarrow rests on its single wheel and two short rear legs. The tray has lost several slats, and pale moss grows along its cracked handles."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.8
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "wetlands_reed_basket"
+name = "Collapsed reed basket"
+visual_description = "A squat woven reed basket sags on a broad flat bottom. Dark wet strands interrupt the faded weave, and its broken handle folds into the empty interior."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.4
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "wetlands_torn_sack"
+name = "Water-stained grain sack"
+visual_description = "A heavy coarse sack slumps against a small root. Its tied neck droops sideways, and a dark flood stain crosses the frayed lower fabric."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.4
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "wetlands_mossy_milestone"
+name = "Silted milestone"
+visual_description = "A blunt stone marker stands on a broad buried foot. A shallow unreadable carving survives between moss patches, above a dark band of dried silt."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.85
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "wetlands_snail_shells"
+name = "Empty marsh shells"
+visual_description = "Three large empty snail shells overlap in a low cluster. Their chalky spiral ridges carry brown stains, and broken lips expose dark empty interiors."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.25
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "wetlands_driftwood_stump"
+name = "Weathered driftwood stump"
+visual_description = "A bleached stump rises from wide interlocked roots. Its snapped crown twists into two blunt prongs, with dark soaked grain beneath peeling silver-gray wood."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 1.25
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "wetlands_marsh_iris"
+name = "Ragged marsh iris"
+visual_description = "Broad dull green leaves grow from a tight low root crown. Two faded purple iris flowers bend on thick stems above broken leaf tips and attached dead sheaths."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.5
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "wetlands_empty_crab_cage"
+name = "Broken crab cage"
+visual_description = "A low wicker cage rests on two thick wooden runners. Its small door hangs inward, and a loop of wet rope remains caught around the bent frame."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.5
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "wetlands_broken_cartwheel"
+name = "Sunken cartwheel"
+visual_description = "A large cracked cartwheel leans against a short stump. Several wooden spokes are missing, and a loosened iron rim curls around the base where both objects meet."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.75
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "wetlands_weathered_shrine"
+name = "Abandoned roadside shrine"
+visual_description = "A narrow mossy stone niche stands on a broad stepped base. Its shallow roof is chipped, and an empty shelf sits within the dark opening beneath rain-worn carving."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 1.6
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "wetlands_clay_jars"
+name = "Abandoned clay jars"
+visual_description = "Two squat clay jars lean together on broad bases. One rim is broken, and pale mineral streaks run through the mud coating their rough reddish sides."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.5
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "wetlands_flooded_wooden_gate"
+name = "Warped marsh gate"
+visual_description = "A short wooden gate hangs crookedly between two thick braced posts. Several rails have split, and dark weed clings along a flood line near the broad supporting feet."
+[scenery.generation]
+canvas = [192, 256]
+height_scale = 1.8
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "wetlands_peat_cutting_spade"
+name = "Forgotten peat spade"
+visual_description = "A broad rusted peat spade stands embedded in a compact turf block. Its short wooden handle has split beneath a wrapped cloth grip, and damp peat clings to the blade."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 1.1
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."

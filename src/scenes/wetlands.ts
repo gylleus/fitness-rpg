@@ -1,5 +1,7 @@
 import type { Dungeon } from '../game/combat';
 import roster from '../game/rosters/wetlands.json';
+import propAtlas from '../../assets/biomes/wetlands/props.json';
+import { sceneryAtlasLayout } from './sceneryAtlas';
 
 /** Recognize Wetlands snapshots saved before biomeId was added, without
  * repainting pre-snapshot Mossfall runs that also used dungeon ID zero. */
@@ -11,22 +13,18 @@ export function hasWetlandsScenery(dungeon: Dungeon): boolean {
 
 export type SceneRect = { x: number; y: number; width: number; height: number };
 
-export function wetlandsLayout(width: number, height: number, groundY: number, heroHeight: number) {
+export function wetlandsLayout(width: number, height: number, groundY: number, heroHeight: number, seed = 0) {
   const scale = heroHeight / 64;
   const background: SceneRect = { x: 0, y: groundY - 288 * scale, width: 640 * scale, height: 360 * scale };
   // The v1 image's solid turf begins at source row 338 / 768. Align that
   // measured surface, rather than the requested (but unfulfilled) row 24.
   const ground: SceneRect = { x: 0, y: groundY - 42.25 * scale, width: 256 * scale, height: 96 * scale };
-  const willowScale = heroHeight * 3.4 / 1368;
   return {
     width, height, groundY,
     // Lift the distant horizon slightly so it clears the generated reed bank.
     distant: { ...background, y: background.y - 32 * scale },
     banks: background, ground,
-    willow: { x: -432 * willowScale, y: groundY - 1410 * willowScale,
-      width: 1086 * willowScale, height: 1448 * willowScale },
-    willowSpacing: 700,
-    willowCount: Math.ceil(width / 700) + 2,
+    scenery: sceneryAtlasLayout(propAtlas, width, groundY, heroHeight, seed),
   };
 }
 
@@ -36,10 +34,4 @@ export type WetlandsLayout = ReturnType<typeof wetlandsLayout>;
 export function sceneryOffset(camera: number, parallax: number, tileWidth: number): number {
   'worklet';
   return camera * parallax % (tileWidth * 2);
-}
-
-/** Bounded repetition even in a restored run near the end of the dungeon. */
-export function willowOffset(camera: number, spacing: number): number {
-  'worklet';
-  return ((camera + 475) % spacing + spacing) % spacing - spacing;
 }

@@ -88,3 +88,267 @@ height_scale = 0.65
 layers = ["behind_path"]
 anchor = "ground"
 composition = "One compact crate, pick, rope and lamp group, with every part touching the group and fully visible; transparent surroundings, no text or flame."
+
+[[scenery]]
+id = "hollow_delve_rusted_bucket"
+name = "Split iron bucket"
+visual_description = "A dented iron bucket rests on its warped bottom. Rust opens a split along one side, and the loose handle folds against its rim."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.32
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_ore_sacks"
+name = "Slumped ore sacks"
+visual_description = "Three coarse sacks slump together beneath a coating of pale stone dust. Dark ore chips show through one torn seam, gathering against the stitched base."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.55
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_crystal_geode"
+name = "Broken crystal geode"
+visual_description = "A split black geode lies open on a flat stone base. Small clouded violet crystals crowd its rough interior beneath a chalky broken rim."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.4
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_broken_barrel"
+name = "Broken pit barrel"
+visual_description = "A squat timber barrel leans on cracked bottom staves. One rusted hoop hangs loose around the bulging sides, and a broken lid rests across the opening."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.75
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_rusted_winch"
+name = "Seized mine winch"
+visual_description = "A heavy iron drum sits between two short timber supports. Frayed rope binds the rusted axle, and a bent crank curls inward above its broad wooden feet."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 1.0
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_collapsed_ladder"
+name = "Splintered pit ladder"
+visual_description = "A short broken ladder leans against a thick snapped support stump. Uneven rungs remain trapped between the rails, whose lower ends spread across the floor."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 1.2
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_mine_signpost"
+name = "Crooked gallery marker"
+visual_description = "Two splintered arrow-shaped boards hang from a crooked timber post. Their paint has worn into unreadable scratches above a base braced by three stones."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 1.1
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_vent_grate"
+name = "Buckled iron grate"
+visual_description = "A square iron grate bows outward from a low stone frame. Rust flakes collect between the close bars, and one corner has broken away to expose a black opening."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.6
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_abandoned_anvil"
+name = "Pitted repair anvil"
+visual_description = "A blunt iron anvil stands on a squat block of dark timber. Its horn is chipped, its face carries shallow tool scars, and two iron bands hold the block together."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.6
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_stone_brazier"
+name = "Cold stone brazier"
+visual_description = "A cracked stone bowl sits on three thick joined legs. Cold charcoal fills the basin, and soot stains the rim above mineral streaks running down the supports."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.9
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_calcite_column"
+name = "Fluted calcite pillar"
+visual_description = "A slender calcite pillar rises from a broad limestone foot. Dense vertical mineral flutes end in a blunt broken crown, with damp slate-blue grooves between pale ridges."
+[scenery.generation]
+canvas = [192, 256]
+height_scale = 2.4
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_iron_ore_vein"
+name = "Exposed ironstone"
+visual_description = "A jagged slab of ironstone stands on a wide fractured base. Rust-red veins cut through dark gray layers, and angular flakes remain attached along its edges."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 1.1
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_cave_mushrooms"
+name = "Clustered cave caps"
+visual_description = "Thick pale mushroom caps crowd a low rotten root. Their waxy green-gray tops overlap above dark short stems, with no loose spores or luminous haze."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.5
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_egg_sac_cluster"
+name = "Old spider egg sacs"
+visual_description = "Three dusty silk sacs rest against a low broken rock. Sagging layers of gray webbing bind them to the stone, and one empty sac has collapsed inward."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.7
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_cocooned_bones"
+name = "Dusty silk bundle"
+visual_description = "A low bundle of dry bones lies inside torn old silk. A yellowed skull and two blunt bone ends press against the webbing above a flattened cloth-covered base."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.65
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_chain_post"
+name = "Chain-bound pit post"
+visual_description = "A short thick pit post stands on a braced timber foot. Heavy rusted chain coils around it and settles into a connected heap beside the base."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 1.0
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_discarded_shield"
+name = "Discarded iron shield"
+visual_description = "A dented round shield leans against a low stone. Its rusted rim has split near the ground, and a broken leather strap curls around its supporting rock."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.45
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_miners_pack"
+name = "Abandoned miner pack"
+visual_description = "A collapsed leather pack sits on its broad reinforced bottom. A rolled cloth and a dented canteen remain strapped to its sides under pale limestone dust."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.45
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_limestone_rubble"
+name = "Fallen limestone blocks"
+visual_description = "Several large limestone fragments lock into a low heap. Fresh pale fractures interrupt their dark damp surfaces, while small attached chips fill the lower gaps."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.4
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_rotted_bridge_trestle"
+name = "Broken gallery trestle"
+visual_description = "Two short splayed timber legs carry a snapped transverse beam. Rusted pins and a diagonal brace hold the rotting trestle together above its broad battered feet."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 1.2
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_drainage_pipe"
+name = "Broken drainage elbow"
+visual_description = "A thick iron pipe bends upward from a low stone cradle. Its jagged open mouth is dark with residue, and orange rust collects around the bolted joint."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.55
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_cracked_urn"
+name = "Cracked storage urn"
+visual_description = "A squat gray clay urn rests on a broad chipped foot. A long crack descends from its heavy rim, and old cord remains looped through its two small handles."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 0.55
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_stone_idol"
+name = "Weathered stone figure"
+visual_description = "A blunt carved figure crouches on a square limestone plinth. Its folded arms merge into the pitted torso, and erosion has nearly erased its broad expressionless face."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 1.4
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."
+
+[[scenery]]
+id = "hollow_delve_wooden_barricade"
+name = "Broken pit barricade"
+visual_description = "Three stout stakes and two warped rails form a short barricade. Splayed timber feet support both ends, while a splintered central plank hangs from rusted nails."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 1.25
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete isolated side-view prop on transparency. All parts are attached or overlap; its supporting feet or solid base meet one horizontal ground line. No detached debris, painted floor, cast shadow, text, characters or background. Preserve clear gaps inside the silhouette."

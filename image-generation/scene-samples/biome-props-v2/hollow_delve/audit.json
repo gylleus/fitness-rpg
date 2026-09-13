@@ -1,0 +1,13 @@
+{
+  "props": 32,
+  "source_cell_pixels": 2204733,
+  "trimmed_prop_pixels": 1530302,
+  "atlas_size": [
+    2048,
+    882
+  ],
+  "decoded_rgba_bytes": 7225344,
+  "individual_png_bytes": 2489053,
+  "atlas_png_bytes": 2517117,
+  "contact": "Every packed cutout has nonempty bottom pixels at its ground anchor; source padding is removed."
+}

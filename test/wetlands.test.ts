@@ -1,7 +1,8 @@
 import { expect, it } from 'vitest';
 import { DUNGEONS, battleDungeon, beginBattle } from '../src/game/combat';
 import { fitnessDay, heroStats } from '../src/game/rules';
-import { hasWetlandsScenery, wetlandsLayout, willowOffset } from '../src/scenes/wetlands';
+import { hasWetlandsScenery, wetlandsLayout } from '../src/scenes/wetlands';
+import { visibleScenery } from '../src/scenes/sceneryAtlas';
 
 it('selects Wetlands for new and older snapshots without changing other saved dungeons', () => {
   expect(hasWetlandsScenery(DUNGEONS[0])).toBe(true);
@@ -16,16 +17,14 @@ it('selects Wetlands for new and older snapshots without changing other saved du
 });
 
 it.each([[300, 240, 198, 92], [390, 844, 754, 140], [844, 390, 300, 126.5], [320, 480, 390, 140]])(
-  'plants the turf and willow on the character baseline at %ix%i', (width, height, baseline, hero) => {
+  'plants the turf and prop atlas on the character baseline at %ix%i', (width, height, baseline, hero) => {
     const layout = wetlandsLayout(width, height, baseline, hero);
     expect(layout.ground.y + layout.ground.height * 338 / 768).toBeCloseTo(baseline);
-    expect(layout.willow.y + layout.willow.height * 1410 / 1448).toBeCloseTo(baseline);
-    expect(layout.willow.height * 1368 / 1448).toBeCloseTo(hero * 3.4);
+    for (const prop of layout.scenery.props) expect(prop.y + prop.height).toBeCloseTo(baseline);
+    expect(layout.scenery.props.find(p => p.key === 'wetlands_leaning_willow')?.height).toBeCloseTo(hero * 3.4);
     for (const camera of [26, -254, -1734, -10_000_000]) {
-      const start = willowOffset(camera, layout.willowSpacing);
-      expect(start).toBeGreaterThanOrEqual(-layout.willowSpacing);
-      expect(start).toBeLessThanOrEqual(0);
-      expect(start + (layout.willowCount - 1) * layout.willowSpacing).toBeGreaterThanOrEqual(width);
-      expect(willowOffset(camera - 700, 700)).toBe(start);
+      const visible = visibleScenery(layout.scenery, camera);
+      expect(visible.keys.length).toBeGreaterThan(0);
+      expect(visibleScenery(layout.scenery, camera - layout.scenery.period)).toEqual(visible);
     }
   });
