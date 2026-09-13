@@ -37,13 +37,13 @@ color = "#8B513B"
 name = "Fungal green"
 color = "#8AA778"
 [generation]
-composition = "Side-on cave expedition with a clear horizontal walking strip. Three atmosphere panels show natural limestone, worked galleries and the edge of a sunken cavern. Separate ground and isolated scenery preserve a readable route in front of the background water."
+composition = "An enclosed horizontal mine tunnel with close rear walls, shallow recesses and a heavy low roof. Independent distant, wall and ceiling layers create depth while a separate walking strip and props define the route."
 [generation.scene]
 canvas = [640, 360]
 ground_y = 288
 reference_height = 64
 view = "orthographic_side"
-style = "Weathered dark fantasy pixel art with broad readable rock and timber shapes, stepped clusters of muted color and sparse material marks. Backgrounds use low detail and low local contrast; reserve stronger silhouettes and highlights for actors and nearby props. Judge and export scenery at its logical canvas size."
+style = "Refined dark fantasy pixel art with the texture density of Wetlands. Preserve full-resolution source textures independently of the logical canvas. Material edges and controlled mineral or timber detail remain visible, while restrained local contrast keeps actors readable. A nearby low ceiling encloses the horizontal passage."
 avoid = ["characters baked into scenery", "isometric view", "a road receding to a vanishing point", "bright cheerful colors", "readable text", "smooth airbrushed edges", "mandatory gaps in the walking surface"]
 [generation.ground]
 canvas = [256, 96]
@@ -62,12 +62,12 @@ description = "A continuous gravel ledge skirts a still black pool beneath massi
 [[background_layers]]
 id = "hollow_delve_cavern_backdrop"
 name = "Limestone chambers"
-visual_description = "Ribbed limestone walls descend from a high, shadowed ceiling. Broad pale shelves and dark recesses alternate behind a clear passage, with shallow reflected light along the lower stone."
+visual_description = "Close damp limestone walls and shallow shadowed recesses line a low horizontal passage. A heavy roof presses down above the route, supported by short rock piers and worn timber braces."
 [background_layers.generation]
 parallax = 0.18
 repeat_x = false
 transparent = false
-composition = "Opaque low-detail atmosphere panel. Use limestone chambers, abandoned timber galleries and a sunken cavern as three sequential variants with soft overlap during travel. A few broad rock masses and attached stalactites frame quiet shadowed recesses. Keep rows 160 through 288 subdued across the whole width. The walking ground and freestanding props are separate. These full scenes are not seamless tiles."
+composition = "Use the shared interior recipe for three independent planes: dim rear recesses, nearer wall piers with transparent gaps, and a continuous low roof cutout. The ceiling follows the floor at a fixed actor-relative clearance rather than stretching to viewport height. Maintain fine texture at low contrast and separate the ground and freestanding props."
 [[ground_sections]]
 id = "hollow_delve_slate_path"
 name = "Slate and gravel path"

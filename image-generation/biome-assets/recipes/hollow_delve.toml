@@ -1,20 +1,4 @@
-schema_version = 1
+schema_version = 2
 biome_id = "hollow_delve"
-
-[[variants]]
-source_id = "hollow_delve_cavern_backdrop"
-id = "hollow_delve_landscape"
-name = "Limestone chamber"
-subject = "A broad limestone chamber with a few blunt attached stalactites and large quiet shadowed wall recesses. Rock is described by simple overlapping masses and sparse stepped edges."
-
-[[variants]]
-source_id = "hollow_delve_cavern_backdrop"
-id = "hollow_delve_timber_gallery"
-name = "Abandoned timber gallery"
-subject = "An abandoned mine gallery with three widely spaced heavy timber supports embedded in the distant wall. Simple blue-gray stone slabs and broad dark recesses. Timber has one or two identifying splits, with no fine grain or metalwork detail."
-
-[[variants]]
-source_id = "hollow_delve_cavern_backdrop"
-id = "hollow_delve_sunken_cavern"
-name = "Sunken cavern"
-subject = "A spacious sunken chamber with two broad attached limestone columns framing a quiet dark rear wall. A still dark pool occupies only the lowest fifth, with two or three wide muted reflection bands. No fine ripples or sparkling highlights."
+interior_theme = "limestone_tunnel"
+interior_recipe = "../interiors.toml"

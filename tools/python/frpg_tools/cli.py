@@ -44,7 +44,7 @@ def enemy_sprites():
 
 def biome_assets():
     # Planning needs only the root interpreter; importing pixels uses the pinned runtime.
-    python = sys.executable if not sys.argv[1:] or sys.argv[1] in ("plan", "definition", "--help") else _sprite_python()
+    python = sys.executable if not sys.argv[1:] or sys.argv[1] in ("plan", "plan-interior", "definition", "--help") else _sprite_python()
     _exec(python, ROOT / "image-generation/biome-assets/biome_assets.py")
 
 

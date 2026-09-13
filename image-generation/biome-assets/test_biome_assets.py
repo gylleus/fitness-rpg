@@ -35,16 +35,19 @@ class BiomeAssetsTests(unittest.TestCase):
         for biome in ("wetlands", "hollow_delve"):
             plan = make_plan(biome)
             self.assertEqual(plan, make_plan(biome))
-            self.assertEqual(plan["style"]["id"], "readable-dark-fantasy-v1")
+            self.assertEqual(plan["style"]["id"], "readable-dark-fantasy-v2")
             self.assertEqual({a["kind"] for a in plan["assets"]}, {"background", "ground", "prop", "enemy"})
             for asset in plan["assets"]:
-                self.assertIn(plan["style"][asset["kind"]], asset["prompt"])
+                if not (asset["kind"] == "background" and "interior" in plan):
+                    self.assertIn(plan["style"][asset["kind"]], asset["prompt"])
                 if asset["kind"] == "enemy":
                     self.assertIn(asset["source_definition"]["visual"]["attack"], asset["sheet_prompt"])
                     self.assertIn("exactly 24", asset["sheet_prompt"])
                 elif asset["kind"] == "background":
-                    self.assertIn("rows 160 through 288 quiet", asset["prompt"])
-                    self.assertEqual(asset["canvas"], [640, 360])
+                    self.assertEqual(asset["export"]["resolution"], "source")
+                    if "interior" not in plan:
+                        self.assertIn("rows 160 through 288 quiet", asset["prompt"])
+                        self.assertEqual(asset["canvas"], [640, 360])
         self.assertEqual(len(make_plan("hollow_delve", "background")["assets"]), 3)
 
     def test_unknown_biome_or_asset_selection_rejected(self):
@@ -54,7 +57,7 @@ class BiomeAssetsTests(unittest.TestCase):
             make_plan("wetlands", selected=["missing"])
 
     def test_local_definition_preserves_exact_prompts_and_rejects_alpha_layers(self):
-        plan = make_plan("hollow_delve", "background")
+        plan = make_plan("wetlands", "background", selected=["wetlands_overcast_sky"])
         save(self.root / "plan.json", plan)
         local_definition(self.root / "plan.json", self.root / "definition.toml")
         definition = tomllib.loads((self.root / "definition.toml").read_text())

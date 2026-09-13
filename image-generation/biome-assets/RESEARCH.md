@@ -50,3 +50,20 @@ style profile supplies role-specific detail constraints; recipes supply variants
 extraction corrections and selected runtime slots. Original generation sources
 remain immutable. Plans and imports are reproducible; image generation and visual
 approval still require inspecting the result in context.
+
+## Tunnel revision
+
+The first shared scenery export overcorrected: it resized the cave to 640×360
+while Wetlands retained larger source textures. Logical layout size had become
+an accidental texture-resolution limit. The cave also crossfaded whole opaque
+panels, so it could not reproduce Wetlands' independently moving depth layers.
+
+Background plans now retain full source textures while keeping independent
+logical geometry. Shared interior recipes produce recess, wall and ceiling
+assets with separate parallax speeds. The ceiling uses its measured alpha
+underside as an anchor relative to the floor and reference actor height, rather
+than stretching with the viewport. This makes a low tunnel possible in both
+orientations. Materials and optional geometry overrides provide frost caves,
+volcanic tunnels, crypts and castle passages through the same commands and
+renderer. Only the limestone theme has generated production art in this revision;
+the other presets are planning inputs, not new playable locations.

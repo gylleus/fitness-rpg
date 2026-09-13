@@ -51,6 +51,20 @@ def make_plan(biome_id, kind="all", selected=None, content_root=None, style_path
     style_path = Path(style_path or HERE / "style.toml")
     style = tomllib.loads(style_path.read_text())
     scene = biome["generation"]["scene"]
+    candidate_recipe = Path(recipe_path or HERE / "recipes" / f"{biome_id}.toml")
+    recipe_data = tomllib.loads(candidate_recipe.read_text()) if candidate_recipe.exists() else {}
+    interior_plan = None
+    if recipe_data.get("interior_theme"):
+        if recipe_data["schema_version"] != 2 or recipe_data["biome_id"] != biome_id:
+            raise ValueError("Interior recipe does not match biome/schema")
+        from interiors import make_interior_plan
+        interior_plan = make_interior_plan(recipe_data["interior_theme"], biome_id,
+                                          candidate_recipe.parent / recipe_data["interior_recipe"])
+        if kind == "background":
+            if selected and set(selected) != {a["id"] for a in interior_plan["assets"]}:
+                raise ValueError("Plan the complete interior layer set; all layers share one scene contract")
+            interior_plan["source_sha256"] = {str(path.relative_to(content_root)): sha(path) for path in paths.values()}
+            return interior_plan
     palette = ", ".join(f"{p['name']} {p['color']}" for p in biome["visual"]["palette"])
     entries = []
     for source in biome["background_layers"]:
@@ -58,7 +72,7 @@ def make_plan(biome_id, kind="all", selected=None, content_root=None, style_path
                         "transparent": source["generation"]["transparent"]})
     default_recipe = HERE / "recipes" / f"{biome_id}.toml"
     recipe_path = Path(recipe_path) if recipe_path else default_recipe if default_recipe.exists() else None
-    if recipe_path:
+    if recipe_path and not interior_plan:
         recipe = tomllib.loads(recipe_path.read_text())
         if recipe["schema_version"] != 1 or recipe["biome_id"] != biome_id:
             raise ValueError("Variant recipe does not match biome/schema")
@@ -98,7 +112,7 @@ def make_plan(biome_id, kind="all", selected=None, content_root=None, style_path
             lines.append(f"Scene/backdrop: {entry['generation']['composition']}")
             constraints += [f"Keep rows {scene['ground_y'] - 2 * scene['reference_height']} through {scene['ground_y']} quiet across the full width for moving combatants.",
                             "Rear atmosphere only. Foreground props and the playable floor are separate assets. No characters, enemies or freestanding objects.",
-                            "Use broad stepped shading with large uninterrupted regions. No intricate mineral ribs, pitted stone, tiny chisel marks or fine grain."]
+                            "Use controlled material texture and grouped shading. Preserve fine pixel edges without dense high-contrast highlights behind actors."]
         elif role == "ground":
             ground = biome["generation"]["ground"]
             lines.append(f"Composition: {entry['generation']['composition']} {ground['edge_description']}")
@@ -117,7 +131,8 @@ def make_plan(biome_id, kind="all", selected=None, content_root=None, style_path
         prompt = "\n".join(lines)
         record = {"id": entry["id"], "name": entry["name"], "kind": role, "canvas": canvas,
                   "transparent": entry["transparent"], "prompt": prompt, "prompt_sha256": digest(prompt),
-                  "source_definition": entry, "export": {"sampling": "nearest", "alpha": "binary" if entry["transparent"] else "opaque", "colors": "source"}}
+                  "source_definition": entry, "export": {"sampling": "nearest", "alpha": "binary" if entry["transparent"] else "opaque", "colors": "source",
+                  "resolution": "source" if role == "background" else "logical", **({"min_width": 1536} if role == "background" else {})}}
         if role == "enemy":
             record["sheet_prompt"] = "\n".join([
                 "Use case: stylized-concept", "Asset type: authored enemy animation sheet",
@@ -138,6 +153,10 @@ def make_plan(biome_id, kind="all", selected=None, content_root=None, style_path
               "style_sha256": sha(style_path), "scene": scene, "assets": assets}
     if recipe_path:
         result["variant_recipe"] = {"text": recipe_path.read_text(), "sha256": sha(recipe_path)}
+    if interior_plan and kind == "all" and not selected:
+        result["assets"] = interior_plan["assets"] + [a for a in assets if a["kind"] != "background"]
+        result["interior"] = interior_plan["interior"]
+        result["interior_recipe"] = interior_plan["recipe"]
     return result
 
 
@@ -178,12 +197,21 @@ def prepare(plan_path, sources_path, out):
             raise ValueError(f"Expected a nonempty transparent cutout: {asset['id']}")
         if not asset["transparent"] and low != 255:
             raise ValueError(f"Expected opaque background: {asset['id']}")
-        pixels = np.array(image.resize((width, height), Image.Resampling.NEAREST))
+        resolution = asset["export"].get("resolution", "logical")
+        if resolution not in ("source", "logical"):
+            raise ValueError("Export resolution must be source or logical")
+        if resolution == "source" and image.width < asset["export"].get("min_width", 1):
+            raise ValueError(f"Source texture is below the required resolution: {asset['id']}")
+        pixels = np.array(image if resolution == "source" else image.resize((width, height), Image.Resampling.NEAREST))
         pixels[..., 3] = (pixels[..., 3] > 128).astype(np.uint8) * 255
         pixels[pixels[..., 3] == 0] = 0
         if not pixels[..., 3].any():
             raise ValueError(f"Asset disappears at logical resolution: {asset['id']}")
         prepared.append((asset, spec, source, Image.fromarray(pixels)))
+    interior = None
+    if "interior" in plan:
+        from interiors import prepared_scene
+        interior = prepared_scene(plan, {asset["id"]: image for asset, _, _, image in prepared})
     out.mkdir(parents=True, exist_ok=True)
     manifest = {"schema_version": 1, "biome_id": plan["biome_id"], "inputs": fingerprint, "assets": {}}
     for asset, spec, source, image in prepared:
@@ -192,9 +220,15 @@ def prepare(plan_path, sources_path, out):
         manifest["assets"][asset["id"]] = {"image": image_path.name, "sha256": sha(image_path),
             "size": list(image.size), "source": os.path.relpath(source, out), "source_sha256": spec["sha256"],
             "backend": spec["backend"], "prompt_sha256": spec["prompt_sha256"], "export": asset["export"]}
+    if interior:
+        manifest["interior"] = interior
     save(out / "manifest.json", manifest)
-    cards = "\n".join(f'<figure><img src="{html.escape(key)}.png"><figcaption>{html.escape(key)}</figcaption></figure>' for key in manifest["assets"])
-    (out / "review.html").write_text('<!doctype html><meta charset="utf-8"><title>Biome asset review</title><style>body{background:#20272d;color:#ddd;font:16px sans-serif}img{image-rendering:pixelated;max-width:100%;background:#343b42}figure{margin:24px 0}</style><h1>Review at logical size</h1><p>Inspect quiet combat space, alpha, contact and repeat seams in the game composition before bundling.</p>' + cards)
+    cards = "\n".join(f'<figure><img width="{asset["canvas"][0]}" src="{html.escape(asset["id"])}.png"><figcaption>{html.escape(asset["id"])} — texture {manifest["assets"][asset["id"]]["size"]}, logical canvas {asset["canvas"]}</figcaption></figure>' for asset in plan["assets"])
+    preview = ""
+    if interior:
+        from interiors import review_html
+        preview = review_html(manifest)
+    (out / "review.html").write_text('<!doctype html><meta charset="utf-8"><title>Biome asset review</title><style>body{background:#20272d;color:#ddd;font:16px sans-serif}img,canvas{image-rendering:pixelated;max-width:100%;background:#343b42}figure{margin:24px 0}label{margin-right:16px}</style><h1>Review at logical size</h1><p>Inspect quiet combat space, alpha, contact and repeat seams in the game composition before bundling.</p>' + preview + cards)
     return manifest
 
 
@@ -215,6 +249,14 @@ def bundle(manifest_path, mapping_path, out=None):
             raise ValueError(f"Prepared image or original source changed: {key}")
         source_relative = str(source.relative_to(ROOT))
         selected.append((key, slot, spec, image, source_relative))
+    interior = deepcopy(manifest.get("interior"))
+    if interior:
+        from interiors import validate_scene
+        validate_scene(interior)
+        for layer in interior["layers"]:
+            if layer["asset_id"] not in mapping:
+                raise ValueError("Interior bundle must include every scene layer")
+            layer["image"] = mapping[layer["asset_id"]]
     runtime = json.loads((out / "sources.json").read_text()) if (out / "sources.json").exists() else {}
     out.mkdir(parents=True, exist_ok=True)
     for key, slot, spec, image, source_relative in selected:
@@ -222,6 +264,8 @@ def bundle(manifest_path, mapping_path, out=None):
         runtime[slot] = {"id": key, "source": source_relative,
             **{k: spec[k] for k in ("source_sha256", "sha256", "size", "backend", "prompt_sha256", "export")}}
     save(out / "sources.json", runtime)
+    if interior:
+        save(out / "interior.json", interior)
 
 
 def local_definition(plan_path, out):
@@ -254,7 +298,12 @@ def main(argv=None):
     plan.add_argument("--asset", nargs="+")
     plan.add_argument("--recipe", type=Path)
     plan.add_argument("--out", type=Path, required=True)
-    prep = commands.add_parser("prepare", help="Validate and export supplied static art at logical resolution")
+    interior = commands.add_parser("plan-interior", help="Plan reusable recess, wall and ceiling layers")
+    interior.add_argument("--theme", required=True, help="Theme from interiors.toml, or your custom recipe")
+    interior.add_argument("--biome", help="Optional runtime biome ID; defaults to the theme name")
+    interior.add_argument("--recipe", type=Path)
+    interior.add_argument("--out", type=Path, required=True)
+    prep = commands.add_parser("prepare", help="Validate and export supplied static art at the planned texture resolution")
     prep.add_argument("--plan", type=Path, required=True)
     prep.add_argument("--sources", type=Path, required=True)
     prep.add_argument("--out", type=Path, required=True)
@@ -270,8 +319,12 @@ def main(argv=None):
     props.add_argument("--recipe-dir", type=Path)
     props.add_argument("--out", type=Path)
     args = parser.parse_args(argv)
-    if args.command == "plan":
-        data = make_plan(args.biome, args.kind, args.asset, recipe_path=args.recipe)
+    if args.command in ("plan", "plan-interior"):
+        if args.command == "plan-interior":
+            from interiors import make_interior_plan
+            data = make_interior_plan(args.theme, args.biome, args.recipe)
+        else:
+            data = make_plan(args.biome, args.kind, args.asset, recipe_path=args.recipe)
         if args.out.exists() and json.loads(args.out.read_text()) != data:
             parser.error("Plan inputs changed; choose a new output path")
         args.out.parent.mkdir(parents=True, exist_ok=True)
