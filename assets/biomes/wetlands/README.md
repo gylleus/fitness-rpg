@@ -35,7 +35,7 @@ remain reserved for pool placement. See the
 [inventory, exact prompts and rebuild recipes](../../../image-generation/scene-samples/biome-props-v2/README.md).
 
 ```sh
-uv run sprite-python scripts/bundle_scenery.py --biome wetlands
+uv run biome-assets bundle-props --biome wetlands
 npm run test:scenery
 ```
 

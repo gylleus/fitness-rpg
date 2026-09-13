@@ -20,36 +20,54 @@
   },
   "landscape": {
     "id": "hollow_delve_landscape",
-    "source": "image-generation/scene-samples/hollow-delve-backgrounds-v4/landscape.png",
-    "source_sha256": "73109ed8688aefd6d366a497c9ccf692c075f72f3759c9f865d37fe4a4805e4c",
-    "sha256": "73109ed8688aefd6d366a497c9ccf692c075f72f3759c9f865d37fe4a4805e4c",
+    "source": "image-generation/scene-samples/hollow-delve-backgrounds-v5/originals/landscape.png",
+    "source_sha256": "2c57b7e0148c394c64a69189b033d6710abcd4dc05a86fe61e130e9b869ced2f",
+    "sha256": "213677db36b80959e38573a08d3614256f6e8e9240bd908a6cb473eb7930b3e4",
     "size": [
-      1672,
-      941
+      640,
+      360
     ],
-    "backend": "built-in imagegen; full source resolution and colors preserved"
+    "backend": "built-in imagegen",
+    "prompt_sha256": "1970d7744e039be6f7769d7df42ede6267e88db8a0d394e15a3d8dea7e1f4445",
+    "export": {
+      "sampling": "nearest",
+      "alpha": "opaque",
+      "colors": "source"
+    }
   },
   "timber_gallery": {
     "id": "hollow_delve_timber_gallery",
-    "source": "image-generation/scene-samples/hollow-delve-backgrounds-v4/timber_gallery.png",
-    "source_sha256": "f4b71d448fd41fb780338e242525d704085bb0405513d811dd1668eb17367f13",
-    "sha256": "f4b71d448fd41fb780338e242525d704085bb0405513d811dd1668eb17367f13",
+    "source": "image-generation/scene-samples/hollow-delve-backgrounds-v5/originals/timber_gallery.png",
+    "source_sha256": "13fad9dcab9567e58b79b77cbdb24d8e424644dbbd05ad79540e49474ce57bd4",
+    "sha256": "db2cadf23c0df46f1eee4330e0a6de9dab7df109f5802df096313dd97149c865",
     "size": [
-      1672,
-      941
+      640,
+      360
     ],
-    "backend": "built-in imagegen; full source resolution and colors preserved"
+    "backend": "built-in imagegen",
+    "prompt_sha256": "a1eb8c32d7a437d9f163522e645bf52727c7aed415544c825168b56a82d79f71",
+    "export": {
+      "sampling": "nearest",
+      "alpha": "opaque",
+      "colors": "source"
+    }
   },
   "sunken_cavern": {
     "id": "hollow_delve_sunken_cavern",
-    "source": "image-generation/scene-samples/hollow-delve-backgrounds-v4/sunken_cavern.png",
-    "source_sha256": "130cb187b422a28a3e2de4e41f0a6ef3a7b0bf4a8d03abeac7002e34fe967e20",
-    "sha256": "130cb187b422a28a3e2de4e41f0a6ef3a7b0bf4a8d03abeac7002e34fe967e20",
+    "source": "image-generation/scene-samples/hollow-delve-backgrounds-v5/originals/sunken_cavern.png",
+    "source_sha256": "28bff711ab343d68133ae0bfbef6de57f46970cdd12047a8ab43fb4f83a1d733",
+    "sha256": "9a6b731cce42bcafefcbc60016ee649e4416caa5c4bc60ba8c02d34a3efafc48",
     "size": [
-      1672,
-      940
+      640,
+      360
     ],
-    "backend": "built-in imagegen; full source resolution and colors preserved"
+    "backend": "built-in imagegen",
+    "prompt_sha256": "b59a80b89b553ddaeaa98abb702458f1da5062dea47f580bbf10bc78fd5bef78",
+    "export": {
+      "sampling": "nearest",
+      "alpha": "opaque",
+      "colors": "source"
+    }
   },
   "props": {
     "id": "hollow_delve_prop_atlas",

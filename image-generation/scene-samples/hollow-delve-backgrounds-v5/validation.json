@@ -1,0 +1,71 @@
+{
+  "canvas": [
+    640,
+    360
+  ],
+  "combat_band_rows": [
+    160,
+    288
+  ],
+  "metric": "Mean absolute neighboring luminance difference at logical resolution, averaged over horizontal and vertical edges; descriptive measurement, not an art approval threshold.",
+  "panels": {
+    "landscape": {
+      "before_source_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        640,
+        360
+      ],
+      "before_combat_band_activity": 15.892716375012707,
+      "after_combat_band_activity": 1.4528682440498193,
+      "activity_reduction_percent": 90.85827614507681,
+      "before_decoded_rgba_bytes": 6293408,
+      "after_decoded_rgba_bytes": 921600,
+      "before_png_bytes": 2913117,
+      "after_png_bytes": 250125
+    },
+    "timber_gallery": {
+      "before_source_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        640,
+        360
+      ],
+      "before_combat_band_activity": 16.280009030617705,
+      "after_combat_band_activity": 1.9541014159327132,
+      "activity_reduction_percent": 87.99692670773311,
+      "before_decoded_rgba_bytes": 6293408,
+      "after_decoded_rgba_bytes": 921600,
+      "before_png_bytes": 2937933,
+      "after_png_bytes": 275633
+    },
+    "sunken_cavern": {
+      "before_source_size": [
+        1672,
+        940
+      ],
+      "runtime_size": [
+        640,
+        360
+      ],
+      "before_combat_band_activity": 17.10896289705864,
+      "after_combat_band_activity": 3.3424225985927043,
+      "activity_reduction_percent": 80.46390877867103,
+      "before_decoded_rgba_bytes": 6286720,
+      "after_decoded_rgba_bytes": 921600,
+      "before_png_bytes": 2851395,
+      "after_png_bytes": 295994
+    }
+  },
+  "validation": {
+    "scenery_renders": 104,
+    "sprite_exact_crops": 304,
+    "sprite_scaled_mirrored_samples": 264,
+    "scenery_logic_tests": 4,
+    "sprite_replay_identical_rgba_pngs": 424
+  }
+}

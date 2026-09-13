@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "biome_id": "hollow_delve",
+  "style": {
+    "schema_version": 1,
+    "id": "readable-dark-fantasy-v1",
+    "style": "Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks.",
+    "background": "Low detail and low local contrast. Two or three broad value masses; distant shapes lose detail and contrast. Keep the combat band behind the entire route quiet. Use sparse large rock, cloud or foliage shapes, with only a few edge accents.",
+    "prop": "Medium detail concentrated at the outer silhouette and a few identifying features. Keep interior shading grouped. Show one complete isolated object with a clear support contact.",
+    "enemy": "Highest silhouette clarity and controlled contrast in the scene. Consistent body proportions and equipment across poses, deliberate grouped shading, no fine stippled texture. Strict left-facing side profile.",
+    "ground": "A readable continuous walking lip with sparse low-contrast material marks. Keep the surface level and separate from scenery and actors.",
+    "avoid": [
+      "photorealism",
+      "intricate microtexture",
+      "dense cracks or hatching",
+      "single-pixel speckle",
+      "dithering",
+      "dramatic spotlights",
+      "bloom",
+      "soft airbrushed edges",
+      "text",
+      "watermarks",
+      "UI",
+      "painted checkerboard",
+      "isometric or overhead view",
+      "a road receding to a vanishing point"
+    ],
+    "walk": "Six ordered poses of an anatomy-appropriate walk in place: ready contact, weight shift, passing pose, opposite contact, opposite weight shift, return toward the starting contact. No horizontal travel across cells.",
+    "death": "Six ordered poses: recoil, loss of support, falling, floor contact, settling, fully inert corpse resting on its actual support. The last pose stays down."
+  },
+  "source_sha256": {
+    "biomes/hollow_delve/BIOME.toml": "57325b70230cf794c50011397402695b747cc9529bf9f8bf63fab44e870e8a60",
+    "biomes/hollow_delve/SCENERY.toml": "a144e5e5f1a0e70d8331d480dd7c50558a54e7af29310ae83fedbb086a65385d",
+    "biomes/hollow_delve/ENEMIES.toml": "326934d55340a07cb5a39845c97f57017d7e3eeebd262b7d0268bf82b3c45a92"
+  },
+  "style_sha256": "d164f330c63963ffcad9bfd64fc1e90978dbe0ab7d85350b0a220f9d7e430141",
+  "scene": {
+    "canvas": [
+      640,
+      360
+    ],
+    "ground_y": 288,
+    "reference_height": 64,
+    "view": "orthographic_side",
+    "style": "Weathered dark fantasy pixel art with broad readable rock and timber shapes, stepped clusters of muted color and sparse material marks. Backgrounds use low detail and low local contrast; reserve stronger silhouettes and highlights for actors and nearby props. Judge and export scenery at its logical canvas size.",
+    "avoid": [
+      "characters baked into scenery",
+      "isometric view",
+      "a road receding to a vanishing point",
+      "bright cheerful colors",
+      "readable text",
+      "smooth airbrushed edges",
+      "mandatory gaps in the walking surface"
+    ]
+  },
+  "assets": [
+    {
+      "id": "hollow_delve_landscape",
+      "name": "Limestone chamber",
+      "kind": "background",
+      "canvas": [
+        640,
+        360
+      ],
+      "transparent": false,
+      "prompt": "Use case: stylized-concept\nAsset type: background for a side-scrolling combat game\nPrimary request: Limestone chamber\nSubject: A broad limestone chamber with a few blunt attached stalactites and large quiet shadowed wall recesses. Rock is described by simple overlapping masses and sparse stepped edges.\nStyle/medium: Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks. Low detail and low local contrast. Two or three broad value masses; distant shapes lose detail and contrast. Keep the combat band behind the entire route quiet. Use sparse large rock, cloud or foliage shapes, with only a few edge accents.\nComposition/framing: orthographic side view, parallel to the screen.\nLighting/mood: Cold blue-gray reflected light reveals damp limestone. Sparse dull amber points suggest old mineral deposits; pale fungus gives a restrained green accent without illuminating the whole cavern.\nColor palette: Cavern black #181B27, Wet slate #394757, Limestone #A6ADB0, Old timber #635044, Iron rust #8B513B, Fungal green #8AA778\nScene/backdrop: Opaque low-detail atmosphere panel. Use limestone chambers, abandoned timber galleries and a sunken cavern as three sequential variants with soft overlap during travel. A few broad rock masses and attached stalactites frame quiet shadowed recesses. Keep rows 160 through 288 subdued across the whole width. The walking ground and freestanding props are separate. These full scenes are not seamless tiles.\nConstraints: Designed for 640 by 360 logical pixels; judge detail at this size. Keep rows 160 through 288 quiet across the full width for moving combatants. Rear atmosphere only. Foreground props and the playable floor are separate assets. No characters, enemies or freestanding objects. Use broad stepped shading with large uninterrupted regions. No intricate mineral ribs, pitted stone, tiny chisel marks or fine grain. Opaque edge-to-edge image; no transparency or border.\nAvoid: photorealism, intricate microtexture, dense cracks or hatching, single-pixel speckle, dithering, dramatic spotlights, bloom, soft airbrushed edges, text, watermarks, UI, painted checkerboard, isometric or overhead view, a road receding to a vanishing point, characters baked into scenery, isometric view, bright cheerful colors, readable text, smooth airbrushed edges, mandatory gaps in the walking surface",
+      "prompt_sha256": "1970d7744e039be6f7769d7df42ede6267e88db8a0d394e15a3d8dea7e1f4445",
+      "source_definition": {
+        "id": "hollow_delve_landscape",
+        "name": "Limestone chamber",
+        "visual_description": "A broad limestone chamber with a few blunt attached stalactites and large quiet shadowed wall recesses. Rock is described by simple overlapping masses and sparse stepped edges.",
+        "generation": {
+          "parallax": 0.18,
+          "repeat_x": false,
+          "transparent": false,
+          "composition": "Opaque low-detail atmosphere panel. Use limestone chambers, abandoned timber galleries and a sunken cavern as three sequential variants with soft overlap during travel. A few broad rock masses and attached stalactites frame quiet shadowed recesses. Keep rows 160 through 288 subdued across the whole width. The walking ground and freestanding props are separate. These full scenes are not seamless tiles."
+        },
+        "kind": "background",
+        "canvas": [
+          640,
+          360
+        ],
+        "transparent": false,
+        "source_id": "hollow_delve_cavern_backdrop"
+      },
+      "export": {
+        "sampling": "nearest",
+        "alpha": "opaque",
+        "colors": "source"
+      }
+    },
+    {
+      "id": "hollow_delve_timber_gallery",
+      "name": "Abandoned timber gallery",
+      "kind": "background",
+      "canvas": [
+        640,
+        360
+      ],
+      "transparent": false,
+      "prompt": "Use case: stylized-concept\nAsset type: background for a side-scrolling combat game\nPrimary request: Abandoned timber gallery\nSubject: An abandoned mine gallery with three widely spaced heavy timber supports embedded in the distant wall. Simple blue-gray stone slabs and broad dark recesses. Timber has one or two identifying splits, with no fine grain or metalwork detail.\nStyle/medium: Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks. Low detail and low local contrast. Two or three broad value masses; distant shapes lose detail and contrast. Keep the combat band behind the entire route quiet. Use sparse large rock, cloud or foliage shapes, with only a few edge accents.\nComposition/framing: orthographic side view, parallel to the screen.\nLighting/mood: Cold blue-gray reflected light reveals damp limestone. Sparse dull amber points suggest old mineral deposits; pale fungus gives a restrained green accent without illuminating the whole cavern.\nColor palette: Cavern black #181B27, Wet slate #394757, Limestone #A6ADB0, Old timber #635044, Iron rust #8B513B, Fungal green #8AA778\nScene/backdrop: Opaque low-detail atmosphere panel. Use limestone chambers, abandoned timber galleries and a sunken cavern as three sequential variants with soft overlap during travel. A few broad rock masses and attached stalactites frame quiet shadowed recesses. Keep rows 160 through 288 subdued across the whole width. The walking ground and freestanding props are separate. These full scenes are not seamless tiles.\nConstraints: Designed for 640 by 360 logical pixels; judge detail at this size. Keep rows 160 through 288 quiet across the full width for moving combatants. Rear atmosphere only. Foreground props and the playable floor are separate assets. No characters, enemies or freestanding objects. Use broad stepped shading with large uninterrupted regions. No intricate mineral ribs, pitted stone, tiny chisel marks or fine grain. Opaque edge-to-edge image; no transparency or border.\nAvoid: photorealism, intricate microtexture, dense cracks or hatching, single-pixel speckle, dithering, dramatic spotlights, bloom, soft airbrushed edges, text, watermarks, UI, painted checkerboard, isometric or overhead view, a road receding to a vanishing point, characters baked into scenery, isometric view, bright cheerful colors, readable text, smooth airbrushed edges, mandatory gaps in the walking surface",
+      "prompt_sha256": "a1eb8c32d7a437d9f163522e645bf52727c7aed415544c825168b56a82d79f71",
+      "source_definition": {
+        "id": "hollow_delve_timber_gallery",
+        "name": "Abandoned timber gallery",
+        "visual_description": "An abandoned mine gallery with three widely spaced heavy timber supports embedded in the distant wall. Simple blue-gray stone slabs and broad dark recesses. Timber has one or two identifying splits, with no fine grain or metalwork detail.",
+        "generation": {
+          "parallax": 0.18,
+          "repeat_x": false,
+          "transparent": false,
+          "composition": "Opaque low-detail atmosphere panel. Use limestone chambers, abandoned timber galleries and a sunken cavern as three sequential variants with soft overlap during travel. A few broad rock masses and attached stalactites frame quiet shadowed recesses. Keep rows 160 through 288 subdued across the whole width. The walking ground and freestanding props are separate. These full scenes are not seamless tiles."
+        },
+        "kind": "background",
+        "canvas": [
+          640,
+          360
+        ],
+        "transparent": false,
+        "source_id": "hollow_delve_cavern_backdrop"
+      },
+      "export": {
+        "sampling": "nearest",
+        "alpha": "opaque",
+        "colors": "source"
+      }
+    },
+    {
+      "id": "hollow_delve_sunken_cavern",
+      "name": "Sunken cavern",
+      "kind": "background",
+      "canvas": [
+        640,
+        360
+      ],
+      "transparent": false,
+      "prompt": "Use case: stylized-concept\nAsset type: background for a side-scrolling combat game\nPrimary request: Sunken cavern\nSubject: A spacious sunken chamber with two broad attached limestone columns framing a quiet dark rear wall. A still dark pool occupies only the lowest fifth, with two or three wide muted reflection bands. No fine ripples or sparkling highlights.\nStyle/medium: Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks. Low detail and low local contrast. Two or three broad value masses; distant shapes lose detail and contrast. Keep the combat band behind the entire route quiet. Use sparse large rock, cloud or foliage shapes, with only a few edge accents.\nComposition/framing: orthographic side view, parallel to the screen.\nLighting/mood: Cold blue-gray reflected light reveals damp limestone. Sparse dull amber points suggest old mineral deposits; pale fungus gives a restrained green accent without illuminating the whole cavern.\nColor palette: Cavern black #181B27, Wet slate #394757, Limestone #A6ADB0, Old timber #635044, Iron rust #8B513B, Fungal green #8AA778\nScene/backdrop: Opaque low-detail atmosphere panel. Use limestone chambers, abandoned timber galleries and a sunken cavern as three sequential variants with soft overlap during travel. A few broad rock masses and attached stalactites frame quiet shadowed recesses. Keep rows 160 through 288 subdued across the whole width. The walking ground and freestanding props are separate. These full scenes are not seamless tiles.\nConstraints: Designed for 640 by 360 logical pixels; judge detail at this size. Keep rows 160 through 288 quiet across the full width for moving combatants. Rear atmosphere only. Foreground props and the playable floor are separate assets. No characters, enemies or freestanding objects. Use broad stepped shading with large uninterrupted regions. No intricate mineral ribs, pitted stone, tiny chisel marks or fine grain. Opaque edge-to-edge image; no transparency or border.\nAvoid: photorealism, intricate microtexture, dense cracks or hatching, single-pixel speckle, dithering, dramatic spotlights, bloom, soft airbrushed edges, text, watermarks, UI, painted checkerboard, isometric or overhead view, a road receding to a vanishing point, characters baked into scenery, isometric view, bright cheerful colors, readable text, smooth airbrushed edges, mandatory gaps in the walking surface",
+      "prompt_sha256": "b59a80b89b553ddaeaa98abb702458f1da5062dea47f580bbf10bc78fd5bef78",
+      "source_definition": {
+        "id": "hollow_delve_sunken_cavern",
+        "name": "Sunken cavern",
+        "visual_description": "A spacious sunken chamber with two broad attached limestone columns framing a quiet dark rear wall. A still dark pool occupies only the lowest fifth, with two or three wide muted reflection bands. No fine ripples or sparkling highlights.",
+        "generation": {
+          "parallax": 0.18,
+          "repeat_x": false,
+          "transparent": false,
+          "composition": "Opaque low-detail atmosphere panel. Use limestone chambers, abandoned timber galleries and a sunken cavern as three sequential variants with soft overlap during travel. A few broad rock masses and attached stalactites frame quiet shadowed recesses. Keep rows 160 through 288 subdued across the whole width. The walking ground and freestanding props are separate. These full scenes are not seamless tiles."
+        },
+        "kind": "background",
+        "canvas": [
+          640,
+          360
+        ],
+        "transparent": false,
+        "source_id": "hollow_delve_cavern_backdrop"
+      },
+      "export": {
+        "sampling": "nearest",
+        "alpha": "opaque",
+        "colors": "source"
+      }
+    }
+  ],
+  "variant_recipe": {
+    "text": "schema_version = 1\nbiome_id = \"hollow_delve\"\n\n[[variants]]\nsource_id = \"hollow_delve_cavern_backdrop\"\nid = \"hollow_delve_landscape\"\nname = \"Limestone chamber\"\nsubject = \"A broad limestone chamber with a few blunt attached stalactites and large quiet shadowed wall recesses. Rock is described by simple overlapping masses and sparse stepped edges.\"\n\n[[variants]]\nsource_id = \"hollow_delve_cavern_backdrop\"\nid = \"hollow_delve_timber_gallery\"\nname = \"Abandoned timber gallery\"\nsubject = \"An abandoned mine gallery with three widely spaced heavy timber supports embedded in the distant wall. Simple blue-gray stone slabs and broad dark recesses. Timber has one or two identifying splits, with no fine grain or metalwork detail.\"\n\n[[variants]]\nsource_id = \"hollow_delve_cavern_backdrop\"\nid = \"hollow_delve_sunken_cavern\"\nname = \"Sunken cavern\"\nsubject = \"A spacious sunken chamber with two broad attached limestone columns framing a quiet dark rear wall. A still dark pool occupies only the lowest fifth, with two or three wide muted reflection bands. No fine ripples or sparkling highlights.\"\n",
+    "sha256": "ce923e85ccea565c59802c644d4808b54f85a7e085e9eb592706c41e5410f8e2"
+  }
+}
