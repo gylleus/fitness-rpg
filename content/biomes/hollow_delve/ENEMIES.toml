@@ -1,0 +1,164 @@
+schema_version = 1
+biome_id = "hollow_delve"
+
+# Random-spawn membership; expedition order is owned by the runtime.
+[[encounters]]
+enemy_id = "troglodyte"
+[[encounters]]
+enemy_id = "giant_cave_spider"
+[[encounters]]
+enemy_id = "bone_slime"
+[[encounters]]
+enemy_id = "delve_dwarf"
+[[encounters]]
+enemy_id = "delve_gnoll"
+
+[[enemies]]
+id = "troglodyte"
+name = "Troglodyte"
+family = "human"
+rank = "common"
+tier = 2
+balance = "draft"
+description = "A blind, slimy cave humanoid that feels its way through the abandoned galleries. Its bent posture and hesitant probing conceal the reach of its long arms."
+visual_description = """
+The Troglodyte has the proportions of a primitive human stretched by life in narrow passages. Its hunched shoulders sit above a thin, hanging belly, while long forearms reach almost to its knees. Pale gray skin carries a greenish cast and a wet film that gathers in strings beneath its elbows. Loose folds bunch at the neck and wrists; the ribs and blunt shoulder blades show through the slick surface. Its large, hairless head projects forward on a short neck. A continuous layer of wrinkled skin covers the places where eyes would be, leaving two shallow depressions beneath a heavy brow. Broad nostrils flare above a small mouth crowded with uneven, worn teeth.
+
+Large cupped ears stand away from its skull, one folded along the rim. Five long fingers end in thick, dirty nails, and its flat bare feet spread into splayed toes. A strip of stained hide hangs from a simple cord around its hips; it carries no weapon. Limestone dust clings to its shins and to the raised knuckles, contrasting with the shining damp of its chest. It stands with one hand extended, head tilted as though listening to an objection from the wall. The other hand hangs low, fingers opening and closing before it takes another cautious step.
+"""
+quirk = "It pauses with its head cocked after tapping a wall, as if waiting for the wall to answer."
+fallback_sprite = "knight"
+[enemies.stats]
+health = 120
+attack = 17
+gold = 16
+xp = 22
+[enemies.visual]
+height_scale = 0.95
+silhouette = "Stooped hairless humanlike creature with a projecting head, cupped ears, long hanging forearms, narrow chest, loose belly and flat splayed feet."
+appearance = "Slimy pale gray-green skin, sealed eyeless depressions under a heavy brow, flared nostrils, uneven small teeth, and limestone dust on knees and knuckles. A stained hide loincloth covers its hips."
+equipment = ["stained hide loincloth", "plain cord belt"]
+palette = ["#A6B6AA", "#718B7A", "#D0CEC0", "#504B40", "#273333"]
+idle = "It breathes through flared nostrils and slowly tilts its head, keeping both feet planted while the long fingers of one extended hand curl and release."
+attack = "It draws one elbow behind its ribs, spreads its fingers, then throws its shoulder forward in a long horizontal clawing rake. Its front knee bends to catch the weight before it withdraws the arm and returns to its listening crouch."
+avoid = ["visible eyeballs or glowing eye sockets", "hair", "reptilian scales or tail", "carried weapons", "exposed genitals", "a cheerful expression"]
+
+[[enemies]]
+id = "giant_cave_spider"
+name = "Giant Cave Spider"
+family = "beast"
+rank = "common"
+tier = 2
+balance = "draft"
+description = "A heavy cave spider with a swollen abdomen and long hooked legs. Dust catches in its coarse hairs while its paired fangs remain dark and polished."
+visual_description = """
+The Giant Cave Spider holds a low, plated forebody ahead of a swollen, pear-shaped abdomen. Eight long legs spread from the forebody in four pairs, their angular joints rising above its back before tapering into hooked feet. The front pair reaches farther than the others. Soot-brown armor covers the body and upper legs, broken by irregular chalk-gray markings and rusty bands around the joints. Sparse stiff hairs catch limestone dust along the limbs. Its abdomen is dull charcoal with a pale, crooked seam down the top, and hangs just clear of the ground between the rear legs.
+
+Eight small, glossy black eyes crowd the front of its low head, with the middle pair slightly larger. Two thick fangs curve downward beneath them, flanked by short, jointed mouth palps. No human features soften the compact face. Old silk threads cling to the rear of its abdomen and to one hind leg. It rests with its hooked feet planted well apart, occasionally lifting a single forefoot to clear a thread before setting it down in exactly the same place. Even at rest its wide stance occupies most of a narrow gallery.
+"""
+quirk = "It repeatedly clears the same old strand of silk from a forefoot without appearing to make progress."
+fallback_sprite = "wolf"
+[enemies.stats]
+health = 145
+attack = 20
+gold = 18
+xp = 25
+[enemies.visual]
+height_scale = 0.6
+silhouette = "Low two-part spider body with a large rear abdomen, eight angular legs in four pairs, short mouth palps and two downward fangs."
+appearance = "Soot-brown and charcoal plates, chalk-gray mottling, rusty joint bands and sparse dusty hairs. Eight tiny black eyes and dark curved fangs; no clothing."
+equipment = []
+palette = ["#292830", "#544039", "#8B6548", "#B2ADA0", "#111820"]
+idle = "Its abdomen lifts slightly with each breath while its eight feet remain broadly planted. One forefoot briefly lifts and settles as the mouth palps twitch."
+attack = "It lowers its forebody, folds the front legs back, then drives forward on the rear legs with both fangs open. The fangs close in a short downward bite before the front feet brace and push the body back into its broad resting stance."
+avoid = ["six legs", "human face or humanoid torso", "cartoon eyes", "wings", "scorpion tail", "weapons", "web projectiles"]
+
+[[enemies]]
+id = "bone_slime"
+name = "Bone Slime"
+family = "ooze"
+rank = "common"
+tier = 2
+balance = "draft"
+description = "A translucent green blob containing a humanoid skull, ribs and long bones. Its borrowed remains drift through the jelly whenever it changes direction."
+visual_description = """
+The Bone Slime forms a broad mound of translucent green jelly, roughly knee-high when settled. Its thick outer skin bulges into rounded lobes at the base, with darker bottle-green folds where the material overlaps. Pale yellow-green highlights follow the stretched upper surface. Small bubbles collect just beneath the skin, and grains of grit remain trapped around its flattened contact with the floor. It has no eyes, mouth, limbs or independent face; the visible expression belongs entirely to the remains suspended inside it.
+
+A yellowed humanoid skull floats near the front of the mass with its empty sockets tilted slightly upward. The lower jaw hangs loose beneath it. Several curved ribs, two broken long bones and a few vertebrae lie at different angles deeper in the jelly, their edges softened but still clearly visible through the green body. The bones do not form an articulated skeleton. As the slime creeps, the skull rolls a little behind the motion and slowly rights itself. The outer mound settles around it with the patient wobble of something carrying an awkwardly packed load.
+"""
+quirk = "Its skull takes an extra moment to face the direction the rest of it has already chosen."
+fallback_sprite = "slime"
+[enemies.stats]
+health = 160
+attack = 19
+gold = 20
+xp = 26
+[enemies.visual]
+height_scale = 0.45
+silhouette = "Broad, low green jelly mound with rounded basal lobes and a clearly enclosed humanoid skull and scattered bones; no limbs or own face."
+appearance = "Translucent bottle-green jelly with yellow-green surface highlights and bubbles. A yellowed skull with empty sockets, loose jaw, ribs, long-bone fragments and vertebrae float visibly inside."
+equipment = []
+palette = ["#245A38", "#438F3D", "#8DC45A", "#CBDB86", "#DDD0A8", "#756746"]
+idle = "The planted mound slowly swells and relaxes. The skull tilts a little behind the wobble while loose ribs and bubbles drift inside the jelly."
+attack = "The slime bunches its rear into a higher mound, then flattens and surges forward in a blunt wave of jelly. Its skull and bones lag behind the leading bulge before rolling forward inside it. The stretched body draws back into a low mound without ejecting its contents."
+avoid = ["a face on the jelly", "eyes outside the skull", "arms or legs", "opaque body hiding the bones", "intact standing skeleton", "exposed gore", "ejected bones or projectiles"]
+
+[[enemies]]
+id = "delve_dwarf"
+name = "Delve Dwarf"
+family = "dwarf"
+rank = "elite"
+tier = 2
+balance = "draft"
+description = "A hostile dwarf encountered in the abandoned workings, short and unnervingly broad, with a hairless face and a heavy stone-breaking maul. This individual guards its tools with silent, disproportionate anger."
+visual_description = """
+The Delve Dwarf barely reaches an adult human's chest, but its barrel-shaped torso is nearly as broad as it is tall. A large bald head sits directly between sloping shoulders on a neck almost hidden by thick folds. Its clean-shaven face is broad and flattened, with a low shelf of brow, close-set pale eyes, a short blunt nose and a thin horizontal mouth. The jaw is wide and smoothly hairless. Ash-gray skin darkens to violet around the deep creases of its elbows, and chalky dust settles over the crown of its head. Its expression barely changes when the rest of its body moves.
+
+Bulky forearms hang beside the compressed torso, ending in large square hands with thick fingers. Short bowed legs terminate in broad, cracked leather boots. A sleeveless charcoal work tunic, patched leather apron and narrow iron belt enclose its heavy frame; one apron corner has been cut away to stop it catching beneath a knee. It grips a short-handled iron mining maul with a massive rectangular head, both striking faces polished by use. It rests the maul upright beside its foot and squares its stance in tiny adjustments, taking considerable trouble to occupy the exact middle of the passage.
+"""
+quirk = "It makes tiny sideways adjustments until it blocks the passage with apparently exact satisfaction."
+fallback_sprite = "knight"
+[enemies.stats]
+health = 245
+attack = 25
+gold = 34
+xp = 38
+[enemies.visual]
+height_scale = 0.72
+silhouette = "Very short, immensely broad humanoid; bald flattened head sunk between shoulders, barrel torso, huge square hands, bulky forearms and short bowed legs. Short mining maul with rectangular iron head."
+appearance = "Completely beardless, bald ash-gray dwarf with small close-set pale eyes, wide smooth jaw and thin mouth. Chalk dust, charcoal sleeveless tunic, patched dark leather apron, iron belt and cracked broad boots."
+equipment = ["short-handled rectangular iron mining maul", "sleeveless charcoal work tunic", "patched leather apron", "narrow iron belt", "broad cracked leather boots"]
+palette = ["#969499", "#615D73", "#C8C3B4", "#37363D", "#675044", "#85888D"]
+idle = "It breathes through its nose and adjusts its grip around the upright maul handle, keeping both short legs firmly planted and its pale eyes fixed ahead."
+attack = "It takes the maul in both hands, bends its short knees and lifts the iron head above one shoulder. Its torso rolls forward into a heavy downward blow. The head stops against the floor before it heaves the handle upright and settles back behind the tool."
+avoid = ["beard or moustache", "head hair", "horned helmet", "Viking costume", "heroic smiling fantasy dwarf", "slender build", "exposed genitals", "giant stature"]
+
+[[enemies]]
+id = "delve_gnoll"
+name = "Delve Gnoll"
+family = "beast"
+rank = "boss"
+tier = 2
+balance = "draft"
+description = "A large hyena-headed scavenger that claims the deeper galleries. A forward-heavy stance and a scarred iron cleaver make this gnoll the strongest obstacle on the route."
+visual_description = """
+The Delve Gnoll is a tall, hyena-headed humanoid with a high, muscular shoulder line and narrow hindquarters. Tawny-gray fur grows in ragged patches over its limbs, interrupted by dark brown spots. A coarse black mane rises along the back of its neck and shoulders. Its long blunt muzzle carries heavy lips and uneven yellow teeth; rounded ears stand above a sloping brow, with a notch missing from one rim. Small amber eyes sit deep in the dark fur around its face. A thick neck and forward lean make the large head seem to arrive before the rest of the body.
+
+Its long arms end in broad, clawed hands, while bent hocks lift the heels of its digitigrade legs above large paw-like feet. A short coarse tail hangs behind a ragged leather skirt. Mismatched scraps of hide and a rusted shoulder plate are held by a cross-body strap, with a few blunt bone toggles fastening the belt. It carries a broad, chipped iron cleaver in one hand, keeping the other open for balance. Damp stone dust has turned the lower fur almost gray. Between steps it works its jaws slowly, as if still judging the quality of something it ate much earlier.
+"""
+quirk = "It keeps chewing long after its mouth is empty, looking increasingly dissatisfied."
+fallback_sprite = "boss"
+[enemies.stats]
+health = 330
+attack = 30
+gold = 65
+xp = 58
+[enemies.visual]
+height_scale = 1.12
+silhouette = "Tall hunched hyena humanoid with high shoulders, black neck mane, long muzzle, rounded ears, long arms, digitigrade legs, broad paw feet and short tail. One broad cleaver."
+appearance = "Ragged gray-tawny spotted fur, dark mane, deep amber eyes and uneven yellow teeth. Patched hide skirt, one rusted shoulder plate on a leather strap, bone belt toggles and a chipped iron cleaver."
+equipment = ["broad chipped iron cleaver", "ragged hide skirt", "single rusted shoulder plate", "cross-body leather strap", "belt with blunt bone toggles"]
+palette = ["#8D7960", "#514638", "#292931", "#B9AE94", "#8B513B", "#D9AB57"]
+idle = "It stands forward over bent hocks, breathing through its heavy muzzle and slowly working its jaw. Its free clawed hand flexes while the cleaver hangs beside its thigh."
+attack = "It draws the cleaver back past its shoulder, plants the forward paw and snaps its torso into a broad descending chop. Its empty hand spreads for balance as the muzzle thrusts forward. It pulls the blade free and returns to its hunched stance."
+avoid = ["human face", "wolf ears or long bushy wolf tail", "hooves", "cheerful grin", "two weapons", "ornate heroic armor"]

@@ -1,0 +1,90 @@
+schema_version = 1
+biome_id = "hollow_delve"
+
+[[scenery]]
+id = "hollow_delve_mine_support"
+name = "Buckled mine support"
+visual_description = "Two splintered timber uprights hold a sagging crossbeam with rusted iron straps. A short diagonal brace props up one foot, and overlapping repairs stop below a fresh crack."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 2.3
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One complete timber portal, both feet visible, transparent opening and surroundings; no rock wall or ground. Keep the opening broad enough to read behind a passing adventurer."
+
+[[scenery]]
+id = "hollow_delve_webbed_arch"
+name = "Webbed broken arch"
+visual_description = "A squat arch of chipped limestone blocks survives with one shoulder partly collapsed. Thick old silk bridges its upper corners, holding dust in uneven gray folds."
+[scenery.generation]
+canvas = [192, 192]
+height_scale = 2.1
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One freestanding arch with supporting bases, transparent center and exterior, attached web bands in its upper corners, no spider or surrounding wall."
+
+[[scenery]]
+id = "hollow_delve_ore_cart"
+name = "Derailed ore cart"
+visual_description = "An empty iron ore cart lists on four small rusted wheels. Its riveted sides are dented, and a broken axle leaves one corner low."
+[scenery.generation]
+canvas = [160, 128]
+height_scale = 0.8
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One broadside cart, entire silhouette and all attached wheels visible, empty dark interior, transparent surroundings and no rails or floor."
+
+[[scenery]]
+id = "hollow_delve_quartz_cluster"
+name = "Clouded quartz cluster"
+visual_description = "A few thick, clouded quartz points rise from a rough slate base. Their chipped tips catch cold gray highlights while rust stains the lower facets."
+[scenery.generation]
+canvas = [128, 128]
+height_scale = 0.65
+layers = ["behind_path", "foreground"]
+anchor = "ground"
+composition = "One compact mineral cluster attached to its small rock base; transparent surroundings, broad stepped facets, no glow or detached particles."
+
+[[scenery]]
+id = "hollow_delve_fungus_stump"
+name = "Pale fungus on pit timber"
+visual_description = "Layers of pale green shelf fungus crowd the base of a snapped pit prop. The exposed timber is black with damp, and chalk dust gathers around the thick waxy caps."
+[scenery.generation]
+canvas = [96, 128]
+height_scale = 0.55
+layers = ["behind_path", "foreground"]
+anchor = "ground"
+composition = "One short broken timber stump carrying attached fungus; transparent exterior, no painted light halo, ground patch or free-floating spores."
+
+[[scenery]]
+id = "hollow_delve_bone_heap"
+name = "Dusty bone heap"
+visual_description = "A yellowed humanoid skull lies on its side among loose ribs and two cracked long bones. Pale mineral grit fills the hollows, and a short strip of old cloth lies beneath the jaw."
+[scenery.generation]
+canvas = [128, 64]
+height_scale = 0.25
+layers = ["behind_path", "foreground"]
+anchor = "ground"
+composition = "One low group of overlapping dry bones and attached cloth; no flesh, blood, complete skeleton, slime or ground rectangle."
+
+[[scenery]]
+id = "hollow_delve_stalagmites"
+name = "Worn stalagmites"
+visual_description = "Three blunt limestone teeth rise from a single low stone base. Damp vertical streaks interrupt their gray surfaces, and their chipped ridges are almost white."
+[scenery.generation]
+canvas = [128, 160]
+height_scale = 1.0
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One attached group of three uneven stalagmites, full bases and tips inside a transparent canvas. No ceiling, cave background or separate ground strip."
+
+[[scenery]]
+id = "hollow_delve_tool_cache"
+name = "Abandoned tool cache"
+visual_description = "A rusted pick rests diagonally against a low broken crate. A coil of frayed rope and a dented, unlit oil lamp sit between the remaining slats."
+[scenery.generation]
+canvas = [128, 128]
+height_scale = 0.65
+layers = ["behind_path"]
+anchor = "ground"
+composition = "One compact crate, pick, rope and lamp group, with every part touching the group and fully visible; transparent surroundings, no text or flame."

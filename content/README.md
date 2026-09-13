@@ -1,10 +1,11 @@
 # Structured game content
 
 The authored environments and enemies are being rebuilt through user-led curation.
-[catalog.toml](catalog.toml) currently registers [Wetlands](biomes/wetlands/BIOME.toml),
-a hostile, abandoned environment with no settled residents. Its
-[enemy roster](biomes/wetlands/ENEMIES.toml) begins with the Bog Toad, whose
-description is approved and whose combat values remain provisional.
+[catalog.toml](catalog.toml) registers [Wetlands](biomes/wetlands/BIOME.toml)
+and [Hollow Delve](biomes/hollow_delve/BIOME.toml). Wetlands has five marsh
+enemies. Hollow Delve has a Troglodyte, Giant Cave Spider, Bone Slime, Delve
+Dwarf and Delve Gnoll, with eight isolated cave props and decorations in
+[SCENERY.toml](biomes/hollow_delve/SCENERY.toml). Combat values remain provisional.
 There is no shared roster. New content will be developed within the scope
 discussed with the user.
 

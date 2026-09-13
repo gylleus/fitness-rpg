@@ -1,0 +1,76 @@
+schema_version = 1
+id = "hollow_delve"
+name = "Hollow Delve"
+short_description = "Blind things stir beneath abandoned mine galleries and dripping limestone vaults."
+description = """
+Hollow Delve follows an old excavation into natural limestone chambers. Narrow galleries open beneath ribbed ceilings, then pinch between worked stone and black gaps left by fallen supports. Pale mineral crusts creep over tool marks. Underground pools hold still reflections beneath ledges of compact gravel, and cold moisture gathers on everything brought below.
+
+The workings have no active crew. Split pit props, derailed ore carts and rusted tools remain where the last repairs failed. Spiders hang silk between broken masonry, blind troglodytes feel their way along walls, and green slimes move slowly around abandoned bones. A hostile dwarf and gnoll scavengers occupy the route without turning it into a functioning settlement. Old support braces carry newer braces that now need support themselves.
+"""
+[setting]
+terrain = "Horizontal mine passages connect ribbed limestone caverns, disused timber galleries and still underground pools. A continuous strip of gravel and broken flagstone provides the route above the water."
+inhabitants = "Blind troglodytes, giant cave spiders and bone-filled green slimes inhabit the abandoned workings. A hostile beardless dwarf guards a gallery and a gnoll scavenger claims the deeper route. These encounters do not describe all dwarves or gnolls. No miners or staffed settlements remain."
+supernatural = "Old skulls turn slowly inside green jelly. Repeated tapping seems to answer itself beyond sealed workings, where wet stone carries the sound too far to locate."
+environmental_pressure_and_humor = "Darkness, damp footing, loose rubble and neglected supports make the route oppressive. Successive generations of braces lean against one another with no obvious original support left."
+[visual]
+lighting = "Cold blue-gray reflected light reveals damp limestone. Sparse dull amber points suggest old mineral deposits; pale fungus gives a restrained green accent without illuminating the whole cavern."
+materials = ["ribbed limestone", "wet slate", "splintered timber", "rusted iron", "chalk dust", "old silk", "weathered bone", "pale fungus", "clouded quartz"]
+weather = "Cold enclosed air, occasional drips and low mist above underground water; no open sky."
+ambient_sounds = ["slow ceiling drips", "distant water", "strained timber", "grit beneath feet", "indistinct tapping beyond the wall"]
+ambient_motion = "An occasional drip crosses dark stone; hanging silk and loose rope remain almost still."
+[[visual.palette]]
+name = "Cavern black"
+color = "#181B27"
+[[visual.palette]]
+name = "Wet slate"
+color = "#394757"
+[[visual.palette]]
+name = "Limestone"
+color = "#A6ADB0"
+[[visual.palette]]
+name = "Old timber"
+color = "#635044"
+[[visual.palette]]
+name = "Iron rust"
+color = "#8B513B"
+[[visual.palette]]
+name = "Fungal green"
+color = "#8AA778"
+[generation]
+composition = "Side-on cave expedition with a clear horizontal walking strip. Three atmosphere panels show natural limestone, worked galleries and the edge of a sunken cavern. Separate ground and isolated scenery preserve a readable route in front of the background water."
+[generation.scene]
+canvas = [640, 360]
+ground_y = 288
+reference_height = 64
+view = "orthographic_side"
+style = "Detailed dark fantasy pixel art, dark outlines, stepped color clusters, weighty weathered materials and a muted cave palette, consistent with the existing Hollow Delve atmosphere samples."
+avoid = ["characters baked into scenery", "isometric view", "a road receding to a vanishing point", "bright cheerful colors", "readable text", "smooth airbrushed edges", "mandatory gaps in the walking surface"]
+[generation.ground]
+canvas = [256, 96]
+surface_y = 24
+edge_margin = 16
+repeat_x = true
+edge_description = "A level slate-gravel lip at row 24, dark compact stone below to the bottom and transparency above. The outer 16 columns share this same flat profile. Large variations stay in the center; no holes or raised obstacles."
+[[sites]]
+id = "hollow_delve_abandoned_workings"
+name = "Abandoned workings"
+description = "A line of broken support frames follows an excavation into dark limestone. Empty carts stand beside rails that stop abruptly at fallen rock."
+[[sites]]
+id = "hollow_delve_pool_ledge"
+name = "Sunken cavern ledge"
+description = "A continuous gravel ledge skirts a still black pool beneath massive mineral ribs. The water occupies the lower chamber beyond the ledge."
+[[background_layers]]
+id = "hollow_delve_cavern_backdrop"
+name = "Limestone chambers"
+visual_description = "Ribbed limestone walls descend from a high, shadowed ceiling. Broad pale shelves and dark recesses alternate behind a clear passage, with shallow reflected light along the lower stone."
+[background_layers.generation]
+parallax = 0.18
+repeat_x = false
+transparent = false
+composition = "Opaque atmosphere panel. Use the selected Hollow Delve limestone, gallery and pool samples as three sequential variants with soft overlap during travel. Ground and props are separate. These full scenes are not seamless tiles."
+[[ground_sections]]
+id = "hollow_delve_slate_path"
+name = "Slate and gravel path"
+visual_description = "Flattened chips of slate and pale gravel form a compact ledge. Broken flagstones sit flush with its upper lip, above dark fractured rock."
+[ground_sections.generation]
+composition = "A continuous horizontal side-on strip on transparency above the surface. Small pale chips and cracks interrupt the dark lower rock. Preserve the shared flat surface and edges; no tracks, props or figures."
