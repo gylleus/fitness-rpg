@@ -8,6 +8,18 @@ from prepare import BOOT, GROUND, HERE, IDLE_OFFSETS, KNEE, TYPES, breathe
 
 
 class PlayerSheetsTest(unittest.TestCase):
+    def test_exported_cloth_stays_muted_across_weapons_and_attack_poses(self):
+        # Sample the shared hanging front drape at game resolution, including
+        # attack transitions. Bright red/orange was visible only after export.
+        for weapon in TYPES:
+            for action in ('idle', 'walk', 'attack'):
+                for path in (HERE / weapon / 'export' / action / 'nearest').glob('frame-*.png'):
+                    with self.subTest(path=str(path.relative_to(HERE))):
+                        cloth = np.array(Image.open(path).convert('RGBA'))[76:93, 41:72]
+                        colors = {tuple(rgb) for rgb in cloth[cloth[..., 3] > 0, :3]}
+                        self.assertFalse(colors & {(190, 74, 47), (162, 38, 51), (228, 59, 68)})
+                        self.assertIn((115, 62, 57), colors)
+
     def test_idle_keeps_boots_exact_and_weapon_rigid_without_horizontal_motion(self):
         for weapon in TYPES:
             with self.subTest(weapon=weapon):

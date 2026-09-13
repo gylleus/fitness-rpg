@@ -44,12 +44,36 @@
       "sheet": {
         "path": "mace-source.png",
         "sha256": "aee9e10d1750b918b0cf12b49570b8907373a4fb229674603eb236842dd2b51a"
+      },
+      "attack": {
+        "path": "corrections/mace-attack.png",
+        "sha256": "a856d4b2c6d03ba91c4657592eb7f041a87e91239b4050c019cfabd49c68eb9d",
+        "scale": 0.162839248434238,
+        "origins": [
+          [
+            350,
+            615
+          ],
+          [
+            895,
+            615
+          ],
+          [
+            350,
+            1190
+          ],
+          [
+            895,
+            1190
+          ]
+        ],
+        "weapon_hand": "far arm; near arm remains an empty-handed chest guard"
       }
     },
     "axe": {
       "reference": {
-        "path": "references/axe.png",
-        "sha256": "e3c63f30d131bae71975ca750703da9a2dab44a2f24a4046642e26fb92083927",
+        "path": "corrections/axe-reference.png",
+        "sha256": "c75c5b6ddb3e920bd1344350297462c6749d27ec92ff59a90dfcd285e7498832",
         "origin": [
           624,
           1085
@@ -58,6 +82,30 @@
       "sheet": {
         "path": "axe-source.png",
         "sha256": "b45268a8f51b8a5423c5828eca363977661310cdc63f025224bcb4e051ce18e7"
+      },
+      "attack": {
+        "path": "corrections/axe-attack.png",
+        "sha256": "ebfcdaf2bb7bce4bb0974ad700bd793a9c5061152cbdb79eff6958ae2c708599",
+        "scale": 0.162839248434238,
+        "origins": [
+          [
+            350,
+            615
+          ],
+          [
+            895,
+            615
+          ],
+          [
+            350,
+            1190
+          ],
+          [
+            895,
+            1190
+          ]
+        ],
+        "weapon_hand": "far arm; near arm remains an empty-handed chest guard"
       }
     },
     "sword": {
@@ -72,6 +120,30 @@
       "sheet": {
         "path": "sword-source.png",
         "sha256": "6ff28ecd2a61d5c0186b5119afc59f53a254aa0b18e5cc76157fbfe702e8a054"
+      },
+      "attack": {
+        "path": "corrections/sword-attack.png",
+        "sha256": "60b6c315ae4c8fce5cfb1db6823b75335793b208371b9739093d378e79b6d947",
+        "scale": 0.162839248434238,
+        "origins": [
+          [
+            350,
+            615
+          ],
+          [
+            895,
+            615
+          ],
+          [
+            350,
+            1190
+          ],
+          [
+            895,
+            1190
+          ]
+        ],
+        "weapon_hand": "far arm; near arm remains an empty-handed chest guard"
       }
     },
     "fist": {

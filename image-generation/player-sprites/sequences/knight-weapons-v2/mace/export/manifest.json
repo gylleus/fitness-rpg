@@ -25,9 +25,33 @@
     "sheet": {
       "path": "mace-source.png",
       "sha256": "aee9e10d1750b918b0cf12b49570b8907373a4fb229674603eb236842dd2b51a"
+    },
+    "attack": {
+      "path": "corrections/mace-attack.png",
+      "sha256": "a856d4b2c6d03ba91c4657592eb7f041a87e91239b4050c019cfabd49c68eb9d",
+      "scale": 0.162839248434238,
+      "origins": [
+        [
+          350,
+          615
+        ],
+        [
+          895,
+          615
+        ],
+        [
+          350,
+          1190
+        ],
+        [
+          895,
+          1190
+        ]
+      ],
+      "weapon_hand": "far arm; near arm remains an empty-handed chest guard"
     }
   },
-  "code_sha256": "20057e058cb97acc52aa0b4c7c39956f7d0a3e10d0d7e8be8173c9ca54b103d3",
+  "code_sha256": "f9f2adcfb96d7a536333070463ca46264333868c90a345f2163b0e70e903f868",
   "actions": {
     "idle": {
       "timing": {

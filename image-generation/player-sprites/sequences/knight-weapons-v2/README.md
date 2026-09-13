@@ -26,6 +26,30 @@ figures at reviewed body contacts, and maps to the game's ENDESGA-32 palette.
 The source sheet uses a single scale across all actions and classes. Corpse
 height and weapon reach never determine an individual frame's scale.
 
+### Hand and cloth corrections
+
+The original attack row incorrectly changed from the far weapon arm in idle
+to the near arm during windup. The selected `corrections/*-attack.png` sources
+replace its four interior poses for mace, axe and sword. These are new
+built-in imagegen edits of the master reference, then weapon edits of the
+corrected mace sequence. The nearer pauldron, elbow and empty fist remain
+folded across the chest; the farther hand retains the weapon from windup
+through impact and recovery. Hand ownership was reviewed visually in all
+four source poses and the final [attack comparison](corrections/attack-review.png).
+The original walk and death poses are still used, and attack timing is unchanged.
+
+`corrections/axe-reference.png` corrects the warmer cloth highlights introduced
+by the axe edit. Palette conversion had amplified small source hue differences
+into orange and saturated red. The exporter now constrains these cloth colors
+to the shared muted burgundy `#733e39` within reviewed garment bounds for all
+classes. Metal, leather and silhouettes keep their original palette treatment.
+The pixel tests cover the exported cloth, rigid idle, clean alpha, ground
+contact and timing; they do not infer anatomical correctness from image data.
+
+Exact correction prompts are stored beside their selected PNGs. `sources.json`
+records their hashes, physical origins and the fixed scale shared by the
+four attack poses. Original sources remain available for comparison.
+
 ## The quiet idle
 
 Each idle is built from its fixed master ready pose at the final 128px grid.

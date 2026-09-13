@@ -14,7 +14,7 @@
     },
     {
       "filename": "frame-001.png",
-      "sha256": "dfb280d9b5e49814aa3fb66e24b400f568ea0ab54cb0eefe80854b0f695c8130",
+      "sha256": "b1ccd832b1ac2afafdc17fca5824d79ffdc77c10dc3a7f92919798b13c7252e2",
       "frame": {
         "x": 128,
         "y": 0,
@@ -26,7 +26,7 @@
     },
     {
       "filename": "frame-002.png",
-      "sha256": "432db8e21f4f582031fd5e224d126e23bc5737e22745402838716bf2393152fd",
+      "sha256": "1d11129ab4da592d28e13f10ca9ae3c8f883539ee1ec8c20313ffd281d86b16f",
       "frame": {
         "x": 256,
         "y": 0,
@@ -38,7 +38,7 @@
     },
     {
       "filename": "frame-003.png",
-      "sha256": "36c644eb49f4093868f96e4ff225ab62e3cbb56c878f1b119d5f568d1d5c1687",
+      "sha256": "eefb9f3948ffe2033366bc33656b4983156b24e6f9d20a37c118875b055a0ea2",
       "frame": {
         "x": 384,
         "y": 0,
@@ -50,7 +50,7 @@
     },
     {
       "filename": "frame-004.png",
-      "sha256": "3c31059864854433b13fd65175c363d8f1bb3b48f4e9e07346320b599c281a7a",
+      "sha256": "612292f90c43634960157abc385225d1506c9332f36704e0feda516ba0490317",
       "frame": {
         "x": 512,
         "y": 0,

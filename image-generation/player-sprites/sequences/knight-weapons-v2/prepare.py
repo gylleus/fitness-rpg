@@ -28,6 +28,20 @@ IDLE_OFFSETS = (0, -1, -1, 0, 0, 1, 1, 0)
 DURATIONS = {'idle': [300] * 8, 'walk': [140, 130, 130, 140, 130, 130],
              'attack': [120, 160, 120, 100, 140, 160],
              'death': [100, 120, 130, 140, 160, 250]}
+# Reviewed garment bounds at the final grid. Saturated orange/red highlights
+# are forbidden for this material; leather browns and metal colors stay intact.
+CLOTH_BOUNDS = {'idle': (35, 74, 76, 96), 'walk': (28, 70, 82, 100),
+                'attack': (30, 73, 78, 103), 'death': (6, 74, 88, 113)}
+
+
+def cloth_palette(frame, action):
+    rgba = np.array(frame)
+    x0, y0, x1, y1 = CLOTH_BOUNDS[action]
+    cloth = rgba[y0:y1, x0:x1]
+    for color in ((190, 74, 47), (162, 38, 51), (228, 59, 68)):
+        mask = (cloth[..., :3] == color).all(axis=2) & (cloth[..., 3] > 0)
+        cloth[mask, :3] = (115, 62, 57)
+    return Image.fromarray(rgba)
 
 
 def sha(path):
@@ -38,7 +52,7 @@ def save(path, value):
     path.write_text(json.dumps(value, indent=2) + '\n')
 
 
-def subjects(path, expected):
+def subjects(path, expected, columns=6):
     rgba = np.array(Image.open(path).convert('RGBA'))
     rgb = rgba[..., :3].astype(int)
     key = (rgb[..., 0] - rgb[..., 1] > 40) & (rgb[..., 2] - rgb[..., 1] > 40)
@@ -58,8 +72,11 @@ def subjects(path, expected):
     # Baselines distinguish the walking, attacking and falling rows, including
     # the low corpses. Connected subjects may cross a nominal column boundary.
     result.sort(key=lambda value: value[1][3])
-    if expected == 18:
-        result = [pose for row in range(3) for pose in sorted(result[row*6:row*6+6], key=lambda v: v[1][0])]
+    if expected > 1:
+        if expected % columns:
+            raise ValueError('Subject count must fill complete source rows')
+        result = [pose for row in range(expected // columns)
+                  for pose in sorted(result[row*columns:row*columns+columns], key=lambda v: v[1][0])]
     return result
 
 
@@ -138,11 +155,11 @@ def main():
     previews = []
     for weapon in TYPES:
         entry = spec['weapons'][weapon]
-        for key in ('reference', 'sheet'):
+        for key in ('reference', 'sheet', *(['attack'] if 'attack' in entry else [])):
             if sha(HERE / entry[key]['path']) != entry[key]['sha256']:
                 raise ValueError(f'Changed {weapon} {key} source; review before updating provenance')
         pose, box = subjects(HERE / entry['reference']['path'], 1)[0]
-        reference = register(pose, box, entry['reference']['origin'], spec['reference_scale'])
+        reference = cloth_palette(register(pose, box, entry['reference']['origin'], spec['reference_scale']), 'idle')
         actions = {'idle': [breathe(reference, offset) for offset in IDLE_OFFSETS]}
         source_poses = subjects(HERE / entry['sheet']['path'], 18)
         for row, action in enumerate(('walk', 'attack', 'death')):
@@ -152,11 +169,25 @@ def main():
         # Every action transitions from/to the exact master ready pose.
         actions['attack'][0] = reference.copy()
         actions['attack'][-1] = reference.copy()
+        if 'attack' in entry:
+            attack = entry['attack']
+            poses = subjects(HERE / attack['path'], 4, columns=2)
+            if len(attack['origins']) != len(poses):
+                raise ValueError('Each corrected attack pose needs a reviewed origin')
+            actions['attack'][1:5] = [register(pose, box, origin, attack['scale'])
+                for (pose, box), origin in zip(poses, attack['origins'])]
+        for action in ('walk', 'attack', 'death'):
+            actions[action] = [cloth_palette(frame, action) for frame in actions[action]]
         export(weapon, actions, entry)
         audit['weapons'][weapon] = {'reference_box': box,
             'source_boxes': [box for _, box in source_poses]}
+        if 'attack' in entry:
+            audit['weapons'][weapon]['corrected_attack_boxes'] = [box for _, box in poses]
         previews.append((weapon, [('ready', reference)]))
     comparison(previews, HERE / 'weapon-previews.png')
+    comparison([(weapon, [(str(i), Image.open(HERE / weapon / 'export/attack/nearest' / f'frame-{i:03d}.png'))
+                          for i in range(6)]) for weapon in ('mace', 'axe', 'sword')],
+               HERE / 'corrections/attack-review.png')
     save(HERE / 'extraction.json', audit)
     review = {'weapons': TYPES, 'size': SIZE, 'pivot': [PIVOT_X, GROUND],
               'bodyHeight': BODY_HEIGHT, 'durations': DURATIONS}
