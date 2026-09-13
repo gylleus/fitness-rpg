@@ -2,59 +2,71 @@
   "schema_version": 1,
   "entities": {
     "barbarian_player": {
-      "name": "Knight",
+      "name": "Knight (mace)",
       "facing": "right",
       "frameSize": [
         128,
         128
       ],
       "pivot": [
-        0.5341246290801187,
-        0.8694362017804155
+        0.484375,
+        0.875
       ],
-      "idleHeight": 82.42136498516321,
+      "idleHeight": 78,
       "heightScale": 1,
       "actions": {
         "idle": {
           "image": "barbarian_player/idle",
           "loop": true,
-          "duration": 1200,
+          "duration": 2400,
           "frames": [
             {
               "x": 0,
               "y": 0,
-              "duration": 200,
+              "duration": 300,
               "sourceFrame": 0
             },
             {
               "x": 128,
               "y": 0,
-              "duration": 200,
+              "duration": 300,
               "sourceFrame": 1
             },
             {
               "x": 256,
               "y": 0,
-              "duration": 200,
+              "duration": 300,
               "sourceFrame": 2
             },
             {
               "x": 384,
               "y": 0,
-              "duration": 200,
+              "duration": 300,
               "sourceFrame": 3
             },
             {
               "x": 512,
               "y": 0,
-              "duration": 200,
+              "duration": 300,
               "sourceFrame": 4
             },
             {
               "x": 640,
               "y": 0,
-              "duration": 200,
+              "duration": 300,
               "sourceFrame": 5
+            },
+            {
+              "x": 768,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 6
+            },
+            {
+              "x": 896,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 7
             }
           ]
         },
@@ -146,6 +158,606 @@
         },
         "death": {
           "image": "barbarian_player/death",
+          "loop": false,
+          "duration": 900,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "duration": 100,
+              "sourceFrame": 0
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "duration": 120,
+              "sourceFrame": 1
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "duration": 130,
+              "sourceFrame": 2
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "duration": 140,
+              "sourceFrame": 3
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "duration": 160,
+              "sourceFrame": 4
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "duration": 250,
+              "sourceFrame": 5
+            }
+          ]
+        }
+      }
+    },
+    "knight_player_axe": {
+      "name": "Knight (axe)",
+      "facing": "right",
+      "frameSize": [
+        128,
+        128
+      ],
+      "pivot": [
+        0.484375,
+        0.875
+      ],
+      "idleHeight": 78,
+      "heightScale": 1,
+      "actions": {
+        "idle": {
+          "image": "knight_player_axe/idle",
+          "loop": true,
+          "duration": 2400,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 0
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 1
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 2
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 3
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 4
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 5
+            },
+            {
+              "x": 768,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 6
+            },
+            {
+              "x": 896,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 7
+            }
+          ]
+        },
+        "walk": {
+          "image": "knight_player_axe/walk",
+          "loop": true,
+          "duration": 800,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "duration": 140,
+              "sourceFrame": 0
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "duration": 130,
+              "sourceFrame": 1
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "duration": 130,
+              "sourceFrame": 2
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "duration": 140,
+              "sourceFrame": 3
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "duration": 130,
+              "sourceFrame": 4
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "duration": 130,
+              "sourceFrame": 5
+            }
+          ]
+        },
+        "attack": {
+          "image": "knight_player_axe/attack",
+          "loop": false,
+          "duration": 800,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "duration": 120,
+              "sourceFrame": 0
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "duration": 160,
+              "sourceFrame": 1
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "duration": 120,
+              "sourceFrame": 2
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "duration": 100,
+              "sourceFrame": 3
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "duration": 140,
+              "sourceFrame": 4
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "duration": 160,
+              "sourceFrame": 5
+            }
+          ]
+        },
+        "death": {
+          "image": "knight_player_axe/death",
+          "loop": false,
+          "duration": 900,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "duration": 100,
+              "sourceFrame": 0
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "duration": 120,
+              "sourceFrame": 1
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "duration": 130,
+              "sourceFrame": 2
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "duration": 140,
+              "sourceFrame": 3
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "duration": 160,
+              "sourceFrame": 4
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "duration": 250,
+              "sourceFrame": 5
+            }
+          ]
+        }
+      }
+    },
+    "knight_player_sword": {
+      "name": "Knight (sword)",
+      "facing": "right",
+      "frameSize": [
+        128,
+        128
+      ],
+      "pivot": [
+        0.484375,
+        0.875
+      ],
+      "idleHeight": 78,
+      "heightScale": 1,
+      "actions": {
+        "idle": {
+          "image": "knight_player_sword/idle",
+          "loop": true,
+          "duration": 2400,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 0
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 1
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 2
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 3
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 4
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 5
+            },
+            {
+              "x": 768,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 6
+            },
+            {
+              "x": 896,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 7
+            }
+          ]
+        },
+        "walk": {
+          "image": "knight_player_sword/walk",
+          "loop": true,
+          "duration": 800,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "duration": 140,
+              "sourceFrame": 0
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "duration": 130,
+              "sourceFrame": 1
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "duration": 130,
+              "sourceFrame": 2
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "duration": 140,
+              "sourceFrame": 3
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "duration": 130,
+              "sourceFrame": 4
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "duration": 130,
+              "sourceFrame": 5
+            }
+          ]
+        },
+        "attack": {
+          "image": "knight_player_sword/attack",
+          "loop": false,
+          "duration": 800,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "duration": 120,
+              "sourceFrame": 0
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "duration": 160,
+              "sourceFrame": 1
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "duration": 120,
+              "sourceFrame": 2
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "duration": 100,
+              "sourceFrame": 3
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "duration": 140,
+              "sourceFrame": 4
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "duration": 160,
+              "sourceFrame": 5
+            }
+          ]
+        },
+        "death": {
+          "image": "knight_player_sword/death",
+          "loop": false,
+          "duration": 900,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "duration": 100,
+              "sourceFrame": 0
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "duration": 120,
+              "sourceFrame": 1
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "duration": 130,
+              "sourceFrame": 2
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "duration": 140,
+              "sourceFrame": 3
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "duration": 160,
+              "sourceFrame": 4
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "duration": 250,
+              "sourceFrame": 5
+            }
+          ]
+        }
+      }
+    },
+    "knight_player_fist": {
+      "name": "Knight (fist)",
+      "facing": "right",
+      "frameSize": [
+        128,
+        128
+      ],
+      "pivot": [
+        0.484375,
+        0.875
+      ],
+      "idleHeight": 78,
+      "heightScale": 1,
+      "actions": {
+        "idle": {
+          "image": "knight_player_fist/idle",
+          "loop": true,
+          "duration": 2400,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 0
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 1
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 2
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 3
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 4
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 5
+            },
+            {
+              "x": 768,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 6
+            },
+            {
+              "x": 896,
+              "y": 0,
+              "duration": 300,
+              "sourceFrame": 7
+            }
+          ]
+        },
+        "walk": {
+          "image": "knight_player_fist/walk",
+          "loop": true,
+          "duration": 800,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "duration": 140,
+              "sourceFrame": 0
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "duration": 130,
+              "sourceFrame": 1
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "duration": 130,
+              "sourceFrame": 2
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "duration": 140,
+              "sourceFrame": 3
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "duration": 130,
+              "sourceFrame": 4
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "duration": 130,
+              "sourceFrame": 5
+            }
+          ]
+        },
+        "attack": {
+          "image": "knight_player_fist/attack",
+          "loop": false,
+          "duration": 800,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "duration": 120,
+              "sourceFrame": 0
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "duration": 160,
+              "sourceFrame": 1
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "duration": 120,
+              "sourceFrame": 2
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "duration": 100,
+              "sourceFrame": 3
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "duration": 140,
+              "sourceFrame": 4
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "duration": 160,
+              "sourceFrame": 5
+            }
+          ]
+        },
+        "death": {
+          "image": "knight_player_fist/death",
           "loop": false,
           "duration": 900,
           "frames": [

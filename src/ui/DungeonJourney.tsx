@@ -3,6 +3,7 @@ import { Animated, Text, View } from 'react-native';
 import { battleDungeon, type BattleState } from '../game/combat';
 import { enemyAnimation, heroAnimation, journeyLeg, journeyTarget } from '../sprites/battleAnimation';
 import { spriteCatalog } from '../sprites/generated';
+import { playerSpriteId } from '../sprites/player';
 import { usePlaybackAnimation } from '../sprites/usePlaybackAnimation';
 import { EntitySprite } from './EntitySprite';
 import { FloatingDamage, type FloatingImpact } from './FloatingDamage';
@@ -15,6 +16,7 @@ import { HollowDelveBackdrop } from '../scenes/HollowDelveBackdrop';
 export function DungeonJourney({ battle, playing, speed, fullScreen = false }: { battle: BattleState; playing: boolean; speed: number; fullScreen?: boolean }) {
   const [width, setWidth] = useState(300);
   const [height, setHeight] = useState(240);
+  const heroEntityId = playerSpriteId(battle.weaponType);
   const heroHeight = fullScreen ? Math.min(140, Math.max(64, (height - 160) * 0.55)) : 92;
   const leg = journeyLeg(battle);
   const moving = playing && battle.status === 'active';
@@ -32,7 +34,7 @@ export function DungeonJourney({ battle, playing, speed, fullScreen = false }: {
   // with the hit. Loading a saved tick never replays its old damage numbers.
   if (effects.tick !== battle.tick) {
     const hits = (battle.impacts ?? []).map((impact, index) => {
-      const entityId = impact.target === 'hero' ? 'barbarian_player' : dungeon.enemies[impact.encounter].id;
+      const entityId = impact.target === 'hero' ? heroEntityId : dungeon.enemies[impact.encounter].id;
       return { ...impact, id: `${battle.tick}:${index}`,
         x: impact.target === 'hero' ? journeyTarget(battle) : 40 + (impact.encounter + 1) * 320,
         height: heroHeight * (entityId ? spriteCatalog.entities[entityId]?.heightScale ?? 1 : 1) };
@@ -68,7 +70,7 @@ export function DungeonJourney({ battle, playing, speed, fullScreen = false }: {
         <EntitySprite entityId={enemy.id} {...enemyAnimation(battle, i)} heroHeight={heroHeight} facing="left" playing={playing} speed={speed} fallback={enemy.sprite} tint={dungeon.color} />
       </View>)}
       <Animated.View style={{ position: 'absolute', bottom: 20, transform: [{ translateX: heroPosition }] }}>
-        <EntitySprite entityId="barbarian_player" {...heroAnimation(battle)} heroHeight={heroHeight} facing="right" playing={playing} speed={speed} />
+        <EntitySprite entityId={heroEntityId} {...heroAnimation(battle)} heroHeight={heroHeight} facing="right" playing={playing} speed={speed} />
       </Animated.View>
       {effects.impacts.map(impact => <FloatingDamage key={impact.id} impact={impact} playing={playing} speed={speed} onComplete={finishImpact} />)}
     </Animated.View>

@@ -134,6 +134,25 @@ async function navigate(path: '/dungeon' | '/forge' | '/progress' | '/') {
 }
 
 describe('first playable game flow', () => {
+  it('updates the camp knight after equipping a sword and returns to fists when unequipped', async () => {
+    const sword = Object.values(GEAR).find(item => item.weaponType === 'sword')!;
+    giveItem(mockDb, sword);
+    await renderRouter(routes, { initialUrl: '/' });
+    expect(screen.getByTestId('entity-sprite-barbarian_player')).toBeTruthy();
+    await navigate('/forge');
+    await press(`Inspect ${sword.name}`);
+    await press('Equip to Weapon');
+    await press('Close item');
+    await navigate('/');
+    expect(screen.getByTestId('entity-sprite-knight_player_sword')).toBeTruthy();
+    await navigate('/forge');
+    await press(`Weapon: ${sword.name}`);
+    await press('Unequip to bag');
+    await press('Close item');
+    await navigate('/');
+    expect(screen.getByTestId('entity-sprite-knight_player_fist')).toBeTruthy();
+  });
+
   it('lets players inspect locked map destinations without starting or unlocking them', async () => {
     await renderRouter(routes, { initialUrl: '/dungeon' });
     expect(screen.getByTestId('dungeon-map')).toBeVisible();

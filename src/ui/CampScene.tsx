@@ -2,10 +2,12 @@ import { useCallback, useState } from 'react';
 import { useFocusEffect } from 'expo-router';
 import { View } from 'react-native';
 import { useGame } from '../game/GameProvider';
+import { equippedWeaponType } from '../game/equipment';
+import { playerSpriteId } from '../sprites/player';
 import { EntitySprite } from './EntitySprite';
 
 export function CampScene() {
-  const { foreground } = useGame();
+  const { data, foreground } = useGame();
   const [focused, setFocused] = useState(false);
   useFocusEffect(useCallback(() => { setFocused(true); return () => setFocused(false); }, []));
   return <View style={{ height: 172, backgroundColor: '#15231f', borderRadius: 16, overflow: 'hidden' }}>
@@ -15,7 +17,7 @@ export function CampScene() {
     <View style={{ position: 'absolute', top: 16, right: 32, width: 24, height: 24, backgroundColor: '#e9d799', borderRadius: 12 }} />
     <View style={{ position: 'absolute', bottom: 0, height: 22, width: '100%', backgroundColor: '#304635' }} />
     <View style={{ position: 'absolute', left: '50%', bottom: 22 }}>
-      <EntitySprite entityId="barbarian_player" heroHeight={116} playing={focused && foreground} />
+      <EntitySprite entityId={playerSpriteId(equippedWeaponType(data.inventory))} heroHeight={116} playing={focused && foreground} />
     </View>
   </View>;
 }

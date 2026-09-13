@@ -1,0 +1,53 @@
+{
+  "asset_id": "knight_player_fist",
+  "name": "Knight (fist)",
+  "facing": "right",
+  "frame_size": [
+    128,
+    128
+  ],
+  "pivot": [
+    0.484375,
+    0.875
+  ],
+  "height_scale": 1,
+  "reference_idle_height_px": 78,
+  "backend": "built-in imagegen poses; CPU registration; rigid pixel idle",
+  "source": {
+    "reference": {
+      "path": "references/fist.png",
+      "sha256": "1d5fec2ec49f9374114d367d410a942a7d873f7e5fd96c250878d62cc80924e9",
+      "origin": [
+        624,
+        1083
+      ]
+    },
+    "sheet": {
+      "path": "fist-source.png",
+      "sha256": "d1027d9a49ece2b6d8c92bfe6c3895b908e2fe046b7304932c4bc872ca5a37bd"
+    }
+  },
+  "code_sha256": "20057e058cb97acc52aa0b4c7c39956f7d0a3e10d0d7e8be8173c9ca54b103d3",
+  "actions": {
+    "idle": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "walk": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "attack": {
+      "timing": {
+        "repeat": false
+      }
+    },
+    "death": {
+      "timing": {
+        "repeat": false
+      }
+    }
+  }
+}

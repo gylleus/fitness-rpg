@@ -1,0 +1,53 @@
+{
+  "asset_id": "knight_player_axe",
+  "name": "Knight (axe)",
+  "facing": "right",
+  "frame_size": [
+    128,
+    128
+  ],
+  "pivot": [
+    0.484375,
+    0.875
+  ],
+  "height_scale": 1,
+  "reference_idle_height_px": 78,
+  "backend": "built-in imagegen poses; CPU registration; rigid pixel idle",
+  "source": {
+    "reference": {
+      "path": "references/axe.png",
+      "sha256": "e3c63f30d131bae71975ca750703da9a2dab44a2f24a4046642e26fb92083927",
+      "origin": [
+        624,
+        1085
+      ]
+    },
+    "sheet": {
+      "path": "axe-source.png",
+      "sha256": "b45268a8f51b8a5423c5828eca363977661310cdc63f025224bcb4e051ce18e7"
+    }
+  },
+  "code_sha256": "20057e058cb97acc52aa0b4c7c39956f7d0a3e10d0d7e8be8173c9ca54b103d3",
+  "actions": {
+    "idle": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "walk": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "attack": {
+      "timing": {
+        "repeat": false
+      }
+    },
+    "death": {
+      "timing": {
+        "repeat": false
+      }
+    }
+  }
+}

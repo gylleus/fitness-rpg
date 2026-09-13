@@ -37,7 +37,7 @@ function PreloadSheet({ clip, onLoad }: {
   return null;
 }
 
-function Playback({ entity, action = 'idle', eventKey, playing = true, speed = 1, heroHeight = 96, facing, durationMs, ...props }: Props & { entity: SpriteEntity }) {
+function Playback({ entity, entityId, action = 'idle', eventKey, playing = true, speed = 1, heroHeight = 96, facing, durationMs, ...props }: Props & { entity: SpriteEntity }) {
   const pose = useSpritePlayback(entity, action, eventKey, playing, speed, durationMs);
   const [images, setImages] = useState<Record<string, SkImage>>({});
   const onLoad = useCallback((key: string, image: SkImage) => {
@@ -47,7 +47,7 @@ function Playback({ entity, action = 'idle', eventKey, playing = true, speed = 1
   const readyClip = images[pose.clip.image] ? pose.clip : Object.values(entity.actions).find(clip => images[clip.image]);
   const image = readyClip && images[readyClip.image];
   const frame = readyClip === pose.clip ? pose.frame : readyClip?.frames[0];
-  return <View accessible={false} pointerEvents="none" style={{ width: 0, height: 0 }}>
+  return <View testID={`entity-sprite-${entityId}`} accessible={false} pointerEvents="none" style={{ width: 0, height: 0 }}>
     {Object.values(entity.actions).map(clip => <PreloadSheet key={clip.image} clip={clip} onLoad={onLoad} />)}
     {/* One persistent native surface: transitions only replace drawing data. */}
     <Canvas testID="entity-sprite-canvas" pointerEvents="none" style={{ position: 'absolute', width, height, left, top }}>
@@ -60,5 +60,5 @@ function Playback({ entity, action = 'idle', eventKey, playing = true, speed = 1
 /** Place at the feet, not the top-left. Unknown assets use the existing icon. */
 export function EntitySprite({ entityId, ...props }: Props) {
   const entity = entityId ? spriteCatalog.entities[entityId] : undefined;
-  return entity ? <Playback key={entityId} entity={entity} {...props} /> : <Fallback {...props} />;
+  return entity ? <Playback key={entityId} entityId={entityId} entity={entity} {...props} /> : <Fallback {...props} />;
 }

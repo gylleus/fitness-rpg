@@ -1,4 +1,11 @@
-# Barbarian player experiment
+# Player sprites
+
+The current game uses the [knight weapon sets](sequences/knight-weapons-v2/README.md)
+with a restrained breathing idle and separate mace, axe, sword and fist
+animations. Open the [interactive preview](sequences/knight-weapons-v2/review.html)
+to compare them. The experiments below are historical.
+
+## Barbarian player experiment
 
 This player uses the same local rendering pipeline as the enemy experiment,
 through an art-only [definition](barbarian.toml). No enemy statistics or biome

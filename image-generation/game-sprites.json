@@ -2,13 +2,31 @@
   "schema_version": 1,
   "entities": [
     {
-      "manifest": "player-sprites/sequences/knight-mace-v1/export/manifest.json",
+      "manifest": "player-sprites/sequences/knight-weapons-v2/mace/export/manifest.json",
       "actions": [
         "idle",
         "walk",
         "attack",
         "death"
       ],
+      "variant": "nearest",
+      "frame_step": 1
+    },
+    {
+      "manifest": "player-sprites/sequences/knight-weapons-v2/axe/export/manifest.json",
+      "actions": ["idle", "walk", "attack", "death"],
+      "variant": "nearest",
+      "frame_step": 1
+    },
+    {
+      "manifest": "player-sprites/sequences/knight-weapons-v2/sword/export/manifest.json",
+      "actions": ["idle", "walk", "attack", "death"],
+      "variant": "nearest",
+      "frame_step": 1
+    },
+    {
+      "manifest": "player-sprites/sequences/knight-weapons-v2/fist/export/manifest.json",
+      "actions": ["idle", "walk", "attack", "death"],
       "variant": "nearest",
       "frame_step": 1
     },

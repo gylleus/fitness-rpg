@@ -11,6 +11,8 @@ import { DungeonJourney } from '../../src/ui/DungeonJourney';
 import { beginBattle, battleTurn } from '../../src/game/combat';
 import { fitnessDay, heroStats } from '../../src/game/rules';
 import { battleSchedule, HERO_ATTACK_DURATION_MS, HERO_ATTACK_IMPACT_MS } from '../../src/sprites/battleAnimation';
+import { WEAPON_TYPES } from '../../src/game/weapons';
+import { PLAYER_SPRITES } from '../../src/sprites/player';
 
 const player = (catalog as unknown as SpriteCatalog).entities.barbarian_player;
 beforeEach(() => { jest.useFakeTimers({ doNotFake: ['queueMicrotask'] }); jest.setSystemTime(0); });
@@ -113,6 +115,16 @@ it('attacks at the walk deadline even when saving and rendering each checkpoint 
   await act(() => { jest.advanceTimersByTime(1); });
   expect(Date.now()).toBe(1500);
   expect(battle).toMatchObject({ lastAction: 'attack', attacksMade: 1 });
+});
+
+it('renders the expedition weapon snapshot for every class and retains the old-save fallback', async () => {
+  const stats = heroStats({ gold: 0, xp: 0, swordLevel: 0, armorLevel: 0, unlockedDungeon: 0 }, fitnessDay('2026-09-11'));
+  const battle = beginBattle(0, '2026-09-11', stats);
+  const view = await render(<DungeonJourney battle={battle} playing={false} speed={1} />);
+  for (const type of [...WEAPON_TYPES, undefined]) {
+    await view.rerender(<DungeonJourney battle={{ ...battle, weaponType: type }} playing={false} speed={1} />);
+    expect(view.getByTestId(`entity-sprite-${PLAYER_SPRITES[type ?? 'mace']}`)).toBeTruthy();
+  }
 });
 
 it('interrupts an unfinished walk pose immediately and reaches the strike at 180 ms', async () => {

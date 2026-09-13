@@ -15,7 +15,7 @@
   canvas { display: block; width: 100%; image-rendering: pixelated; }
   a { color: #8ae3b1; }
 </style>
-<h1>Player & Wetlands animations</h1>
+<h1>Player & enemy animations</h1>
 <p>The exact transparent atlases bundled with the game. Idle and walk loop; attack returns to idle; death holds its final pose. Characters share a ground line and their authored relative heights.</p>
 <nav>
   <label>Action <select id="action"><option>idle</option><option>walk</option><option>attack</option><option>death</option></select></label>
@@ -23,7 +23,7 @@
   <button id="pause">Pause</button><button id="restart">Restart</button>
 </nav>
 <main></main>
-<p>The Wetlands now use the regenerated 128px imagegen set, with eight poses per action, alongside the unchanged player. <a href="enemy-sprites/sequences/wetlands-128-v1/review.html">Open the portable review with pose controls</a> or <a href="enemy-sprites/sequences/wetlands-128-v1/README.md">read the generation and review notes</a>.</p>
+<p>The player has a quiet breathing idle and four weapon sets. <a href="player-sprites/sequences/knight-weapons-v2/review.html">Compare mace, axe, sword and fist animations</a>. <a href="enemy-sprites/sequences/wetlands-128-v1/review.html">Open the Wetlands pose review</a>.</p>
 <script type="module">
 const {entities} = await fetch('../assets/sprites/catalog.json').then(r => r.json());
 const action = document.querySelector('#action'), speed = document.querySelector('#speed');

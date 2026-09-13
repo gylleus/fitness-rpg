@@ -1,30 +1,111 @@
 {
-  "recipe_sha256": "fb57a127f1b6f24e85ef594b8f9eb74ddfd05877fdf61bef7c09fbbca7b962e8",
+  "recipe_sha256": "51327fc599e09472ac264f85508b6beecdec414375ee9839c47bfdeef320af96",
   "entities": {
     "barbarian_player": {
-      "manifest": "image-generation/player-sprites/sequences/knight-mace-v1/export/manifest.json",
-      "sha256": "1e9e93a74f72dea68c36e7f23cf4d36d86f290cd461e78535e6371a934a0d92c",
+      "manifest": "image-generation/player-sprites/sequences/knight-weapons-v2/mace/export/manifest.json",
+      "sha256": "9e35bb70c3227ac815ed86b286f9081046f9391430b54e6100078d60bb6a311b",
       "frame_step": 1,
       "sheets": {
         "idle": {
-          "atlas_sha256": "c8119c504b33bb95ab2359f1b42dca55b5993a61a1fea292d4fd184777add6fc",
-          "image_sha256": "e186540b8755bba9dcb092826460e0844726ea8e629a999977f51b6077901588",
-          "output_sha256": "fbbbc4df0224c0c1829ff9968ce67e80e0701b66b1711266722113a25dddaa45"
+          "atlas_sha256": "66f5e1bad56d8fa6d64e77e4f44a0b9fcfa4a884754c46f0cc4e91b914853460",
+          "image_sha256": "2fcde370119f5bce2a5f1f418a8ad39a95579b376eb5d6a0bbb8c510f80b30fe",
+          "output_sha256": "2fcde370119f5bce2a5f1f418a8ad39a95579b376eb5d6a0bbb8c510f80b30fe"
         },
         "walk": {
-          "atlas_sha256": "1b04e45e8871837feb3e1468d560e469cbcbcc2999db80b1eb597f6427f2159d",
-          "image_sha256": "5486137c2fa6d837415a887f6638f1600ef7627fac5361d9f83f527df0c2966c",
-          "output_sha256": "2ec359cc49e9cd3e5eae9eee4a64a0452247147b4559fdc4e32d8d1589b23329"
+          "atlas_sha256": "1e832ec2453653e2a3731c8c4d24f4d50f71e21ff457026631c9a1f54f66e85f",
+          "image_sha256": "c98969da59707ca32628c5465f350d99e3579fb9f5da2254dda715dc8a97dcea",
+          "output_sha256": "c98969da59707ca32628c5465f350d99e3579fb9f5da2254dda715dc8a97dcea"
         },
         "attack": {
-          "atlas_sha256": "ab99782268a2ef3a55a4fcd4f3a3a19aa549c07c7226882ae61aad3422c451db",
-          "image_sha256": "223673933e1683bf3d4a26a824d7ebb614bf5fd49c3a395819b6da6002840200",
-          "output_sha256": "cbc01f4f462e1da3646e18b54f134d586783b176a784684e729f9895a4723bdb"
+          "atlas_sha256": "a0fc51625a65f1ad3ba0723a559becf113ff64f17572b748f5f50815f074a6ba",
+          "image_sha256": "158aa116c3a88560b79b3b5dd4752d07237a71764ac3f3b3eb7b25bccc5d8814",
+          "output_sha256": "158aa116c3a88560b79b3b5dd4752d07237a71764ac3f3b3eb7b25bccc5d8814"
         },
         "death": {
-          "atlas_sha256": "dbe9d4b08accfe4c8f168ca1fd1c0638529fe9413e955c663bdcfec1b0170792",
-          "image_sha256": "e929dd3892659b6b66039100f206cd8b07ef01acf4616ed9282f15824d735860",
-          "output_sha256": "8645d9ce901340089716b572a547a30725bd4daf07b5786b7f8834f63f21fa01"
+          "atlas_sha256": "b9afce4fba14ca22df925ba83ed21c28e2af71785312617657ac55ef00180e77",
+          "image_sha256": "e4ea101f50754bcdf0d3a01fc8b30b00d02c21ca8e4a9accbf53d5677b633817",
+          "output_sha256": "e4ea101f50754bcdf0d3a01fc8b30b00d02c21ca8e4a9accbf53d5677b633817"
+        }
+      }
+    },
+    "knight_player_axe": {
+      "manifest": "image-generation/player-sprites/sequences/knight-weapons-v2/axe/export/manifest.json",
+      "sha256": "b044984e5b7cc3b316ee9b6ec344ad44b5d3a7fac1c739036a581e44246fe469",
+      "frame_step": 1,
+      "sheets": {
+        "idle": {
+          "atlas_sha256": "b12e0cd8f1bf7e4f5125b56a1de2e72393c3f43ddb46cf9320157a4e5b9d1fe0",
+          "image_sha256": "73a04ac967561e02850ee861bb3c6ca89d4b38d3378af74eb0043f2a03d3de9b",
+          "output_sha256": "73a04ac967561e02850ee861bb3c6ca89d4b38d3378af74eb0043f2a03d3de9b"
+        },
+        "walk": {
+          "atlas_sha256": "005c1af3e7900dae843ab7d0a00a0c98186b6bee1abd494b7dc4ec03bb2edd3b",
+          "image_sha256": "be10a457fab6372a8c6b629220865af4fae9283e52be6be38c2083c8d5563a36",
+          "output_sha256": "be10a457fab6372a8c6b629220865af4fae9283e52be6be38c2083c8d5563a36"
+        },
+        "attack": {
+          "atlas_sha256": "062d497cd5149299877b7a05f83f244485f30ae1380f6fbff08634c950fd3fd6",
+          "image_sha256": "3eb5c667699716ee7ece6022464fe47eb20d6a4959488b191a6e7d720a6510df",
+          "output_sha256": "3eb5c667699716ee7ece6022464fe47eb20d6a4959488b191a6e7d720a6510df"
+        },
+        "death": {
+          "atlas_sha256": "52a709156d674bdbc5a9c0b1225669ca9e2085a54e49168557ddbaeec1e4825f",
+          "image_sha256": "2eb97944b35e3540b74663509ae34cd0f76ee8389482895abe73082cf597ecb9",
+          "output_sha256": "2eb97944b35e3540b74663509ae34cd0f76ee8389482895abe73082cf597ecb9"
+        }
+      }
+    },
+    "knight_player_sword": {
+      "manifest": "image-generation/player-sprites/sequences/knight-weapons-v2/sword/export/manifest.json",
+      "sha256": "0ba6d01e13f14eb9af6b685955491b7df2f21aee785fdaffcdb1f90481944df8",
+      "frame_step": 1,
+      "sheets": {
+        "idle": {
+          "atlas_sha256": "2cce1f1c68e2992d7c2cd29e33904a5a866f33dd251d55ffd451002f96017b30",
+          "image_sha256": "8598a5fd3970333f95d127e01af67c9040f2a09e7ec638867b9554dca819a825",
+          "output_sha256": "8598a5fd3970333f95d127e01af67c9040f2a09e7ec638867b9554dca819a825"
+        },
+        "walk": {
+          "atlas_sha256": "ccfee6fd99e6a7a4f6c0be8712aa5817c954de6f0beee15b2d29a8f94a156676",
+          "image_sha256": "15986033841c652ec4aee55c6aee8d282033834e3b5953edaf591763628b2aa8",
+          "output_sha256": "15986033841c652ec4aee55c6aee8d282033834e3b5953edaf591763628b2aa8"
+        },
+        "attack": {
+          "atlas_sha256": "ece65aed3d48a47b7525eb71f42bab96bf9b308c728d5a20ff769a29b928d8b5",
+          "image_sha256": "2bb888ae8a1000b8ce30edf9c3456067585a4bbf41863085ac11c21f4ebbd148",
+          "output_sha256": "2bb888ae8a1000b8ce30edf9c3456067585a4bbf41863085ac11c21f4ebbd148"
+        },
+        "death": {
+          "atlas_sha256": "ac03e601e5b5380dee094e7279d033a6a111a579b2923313dd40d516be6a7aeb",
+          "image_sha256": "fe29d542c717ec677b00dfae64b6d25c706c399d94c41e5b24b81cdf8dbb7655",
+          "output_sha256": "fe29d542c717ec677b00dfae64b6d25c706c399d94c41e5b24b81cdf8dbb7655"
+        }
+      }
+    },
+    "knight_player_fist": {
+      "manifest": "image-generation/player-sprites/sequences/knight-weapons-v2/fist/export/manifest.json",
+      "sha256": "8aa38fbd95695574d43ab7a86987b8bde91a6c51c13abbed0b8319843680557e",
+      "frame_step": 1,
+      "sheets": {
+        "idle": {
+          "atlas_sha256": "6ac4fd1bd2ec09ecce43c74c9cd683c38a3a65aa2fd1f51917de8d9c3dab29cb",
+          "image_sha256": "cda09985ce87f28ca8994efcea1bfc72f1eab2db4a8eb91184fb17c34b4b7220",
+          "output_sha256": "cda09985ce87f28ca8994efcea1bfc72f1eab2db4a8eb91184fb17c34b4b7220"
+        },
+        "walk": {
+          "atlas_sha256": "d03926d2f691fc719ef85f5b88ae4641eb904b4d67393b75d54cfe278a0c59d9",
+          "image_sha256": "0718a9b62ae9988bdc8944062a049e561960a79672e529fbdfdc6802b8855f64",
+          "output_sha256": "0718a9b62ae9988bdc8944062a049e561960a79672e529fbdfdc6802b8855f64"
+        },
+        "attack": {
+          "atlas_sha256": "298a9a1e4e78739594600e55ccd17bf6ba18583c4bab6699853d361cf1d0d33e",
+          "image_sha256": "896466afbe0e4cf13250485e2d487bd79a425836c76bd41e217a89b3e1ab7a0b",
+          "output_sha256": "896466afbe0e4cf13250485e2d487bd79a425836c76bd41e217a89b3e1ab7a0b"
+        },
+        "death": {
+          "atlas_sha256": "4e03b412811db8e6d5e58d26afc1ea4809f818f0fe0706f80add09a355f89754",
+          "image_sha256": "8cbd6218643bdb7de3721aca55c8ba1dabd3b296252c0880603ab84f8def075c",
+          "output_sha256": "8cbd6218643bdb7de3721aca55c8ba1dabd3b296252c0880603ab84f8def075c"
         }
       }
     },

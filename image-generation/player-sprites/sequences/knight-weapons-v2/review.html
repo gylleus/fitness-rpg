@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Knight weapon animations</title>
+<style>
+  :root { color-scheme: dark; font: 16px system-ui, sans-serif; background: #11191e; color: #e3e9e6; }
+  body { max-width: 1200px; margin: 40px auto; padding: 0 24px; }
+  h1 { font-size: 30px; margin-bottom: 8px; } p { color: #aabbb6; line-height: 1.6; }
+  nav { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin: 26px 0; }
+  select, button { font: inherit; color: inherit; background: #24362f; padding: 10px 14px; border: 1px solid #52685c; border-radius: 6px; }
+  button { cursor: pointer; } :focus-visible { outline: 3px solid #8ae3b1; outline-offset: 3px; }
+  main { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  article { border: 1px solid #3b4c42; border-radius: 12px; overflow: hidden; background: #15231f; }
+  h2 { font-size: 18px; margin: 20px 20px 0; } canvas { width: 100%; display: block; image-rendering: pixelated; }
+  small { display: block; color: #b2c3ba; margin: 0 20px 20px; } a { color: #8ae3b1; }
+  #frame { width: 190px; vertical-align: middle; } #error { color: #ff9588; }
+</style>
+<h1>One knight, four weapon classes</h1>
+<p>A quiet breath, planted boots, and a steady grip. Compare the same player with a mace, axe, sword, or iron fist weapons.</p>
+<nav aria-label="Animation controls">
+  <label>Animation <select id="action"><option>idle</option><option>walk</option><option>attack</option><option>death</option></select></label>
+  <label>Speed <select id="speed"><option value="1">Normal</option><option value="0.5">Half speed</option><option value="2">Double speed</option></select></label>
+  <button id="pause">Pause</button><button id="restart">Replay</button>
+  <label>Frame <input id="frame" type="range" min="0" max="7" value="0"></label>
+</nav>
+<main></main>
+<p id="error" role="alert"></p>
+<p>Idle: 2.4 seconds. Walk: 0.8 seconds. Attacks play at the game's 0.36-second timing and return to guard; death holds its last pose. Drag the frame control to inspect a still.</p>
+<p><a href="weapon-previews.png">View the four ready poses</a> · <a href="README.md">Generation and rebuild notes</a></p>
+<script src="review-data.js"></script>
+<script>
+(async () => {
+  const { weapons, size, pivot, bodyHeight, durations } = window.playerReview;
+  const action = document.querySelector('#action'), speed = document.querySelector('#speed');
+  const pause = document.querySelector('#pause'), slider = document.querySelector('#frame');
+  let elapsed = 0, previous = performance.now(), playing = true;
+  const cards = await Promise.all(weapons.map(async weapon => {
+    const card = document.createElement('article'), title = document.createElement('h2');
+    title.textContent = weapon === 'fist' ? 'Fist weapons' : weapon[0].toUpperCase() + weapon.slice(1);
+    const canvas = document.createElement('canvas'); canvas.width = 360; canvas.height = 280;
+    canvas.setAttribute('aria-label', `${title.textContent} knight animation`);
+    const detail = document.createElement('small'); card.append(title, canvas, detail);
+    document.querySelector('main').append(card);
+    const images = Object.fromEntries(await Promise.all(Object.keys(durations).map(async clip => {
+      const image = new Image(); image.src = `${weapon}/export/${clip}/nearest/spritesheet.png`;
+      await image.decode(); return [clip, image];
+    })));
+    return { canvas, detail, images };
+  }));
+  const toggle = value => { playing = value; pause.textContent = value ? 'Pause' : 'Resume'; };
+  pause.onclick = () => toggle(!playing);
+  document.querySelector('#restart').onclick = () => { elapsed = 0; toggle(true); };
+  action.onchange = () => { elapsed = 0; slider.max = durations[action.value].length - 1; slider.value = 0; };
+  const duration = clip => clip === 'attack' ? 360 : durations[clip].reduce((a, b) => a + b, 0);
+  slider.oninput = () => {
+    toggle(false);
+    const times = durations[action.value];
+    elapsed = times.slice(0, Number(slider.value)).reduce((a, b) => a + b, 0) * duration(action.value) / times.reduce((a, b) => a + b, 0);
+  };
+  function draw(now) {
+    if (playing && !document.hidden) elapsed += (now - previous) * Number(speed.value);
+    previous = now;
+    let clip = action.value, time = elapsed;
+    if (clip === 'attack' && time >= 360) { clip = 'idle'; time -= 360; }
+    else if (clip === 'attack') time *= 800 / 360;
+    const times = durations[clip], total = times.reduce((a, b) => a + b, 0);
+    if (clip === 'idle' || clip === 'walk') time %= total;
+    let frame = times.length - 1;
+    for (let i = 0; i < times.length; i++) { if (time < times[i]) { frame = i; break; } time -= times[i]; }
+    if (playing && clip === action.value) slider.value = frame;
+    for (const {canvas, detail, images} of cards) {
+      const c = canvas.getContext('2d'); c.imageSmoothingEnabled = false;
+      c.clearRect(0, 0, 360, 280); c.fillStyle = '#304635'; c.fillRect(0, 240, 360, 40);
+      c.fillStyle = '#657959'; c.fillRect(0, 240, 360, 2);
+      const scale = 132 / bodyHeight;
+      c.drawImage(images[clip], frame*size, 0, size, size, 180-pivot[0]*scale, 240-pivot[1]*scale, size*scale, size*scale);
+      detail.textContent = `${clip} · frame ${frame + 1} / ${times.length}`;
+    }
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})().catch(error => { document.querySelector('#error').textContent = `Unable to load animation sheets: ${error.message}`; });
+</script>
+</html>

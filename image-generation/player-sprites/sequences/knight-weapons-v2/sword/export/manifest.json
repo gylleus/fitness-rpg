@@ -1,0 +1,53 @@
+{
+  "asset_id": "knight_player_sword",
+  "name": "Knight (sword)",
+  "facing": "right",
+  "frame_size": [
+    128,
+    128
+  ],
+  "pivot": [
+    0.484375,
+    0.875
+  ],
+  "height_scale": 1,
+  "reference_idle_height_px": 78,
+  "backend": "built-in imagegen poses; CPU registration; rigid pixel idle",
+  "source": {
+    "reference": {
+      "path": "references/sword.png",
+      "sha256": "ed4d534e3ec7dc8191ef6f510a6d596a5f7fa0aa04d0bd87830b6f76f0a93805",
+      "origin": [
+        624,
+        1084
+      ]
+    },
+    "sheet": {
+      "path": "sword-source.png",
+      "sha256": "6ff28ecd2a61d5c0186b5119afc59f53a254aa0b18e5cc76157fbfe702e8a054"
+    }
+  },
+  "code_sha256": "20057e058cb97acc52aa0b4c7c39956f7d0a3e10d0d7e8be8173c9ca54b103d3",
+  "actions": {
+    "idle": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "walk": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "attack": {
+      "timing": {
+        "repeat": false
+      }
+    },
+    "death": {
+      "timing": {
+        "repeat": false
+      }
+    }
+  }
+}

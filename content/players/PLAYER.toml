@@ -1,4 +1,5 @@
-# Player — Knight with a spiked mace.
+# Player — Knight master reference, with the standard mace.
+# Runtime weapon variants and rigid idle: image-generation/player-sprites/sequences/knight-weapons-v2/.
 # The existing asset ID remains stable across this visual redesign.
 schema_version = 1
 
@@ -27,7 +28,7 @@ equipment = ["one spiked iron mace", "closed steel helmet", "scratched plate arm
 avoid = ["exposed face", "exposed hair", "bare chest", "wooden club", "axe", "sword", "flail", "shield", "flowing cape", "extra weapons", "floating feet", "front-facing torso"]
 
 [assets.animations.idle]
-description = "The knight breathes in a guarded right-facing stance with both boots planted. The armored shoulders rise and settle slightly, the free gauntlet adjusts near the breastplate and the single spiked mace remains controlled beside the forward shoulder. Return to the original pose for a seamless loop."
+description = "The knight breathes slowly in a calm right-facing guard over 2.4 seconds. Both boots remain completely planted at identical horizontal positions. The knees flex almost imperceptibly while the torso rises or settles by at most one pixel at game resolution. Head, hands and equipped weapon move together as rigid artwork: no wrist rotation, weapon sway, changing weapon shape, side-to-side movement or stepping. Return to the exact original pose for a seamless loop."
 loop = true
 
 [assets.animations.walk]

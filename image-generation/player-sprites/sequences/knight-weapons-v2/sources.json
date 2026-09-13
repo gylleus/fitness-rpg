@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "tool": "built-in imagegen",
+  "reference_scale": 0.09208972845336481,
+  "sheet_scale": 0.319672131147541,
+  "column_origin_x": 148,
+  "column_width": 295.6666666666667,
+  "contacts": {
+    "walk": [
+      285,
+      285,
+      285,
+      285,
+      285,
+      285
+    ],
+    "attack": [
+      579,
+      579,
+      579,
+      579,
+      579,
+      579
+    ],
+    "death": [
+      855,
+      855,
+      853,
+      854,
+      855,
+      855
+    ]
+  },
+  "weapons": {
+    "mace": {
+      "reference": {
+        "path": "references/mace.png",
+        "sha256": "d7bc2a2bfbd7632a520795a1d7f2bccfdfdf605b1ccb0d54437b36b6752a3171",
+        "origin": [
+          624,
+          1084
+        ]
+      },
+      "sheet": {
+        "path": "mace-source.png",
+        "sha256": "aee9e10d1750b918b0cf12b49570b8907373a4fb229674603eb236842dd2b51a"
+      }
+    },
+    "axe": {
+      "reference": {
+        "path": "references/axe.png",
+        "sha256": "e3c63f30d131bae71975ca750703da9a2dab44a2f24a4046642e26fb92083927",
+        "origin": [
+          624,
+          1085
+        ]
+      },
+      "sheet": {
+        "path": "axe-source.png",
+        "sha256": "b45268a8f51b8a5423c5828eca363977661310cdc63f025224bcb4e051ce18e7"
+      }
+    },
+    "sword": {
+      "reference": {
+        "path": "references/sword.png",
+        "sha256": "ed4d534e3ec7dc8191ef6f510a6d596a5f7fa0aa04d0bd87830b6f76f0a93805",
+        "origin": [
+          624,
+          1084
+        ]
+      },
+      "sheet": {
+        "path": "sword-source.png",
+        "sha256": "6ff28ecd2a61d5c0186b5119afc59f53a254aa0b18e5cc76157fbfe702e8a054"
+      }
+    },
+    "fist": {
+      "reference": {
+        "path": "references/fist.png",
+        "sha256": "1d5fec2ec49f9374114d367d410a942a7d873f7e5fd96c250878d62cc80924e9",
+        "origin": [
+          624,
+          1083
+        ]
+      },
+      "sheet": {
+        "path": "fist-source.png",
+        "sha256": "d1027d9a49ece2b6d8c92bfe6c3895b908e2fe046b7304932c4bc872ca5a37bd"
+      }
+    }
+  }
+}

@@ -13,8 +13,8 @@ const stats = heroStats({ gold: 0, xp: 0, swordLevel: 0, armorLevel: 0, unlocked
 describe('sprite playback', () => {
   it('loops on exact boundaries and holds a one-shot ending', () => {
     const idle = player.actions.idle, death = player.actions.death;
-    expect(frameAt(idle, 199).index).toBe(0);
-    expect(frameAt(idle, 200).index).toBe(1);
+    expect(frameAt(idle, idle.frames[0].duration - 1).index).toBe(0);
+    expect(frameAt(idle, idle.frames[0].duration).index).toBe(1);
     expect(frameAt(idle, idle.duration).index).toBe(0);
     expect(frameAt(death, death.duration + 10000)).toMatchObject({ index: 5, remaining: Infinity });
   });
@@ -22,7 +22,7 @@ describe('sprite playback', () => {
     expect(sampleSprite(player, 'attack', 360, 720).index).toBe(3);
     expect(sampleSprite(player, 'attack', 719, 720).index).toBe(5);
     expect(sampleSprite(player, 'attack', 720, 720).clip).toBe(player.actions.idle);
-    expect(sampleSprite(player, 'attack', 920, 720).index).toBe(1);
+    expect(sampleSprite(player, 'attack', 720 + player.actions.idle.frames[0].duration, 720).index).toBe(1);
     expect(clipFor(player, 'unavailable')).toBe(player.actions.idle);
   });
   it('preserves feet and relative entity height when mirrored', () => {

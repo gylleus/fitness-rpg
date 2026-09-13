@@ -1,0 +1,53 @@
+{
+  "asset_id": "barbarian_player",
+  "name": "Knight (mace)",
+  "facing": "right",
+  "frame_size": [
+    128,
+    128
+  ],
+  "pivot": [
+    0.484375,
+    0.875
+  ],
+  "height_scale": 1,
+  "reference_idle_height_px": 78,
+  "backend": "built-in imagegen poses; CPU registration; rigid pixel idle",
+  "source": {
+    "reference": {
+      "path": "references/mace.png",
+      "sha256": "d7bc2a2bfbd7632a520795a1d7f2bccfdfdf605b1ccb0d54437b36b6752a3171",
+      "origin": [
+        624,
+        1084
+      ]
+    },
+    "sheet": {
+      "path": "mace-source.png",
+      "sha256": "aee9e10d1750b918b0cf12b49570b8907373a4fb229674603eb236842dd2b51a"
+    }
+  },
+  "code_sha256": "20057e058cb97acc52aa0b4c7c39956f7d0a3e10d0d7e8be8173c9ca54b103d3",
+  "actions": {
+    "idle": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "walk": {
+      "timing": {
+        "repeat": true
+      }
+    },
+    "attack": {
+      "timing": {
+        "repeat": false
+      }
+    },
+    "death": {
+      "timing": {
+        "repeat": false
+      }
+    }
+  }
+}

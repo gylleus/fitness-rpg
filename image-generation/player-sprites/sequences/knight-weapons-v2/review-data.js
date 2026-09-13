@@ -1,0 +1,1 @@
+window.playerReview = {"weapons": ["mace", "axe", "sword", "fist"], "size": 128, "pivot": [62, 112], "bodyHeight": 78, "durations": {"idle": [300, 300, 300, 300, 300, 300, 300, 300], "walk": [140, 130, 130, 140, 130, 130], "attack": [120, 160, 120, 100, 140, 160], "death": [100, 120, 130, 140, 160, 250]}};
