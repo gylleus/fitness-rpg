@@ -4,6 +4,7 @@ import { router } from 'expo-router';
 import { Alert, AppState, type AppStateStatus } from 'react-native';
 import { giveItem } from '../equipment';
 import { GEAR } from '../../src/game/equipment';
+import { DUNGEONS } from '../../src/game/combat';
 import { createTestDb } from '../db';
 import { getGameSnapshot, savePushupWorkout } from '../../src/db/game';
 import * as gameRepository from '../../src/db/game';
@@ -133,6 +134,45 @@ async function navigate(path: '/dungeon' | '/forge' | '/progress' | '/') {
 }
 
 describe('first playable game flow', () => {
+  it('lets players inspect locked map destinations without starting or unlocking them', async () => {
+    await renderRouter(routes, { initialUrl: '/dungeon' });
+    expect(screen.getByTestId('dungeon-map')).toBeVisible();
+    expect(screen.getAllByRole('button', { name: /^Select / })).toHaveLength(DUNGEONS.length);
+    expect(screen.getByRole('button', { name: 'Select Wetlands, selected' })).toBeSelected();
+    await press('Select Embercrypt, locked');
+    expect(screen.getByRole('button', { name: 'Select Embercrypt, locked' })).toBeSelected();
+    expect(screen.getByText('Defeat Root Hulk in Wetlands to open this path.')).toBeVisible();
+    expect(screen.getByRole('button', { name: 'Defeat Root Hulk' })).toBeDisabled();
+    expect(getGameSnapshot(mockDb).latestBattle).toBeNull();
+    expect(getGameSnapshot(mockDb).hero.unlockedDungeon).toBe(0);
+    await press('Select Wetlands, available');
+    expect(screen.getByRole('button', { name: 'Enter dungeon  →' })).toBeEnabled();
+  });
+
+  it.each(DUNGEONS)('enters the selected $name map destination', async dungeon => {
+    gameRepository.getHero(mockDb);
+    mockDb.update(heroes).set({ unlockedDungeon: 3 }).run();
+    await renderRouter(routes, { initialUrl: '/dungeon' });
+    await press(new RegExp(`^Select ${dungeon.name},`));
+    expect(screen.getByTestId(`map-location-${dungeon.id}`)).toBeSelected();
+    await press('Enter dungeon  →');
+    expect(getGameSnapshot(mockDb).latestBattle?.state.dungeonId).toBe(dungeon.id);
+    expect(screen.getByTestId('fullscreen-expedition')).toBeVisible();
+  });
+
+  it('allows map browsing during an active run while preventing a second expedition', async () => {
+    gameRepository.getHero(mockDb);
+    mockDb.update(heroes).set({ unlockedDungeon: 3 }).run();
+    const active = gameRepository.startDungeon(mockDb, 0, NOW);
+    await renderRouter(routes, { initialUrl: '/dungeon' });
+    expect(screen.getByRole('button', { name: 'Select Wetlands, in progress' })).toBeSelected();
+    await press('Select Hollow Delve, available');
+    expect(screen.getByRole('button', { name: 'Expedition in progress' })).toBeDisabled();
+    await press('Continue expedition');
+    expect(getGameSnapshot(mockDb).latestBattle?.id).toBe(active.id);
+    expect(mockDb.select().from(dungeonRuns).all()).toHaveLength(1);
+  });
+
   it('equips two found rings independently and locks their controls during combat', async () => {
     giveItem(mockDb, GEAR.copper_ring);
     giveItem(mockDb, GEAR.copper_ring);
@@ -420,7 +460,12 @@ describe('first playable game flow', () => {
     expect(screen.getByText('Boss defeated. Well fought.')).toBeVisible();
     expect(getGameSnapshot(mockDb).hero).toMatchObject({ gold: 72, xp: 99, unlockedDungeon: 1 });
     await press('Choose a new expedition');
-    expect(screen.getAllByRole('button', { name: 'Enter dungeon  →' })).toHaveLength(2);
+    expect(screen.getByRole('button', { name: 'Select Wetlands, available' })).toBeEnabled();
+    expect(screen.getByRole('button', { name: 'Select Embercrypt, selected' })).toBeSelected();
+    expect(screen.getByRole('button', { name: 'Select Frostbound Keep, locked' })).toBeVisible();
+    expect(screen.getByRole('button', { name: 'Enter dungeon  →' })).toBeEnabled();
+    await press('Enter dungeon  →');
+    expect(getGameSnapshot(mockDb).latestBattle?.state.dungeonId).toBe(1);
   });
 
   it('keeps fighting without spending pushups and allows retrying after defeat', async () => {

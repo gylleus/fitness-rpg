@@ -1,0 +1,12 @@
+{
+  "backend": "built-in imagegen",
+  "prompt": "prompt.txt",
+  "source": "source.png",
+  "sha256": "b8a333387b25800993d114ea62eb55d81e1f852d7fb838e6f8ba277330778c5c",
+  "size": [
+    1122,
+    1402
+  ],
+  "runtime": "assets/maps/world-map.png",
+  "runtimeExport": "Byte-identical source; routes, labels and interactive nodes are drawn by the app."
+}

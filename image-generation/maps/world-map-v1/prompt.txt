@@ -1,0 +1,12 @@
+Use case: stylized-concept.
+Asset type: background art for a mobile dark-fantasy dungeon selection map, portrait 4:5 aspect ratio.
+Create a beautiful highly detailed hand-painted cartographic fantasy map, viewed from above with miniature illustrated hills, trees and buildings. The entire image is the map, edge to edge: no table, no physical scroll border, no interface.
+A worn, grounded old world on muted parchment olive-green and desaturated brown, dark charcoal ink hatching and delicate earthy textures, subdued blue-gray waterways, restrained ember-orange and frost-blue accents. Intricate crafted game art, clear geography and beautiful small details, neither cute nor photorealistic. The world has coherent valleys and ridgelines with a narrow river weaving through the center, marsh in the southwest, volcanic ruins in the southeast, snowy highlands in the northeast, limestone mountains in the northwest. Leave open low-contrast terrain between the four landmarks for paths which will be added by the game.
+Exactly four primary dungeon landmarks at these locations, stated as percentages from the LEFT and TOP of the image:
+1. At (25%, 73%): Wetlands, a cluster of weathered timber cottages among reeds, leaning willows, dark pools and rotten little bridges.
+2. At (73%, 62%): Embercrypt, an ancient broken dark-stone mausoleum or sunken ruined fortress among soot-black hills, a few restrained orange fissures and drifting ash.
+3. At (71%, 20%): Frostbound Keep, a lonely angular stone keep on a white snow-covered mountain pass, bluish ice and frost-encrusted pines.
+4. At (28%, 31%): Hollow Delve, an ominous black cave mouth in gray limestone crags with a weathered timber mine entrance and scattered stones.
+Each landmark occupies roughly 18% of image width and remains distinct from the terrain. Add tiny trees, rocky slopes, ruined walls, marsh channels and weathered terrain around them. A modest tent and unlit campfire clearing at (16%, 90%) can mark the journey's starting camp.
+Keep a clear 7% margin around image edges. Especially preserve open space immediately below each dungeon landmark for a label added later.
+NO text, NO letters, NO numbers, NO labels, NO compass letters, NO UI panels, NO decorative border, NO markers, NO circles, NO dotted lines, NO drawn route connections. Do not add extra castles, caves or major destinations.
