@@ -43,7 +43,7 @@ canvas = [640, 360]
 ground_y = 288
 reference_height = 64
 view = "orthographic_side"
-style = "Detailed dark fantasy pixel art, dark outlines, stepped color clusters, weighty weathered materials and a muted cave palette, consistent with the existing Hollow Delve atmosphere samples."
+style = "Detailed dark fantasy pixel art with fine mineral ribs, pitted stone, visible chisel marks, damaged timber, crisp small color clusters and a muted cave palette. Preserve the detail of full-resolution source textures when rendering the logical scene; avoid coarse block upscaling."
 avoid = ["characters baked into scenery", "isometric view", "a road receding to a vanishing point", "bright cheerful colors", "readable text", "smooth airbrushed edges", "mandatory gaps in the walking surface"]
 [generation.ground]
 canvas = [256, 96]
@@ -67,7 +67,7 @@ visual_description = "Ribbed limestone walls descend from a high, shadowed ceili
 parallax = 0.18
 repeat_x = false
 transparent = false
-composition = "Opaque atmosphere panel. Use the selected Hollow Delve limestone, gallery and pool samples as three sequential variants with soft overlap during travel. Ground and props are separate. These full scenes are not seamless tiles."
+composition = "Opaque detailed atmosphere panel. Use limestone chambers, abandoned timber galleries and a sunken cavern as three sequential variants with soft overlap during travel. Rock shelves and stalactites remain visibly attached to their walls or ceiling. The walking ground and freestanding props are separate. Preserve fine source texture detail; these full scenes are not seamless tiles."
 [[ground_sections]]
 id = "hollow_delve_slate_path"
 name = "Slate and gravel path"

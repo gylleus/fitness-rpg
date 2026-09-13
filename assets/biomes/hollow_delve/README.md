@@ -19,8 +19,9 @@ export dimensions and measured bounds used by the game.
 | stalagmites | Group of three limestone formations |
 | tool_cache | Broken crate, pick, rope and unlit lamp |
 
-The backgrounds reuse the selected local SDXL
-[Hollow Delve samples](../../../image-generation/scene-samples/hollow-delve-v1/).
+The backgrounds use detailed 1672×941 built-in imagegen
+[panoramas](../../../image-generation/scene-samples/hollow-delve-backgrounds-v4/),
+preserving the complete source pixels and colors.
 They pan slowly inside their painted bounds and crossfade during travel; they
 are not tiled. Props and ground were generated with built-in imagegen and
 converted through the existing ENDESGA32 pipeline. Exact prompts and immutable
@@ -34,6 +35,7 @@ appear along the route; bounded repetition keeps restored long runs inexpensive.
 
 ```bash
 uv run sprite-python image-generation/scene-samples/hollow-delve-props-v1/prepare.py
+uv run sprite-python image-generation/scene-samples/hollow-delve-backgrounds-v4/prepare.py
 npm run test:scenery
 ```
 
