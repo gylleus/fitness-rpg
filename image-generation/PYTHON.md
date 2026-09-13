@@ -66,8 +66,11 @@ uv run sprites reference \
 ```
 
 SDXL and SAM2 select MPS on Apple Silicon; CUDA remains the default on Linux.
-BiRefNet runs on CPU on both platforms. SDXL enables attention and VAE slicing
-on Mac, and SAM2 uses FP32 without CUDA autocast. The launcher enables
+BiRefNet runs on CPU on both platforms. SDXL keeps PyTorch's default attention
+and enables VAE slicing on Mac; SAM2 uses FP32 without CUDA autocast. SDXL
+attention slicing produced NaNs on this M3 Max in both FP16 and FP32, matching
+[the upstream report](https://github.com/huggingface/diffusers/issues/11229).
+Invalid pixels now raise an error before a reference can be saved. The launcher enables
 `PYTORCH_ENABLE_MPS_FALLBACK=1` before importing torch, unless explicitly set by
 the caller. Some operations can consequently run on CPU. Seeds and prompts
 are preserved; different backends and precision can produce different pixels.

@@ -57,6 +57,14 @@ def reference_text(entry):
     return prompts["reference"], prompts.get("reference_negative", prompts["negative"])
 
 
+def checked_image(processor, pixels):
+    """Reject numerical failures before conversion can silently turn NaNs black."""
+    import numpy as np
+    if not np.isfinite(pixels).all():
+        raise RuntimeError("SDXL produced non-finite pixels; no reference was saved")
+    return processor.numpy_to_pil(pixels)[0]
+
+
 def generate(run):
     config = load(run)
     needed = []
@@ -95,10 +103,13 @@ def generate(run):
     pipe.set_adapters("pixel", adapter_weights=settings["lora"]["weight"])
     pipe.to(device)
     if device == "mps":
-        pipe.enable_attention_slicing()
+        # Keep PyTorch SDPA. SDXL's sliced attention produced NaNs on M3 Max
+        # in both FP16 and FP32 (also reported in diffusers issue #11229).
         pipe.enable_vae_slicing()
     image_pipe = (pipe if guided_only else StableDiffusionXLImg2ImgPipeline.from_pipe(pipe)) if any(e.get("reference_guide") for e, _ in needed) else pipe
-    save_json(run / "reference-environment.json", {**device_metadata(device), "configuration": settings,
+    runtime = {"device": device, "dtype": str(dtype),
+               "attention_processors": sorted({type(p).__name__ for p in pipe.unet.attn_processors.values()})}
+    save_json(run / "reference-environment.json", {**device_metadata(device), **runtime, "configuration": settings,
         "scheduler": dict(pipe.scheduler.config), "generator_device": "cpu", "deterministic": device == "cuda",
         "packages": {p: importlib.metadata.version(p) for p in
             ("torch", "diffusers", "transformers", "accelerate", "peft", "numpy", "pillow", "tomli")},
@@ -119,10 +130,11 @@ def generate(run):
                 raise ValueError("Guide image hash differs from the run plan")
             guide = dict(guide_spec)
             kwargs.update(image=Image.open(guide_path).convert("RGB"), strength=guide_spec["strength"])
-        image = (image_pipe if guide else pipe)(**embeds, **kwargs,
+        pixels = (image_pipe if guide else pipe)(**embeds, **kwargs, output_type="np",
             generator=torch.Generator(device="cpu").manual_seed(entry["seeds"]["reference"])).images[0]
+        image = checked_image(pipe.image_processor, pixels)
         record = {"entry": entry, "settings": settings, "conditioning": text_settings, "guide": guide,
-            "seconds": time.monotonic()-started, "size": list(image.size), "mode": image.mode}
+            "runtime": runtime, "seconds": time.monotonic()-started, "size": list(image.size), "mode": image.mode}
         info = PngInfo()
         info.add_text("generation", json.dumps(record))
         path.parent.mkdir(parents=True, exist_ok=True)
