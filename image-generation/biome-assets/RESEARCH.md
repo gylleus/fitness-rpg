@@ -65,5 +65,11 @@ underside as an anchor relative to the floor and reference actor height, rather
 than stretching with the viewport. This makes a low tunnel possible in both
 orientations. Materials and optional geometry overrides provide frost caves,
 volcanic tunnels, crypts and castle passages through the same commands and
-renderer. Only the limestone theme has generated production art in this revision;
-the other presets are planning inputs, not new playable locations.
+renderer. Hollow Delve uses the limestone theme in the game. Four additional
+themes now have generated scenery sets and portable reviews in
+`scene-samples/interior-biomes-v1`, including floors and eight decorations each.
+The full-set planner extends the shared layer plan; the assembler delegates to
+the same static exporter and prop packer. The crypt sheet needed reviewed crop
+rectangles, stored as recipe data. No biome-specific generation or extraction
+script was added. These four sets are ready for art review; playable content
+registration remains a separate step.

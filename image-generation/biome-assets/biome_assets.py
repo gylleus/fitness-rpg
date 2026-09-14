@@ -341,6 +341,8 @@ def main(argv=None):
     interior.add_argument("--biome", help="Optional runtime biome ID; defaults to the theme name")
     interior.add_argument("--recipe", type=Path)
     interior.add_argument("--edit-from", type=Path, help="JSON mapping of every planned asset ID to a reference PNG, relative to the JSON file")
+    interior.add_argument("--with-scenery", action="store_true", help="Include a walking floor and eight authored decorations")
+    interior.add_argument("--decorations", type=Path, help="Optional decoration recipes for complete interior sets")
     interior.add_argument("--out", type=Path, required=True)
     prep = commands.add_parser("prepare", help="Validate and export supplied static art at the planned texture resolution")
     prep.add_argument("--plan", type=Path, required=True)
@@ -357,11 +359,20 @@ def main(argv=None):
     props.add_argument("--biome", required=True)
     props.add_argument("--recipe-dir", type=Path)
     props.add_argument("--out", type=Path)
+    assemble = commands.add_parser("assemble-interior", help="Bundle a complete interior set and build a standalone HTML review")
+    assemble.add_argument("--plan", type=Path, required=True)
+    assemble.add_argument("--manifest", type=Path, required=True)
+    assemble.add_argument("--out", type=Path, required=True)
+    assemble.add_argument("--regions", type=Path, help="Optional reviewed decoration crop rectangles keyed by prop ID")
     args = parser.parse_args(argv)
     if args.command in ("plan", "plan-interior"):
         if args.command == "plan-interior":
-            from interiors import make_interior_plan
-            data = make_interior_plan(args.theme, args.biome, args.recipe)
+            if args.with_scenery:
+                from interior_sets import make_set_plan
+                data = make_set_plan(args.theme, args.biome, args.recipe, args.decorations)
+            else:
+                from interiors import make_interior_plan
+                data = make_interior_plan(args.theme, args.biome, args.recipe)
         else:
             data = make_plan(args.biome, args.kind, args.asset, recipe_path=args.recipe)
         if args.edit_from:
@@ -381,6 +392,9 @@ def main(argv=None):
         sys.path.insert(0, str(ROOT / "scripts"))
         from bundle_scenery import bundle as bundle_props
         bundle_props(safe_id(args.biome), args.recipe_dir, args.out)
+    elif args.command == "assemble-interior":
+        from interior_sets import assemble_set
+        assemble_set(args.plan, args.manifest, args.out, args.regions)
     else:
         bundle(args.manifest, args.mapping, args.out)
         print("Bundled selected biome assets")

@@ -86,8 +86,13 @@ def bundle(biome, recipe_dir=None, destination=None):
     recipe = json.loads((folder / "recipe.json").read_text())
     if recipe["biome_id"] != biome:
         raise ValueError("Recipe/biome mismatch")
-    definitions = {p["id"]: p for p in tomllib.loads(
-        (ROOT / f"content/biomes/{biome}/SCENERY.toml").read_text())["scenery"]}
+    authored_definitions = recipe.get("definitions")
+    if authored_definitions is None:
+        authored_definitions = tomllib.loads(
+            (ROOT / f"content/biomes/{biome}/SCENERY.toml").read_text())["scenery"]
+    definitions = {p["id"]: p for p in authored_definitions}
+    if len(definitions) != len(authored_definitions):
+        raise ValueError("Duplicate decoration definitions")
     source_records = {}
     tiles = {}
     props = {}
@@ -115,6 +120,10 @@ def bundle(biome, recipe_dir=None, destination=None):
             cell = spec.get("regions", {}).get(key, [round(col * source.width / columns),
                 round(row * source.height / rows), round((col + 1) * source.width / columns),
                 round((row + 1) * source.height / rows)])
+            if len(cell) != 4 or any(type(n) is not int for n in cell) or not (
+                0 <= cell[0] < cell[2] <= source.width and 0 <= cell[1] < cell[3] <= source.height
+            ):
+                raise ValueError(f"Invalid source extraction region: {key}")
             tile, trimming = trim_prop(source.crop(cell), recipe["max_prop_edge"], recipe["alpha_threshold"])
             x0, y0, x1, y1 = trimming["source_trim"]
             if x0 == 0 or y0 == 0 or x1 == cell[2]-cell[0] or y1 == cell[3]-cell[1]:

@@ -92,6 +92,42 @@ required PNGs, a ground canvas/surface anchor and a prop atlas with the shared
 implementation is needed for another indoor biome. Adding playable content and
 registering a biome in the game remain separate steps.
 
+## Complete scenery sets and portable reviews
+
+Add `--with-scenery` to plan a floor and eight decorations alongside the three
+interior layers. [decorations.toml](decorations.toml) defines materials, subjects
+and actor-relative sizes for volcanic tunnels, frost caves, crypts and castles.
+Pass `--decorations PATH` to supply another decoration recipe. The same theme key
+must exist in both the interior and decoration recipes.
+
+```sh
+uv run biome-assets plan-interior --theme volcano_tunnel --biome lava_caves --with-scenery --out PATH/plan.json
+# Generate the five saved prompts and record their images in PATH/sources.json.
+uv run biome-assets prepare --plan PATH/plan.json --sources PATH/sources.json --out PATH/prepared
+uv run biome-assets assemble-interior --plan PATH/plan.json --manifest PATH/prepared/manifest.json --out PATH/review
+```
+
+The decoration prompt specifies a four-column, two-row transparent sheet. Its
+source resolution survives preparation; the shared prop packer trims objects,
+checks ground anchors and packs one atlas. Definitions stay in the saved plan
+and generated extraction recipe, so a review needs no placeholder playable
+content in `SCENERY.toml`. If an object crosses a cell boundary, inspect the sheet
+and pass `assemble-interior --regions PATH/regions.json`: a mapping from prop IDs
+to `[left, top, right, bottom]` source-pixel rectangles. The normal bounds, padding
+and contact checks still apply. Preserve that correction as data beside the plan.
+
+`PATH/review/review.html` embeds the textures, existing knight sprite and scripts.
+It works offline as one file, with travel playback, layer toggles, three viewport
+sizes, a decoration gallery and downloadable textures. Its Canvas2D renderer uses
+the production interior layout, scenery placement and sprite geometry; native
+Skia rendering still needs its own checks when integrating a new playable biome.
+Run `node scripts/build-interior-review.cjs PATH/review` to rebuild just the HTML.
+
+The [four generated examples](../scene-samples/interior-biomes-v1/index.html)
+retain all 20 original images, exact prompts, export manifests and reviewed
+extraction regions. Their [generation record](../scene-samples/interior-biomes-v1/README.md)
+includes replay and browser-validation commands.
+
 Use image references with explicit roles: the approved player for sprite style,
 the approved enemy for identity and motion, or a selected scene for background
 style. Do not transfer a reference's unrelated anatomy or objects. Record the

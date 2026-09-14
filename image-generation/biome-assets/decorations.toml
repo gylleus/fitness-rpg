@@ -1,0 +1,53 @@
+schema_version = 1
+
+[volcano_tunnel]
+ground = "A level compact ledge of dark warm basalt and ash. Subdued reddish-brown chips and a few dark burnt-orange seams below the walking lip; no open lava on the route."
+props = [
+  {id="basalt_boulder", name="Layered basalt boulder", height_scale=0.50},
+  {id="obsidian_cluster", name="Small squat obsidian outcrop with restrained dull red reflections", height_scale=0.65},
+  {id="ash_urn", name="Cracked ash-filled stone urn", height_scale=0.45},
+  {id="cooled_vent", name="Low cooled lava vent with one faint ember seam and no smoke", height_scale=0.40},
+  {id="iron_brazier", name="Heavy iron brazier with a few dull embers", height_scale=0.85},
+  {id="ore_cart", name="Abandoned iron ore cart carrying volcanic stone", height_scale=0.75},
+  {id="chain_coil", name="Rusted chain coiled beside a broken mining pick", height_scale=0.35},
+  {id="broken_column", name="Broken natural basalt column with a flat grounded base", height_scale=0.95},
+]
+
+[frost_cave]
+ground = "A level dark frozen-stone ledge with a thin packed-snow lip and opaque cloudy ice below. Muted steel blue and gray, a few pale edges; no slippery gaps or bright sparkles."
+props = [
+  {id="snow_boulder", name="Snow-capped frozen boulder", height_scale=0.55},
+  {id="cloudy_ice", name="Short cluster of thick cloudy blue ice slabs", height_scale=0.80},
+  {id="frozen_crate", name="Old supply crate rimmed with thick frost", height_scale=0.55},
+  {id="unlit_brazier", name="Snow-dusted iron brazier, unlit", height_scale=0.85},
+  {id="split_barrel", name="Split wooden barrel partly encased in cloudy ice", height_scale=0.55},
+  {id="broken_sled", name="Low broken wooden expedition sled with coiled rope", height_scale=0.45},
+  {id="frozen_chest", name="Closed iron-bound chest trapped in frost", height_scale=0.55},
+  {id="ice_shelf", name="Squat irregular frozen-stone shelf with short attached icicles", height_scale=1.00},
+]
+
+[crypt]
+ground = "A level worn burial-passage floor of muted warm-gray flagstones above dark compact masonry. Sparse dust in joints, no loose bones baked into the ground and no raised steps."
+props = [
+  {id="sarcophagus", name="Low closed weathered stone sarcophagus", height_scale=0.65},
+  {id="funerary_urn", name="Dusty funerary urn with a chipped lid", height_scale=0.45},
+  {id="candle_plinth", name="Short stone plinth carrying three melted candles with tiny subdued flames", height_scale=0.85},
+  {id="bone_heap", name="Small old skull and bone heap", height_scale=0.35},
+  {id="broken_statue", name="Broken hooded funerary statue on a grounded pedestal, no living figure", height_scale=1.00},
+  {id="coffin_lid", name="Cracked stone coffin lid propped securely against a low rubble base", height_scale=0.65},
+  {id="iron_lamp", name="Old standing iron oil lamp with a restrained dull flame", height_scale=0.85},
+  {id="burial_chest", name="Small decayed iron-bound burial chest", height_scale=0.55},
+]
+
+[castle]
+ground = "A level fortress corridor floor of broad worn warm-gray flagstones, with dark stone blocks below its walking lip. Restrained mortar and dust, no steps or battlements."
+props = [
+  {id="supply_barrel", name="Iron-hooped wooden supply barrel", height_scale=0.55},
+  {id="supply_crates", name="Two squat stacked military supply crates", height_scale=0.65},
+  {id="weapon_rack", name="Grounded wooden rack with a spear, axe and sword", height_scale=1.00},
+  {id="shield_stand", name="Wooden stand carrying two battered unmarked shields", height_scale=0.85},
+  {id="standing_brazier", name="Heavy standing iron brazier with subdued glowing coals", height_scale=0.90},
+  {id="masonry_rubble", name="Low pile of broken dressed stone and mortar", height_scale=0.40},
+  {id="strongbox", name="Closed military strongbox with iron straps", height_scale=0.50},
+  {id="banner_stand", name="Short freestanding banner pole on a heavy base with a plain faded burgundy pennant, no emblem", height_scale=1.15},
+]

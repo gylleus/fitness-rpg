@@ -1,12 +1,36 @@
 import unittest
+import json
+from pathlib import Path
+import tempfile
+from unittest.mock import patch
 
 import numpy as np
 from PIL import Image
 
-from bundle_scenery import pack_rectangles, trim_prop
+from bundle_scenery import bundle, pack_rectangles, sha, trim_prop
 
 
 class SceneryAtlasTests(unittest.TestCase):
+    def test_inline_definitions_pack_a_new_biome_without_canonical_content(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            pixels = np.zeros((32, 64, 4), dtype=np.uint8)
+            pixels[5:27, 5:27] = [90, 80, 60, 255]
+            pixels[9:27, 37:59] = [60, 80, 90, 255]
+            Image.fromarray(pixels).save(root / "sheet.png")
+            (root / "prompt.txt").write_text("two isolated props")
+            definitions = [{"id": key, "name": key, "generation": {"anchor": "ground", "height_scale": .5}} for key in ("one", "two")]
+            recipe = {"biome_id": "new_biome", "definitions": definitions, "alpha_threshold": 128,
+                "max_prop_edge": 64, "atlas_width": 128, "padding": 2, "sheets": [{"image": "sheet.png",
+                    "sha256": sha((root / "sheet.png").read_bytes()), "prompt_file": "prompt.txt",
+                    "columns": 2, "rows": 1, "props": ["one", "two"]}]}
+            (root / "recipe.json").write_text(json.dumps(recipe))
+            with patch("bundle_scenery.ROOT", root):
+                result = bundle("new_biome", root, root / "out")
+            self.assertEqual(set(result["props"]), {"one", "two"})
+            self.assertEqual(result["props"]["one"]["anchor"], [11, 22])
+            self.assertEqual(result["props"]["two"]["anchor"], [11, 18])
+
     def test_padding_and_detached_pixel_cannot_lower_the_ground_anchor(self):
         pixels = np.zeros((40, 40, 4), dtype=np.uint8)
         pixels[7:21, 12:28] = [92, 100, 77, 255]

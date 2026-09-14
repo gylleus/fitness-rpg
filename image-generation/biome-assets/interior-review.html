@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Interior art review</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#151719;color:#e7e3da}
+body{margin:0 auto;max-width:1180px;padding:24px}h1{font-size:32px;margin:5px 0 8px}p{line-height:1.5;color:#b9b6af}button,select,input{font:inherit}button,select{background:#2b2e30;color:#eee;border:1px solid #555;border-radius:6px;padding:8px 12px}button{cursor:pointer}label{display:inline-flex;gap:7px;align-items:center;margin-right:16px}input[type=range]{width:min(45vw,450px)}input{accent-color:#c4a46a}.controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:16px 0}.stage{background:#0d0e0f;border:1px solid #444;border-radius:10px;padding:12px;text-align:center}.stage canvas{display:block;max-width:100%;height:auto;margin:auto;image-rendering:pixelated}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}figure{margin:0;background:#212426;border:1px solid #3a3d3e;border-radius:8px;overflow:hidden}figure canvas,figure img{display:block;width:100%;height:auto;image-rendering:pixelated}figcaption{padding:12px;line-height:1.4}small{color:#aaa}a{color:#dfbf80}details{margin:24px 0}summary{cursor:pointer;font-size:20px}#error{color:#ffc0a0}.note{font-size:13px}.chip{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#c4a46a}@media(max-width:600px){body{padding:14px}h1{font-size:27px}.stage{padding:3px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}figcaption{font-size:13px}}
+</style>
+<div class="chip">Biome art review</div><h1 id="title"></h1>
+<p>Layered interior scenery with eight grounded decorations. Pan through the route to inspect depth, roof clearance and repetition.</p>
+<div class="controls"><button id="play">Play travel</button><label>Travel <input id="travel" type="range" min="0" max="12800" value="280" step="1"></label><label>View <select id="viewport"><option value="wide">Landscape</option><option value="tall">Portrait</option><option value="compact">Compact</option></select></label></div>
+<div class="controls" id="toggles"></div><div class="stage"><canvas id="scene"></canvas></div><p id="error"></p>
+<p class="note">The knight is an existing game sprite for scale. This review uses the game's layout, parallax and prop placement calculations. These are scenery sets; enemies and playable chapter progression are separate.</p>
+<h2>Decorations</h2><p>Every object is trimmed from the authored sheet and sits on its measured ground anchor.</p><div id="decorations" class="grid"></div>
+<details><summary>Background and floor textures</summary><p>Full source detail is retained in background layers. Texture size is independent of world scale.</p><div id="textures" class="grid"></div></details>
+<script>/* GEOMETRY */</script>
+<script>
+const data=/* SCENE_DATA */;
+const canvas=document.getElementById('scene'),ctx=canvas.getContext('2d'),travel=document.getElementById('travel'),viewport=document.getElementById('viewport');
+document.title=data.title+' — art review';document.getElementById('title').textContent=data.title;
+const images={},enabled={};let playing=false,position=Number(travel.value),elapsed=0,last=0,frameRequest=0;
+for(const key of [...data.assets.scene.layers.map(l=>l.image),'props','ground','hero']){
+  enabled[key]=true;const label=document.createElement('label'),check=document.createElement('input');check.type='checkbox';check.checked=true;
+  check.onchange=()=>{enabled[key]=check.checked;draw()};label.append(check,document.createTextNode(key==='props'?'decorations':key));document.getElementById('toggles').append(label);
+}
+function strip(image,rect){
+  if(!image)return;const {x,y,width:w,height:h}=rect;
+  for(let n=Math.floor(-x/w)-1;n*w+x<canvas.width;n++){
+    ctx.save();ctx.translate(n*w+x,y);if(Math.abs(n%2)===1){ctx.translate(w,0);ctx.scale(-1,1)}
+    if(y>0)ctx.drawImage(image,0,0,image.width,1,0,-y,w,y);
+    ctx.drawImage(image,0,0,w,h);
+    if(y+h<canvas.height)ctx.drawImage(image,0,image.height-1,image.width,1,0,h,w,canvas.height-y-h);
+    ctx.restore();
+  }
+}
+function draw(){
+  const size=viewport.value==='tall'?[390,720,630,140]:viewport.value==='compact'?[640,360,288,96]:[960,440,350,128];
+  const [w,h,groundY,heroHeight]=size;canvas.width=w;canvas.height=h;ctx.imageSmoothingEnabled=false;
+  const layout=InteriorGeometry.interiorLayout(data.assets,w,h,groundY,heroHeight,17),camera=w*.22-position;
+  ctx.fillStyle=layout.fill;ctx.fillRect(0,0,w,h);
+  for(const layer of layout.layers.filter(l=>l.role==='rear'))if(enabled[layer.image])strip(images[layer.image],InteriorGeometry.interiorLayerRect(layer,camera));
+  if(enabled.props){const visible=InteriorGeometry.visibleScenery(layout.scenery,camera);visible.sprites.forEach((s,i)=>{const t=visible.transforms[i];ctx.drawImage(images.props,s.x,s.y,s.width,s.height,t.tx,t.ty,s.width*t.scos,s.height*t.scos)})}
+  for(const layer of layout.layers.filter(l=>l.role==='ceiling'))if(enabled[layer.image]){
+    ctx.fillStyle=layout.fill;ctx.fillRect(0,0,w,Math.max(0,layer.rect.y+(layer.cap_y||0)*layout.scale));strip(images[layer.image],InteriorGeometry.interiorLayerRect(layer,camera));
+  }
+  ctx.fillStyle=layout.fill;ctx.fillRect(0,groundY,w,h-groundY);
+  if(enabled.ground)strip(images.ground,{...layout.ground,x:camera%(layout.ground.width*2)});
+  if(enabled.hero){const g=InteriorGeometry.spriteGeometry(data.hero,heroHeight,'right');const clip=data.hero.actions.idle;let time=elapsed%clip.duration,frame=clip.frames[0];for(const f of clip.frames){frame=f;if(time<f.duration)break;time-=f.duration}
+    ctx.drawImage(images.hero,frame.x,frame.y,...data.hero.frameSize,w*.22+g.left,groundY+g.top,g.width,g.height)}
+  window.interiorReview={ready:true,position,layout};
+}
+function tick(time){if(last){const dt=Math.min(100,time-last);elapsed+=dt;if(playing){position=(position+dt*.08)%12800;travel.value=position}}last=time;draw();frameRequest=requestAnimationFrame(tick)}
+document.getElementById('play').onclick=()=>{playing=!playing;document.getElementById('play').textContent=playing?'Pause travel':'Play travel'};
+travel.oninput=()=>{position=Number(travel.value);draw()};viewport.onchange=draw;
+document.addEventListener('visibilitychange',()=>{cancelAnimationFrame(frameRequest);last=0;if(!document.hidden)frameRequest=requestAnimationFrame(tick)});
+function gallery(){
+  for(const [id,p] of Object.entries(data.assets.props.props)){
+    const fig=document.createElement('figure'),c=document.createElement('canvas'),caption=document.createElement('figcaption');c.width=300;c.height=220;const g=c.getContext('2d');g.imageSmoothingEnabled=false;
+    const scale=140*p.height_scale/p.frame.height;g.fillStyle='#202629';g.fillRect(0,0,300,220);g.strokeStyle='#867753';g.beginPath();g.moveTo(0,194.5);g.lineTo(300,194.5);g.stroke();
+    g.drawImage(images.props,p.frame.x,p.frame.y,p.frame.width,p.frame.height,150-p.anchor[0]*scale,194-p.anchor[1]*scale,p.frame.width*scale,p.frame.height*scale);
+    caption.textContent=p.name;fig.append(c,caption);document.getElementById('decorations').append(fig);
+  }
+  for(const [key,texture] of Object.entries(data.textures))if(key!=='props'){
+    const fig=document.createElement('figure'),im=document.createElement('img'),caption=document.createElement('figcaption'),link=document.createElement('a');im.src=texture.url;im.alt=key;
+    link.href=texture.url;link.download=key+'.png';link.textContent=key+' · '+texture.size.join(' × ');caption.append(link);fig.append(im,caption);document.getElementById('textures').append(fig);
+  }
+}
+Promise.all(Object.entries({...Object.fromEntries(Object.entries(data.textures).map(([k,v])=>[k,v.url])),hero:data.heroImage}).map(([key,url])=>new Promise((resolve,reject)=>{
+  const im=new Image();im.onload=()=>{images[key]=im;resolve()};im.onerror=()=>reject(Error('Unable to decode '+key));im.src=url;
+}))).then(()=>{gallery();draw();frameRequest=requestAnimationFrame(tick)}).catch(e=>{document.getElementById('error').textContent=e.message});
+</script></html>
