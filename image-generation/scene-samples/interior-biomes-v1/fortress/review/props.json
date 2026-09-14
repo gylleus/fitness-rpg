@@ -4,19 +4,28 @@
   "image": "props.png",
   "size": [
     1024,
-    466
+    114
   ],
-  "sha256": "b9eff580d0228ec08de2d489faf8d203851609571fc8ab1a0d426d53ba952452",
+  "pixel_profile": {
+    "schema_version": 1,
+    "pixels_per_unit": 1.5,
+    "reference_height": 64,
+    "background_colors": 48,
+    "ground_colors": 32,
+    "prop_colors": 32
+  },
+  "sha256": "8ff04959363e6bb69590c99636f887dec5d3b4306d870cf1639e00888539e681",
   "padding": 2,
   "props": {
     "fortress_supply_barrel": {
       "name": "Iron-hooped wooden supply barrel",
       "anchor": [
-        91.5,
-        240
+        20.0,
+        53
       ],
       "height_scale": 0.55,
-      "pixels_sha256": "e1ac72f102ee04cdd60e9efed5973dc35e7eb850a277cb30f9058e5d5c2d74cd",
+      "pixels_per_unit": 1.5056818181818181,
+      "pixels_sha256": "2b2a0c7101a17d3f9f0b6b6563304870e168cb809a160b49b2c99a5362609758",
       "source": {
         "image": "image-generation/scene-samples/interior-biomes-v1/fortress/review/prop-recipe/../../prepared/fortress_decorations.png",
         "sha256": "c98976ac3fab056582ea66665772451e7f129aa319b2bd44b6b35adf475b49a1",
@@ -36,27 +45,28 @@
         "reduced_trim": [
           0,
           0,
-          183,
-          240
+          40,
+          53
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 99,
+        "x": 338,
         "y": 2,
-        "width": 183,
-        "height": 240
+        "width": 40,
+        "height": 53
       }
     },
     "fortress_supply_crates": {
       "name": "Two squat stacked military supply crates",
       "anchor": [
-        112.0,
-        240
+        29.0,
+        62
       ],
       "height_scale": 0.65,
-      "pixels_sha256": "1a074dc2c3865892a1f1185a973ef03a30ed36833769ceeaf4370c0fdb39b397",
+      "pixels_per_unit": 1.4903846153846154,
+      "pixels_sha256": "9e339a2f7f595ef30f11338ff6a14c9435acbb2fd0094b53452730c924053706",
       "source": {
         "image": "image-generation/scene-samples/interior-biomes-v1/fortress/review/prop-recipe/../../prepared/fortress_decorations.png",
         "sha256": "c98976ac3fab056582ea66665772451e7f129aa319b2bd44b6b35adf475b49a1",
@@ -76,27 +86,28 @@
         "reduced_trim": [
           0,
           0,
-          224,
-          240
+          58,
+          62
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 286,
+        "x": 276,
         "y": 2,
-        "width": 224,
-        "height": 240
+        "width": 58,
+        "height": 62
       }
     },
     "fortress_weapon_rack": {
       "name": "Grounded wooden rack with a spear, axe and sword",
       "anchor": [
-        93.5,
-        240
+        37.5,
+        95
       ],
       "height_scale": 1.0,
-      "pixels_sha256": "490e083776cd9b39913be31d69db69f640da86427bb1edf91fa6b4e04c2b2994",
+      "pixels_per_unit": 1.484375,
+      "pixels_sha256": "81ff7439268339163024972b73ea4874140309fd9d62c231dd7604517d32ef57",
       "source": {
         "image": "image-generation/scene-samples/interior-biomes-v1/fortress/review/prop-recipe/../../prepared/fortress_decorations.png",
         "sha256": "c98976ac3fab056582ea66665772451e7f129aa319b2bd44b6b35adf475b49a1",
@@ -115,28 +126,29 @@
         ],
         "reduced_trim": [
           0,
-          0,
-          187,
-          240
+          1,
+          75,
+          96
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 514,
+        "x": 49,
         "y": 2,
-        "width": 187,
-        "height": 240
+        "width": 75,
+        "height": 95
       }
     },
     "fortress_shield_stand": {
       "name": "Wooden stand carrying two battered unmarked shields",
       "anchor": [
-        120.0,
-        218
+        45.0,
+        82
       ],
       "height_scale": 0.85,
-      "pixels_sha256": "dd34a704a8adeb84b790897e747847cdfb0b1c17c56d7f5115ee85dd4e497e8e",
+      "pixels_per_unit": 1.5073529411764706,
+      "pixels_sha256": "4fc22327cc03a359aa98f8991db9b521c2f129bd7c737862f614abf2acf60620",
       "source": {
         "image": "image-generation/scene-samples/interior-biomes-v1/fortress/review/prop-recipe/../../prepared/fortress_decorations.png",
         "sha256": "c98976ac3fab056582ea66665772451e7f129aa319b2bd44b6b35adf475b49a1",
@@ -156,27 +168,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          218
+          90,
+          82
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 2,
-        "y": 246,
-        "width": 240,
-        "height": 218
+        "x": 182,
+        "y": 2,
+        "width": 90,
+        "height": 82
       }
     },
     "fortress_standing_brazier": {
       "name": "Heavy standing iron brazier with subdued glowing coals",
       "anchor": [
-        70.0,
-        239
+        25.0,
+        85
       ],
       "height_scale": 0.9,
-      "pixels_sha256": "25f03c15b6b0e27e030b74a678b9e4ec1269d99707ee47072b2858c52c58ac96",
+      "pixels_per_unit": 1.4756944444444444,
+      "pixels_sha256": "fb2bf51cb0df6be9ea1941e1c1e6d87ba117cb0657eea9bdf82224c8d6b9e61e",
       "source": {
         "image": "image-generation/scene-samples/interior-biomes-v1/fortress/review/prop-recipe/../../prepared/fortress_decorations.png",
         "sha256": "c98976ac3fab056582ea66665772451e7f129aa319b2bd44b6b35adf475b49a1",
@@ -196,27 +209,28 @@
         "reduced_trim": [
           0,
           1,
-          140,
-          240
+          50,
+          86
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 705,
+        "x": 128,
         "y": 2,
-        "width": 140,
-        "height": 239
+        "width": 50,
+        "height": 85
       }
     },
     "fortress_masonry_rubble": {
       "name": "Low pile of broken dressed stone and mortar",
       "anchor": [
-        120.0,
-        162
+        28.5,
+        38
       ],
       "height_scale": 0.4,
-      "pixels_sha256": "07e5ecbe76fd70866c9946914719616f78733cd267870cecef1fe08f111178ca",
+      "pixels_per_unit": 1.484375,
+      "pixels_sha256": "9093b9587e92b75d38baa092f113f274489c1993d243bd2e168a364263984d6f",
       "source": {
         "image": "image-generation/scene-samples/interior-biomes-v1/fortress/review/prop-recipe/../../prepared/fortress_decorations.png",
         "sha256": "c98976ac3fab056582ea66665772451e7f129aa319b2bd44b6b35adf475b49a1",
@@ -236,27 +250,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          162
+          57,
+          38
         ],
         "removed_detached_pixels": 4,
         "components": 2
       },
       "frame": {
-        "x": 246,
-        "y": 246,
-        "width": 240,
-        "height": 162
+        "x": 466,
+        "y": 2,
+        "width": 57,
+        "height": 38
       }
     },
     "fortress_strongbox": {
       "name": "Closed military strongbox with iron straps",
       "anchor": [
-        120.0,
-        144
+        40.0,
+        48
       ],
       "height_scale": 0.5,
-      "pixels_sha256": "32061be5cba31f42d5c85eae7bd602f6e8752c7af2b3d905c206ea3734ab260f",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "ceaf1d0f6004a2c061951888a8bbd57300983e1df689c04e50af28651005d2ac",
       "source": {
         "image": "image-generation/scene-samples/interior-biomes-v1/fortress/review/prop-recipe/../../prepared/fortress_decorations.png",
         "sha256": "c98976ac3fab056582ea66665772451e7f129aa319b2bd44b6b35adf475b49a1",
@@ -276,27 +291,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          144
+          80,
+          48
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 490,
-        "y": 246,
-        "width": 240,
-        "height": 144
+        "x": 382,
+        "y": 2,
+        "width": 80,
+        "height": 48
       }
     },
     "fortress_banner_stand": {
       "name": "Short freestanding banner pole on a heavy base with a plain faded burgundy pennant, no emblem",
       "anchor": [
-        46.5,
-        240
+        21.5,
+        110
       ],
       "height_scale": 1.15,
-      "pixels_sha256": "7b6f4ba0f2867d3c4de91f4d2055b01c186fc805360fa90f3da1004436cc3525",
+      "pixels_per_unit": 1.4945652173913044,
+      "pixels_sha256": "f55e762297fad690c67d16b41c16b7d778d50f3b85f4ffe5a7d9c939a6a91035",
       "source": {
         "image": "image-generation/scene-samples/interior-biomes-v1/fortress/review/prop-recipe/../../prepared/fortress_decorations.png",
         "sha256": "c98976ac3fab056582ea66665772451e7f129aa319b2bd44b6b35adf475b49a1",
@@ -316,8 +332,8 @@
         "reduced_trim": [
           0,
           0,
-          93,
-          240
+          43,
+          110
         ],
         "removed_detached_pixels": 1,
         "components": 1
@@ -325,8 +341,8 @@
       "frame": {
         "x": 2,
         "y": 2,
-        "width": 93,
-        "height": 240
+        "width": 43,
+        "height": 110
       }
     }
   }

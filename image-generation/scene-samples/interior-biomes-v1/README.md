@@ -22,15 +22,16 @@ prop atlas and a portable HTML file with all images and scripts embedded.
 The existing knight is included only as a scale reference. The four sets now
 also supply runtime scenery: Embercrypt travels from lava caves into crypts,
 and Frostbound Keep travels from frost caves into the fortress. Their existing
-enemy rosters and chapter progression are preserved. The standalone HTMLs remain
-the original art reviews; the game uses the installed runtime textures and the
-same shared interior geometry.
+enemy rosters and chapter progression are preserved. The standalone HTMLs and
+assembled review textures now match the installed runtime's actor pixel profile.
+The original high-resolution sources and saved generation plans are unchanged.
 
-Background texture pixels are independent of world scale: depth and wall retain
-1672×941 source images on 640×360 logical canvases; ceilings retain 2048×768 pixels
-on a 640×240 logical canvas. Source floors are 2048×768 (lava: 2046×768) and use
-the common 256×96 ground export with measured contact. Each 1774×887 decoration
-sheet becomes an atlas of eight trimmed cutouts with a maximum edge of 240px.
+The shared actor pixel profile exports depth and wall at 960×540 pixels on
+640×360 logical canvases, and ceilings at 960×360 on a 640×240 canvas. Floors
+export to 384×144 on a 256×96 canvas with measured contact. Each decoration
+exports at approximately 96 × height_scale visible pixels tall. This gives every
+scenery category 1.5 pixels per game unit. Layer palettes use at most 48 colors;
+floors and individual props use 32, without dithering.
 Ceiling undersides are measured from alpha and stay at 104 logical units above
 the floor for a 64-unit reference actor. Layer speeds are 0.10, 0.32 and 0.68.
 
@@ -58,14 +59,28 @@ Substitute the other IDs as needed. For crypts, also pass
 `--regions image-generation/scene-samples/interior-biomes-v1/crypts/regions.json`
 to the assembly command. Saved source preparation and packing are deterministic;
 rebuilding HTML embeds the current repository's player sprite and layout code.
-The index thumbnails are actual Canvas2D scene captures from browser validation.
+Saved v1 plans retain their original background export policy. After replaying
+them, apply the current profile with `uv run biome-assets reexport --biome ID`,
+then use `--out image-generation/scene-samples/interior-biomes-v1/ID/review` to
+refresh the assembled review textures as well. Build a review directly from the
+installed art with:
 
-Validation: 18 biome pipeline tests, six prop packer tests, source/export hash and
+```sh
+node scripts/build-interior-review.cjs assets/biomes/frost_caves image-generation/scene-samples/interior-biomes-v1/frost_caves/review/review.html
+```
+
+The index thumbnails are actual Canvas2D scene captures from browser validation.
+The [six-biome pixel scale comparison](pixel-scale-comparison.html) embeds before
+and after captures from the production Skia renderer.
+
+Validation: 24 biome pipeline tests, six prop packer tests, source/export hash and
 alpha checks for all four assemblies, and browser checks for four offline HTMLs.
 The browser audit exercises 12 viewport combinations, all 20 scenery toggles,
 travel scrubbing/playback, 32 decoration cards, mobile overflow and zero external
 network requests or browser exceptions. Results are in [browser-audit.json](browser-audit.json).
-The landscape and portrait scenes were also visually inspected.
+The landscape and portrait scenes were also visually inspected. Native checks
+passed 223 production Skia renders, 96 exact prop crops with density and palette
+budgets, and 224 actor poses below the roofs. Scene logic and UI checks passed.
 
 To repeat browser checks, start a local Chrome with remote debugging enabled
 (for example, `--headless --remote-debugging-port=9223` and a separate

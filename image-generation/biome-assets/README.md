@@ -149,6 +149,10 @@ sizes, a decoration gallery and downloadable textures. Its Canvas2D renderer use
 the production interior layout, scenery placement and sprite geometry; native
 Skia rendering still needs its own checks when integrating a new playable biome.
 Run `node scripts/build-interior-review.cjs PATH/review` to rebuild just the HTML.
+Pass a second path to save the HTML elsewhere, including when building directly
+from `assets/biomes/LOCATION`. For a before/after review of actual Skia captures,
+run `node scripts/build-scene-comparison.cjs BEFORE_AUDIT AFTER_AUDIT OUT.html`.
+[review-scenes.json](review-scenes.json) selects the representative scenes.
 
 The [four generated examples](../scene-samples/interior-biomes-v1/index.html)
 retain all 20 original images, exact prompts, export manifests and reviewed
