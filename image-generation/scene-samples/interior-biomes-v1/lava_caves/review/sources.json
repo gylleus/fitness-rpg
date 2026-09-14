@@ -1,0 +1,93 @@
+{
+  "depth": {
+    "id": "lava_caves_depth",
+    "source": "image-generation/scene-samples/interior-biomes-v1/lava_caves/sources/lava_caves_depth.png",
+    "source_sha256": "f3a0283a3d5c50280d3355fbcaf072ba0555414bd61da76d3c3108f424d523bc",
+    "sha256": "3e673d224181def2531421fad2e89196444f2a3e8c730364fbf2abc0d0ce3dc5",
+    "size": [
+      1672,
+      941
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "0b8d83d17bf4b214e90986e91936638e0f58f6f85ec3886304c542a5fe47aefc",
+    "export": {
+      "resolution": "source",
+      "min_width": 1536,
+      "sampling": "nearest",
+      "colors": "source",
+      "alpha": "opaque"
+    }
+  },
+  "wall": {
+    "id": "lava_caves_wall",
+    "source": "image-generation/scene-samples/interior-biomes-v1/lava_caves/sources/lava_caves_wall.png",
+    "source_sha256": "2c28b462f27ebbb529a18782c7998020fc8ec16161733a4e6f8e2c70ada16f71",
+    "sha256": "3b41da04c61f437c55fa76c1af305eab5ddaaf522cb19638a3c31859350ec856",
+    "size": [
+      1672,
+      941
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "ffc9e5500eaaa41f372dff09f37e3108e39820f755d4380c188ace59844446e0",
+    "export": {
+      "resolution": "source",
+      "min_width": 1536,
+      "sampling": "nearest",
+      "colors": "source",
+      "alpha": "binary"
+    }
+  },
+  "roof": {
+    "id": "lava_caves_roof",
+    "source": "image-generation/scene-samples/interior-biomes-v1/lava_caves/sources/lava_caves_roof.png",
+    "source_sha256": "8d10022975232ede7fbb3174762edbade3581895f20d51a1d650667d7e1aa60b",
+    "sha256": "3b3d8e43f1b73eedc1defa797d27daf3b35be47e00c81cb028a9958fe4a550bd",
+    "size": [
+      2048,
+      768
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "f22f715bfb9cacba99b9c035eef6acc8790b080c30039b72ef62d3d9c12ee08f",
+    "export": {
+      "resolution": "source",
+      "min_width": 1536,
+      "sampling": "nearest",
+      "colors": "source",
+      "alpha": "binary"
+    }
+  },
+  "ground": {
+    "id": "lava_caves_ground",
+    "source": "image-generation/scene-samples/interior-biomes-v1/lava_caves/sources/lava_caves_ground.png",
+    "source_sha256": "cbe6c21460bc9e9ab02f58a59a359137dac5c3c4dd7d6ec01add971b84d62f2f",
+    "sha256": "2e62d7311b099151d6fd90e70166fbd8cdaea0e7b4e52fdecebecaeaf5d657bd",
+    "size": [
+      256,
+      96
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "f14e0b276aba6dcd3ce59594a29d7dc2fdd6e525cd4b69855cae43432e3fb814",
+    "export": {
+      "resolution": "logical",
+      "sampling": "nearest",
+      "colors": "source",
+      "alpha": "binary"
+    },
+    "canvas": [
+      256,
+      96
+    ],
+    "surface_y": 59.0
+  },
+  "props": {
+    "id": "lava_caves_prop_atlas",
+    "source": "image-generation/scene-samples/interior-biomes-v1/lava_caves/review/prop-recipe/recipe.json",
+    "source_sha256": "d1b01c5b6d0bf3670e23272e762927a05df738bae5ee0a2b3c0cb97ae1999d4f",
+    "sha256": "11262e3e1085d1de8326ee529907f0ae048b653391a4b59c801242522173218b",
+    "size": [
+      1024,
+      433
+    ],
+    "backend": "built-in imagegen; trimmed nearest cutouts in one atlas"
+  }
+}

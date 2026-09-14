@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "canvas": [
+    640,
+    360
+  ],
+  "reference_height": 64,
+  "ground_y": 288,
+  "ceiling_clearance": 104,
+  "fill": "#171e25",
+  "layers": [
+    {
+      "id": "depth",
+      "role": "rear",
+      "canvas": [
+        640,
+        360
+      ],
+      "parallax": 0.1,
+      "origin_y": 288,
+      "asset_id": "fortress_depth",
+      "repeat": "mirror",
+      "image": "depth"
+    },
+    {
+      "id": "wall",
+      "role": "rear",
+      "canvas": [
+        640,
+        360
+      ],
+      "parallax": 0.32,
+      "origin_y": 288,
+      "asset_id": "fortress_wall",
+      "repeat": "mirror",
+      "image": "wall"
+    },
+    {
+      "id": "roof",
+      "role": "ceiling",
+      "canvas": [
+        640,
+        240
+      ],
+      "parallax": 0.68,
+      "origin_y": 152.1875,
+      "asset_id": "fortress_roof",
+      "repeat": "mirror",
+      "cap_y": 0.0,
+      "image": "roof"
+    }
+  ]
+}

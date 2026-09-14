@@ -1,0 +1,308 @@
+{
+  "schema_version": 1,
+  "biome_id": "fortress",
+  "theme": "castle",
+  "interior": {
+    "schema_version": 1,
+    "canvas": [
+      640,
+      360
+    ],
+    "reference_height": 64,
+    "ground_y": 288,
+    "ceiling_clearance": 104,
+    "fill": "#171e25",
+    "layers": [
+      {
+        "id": "depth",
+        "role": "rear",
+        "canvas": [
+          640,
+          360
+        ],
+        "parallax": 0.1,
+        "origin_y": 288,
+        "asset_id": "fortress_depth",
+        "repeat": "mirror"
+      },
+      {
+        "id": "wall",
+        "role": "rear",
+        "canvas": [
+          640,
+          360
+        ],
+        "parallax": 0.32,
+        "origin_y": 288,
+        "asset_id": "fortress_wall",
+        "repeat": "mirror"
+      },
+      {
+        "id": "roof",
+        "role": "ceiling",
+        "canvas": [
+          640,
+          240
+        ],
+        "parallax": 0.68,
+        "origin_y": "alpha_bottom",
+        "asset_id": "fortress_roof",
+        "repeat": "mirror"
+      }
+    ]
+  },
+  "style": {
+    "schema_version": 1,
+    "id": "readable-dark-fantasy-v2",
+    "style": "Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks.",
+    "background": "Refined material edges and deliberate fine pixel clusters at the Wetlands texture density. Keep local contrast restrained behind actors; distant layers use a narrower value range. Preserve full texture resolution independently of the logical layout. Do not enlarge a coarse pixel grid to create quiet scenery.",
+    "prop": "Medium detail concentrated at the outer silhouette and a few identifying features. Keep interior shading grouped. Show one complete isolated object with a clear support contact.",
+    "enemy": "Highest silhouette clarity and controlled contrast in the scene. Consistent body proportions and equipment across poses, deliberate grouped shading, no fine stippled texture. Strict left-facing side profile.",
+    "ground": "A readable continuous walking lip with sparse low-contrast material marks. Keep the surface level and separate from scenery and actors.",
+    "avoid": [
+      "photorealism",
+      "intricate microtexture",
+      "dense cracks or hatching",
+      "single-pixel speckle",
+      "dithering",
+      "dramatic spotlights",
+      "bloom",
+      "soft airbrushed edges",
+      "text",
+      "watermarks",
+      "UI",
+      "painted checkerboard",
+      "isometric or overhead view",
+      "a road receding to a vanishing point"
+    ],
+    "walk": "Six ordered poses of an anatomy-appropriate walk in place: ready contact, weight shift, passing pose, opposite contact, opposite weight shift, return toward the starting contact. No horizontal travel across cells.",
+    "death": "Six ordered poses: recoil, loss of support, falling, floor contact, settling, fully inert corpse resting on its actual support. The last pose stays down."
+  },
+  "style_sha256": "f0df349515fe85db8cd5b3c41f4e1b328a0788be113de6e6050de778d50a7682",
+  "recipe": {
+    "text": "schema_version = 1\n\n[scene]\ncanvas = [640, 360]\nreference_height = 64\nground_y = 288\nceiling_clearance = 104\nfill = \"#171e25\"\n\n[[layers]]\nid = \"depth\"\nrole = \"rear\"\ncanvas = [640, 360]\nparallax = 0.10\ntransparent = false\norigin_y = 288\nprompt = \"Opaque distant recess layer only. A close horizontal band of dark shallow recesses in an enclosed passage, interrupted by dim silhouettes of distant supports. Subtle atmospheric depth and a narrow value range. No enormous chamber, vertical abyss, soaring pillars or receding corridor. No foreground ceiling, floor, nearby wall piers, props or characters. Fill the entire image; any visible recess has an enclosed back.\"\n\n[[layers]]\nid = \"wall\"\nrole = \"rear\"\ncanvas = [640, 360]\nparallax = 0.32\ntransparent = true\norigin_y = 288\nprompt = \"Separate nearer rear-wall layer on genuine transparency. Three irregularly spaced substantial wall piers with low connecting masonry or rock shelves, leaving broad transparent gaps between them to reveal the independently supplied recess layer. Wall piers extend down to logical row 288 of 360 and stay flush to the rear wall. The central action band has subdued material shading. Keep the upper third mostly transparent: the overhead ceiling is a separate asset. No horizon, sky, deep vista, freestanding props or floor strip. No painted dark backdrop in the gaps.\"\n\n[[layers]]\nid = \"roof\"\nrole = \"ceiling\"\ncanvas = [640, 240]\nparallax = 0.68\ntransparent = true\norigin_y = \"alpha_bottom\"\nprompt = \"A continuous heavy low overhead ceiling strip seen strictly from the side. WIDE 8:3 image, intended 2048 by 768 or equivalent. Solid material occupies the entire upper edge and roughly the upper two thirds, ending in an irregular but mostly horizontal underside with a few short downward projections. All material is physically connected to the top; the lower third is genuinely transparent empty air. A narrow dark nearly uniform top band blends into the solid ceiling fill. Compatible left and right edges for horizontal mirror repetition. No floor, columns reaching the bottom, detached rocks, characters, sky, windows, complete cavern or wall backdrop. This is a close tunnel roof cutout, not an entire scene.\"\n\n[themes.limestone_tunnel]\nname = \"Low earthy limestone cave\"\nmaterials = \"An ordinary compact underground cave of warm brown limestone, weathered earthen rock, subdued tan sediment bands and dusty cracks. Broad irregular rounded rock masses and shallow ledges, with occasional old brown timber. Natural rock buttresses rather than brick columns or arches. Ceiling: a heavy low gently uneven brown rock shelf; mostly blunt rounded underside, no hanging needles or icicle teeth. No stalagmite forest, dense stalactites, crystals, blue mineral crusts or dramatic fantasy formations.\"\npalette = \"Earth brown #554334, umber #382a21, warm charcoal #211b16, dusty warm gray #7d7060, muted tan #95816a and dark old timber #493727. No blue, cyan, teal or purple cast.\"\nlighting = \"Dim neutral-to-warm reflected light with soft brown shadows and restrained highlights. A typical earthy underground passage, neither icy nor orange-glowing.\"\n[themes.limestone_tunnel.scene]\nfill = \"#211b16\"\n\n[themes.frost_cave]\nname = \"Narrow frost cave\"\nmaterials = \"Compact glacial tunnel enclosed by layered opaque blue ice and dark frozen stone. Readable ice fractures and trapped cloudy bands. Ceiling: a low solid ice shelf with short attached icicles, compressed snow seams and no view of an open sky.\"\npalette = \"Desaturated steel blue, slate, dark indigo and restrained cloudy ice blue; sparse pale cyan edge accents.\"\nlighting = \"Muted diffuse blue light carried through cloudy ice, dark seams and no sparkling bloom.\"\n\n[themes.volcano_tunnel]\nname = \"Confined volcanic tunnel\"\nmaterials = \"A cramped horizontal lava tube of dark layered basalt and cooled lava folds. Sparse narrow ember seams. Ceiling: heavy basalt shelves with short attached lava drips and thick cooled crust; no vast caldera or magma lake.\"\npalette = \"Charcoal basalt, muted brown-black, ash gray and sparse dark burnt-orange seams.\"\nlighting = \"Dim reflected amber from sparse narrow seams below, with cool charcoal shadow and no glowing haze.\"\n\n[themes.crypt]\nname = \"Low vaulted crypt\"\nmaterials = \"A confined burial passage of weathered dressed stone, closed wall niches and worn mortar. Ceiling: a low shallow barrel vault with broad voussoir stones, occasional cracked mortar and attached stone ribs. No cathedral-height space or freestanding tombs baked into the background.\"\npalette = \"Muted blue-gray stone, old beige mortar, dark olive stains and deep cool shadow.\"\nlighting = \"Restrained indirect cool light on stone edges; niche interiors remain dim, with no luminous symbols.\"\n\n[themes.castle]\nname = \"Enclosed castle passage\"\nmaterials = \"A close medieval castle service passage with substantial dressed-stone wall piers and small shuttered recesses. Ceiling: low heavy timber crossbeams under a continuous stone-and-plaster roof, restrained grain and chipped plaster. No throne hall, outdoor battlements or soaring atrium.\"\npalette = \"Desaturated warm-gray masonry, cool charcoal shadows, weathered brown beams and muted ochre plaster.\"\nlighting = \"Soft indirect warm-gray light with shallow beam shadows; no brilliant windows or shafts of sunlight.\"\n",
+    "sha256": "3fb258fd050604818581357524f31d9f2d60ae2807f0862932e872fcfd6ae6a3"
+  },
+  "assets": [
+    {
+      "id": "fortress_depth",
+      "name": "Enclosed castle passage \u2014 depth",
+      "kind": "background",
+      "canvas": [
+        640,
+        360
+      ],
+      "transparent": false,
+      "prompt": "Use case: stylized-concept\nAsset type: independently scrolling depth layer for a claustrophobic side-scrolling game interior\nPrimary request: Enclosed castle passage\nMaterials: A close medieval castle service passage with substantial dressed-stone wall piers and small shuttered recesses. Ceiling: low heavy timber crossbeams under a continuous stone-and-plaster roof, restrained grain and chipped plaster. No throne hall, outdoor battlements or soaring atrium.\nComposition: Opaque distant recess layer only. A close horizontal band of dark shallow recesses in an enclosed passage, interrupted by dim silhouettes of distant supports. Subtle atmospheric depth and a narrow value range. No enormous chamber, vertical abyss, soaring pillars or receding corridor. No foreground ceiling, floor, nearby wall piers, props or characters. Fill the entire image; any visible recess has an enclosed back.\nCamera: strict orthographic side view along a horizontal tunnel, parallel to the image plane. The passage continues sideways off both edges.\nStyle/medium: Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks. Refined material edges and deliberate fine pixel clusters at the Wetlands texture density. Keep local contrast restrained behind actors; distant layers use a narrower value range. Preserve full texture resolution independently of the logical layout. Do not enlarge a coarse pixel grid to create quiet scenery.\nColor palette: Desaturated warm-gray masonry, cool charcoal shadows, weathered brown beams and muted ochre plaster.\nLighting: Soft indirect warm-gray light with shallow beam shadows; no brilliant windows or shafts of sunlight.\nCanvas: 640 by 360 logical units; generate a large image with width at least 1536 pixels and this aspect ratio.\nOpacity: completely opaque edge-to-edge image.\nIf a reference image is supplied, use it for pixel texture density and restrained shading only; keep the requested indoor subject and enclosed composition.\nAvoid: photorealism, intricate microtexture, dense cracks or hatching, single-pixel speckle, dithering, dramatic spotlights, bloom, soft airbrushed edges, text, watermarks, UI, painted checkerboard, isometric or overhead view, a road receding to a vanishing point, tiny-resolution upscaling, flat featureless polygons, harsh white highlights, vast cave expanses, soaring ceilings, long vanishing-point corridors, characters",
+      "prompt_sha256": "aa0090672ae01ab44f55995f5119f25b07c39c8f10e7735d5dc3ab124eca50ec",
+      "source_definition": {
+        "visual_description": "A close medieval castle service passage with substantial dressed-stone wall piers and small shuttered recesses. Ceiling: low heavy timber crossbeams under a continuous stone-and-plaster roof, restrained grain and chipped plaster. No throne hall, outdoor battlements or soaring atrium.",
+        "layer": {
+          "id": "depth",
+          "role": "rear",
+          "canvas": [
+            640,
+            360
+          ],
+          "parallax": 0.1,
+          "transparent": false,
+          "origin_y": 288,
+          "prompt": "Opaque distant recess layer only. A close horizontal band of dark shallow recesses in an enclosed passage, interrupted by dim silhouettes of distant supports. Subtle atmospheric depth and a narrow value range. No enormous chamber, vertical abyss, soaring pillars or receding corridor. No foreground ceiling, floor, nearby wall piers, props or characters. Fill the entire image; any visible recess has an enclosed back."
+        }
+      },
+      "export": {
+        "resolution": "source",
+        "min_width": 1536,
+        "sampling": "nearest",
+        "colors": "source",
+        "alpha": "opaque"
+      }
+    },
+    {
+      "id": "fortress_wall",
+      "name": "Enclosed castle passage \u2014 wall",
+      "kind": "background",
+      "canvas": [
+        640,
+        360
+      ],
+      "transparent": true,
+      "prompt": "Use case: stylized-concept\nAsset type: independently scrolling wall layer for a claustrophobic side-scrolling game interior\nPrimary request: Enclosed castle passage\nMaterials: A close medieval castle service passage with substantial dressed-stone wall piers and small shuttered recesses. Ceiling: low heavy timber crossbeams under a continuous stone-and-plaster roof, restrained grain and chipped plaster. No throne hall, outdoor battlements or soaring atrium.\nComposition: Separate nearer rear-wall layer on genuine transparency. Three irregularly spaced substantial wall piers with low connecting masonry or rock shelves, leaving broad transparent gaps between them to reveal the independently supplied recess layer. Wall piers extend down to logical row 288 of 360 and stay flush to the rear wall. The central action band has subdued material shading. Keep the upper third mostly transparent: the overhead ceiling is a separate asset. No horizon, sky, deep vista, freestanding props or floor strip. No painted dark backdrop in the gaps.\nCamera: strict orthographic side view along a horizontal tunnel, parallel to the image plane. The passage continues sideways off both edges.\nStyle/medium: Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks. Refined material edges and deliberate fine pixel clusters at the Wetlands texture density. Keep local contrast restrained behind actors; distant layers use a narrower value range. Preserve full texture resolution independently of the logical layout. Do not enlarge a coarse pixel grid to create quiet scenery.\nColor palette: Desaturated warm-gray masonry, cool charcoal shadows, weathered brown beams and muted ochre plaster.\nLighting: Soft indirect warm-gray light with shallow beam shadows; no brilliant windows or shafts of sunlight.\nCanvas: 640 by 360 logical units; generate a large image with width at least 1536 pixels and this aspect ratio.\nTransparency: genuine alpha in all empty areas; never paint checkerboard or a colored matte.\nIf a reference image is supplied, use it for pixel texture density and restrained shading only; keep the requested indoor subject and enclosed composition.\nAvoid: photorealism, intricate microtexture, dense cracks or hatching, single-pixel speckle, dithering, dramatic spotlights, bloom, soft airbrushed edges, text, watermarks, UI, painted checkerboard, isometric or overhead view, a road receding to a vanishing point, tiny-resolution upscaling, flat featureless polygons, harsh white highlights, vast cave expanses, soaring ceilings, long vanishing-point corridors, characters",
+      "prompt_sha256": "7ab752f35c391b4e753a2978ff1325aeb1a62d0884001485cb93ec37177b54ee",
+      "source_definition": {
+        "visual_description": "A close medieval castle service passage with substantial dressed-stone wall piers and small shuttered recesses. Ceiling: low heavy timber crossbeams under a continuous stone-and-plaster roof, restrained grain and chipped plaster. No throne hall, outdoor battlements or soaring atrium.",
+        "layer": {
+          "id": "wall",
+          "role": "rear",
+          "canvas": [
+            640,
+            360
+          ],
+          "parallax": 0.32,
+          "transparent": true,
+          "origin_y": 288,
+          "prompt": "Separate nearer rear-wall layer on genuine transparency. Three irregularly spaced substantial wall piers with low connecting masonry or rock shelves, leaving broad transparent gaps between them to reveal the independently supplied recess layer. Wall piers extend down to logical row 288 of 360 and stay flush to the rear wall. The central action band has subdued material shading. Keep the upper third mostly transparent: the overhead ceiling is a separate asset. No horizon, sky, deep vista, freestanding props or floor strip. No painted dark backdrop in the gaps."
+        }
+      },
+      "export": {
+        "resolution": "source",
+        "min_width": 1536,
+        "sampling": "nearest",
+        "colors": "source",
+        "alpha": "binary"
+      }
+    },
+    {
+      "id": "fortress_roof",
+      "name": "Enclosed castle passage \u2014 roof",
+      "kind": "background",
+      "canvas": [
+        640,
+        240
+      ],
+      "transparent": true,
+      "prompt": "Use case: stylized-concept\nAsset type: independently scrolling roof layer for a claustrophobic side-scrolling game interior\nPrimary request: Enclosed castle passage\nMaterials: A close medieval castle service passage with substantial dressed-stone wall piers and small shuttered recesses. Ceiling: low heavy timber crossbeams under a continuous stone-and-plaster roof, restrained grain and chipped plaster. No throne hall, outdoor battlements or soaring atrium.\nComposition: A continuous heavy low overhead ceiling strip seen strictly from the side. WIDE 8:3 image, intended 2048 by 768 or equivalent. Solid material occupies the entire upper edge and roughly the upper two thirds, ending in an irregular but mostly horizontal underside with a few short downward projections. All material is physically connected to the top; the lower third is genuinely transparent empty air. A narrow dark nearly uniform top band blends into the solid ceiling fill. Compatible left and right edges for horizontal mirror repetition. No floor, columns reaching the bottom, detached rocks, characters, sky, windows, complete cavern or wall backdrop. This is a close tunnel roof cutout, not an entire scene.\nCamera: strict orthographic side view along a horizontal tunnel, parallel to the image plane. The passage continues sideways off both edges.\nStyle/medium: Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks. Refined material edges and deliberate fine pixel clusters at the Wetlands texture density. Keep local contrast restrained behind actors; distant layers use a narrower value range. Preserve full texture resolution independently of the logical layout. Do not enlarge a coarse pixel grid to create quiet scenery.\nColor palette: Desaturated warm-gray masonry, cool charcoal shadows, weathered brown beams and muted ochre plaster.\nLighting: Soft indirect warm-gray light with shallow beam shadows; no brilliant windows or shafts of sunlight.\nCanvas: 640 by 240 logical units; generate a large image with width at least 1536 pixels and this aspect ratio.\nTransparency: genuine alpha in all empty areas; never paint checkerboard or a colored matte.\nIf a reference image is supplied, use it for pixel texture density and restrained shading only; keep the requested indoor subject and enclosed composition.\nAvoid: photorealism, intricate microtexture, dense cracks or hatching, single-pixel speckle, dithering, dramatic spotlights, bloom, soft airbrushed edges, text, watermarks, UI, painted checkerboard, isometric or overhead view, a road receding to a vanishing point, tiny-resolution upscaling, flat featureless polygons, harsh white highlights, vast cave expanses, soaring ceilings, long vanishing-point corridors, characters",
+      "prompt_sha256": "e42c2cc0c1a2bc29c90b6987225227c86f861e1ff5249e1dc938a96567aa2c11",
+      "source_definition": {
+        "visual_description": "A close medieval castle service passage with substantial dressed-stone wall piers and small shuttered recesses. Ceiling: low heavy timber crossbeams under a continuous stone-and-plaster roof, restrained grain and chipped plaster. No throne hall, outdoor battlements or soaring atrium.",
+        "layer": {
+          "id": "roof",
+          "role": "ceiling",
+          "canvas": [
+            640,
+            240
+          ],
+          "parallax": 0.68,
+          "transparent": true,
+          "origin_y": "alpha_bottom",
+          "prompt": "A continuous heavy low overhead ceiling strip seen strictly from the side. WIDE 8:3 image, intended 2048 by 768 or equivalent. Solid material occupies the entire upper edge and roughly the upper two thirds, ending in an irregular but mostly horizontal underside with a few short downward projections. All material is physically connected to the top; the lower third is genuinely transparent empty air. A narrow dark nearly uniform top band blends into the solid ceiling fill. Compatible left and right edges for horizontal mirror repetition. No floor, columns reaching the bottom, detached rocks, characters, sky, windows, complete cavern or wall backdrop. This is a close tunnel roof cutout, not an entire scene."
+        }
+      },
+      "export": {
+        "resolution": "source",
+        "min_width": 1536,
+        "sampling": "nearest",
+        "colors": "source",
+        "alpha": "binary"
+      }
+    },
+    {
+      "id": "fortress_ground",
+      "name": "ground",
+      "kind": "ground",
+      "canvas": [
+        256,
+        96
+      ],
+      "transparent": true,
+      "prompt": "Use case: stylized-concept\nAsset type: isolated walking floor strip for Enclosed castle passage\nSubject: A level fortress corridor floor of broad worn warm-gray flagstones, with dark stone blocks below its walking lip. Restrained mortar and dust, no steps or battlements.\nStyle: Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks. Refined material edges and deliberate fine pixel clusters at the Wetlands texture density. Keep local contrast restrained behind actors; distant layers use a narrower value range. Preserve full texture resolution independently of the logical layout. Do not enlarge a coarse pixel grid to create quiet scenery.\nPalette: Desaturated warm-gray masonry, cool charcoal shadows, weathered brown beams and muted ochre plaster.\nLighting: Soft indirect warm-gray light with shallow beam shadows; no brilliant windows or shafts of sunlight.\nStrict orthographic side view. Wide 8:3 image, 2048 by 768 pixels, logical canvas 256 by 96. A continuous level walking lip at one quarter of the image height. Opaque earth or masonry fills everything below it through the bottom edge; genuine alpha transparency above. Compatible left and right edges for mirror repetition.\nNo props, characters, roof, receding perspective, checkerboard, matte, text, floating objects or floor gaps.",
+      "prompt_sha256": "4d4dd768a59d760509b9571a58a21753be3ea98d7c37f04dc59ed00d590ac798",
+      "export": {
+        "resolution": "logical",
+        "sampling": "nearest",
+        "colors": "source",
+        "alpha": "binary"
+      }
+    },
+    {
+      "id": "fortress_decorations",
+      "name": "decorations",
+      "kind": "prop_sheet",
+      "canvas": [
+        2048,
+        1024
+      ],
+      "transparent": true,
+      "prompt": "Use case: stylized-concept\nAsset type: eight separate decoration cutouts for Enclosed castle passage\nStyle: Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks. Refined material edges and deliberate fine pixel clusters at the Wetlands texture density. Keep local contrast restrained behind actors; distant layers use a narrower value range. Preserve full texture resolution independently of the logical layout. Do not enlarge a coarse pixel grid to create quiet scenery.\nPalette: Desaturated warm-gray masonry, cool charcoal shadows, weathered brown beams and muted ochre plaster.\nLighting: Soft indirect warm-gray light with shallow beam shadows; no brilliant windows or shafts of sunlight.\nProp detail: Medium detail concentrated at the outer silhouette and a few identifying features. Keep interior shading grouped. Show one complete isolated object with a clear support contact.\nExactly FOUR columns by TWO rows, eight equal cells, wide 2:1 canvas 2048 by 1024. Each cell contains exactly one complete isolated prop or the specified small grouped object, centered with at least 40 pixels of clear padding on every side. No grid lines or labels. All props sit on a flat invisible ground line within their own cell, with no cast shadow, ground patch or backdrop. Strict orthographic side view, no strong overhead perspective. Real transparent alpha outside every object, including holes and between cells.\nCell order, left to right then top to bottom:\n1. Iron-hooped wooden supply barrel\n2. Two squat stacked military supply crates\n3. Grounded wooden rack with a spear, axe and sword\n4. Wooden stand carrying two battered unmarked shields\n5. Heavy standing iron brazier with subdued glowing coals\n6. Low pile of broken dressed stone and mortar\n7. Closed military strongbox with iron straps\n8. Short freestanding banner pole on a heavy base with a plain faded burgundy pennant, no emblem\nKeep each object entirely within its cell, especially poles and handles. No characters, words, symbols, checkerboard, walls, floors or roof.",
+      "prompt_sha256": "ee5a190a1d6d390c435d866877f429e23e112b5b906cabbbdd605e9509fa2856",
+      "export": {
+        "resolution": "source",
+        "sampling": "nearest",
+        "colors": "source",
+        "alpha": "binary"
+      },
+      "sheet": {
+        "columns": 4,
+        "rows": 2,
+        "props": [
+          {
+            "id": "fortress_supply_barrel",
+            "name": "Iron-hooped wooden supply barrel",
+            "height_scale": 0.55,
+            "generation": {
+              "anchor": "ground",
+              "height_scale": 0.55
+            }
+          },
+          {
+            "id": "fortress_supply_crates",
+            "name": "Two squat stacked military supply crates",
+            "height_scale": 0.65,
+            "generation": {
+              "anchor": "ground",
+              "height_scale": 0.65
+            }
+          },
+          {
+            "id": "fortress_weapon_rack",
+            "name": "Grounded wooden rack with a spear, axe and sword",
+            "height_scale": 1.0,
+            "generation": {
+              "anchor": "ground",
+              "height_scale": 1.0
+            }
+          },
+          {
+            "id": "fortress_shield_stand",
+            "name": "Wooden stand carrying two battered unmarked shields",
+            "height_scale": 0.85,
+            "generation": {
+              "anchor": "ground",
+              "height_scale": 0.85
+            }
+          },
+          {
+            "id": "fortress_standing_brazier",
+            "name": "Heavy standing iron brazier with subdued glowing coals",
+            "height_scale": 0.9,
+            "generation": {
+              "anchor": "ground",
+              "height_scale": 0.9
+            }
+          },
+          {
+            "id": "fortress_masonry_rubble",
+            "name": "Low pile of broken dressed stone and mortar",
+            "height_scale": 0.4,
+            "generation": {
+              "anchor": "ground",
+              "height_scale": 0.4
+            }
+          },
+          {
+            "id": "fortress_strongbox",
+            "name": "Closed military strongbox with iron straps",
+            "height_scale": 0.5,
+            "generation": {
+              "anchor": "ground",
+              "height_scale": 0.5
+            }
+          },
+          {
+            "id": "fortress_banner_stand",
+            "name": "Short freestanding banner pole on a heavy base with a plain faded burgundy pennant, no emblem",
+            "height_scale": 1.15,
+            "generation": {
+              "anchor": "ground",
+              "height_scale": 1.15
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "decorations_recipe": {
+    "text": "schema_version = 1\n\n[volcano_tunnel]\nground = \"A level compact ledge of dark warm basalt and ash. Subdued reddish-brown chips and a few dark burnt-orange seams below the walking lip; no open lava on the route.\"\nprops = [\n  {id=\"basalt_boulder\", name=\"Layered basalt boulder\", height_scale=0.50},\n  {id=\"obsidian_cluster\", name=\"Small squat obsidian outcrop with restrained dull red reflections\", height_scale=0.65},\n  {id=\"ash_urn\", name=\"Cracked ash-filled stone urn\", height_scale=0.45},\n  {id=\"cooled_vent\", name=\"Low cooled lava vent with one faint ember seam and no smoke\", height_scale=0.40},\n  {id=\"iron_brazier\", name=\"Heavy iron brazier with a few dull embers\", height_scale=0.85},\n  {id=\"ore_cart\", name=\"Abandoned iron ore cart carrying volcanic stone\", height_scale=0.75},\n  {id=\"chain_coil\", name=\"Rusted chain coiled beside a broken mining pick\", height_scale=0.35},\n  {id=\"broken_column\", name=\"Broken natural basalt column with a flat grounded base\", height_scale=0.95},\n]\n\n[frost_cave]\nground = \"A level dark frozen-stone ledge with a thin packed-snow lip and opaque cloudy ice below. Muted steel blue and gray, a few pale edges; no slippery gaps or bright sparkles.\"\nprops = [\n  {id=\"snow_boulder\", name=\"Snow-capped frozen boulder\", height_scale=0.55},\n  {id=\"cloudy_ice\", name=\"Short cluster of thick cloudy blue ice slabs\", height_scale=0.80},\n  {id=\"frozen_crate\", name=\"Old supply crate rimmed with thick frost\", height_scale=0.55},\n  {id=\"unlit_brazier\", name=\"Snow-dusted iron brazier, unlit\", height_scale=0.85},\n  {id=\"split_barrel\", name=\"Split wooden barrel partly encased in cloudy ice\", height_scale=0.55},\n  {id=\"broken_sled\", name=\"Low broken wooden expedition sled with coiled rope\", height_scale=0.45},\n  {id=\"frozen_chest\", name=\"Closed iron-bound chest trapped in frost\", height_scale=0.55},\n  {id=\"ice_shelf\", name=\"Squat irregular frozen-stone shelf with short attached icicles\", height_scale=1.00},\n]\n\n[crypt]\nground = \"A level worn burial-passage floor of muted warm-gray flagstones above dark compact masonry. Sparse dust in joints, no loose bones baked into the ground and no raised steps.\"\nprops = [\n  {id=\"sarcophagus\", name=\"Low closed weathered stone sarcophagus\", height_scale=0.65},\n  {id=\"funerary_urn\", name=\"Dusty funerary urn with a chipped lid\", height_scale=0.45},\n  {id=\"candle_plinth\", name=\"Short stone plinth carrying three melted candles with tiny subdued flames\", height_scale=0.85},\n  {id=\"bone_heap\", name=\"Small old skull and bone heap\", height_scale=0.35},\n  {id=\"broken_statue\", name=\"Broken hooded funerary statue on a grounded pedestal, no living figure\", height_scale=1.00},\n  {id=\"coffin_lid\", name=\"Cracked stone coffin lid propped securely against a low rubble base\", height_scale=0.65},\n  {id=\"iron_lamp\", name=\"Old standing iron oil lamp with a restrained dull flame\", height_scale=0.85},\n  {id=\"burial_chest\", name=\"Small decayed iron-bound burial chest\", height_scale=0.55},\n]\n\n[castle]\nground = \"A level fortress corridor floor of broad worn warm-gray flagstones, with dark stone blocks below its walking lip. Restrained mortar and dust, no steps or battlements.\"\nprops = [\n  {id=\"supply_barrel\", name=\"Iron-hooped wooden supply barrel\", height_scale=0.55},\n  {id=\"supply_crates\", name=\"Two squat stacked military supply crates\", height_scale=0.65},\n  {id=\"weapon_rack\", name=\"Grounded wooden rack with a spear, axe and sword\", height_scale=1.00},\n  {id=\"shield_stand\", name=\"Wooden stand carrying two battered unmarked shields\", height_scale=0.85},\n  {id=\"standing_brazier\", name=\"Heavy standing iron brazier with subdued glowing coals\", height_scale=0.90},\n  {id=\"masonry_rubble\", name=\"Low pile of broken dressed stone and mortar\", height_scale=0.40},\n  {id=\"strongbox\", name=\"Closed military strongbox with iron straps\", height_scale=0.50},\n  {id=\"banner_stand\", name=\"Short freestanding banner pole on a heavy base with a plain faded burgundy pennant, no emblem\", height_scale=1.15},\n]\n",
+    "sha256": "00c0c686f5fc90dbec133486269668cf8a8b7f8ac6fcaf3d8680c970efb8cca2"
+  }
+}

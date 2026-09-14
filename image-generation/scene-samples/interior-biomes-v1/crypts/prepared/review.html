@@ -1,0 +1,50 @@
+<!doctype html><meta charset="utf-8"><title>Biome asset review</title><style>body{background:#20272d;color:#ddd;font:16px sans-serif}img,canvas{image-rendering:pixelated;max-width:100%;background:#343b42}figure{margin:24px 0}label{margin-right:16px}</style><h1>Review at logical size</h1><p>Inspect quiet combat space, alpha, contact and repeat seams in the game composition before bundling.</p><h2>Interior composition</h2>
+<p>Drag travel to inspect parallax and mirrored seams. The outline marks one reference-height actor; review actual combat sprites in the runtime audit too.</p>
+<label>Travel <input id="travel" type="range" min="0" max="12800" value="0" step="1"></label>
+<label>Viewport <select id="viewport"><option value="wide">Landscape</option><option value="tall">Portrait</option></select></label>
+<p id="layers"></p><canvas id="scene"></canvas>
+<script type="application/json" id="interior-data">{"scene": {"schema_version": 1, "canvas": [640, 360], "reference_height": 64, "ground_y": 288, "ceiling_clearance": 104, "fill": "#171e25", "layers": [{"id": "depth", "role": "rear", "canvas": [640, 360], "parallax": 0.1, "origin_y": 288, "asset_id": "crypts_depth", "repeat": "mirror"}, {"id": "wall", "role": "rear", "canvas": [640, 360], "parallax": 0.32, "origin_y": 288, "asset_id": "crypts_wall", "repeat": "mirror"}, {"id": "roof", "role": "ceiling", "canvas": [640, 240], "parallax": 0.68, "origin_y": 145.9375, "asset_id": "crypts_roof", "repeat": "mirror", "cap_y": 0.0}]}, "assets": {"crypts_depth": {"image": "crypts_depth.png", "sha256": "28532255b08085009822e913b573d7efc2db69af61644a98d07635b46b0753ed", "size": [1672, 941], "source": "../sources/crypts_depth.png", "source_sha256": "935e533b020b5bc77a9ea0953b35839518668ae8eb0f058142b47568709e5ecd", "backend": "built-in imagegen", "prompt_sha256": "40f1625ce3afca8e63412e84ba17485b45ee14c0066b78f114e2ecb2a7fdb4fb", "export": {"resolution": "source", "min_width": 1536, "sampling": "nearest", "colors": "source", "alpha": "opaque"}}, "crypts_wall": {"image": "crypts_wall.png", "sha256": "cb2f5acc0aa2210e7f4fe9c9a33128fed3bdad104e662ff03dc833e92c18b580", "size": [1672, 941], "source": "../sources/crypts_wall.png", "source_sha256": "61580bf4c139b1008cc9e60a28355eab9b360522d4f6b443076cba0935c1958c", "backend": "built-in imagegen", "prompt_sha256": "e35cb911e3cfa5efea36b8fe104e05f51b06b8b390515e460b6ee86170a95931", "export": {"resolution": "source", "min_width": 1536, "sampling": "nearest", "colors": "source", "alpha": "binary"}}, "crypts_roof": {"image": "crypts_roof.png", "sha256": "6996a67fb2f378fbca47012a6759ae5632274d3b18f42287f3879e38a26741b7", "size": [2048, 768], "source": "../sources/crypts_roof.png", "source_sha256": "b5433228d44b69455abc87989bee8d0b5fe7626b6b7008e7507dcad79f1b40a9", "backend": "built-in imagegen", "prompt_sha256": "45d9f9f73f584c0650d0eda43ce1a56be056b0cd2f9cf191018b86808180a870", "export": {"resolution": "source", "min_width": 1536, "sampling": "nearest", "colors": "source", "alpha": "binary"}}, "crypts_ground": {"image": "crypts_ground.png", "sha256": "86452020e07da0e93d8b31719acb0811b3cebe28377ac9ea6e50fc77e43e93d0", "size": [256, 96], "source": "../sources/crypts_ground.png", "source_sha256": "937520464adfbe27a7830a2d2cadea2528ce438327f8e1fb643b0fbac58cdaeb", "backend": "built-in imagegen", "prompt_sha256": "d36220696f3f3582d4c00f661469371925d02d798d1349ad48c56159c9019755", "export": {"resolution": "logical", "sampling": "nearest", "colors": "source", "alpha": "binary"}, "canvas": [256, 96], "surface_y": 49.0}, "crypts_decorations": {"image": "crypts_decorations.png", "sha256": "ea339baa52ae9e737e6a50789817b3e810efaf03af818de7be6df8611656f963", "size": [1774, 887], "source": "../sources/crypts_decorations.png", "source_sha256": "e78363296372b37c88d2ea0d80ac96b1505f5923ebf7ddcaaec9defb73aadef4", "backend": "built-in imagegen", "prompt_sha256": "31f6583c5c56896c482da47b56858be6b907755f7aded83f1033855274534e87", "export": {"resolution": "source", "sampling": "nearest", "colors": "source", "alpha": "binary"}}}}</script>
+<script>
+const data=JSON.parse(document.getElementById('interior-data').textContent);
+const canvas=document.getElementById('scene'), ctx=canvas.getContext('2d');
+const travel=document.getElementById('travel'), viewport=document.getElementById('viewport');
+const loaded={}, enabled={};
+for(const layer of data.scene.layers){
+  const label=document.createElement('label'), check=document.createElement('input');
+  check.type='checkbox';check.checked=true;enabled[layer.id]=true;
+  check.onchange=()=>{enabled[layer.id]=check.checked;draw()};
+  label.append(check,document.createTextNode(layer.id));document.getElementById('layers').append(label);
+}
+function draw(){
+  const s=data.scene, tall=viewport.value==='tall';
+  canvas.width=tall?390:640;canvas.height=tall?600:360;
+  const scale=(tall?100:64)/s.reference_height, ground=canvas.height-(tall?70:72);
+  const ceiling=ground-s.ceiling_clearance*scale;
+  ctx.imageSmoothingEnabled=false;ctx.fillStyle=s.fill;ctx.fillRect(0,0,canvas.width,canvas.height);
+  for(const layer of s.layers){
+    const im=loaded[layer.asset_id];if(!im||!enabled[layer.id])continue;
+    const w=layer.canvas[0]*scale,h=layer.canvas[1]*scale;
+    const y=(layer.role==='ceiling'?ceiling:ground)-layer.origin_y*scale;
+    if(layer.role==='ceiling'){ctx.fillStyle=s.fill;ctx.fillRect(0,0,canvas.width,Math.max(0,y+(layer.cap_y||0)*scale))}
+    const offset=(-Number(travel.value)*layer.parallax)%(2*w);
+    for(let n=Math.floor(-offset/w)-1;n*w+offset<canvas.width;n++){
+      ctx.save();ctx.translate(n*w+offset,y);if(Math.abs(n%2)===1){ctx.translate(w,0);ctx.scale(-1,1)}
+      if(y>0)ctx.drawImage(im,0,0,im.width,1,0,-y,w,y);
+      ctx.drawImage(im,0,0,w,h);
+      if(y+h<canvas.height)ctx.drawImage(im,0,im.height-1,im.width,1,0,h,w,canvas.height-y-h);
+      ctx.restore();
+    }
+  }
+  ctx.fillStyle=s.fill;ctx.fillRect(0,ground,canvas.width,canvas.height-ground);
+  ctx.strokeStyle='#d5b969';ctx.lineWidth=1;
+  ctx.strokeRect(canvas.width*.22-12*scale,ground-s.reference_height*scale,24*scale,s.reference_height*scale);
+}
+travel.oninput=draw;viewport.onchange=draw;
+Promise.all(Object.entries(data.assets).map(([id,asset])=>new Promise((resolve,reject)=>{
+  const im=new Image();im.onload=()=>{loaded[id]=im;resolve()};im.onerror=reject;im.src=asset.image;
+}))).then(draw).catch(()=>{document.getElementById('layers').append(' Image load failed. Keep this page beside its PNGs.')});
+</script><figure><img width="640" src="crypts_depth.png"><figcaption>crypts_depth — texture [1672, 941], logical canvas [640, 360]</figcaption></figure>
+<figure><img width="640" src="crypts_wall.png"><figcaption>crypts_wall — texture [1672, 941], logical canvas [640, 360]</figcaption></figure>
+<figure><img width="640" src="crypts_roof.png"><figcaption>crypts_roof — texture [2048, 768], logical canvas [640, 240]</figcaption></figure>
+<figure><img width="256" src="crypts_ground.png"><figcaption>crypts_ground — texture [256, 96], logical canvas [256, 96]</figcaption></figure>
+<figure><img width="2048" src="crypts_decorations.png"><figcaption>crypts_decorations — texture [1774, 887], logical canvas [2048, 1024]</figcaption></figure>

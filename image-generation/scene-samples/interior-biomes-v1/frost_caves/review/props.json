@@ -1,0 +1,333 @@
+{
+  "schema_version": 1,
+  "biome_id": "frost_caves",
+  "image": "props.png",
+  "size": [
+    1024,
+    448
+  ],
+  "sha256": "e3aeeee81e2fab4cf1d9507a4a3e4abae4d7e7f141c1a1baf07285946ecf93e9",
+  "padding": 2,
+  "props": {
+    "frost_caves_snow_boulder": {
+      "name": "Snow-capped frozen boulder",
+      "anchor": [
+        120.0,
+        203
+      ],
+      "height_scale": 0.55,
+      "pixels_sha256": "dc117aba163864313220d80154642bcdd98d74ad0a8f4e73d2f393c57eb0ae86",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/frost_caves/review/prop-recipe/../../prepared/frost_caves_decorations.png",
+        "sha256": "b0f70ace567b6571bd08762d439704b1b0405eca6acd0e99caeb4ce93ce8d240",
+        "cell": [
+          0,
+          0,
+          444,
+          444
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          48,
+          90,
+          389,
+          379
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          240,
+          203
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 710,
+        "y": 2,
+        "width": 240,
+        "height": 203
+      }
+    },
+    "frost_caves_cloudy_ice": {
+      "name": "Short cluster of thick cloudy blue ice slabs",
+      "anchor": [
+        114.0,
+        240
+      ],
+      "height_scale": 0.8,
+      "pixels_sha256": "cc159db61a48b4dafeb5dc0414ae0ed5fd81befeb809acb5ba100150ff8180c5",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/frost_caves/review/prop-recipe/../../prepared/frost_caves_decorations.png",
+        "sha256": "b0f70ace567b6571bd08762d439704b1b0405eca6acd0e99caeb4ce93ce8d240",
+        "cell": [
+          444,
+          0,
+          887,
+          444
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          77,
+          65,
+          380,
+          382
+        ],
+        "reduced_trim": [
+          1,
+          0,
+          229,
+          240
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 2,
+        "y": 2,
+        "width": 228,
+        "height": 240
+      }
+    },
+    "frost_caves_frozen_crate": {
+      "name": "Old supply crate rimmed with thick frost",
+      "anchor": [
+        120.0,
+        200
+      ],
+      "height_scale": 0.55,
+      "pixels_sha256": "c477070c1c2eeb0b77fc57d4eaae0403c8f938308decc47dfd3f5046a88b58e3",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/frost_caves/review/prop-recipe/../../prepared/frost_caves_decorations.png",
+        "sha256": "b0f70ace567b6571bd08762d439704b1b0405eca6acd0e99caeb4ce93ce8d240",
+        "cell": [
+          887,
+          0,
+          1330,
+          444
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          56,
+          108,
+          388,
+          384
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          240,
+          200
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 2,
+        "y": 246,
+        "width": 240,
+        "height": 200
+      }
+    },
+    "frost_caves_unlit_brazier": {
+      "name": "Snow-dusted iron brazier, unlit",
+      "anchor": [
+        114.0,
+        240
+      ],
+      "height_scale": 0.85,
+      "pixels_sha256": "604aee174941fcb996f53e8bb2d4c6f9c5435cb284925ea914726953fdca8718",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/frost_caves/review/prop-recipe/../../prepared/frost_caves_decorations.png",
+        "sha256": "b0f70ace567b6571bd08762d439704b1b0405eca6acd0e99caeb4ce93ce8d240",
+        "cell": [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          98,
+          92,
+          365,
+          373
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          228,
+          240
+        ],
+        "removed_detached_pixels": 1,
+        "components": 1
+      },
+      "frame": {
+        "x": 234,
+        "y": 2,
+        "width": 228,
+        "height": 240
+      }
+    },
+    "frost_caves_split_barrel": {
+      "name": "Split wooden barrel partly encased in cloudy ice",
+      "anchor": [
+        120.0,
+        231
+      ],
+      "height_scale": 0.55,
+      "pixels_sha256": "9398bd79aa14b8132c883526cbefbb9533ad07f39d0dd2213b7dd32586bd6528",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/frost_caves/review/prop-recipe/../../prepared/frost_caves_decorations.png",
+        "sha256": "b0f70ace567b6571bd08762d439704b1b0405eca6acd0e99caeb4ce93ce8d240",
+        "cell": [
+          0,
+          444,
+          444,
+          887
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          65,
+          54,
+          395,
+          371
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          240,
+          231
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 466,
+        "y": 2,
+        "width": 240,
+        "height": 231
+      }
+    },
+    "frost_caves_broken_sled": {
+      "name": "Low broken wooden expedition sled with coiled rope",
+      "anchor": [
+        120.0,
+        125
+      ],
+      "height_scale": 0.45,
+      "pixels_sha256": "2fbbdea8c46a0342a1e9547302be84a0853e947aa89f4aca4a32f4f0cb6363b3",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/frost_caves/review/prop-recipe/../../prepared/frost_caves_decorations.png",
+        "sha256": "b0f70ace567b6571bd08762d439704b1b0405eca6acd0e99caeb4ce93ce8d240",
+        "cell": [
+          444,
+          444,
+          887,
+          887
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          23,
+          121,
+          419,
+          327
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          240,
+          125
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 734,
+        "y": 246,
+        "width": 240,
+        "height": 125
+      }
+    },
+    "frost_caves_frozen_chest": {
+      "name": "Closed iron-bound chest trapped in frost",
+      "anchor": [
+        120.0,
+        175
+      ],
+      "height_scale": 0.55,
+      "pixels_sha256": "8cde4583de8c03a2701c118e6fc49cfbd59ab13b26791d11a5263b3a0a216f11",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/frost_caves/review/prop-recipe/../../prepared/frost_caves_decorations.png",
+        "sha256": "b0f70ace567b6571bd08762d439704b1b0405eca6acd0e99caeb4ce93ce8d240",
+        "cell": [
+          887,
+          444,
+          1330,
+          887
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          56,
+          107,
+          387,
+          348
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          240,
+          175
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 246,
+        "y": 246,
+        "width": 240,
+        "height": 175
+      }
+    },
+    "frost_caves_ice_shelf": {
+      "name": "Squat irregular frozen-stone shelf with short attached icicles",
+      "anchor": [
+        120.0,
+        143
+      ],
+      "height_scale": 1.0,
+      "pixels_sha256": "d60f7ffd985fe0ccf7a032b6abea8e2ff54a6403b69ea0a24de6f87987b9b13d",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/frost_caves/review/prop-recipe/../../prepared/frost_caves_decorations.png",
+        "sha256": "b0f70ace567b6571bd08762d439704b1b0405eca6acd0e99caeb4ce93ce8d240",
+        "cell": [
+          1330,
+          444,
+          1774,
+          887
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          47,
+          130,
+          397,
+          338
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          240,
+          143
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 490,
+        "y": 246,
+        "width": 240,
+        "height": 143
+      }
+    }
+  }
+}
