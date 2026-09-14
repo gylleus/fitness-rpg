@@ -8,6 +8,22 @@ from prepare import BOOT, GROUND, HERE, IDLE_OFFSETS, KNEE, TYPES, breathe
 
 
 class PlayerSheetsTest(unittest.TestCase):
+    def test_walk_bobs_through_compression_and_passing_with_grounded_feet(self):
+        for weapon in TYPES:
+            with self.subTest(weapon=weapon):
+                tops = []
+                for path in sorted((HERE / weapon / 'export/walk/nearest').glob('frame-*.png')):
+                    frame = Image.open(path).convert('RGBA')
+                    self.assertEqual(frame.getbbox()[3], GROUND)
+                    # Reviewed head corridor excludes the carried weapon.
+                    rows, _ = np.nonzero(np.array(frame)[10:65, 45:75, 3])
+                    tops.append(int(rows.min()) + 10)
+                for contact, down, up in (tops[:3], tops[3:]):
+                    self.assertGreaterEqual(down - contact, 3)
+                    self.assertGreaterEqual(contact - up, 1)
+                    self.assertGreaterEqual(down - up, 6)
+                self.assertLessEqual(max(tops) - min(tops), 10)
+
     def test_exported_cloth_stays_muted_across_weapons_and_attack_poses(self):
         # Sample the shared hanging front drape at game resolution, including
         # attack transitions. Bright red/orange was visible only after export.

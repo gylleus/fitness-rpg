@@ -17,11 +17,12 @@
   #frame { width: 190px; vertical-align: middle; } #error { color: #ff9588; }
 </style>
 <h1>One knight, four weapon classes</h1>
-<p>A quiet breath, planted boots, and a steady grip. Compare the same player with a mace, axe, sword, or iron fist weapons.</p>
+<p>A quiet idle, a weighted stride, and attacks that coil, strike, and follow through. Compare the same knight with each weapon class.</p>
 <nav aria-label="Animation controls">
   <label>Animation <select id="action"><option>idle</option><option>walk</option><option>attack</option><option>death</option></select></label>
   <label>Speed <select id="speed"><option value="1">Normal</option><option value="0.5">Half speed</option><option value="2">Double speed</option></select></label>
   <button id="pause">Pause</button><button id="restart">Replay</button>
+  <label><input id="repeat" type="checkbox" checked> Repeat attacks</label>
   <label>Frame <input id="frame" type="range" min="0" max="7" value="0"></label>
 </nav>
 <main></main>
@@ -31,9 +32,10 @@
 <script src="review-data.js"></script>
 <script>
 (async () => {
-  const { weapons, size, pivot, bodyHeight, durations } = window.playerReview;
+  const { weapons, size, pivot, bodyHeight, durations, phases } = window.playerReview;
   const action = document.querySelector('#action'), speed = document.querySelector('#speed');
   const pause = document.querySelector('#pause'), slider = document.querySelector('#frame');
+  const repeat = document.querySelector('#repeat');
   let elapsed = 0, previous = performance.now(), playing = true;
   const cards = await Promise.all(weapons.map(async weapon => {
     const card = document.createElement('article'), title = document.createElement('h2');
@@ -62,8 +64,9 @@
     if (playing && !document.hidden) elapsed += (now - previous) * Number(speed.value);
     previous = now;
     let clip = action.value, time = elapsed;
+    if (clip === 'attack' && repeat.checked) time %= 1260;
     if (clip === 'attack' && time >= 360) { clip = 'idle'; time -= 360; }
-    else if (clip === 'attack') time *= 800 / 360;
+    else if (clip === 'attack') time *= durations.attack.reduce((a, b) => a + b, 0) / 360;
     const times = durations[clip], total = times.reduce((a, b) => a + b, 0);
     if (clip === 'idle' || clip === 'walk') time %= total;
     let frame = times.length - 1;
@@ -75,7 +78,7 @@
       c.fillStyle = '#657959'; c.fillRect(0, 240, 360, 2);
       const scale = 132 / bodyHeight;
       c.drawImage(images[clip], frame*size, 0, size, size, 180-pivot[0]*scale, 240-pivot[1]*scale, size*scale, size*scale);
-      detail.textContent = `${clip} · frame ${frame + 1} / ${times.length}`;
+      detail.textContent = `${clip} · ${phases[clip]?.[frame] ?? ''} · frame ${frame + 1} / ${times.length}`;
     }
     requestAnimationFrame(draw);
   }

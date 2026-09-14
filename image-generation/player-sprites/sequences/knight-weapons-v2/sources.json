@@ -46,28 +46,62 @@
         "sha256": "aee9e10d1750b918b0cf12b49570b8907373a4fb229674603eb236842dd2b51a"
       },
       "attack": {
-        "path": "corrections/mace-attack.png",
-        "sha256": "a856d4b2c6d03ba91c4657592eb7f041a87e91239b4050c019cfabd49c68eb9d",
+        "path": "motion-v3/mace-attack.png",
+        "sha256": "885f9904bb48ffd74acbd1e4f852e056cc54d37e3a8d145a7c5938b36070641a",
         "scale": 0.162839248434238,
         "origins": [
           [
             350,
-            615
+            609
           ],
           [
-            895,
-            615
+            975,
+            611
           ],
           [
             350,
-            1190
+            1152
           ],
           [
-            895,
-            1190
+            975,
+            1155
           ]
         ],
-        "weapon_hand": "far arm; near arm remains an empty-handed chest guard"
+        "weapon_hand": "far arm; near arm keeps its guard",
+        "motion": "body coil, lunge and follow-through"
+      },
+      "walk": {
+        "path": "motion-v3/mace-walk.png",
+        "sha256": "3dc2b7c3deebe037143ecdbf4744a9671bae49c8dcc411c64de0e016ccf80d95",
+        "scale": 0.20418848167539266,
+        "origins": [
+          [
+            265,
+            444
+          ],
+          [
+            777,
+            444
+          ],
+          [
+            1289,
+            443
+          ],
+          [
+            265,
+            923
+          ],
+          [
+            777,
+            923
+          ],
+          [
+            1289,
+            923
+          ]
+        ],
+        "weapon_hand": "far arm; near arm keeps its guard",
+        "motion": "contact, compression and rising passing pose on each step"
       }
     },
     "axe": {
@@ -84,28 +118,62 @@
         "sha256": "b45268a8f51b8a5423c5828eca363977661310cdc63f025224bcb4e051ce18e7"
       },
       "attack": {
-        "path": "corrections/axe-attack.png",
-        "sha256": "ebfcdaf2bb7bce4bb0974ad700bd793a9c5061152cbdb79eff6958ae2c708599",
+        "path": "motion-v3/axe-attack.png",
+        "sha256": "2abd96b7a13757184ddcb2f46ddce013efa90efc8ac15a938fe94b4679e2000d",
         "scale": 0.162839248434238,
         "origins": [
           [
             350,
-            615
+            609
           ],
           [
-            895,
-            615
+            975,
+            611
           ],
           [
             350,
-            1190
+            1151
           ],
           [
-            895,
-            1190
+            975,
+            1155
           ]
         ],
-        "weapon_hand": "far arm; near arm remains an empty-handed chest guard"
+        "weapon_hand": "far arm; near arm keeps its guard",
+        "motion": "body coil, lunge and follow-through"
+      },
+      "walk": {
+        "path": "motion-v3/axe-walk.png",
+        "sha256": "aaa3aeaebf60454299a0d76af00a75a0c91ee7f15581768f66a33e9e28914341",
+        "scale": 0.20418848167539266,
+        "origins": [
+          [
+            265,
+            444
+          ],
+          [
+            777,
+            444
+          ],
+          [
+            1289,
+            444
+          ],
+          [
+            265,
+            923
+          ],
+          [
+            777,
+            923
+          ],
+          [
+            1289,
+            923
+          ]
+        ],
+        "weapon_hand": "far arm; near arm keeps its guard",
+        "motion": "contact, compression and rising passing pose on each step"
       }
     },
     "sword": {
@@ -122,28 +190,62 @@
         "sha256": "6ff28ecd2a61d5c0186b5119afc59f53a254aa0b18e5cc76157fbfe702e8a054"
       },
       "attack": {
-        "path": "corrections/sword-attack.png",
-        "sha256": "60b6c315ae4c8fce5cfb1db6823b75335793b208371b9739093d378e79b6d947",
+        "path": "motion-v3/sword-attack.png",
+        "sha256": "1d63155a77d6ceba59550c99c6265b190a5cd11f314644bceec21ef75f2250b8",
         "scale": 0.162839248434238,
         "origins": [
           [
             350,
-            615
+            609
           ],
           [
-            895,
-            615
+            975,
+            611
           ],
           [
             350,
-            1190
+            1151
           ],
           [
-            895,
-            1190
+            975,
+            1155
           ]
         ],
-        "weapon_hand": "far arm; near arm remains an empty-handed chest guard"
+        "weapon_hand": "far arm; near arm keeps its guard",
+        "motion": "body coil, lunge and follow-through"
+      },
+      "walk": {
+        "path": "motion-v3/sword-walk.png",
+        "sha256": "8b1fc7e6280292c92653b4422e0297b55d655654e09d4653bc885acd16b205ae",
+        "scale": 0.20418848167539266,
+        "origins": [
+          [
+            265,
+            444
+          ],
+          [
+            777,
+            444
+          ],
+          [
+            1289,
+            444
+          ],
+          [
+            265,
+            923
+          ],
+          [
+            777,
+            923
+          ],
+          [
+            1289,
+            923
+          ]
+        ],
+        "weapon_hand": "far arm; near arm keeps its guard",
+        "motion": "contact, compression and rising passing pose on each step"
       }
     },
     "fist": {
@@ -158,6 +260,64 @@
       "sheet": {
         "path": "fist-source.png",
         "sha256": "d1027d9a49ece2b6d8c92bfe6c3895b908e2fe046b7304932c4bc872ca5a37bd"
+      },
+      "attack": {
+        "path": "motion-v3/fist-attack.png",
+        "sha256": "f2ad577dd497d1ed2d87babd8a519d98268afa01afc46b3a504ace20e9eebf1d",
+        "scale": 0.162839248434238,
+        "origins": [
+          [
+            350,
+            611
+          ],
+          [
+            975,
+            611
+          ],
+          [
+            350,
+            1153
+          ],
+          [
+            975,
+            1154
+          ]
+        ],
+        "weapon_hand": "far arm; near arm keeps its guard",
+        "motion": "body coil, lunge and follow-through"
+      },
+      "walk": {
+        "path": "motion-v3/fist-walk.png",
+        "sha256": "94bb8a54644d48d3cd6c0d5c56a8bce7ac18f415f96ba8a1dc2c7b9743657e93",
+        "scale": 0.20418848167539266,
+        "origins": [
+          [
+            265,
+            444
+          ],
+          [
+            777,
+            444
+          ],
+          [
+            1289,
+            444
+          ],
+          [
+            265,
+            923
+          ],
+          [
+            777,
+            923
+          ],
+          [
+            1289,
+            923
+          ]
+        ],
+        "weapon_hand": "far arm; near arm keeps its guard",
+        "motion": "contact, compression and rising passing pose on each step"
       }
     }
   }

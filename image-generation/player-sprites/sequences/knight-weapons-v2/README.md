@@ -29,14 +29,15 @@ height and weapon reach never determine an individual frame's scale.
 ### Hand and cloth corrections
 
 The original attack row incorrectly changed from the far weapon arm in idle
-to the near arm during windup. The selected `corrections/*-attack.png` sources
-replace its four interior poses for mace, axe and sword. These are new
+to the near arm during windup. The historical `corrections/*-attack.png` sources
+first replaced its four interior poses for mace, axe and sword. These were
 built-in imagegen edits of the master reference, then weapon edits of the
 corrected mace sequence. The nearer pauldron, elbow and empty fist remain
 folded across the chest; the farther hand retains the weapon from windup
 through impact and recovery. Hand ownership was reviewed visually in all
 four source poses and the final [attack comparison](corrections/attack-review.png).
-The original walk and death poses are still used, and attack timing is unchanged.
+The subsequent motion pass below replaces walk and attack. Death still uses
+the original sheet; all original and correction sources remain available.
 
 `corrections/axe-reference.png` corrects the warmer cloth highlights introduced
 by the axe edit. Palette conversion had amplified small source hue differences
@@ -49,6 +50,36 @@ contact and timing; they do not infer anatomical correctness from image data.
 Exact correction prompts are stored beside their selected PNGs. `sources.json`
 records their hashes, physical origins and the fixed scale shared by the
 four attack poses. Original sources remain available for comparison.
+
+### Body motion and attack timing
+
+The active `motion-v3/*-attack.png` sources add whole-body anticipation and
+follow-through. Knees compress and the shoulders turn back to load the strike;
+the torso then drives forward over a bent front knee with the rear leg extended.
+A separate low finish lets the body absorb the blow. Mace, axe and sword retain
+the far weapon hand; fists use a far-arm cross with the same weight transfer.
+The built-in imagegen tool edited the accepted knight poses, then produced
+weapon variants. Exact prompts, including corrective hand edits, are saved
+beside each selected source. The poses and hand continuity were reviewed
+visually in the [attack comparison](motion-v3/attack-review.png).
+
+The six attack holds are **40 / 160 / 200 / 60 / 240 / 100 ms**: guard, load,
+peak windup, impact, follow-through, guard. At the game's 360ms attack speed,
+the peak windup holds for 90ms, impact for 27ms, and follow-through for 108ms.
+The large pose change into impact gives the strike its speed; the longer holds
+before and after give it weight. Impact still begins at 180ms. Playback tests
+exercise these phase boundaries for all four classes.
+
+`motion-v3/*-walk.png` replaces the six walking poses with contact, down and
+rising passing poses on each step. Knees and hips drive an 8–9px helmet bob at
+the final 128px grid. Each frame uses the same physical scale and is registered
+at its supporting boot; the exporter does not normalize the moving head height.
+Pixel checks verify the down/up ordering and ground contact. See the
+[walk comparison](motion-v3/walk-review.png), or enable repeating attacks and
+half speed in [the interactive preview](review.html).
+
+Idle and death PNGs are unchanged by this motion pass. The shared burgundy
+palette is retained, with garment bounds covering the wider action poses.
 
 ## The quiet idle
 

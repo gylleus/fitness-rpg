@@ -26,12 +26,14 @@ BODY_HEIGHT = 78
 KNEE, BOOT = 91, 104
 IDLE_OFFSETS = (0, -1, -1, 0, 0, 1, 1, 0)
 DURATIONS = {'idle': [300] * 8, 'walk': [140, 130, 130, 140, 130, 130],
-             'attack': [120, 160, 120, 100, 140, 160],
+             'attack': [40, 160, 200, 60, 240, 100],
              'death': [100, 120, 130, 140, 160, 250]}
+PHASES = {'attack': ['guard', 'load', 'windup', 'impact', 'follow-through', 'guard'],
+          'walk': ['contact', 'down', 'up / passing', 'opposite contact', 'down', 'up / passing']}
 # Reviewed garment bounds at the final grid. Saturated orange/red highlights
 # are forbidden for this material; leather browns and metal colors stay intact.
-CLOTH_BOUNDS = {'idle': (35, 74, 76, 96), 'walk': (28, 70, 82, 100),
-                'attack': (30, 73, 78, 103), 'death': (6, 74, 88, 113)}
+CLOTH_BOUNDS = {'idle': (35, 74, 76, 96), 'walk': (28, 66, 82, 100),
+                'attack': (12, 68, 88, 103), 'death': (6, 74, 88, 113)}
 
 
 def cloth_palette(frame, action):
@@ -155,7 +157,7 @@ def main():
     previews = []
     for weapon in TYPES:
         entry = spec['weapons'][weapon]
-        for key in ('reference', 'sheet', *(['attack'] if 'attack' in entry else [])):
+        for key in ('reference', 'sheet', *(a for a in ('attack', 'walk') if a in entry)):
             if sha(HERE / entry[key]['path']) != entry[key]['sha256']:
                 raise ValueError(f'Changed {weapon} {key} source; review before updating provenance')
         pose, box = subjects(HERE / entry['reference']['path'], 1)[0]
@@ -166,31 +168,35 @@ def main():
             actions[action] = [register(pose, box,
                 [spec['column_origin_x'] + i * spec['column_width'], spec['contacts'][action][i]],
                 spec['sheet_scale']) for i, (pose, box) in enumerate(source_poses[row*6:row*6+6])]
-        # Every action transitions from/to the exact master ready pose.
-        actions['attack'][0] = reference.copy()
-        actions['attack'][-1] = reference.copy()
-        if 'attack' in entry:
-            attack = entry['attack']
-            poses = subjects(HERE / attack['path'], 4, columns=2)
-            if len(attack['origins']) != len(poses):
-                raise ValueError('Each corrected attack pose needs a reviewed origin')
-            actions['attack'][1:5] = [register(pose, box, origin, attack['scale'])
-                for (pose, box), origin in zip(poses, attack['origins'])]
+        motion_boxes = {}
+        for action, count, columns, slots in (('attack', 4, 2, slice(1, 5)), ('walk', 6, 3, slice(None))):
+            if action not in entry:
+                continue
+            source = entry[action]
+            poses = subjects(HERE / source['path'], count, columns=columns)
+            if len(source['origins']) != len(poses):
+                raise ValueError(f'Each {action} pose needs a reviewed origin')
+            actions[action][slots] = [register(pose, box, origin, source['scale'])
+                for (pose, box), origin in zip(poses, source['origins'])]
+            motion_boxes[action] = [box for _, box in poses]
         for action in ('walk', 'attack', 'death'):
             actions[action] = [cloth_palette(frame, action) for frame in actions[action]]
+        # Guard retains the exact accepted idle pixels, including its palette.
+        actions['attack'][0] = reference.copy()
+        actions['attack'][-1] = reference.copy()
         export(weapon, actions, entry)
         audit['weapons'][weapon] = {'reference_box': box,
             'source_boxes': [box for _, box in source_poses]}
-        if 'attack' in entry:
-            audit['weapons'][weapon]['corrected_attack_boxes'] = [box for _, box in poses]
+        audit['weapons'][weapon]['motion_boxes'] = motion_boxes
         previews.append((weapon, [('ready', reference)]))
     comparison(previews, HERE / 'weapon-previews.png')
-    comparison([(weapon, [(str(i), Image.open(HERE / weapon / 'export/attack/nearest' / f'frame-{i:03d}.png'))
-                          for i in range(6)]) for weapon in ('mace', 'axe', 'sword')],
-               HERE / 'corrections/attack-review.png')
+    for action in ('attack', 'walk'):
+        comparison([(weapon, [(PHASES[action][i], Image.open(HERE / weapon / 'export' / action / 'nearest' / f'frame-{i:03d}.png'))
+                              for i in range(6)]) for weapon in TYPES],
+                   HERE / 'motion-v3' / f'{action}-review.png')
     save(HERE / 'extraction.json', audit)
     review = {'weapons': TYPES, 'size': SIZE, 'pivot': [PIVOT_X, GROUND],
-              'bodyHeight': BODY_HEIGHT, 'durations': DURATIONS}
+              'bodyHeight': BODY_HEIGHT, 'durations': DURATIONS, 'phases': PHASES}
     (HERE / 'review-data.js').write_text('window.playerReview = ' + json.dumps(review) + ';\n')
     print('Exported four weapon classes, 16 action atlases, 104 frames.')
 

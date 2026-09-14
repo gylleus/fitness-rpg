@@ -9,12 +9,12 @@
         "w": 128,
         "h": 128
       },
-      "duration": 120,
+      "duration": 40,
       "source_frame": 0
     },
     {
       "filename": "frame-001.png",
-      "sha256": "b1ccd832b1ac2afafdc17fca5824d79ffdc77c10dc3a7f92919798b13c7252e2",
+      "sha256": "8aca293454ac2c1dd343cd3ffe2e739c10ecf776af81a5ac2958a0d0ac70fd44",
       "frame": {
         "x": 128,
         "y": 0,
@@ -26,38 +26,38 @@
     },
     {
       "filename": "frame-002.png",
-      "sha256": "1d11129ab4da592d28e13f10ca9ae3c8f883539ee1ec8c20313ffd281d86b16f",
+      "sha256": "6c58a14f10de2b2a8d75908b71fe9bd8af91c91d4cf488425f285393026d3b31",
       "frame": {
         "x": 256,
         "y": 0,
         "w": 128,
         "h": 128
       },
-      "duration": 120,
+      "duration": 200,
       "source_frame": 2
     },
     {
       "filename": "frame-003.png",
-      "sha256": "eefb9f3948ffe2033366bc33656b4983156b24e6f9d20a37c118875b055a0ea2",
+      "sha256": "7ee127a3ad396e00a5b9ef282e431772c5d52e64ee4ff5fe2cc42cd93d245cea",
       "frame": {
         "x": 384,
         "y": 0,
         "w": 128,
         "h": 128
       },
-      "duration": 100,
+      "duration": 60,
       "source_frame": 3
     },
     {
       "filename": "frame-004.png",
-      "sha256": "612292f90c43634960157abc385225d1506c9332f36704e0feda516ba0490317",
+      "sha256": "df7fe98cc1c545a744fab19f33e9dcb4dbca75ce69c27a31bf527ea9f7d530c8",
       "frame": {
         "x": 512,
         "y": 0,
         "w": 128,
         "h": 128
       },
-      "duration": 140,
+      "duration": 240,
       "source_frame": 4
     },
     {
@@ -69,7 +69,7 @@
         "w": 128,
         "h": 128
       },
-      "duration": 160,
+      "duration": 100,
       "source_frame": 5
     }
   ],

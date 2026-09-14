@@ -2,7 +2,7 @@
   "frames": [
     {
       "filename": "frame-000.png",
-      "sha256": "d755d0ca4ab0d322f9cc20e36bcf28650c04f2b8534fe681f27534e2e815b9a4",
+      "sha256": "7a2a0046d0716be37032a226022f7cbf92fb07cbc7dc876ff2887a3b8f0c83de",
       "frame": {
         "x": 0,
         "y": 0,
@@ -14,7 +14,7 @@
     },
     {
       "filename": "frame-001.png",
-      "sha256": "44d29bfccaf53e6f05ce1a914610db328f561063c1690535623bfc885aeba457",
+      "sha256": "89467b9d0c7c0a344237724f005f60596d852fad8fc4e70fe7e4ec5d6d796801",
       "frame": {
         "x": 128,
         "y": 0,
@@ -26,7 +26,7 @@
     },
     {
       "filename": "frame-002.png",
-      "sha256": "b72522499de96e48ce71a8ff1e2f276becf26e52ace97e23dde5be004a050b68",
+      "sha256": "04c2f812575e9725ad60a31ad633be0d15e7170d87ca524a42df923ae40ce6e4",
       "frame": {
         "x": 256,
         "y": 0,
@@ -38,7 +38,7 @@
     },
     {
       "filename": "frame-003.png",
-      "sha256": "2087dc43ce88525e987437dd2d4fcecb214c9138c13cdbfad62f0c4e0949d43b",
+      "sha256": "f2ea45dc1d34f06941a2bf9d2f1a2993b7e7aaf9d484ef70dd656fbd3d5486a0",
       "frame": {
         "x": 384,
         "y": 0,
@@ -50,7 +50,7 @@
     },
     {
       "filename": "frame-004.png",
-      "sha256": "e6e105ae333ebdc03fee614f493ff0fa8307228e082344087a05b2fbbf49e2a6",
+      "sha256": "961a89453bbbcb2374b2fe6048f7e76cb7c2f6664f02376f2c67f614ef0d4903",
       "frame": {
         "x": 512,
         "y": 0,
@@ -62,7 +62,7 @@
     },
     {
       "filename": "frame-005.png",
-      "sha256": "49899982ee51fc9dd48eb3effad956bc0f7149bb1087b8cb4785f0956e3e58c1",
+      "sha256": "bc9750c4f0a6112e35124fc8a2b6ffca637a263ee3dda7c835992cee12693c04",
       "frame": {
         "x": 640,
         "y": 0,

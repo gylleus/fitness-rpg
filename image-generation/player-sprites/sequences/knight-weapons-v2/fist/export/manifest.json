@@ -25,9 +25,67 @@
     "sheet": {
       "path": "fist-source.png",
       "sha256": "d1027d9a49ece2b6d8c92bfe6c3895b908e2fe046b7304932c4bc872ca5a37bd"
+    },
+    "attack": {
+      "path": "motion-v3/fist-attack.png",
+      "sha256": "f2ad577dd497d1ed2d87babd8a519d98268afa01afc46b3a504ace20e9eebf1d",
+      "scale": 0.162839248434238,
+      "origins": [
+        [
+          350,
+          611
+        ],
+        [
+          975,
+          611
+        ],
+        [
+          350,
+          1153
+        ],
+        [
+          975,
+          1154
+        ]
+      ],
+      "weapon_hand": "far arm; near arm keeps its guard",
+      "motion": "body coil, lunge and follow-through"
+    },
+    "walk": {
+      "path": "motion-v3/fist-walk.png",
+      "sha256": "94bb8a54644d48d3cd6c0d5c56a8bce7ac18f415f96ba8a1dc2c7b9743657e93",
+      "scale": 0.20418848167539266,
+      "origins": [
+        [
+          265,
+          444
+        ],
+        [
+          777,
+          444
+        ],
+        [
+          1289,
+          444
+        ],
+        [
+          265,
+          923
+        ],
+        [
+          777,
+          923
+        ],
+        [
+          1289,
+          923
+        ]
+      ],
+      "weapon_hand": "far arm; near arm keeps its guard",
+      "motion": "contact, compression and rising passing pose on each step"
     }
   },
-  "code_sha256": "f9f2adcfb96d7a536333070463ca46264333868c90a345f2163b0e70e903f868",
+  "code_sha256": "00f7375f1911882f0418ad05760cf0d31a73aa7011a5c7f3a0c5d4142fd5c295",
   "actions": {
     "idle": {
       "timing": {

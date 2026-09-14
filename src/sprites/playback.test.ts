@@ -4,6 +4,7 @@ import { battleDungeon, battleTurn, beginBattle, DUNGEONS } from '../game/combat
 import { fitnessDay, heroStats } from '../game/rules';
 import { battleSchedule, battleTickDuration, enemyAnimation, heroAnimation, journeyLeg, journeyTarget } from './battleAnimation';
 import { clipFor, frameAt, sampleSprite, spriteGeometry } from './playback';
+import { PLAYER_SPRITES } from './player';
 import type { SpriteCatalog } from './types';
 
 const entities = (catalog as unknown as SpriteCatalog).entities;
@@ -24,6 +25,14 @@ describe('sprite playback', () => {
     expect(sampleSprite(player, 'attack', 720, 720).clip).toBe(player.actions.idle);
     expect(sampleSprite(player, 'attack', 720 + player.actions.idle.frames[0].duration, 720).index).toBe(1);
     expect(clipFor(player, 'unavailable')).toBe(player.actions.idle);
+  });
+  it.each(Object.values(PLAYER_SPRITES))('holds the windup, snaps to impact, and settles for %s', id => {
+    const entity = entities[id];
+    // At combat speed: 90ms peak windup, 27ms impact, 108ms follow-through.
+    for (const [elapsed, index] of [[90, 2], [179, 2], [180, 3], [206, 3], [207, 4], [314, 4], [315, 5]]) {
+      expect(sampleSprite(entity, 'attack', elapsed, 360).index).toBe(index);
+    }
+    expect(sampleSprite(entity, 'attack', 360, 360).clip).toBe(entity.actions.idle);
   });
   it('preserves feet and relative entity height when mirrored', () => {
     const toad = entities.bog_toad;

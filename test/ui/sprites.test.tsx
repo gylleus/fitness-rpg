@@ -169,7 +169,8 @@ it('freezes while paused, resumes remaining hold, changes speed, restarts repeat
   expect(result.current.index).toBe(1);
   expect(jest.getTimerCount()).toBe(0);
   await rerender({ playing: true, speed: 2, event: 1 });
-  await act(() => { jest.advanceTimersByTime(64); });
+  const remainingAtDoubleSpeed = (player.actions.attack.frames[0].duration + player.actions.attack.frames[1].duration - 150) / 2;
+  await act(() => { jest.advanceTimersByTime(remainingAtDoubleSpeed - 1); });
   expect(result.current.index).toBe(1);
   await act(() => { jest.advanceTimersByTime(1); });
   expect(result.current.index).toBe(2);

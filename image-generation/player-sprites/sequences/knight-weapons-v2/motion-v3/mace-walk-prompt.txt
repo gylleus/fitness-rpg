@@ -1,0 +1,12 @@
+Use case: precise-object-edit.
+Image 1 is the knight source sheet to edit; image 2 the exact identity/material reference.
+Create a dedicated SIX-POSE WALK CYCLE SHEET using the knight in the TOP ROW of image 1, improving its stiff stationary chest/head. Output ONLY SIX walking figures, a 3-column by 2-row grid on perfectly flat magenta #ff00ff, ideally 1536x1024. No attack/death figures, text, guides, shadows or effects. Full figures including rigid short mace, enough clean background spacing; use one physical knight scale in all six cells with a shared floor baseline in each row.
+Keep identical helmet/armor, dark muted burgundy tattered cloth, proportions and right-facing 3/4 angle. Far hand (screen-right of chest) ALWAYS holds one mace upright at relaxed carry, visible nearer arm has empty fist. No swapping hands. Mace geometry unchanged.
+Build a convincing grounded six-frame walk loop, reading order:
+1 top-left: left/near boot steps FORWARD screen-right, far boot BACK; contact pose, medium head height.
+2 top-middle: weight sinks onto forward near leg, near knee flexes and far boot peels off floor; pelvis, breastplate and helmet all clearly LOWER 4 percent of standing height. Compression/down pose.
+3 top-right: near supporting leg straightens, far knee passes forward, far boot lifts; pelvis, chest and head clearly RISE 4 percent above contact height. Passing/up pose.
+4 bottom-left: opposite contact, far boot forward, near boot back, head medium height.
+5 bottom-middle: weight sinks onto forward far leg with flexed knee, near boot peeling off; pelvis, chest and head LOWER 4 percent.
+6 bottom-right: far supporting leg straightens, near knee passes forward, near boot lifts; pelvis, chest and head RISE 4 percent.
+A heavy armored walk with visible vertical bob caused by leg flex and weight transfer, mild counter-rotation of shoulders/hips, relaxed small arm response and cloth lag. Feet must support the body on the floor; not an entire sprite floating up/down. No running, hopping, exaggerated cartoon stretch, changing body scale, near-identical repeated legs, or a frozen torso. Preserve the accepted knight design exactly.
