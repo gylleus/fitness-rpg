@@ -61,31 +61,66 @@ it('stacks all six modifier types, applies flat damage before training, and reso
   expect(equipmentBonuses([{ slot: null, item }]).armor).toBe(0);
 });
 
-it('makes every catalog definition reachable within its tier and snapshots rolled affixes without mutation', () => {
+it('rolls plain catalog bases with rarity-specific names and no inherited magical properties', () => {
   const before = JSON.stringify(GEAR);
-  const seen = new Set<string>(), types = new Set<string>();
-  for (let dungeon = 0; dungeon < 3; dungeon++) {
-    for (let seed = 0; seed < 6000; seed++) {
+  const seen = new Set<string>(), types = new Set<string>(), rarities = new Set<string>();
+  for (const level of [3, 8, 13]) {
+    for (let seed = 0; seed < 1500; seed++) {
       for (const boss of [false, true]) {
-        const drops = rollLoot(seed, 1, boss, dungeon);
-        if (boss) expect(drops).toHaveLength(1);
+        const drops = rollLoot(seed, 1, boss, 0, { level, difficulty: 'mythic', chest: !boss });
+        expect(drops).toHaveLength(1);
         for (const drop of drops) {
           seen.add(drop.item.definitionId);
-          expect(drop.item.tier).toBe(dungeon + 1);
-          const affixes = drop.item.modifiers?.filter(modifier => modifier.affix) ?? [];
-          if (boss) {
-            expect(drop.item.rarity).toBe('rare');
+          rarities.add(drop.item.rarity);
+          expect(drop.item.itemLevel).toBeGreaterThanOrEqual(level - 1);
+          expect(drop.item.itemLevel).toBeLessThanOrEqual(level + 1);
+          expect(drop.item.tier).toBe(Math.ceil(level / 5));
+          const base = GEAR[drop.item.definitionId];
+          expect(base.rarity).toBe('common');
+          const affixes = drop.item.modifiers ?? [];
+          expect(drop.item.health).toBeUndefined();
+          expect(drop.item.attackBonus).toBeUndefined();
+          expect(drop.item.coefficientBonus).toBeUndefined();
+          expect(drop.item.effects).toBeUndefined();
+          if (drop.item.rarity === 'common') {
+            expect(affixes).toHaveLength(0);
+            expect(drop.item.name).toBe(base.name);
+            if (drop.item.kind === 'ring' || drop.item.kind === 'amulet') expect(itemStatsLabel(drop.item)).toBe('No stat bonus');
+          } else if (drop.item.rarity === 'uncommon') {
+            expect(affixes).toHaveLength(1);
+            expect(affixes[0].affix).toMatch(/^of /);
+            expect(drop.item.name).toBe(`${base.name} ${affixes[0].affix}`);
+          } else {
             expect(affixes).toHaveLength(2);
             expect(new Set(affixes.map(modifier => modifier.stat)).size).toBe(2);
+            expect(affixes[0].affix).not.toMatch(/^of /);
+            expect(affixes[1].affix).toMatch(/^of /);
+            expect(drop.item.name).toBe(`${affixes[0].affix} ${base.name} ${affixes[1].affix}`);
           }
           for (const modifier of affixes) types.add(modifier.stat);
         }
       }
     }
   }
-  expect(seen).toEqual(new Set(Object.keys(GEAR)));
+  expect(seen).toEqual(new Set(Object.values(GEAR).filter(item => item.rarity === 'common').map(item => item.definitionId)));
+  expect(rarities).toEqual(new Set(['common', 'uncommon', 'rare', 'epic']));
   expect(types.size).toBe(6);
   expect(JSON.stringify(GEAR)).toBe(before);
+});
+
+it('fills missing item levels without rerolling or stripping earned version 2 gear', () => {
+  const saved: GearItem = { ...GEAR.wooden_club, name: 'My old mighty club', rarity: 'rare', tier: 3,
+    damageMin: 999, damageMax: 1200, health: 40, coefficientBonus: .025, sellValue: 123,
+    modifiers: [{ stat: 'damage', value: 90, affix: 'of Impact' }],
+    effects: [{ id: 'earned-critical', kind: 'critical', name: 'Earned critical', trigger: 'onAttack', rateBps: 1000, multiplierBps: 18000 }],
+  };
+  const original = JSON.parse(JSON.stringify(saved));
+  const upgraded = upgradeGear(saved);
+  expect(upgraded).toEqual({ ...saved, itemLevel: 3 });
+  expect(upgradeGear(upgraded)).toBe(upgraded);
+  expect(saved).toEqual(original);
+  expect(upgradeGear({ ...saved, itemLevel: 42 }).itemLevel).toBe(42);
+  expect(upgradeGear({ ...saved, definitionId: 'unknown-earned-item', tier: undefined }).itemLevel).toBe(1);
 });
 
 it('adds protection to old gear while keeping earned rolls, prices, health and unknown item definitions', () => {
