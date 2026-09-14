@@ -1,5 +1,6 @@
 import unittest
 import json
+import os
 from pathlib import Path
 import tempfile
 from unittest.mock import patch
@@ -13,7 +14,7 @@ from bundle_scenery import bundle, pack_rectangles, sha, trim_prop
 class SceneryAtlasTests(unittest.TestCase):
     def test_inline_definitions_pack_a_new_biome_without_canonical_content(self):
         with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
+            root = Path(directory).resolve()
             pixels = np.zeros((32, 64, 4), dtype=np.uint8)
             pixels[5:27, 5:27] = [90, 80, 60, 255]
             pixels[9:27, 37:59] = [60, 80, 90, 255]
@@ -26,7 +27,7 @@ class SceneryAtlasTests(unittest.TestCase):
                     "columns": 2, "rows": 1, "props": ["one", "two"]}]}
             (root / "recipe.json").write_text(json.dumps(recipe))
             with patch("bundle_scenery.ROOT", root):
-                result = bundle("new_biome", root, root / "out")
+                result = bundle("new_biome", Path(os.path.relpath(root)), Path(os.path.relpath(root / "out")))
             self.assertEqual(set(result["props"]), {"one", "two"})
             self.assertEqual(result["props"]["one"]["anchor"], [11, 22])
             self.assertEqual(result["props"]["two"]["anchor"], [11, 18])

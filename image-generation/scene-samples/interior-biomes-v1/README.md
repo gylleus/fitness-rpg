@@ -19,8 +19,12 @@ The source manifests record image hashes, prompt hashes, backend and original
 tool output paths. `prepared/` contains shared exports and their manifests.
 `review/` contains assembled textures, the runtime interior geometry, a grounded
 prop atlas and a portable HTML file with all images and scripts embedded.
-The existing knight is included only as a scale reference. These four scenery
-sets have not been registered as playable chapters or given new enemy rosters.
+The existing knight is included only as a scale reference. The four sets now
+also supply runtime scenery: Embercrypt travels from lava caves into crypts,
+and Frostbound Keep travels from frost caves into the fortress. Their existing
+enemy rosters and chapter progression are preserved. The standalone HTMLs remain
+the original art reviews; the game uses the installed runtime textures and the
+same shared interior geometry.
 
 Background texture pixels are independent of world scale: depth and wall retain
 1672×941 source images on 640×360 logical canvases; ceilings retain 2048×768 pixels

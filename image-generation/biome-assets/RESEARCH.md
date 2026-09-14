@@ -71,5 +71,9 @@ themes now have generated scenery sets and portable reviews in
 The full-set planner extends the shared layer plan; the assembler delegates to
 the same static exporter and prop packer. The crypt sheet needed reviewed crop
 rectangles, stored as recipe data. No biome-specific generation or extraction
-script was added. These four sets are ready for art review; playable content
-registration remains a separate step.
+script was added. The sets are now installed under `assets/biomes` and selected
+by shared chapter-route data: lava caves/crypts for Embercrypt, frost caves/fortress
+for Frostbound Keep. The original delivery only created review files and left
+those chapters on the placeholder renderer. Native journey tests now cover new
+runs, older snapshots and both sections of each chapter, while the Skia audit
+checks all four runtime sets. Saved enemy rosters and progression stay intact.

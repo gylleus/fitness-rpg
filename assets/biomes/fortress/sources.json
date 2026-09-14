@@ -1,0 +1,93 @@
+{
+  "depth": {
+    "id": "fortress_depth",
+    "source": "image-generation/scene-samples/interior-biomes-v1/fortress/sources/fortress_depth.png",
+    "source_sha256": "154c99d23ec7fe1b01a0bee335ac2fb9427064d4e4559b92bc0f2e0dd206a71d",
+    "sha256": "e43bdc45900866f40593298ce968b9cca3136bc7449757d9a564fa90f928f6b6",
+    "size": [
+      1672,
+      941
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "aa0090672ae01ab44f55995f5119f25b07c39c8f10e7735d5dc3ab124eca50ec",
+    "export": {
+      "resolution": "source",
+      "min_width": 1536,
+      "sampling": "nearest",
+      "colors": "source",
+      "alpha": "opaque"
+    }
+  },
+  "wall": {
+    "id": "fortress_wall",
+    "source": "image-generation/scene-samples/interior-biomes-v1/fortress/sources/fortress_wall.png",
+    "source_sha256": "37f3e2b301a7ddc42e164bdba3ee3a96ad6de187926e52ecde121483c4cf5cec",
+    "sha256": "120e3edf72aae59682899cda3ba8b04a576de4e9d15cf3fa9fa142d69d0ed311",
+    "size": [
+      1672,
+      941
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "7ab752f35c391b4e753a2978ff1325aeb1a62d0884001485cb93ec37177b54ee",
+    "export": {
+      "resolution": "source",
+      "min_width": 1536,
+      "sampling": "nearest",
+      "colors": "source",
+      "alpha": "binary"
+    }
+  },
+  "roof": {
+    "id": "fortress_roof",
+    "source": "image-generation/scene-samples/interior-biomes-v1/fortress/sources/fortress_roof.png",
+    "source_sha256": "9196efcfac572982c9c1b2d83da270e3592f15b9a7010cb04f05166b38c8831d",
+    "sha256": "7698a74c787921e9baaaaff4329256709950b69e19049c8a6b7142e2d62ed617",
+    "size": [
+      2048,
+      768
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "e42c2cc0c1a2bc29c90b6987225227c86f861e1ff5249e1dc938a96567aa2c11",
+    "export": {
+      "resolution": "source",
+      "min_width": 1536,
+      "sampling": "nearest",
+      "colors": "source",
+      "alpha": "binary"
+    }
+  },
+  "ground": {
+    "id": "fortress_ground",
+    "source": "image-generation/scene-samples/interior-biomes-v1/fortress/sources/fortress_ground.png",
+    "source_sha256": "28d7258c5e10228a034cd24fc2132898a31f75e594d47380d21e1804a1f1b1e3",
+    "sha256": "21a30534d0df0e4ba0c5bef9b1e610b10624432d057f9c9750e9974fcb25b437",
+    "size": [
+      256,
+      96
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "4d4dd768a59d760509b9571a58a21753be3ea98d7c37f04dc59ed00d590ac798",
+    "export": {
+      "resolution": "logical",
+      "sampling": "nearest",
+      "colors": "source",
+      "alpha": "binary"
+    },
+    "canvas": [
+      256,
+      96
+    ],
+    "surface_y": 56.0
+  },
+  "props": {
+    "id": "fortress_prop_atlas",
+    "source": "image-generation/scene-samples/interior-biomes-v1/fortress/review/prop-recipe/recipe.json",
+    "source_sha256": "826f2dff529526e19dd87cf84f775c1fdeef8086f9abea21cd8c46499dba44c9",
+    "sha256": "b9eff580d0228ec08de2d489faf8d203851609571fc8ab1a0d426d53ba952452",
+    "size": [
+      1024,
+      466
+    ],
+    "backend": "built-in imagegen; trimmed nearest cutouts in one atlas"
+  }
+}

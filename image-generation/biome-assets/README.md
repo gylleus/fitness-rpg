@@ -128,6 +128,35 @@ retain all 20 original images, exact prompts, export manifests and reviewed
 extraction regions. Their [generation record](../scene-samples/interior-biomes-v1/README.md)
 includes replay and browser-validation commands.
 
+### Publish a reviewed set into the game
+
+The review directory is an art deliverable. Install its textures and prop atlas
+into the runtime asset directory before registering it with a playable chapter:
+
+```sh
+uv run biome-assets bundle --manifest PATH/prepared/manifest.json --mapping PATH/review/runtime-mapping.json --out assets/biomes/LOCATION
+uv run biome-assets bundle-props --biome LOCATION --recipe-dir PATH/review/prop-recipe --out assets/biomes/LOCATION
+```
+
+Register the exported geometry in `src/scenes/interiorLocations.ts` and static
+PNG imports in `InteriorLocationBackdrop.tsx`; Metro requires those imports to
+be statically discoverable. Add chapter sections to `interiorRoutes.ts`.
+Each section gives its starting encounter and location ID. Legacy chapter IDs
+resolve older snapshots without changing saved enemies, balance or progress.
+Explicit biome IDs take precedence, so future content is not repainted by ID.
+
+Embercrypt uses lava caves for its first two encounters and crypts for its last
+two. Frostbound Keep similarly moves from frost caves into the fortress. The
+same `InteriorBackdrop` draws all sections, including Hollow Delve. A finishing
+swing remains in its current room; the next section appears when travel starts.
+
+For a development build on a phone, open
+`fitnessrpg://scenery-review?dungeon=1&encounter=0`. The native preview uses the
+real chapter routing and `DungeonJourney`, and never starts or advances a saved
+run. Its controls inspect both chapter sections; it is disabled in release
+builds. Run `npm run test:scenery` for texture/source hashes, actual Skia rendering,
+ground contact, roof clearance and independent layer repetition across all sets.
+
 Use image references with explicit roles: the approved player for sprite style,
 the approved enemy for identity and motion, or a selected scene for background
 style. Do not transfer a reference's unrelated anatomy or objects. Record the

@@ -81,8 +81,8 @@ def pack_rectangles(sizes, width=2048, padding=2):
 
 
 def bundle(biome, recipe_dir=None, destination=None):
-    folder = recipe_dir or RECIPES / biome
-    out = destination or ROOT / "assets/biomes" / biome
+    folder = Path(recipe_dir or RECIPES / biome).resolve()
+    out = Path(destination or ROOT / "assets/biomes" / biome).resolve()
     recipe = json.loads((folder / "recipe.json").read_text())
     if recipe["biome_id"] != biome:
         raise ValueError("Recipe/biome mismatch")

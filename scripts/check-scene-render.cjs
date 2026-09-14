@@ -40,6 +40,9 @@ async function main() {
   const { WetlandsArtwork } = loadProduction('src/scenes/WetlandsArtwork.tsx', exports);
   const { HollowDelveArtwork } = loadProduction('src/scenes/HollowDelveArtwork.tsx', exports);
   const { hollowDelveLayout } = loadProduction('src/scenes/hollowDelve.ts', exports);
+  const { InteriorArtwork } = loadProduction('src/scenes/InteriorArtwork.tsx', exports);
+  const { interiorLayout } = loadProduction('src/scenes/interior.ts', exports);
+  const { INTERIOR_LOCATIONS } = loadProduction('src/scenes/interiorLocations.ts', exports);
   const { sceneryOffset, wetlandsLayout } = loadProduction('src/scenes/wetlands.ts', exports);
   const { visibleScenery } = loadProduction('src/scenes/sceneryAtlas.ts', exports);
   const { SceneryAtlasArtwork } = loadProduction('src/scenes/SceneryAtlasArtwork.tsx', exports);
@@ -78,6 +81,19 @@ async function main() {
     return [key, image];
   }));
   const delveEnemies = ['troglodyte', 'giant_cave_spider', 'bone_slime', 'delve_dwarf', 'delve_gnoll'];
+  const newInteriors = Object.keys(INTERIOR_LOCATIONS).filter(id => id !== 'hollow_delve');
+  const interiorImages = Object.fromEntries(newInteriors.map(id => {
+    const source = require(`../assets/biomes/${id}/sources.json`);
+    const images = Object.fromEntries(Object.entries(source).map(([key, spec]) => {
+      const file = `assets/biomes/${id}/${key}.png`;
+      assert.equal(createHash('sha256').update(fs.readFileSync(path.join(root, file))).digest('hex'), spec.sha256);
+      assert.equal(createHash('sha256').update(fs.readFileSync(path.join(root, spec.source))).digest('hex'), spec.source_sha256);
+      const image = decode(file);
+      assert.deepEqual([image.width(), image.height()], spec.size);
+      return [key, image];
+    }));
+    return [id, images];
+  }));
   const actors = Object.fromEntries(['barbarian_player', 'bog_toad', 'root_hulk', ...delveEnemies].map(id =>
     [id, decode(`assets/sprites/${id}--idle.png`)]));
   fs.mkdirSync(output, { recursive: true });
@@ -110,15 +126,16 @@ async function main() {
     try { renders++; return await drawOffscreen(surface, React.createElement(Group, null, ...nodes)); }
     finally { surface.dispose(); }
   }
-  async function renderDelve(layout, position, selected = delveImages, enemy) {
+  async function renderDelve(layout, position, selected = delveImages, enemy, artwork = HollowDelveArtwork, withHero = Boolean(enemy)) {
     const camera = layout.width * 0.22 - position;
     const surface = makeOffscreenSurface(layout.width, layout.height);
-    const nodes = [React.createElement(HollowDelveArtwork, { key: 'scenery', images: selected, layout,
+    const nodes = [React.createElement(artwork, { key: 'scenery', images: selected, layout,
       camera,
       ground: { ...layout.ground, x: sceneryOffset(camera, 1, layout.ground.width) },
       ...atlasDrawing(layout, camera) })];
-    if (enemy) for (const [id, x, facing] of [['barbarian_player', layout.width * 0.22, 'right'],
-      [enemy, layout.width * 0.22 + 80, 'left']]) {
+    const placedActors = withHero ? [['barbarian_player', layout.width * 0.22, 'right']] : [];
+    if (enemy) placedActors.push([enemy, layout.width * 0.22 + 80, 'left']);
+    for (const [id, x, facing] of placedActors) {
       const entity = catalog.entities[id];
       const geometry = spriteGeometry(entity, layout.ground.width / 256 * 64, facing);
       nodes.push(React.createElement(Group, { key: id,
@@ -142,6 +159,14 @@ async function main() {
         fs.writeFileSync(path.join(output, `${name}-${pose}.png`), image.encodeToBytes());
         image.dispose();
       }
+      for (const id of newInteriors) {
+        const layout = interiorLayout(INTERIOR_LOCATIONS[id], width, height, groundY, heroHeight);
+        const image = await renderDelve(layout, 280, interiorImages[id], undefined, InteriorArtwork, true);
+        const rgba = pixels(image, width, height);
+        for (let i = 3; i < rgba.length; i += 4) assert.equal(rgba[i], 255, `${id}/${name}: uncovered pixel`);
+        fs.writeFileSync(path.join(output, `${id}-${name}.png`), image.encodeToBytes());
+        image.dispose();
+      }
       for (const [index, enemy] of delveEnemies.entries()) {
         const image = await renderDelve(hollowDelveLayout(width, height, groundY, heroHeight), 280 + index * 320, delveImages, enemy);
         const rgba = pixels(image, width, height);
@@ -162,6 +187,8 @@ async function main() {
       first.dispose(); repeat.dispose();
     }
     const delveLayout = hollowDelveLayout(640, 360, 288, 64);
+    const highestCeilingY = Math.max(delveLayout.ceilingY, ...newInteriors.map(id =>
+      interiorLayout(INTERIOR_LOCATIONS[id], 640, 360, 288, 64).ceilingY));
     // The lowest roof pixel is the strictest bound at every travel position.
     // Check visible alpha in every shipped pose, including raised weapons.
     let clearedPoses = 0;
@@ -178,7 +205,7 @@ async function main() {
               if (rgba[((frame.y + y) * atlas.width() + frame.x + x) * 4 + 3]) { top = y; break; }
             }
           }
-          assert(delveLayout.groundY + geometry.top + top * geometry.scale >= delveLayout.ceilingY,
+          assert(delveLayout.groundY + geometry.top + top * geometry.scale >= highestCeilingY,
             `${id}/${action}: visible pose touches the lowest ceiling edge`);
           clearedPoses++;
         }
@@ -197,9 +224,24 @@ async function main() {
       first.dispose(); repeat.dispose(); moved.dispose();
     }
     let propCrops = 0;
-    for (const [biome, image] of [['wetlands', images.props], ['hollow_delve', delveImages.props]]) {
+    for (const id of newInteriors) {
+      const layout = interiorLayout(INTERIOR_LOCATIONS[id], 640, 360, 288, 64);
+      for (const [key, period] of [['ground', 512], ['props', layout.scenery.period],
+        ...layout.layers.map(layer => [layer.image, layer.rect.width * 2 / layer.parallax])]) {
+        const selected = Object.fromEntries(Object.keys(interiorImages[id]).map(k => [k, k === key ? interiorImages[id][k] : null]));
+        const origin = layout.width * .22;
+        const first = await renderDelve(layout, origin, selected, undefined, InteriorArtwork);
+        const repeated = await renderDelve(layout, origin + period, selected, undefined, InteriorArtwork);
+        const moved = await renderDelve(layout, origin + 173, selected, undefined, InteriorArtwork);
+        assert.deepEqual(pixels(first, 640, 360), pixels(repeated, 640, 360), `${id}/${key}: mirror repetition changed pixels`);
+        assert.notDeepEqual(pixels(first, 640, 360), pixels(moved, 640, 360), `${id}/${key}: travel did not move visible art`);
+        first.dispose(); repeated.dispose(); moved.dispose();
+      }
+    }
+    for (const [biome, image] of [['wetlands', images.props], ['hollow_delve', delveImages.props],
+      ...newInteriors.map(id => [id, interiorImages[id].props])]) {
       const atlas = require(`../assets/biomes/${biome}/props.json`);
-      assert(Object.keys(atlas.props).length >= 32);
+      assert(Object.keys(atlas.props).length >= (newInteriors.includes(biome) ? 8 : 32));
       assert.equal(createHash('sha256').update(fs.readFileSync(path.join(root, `assets/biomes/${biome}/props.png`))).digest('hex'), atlas.sha256);
       for (const [key, prop] of Object.entries(atlas.props)) {
         const { width, height } = prop.frame;
@@ -216,8 +258,8 @@ async function main() {
       }
     }
     fs.writeFileSync(path.join(output, 'report.json'), JSON.stringify({ renderer: 'real Skia / CanvasKit', renders, propCrops, clearedPoses,
-      checks: ['10 runtime texture hashes and dimensions; original generated prop source hashes', 'opaque viewport at four sizes, Wetlands and all five Hollow Delve encounters',
-        '64 exact prop atlas crops with nonempty contact rows', 'production sprites on the shared ground baseline',
+      checks: ['30 runtime texture hashes and dimensions; original generated prop source hashes', 'opaque viewport at four sizes, Wetlands, Hollow Delve and all four new interiors',
+        '96 exact prop atlas crops with nonempty contact rows', 'production sprites on the shared ground baseline',
         'all player/enemy poses below the lowest roof edge',
         'independent visible interior layer motion; pixel-exact mirrored background/ground and culled atlas repetition'] }, null, 2) + '\n');
     console.log(`Scene rendering passed: ${renders} real-Skia renders. Artifacts: ${output}`);

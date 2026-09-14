@@ -1,0 +1,93 @@
+{
+  "depth": {
+    "id": "crypts_depth",
+    "source": "image-generation/scene-samples/interior-biomes-v1/crypts/sources/crypts_depth.png",
+    "source_sha256": "935e533b020b5bc77a9ea0953b35839518668ae8eb0f058142b47568709e5ecd",
+    "sha256": "28532255b08085009822e913b573d7efc2db69af61644a98d07635b46b0753ed",
+    "size": [
+      1672,
+      941
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "40f1625ce3afca8e63412e84ba17485b45ee14c0066b78f114e2ecb2a7fdb4fb",
+    "export": {
+      "resolution": "source",
+      "min_width": 1536,
+      "sampling": "nearest",
+      "colors": "source",
+      "alpha": "opaque"
+    }
+  },
+  "wall": {
+    "id": "crypts_wall",
+    "source": "image-generation/scene-samples/interior-biomes-v1/crypts/sources/crypts_wall.png",
+    "source_sha256": "61580bf4c139b1008cc9e60a28355eab9b360522d4f6b443076cba0935c1958c",
+    "sha256": "cb2f5acc0aa2210e7f4fe9c9a33128fed3bdad104e662ff03dc833e92c18b580",
+    "size": [
+      1672,
+      941
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "e35cb911e3cfa5efea36b8fe104e05f51b06b8b390515e460b6ee86170a95931",
+    "export": {
+      "resolution": "source",
+      "min_width": 1536,
+      "sampling": "nearest",
+      "colors": "source",
+      "alpha": "binary"
+    }
+  },
+  "roof": {
+    "id": "crypts_roof",
+    "source": "image-generation/scene-samples/interior-biomes-v1/crypts/sources/crypts_roof.png",
+    "source_sha256": "b5433228d44b69455abc87989bee8d0b5fe7626b6b7008e7507dcad79f1b40a9",
+    "sha256": "6996a67fb2f378fbca47012a6759ae5632274d3b18f42287f3879e38a26741b7",
+    "size": [
+      2048,
+      768
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "45d9f9f73f584c0650d0eda43ce1a56be056b0cd2f9cf191018b86808180a870",
+    "export": {
+      "resolution": "source",
+      "min_width": 1536,
+      "sampling": "nearest",
+      "colors": "source",
+      "alpha": "binary"
+    }
+  },
+  "ground": {
+    "id": "crypts_ground",
+    "source": "image-generation/scene-samples/interior-biomes-v1/crypts/sources/crypts_ground.png",
+    "source_sha256": "937520464adfbe27a7830a2d2cadea2528ce438327f8e1fb643b0fbac58cdaeb",
+    "sha256": "86452020e07da0e93d8b31719acb0811b3cebe28377ac9ea6e50fc77e43e93d0",
+    "size": [
+      256,
+      96
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "d36220696f3f3582d4c00f661469371925d02d798d1349ad48c56159c9019755",
+    "export": {
+      "resolution": "logical",
+      "sampling": "nearest",
+      "colors": "source",
+      "alpha": "binary"
+    },
+    "canvas": [
+      256,
+      96
+    ],
+    "surface_y": 49.0
+  },
+  "props": {
+    "id": "crypts_prop_atlas",
+    "source": "image-generation/scene-samples/interior-biomes-v1/crypts/review/prop-recipe/recipe.json",
+    "source_sha256": "4de7eebb5821f610ccdc66445a889c9b1c17cca1b8e88e1fa3fd78801b2bafa1",
+    "sha256": "04b6d140440c19f4389cf4ab5dade0dd6775f3be3aad78499701e99e3f02a8dd",
+    "size": [
+      1024,
+      391
+    ],
+    "backend": "built-in imagegen; trimmed nearest cutouts in one atlas"
+  }
+}
