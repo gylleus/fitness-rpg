@@ -25,7 +25,7 @@ it('upgrades an existing bag atomically, retains health and never rewrites the a
   const state = beginBattle(0, '2026-09-11', stats, 85);
   db.insert(dungeonRuns).values({ startedAt: now, status: 'active', state }).run();
   const snapshot = getGameSnapshot(db, now);
-  expect(snapshot.hero).toMatchObject({ inventoryVersion: 2, gold: 73, damageTaken: 15 });
+  expect(snapshot.hero).toMatchObject({ inventoryVersion: 3, gold: 73, damageTaken: 15 });
   expect(snapshot.stats).toMatchObject({ armor: 12, health: 150 });
   expect(snapshot.currentHealth).toBe(135);
   expect(snapshot.inventory).toHaveLength(1);
@@ -41,8 +41,22 @@ it('rolls back both item conversion and the version marker on a failed write', (
   expect(db.select().from(heroes).where(eq(heroes.id, 1)).get()?.inventoryVersion).toBe(1);
   expect(getInventory(db)[0].item).toEqual(oldItem);
   db.run('DROP TRIGGER fail_item_upgrade');
-  expect(getHero(db).inventoryVersion).toBe(2);
+  expect(getHero(db).inventoryVersion).toBe(3);
   expect(getInventory(db)[0].item.armor).toBe(12);
+});
+
+it('fills item levels on current catalog saves once without changing earned stats or regifting starters', () => {
+  const db = createTestDb(); databases.push(db);
+  db.insert(heroes).values({ id: 1, inventoryVersion: 2, gold: 123 }).run();
+  const item = { ...oldItem, version: 2 as const, tier: 2, armor: 17,
+    modifiers: [{ stat: 'health' as const, value: 9, affix: 'of Vigor' }] };
+  db.insert(inventoryItems).values({ item, slot: 'armor', acquiredAt: 42, sourceKey: 'earned:old' }).run();
+  expect(getHero(db).inventoryVersion).toBe(3);
+  const upgraded = getInventory(db);
+  expect(upgraded).toHaveLength(1);
+  expect(upgraded[0]).toMatchObject({ item: { ...item, itemLevel: 2 }, acquiredAt: 42, sourceKey: 'earned:old' });
+  expect(getHero(db).gold).toBe(123);
+  expect(getInventory(db)).toEqual(upgraded);
 });
 
 it('awards late legacy loot with the same stats in the result and in the migrated bag', () => {

@@ -16,7 +16,7 @@ export type GameDb = BaseSQLiteDatabase<'sync', unknown, typeof schema>;
 export function getHero(db: GameDb) {
   db.insert(heroes).values({ id: 1 }).onConflictDoNothing().run();
   const hero = db.select().from(heroes).where(eq(heroes.id, 1)).get()!;
-  if (hero.inventoryVersion < 2) { initializeInventory(db); return { ...hero, inventoryVersion: 2 }; }
+  if (hero.inventoryVersion < 3) { initializeInventory(db); return { ...hero, inventoryVersion: 3 }; }
   return hero;
 }
 
