@@ -1,0 +1,19 @@
+{
+  "installed_apk_sha256": "136a5c21e3e03a1c9c3a5ce09210fce023e6dad5748c69dde5b4157074775ab9",
+  "installed_build_reverified": true,
+  "cause": "The actor-density export retained the original illustration. Pixel density and palette limits alone did not deliver the requested drawn style.",
+  "redraw_status": "review candidate only; not bundled into installed game",
+  "changed_art": [
+    "depth",
+    "wall",
+    "roof"
+  ],
+  "unchanged_art": [
+    "player",
+    "enemies",
+    "ground",
+    "props"
+  ],
+  "pipeline_tests": 26,
+  "standalone_review": "review/review.html"
+}
