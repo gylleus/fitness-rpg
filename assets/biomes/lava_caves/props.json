@@ -4,19 +4,28 @@
   "image": "props.png",
   "size": [
     1024,
-    433
+    95
   ],
-  "sha256": "11262e3e1085d1de8326ee529907f0ae048b653391a4b59c801242522173218b",
+  "pixel_profile": {
+    "schema_version": 1,
+    "pixels_per_unit": 1.5,
+    "reference_height": 64,
+    "background_colors": 48,
+    "ground_colors": 32,
+    "prop_colors": 32
+  },
+  "sha256": "bc2e3c67f0f95f11f515bf55c85cef57a3237fb68c458c6703226507c25265f6",
   "padding": 2,
   "props": {
     "lava_caves_basalt_boulder": {
       "name": "Layered basalt boulder",
       "anchor": [
-        120.0,
-        194
+        30.0,
+        48
       ],
       "height_scale": 0.5,
-      "pixels_sha256": "49d34eddbda5070cd8d37cac75241d61cb9c5678b4699eb6dfb01959b0d58997",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "f881c20d5c883d08d110b9f6201b85cc71472eb1ab3449c5e0912b7b74b26d15",
       "source": {
         "image": "image-generation/scene-samples/interior-biomes-v1/lava_caves/review/prop-recipe/../../prepared/lava_caves_decorations.png",
         "sha256": "b8cb9dd757003270ccda6967ba12543544c3c93d3068ceca8d50a0a7c1308532",
@@ -36,27 +45,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          194
+          60,
+          48
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 671,
+        "x": 360,
         "y": 2,
-        "width": 240,
-        "height": 194
+        "width": 60,
+        "height": 48
       }
     },
     "lava_caves_obsidian_cluster": {
       "name": "Small squat obsidian outcrop with restrained dull red reflections",
       "anchor": [
-        120.0,
-        183
+        41.0,
+        62
       ],
       "height_scale": 0.65,
-      "pixels_sha256": "263335a73b35ef39b88703162363000f087ccdf681d2e050db2184fce00a533f",
+      "pixels_per_unit": 1.4903846153846154,
+      "pixels_sha256": "b613d0891a377ec56c49daf28ccd18b4dd786768205176ff190f8df350e09160",
       "source": {
         "image": "image-generation/scene-samples/interior-biomes-v1/lava_caves/review/prop-recipe/../../prepared/lava_caves_decorations.png",
         "sha256": "b8cb9dd757003270ccda6967ba12543544c3c93d3068ceca8d50a0a7c1308532",
@@ -76,27 +86,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          183
+          82,
+          62
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 246,
-        "y": 246,
-        "width": 240,
-        "height": 183
+        "x": 274,
+        "y": 2,
+        "width": 82,
+        "height": 62
       }
     },
     "lava_caves_ash_urn": {
       "name": "Cracked ash-filled stone urn",
       "anchor": [
-        104.0,
-        240
+        19.0,
+        43
       ],
       "height_scale": 0.45,
-      "pixels_sha256": "ebd84ae389cb1a26a1444e408d719d749983ec3a7cfd2c74e77aafa4a8afdb9e",
+      "pixels_per_unit": 1.4930555555555556,
+      "pixels_sha256": "c9ac09cf23e167313d6b9f00fb4576fc17325a349758d765396a9b56598f297e",
       "source": {
         "image": "image-generation/scene-samples/interior-biomes-v1/lava_caves/review/prop-recipe/../../prepared/lava_caves_decorations.png",
         "sha256": "b8cb9dd757003270ccda6967ba12543544c3c93d3068ceca8d50a0a7c1308532",
@@ -116,27 +127,28 @@
         "reduced_trim": [
           0,
           0,
-          208,
-          240
+          38,
+          43
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 2,
+        "x": 424,
         "y": 2,
-        "width": 208,
-        "height": 240
+        "width": 38,
+        "height": 43
       }
     },
     "lava_caves_cooled_vent": {
       "name": "Low cooled lava vent with one faint ember seam and no smoke",
       "anchor": [
-        120.0,
-        121
+        38.0,
+        38
       ],
       "height_scale": 0.4,
-      "pixels_sha256": "07c93b27f6a9c3661ff94d26c231c95631107ff789d2543b2742894063291d51",
+      "pixels_per_unit": 1.484375,
+      "pixels_sha256": "24c22ea469fbf23cfb1618f45639eb78e73385f11f81726782e220060b8c08f9",
       "source": {
         "image": "image-generation/scene-samples/interior-biomes-v1/lava_caves/review/prop-recipe/../../prepared/lava_caves_decorations.png",
         "sha256": "b8cb9dd757003270ccda6967ba12543544c3c93d3068ceca8d50a0a7c1308532",
@@ -156,27 +168,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          121
+          76,
+          38
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 734,
-        "y": 246,
-        "width": 240,
-        "height": 121
+        "x": 466,
+        "y": 2,
+        "width": 76,
+        "height": 38
       }
     },
     "lava_caves_iron_brazier": {
       "name": "Heavy iron brazier with a few dull embers",
       "anchor": [
-        120.0,
-        224
+        44.0,
+        82
       ],
       "height_scale": 0.85,
-      "pixels_sha256": "7e66d2d0d2075677803d4aa363c0063028444d685de341ce72160db9536de36e",
+      "pixels_per_unit": 1.5073529411764706,
+      "pixels_sha256": "6e9fcf7a9daae8d4114b00eb3b9e1dcb97b82f52a7a1edd08f46faee5e6f3a8a",
       "source": {
         "image": "image-generation/scene-samples/interior-biomes-v1/lava_caves/review/prop-recipe/../../prepared/lava_caves_decorations.png",
         "sha256": "b8cb9dd757003270ccda6967ba12543544c3c93d3068ceca8d50a0a7c1308532",
@@ -196,27 +209,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          224
+          88,
+          82
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 427,
+        "x": 85,
         "y": 2,
-        "width": 240,
-        "height": 224
+        "width": 88,
+        "height": 82
       }
     },
     "lava_caves_ore_cart": {
       "name": "Abandoned iron ore cart carrying volcanic stone",
       "anchor": [
-        120.0,
-        185
+        46.5,
+        72
       ],
       "height_scale": 0.75,
-      "pixels_sha256": "f287e0eb07eb0b1d4e96b7bb2bc1652e604bf0cc00530470194124ffce63e768",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "7892e3497f1a205fef5089fb53a0bcd720d3c28287cc42521d7ad2e25ebad914",
       "source": {
         "image": "image-generation/scene-samples/interior-biomes-v1/lava_caves/review/prop-recipe/../../prepared/lava_caves_decorations.png",
         "sha256": "b8cb9dd757003270ccda6967ba12543544c3c93d3068ceca8d50a0a7c1308532",
@@ -236,27 +250,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          185
+          93,
+          72
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 2,
-        "y": 246,
-        "width": 240,
-        "height": 185
+        "x": 177,
+        "y": 2,
+        "width": 93,
+        "height": 72
       }
     },
     "lava_caves_chain_coil": {
       "name": "Rusted chain coiled beside a broken mining pick",
       "anchor": [
-        120.0,
-        140
+        28.5,
+        34
       ],
       "height_scale": 0.35,
-      "pixels_sha256": "0358dec41a35dcd8eba085cd068f1638b10033844d679417af430e17e320db57",
+      "pixels_per_unit": 1.517857142857143,
+      "pixels_sha256": "814f296d7ca81301516b871611083dc715fa3d82c1dbfce6851a2a5fb83e538d",
       "source": {
         "image": "image-generation/scene-samples/interior-biomes-v1/lava_caves/review/prop-recipe/../../prepared/lava_caves_decorations.png",
         "sha256": "b8cb9dd757003270ccda6967ba12543544c3c93d3068ceca8d50a0a7c1308532",
@@ -276,27 +291,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          140
+          57,
+          34
         ],
         "removed_detached_pixels": 0,
         "components": 3
       },
       "frame": {
-        "x": 490,
-        "y": 246,
-        "width": 240,
-        "height": 140
+        "x": 546,
+        "y": 2,
+        "width": 57,
+        "height": 34
       }
     },
     "lava_caves_broken_column": {
       "name": "Broken natural basalt column with a flat grounded base",
       "anchor": [
-        104.5,
-        240
+        39.5,
+        91
       ],
       "height_scale": 0.95,
-      "pixels_sha256": "f2a8e332348d8f6ac7908e47081d2bde4bbb8c6109ce915aee000bac239542e5",
+      "pixels_per_unit": 1.4967105263157896,
+      "pixels_sha256": "8bd73e13cd28926289834a77720c947fa15677a0c7517423a670c65f5c51b996",
       "source": {
         "image": "image-generation/scene-samples/interior-biomes-v1/lava_caves/review/prop-recipe/../../prepared/lava_caves_decorations.png",
         "sha256": "b8cb9dd757003270ccda6967ba12543544c3c93d3068ceca8d50a0a7c1308532",
@@ -316,17 +332,17 @@
         "reduced_trim": [
           0,
           0,
-          209,
-          240
+          79,
+          91
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 214,
+        "x": 2,
         "y": 2,
-        "width": 209,
-        "height": 240
+        "width": 79,
+        "height": 91
       }
     }
   }

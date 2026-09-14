@@ -82,6 +82,18 @@ async function main() {
   }));
   const delveEnemies = ['troglodyte', 'giant_cave_spider', 'bone_slime', 'delve_dwarf', 'delve_gnoll'];
   const newInteriors = Object.keys(INTERIOR_LOCATIONS).filter(id => id !== 'hollow_delve');
+  // Enforce world density on installed art as well as export unit fixtures.
+  // A large source master must not silently bypass the actor-scale compiler.
+  const pixelProfile = sources.ground.export.pixel_profile;
+  for (const biome of ['wetlands', 'hollow_delve', ...newInteriors]) {
+    const records = require(`../assets/biomes/${biome}/sources.json`);
+    for (const [key, spec] of Object.entries(records)) {
+      if (key === 'props') continue;
+      assert.deepEqual(spec.export.pixel_profile, pixelProfile, `${biome}/${key}: mismatched pixel profile`);
+      assert.deepEqual(spec.size, spec.canvas.map(n => Math.round(n * pixelProfile.pixels_per_unit)),
+        `${biome}/${key}: texture density differs from actor reference`);
+    }
+  }
   const interiorImages = Object.fromEntries(newInteriors.map(id => {
     const source = require(`../assets/biomes/${id}/sources.json`);
     const images = Object.fromEntries(Object.entries(source).map(([key, spec]) => {
@@ -241,16 +253,22 @@ async function main() {
     for (const [biome, image] of [['wetlands', images.props], ['hollow_delve', delveImages.props],
       ...newInteriors.map(id => [id, interiorImages[id].props])]) {
       const atlas = require(`../assets/biomes/${biome}/props.json`);
+      assert.deepEqual(atlas.pixel_profile, pixelProfile, `${biome}: atlas uses a different pixel scale`);
       assert(Object.keys(atlas.props).length >= (newInteriors.includes(biome) ? 8 : 32));
       assert.equal(createHash('sha256').update(fs.readFileSync(path.join(root, `assets/biomes/${biome}/props.png`))).digest('hex'), atlas.sha256);
       for (const [key, prop] of Object.entries(atlas.props)) {
         const { width, height } = prop.frame;
+        const expectedHeight = Math.round(pixelProfile.reference_height * prop.height_scale * pixelProfile.pixels_per_unit);
+        assert(Math.abs(height - expectedHeight) <= 1, `${key}: visible pixel height does not match its in-game height`);
         assert.equal(createHash('sha256').update(fs.readFileSync(path.join(root, prop.source.image))).digest('hex'), prop.source.sha256);
         assert.equal(prop.anchor[1], height, `${key}: anchor includes transparent bottom padding`);
         const surface = makeOffscreenSurface(width, height);
         const crop = await drawOffscreen(surface, React.createElement(SceneryAtlasArtwork, {
           image, sprites: [prop.frame], transforms: [Skia.RSXform(1, 0, 0, 0)] }));
         const rgba = pixels(crop, width, height);
+        const colors = new Set();
+        for (let i = 0; i < rgba.length; i += 4) if (rgba[i+3]) colors.add((rgba[i]<<16) | (rgba[i+1]<<8) | rgba[i+2]);
+        assert(colors.size <= pixelProfile.prop_colors, `${key}: texture exceeds the prop palette budget`);
         assert.equal(createHash('sha256').update(rgba).digest('hex'), prop.pixels_sha256, `${key}: rendered atlas crop differs from prepared pixels`);
         assert(Array.from({ length: width }, (_, x) => rgba[((height-1)*width+x)*4+3]).some(a => a === 255), `${key}: empty bottom row creates a floating prop`);
         assert(Array.from({ length: width }, (_, x) => rgba[x*4+3]).some(a => a === 255), `${key}: untrimmed top edge`);
@@ -258,7 +276,7 @@ async function main() {
       }
     }
     fs.writeFileSync(path.join(output, 'report.json'), JSON.stringify({ renderer: 'real Skia / CanvasKit', renders, propCrops, clearedPoses,
-      checks: ['30 runtime texture hashes and dimensions; original generated prop source hashes', 'opaque viewport at four sizes, Wetlands, Hollow Delve and all four new interiors',
+      pixelProfile, checks: ['30 runtime texture hashes and dimensions; original generated prop source hashes', 'shared world pixel density and per-prop palette budgets', 'opaque viewport at four sizes, Wetlands, Hollow Delve and all four new interiors',
         '96 exact prop atlas crops with nonempty contact rows', 'production sprites on the shared ground baseline',
         'all player/enemy poses below the lowest roof edge',
         'independent visible interior layer motion; pixel-exact mirrored background/ground and culled atlas repetition'] }, null, 2) + '\n');

@@ -50,7 +50,7 @@ it('resolves every enemy animation and holds death while attack recovers to idle
 it.each([[300, 240, 198, 92], [390, 844, 754, 140], [844, 390, 300, 126.5], [320, 480, 390, 140]])(
   'keeps cave surfaces grounded and the tunnel enclosed at %ix%i', (width, height, groundY, heroHeight) => {
     const layout = hollowDelveLayout(width, height, groundY, heroHeight);
-    expect(layout.ground.y + sources.slate_path.surface_y / sources.slate_path.size[1] * layout.ground.height).toBeCloseTo(groundY);
+    expect(layout.ground.y + sources.slate_path.surface_y / sources.slate_path.canvas[1] * layout.ground.height).toBeCloseTo(groundY);
     for (const prop of layout.scenery.props) {
       expect(prop.y + prop.height).toBeCloseTo(groundY);
     }
@@ -64,7 +64,7 @@ it.each([[300, 240, 198, 92], [390, 844, 754, 140], [844, 390, 300, 126.5], [320
     }
     expect(groundY - layout.ceilingY).toBeCloseTo(heroHeight * 104 / 64);
     expect(layout.layers.map(layer => layer.parallax)).toEqual([.1, .32, .68]);
-    expect(sources.depth.size[0]).toBeGreaterThanOrEqual(1536);
-    expect(sources.wall.size[0]).toBeGreaterThanOrEqual(1536);
-    expect(sources.roof.size[0]).toBeGreaterThanOrEqual(1536);
+    for (const source of [sources.depth, sources.wall, sources.roof]) {
+      expect(source.size[0] / source.canvas[0]).toBe(1.5);
+    }
   });

@@ -2,48 +2,141 @@
   "sky": {
     "id": "wetlands_overcast_sky",
     "source": "image-generation/scene-samples/wetlands-v1/wetlands_overcast_sky.png",
-    "sha256": "c64c5ced7b3bea0bd796f90146aa964a4a00f954d53aa799696f4dd412019e99",
+    "sha256": "d5291d3ab3b5e3c62ee9e3162280e125ed580a14a7771c1b80c2d9e49c541b01",
     "size": [
-      1672,
-      941
-    ]
+      960,
+      540
+    ],
+    "source_sha256": "c64c5ced7b3bea0bd796f90146aa964a4a00f954d53aa799696f4dd412019e99",
+    "canvas": [
+      640,
+      360
+    ],
+    "export": {
+      "resolution": "world",
+      "sampling": "nearest",
+      "reduction": "area",
+      "dither": "none",
+      "colors": 48,
+      "pixel_profile": {
+        "schema_version": 1,
+        "pixels_per_unit": 1.5,
+        "reference_height": 64,
+        "background_colors": 48,
+        "ground_colors": 32,
+        "prop_colors": 32
+      },
+      "alpha": "opaque"
+    }
   },
   "distant": {
     "id": "wetlands_distant_silhouettes",
     "source": "image-generation/scene-samples/wetlands-v1/wetlands_distant_silhouettes.png",
-    "sha256": "6c1346b8e1737c5e91508c440ada0aaba519d7a18d7e893045c8e4902ca3ee74",
+    "sha256": "6d4471a20c1f9d2610e9174da601dae927ef24ac582484c8653e0e13bd914b64",
     "size": [
-      1672,
-      941
-    ]
+      960,
+      540
+    ],
+    "source_sha256": "6c1346b8e1737c5e91508c440ada0aaba519d7a18d7e893045c8e4902ca3ee74",
+    "canvas": [
+      640,
+      360
+    ],
+    "export": {
+      "resolution": "world",
+      "sampling": "nearest",
+      "reduction": "area",
+      "dither": "none",
+      "colors": 48,
+      "pixel_profile": {
+        "schema_version": 1,
+        "pixels_per_unit": 1.5,
+        "reference_height": 64,
+        "background_colors": 48,
+        "ground_colors": 32,
+        "prop_colors": 32
+      },
+      "alpha": "binary"
+    }
   },
   "banks": {
     "id": "wetlands_reed_banks",
     "source": "image-generation/scene-samples/wetlands-v1/wetlands_reed_banks.png",
-    "sha256": "59f681084074fbc3bfa56f30aed8ad3d385a42b83648bf5f26e0f4c19220a8ef",
+    "sha256": "1d55f4982f2d87688d0dc995ab17f89045a31da6b1017ac1bef4fb432cc68932",
     "size": [
-      1672,
-      941
-    ]
+      960,
+      540
+    ],
+    "source_sha256": "59f681084074fbc3bfa56f30aed8ad3d385a42b83648bf5f26e0f4c19220a8ef",
+    "canvas": [
+      640,
+      360
+    ],
+    "export": {
+      "resolution": "world",
+      "sampling": "nearest",
+      "reduction": "area",
+      "dither": "none",
+      "colors": 48,
+      "pixel_profile": {
+        "schema_version": 1,
+        "pixels_per_unit": 1.5,
+        "reference_height": 64,
+        "background_colors": 48,
+        "ground_colors": 32,
+        "prop_colors": 32
+      },
+      "alpha": "binary"
+    }
   },
   "ground": {
     "id": "wetlands_raised_peat_path",
     "source": "image-generation/scene-samples/wetlands-v1/wetlands_raised_peat_path.png",
-    "sha256": "7ac7914cd6c5962816f8a751e095643614d734bd9252a9605140660cf27f341c",
+    "sha256": "3933179de09aa979775e6f8cd6e5c90650a884e5452805bd90418b7a91648eae",
     "size": [
-      2048,
-      768
-    ]
+      384,
+      144
+    ],
+    "source_sha256": "7ac7914cd6c5962816f8a751e095643614d734bd9252a9605140660cf27f341c",
+    "canvas": [
+      256,
+      96
+    ],
+    "export": {
+      "resolution": "world",
+      "sampling": "nearest",
+      "reduction": "area",
+      "dither": "none",
+      "colors": 32,
+      "pixel_profile": {
+        "schema_version": 1,
+        "pixels_per_unit": 1.5,
+        "reference_height": 64,
+        "background_colors": 48,
+        "ground_colors": 32,
+        "prop_colors": 32
+      },
+      "alpha": "binary"
+    },
+    "surface_y": 40.666666666666664
   },
   "props": {
     "id": "wetlands_prop_atlas",
     "source": "image-generation/scene-samples/biome-props-v2/wetlands/recipe.json",
     "source_sha256": "f502fd3de105d49e2d2a3c93bc062ffbba34d2d75cbfcf52108df4fb00a35603",
-    "sha256": "8b6687cd16387354d77de6c2bb1975e3ab8728b8c0603609a81b6f60e38ae284",
+    "sha256": "4299151757c3988ecf7ec89799089dcbefd1455f6772ec1358b74139672aff42",
     "size": [
       2048,
-      866
+      424
     ],
-    "backend": "built-in imagegen; trimmed nearest cutouts in one atlas"
+    "pixel_profile": {
+      "schema_version": 1,
+      "pixels_per_unit": 1.5,
+      "reference_height": 64,
+      "background_colors": 48,
+      "ground_colors": 32,
+      "prop_colors": 32
+    },
+    "backend": "built-in imagegen; actor-scale cutouts in one atlas"
   }
 }

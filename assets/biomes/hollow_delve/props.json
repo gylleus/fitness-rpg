@@ -4,19 +4,28 @@
   "image": "props.png",
   "size": [
     2048,
-    882
+    300
   ],
-  "sha256": "0b3f7a6c7b502677a5ce907bc03237e71cac23307fc4a4816c6a285fc0e463e0",
+  "pixel_profile": {
+    "schema_version": 1,
+    "pixels_per_unit": 1.5,
+    "reference_height": 64,
+    "background_colors": 48,
+    "ground_colors": 32,
+    "prop_colors": 32
+  },
+  "sha256": "e300717ac1e58a8bccc18ff75f1b326d42dbee9da97241eb2da4d5e63e0b2e6c",
   "padding": 2,
   "props": {
     "hollow_delve_mine_support": {
       "name": "Buckled mine support",
       "anchor": [
-        120.0,
-        224
+        118.0,
+        221
       ],
       "height_scale": 2.3,
-      "pixels_sha256": "a40e6c0eba17f1f50a172d67d58041643c71eb4ff277c78bfae1bca1d4c2bc0c",
+      "pixels_per_unit": 1.501358695652174,
+      "pixels_sha256": "eef0023e4dd34f2b9aff021961cc01723d022b8ce3f6735537f9f4ff1facdf44",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-1.png",
         "sha256": "a6fa0dd11d55baeb64bec83b094089a93d1a7132835e75bbddf650de1e083b39",
@@ -36,27 +45,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          224
+          236,
+          221
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 1222,
-        "y": 246,
-        "width": 240,
-        "height": 224
+        "x": 138,
+        "y": 2,
+        "width": 236,
+        "height": 221
       }
     },
     "hollow_delve_webbed_arch": {
       "name": "Webbed broken arch",
       "anchor": [
-        120.0,
-        210
+        115.0,
+        202
       ],
       "height_scale": 2.1,
-      "pixels_sha256": "a54c48e0a09f1018ccc11756e217bd7bc4622f30cb83667248fd71cf8f69e7a3",
+      "pixels_per_unit": 1.5029761904761905,
+      "pixels_sha256": "e8bef4a1c2a5906e982e996ae42659d3e27cf4dd8fc8e566023d732fe65b60d5",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-1.png",
         "sha256": "a6fa0dd11d55baeb64bec83b094089a93d1a7132835e75bbddf650de1e083b39",
@@ -76,27 +86,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          210
+          230,
+          202
         ],
         "removed_detached_pixels": 7,
         "components": 1
       },
       "frame": {
-        "x": 734,
-        "y": 487,
-        "width": 240,
-        "height": 210
+        "x": 378,
+        "y": 2,
+        "width": 230,
+        "height": 202
       }
     },
     "hollow_delve_ore_cart": {
       "name": "Derailed ore cart",
       "anchor": [
-        120.0,
-        176
+        52.5,
+        77
       ],
       "height_scale": 0.8,
-      "pixels_sha256": "fbb57cff1a6e7ea04b501d6b0317714af1bffbd1de8815ce7c04d21847e033ac",
+      "pixels_per_unit": 1.50390625,
+      "pixels_sha256": "b778229c147a2aa0a33fa5cea795299d7198eb1fb23622d9b562bc60690ea25e",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-1.png",
         "sha256": "a6fa0dd11d55baeb64bec83b094089a93d1a7132835e75bbddf650de1e083b39",
@@ -116,27 +127,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          176
+          105,
+          77
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 2,
-        "y": 704,
-        "width": 240,
-        "height": 176
+        "x": 1734,
+        "y": 2,
+        "width": 105,
+        "height": 77
       }
     },
     "hollow_delve_quartz_cluster": {
       "name": "Clouded quartz cluster",
       "anchor": [
-        118.0,
-        240
+        30.5,
+        62
       ],
       "height_scale": 0.65,
-      "pixels_sha256": "5dabba177f5c010ebbac67f44d0daaf69eec9db35e7e0a6a8b62bc554b8f3e88",
+      "pixels_per_unit": 1.4903846153846154,
+      "pixels_sha256": "894936f03ea7462d071f070200cd34fe75f8602b40afceca05e0a23cf6ec8daa",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-1.png",
         "sha256": "a6fa0dd11d55baeb64bec83b094089a93d1a7132835e75bbddf650de1e083b39",
@@ -156,27 +168,28 @@
         "reduced_trim": [
           0,
           0,
-          236,
-          240
+          61,
+          62
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 1204,
-        "y": 2,
-        "width": 236,
-        "height": 240
+        "x": 116,
+        "y": 236,
+        "width": 61,
+        "height": 62
       }
     },
     "hollow_delve_fungus_stump": {
       "name": "Pale fungus on pit timber",
       "anchor": [
-        112.0,
-        240
+        24.5,
+        53
       ],
       "height_scale": 0.55,
-      "pixels_sha256": "923b5e91b17b5731b26fe306e02cafddebda1ccfdf19a79b7b012b36a942f601",
+      "pixels_per_unit": 1.5056818181818181,
+      "pixels_sha256": "77e08c3547435cd3042d0565b3d6649e5081885ef5c7d20f576a052bbbff237f",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-1.png",
         "sha256": "a6fa0dd11d55baeb64bec83b094089a93d1a7132835e75bbddf650de1e083b39",
@@ -196,27 +209,28 @@
         "reduced_trim": [
           0,
           0,
-          224,
-          240
+          49,
+          53
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 592,
-        "y": 2,
-        "width": 224,
-        "height": 240
+        "x": 499,
+        "y": 236,
+        "width": 49,
+        "height": 53
       }
     },
     "hollow_delve_bone_heap": {
       "name": "Dusty bone heap",
       "anchor": [
-        120.0,
-        136
+        21.0,
+        24
       ],
       "height_scale": 0.25,
-      "pixels_sha256": "d1b62e85c447935fe2b6a1369714f1258a58b7532e48c1db73683f5347b3cb64",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "cc15916fff6d50f9d75fb08ae0b43438e351ca521dc7107083b9fe91e6c8c578",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-1.png",
         "sha256": "a6fa0dd11d55baeb64bec83b094089a93d1a7132835e75bbddf650de1e083b39",
@@ -236,27 +250,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          136
+          42,
+          24
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 1466,
-        "y": 704,
-        "width": 240,
-        "height": 136
+        "x": 961,
+        "y": 236,
+        "width": 42,
+        "height": 24
       }
     },
     "hollow_delve_stalagmites": {
       "name": "Worn stalagmites",
       "anchor": [
-        120.0,
-        237
+        48.5,
+        96
       ],
       "height_scale": 1.0,
-      "pixels_sha256": "6f3aa945bbff191dcd643f21d79a4a0ca8b5d00a1be605811e0e88819d3a3394",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "e8a4a36e432c769dc4c9b352fee0a44b94b1d1339803bfc98abf5c0276d2e219",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-1.png",
         "sha256": "a6fa0dd11d55baeb64bec83b094089a93d1a7132835e75bbddf650de1e083b39",
@@ -276,27 +291,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          237
+          97,
+          96
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 2,
-        "y": 246,
-        "width": 240,
-        "height": 237
+        "x": 1546,
+        "y": 2,
+        "width": 97,
+        "height": 96
       }
     },
     "hollow_delve_tool_cache": {
       "name": "Abandoned tool cache",
       "anchor": [
-        120.0,
-        236
+        32.0,
+        62
       ],
       "height_scale": 0.65,
-      "pixels_sha256": "07045870de266061456fd4531749bc7bce6b6eb999195d25fb2d2b093d4dfd8d",
+      "pixels_per_unit": 1.4903846153846154,
+      "pixels_sha256": "3b7643cedef2b76ee96bcc7e8d44603023a5c0ecb198a0d752fa9ea7e78f7957",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-1.png",
         "sha256": "a6fa0dd11d55baeb64bec83b094089a93d1a7132835e75bbddf650de1e083b39",
@@ -316,27 +332,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          236
+          64,
+          62
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 246,
-        "y": 246,
-        "width": 240,
-        "height": 236
+        "x": 181,
+        "y": 236,
+        "width": 64,
+        "height": 62
       }
     },
     "hollow_delve_rusted_bucket": {
       "name": "Split iron bucket",
       "anchor": [
-        103.0,
-        217
+        14.5,
+        31
       ],
       "height_scale": 0.32,
-      "pixels_sha256": "91a6d0a595a79eb1b1368b662aa7595a6c0b899f4b8d289e190a875b70a5d05a",
+      "pixels_per_unit": 1.513671875,
+      "pixels_sha256": "b5b94e23538118717e4073122684cd4914d8371b7c93b855cf85e8f987bc60a8",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-1.png",
         "sha256": "a6fa0dd11d55baeb64bec83b094089a93d1a7132835e75bbddf650de1e083b39",
@@ -356,27 +373,28 @@
         "reduced_trim": [
           0,
           0,
-          206,
-          217
+          29,
+          31
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 1710,
-        "y": 246,
-        "width": 206,
-        "height": 217
+        "x": 928,
+        "y": 236,
+        "width": 29,
+        "height": 31
       }
     },
     "hollow_delve_ore_sacks": {
       "name": "Slumped ore sacks",
       "anchor": [
-        120.0,
-        171
+        37.0,
+        53
       ],
       "height_scale": 0.55,
-      "pixels_sha256": "a3dccdd48cfa1a597f3968b1594331f47bda3cb315494e3f84054b7f03f08f5a",
+      "pixels_per_unit": 1.5056818181818181,
+      "pixels_sha256": "73bc229880a36040bfd4f13bb8d51db27533269de8698e9fc2aeb841b7310b9b",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-1.png",
         "sha256": "a6fa0dd11d55baeb64bec83b094089a93d1a7132835e75bbddf650de1e083b39",
@@ -396,27 +414,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          171
+          74,
+          53
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 734,
-        "y": 704,
-        "width": 240,
-        "height": 171
+        "x": 552,
+        "y": 236,
+        "width": 74,
+        "height": 53
       }
     },
     "hollow_delve_crystal_geode": {
       "name": "Broken crystal geode",
       "anchor": [
-        120.0,
-        181
+        25.5,
+        38
       ],
       "height_scale": 0.4,
-      "pixels_sha256": "c80694646294da2a2f9c626490934ed1df5173f74316fa8e420acd63cf75731d",
+      "pixels_per_unit": 1.484375,
+      "pixels_sha256": "a7322e97a22684d5cb3d05f1532021b14cdac401b336350551db7468c1205f50",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-1.png",
         "sha256": "a6fa0dd11d55baeb64bec83b094089a93d1a7132835e75bbddf650de1e083b39",
@@ -436,27 +455,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          181
+          51,
+          38
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 1710,
-        "y": 487,
-        "width": 240,
-        "height": 181
+        "x": 815,
+        "y": 236,
+        "width": 51,
+        "height": 38
       }
     },
     "hollow_delve_broken_barrel": {
       "name": "Broken pit barrel",
       "anchor": [
-        120.0,
-        230
+        37.5,
+        72
       ],
       "height_scale": 0.75,
-      "pixels_sha256": "d5b5f61872bb7173531a231847b96bcff118ca896ef0935c98e4ae92da2f2c5b",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "dac42a68d47eaa26297307f56835ec0d99177582f0598b6beccd55f712991d29",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-1.png",
         "sha256": "a6fa0dd11d55baeb64bec83b094089a93d1a7132835e75bbddf650de1e083b39",
@@ -476,27 +496,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          230
+          75,
+          72
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 978,
-        "y": 246,
-        "width": 240,
-        "height": 230
+        "x": 1843,
+        "y": 2,
+        "width": 75,
+        "height": 72
       }
     },
     "hollow_delve_rusted_winch": {
       "name": "Seized mine winch",
       "anchor": [
-        120.0,
-        218
+        53.0,
+        96
       ],
       "height_scale": 1.0,
-      "pixels_sha256": "aa1a5fdc25d99b6253e0fd5beec670806ee991839de9fc99145ad40864c4c2a3",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "36e07a0fe5acac210bae68fa84c7ce758967a694fe6c1a7007e6caf62fc9562c",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-1.png",
         "sha256": "a6fa0dd11d55baeb64bec83b094089a93d1a7132835e75bbddf650de1e083b39",
@@ -516,27 +537,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          218
+          106,
+          96
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 1466,
-        "y": 246,
-        "width": 240,
-        "height": 218
+        "x": 1436,
+        "y": 2,
+        "width": 106,
+        "height": 96
       }
     },
     "hollow_delve_collapsed_ladder": {
       "name": "Splintered pit ladder",
       "anchor": [
-        113.0,
-        240
+        54.5,
+        115
       ],
       "height_scale": 1.2,
-      "pixels_sha256": "c20ed76e368026e985bc2fa857454d0470b96c9fb27910c4f58e7ca968a11e9c",
+      "pixels_per_unit": 1.4973958333333335,
+      "pixels_sha256": "3f1fde23def763b403988554c2af8c004f33a1b5c665c7c3da73a4893154ca16",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-1.png",
         "sha256": "a6fa0dd11d55baeb64bec83b094089a93d1a7132835e75bbddf650de1e083b39",
@@ -556,27 +578,28 @@
         "reduced_trim": [
           0,
           0,
-          226,
-          240
+          109,
+          115
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 143,
+        "x": 912,
         "y": 2,
-        "width": 226,
-        "height": 240
+        "width": 109,
+        "height": 115
       }
     },
     "hollow_delve_mine_signpost": {
       "name": "Crooked gallery marker",
       "anchor": [
-        81.5,
-        240
+        36.0,
+        106
       ],
       "height_scale": 1.1,
-      "pixels_sha256": "6617aaeb0108692589d26c471d57dd339d2beda93c9aea4e8e5c072277ae8a37",
+      "pixels_per_unit": 1.5056818181818181,
+      "pixels_sha256": "0b51c01c17c4d2a4047aa656c7a880d28d23ebc6b9dfbdbfef33d4bf898da03b",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-1.png",
         "sha256": "a6fa0dd11d55baeb64bec83b094089a93d1a7132835e75bbddf650de1e083b39",
@@ -596,27 +619,28 @@
         "reduced_trim": [
           0,
           0,
-          163,
-          240
+          72,
+          106
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 1037,
+        "x": 1257,
         "y": 2,
-        "width": 163,
-        "height": 240
+        "width": 72,
+        "height": 106
       }
     },
     "hollow_delve_vent_grate": {
       "name": "Buckled iron grate",
       "anchor": [
-        120.0,
-        212
+        32.5,
+        58
       ],
       "height_scale": 0.6,
-      "pixels_sha256": "c44979dda4cae7bc4d517a1d7e2d83f915b9991e53be024f9985d3ddab2afe57",
+      "pixels_per_unit": 1.5104166666666667,
+      "pixels_sha256": "2cef8c209ece855c8c87ea348799d6e28a4402c42dad539390da0ebecc081564",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-1.png",
         "sha256": "a6fa0dd11d55baeb64bec83b094089a93d1a7132835e75bbddf650de1e083b39",
@@ -636,27 +660,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          212
+          65,
+          58
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 490,
-        "y": 487,
-        "width": 240,
-        "height": 212
+        "x": 320,
+        "y": 236,
+        "width": 65,
+        "height": 58
       }
     },
     "hollow_delve_abandoned_anvil": {
       "name": "Pitted repair anvil",
       "anchor": [
-        120.0,
-        205
+        33.5,
+        58
       ],
       "height_scale": 0.6,
-      "pixels_sha256": "dff4d1772ca18c7b5fb9476843f9bae1b760448232ab98f8710dbb368d0b391d",
+      "pixels_per_unit": 1.5104166666666667,
+      "pixels_sha256": "0e9e465a62cb02d9d2d6e22c69ad322e1d650b5fa462c5387c70b6ec19dc9dfb",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-2.png",
         "sha256": "9852116c4bdc87107b90b6e21934d50631bfb329e681c44195f943def82ea376",
@@ -676,27 +701,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          205
+          67,
+          58
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 978,
-        "y": 487,
-        "width": 240,
-        "height": 205
+        "x": 249,
+        "y": 236,
+        "width": 67,
+        "height": 58
       }
     },
     "hollow_delve_stone_brazier": {
       "name": "Cold stone brazier",
       "anchor": [
-        114.5,
-        240
+        41.5,
+        86
       ],
       "height_scale": 0.9,
-      "pixels_sha256": "3bd473d05d8cdb6330d0e96f7a41b261c21965ff770d9a9b8e2451a3b1491089",
+      "pixels_per_unit": 1.4930555555555556,
+      "pixels_sha256": "770499755b547888c4751b93f5bc2be4803ebd01a8ffbc56b04da710880d7505",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-2.png",
         "sha256": "9852116c4bdc87107b90b6e21934d50631bfb329e681c44195f943def82ea376",
@@ -716,27 +742,28 @@
         "reduced_trim": [
           0,
           0,
-          229,
-          240
+          83,
+          86
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 1444,
+        "x": 1647,
         "y": 2,
-        "width": 229,
-        "height": 240
+        "width": 83,
+        "height": 86
       }
     },
     "hollow_delve_calcite_column": {
       "name": "Fluted calcite pillar",
       "anchor": [
-        68.5,
-        240
+        66.0,
+        230
       ],
       "height_scale": 2.4,
-      "pixels_sha256": "4dcce0adeedb5a7ea11ad3a81fb295e5f12eb891ae53c558f402f23af4c5a2c0",
+      "pixels_per_unit": 1.4973958333333335,
+      "pixels_sha256": "ca71aa8b85b07ec6815c64b4146cc6862b088ec6f572bcbb23709b33acc7a8ff",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-2.png",
         "sha256": "9852116c4bdc87107b90b6e21934d50631bfb329e681c44195f943def82ea376",
@@ -756,8 +783,8 @@
         "reduced_trim": [
           0,
           0,
-          137,
-          240
+          132,
+          230
         ],
         "removed_detached_pixels": 0,
         "components": 1
@@ -765,18 +792,19 @@
       "frame": {
         "x": 2,
         "y": 2,
-        "width": 137,
-        "height": 240
+        "width": 132,
+        "height": 230
       }
     },
     "hollow_delve_iron_ore_vein": {
       "name": "Exposed ironstone",
       "anchor": [
-        106.5,
-        240
+        47.0,
+        106
       ],
       "height_scale": 1.1,
-      "pixels_sha256": "2a6e1d6d9aa6a3a0ffea1601fae385785d4f66516aa6a7908d6a73630bf67553",
+      "pixels_per_unit": 1.5056818181818181,
+      "pixels_sha256": "773a23b964a2908fef1874278c897174c53fb9708f0ab578ad002ebc922a05ed",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-2.png",
         "sha256": "9852116c4bdc87107b90b6e21934d50631bfb329e681c44195f943def82ea376",
@@ -796,27 +824,28 @@
         "reduced_trim": [
           0,
           0,
-          213,
-          240
+          94,
+          106
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 820,
+        "x": 1159,
         "y": 2,
-        "width": 213,
-        "height": 240
+        "width": 94,
+        "height": 106
       }
     },
     "hollow_delve_cave_mushrooms": {
       "name": "Clustered cave caps",
       "anchor": [
-        120.0,
-        173
+        33.5,
+        48
       ],
       "height_scale": 0.5,
-      "pixels_sha256": "299c22322635f856548449125a47fd9785a2adac247c0a120c7badf0a95a7f67",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "f198ecf21715ded41ab796f43afcaf9ca2b052c93c051c20fc026182d9d9bdaf",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-2.png",
         "sha256": "9852116c4bdc87107b90b6e21934d50631bfb329e681c44195f943def82ea376",
@@ -836,27 +865,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          173
+          67,
+          48
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 246,
-        "y": 704,
-        "width": 240,
-        "height": 173
+        "x": 630,
+        "y": 236,
+        "width": 67,
+        "height": 48
       }
     },
     "hollow_delve_egg_sac_cluster": {
       "name": "Old spider egg sacs",
       "anchor": [
-        120.0,
-        190
+        42.5,
+        67
       ],
       "height_scale": 0.7,
-      "pixels_sha256": "eed04d8535f6d562bce5c7853266d331ae2a37268ca75aef905f867729d5aa1a",
+      "pixels_per_unit": 1.4955357142857144,
+      "pixels_sha256": "11dd59fb6483d918255ba082a1d72b8671a9cb984e23d6f4efdb5d8776998317",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-2.png",
         "sha256": "9852116c4bdc87107b90b6e21934d50631bfb329e681c44195f943def82ea376",
@@ -876,27 +906,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          190
+          85,
+          67
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 1222,
-        "y": 487,
-        "width": 240,
-        "height": 190
+        "x": 1922,
+        "y": 2,
+        "width": 85,
+        "height": 67
       }
     },
     "hollow_delve_cocooned_bones": {
       "name": "Dusty silk bundle",
       "anchor": [
-        120.0,
-        137
+        55.0,
+        62
       ],
       "height_scale": 0.65,
-      "pixels_sha256": "fd8bb37933d4b89d96df1b45b2664a9ff02f4b9153994277bef7a51f714dfda1",
+      "pixels_per_unit": 1.4903846153846154,
+      "pixels_sha256": "4fe00b853ab34b99212fd62a2e7be14d3d8ca3989baadef785e5174501a99f09",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-2.png",
         "sha256": "9852116c4bdc87107b90b6e21934d50631bfb329e681c44195f943def82ea376",
@@ -916,27 +947,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          137
+          110,
+          62
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 1222,
-        "y": 704,
-        "width": 240,
-        "height": 137
+        "x": 2,
+        "y": 236,
+        "width": 110,
+        "height": 62
       }
     },
     "hollow_delve_chain_post": {
       "name": "Chain-bound pit post",
       "anchor": [
-        120.0,
-        233
+        49.5,
+        96
       ],
       "height_scale": 1.0,
-      "pixels_sha256": "cc5644cbdde83b2e04acfaeed3f8f7c7b430b73489448ac648fc8acc57c6a238",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "39ea790c5f61ee7fc4b8f4f5f93b20b0c30ce7ab271e0aaa9c8394b27a7857e5",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-2.png",
         "sha256": "9852116c4bdc87107b90b6e21934d50631bfb329e681c44195f943def82ea376",
@@ -956,27 +988,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          233
+          99,
+          96
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 490,
-        "y": 246,
-        "width": 240,
-        "height": 233
+        "x": 1333,
+        "y": 2,
+        "width": 99,
+        "height": 96
       }
     },
     "hollow_delve_discarded_shield": {
       "name": "Discarded iron shield",
       "anchor": [
-        120.0,
-        213
+        24.5,
+        43
       ],
       "height_scale": 0.45,
-      "pixels_sha256": "bc43eeea44cb36990827f00be579ff2746bef77aed983dc5c0341b615ddbbfbc",
+      "pixels_per_unit": 1.4930555555555556,
+      "pixels_sha256": "b0fe74644ce185c81cac8a359c089015132a75a994353a4cd54d8a039af57224",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-2.png",
         "sha256": "9852116c4bdc87107b90b6e21934d50631bfb329e681c44195f943def82ea376",
@@ -996,27 +1029,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          213
+          49,
+          43
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 2,
-        "y": 487,
-        "width": 240,
-        "height": 213
+        "x": 701,
+        "y": 236,
+        "width": 49,
+        "height": 43
       }
     },
     "hollow_delve_miners_pack": {
       "name": "Abandoned miner pack",
       "anchor": [
-        120.0,
-        183
+        28.5,
+        43
       ],
       "height_scale": 0.45,
-      "pixels_sha256": "b7bfbb65be1dba691bd0c4f692389f7336fd6692e2acc069da44521b71c0b798",
+      "pixels_per_unit": 1.4930555555555556,
+      "pixels_sha256": "5e73ff4fbc2cf8c78e7034e742b3ca3469378f55d1138ce05899fec7c1e3fa61",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-2.png",
         "sha256": "9852116c4bdc87107b90b6e21934d50631bfb329e681c44195f943def82ea376",
@@ -1036,27 +1070,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          183
+          57,
+          43
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 1466,
-        "y": 487,
-        "width": 240,
-        "height": 183
+        "x": 754,
+        "y": 236,
+        "width": 57,
+        "height": 43
       }
     },
     "hollow_delve_limestone_rubble": {
       "name": "Fallen limestone blocks",
       "anchor": [
-        120.0,
-        171
+        27.0,
+        38
       ],
       "height_scale": 0.4,
-      "pixels_sha256": "90a7a8b9310eff69e636de89f8ec073c700a46bb7778175dd0959ce7b68394e9",
+      "pixels_per_unit": 1.484375,
+      "pixels_sha256": "fec270b63556f285fd17a346d1bc17cae64f0bd8941253422250ccb75bcd5ced",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-2.png",
         "sha256": "9852116c4bdc87107b90b6e21934d50631bfb329e681c44195f943def82ea376",
@@ -1076,27 +1111,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          171
+          54,
+          38
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 490,
-        "y": 704,
-        "width": 240,
-        "height": 171
+        "x": 870,
+        "y": 236,
+        "width": 54,
+        "height": 38
       }
     },
     "hollow_delve_rotted_bridge_trestle": {
       "name": "Broken gallery trestle",
       "anchor": [
-        120.0,
-        213
+        65.0,
+        115
       ],
       "height_scale": 1.2,
-      "pixels_sha256": "e207b502b5d31450bbd6360857622c3c83b41a774a92b6fce4586c2e4b5639c6",
+      "pixels_per_unit": 1.4973958333333335,
+      "pixels_sha256": "d6c68eb307b0405602e17db3ec527cb53cb8b4e6d2a4f0f122f4e3e5b8742051",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-2.png",
         "sha256": "9852116c4bdc87107b90b6e21934d50631bfb329e681c44195f943def82ea376",
@@ -1116,27 +1152,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          213
+          130,
+          115
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 246,
-        "y": 487,
-        "width": 240,
-        "height": 213
+        "x": 1025,
+        "y": 2,
+        "width": 130,
+        "height": 115
       }
     },
     "hollow_delve_drainage_pipe": {
       "name": "Broken drainage elbow",
       "anchor": [
-        120.0,
-        232
+        27.5,
+        53
       ],
       "height_scale": 0.55,
-      "pixels_sha256": "aeba39128b833fbde37b62c39f12a9abe257b90d0c98927f14b9763651f1c558",
+      "pixels_per_unit": 1.5056818181818181,
+      "pixels_sha256": "741ccac6d9c8517d4f7bc96228da59a31dddbf8d0f66ea3fa8241e7d70b90f16",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-2.png",
         "sha256": "9852116c4bdc87107b90b6e21934d50631bfb329e681c44195f943def82ea376",
@@ -1156,27 +1193,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          232
+          55,
+          53
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 734,
-        "y": 246,
-        "width": 240,
-        "height": 232
+        "x": 440,
+        "y": 236,
+        "width": 55,
+        "height": 53
       }
     },
     "hollow_delve_cracked_urn": {
       "name": "Cracked storage urn",
       "anchor": [
-        107.5,
-        240
+        23.5,
+        53
       ],
       "height_scale": 0.55,
-      "pixels_sha256": "cfc2ed7b6e431e1265dfaed697d45a3eec6e2c54f823949d978b15c00e8245ad",
+      "pixels_per_unit": 1.5056818181818181,
+      "pixels_sha256": "61afdcda82bc634ae68a86e075725e903a45f47164617bf5b862593bd5dd8e74",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-2.png",
         "sha256": "9852116c4bdc87107b90b6e21934d50631bfb329e681c44195f943def82ea376",
@@ -1196,27 +1234,28 @@
         "reduced_trim": [
           0,
           0,
-          215,
-          240
+          47,
+          53
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 373,
-        "y": 2,
-        "width": 215,
-        "height": 240
+        "x": 389,
+        "y": 236,
+        "width": 47,
+        "height": 53
       }
     },
     "hollow_delve_stone_idol": {
       "name": "Weathered stone figure",
       "anchor": [
-        102.0,
-        240
+        57.0,
+        134
       ],
       "height_scale": 1.4,
-      "pixels_sha256": "a6cdd9989c80491189d09ef0c732a6ca6889165ebcdbc34ea8ba9376e4e7aa4c",
+      "pixels_per_unit": 1.4955357142857144,
+      "pixels_sha256": "ce856a2bc9dfd0a8c0fbf146e82081c0a39d4f42a1714ef7a1915184e91ac473",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-2.png",
         "sha256": "9852116c4bdc87107b90b6e21934d50631bfb329e681c44195f943def82ea376",
@@ -1236,27 +1275,28 @@
         "reduced_trim": [
           0,
           0,
-          204,
-          240
+          114,
+          134
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 1677,
+        "x": 612,
         "y": 2,
-        "width": 204,
-        "height": 240
+        "width": 114,
+        "height": 134
       }
     },
     "hollow_delve_wooden_barricade": {
       "name": "Broken pit barricade",
       "anchor": [
-        120.0,
-        162
+        89.0,
+        120
       ],
       "height_scale": 1.25,
-      "pixels_sha256": "e5c9e69056db48ed18f5f1bc6daa059c0959a619b3882a3144e1086b9de5b1a9",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "5178a630158eb4ade787877556dca148bd4dae71183e71e146c3291f8236d630",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/hollow_delve/sheet-2.png",
         "sha256": "9852116c4bdc87107b90b6e21934d50631bfb329e681c44195f943def82ea376",
@@ -1276,17 +1316,17 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          162
+          178,
+          120
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 978,
-        "y": 704,
-        "width": 240,
-        "height": 162
+        "x": 730,
+        "y": 2,
+        "width": 178,
+        "height": 120
       }
     }
   }

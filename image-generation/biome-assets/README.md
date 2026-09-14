@@ -26,18 +26,43 @@ prompt in a new plan before generating. Both biomes share these priorities:
 
 | Asset | Detail and composition | Delivery |
 | --- | --- | --- |
-| Background | Low local contrast, grouped values, readable medium material texture comparable to Wetlands. Quiet space behind the whole route. Distant structures lose contrast. | Logical canvas usually 640×360; full source texture at least 1536px wide; opaque depth or genuine alpha for separate layers. |
-| Ground | Continuous, readable walking lip; sparse texture. Respect the common edge profile. | Authored canvas and surface row; transparent above the silhouette, opaque below. |
-| Prop | Clear silhouette and a few material cues; stronger contrast than distant scenery. | Complete isolated cutout, padding, reviewed support anchor. |
+| Background | Connected color clusters and stepped shading matching authored actors. Quiet space behind the whole route; distant structures lose contrast. | 640×360 game units export to 960×540 texture pixels; up to 48 colors per layer. Opaque depth or genuine alpha. |
+| Ground | Continuous, readable walking lip; sparse texture. Respect the common edge profile. | 256×96 game units export to 384×144 pixels; 32 colors, measured surface row and binary alpha. |
+| Prop | Clean silhouette, restrained dark contour and a few stepped material shades. | Visible height = 64 × height_scale × 1.5 pixels; 32 colors per cutout, reviewed support anchor. |
 | Enemy | Strongest silhouette clarity, stable anatomy, equipment and scale. | Reference first, then separated authored poses, shared crop/pivot, 128px ENDESGA32 export. |
 
-Describe limestone, reeds or timber through readable forms and controlled texture.
-Preserve fine pixel edges and source resolution; reducing a texture to its logical
-canvas makes it coarser than Wetlands. Control distraction through lighting and
-local contrast instead. Avoid dense bright cracks, uniformly intricate surfaces,
-chunky simulated pixel grids and featureless polygons. Keep a cave dark but
-legible. Review all layers together at gameplay size with actual player and enemy
-silhouettes, including long travel and portrait/landscape changes.
+The player and authored enemies are the art reference. Their effective density
+is roughly 1–1.9 source pixels per game unit. The shared `[pixels]` profile in
+[style.toml](style.toml) targets **1.5 pixels per game unit** for every scenery
+category: approximately 96 visible pixels for a 64-unit reference actor.
+Attach the existing player and authored enemy sheets as style references when
+generating new art, preserving the requested scenery subjects and biome colors.
+Judge detail beside `barbarian_player`, `bog_toad` and `delve_dwarf` at gameplay
+scale, rather than enlarging each isolated asset to fill a preview card.
+
+Generation masters remain at full resolution. The common texture compiler uses
+area reduction to remove fine surface noise, bounded adaptive palettes without
+dithering, and hard alpha. Runtime uses nearest sampling. Adaptive palettes retain
+the cave's browns, frost blues and volcanic accents without forcing every material
+into the actor palette. Larger props receive more texture pixels because they
+occupy more world space; an arbitrary maximum source edge no longer sets detail.
+Keep distant contrast restrained and review travel, floor contact, roofs and
+portrait/landscape layouts with actual actors.
+
+To apply the current profile to installed art without another generation run:
+
+```sh
+uv run biome-assets reexport --biome wetlands
+uv run biome-assets reexport --biome hollow_delve
+uv run biome-assets reexport --biome lava_caves
+```
+
+This reads the immutable masters recorded in `assets/biomes/BIOME/sources.json`,
+rebuilds layers and props, records the profile and source hashes, and remeasures
+ground contact and roof anchors. It never resamples an earlier runtime export.
+Use `--style PATH` for another shared profile or `--out PATH` for a candidate
+export. The same command supports frost caves, crypts, fortress and future
+registered interiors; no biome-specific processing code is needed.
 
 ## Enclosed locations
 
@@ -66,8 +91,9 @@ prompt with its referenced image. Preparation requires matching reference
 provenance. This works for changing an existing palette or applying another
 interior theme. Hollow Delve's earth-brown revision demonstrates the workflow.
 
-Texture pixels and world coordinates are separate. A 2048×768 roof occupies a
-640×240 logical rectangle. Preparation measures its lowest opaque pixel and writes
+Texture pixels and world coordinates are separate. A 2048×768 roof master exports
+to 960×360 pixels and occupies a 640×240 logical rectangle. Preparation measures
+its lowest opaque pixel and writes
 `origin_y`, so runtime anchors the actual underside a configured distance above
 the ground. The default clearance is 104 units for a 64-unit actor. It stays
 relative to actors when the viewport changes; tall screens fill upward with the
@@ -108,8 +134,9 @@ uv run biome-assets assemble-interior --plan PATH/plan.json --manifest PATH/prep
 ```
 
 The decoration prompt specifies a four-column, two-row transparent sheet. Its
-source resolution survives preparation; the shared prop packer trims objects,
-checks ground anchors and packs one atlas. Definitions stay in the saved plan
+source resolution survives preparation; the shared prop packer trims each object,
+compiles it at its actor-relative pixel height, checks anchors and packs one atlas.
+Definitions stay in the saved plan
 and generated extraction recipe, so a review needs no placeholder playable
 content in `SCENERY.toml`. If an object crosses a cell boundary, inspect the sheet
 and pass `assemble-interior --regions PATH/regions.json`: a mapping from prop IDs
@@ -213,17 +240,18 @@ uv run biome-assets prepare --plan PATH/plan.json --sources PATH/sources.json --
 ```
 
 This verifies all hashes, prompt identity, aspect ratio and alpha before writing.
-It exports the plan's `resolution` (`source` for new backgrounds, `logical` for
-ground/props), with original colors, binary alpha and zero hidden RGB. Old saved
-plans without `resolution` retain logical export for reproducibility. It does not
-paint detail away or certify artistic quality.
+New plans embed `resolution = world` and the complete pixel profile for layers,
+ground and individual props. Decoration sheets retain source resolution until
+each cutout is packed at its own world height. Binary alpha and zero hidden RGB
+are enforced. Old saved plans retain their original source/logical export for
+reproducibility; use `reexport` to deliberately apply the current style to their
+installed assets. Export checks do not certify artistic quality.
 Opaque RGB cannot masquerade as a transparent cutout. Large aspect mismatches
 fail instead of stretching or cropping the composition. Outputs include a manifest
 and an offline review page. Changed inputs require a new output directory.
 
-Logical scenery dimensions are shared across biomes; sprite palette mapping and
-scene source colors serve different roles. Texture resolution does not change the
-character, ground or ceiling scale.
+Logical scenery dimensions are shared across biomes. Texture resolution does not
+change character, ground or ceiling scale.
 Ground preparation also measures the exported walking contact row and carries
 `surface_y` and logical `canvas` into the runtime source manifest.
 

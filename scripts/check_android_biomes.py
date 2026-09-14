@@ -48,7 +48,8 @@ def check(apk, aapt2):
             raise ValueError("APK does not contain this build's compiled JavaScript bundle")
     source_map = json.loads((ROOT / "android/app/build/intermediates/sourcemaps/react/release/index.android.bundle.packager.map").read_text())
     modules = ["src/ui/DungeonJourney.tsx", "src/scenes/interiorRoutes.ts",
-               "src/scenes/interiorLocations.ts", "src/scenes/InteriorLocationBackdrop.tsx"]
+               "src/scenes/interiorLocations.ts", "src/scenes/InteriorLocationBackdrop.tsx",
+               "src/scenes/wetlands.ts"]
     for file in modules:
         matches = [i for i, name in enumerate(source_map["sources"]) if name.endswith(file)]
         if len(matches) != 1 or source_map["sourcesContent"][matches[0]] != (ROOT / file).read_text():

@@ -43,10 +43,10 @@
         240
       ],
       "parallax": 0.68,
-      "origin_y": 140.3125,
+      "origin_y": 140.66666666666666,
       "asset_id": "hollow_delve_roof",
       "repeat": "mirror",
-      "cap_y": 28.75,
+      "cap_y": 28.666666666666668,
       "image": "roof"
     }
   ]

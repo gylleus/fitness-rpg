@@ -10,6 +10,7 @@ import io
 import json
 from pathlib import Path
 import tomllib
+import sys
 
 import numpy as np
 from PIL import Image, ImageDraw
@@ -17,17 +18,19 @@ from scipy import ndimage
 
 ROOT = Path(__file__).resolve().parents[1]
 RECIPES = ROOT / "image-generation/scene-samples/biome-props-v2"
+sys.path.insert(0, str(ROOT / "image-generation/biome-assets"))
+from pixel_style import compile_texture, load_profile, validate
 
 
 def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def trim_prop(image, max_edge=256, threshold=128):
+def trim_prop(image, max_edge=256, threshold=128, *, world_height=None, pixel_profile=None):
     """Discard faint matte and tiny detached specks, then trim visible pixels.
 
-    Significant separate parts are retained. Nothing is painted or stretched;
-    aspect ratio is preserved and only a common nearest reduction is applied.
+    Significant separate parts and aspect ratio are retained. A pixel profile
+    compiles detail at world scale; the legacy max-edge path uses nearest reduction.
     """
     rgba = np.array(image.convert("RGBA"))
     labels, _ = ndimage.label(rgba[..., 3] >= threshold, np.ones((3, 3)))
@@ -46,10 +49,13 @@ def trim_prop(image, max_edge=256, threshold=128):
     if not bounds:
         raise ValueError("No supported prop pixels")
     clean = clean.crop(bounds)
-    ratio = min(1, max_edge / max(clean.size))
-    size = tuple(max(1, round(n * ratio)) for n in clean.size)
-    clean = clean.resize(size, Image.Resampling.NEAREST)
-    # Nearest reduction can lose the last sparse row. Trim once more so the
+    if pixel_profile is not None:
+        clean = compile_texture(clean, (world_height * clean.width / clean.height, world_height), pixel_profile, "prop")
+    else:
+        ratio = min(1, max_edge / max(clean.size))
+        size = tuple(max(1, round(n * ratio)) for n in clean.size)
+        clean = clean.resize(size, Image.Resampling.NEAREST)
+    # Reduction can lose the last sparse row. Trim once more so the
     # declared support line cannot sit below an empty exported row.
     reduced_bounds = clean.getbbox()
     clean = clean.crop(reduced_bounds)
@@ -80,10 +86,11 @@ def pack_rectangles(sizes, width=2048, padding=2):
     return packed, (width, height)
 
 
-def bundle(biome, recipe_dir=None, destination=None):
+def bundle(biome, recipe_dir=None, destination=None, pixel_profile=None):
     folder = Path(recipe_dir or RECIPES / biome).resolve()
     out = Path(destination or ROOT / "assets/biomes" / biome).resolve()
     recipe = json.loads((folder / "recipe.json").read_text())
+    profile = validate(pixel_profile or recipe.get("pixel_profile") or load_profile())
     if recipe["biome_id"] != biome:
         raise ValueError("Recipe/biome mismatch")
     authored_definitions = recipe.get("definitions")
@@ -124,7 +131,9 @@ def bundle(biome, recipe_dir=None, destination=None):
                 0 <= cell[0] < cell[2] <= source.width and 0 <= cell[1] < cell[3] <= source.height
             ):
                 raise ValueError(f"Invalid source extraction region: {key}")
-            tile, trimming = trim_prop(source.crop(cell), recipe["max_prop_edge"], recipe["alpha_threshold"])
+            world_height = profile["reference_height"] * definition["generation"]["height_scale"]
+            tile, trimming = trim_prop(source.crop(cell), recipe["max_prop_edge"], recipe["alpha_threshold"],
+                                       world_height=world_height, pixel_profile=profile)
             x0, y0, x1, y1 = trimming["source_trim"]
             if x0 == 0 or y0 == 0 or x1 == cell[2]-cell[0] or y1 == cell[3]-cell[1]:
                 raise ValueError(f"Prop touches source cell edge; review extraction region: {key}")
@@ -135,6 +144,7 @@ def bundle(biome, recipe_dir=None, destination=None):
             loose_bytes += len(encoded.getvalue())
             props[key] = {"name": definition["name"], "anchor": [tile.width / 2, tile.height],
                 "height_scale": definition["generation"]["height_scale"],
+                "pixels_per_unit": tile.height / world_height,
                 "pixels_sha256": sha(tile.tobytes()),
                 "source": {"image": str(path.relative_to(ROOT)), "sha256": digest,
                     "cell": cell, "alpha_threshold": recipe["alpha_threshold"], **trimming}}
@@ -147,14 +157,14 @@ def bundle(biome, recipe_dir=None, destination=None):
     out.mkdir(parents=True, exist_ok=True)
     image_path = out / "props.png"
     atlas.save(image_path, optimize=True)
-    manifest = {"schema_version": 1, "biome_id": biome, "image": "props.png", "size": list(size),
+    manifest = {"schema_version": 1, "biome_id": biome, "image": "props.png", "size": list(size), "pixel_profile": profile,
         "sha256": sha(image_path.read_bytes()), "padding": recipe["padding"], "props": props}
     (out / "props.json").write_text(json.dumps(manifest, indent=2) + "\n")
     runtime = json.loads((out / "sources.json").read_text()) if (out / "sources.json").exists() else {}
     runtime = {key: spec for key, spec in runtime.items() if spec["id"] not in props}
     runtime["props"] = {"id": f"{biome}_prop_atlas", "source": str((folder / "recipe.json").relative_to(ROOT)),
         "source_sha256": sha((folder / "recipe.json").read_bytes()), "sha256": manifest["sha256"],
-        "size": list(size), "backend": "built-in imagegen; trimmed nearest cutouts in one atlas"}
+        "size": list(size), "pixel_profile": profile, "backend": "built-in imagegen; actor-scale cutouts in one atlas"}
     (out / "sources.json").write_text(json.dumps(runtime, indent=2) + "\n")
     (folder / "sources.json").write_text(json.dumps(source_records, indent=2) + "\n")
     report = {"props": len(props), "source_cell_pixels": source_pixels,

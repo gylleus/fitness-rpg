@@ -29,8 +29,11 @@ class SceneryAtlasTests(unittest.TestCase):
             with patch("bundle_scenery.ROOT", root):
                 result = bundle("new_biome", Path(os.path.relpath(root)), Path(os.path.relpath(root / "out")))
             self.assertEqual(set(result["props"]), {"one", "two"})
-            self.assertEqual(result["props"]["one"]["anchor"], [11, 22])
-            self.assertEqual(result["props"]["two"]["anchor"], [11, 18])
+            # Both props have the same in-game height despite different source
+            # cell occupancy, so they must use the same number of visible pixels.
+            self.assertEqual(result["props"]["one"]["anchor"], [24, 48])
+            self.assertEqual(result["props"]["two"]["anchor"], [29.5, 48])
+            self.assertEqual(result["props"]["one"]["pixels_per_unit"], 1.5)
 
     def test_padding_and_detached_pixel_cannot_lower_the_ground_anchor(self):
         pixels = np.zeros((40, 40, 4), dtype=np.uint8)

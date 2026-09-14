@@ -37,6 +37,7 @@ def validate_scene(scene):
 
 
 def make_interior_plan(theme, biome_id=None, recipe_path=None, style_path=None):
+    from pixel_style import export_contract, guidance
     recipe_path = Path(recipe_path or HERE / "interiors.toml")
     recipe = tomllib.loads(recipe_path.read_text())
     if recipe["schema_version"] != 1 or theme not in recipe["themes"]:
@@ -63,14 +64,15 @@ def make_interior_plan(theme, biome_id=None, recipe_path=None, style_path=None):
             f"Color palette: {selected['palette']}",
             f"Lighting: {selected['lighting']}",
             f"Canvas: {spec['canvas'][0]} by {spec['canvas'][1]} logical units; generate a large image with width at least 1536 pixels and this aspect ratio.",
+            guidance(style["pixels"], spec["canvas"]),
             "Transparency: genuine alpha in all empty areas; never paint checkerboard or a colored matte." if spec["transparent"] else "Opacity: completely opaque edge-to-edge image.",
             "If a reference image is supplied, use it for pixel texture density and restrained shading only; keep the requested indoor subject and enclosed composition.",
             "Avoid: " + ", ".join(style["avoid"] + ["tiny-resolution upscaling", "flat featureless polygons", "harsh white highlights", "vast cave expanses", "soaring ceilings", "long vanishing-point corridors", "characters"])])
         assets.append({"id": asset_id, "name": f"{selected['name']} — {spec['id']}", "kind": "background",
             "canvas": spec["canvas"], "transparent": spec["transparent"], "prompt": prompt, "prompt_sha256": digest(prompt),
             "source_definition": {"visual_description": selected["materials"], "layer": spec},
-            "export": {"resolution": "source", "min_width": 1536, "sampling": "nearest",
-                       "colors": "source", "alpha": "binary" if spec["transparent"] else "opaque"}})
+            "export": {**export_contract(style["pixels"], "background"), "min_width": 1536,
+                       "alpha": "binary" if spec["transparent"] else "opaque"}})
     validate_scene(scene)
     return {"schema_version": 1, "biome_id": biome_id, "theme": theme, "interior": scene,
             "style": style, "style_sha256": sha(style_path),

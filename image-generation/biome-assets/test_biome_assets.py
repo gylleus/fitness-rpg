@@ -35,7 +35,7 @@ class BiomeAssetsTests(unittest.TestCase):
         for biome in ("wetlands", "hollow_delve"):
             plan = make_plan(biome)
             self.assertEqual(plan, make_plan(biome))
-            self.assertEqual(plan["style"]["id"], "readable-dark-fantasy-v2")
+            self.assertEqual(plan["style"]["id"], "actor-scale-dark-fantasy-v3")
             self.assertEqual({a["kind"] for a in plan["assets"]}, {"background", "ground", "prop", "enemy"})
             for asset in plan["assets"]:
                 self.assertIn(plan["style"][asset["kind"]], asset["prompt"])
@@ -43,7 +43,7 @@ class BiomeAssetsTests(unittest.TestCase):
                     self.assertIn(asset["source_definition"]["visual"]["attack"], asset["sheet_prompt"])
                     self.assertIn("exactly 24", asset["sheet_prompt"])
                 elif asset["kind"] == "background":
-                    self.assertEqual(asset["export"]["resolution"], "source")
+                    self.assertEqual(asset["export"]["resolution"], "world")
                     if "interior" not in plan:
                         self.assertIn("rows 160 through 288 quiet", asset["prompt"])
                         self.assertEqual(asset["canvas"], [640, 360])

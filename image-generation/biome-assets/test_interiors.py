@@ -17,7 +17,7 @@ class InteriorTests(unittest.TestCase):
             plan = make_interior_plan(theme)
             self.assertEqual(plan, make_interior_plan(theme))
             self.assertEqual([a["transparent"] for a in plan["assets"]], [False, True, True])
-            self.assertEqual([a["export"]["resolution"] for a in plan["assets"]], ["source"] * 3)
+            self.assertEqual([a["export"]["resolution"] for a in plan["assets"]], ["world"] * 3)
             self.assertEqual([a["parallax"] for a in plan["interior"]["layers"]], [.1, .32, .68])
             for asset in plan["assets"]:
                 self.assertIn(plan["style"]["background"], asset["prompt"])
@@ -30,7 +30,7 @@ class InteriorTests(unittest.TestCase):
         self.assertIn("interior", plan)
         self.assertEqual([a["id"] for a in plan["assets"]], ["hollow_delve_depth", "hollow_delve_wall", "hollow_delve_roof"])
 
-    def test_source_resolution_and_measured_roof_anchor_survive_preparation(self):
+    def test_world_resolution_and_measured_roof_anchor_survive_preparation(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             plan = make_interior_plan("limestone_tunnel")
@@ -47,7 +47,7 @@ class InteriorTests(unittest.TestCase):
                     "prompt_sha256": asset["prompt_sha256"], "backend": "test"}
             save(root / "sources.json", sources)
             manifest = prepare(root / "plan.json", root / "sources.json", root / "prepared")
-            self.assertEqual(manifest["assets"]["limestone_tunnel_depth"]["size"], [1600, 900])
+            self.assertEqual(manifest["assets"]["limestone_tunnel_depth"]["size"], [960, 540])
             self.assertEqual(manifest["interior"]["layers"][2]["origin_y"], 160)
             self.assertEqual(manifest, prepare(root / "plan.json", root / "sources.json", root / "prepared"))
 

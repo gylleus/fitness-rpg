@@ -4,19 +4,28 @@
   "image": "props.png",
   "size": [
     2048,
-    866
+    424
   ],
-  "sha256": "8b6687cd16387354d77de6c2bb1975e3ab8728b8c0603609a81b6f60e38ae284",
+  "pixel_profile": {
+    "schema_version": 1,
+    "pixels_per_unit": 1.5,
+    "reference_height": 64,
+    "background_colors": 48,
+    "ground_colors": 32,
+    "prop_colors": 32
+  },
+  "sha256": "4299151757c3988ecf7ec89799089dcbefd1455f6772ec1358b74139672aff42",
   "padding": 2,
   "props": {
     "wetlands_channel_marker": {
       "name": "Channel marker",
       "anchor": [
-        81.5,
-        240
+        45.0,
+        133
       ],
       "height_scale": 1.4,
-      "pixels_sha256": "48202e9623ba481acd08f87a82825fe0c91b6232fff60afbe4d5c01eddfb623d",
+      "pixels_per_unit": 1.484375,
+      "pixels_sha256": "fc319a0511f0893529d49e165149c6f5dc4d03ca36b7c785454fd4c01bcfd73e",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -34,29 +43,30 @@
           293
         ],
         "reduced_trim": [
-          0,
-          0,
-          163,
-          240
+          1,
+          1,
+          91,
+          134
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 234,
+        "x": 1441,
         "y": 2,
-        "width": 163,
-        "height": 240
+        "width": 90,
+        "height": 133
       }
     },
     "wetlands_obsolete_road_marker": {
       "name": "Obsolete road marker",
       "anchor": [
-        71.5,
-        240
+        43.0,
+        144
       ],
       "height_scale": 1.5,
-      "pixels_sha256": "ed5a693cc1a870d86c9418cdbc02b36167ed9d395850fa26de5fd43963bdd2de",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "840620b096fe166035152ef362bea74827ff013c88757c2a2138f7a53ec21454",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -76,27 +86,28 @@
         "reduced_trim": [
           0,
           0,
-          143,
-          240
+          86,
+          144
         ],
         "removed_detached_pixels": 2,
         "components": 1
       },
       "frame": {
-        "x": 1545,
+        "x": 1351,
         "y": 2,
-        "width": 143,
-        "height": 240
+        "width": 86,
+        "height": 144
       }
     },
     "wetlands_wicker_fish_traps": {
       "name": "Discarded wicker traps",
       "anchor": [
-        120.0,
-        177
+        42.0,
+        61
       ],
       "height_scale": 0.65,
-      "pixels_sha256": "33347e369fd59d1b302df589b2b530c1c0b3928e14a2a48cb19126341c28c843",
+      "pixels_per_unit": 1.4663461538461537,
+      "pixels_sha256": "b248eab5627b76838addb2b7c083d4c8a841bf833f17b982e4b7182654f43bbb",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -116,27 +127,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          177
+          84,
+          61
         ],
         "removed_detached_pixels": 1,
         "components": 1
       },
       "frame": {
-        "x": 1219,
-        "y": 490,
-        "width": 240,
-        "height": 177
+        "x": 872,
+        "y": 332,
+        "width": 84,
+        "height": 61
       }
     },
     "wetlands_collapsed_net_rack": {
       "name": "Collapsed net rack",
       "anchor": [
-        108.0,
-        240
+        65.0,
+        144
       ],
       "height_scale": 1.5,
-      "pixels_sha256": "94e2fdedf2e2a85d7600ecfff26542eca1379c0f9efa42d43528a1a265b8c289",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "15a0359a47b0cd876f18ece845a8ed83508037d6d9d9fe7643f4689e1a880878",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -156,27 +168,28 @@
         "reduced_trim": [
           0,
           0,
-          216,
-          240
+          130,
+          144
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 401,
+        "x": 1217,
         "y": 2,
-        "width": 216,
-        "height": 240
+        "width": 130,
+        "height": 144
       }
     },
     "wetlands_unlit_lantern": {
       "name": "Abandoned lantern",
       "anchor": [
-        73.5,
-        240
+        28.0,
+        91
       ],
       "height_scale": 0.95,
-      "pixels_sha256": "9ec8e35bf5cb2f73daeaa01273d1b46c39d95463ffcaedea564de703e054dabc",
+      "pixels_per_unit": 1.4967105263157896,
+      "pixels_sha256": "729153cfdc51df67fe41165b96f253af650a67812047636449802b64ffb30a80",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -196,27 +209,28 @@
         "reduced_trim": [
           0,
           0,
-          147,
-          240
+          56,
+          91
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 170,
-        "y": 246,
-        "width": 147,
-        "height": 240
+        "x": 1885,
+        "y": 2,
+        "width": 56,
+        "height": 91
       }
     },
     "wetlands_reed_clump": {
       "name": "Reeds and rushes",
       "anchor": [
-        107.0,
-        240
+        38.5,
+        86
       ],
       "height_scale": 0.9,
-      "pixels_sha256": "4771f69d9e3d067e5089e30aef678b7f107295abcb68e358ca3bdd070a56376e",
+      "pixels_per_unit": 1.4930555555555556,
+      "pixels_sha256": "b2d5ec67d348d207d533c2522c5adbff6f0d8046b09c40a13cdd9f7b89395abd",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -236,27 +250,28 @@
         "reduced_trim": [
           0,
           0,
-          214,
-          240
+          77,
+          86
         ],
         "removed_detached_pixels": 2,
         "components": 1
       },
       "frame": {
-        "x": 1692,
-        "y": 2,
-        "width": 214,
-        "height": 240
+        "x": 223,
+        "y": 332,
+        "width": 77,
+        "height": 86
       }
     },
     "wetlands_willow_roots": {
       "name": "Exposed willow roots",
       "anchor": [
-        120.0,
-        206
+        36.5,
+        62
       ],
       "height_scale": 0.65,
-      "pixels_sha256": "03a941d7fec0d0df10e23f815e3ae4599ba246de95e248c65e9eecdb8043a9fe",
+      "pixels_per_unit": 1.4903846153846154,
+      "pixels_sha256": "8b6ea5004b0fbe4de36cc4f1e21b73511b566804efcb3da169b6c5e8e02bc061",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -276,27 +291,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          206
+          73,
+          62
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 1453,
-        "y": 246,
-        "width": 240,
-        "height": 206
+        "x": 795,
+        "y": 332,
+        "width": 73,
+        "height": 62
       }
     },
     "wetlands_shelf_fungi": {
       "name": "Pale shelf fungi",
       "anchor": [
-        82.0,
-        240
+        15.0,
+        43
       ],
       "height_scale": 0.45,
-      "pixels_sha256": "c588a853f4af1a366e8c8ddfde3b509c0acfe445f9b6f0b4e3975942c6e44701",
+      "pixels_per_unit": 1.4930555555555556,
+      "pixels_sha256": "7f6457786514b8542b00e576d3f662c3744aec34929f1f56ed6ab296dcf79248",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -316,27 +332,28 @@
         "reduced_trim": [
           0,
           0,
-          164,
-          240
+          30,
+          43
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 2,
-        "y": 246,
-        "width": 164,
-        "height": 240
+        "x": 1388,
+        "y": 332,
+        "width": 30,
+        "height": 43
       }
     },
     "wetlands_flood_debris": {
       "name": "Flood debris",
       "anchor": [
-        120.0,
-        212
+        30.0,
+        52
       ],
       "height_scale": 0.55,
-      "pixels_sha256": "c183332829bd9c5864aa4b5708d4f992665495ace2ab0d3310effd3a124366bf",
+      "pixels_per_unit": 1.477272727272727,
+      "pixels_sha256": "ba3f6e7fcd223a21334fbe8a19d225b7098baf82262dc263a18003a2beb3e8fe",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -356,27 +373,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          212
+          60,
+          52
         ],
         "removed_detached_pixels": 4,
         "components": 1
       },
       "frame": {
-        "x": 1209,
-        "y": 246,
-        "width": 240,
-        "height": 212
+        "x": 1034,
+        "y": 332,
+        "width": 60,
+        "height": 52
       }
     },
     "wetlands_sinking_fence": {
       "name": "Sinking fence remnants",
       "anchor": [
-        120.0,
-        168
+        65.5,
+        90
       ],
       "height_scale": 0.95,
-      "pixels_sha256": "3491134ee9b36f6a1efa11e0343cc42dc76c7c92194e537d661fa28252e8c954",
+      "pixels_per_unit": 1.480263157894737,
+      "pixels_sha256": "4fcc6cf6678447b428ab3afeb4fe1f57677c9371d52736bee95203803aa8335c",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -396,27 +414,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          168
+          131,
+          90
         ],
         "removed_detached_pixels": 9,
         "components": 1
       },
       "frame": {
         "x": 2,
-        "y": 696,
-        "width": 240,
-        "height": 168
+        "y": 332,
+        "width": 131,
+        "height": 90
       }
     },
     "wetlands_leaning_willow": {
       "name": "Leaning marsh willow",
       "anchor": [
-        118.0,
-        240
+        160.5,
+        326
       ],
       "height_scale": 3.4,
-      "pixels_sha256": "8f2d292cfae1cc0357f24e0157a3a49bd3b75f30bca82c75d3ac331b4b948827",
+      "pixels_per_unit": 1.4981617647058825,
+      "pixels_sha256": "43e4d39d86e8b0987619bdf0f3f952e88864fd309658756b46bc6b9916ce47ef",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -436,27 +455,28 @@
         "reduced_trim": [
           0,
           0,
-          236,
-          240
+          321,
+          326
         ],
         "removed_detached_pixels": 75,
         "components": 1
       },
       "frame": {
-        "x": 850,
+        "x": 2,
         "y": 2,
-        "width": 236,
-        "height": 240
+        "width": 321,
+        "height": 326
       }
     },
     "wetlands_dead_willow": {
       "name": "Dead marsh willow",
       "anchor": [
-        112.5,
-        240
+        135.0,
+        288
       ],
       "height_scale": 3.0,
-      "pixels_sha256": "24e7e24d3eaa73a33996f3a66f0c3365b6340b5a43aa62379032ec23b905afab",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "360cdfb9dff02bde0b947e87468d6872de5802157b2f61e1ed348cc075f69ea8",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -476,27 +496,28 @@
         "reduced_trim": [
           0,
           0,
-          225,
-          240
+          270,
+          288
         ],
         "removed_detached_pixels": 1,
         "components": 1
       },
       "frame": {
-        "x": 621,
+        "x": 327,
         "y": 2,
-        "width": 225,
-        "height": 240
+        "width": 270,
+        "height": 288
       }
     },
     "wetlands_ruined_stilt_cottage": {
       "name": "Ruined stilt cottage",
       "anchor": [
-        120.0,
-        233
+        114.0,
+        220
       ],
       "height_scale": 2.3,
-      "pixels_sha256": "1e10968f06c4d1587759ba3cba2e322b1e110a45e1e15e02d66d2f603752f1aa",
+      "pixels_per_unit": 1.4945652173913044,
+      "pixels_sha256": "40c1d23b1d9aa859c6b98551397f52801ae27ecbc346b9edd520e98e39d53bba",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -516,27 +537,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          233
+          228,
+          220
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 721,
-        "y": 246,
-        "width": 240,
-        "height": 233
+        "x": 601,
+        "y": 2,
+        "width": 228,
+        "height": 220
       }
     },
     "wetlands_slumped_peat_stack": {
       "name": "Slumped peat stack",
       "anchor": [
-        119.5,
-        179
+        41.5,
+        62
       ],
       "height_scale": 0.65,
-      "pixels_sha256": "157d12b23e32a2a15fcbe68aaef0a0eaaf23222222ab7746addb642c74f3f8ff",
+      "pixels_per_unit": 1.4903846153846154,
+      "pixels_sha256": "72d1dfa9852258337a44c2ea22ba055cd7ed204dff7779904cb82d1cc5a12b61",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -556,27 +578,28 @@
         "reduced_trim": [
           1,
           0,
-          240,
-          179
+          84,
+          62
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 976,
-        "y": 490,
-        "width": 239,
-        "height": 179
+        "x": 708,
+        "y": 332,
+        "width": 83,
+        "height": 62
       }
     },
     "wetlands_mossy_boulder": {
       "name": "Moss-covered boulder",
       "anchor": [
-        120.0,
-        189
+        46.0,
+        72
       ],
       "height_scale": 0.75,
-      "pixels_sha256": "0e5a446ef7c13a25f7825a64b93953310993db88ae771082373275407e326797",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "6aed1e1a407877ef27684420f5f1bf139a84e0be3a3663c9e9d6b891312e0583",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -596,27 +619,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          189
+          92,
+          72
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 489,
-        "y": 490,
-        "width": 240,
-        "height": 189
+        "x": 612,
+        "y": 332,
+        "width": 92,
+        "height": 72
       }
     },
     "wetlands_cattail_cluster": {
       "name": "Bent cattails",
       "anchor": [
-        114.0,
-        240
+        41.0,
+        86
       ],
       "height_scale": 0.9,
-      "pixels_sha256": "29f2dd78d74afe80a86bfc8b9f97a3af698df77c231131a3f9c12a911a929828",
+      "pixels_per_unit": 1.4930555555555556,
+      "pixels_sha256": "e863d7957062a123f8a20089a5f55707037ff3bf9dd098485e4dd4536f70fd12",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -636,27 +660,28 @@
         "reduced_trim": [
           0,
           0,
-          228,
-          240
+          82,
+          86
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 2,
-        "y": 2,
-        "width": 228,
-        "height": 240
+        "x": 137,
+        "y": 332,
+        "width": 82,
+        "height": 86
       }
     },
     "wetlands_broken_jetty_posts": {
       "name": "Broken jetty posts",
       "anchor": [
-        120.0,
-        202
+        62.5,
+        106
       ],
       "height_scale": 1.1,
-      "pixels_sha256": "7feab0469b0a7ce3cdd37a9c5fe7e7f38ec267f03f2752a226a46d58caeb0df2",
+      "pixels_per_unit": 1.5056818181818181,
+      "pixels_sha256": "dfd311938cdcbcd46eff90342537983a47e410ad950ef8e9e5ec0450f08a0696",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -676,27 +701,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          202
+          125,
+          106
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 2,
-        "y": 490,
-        "width": 240,
-        "height": 202
+        "x": 1675,
+        "y": 2,
+        "width": 125,
+        "height": 106
       }
     },
     "wetlands_rotting_log": {
       "name": "Hollow marsh log",
       "anchor": [
-        120.0,
-        143
+        40.0,
+        48
       ],
       "height_scale": 0.5,
-      "pixels_sha256": "be86029b299ba67731614224a2f606bd37b4953caa606f5a151be83e2d98e98e",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "67bb56c1e12463a1e36a1cf8cf365e6a3c20e2e902b01493235f524292aa99d9",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -716,27 +742,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          143
+          80,
+          48
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 490,
-        "y": 696,
-        "width": 240,
-        "height": 143
+        "x": 1304,
+        "y": 332,
+        "width": 80,
+        "height": 48
       }
     },
     "wetlands_rusted_anchor": {
       "name": "Abandoned marsh anchor",
       "anchor": [
-        119.5,
-        196
+        35.0,
+        58
       ],
       "height_scale": 0.6,
-      "pixels_sha256": "75e9e70983f5744409e4a0a094b41077d232bb06e42c532ea778d096b8310f79",
+      "pixels_per_unit": 1.5104166666666667,
+      "pixels_sha256": "eedf1f6a57f7c2fb7216aaa7646faa3c429e6c5a494924e56c9482c2a1c6eb80",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -756,27 +783,28 @@
         "reduced_trim": [
           0,
           0,
-          239,
-          196
+          70,
+          58
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 246,
-        "y": 490,
-        "width": 239,
-        "height": 196
+        "x": 960,
+        "y": 332,
+        "width": 70,
+        "height": 58
       }
     },
     "wetlands_abandoned_wheelbarrow": {
       "name": "Rotting wheelbarrow",
       "anchor": [
-        120.0,
-        140
+        65.5,
+        77
       ],
       "height_scale": 0.8,
-      "pixels_sha256": "d97d20d601ca0fcc8f984c0b27fac0d35bae1dc3c8489a118086a4dd12816d02",
+      "pixels_per_unit": 1.50390625,
+      "pixels_sha256": "cd84625a56a242fdb0b87345c01f2be2efab950cfbd5e5ec7bb55f157a5be4e7",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -796,27 +824,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          140
+          131,
+          77
         ],
         "removed_detached_pixels": 1,
         "components": 1
       },
       "frame": {
-        "x": 734,
-        "y": 696,
-        "width": 240,
-        "height": 140
+        "x": 387,
+        "y": 332,
+        "width": 131,
+        "height": 77
       }
     },
     "wetlands_reed_basket": {
       "name": "Collapsed reed basket",
       "anchor": [
-        120.0,
-        145
+        32.0,
+        38
       ],
       "height_scale": 0.4,
-      "pixels_sha256": "415db73e1b49c1c1285b67a1647e50693e8d3698cc296b4f1cc4979a75ce192c",
+      "pixels_per_unit": 1.484375,
+      "pixels_sha256": "c6a88f93beb1a62c0c3df35fe13346f10d3cbec20f2441f79a6e66c1265ba7f8",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -836,27 +865,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          145
+          64,
+          38
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 246,
-        "y": 696,
-        "width": 240,
-        "height": 145
+        "x": 1422,
+        "y": 332,
+        "width": 64,
+        "height": 38
       }
     },
     "wetlands_torn_sack": {
       "name": "Water-stained grain sack",
       "anchor": [
-        120.0,
-        176
+        26.0,
+        38
       ],
       "height_scale": 0.4,
-      "pixels_sha256": "eec149c25c317f0a87971d2b6bc24e919effe1cf3cd316d8309ea5980af0a3d3",
+      "pixels_per_unit": 1.484375,
+      "pixels_sha256": "0195575eaab6c6363a9fd70d2ca2b560fa9d88ed78707098aab9d24ab4305fd1",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -876,27 +906,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          176
+          52,
+          38
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 1463,
-        "y": 490,
-        "width": 240,
-        "height": 176
+        "x": 1490,
+        "y": 332,
+        "width": 52,
+        "height": 38
       }
     },
     "wetlands_mossy_milestone": {
       "name": "Silted milestone",
       "anchor": [
-        116.5,
-        240
+        39.5,
+        82
       ],
       "height_scale": 0.85,
-      "pixels_sha256": "5b2cdae0524559950cc737989968ffbc54684900f17e2d0e46f95ab43f7557e3",
+      "pixels_per_unit": 1.5073529411764706,
+      "pixels_sha256": "44cc1da45ed7a20b384b52e3221de53189ec9f9e4798303fab17d60c36c238f7",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -916,27 +947,28 @@
         "reduced_trim": [
           0,
           0,
-          233,
-          240
+          79,
+          82
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 1308,
-        "y": 2,
-        "width": 233,
-        "height": 240
+        "x": 304,
+        "y": 332,
+        "width": 79,
+        "height": 82
       }
     },
     "wetlands_snail_shells": {
       "name": "Empty marsh shells",
       "anchor": [
-        120.0,
-        123
+        23.5,
+        24
       ],
       "height_scale": 0.25,
-      "pixels_sha256": "107fd044e69b3b2882ff934350ad9135c6bce8cd071bc2a3652b6ee7ec0b0f09",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "e0112a20653b6ee1f87041341de823d2a1d19e807b9e212c1ee2f9f17e2c44fb",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -956,27 +988,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          123
+          47,
+          24
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 1222,
-        "y": 696,
-        "width": 240,
-        "height": 123
+        "x": 1546,
+        "y": 332,
+        "width": 47,
+        "height": 24
       }
     },
     "wetlands_driftwood_stump": {
       "name": "Weathered driftwood stump",
       "anchor": [
-        120.0,
-        212
+        68.0,
+        120
       ],
       "height_scale": 1.25,
-      "pixels_sha256": "f21a41ed8fd4ea784ebc7a1bb70bce1fe11c03b142a4febce3029ef1ef126eba",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "80c9aad1e3e77da0a68dfc5e966144d413d90079198d72e55b5a7dad41375f93",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -996,27 +1029,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          212
+          136,
+          120
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 965,
-        "y": 246,
-        "width": 240,
-        "height": 212
+        "x": 1535,
+        "y": 2,
+        "width": 136,
+        "height": 120
       }
     },
     "wetlands_marsh_iris": {
       "name": "Ragged marsh iris",
       "anchor": [
-        107.0,
-        240
+        21.5,
+        48
       ],
       "height_scale": 0.5,
-      "pixels_sha256": "dea27a583d3097867f079e71a6e553c1ce4da3e77fc9210cc7efdcca13fca406",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "8f4fa061ed97e0ebeddac74888e8879336ba8114504335ef4d639f844564748c",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -1036,27 +1070,28 @@
         "reduced_trim": [
           0,
           0,
-          214,
-          240
+          43,
+          48
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 1090,
-        "y": 2,
-        "width": 214,
-        "height": 240
+        "x": 1257,
+        "y": 332,
+        "width": 43,
+        "height": 48
       }
     },
     "wetlands_empty_crab_cage": {
       "name": "Broken crab cage",
       "anchor": [
-        120.0,
-        131
+        44.0,
+        48
       ],
       "height_scale": 0.5,
-      "pixels_sha256": "271b8bc156e0441bd3d1c269ded987c86e7dbcbaad098e9e77fd96e141d67928",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "830f4477f68d8933fd3b079d0e341e14e86d9bc1ef77d4e20d3ec8a489925a72",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -1076,27 +1111,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          131
+          88,
+          48
         ],
         "removed_detached_pixels": 1,
         "components": 1
       },
       "frame": {
-        "x": 978,
-        "y": 696,
-        "width": 240,
-        "height": 131
+        "x": 1165,
+        "y": 332,
+        "width": 88,
+        "height": 48
       }
     },
     "wetlands_broken_cartwheel": {
       "name": "Sunken cartwheel",
       "anchor": [
-        120.0,
-        202
+        43.0,
+        72
       ],
       "height_scale": 0.75,
-      "pixels_sha256": "734f9904335d937f13fd009502f2a6580aef9c4de7fa6ce1f4ac3c620dff929d",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "f282eb13adaabd93206e6233170fcc9d1c471d823ec428ae6186e54dbcefadd4",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -1116,27 +1152,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          202
+          86,
+          72
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 1697,
-        "y": 246,
-        "width": 240,
-        "height": 202
+        "x": 522,
+        "y": 332,
+        "width": 86,
+        "height": 72
       }
     },
     "wetlands_weathered_shrine": {
       "name": "Abandoned roadside shrine",
       "anchor": [
-        108.0,
-        240
+        68.5,
+        154
       ],
       "height_scale": 1.6,
-      "pixels_sha256": "61c52de1cb048f07da9fd852e7f0ccfe56b7c29d3530330f6f637f8e7d6d7185",
+      "pixels_per_unit": 1.50390625,
+      "pixels_sha256": "4a90af4f7b62d9d11dbd3928f0f6b27d24ffed89b23eece127cb75340f9edb3c",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -1156,27 +1193,28 @@
         "reduced_trim": [
           0,
           0,
-          216,
-          240
+          137,
+          154
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 321,
-        "y": 246,
-        "width": 216,
-        "height": 240
+        "x": 1076,
+        "y": 2,
+        "width": 137,
+        "height": 154
       }
     },
     "wetlands_clay_jars": {
       "name": "Abandoned clay jars",
       "anchor": [
-        119.5,
-        182
+        31.5,
+        48
       ],
       "height_scale": 0.5,
-      "pixels_sha256": "315426d898f6b819b6add1706baa2aee34c7fa280737685eeba387fae355de98",
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "a8fee51416c6e21f946f8b7206ffe417c60500d5aa87639a72e83d7367cb59b2",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -1194,29 +1232,30 @@
           205
         ],
         "reduced_trim": [
-          1,
           0,
-          240,
-          182
+          0,
+          63,
+          48
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 733,
-        "y": 490,
-        "width": 239,
-        "height": 182
+        "x": 1098,
+        "y": 332,
+        "width": 63,
+        "height": 48
       }
     },
     "wetlands_flooded_wooden_gate": {
       "name": "Warped marsh gate",
       "anchor": [
-        120.0,
-        174
+        119.5,
+        173
       ],
       "height_scale": 1.8,
-      "pixels_sha256": "35d2158f166ebdbf08b80b7a403b0bc0e2cd94390eebd936624448a8c757b73f",
+      "pixels_per_unit": 1.5017361111111112,
+      "pixels_sha256": "56c1fa842413775262dd61ff251e7377790308a5bfab064e001d3e7454662b42",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -1236,27 +1275,28 @@
         "reduced_trim": [
           0,
           0,
-          240,
-          174
+          239,
+          173
         ],
         "removed_detached_pixels": 0,
         "components": 1
       },
       "frame": {
-        "x": 1707,
-        "y": 490,
-        "width": 240,
-        "height": 174
+        "x": 833,
+        "y": 2,
+        "width": 239,
+        "height": 173
       }
     },
     "wetlands_peat_cutting_spade": {
       "name": "Forgotten peat spade",
       "anchor": [
-        88.0,
-        239
+        38.5,
+        106
       ],
       "height_scale": 1.1,
-      "pixels_sha256": "e6ad8f6d22cd9157d944a844ece9c8719015d5d820fa497808ae91e78cec10c4",
+      "pixels_per_unit": 1.5056818181818181,
+      "pixels_sha256": "00a613c08812211f8994b05910f0a4f9bc62d062a889f2fa51650c2a0ee3fc29",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -1276,17 +1316,17 @@
         "reduced_trim": [
           0,
           0,
-          176,
-          239
+          77,
+          106
         ],
         "removed_detached_pixels": 14,
         "components": 1
       },
       "frame": {
-        "x": 541,
-        "y": 246,
-        "width": 176,
-        "height": 239
+        "x": 1804,
+        "y": 2,
+        "width": 77,
+        "height": 106
       }
     }
   }

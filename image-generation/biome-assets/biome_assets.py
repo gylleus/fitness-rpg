@@ -12,6 +12,8 @@ import re
 import shutil
 import sys
 
+from pixel_style import compile_texture, export_contract, guidance
+
 if sys.version_info < (3, 11):
     import tomli as tomllib
 else:
@@ -108,6 +110,9 @@ def make_plan(biome_id, kind="all", selected=None, content_root=None, style_path
                  "Composition/framing: orthographic side view, parallel to the screen.",
                  f"Lighting/mood: {biome['visual']['lighting']}", f"Color palette: {palette}"]
         constraints = [f"Designed for {canvas[0]} by {canvas[1]} logical pixels; judge detail at this size."]
+        if role != "enemy":
+            constraints.append(guidance(style["pixels"], canvas if role != "prop" else None,
+                                       entry["generation"]["height_scale"] if role == "prop" else None))
         if role == "background":
             lines.append(f"Scene/backdrop: {entry['generation']['composition']}")
             constraints += [f"Keep rows {scene['ground_y'] - 2 * scene['reference_height']} through {scene['ground_y']} quiet across the full width for moving combatants.",
@@ -134,6 +139,8 @@ def make_plan(biome_id, kind="all", selected=None, content_root=None, style_path
                   "transparent": entry["transparent"], "prompt": prompt, "prompt_sha256": digest(prompt),
                   "source_definition": entry, "export": {"sampling": "nearest", "alpha": "binary" if entry["transparent"] else "opaque", "colors": "source",
                   "resolution": "source" if role == "background" else "logical", **({"min_width": 1536} if role == "background" else {})}}
+        if role != "enemy":
+            record["export"].update(export_contract(style["pixels"], role))
         if role == "enemy":
             record["sheet_prompt"] = "\n".join([
                 "Use case: stylized-concept", "Asset type: authored enemy animation sheet",
@@ -206,11 +213,23 @@ def prepare(plan_path, sources_path, out):
         if not asset["transparent"] and low != 255:
             raise ValueError(f"Expected opaque background: {asset['id']}")
         resolution = asset["export"].get("resolution", "logical")
-        if resolution not in ("source", "logical"):
-            raise ValueError("Export resolution must be source or logical")
-        if resolution == "source" and image.width < asset["export"].get("min_width", 1):
+        if resolution not in ("source", "logical", "world"):
+            raise ValueError("Export resolution must be source, logical or world")
+        if image.width < asset["export"].get("min_width", 1):
             raise ValueError(f"Source texture is below the required resolution: {asset['id']}")
-        pixels = np.array(image if resolution == "source" else image.resize((width, height), Image.Resampling.NEAREST))
+        if resolution == "world":
+            profile = asset["export"]["pixel_profile"]
+            if asset["kind"] == "prop":
+                sys.path.insert(0, str(ROOT / "scripts"))
+                from bundle_scenery import trim_prop
+                height = profile["reference_height"] * asset["source_definition"]["generation"]["height_scale"]
+                image, _ = trim_prop(image, world_height=height, pixel_profile=profile)
+                asset = {**asset, "canvas": [height * image.width / image.height, height]}
+            else:
+                image = compile_texture(image, (width, height), profile, asset["kind"])
+        elif resolution == "logical":
+            image = image.resize((width, height), Image.Resampling.NEAREST)
+        pixels = np.array(image)
         pixels[..., 3] = (pixels[..., 3] > 128).astype(np.uint8) * 255
         pixels[pixels[..., 3] == 0] = 0
         if not pixels[..., 3].any():
@@ -237,7 +256,7 @@ def prepare(plan_path, sources_path, out):
         image.save(image_path, optimize=True)
         manifest["assets"][asset["id"]] = {"image": image_path.name, "sha256": sha(image_path),
             "size": list(image.size), "source": os.path.relpath(source, out), "source_sha256": spec["sha256"],
-            "backend": spec["backend"], "prompt_sha256": spec["prompt_sha256"], "export": asset["export"],
+            "backend": spec["backend"], "prompt_sha256": spec["prompt_sha256"], "export": asset["export"], "canvas": asset["canvas"],
             **ground_metadata.get(asset["id"], {})}
     if interior:
         manifest["interior"] = interior
@@ -359,6 +378,10 @@ def main(argv=None):
     props.add_argument("--biome", required=True)
     props.add_argument("--recipe-dir", type=Path)
     props.add_argument("--out", type=Path)
+    reexport = commands.add_parser("reexport", help="Recompile installed scenery from recorded masters at the shared actor pixel scale")
+    reexport.add_argument("--biome", required=True)
+    reexport.add_argument("--style", type=Path, help="Optional shared style TOML with a pixels table")
+    reexport.add_argument("--out", type=Path, help="Defaults to this biome's runtime asset directory")
     assemble = commands.add_parser("assemble-interior", help="Bundle a complete interior set and build a standalone HTML review")
     assemble.add_argument("--plan", type=Path, required=True)
     assemble.add_argument("--manifest", type=Path, required=True)
@@ -395,6 +418,9 @@ def main(argv=None):
     elif args.command == "assemble-interior":
         from interior_sets import assemble_set
         assemble_set(args.plan, args.manifest, args.out, args.regions)
+    elif args.command == "reexport":
+        from reexport import reexport_biome
+        print(f"Re-exported scenery: {reexport_biome(args.biome, args.out, args.style)}")
     else:
         bundle(args.manifest, args.mapping, args.out)
         print("Bundled selected biome assets")

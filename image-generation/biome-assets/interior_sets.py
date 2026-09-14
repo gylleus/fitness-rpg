@@ -8,6 +8,7 @@ import sys
 
 from biome_assets import HERE, ROOT, bundle, digest, save, sha, tomllib
 from interiors import make_interior_plan
+from pixel_style import export_contract, guidance
 
 
 def make_set_plan(theme, biome_id=None, recipe_path=None, decorations_path=None):
@@ -23,6 +24,7 @@ def make_set_plan(theme, biome_id=None, recipe_path=None, decorations_path=None)
     ground_prompt = "\n".join([
         "Use case: stylized-concept", f"Asset type: isolated walking floor strip for {recipe['name']}",
         f"Subject: {selected['ground']}", shared,
+        guidance(plan["style"]["pixels"], [256, 96]),
         "Strict orthographic side view. Wide 8:3 image, 2048 by 768 pixels, logical canvas 256 by 96. A continuous level walking lip at one quarter of the image height. Opaque earth or masonry fills everything below it through the bottom edge; genuine alpha transparency above. Compatible left and right edges for mirror repetition.",
         "No props, characters, roof, receding perspective, checkerboard, matte, text, floating objects or floor gaps."])
     props = [{**deepcopy(p), "id": f"{biome}_{p['id']}", "generation": {"anchor": "ground", "height_scale": p["height_scale"]}} for p in selected["props"]]
@@ -33,12 +35,12 @@ def make_set_plan(theme, biome_id=None, recipe_path=None, decorations_path=None)
         shared, f"Prop detail: {plan['style']['prop']}",
         "Exactly FOUR columns by TWO rows, eight equal cells, wide 2:1 canvas 2048 by 1024. Each cell contains exactly one complete isolated prop or the specified small grouped object, centered with at least 40 pixels of clear padding on every side. No grid lines or labels. All props sit on a flat invisible ground line within their own cell, with no cast shadow, ground patch or backdrop. Strict orthographic side view, no strong overhead perspective. Real transparent alpha outside every object, including holes and between cells.",
         "Cell order, left to right then top to bottom:",
-        *[f"{i+1}. {p['name']}" for i, p in enumerate(props)],
+        *[f"{i+1}. {p['name']}. {guidance(plan['style']['pixels'], height_scale=p['height_scale'])}" for i, p in enumerate(props)],
         "Keep each object entirely within its cell, especially poles and handles. No characters, words, symbols, checkerboard, walls, floors or roof."])
     for key, kind, canvas, prompt in [("ground", "ground", [256, 96], ground_prompt), ("decorations", "prop_sheet", [2048, 1024], prop_prompt)]:
         plan["assets"].append({"id": f"{biome}_{key}", "name": key, "kind": kind, "canvas": canvas,
             "transparent": True, "prompt": prompt, "prompt_sha256": digest(prompt),
-            "export": {"resolution": "source" if kind == "prop_sheet" else "logical", "sampling": "nearest", "colors": "source", "alpha": "binary"},
+            "export": {**({"resolution": "source", "sampling": "nearest", "colors": "source"} if kind == "prop_sheet" else export_contract(plan["style"]["pixels"], "ground")), "alpha": "binary"},
             **({"sheet": {"columns": 4, "rows": 2, "props": props}} if kind == "prop_sheet" else {})})
     plan["decorations_recipe"] = {"text": decorations_path.read_text(), "sha256": sha(decorations_path)}
     return plan
@@ -70,6 +72,7 @@ def assemble_set(plan_path, manifest_path, out, regions_path=None):
     recipe_dir.mkdir(exist_ok=True)
     (recipe_dir / "prompt.txt").write_text(sheet["prompt"] + "\n")
     save(recipe_dir / "recipe.json", {"schema_version": 1, "biome_id": plan["biome_id"],
+        **({"pixel_profile": plan["style"]["pixels"]} if "pixels" in plan.get("style", {}) else {}),
         "alpha_threshold": 128, "max_prop_edge": 240, "atlas_width": 1024, "padding": 2,
         "definitions": sheet["sheet"]["props"], "sheets": [{"image": os.path.relpath(sheet_image, recipe_dir),
             "sha256": prepared["sha256"], "prompt_file": "prompt.txt", "columns": sheet["sheet"]["columns"],
