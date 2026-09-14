@@ -11,7 +11,7 @@
 
 import { sql } from 'drizzle-orm';
 import { index, integer, primaryKey, real, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core';
-import type { BattleState, BattleStatus } from '../game/combat';
+import type { BattleState, BattleStatus, DungeonOffer } from '../game/combat';
 import type { EquipmentSlot, GearItem } from '../game/equipment';
 import type { CombatMeters } from '../game/attacks';
 import type { RunSegment } from '../running/route';
@@ -112,6 +112,19 @@ export const inventoryItems = sqliteTable('inventory_items', {
 export const dungeonSeeds = sqliteTable('dungeon_seeds', {
   dungeonId: integer('dungeon_id').primaryKey(),
   victories: integer('victories').notNull().default(0),
+});
+
+/** A saved set of camp destinations. Reading the map never rerolls it. */
+export const campMaps = sqliteTable('camp_maps', {
+  id: integer('id').primaryKey(),
+  generation: integer('generation').notNull().default(0),
+  offers: text('offers', { mode: 'json' }).$type<DungeonOffer[]>().notNull(),
+});
+
+/** Spending is separate from recorded steps, so health sync cannot refund it. */
+export const travelDays = sqliteTable('travel_days', {
+  day: text('day').primaryKey(),
+  spent: integer('spent').notNull().default(0),
 });
 
 export const dungeonRuns = sqliteTable('dungeon_runs', {

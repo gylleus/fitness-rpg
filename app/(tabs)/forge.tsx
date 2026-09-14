@@ -22,7 +22,7 @@ export default function Inventory() {
   const [visibleCount, setVisibleCount] = useState(24);
   const selected = inventory.find(item => item.id === selectedId);
   const bag = inventory.filter(item => !item.slot);
-  const rarityOrder = { common: 0, uncommon: 1, rare: 2 };
+  const rarityOrder = { common: 0, uncommon: 1, rare: 2, epic: 3 };
   const filtered = bag.filter(({ item }) => (category === 'all' || item.category === category) &&
     `${item.name} ${item.rarity} ${itemStatsLabel(item)}`.toLowerCase().includes(query.trim().toLowerCase()))
     .sort((a, b) => sort === 'name' ? a.item.name.localeCompare(b.item.name) : sort === 'value' ? b.item.sellValue - a.item.sellValue || b.id - a.id
@@ -92,7 +92,7 @@ export default function Inventory() {
           style={{ padding: 16, gap: 8, borderRadius: 14, backgroundColor: colors.panel, borderWidth: 1, borderColor: owned.id === selectedId ? colors.green : colors.border }}>
           <View style={ui.row}><ItemIcon item={owned.item} /><View style={ui.flex}>
           <View style={ui.between}><Text style={[ui.heading, { flex: 1, color: rarityColor[owned.item.rarity] }]}>{owned.item.name}</Text><Text style={ui.small}>◆ {owned.item.sellValue}</Text></View>
-          <Text style={ui.small}>{owned.item.kind} · {itemStatsLabel(owned.item)}</Text>
+          <Text style={ui.small}>Item level {owned.item.itemLevel ?? 1} · {owned.item.kind} · {itemStatsLabel(owned.item)}</Text>
           </View></View>
         </Pressable>)}
       {bag.length > 0 && filtered.length === 0 && <Text style={ui.body}>No items match this search.</Text>}

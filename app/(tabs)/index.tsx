@@ -28,7 +28,7 @@ export default function Camp() {
       <View style={ui.divider} />
       <View style={ui.row}>
         <View style={[ui.flex, { gap: 5 }]}><Text style={ui.label}>Damage per hit</Text><Text style={ui.number}>{data.damageMin}–{data.damageMax}</Text><Text style={ui.small}>{stats.baseDamageMin}–{stats.baseDamageMax} from hero & gear</Text></View>
-        <View style={[ui.flex, { gap: 5 }]}><Text style={ui.label}>Health</Text><Text style={ui.number}>{data.currentHealth} <Text style={{ fontSize: 14, color: colors.green }}>/ {stats.health} HP</Text></Text><Text style={ui.small}>{stats.dailyHealth} bonus today · wins spend HP</Text></View>
+        <View style={[ui.flex, { gap: 5 }]}><Text style={ui.label}>Health</Text><Text style={ui.number}>{data.currentHealth} <Text style={{ fontSize: 14, color: colors.green }}>/ {stats.health} HP</Text></Text><Text style={ui.small}>Wins carry remaining health</Text></View>
       </View>
       <View style={ui.divider} />
       <Text style={ui.label}>Pushup power</Text>
@@ -42,7 +42,7 @@ export default function Camp() {
       <View style={ui.between}><Text style={ui.heading}>Today fuels your hero</Text><Text style={ui.small}>{new Date(dayStart(today.day)).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</Text></View>
       <View style={ui.row}>
         <Card style={ui.flex}><Text style={ui.label}>Pushups</Text><Text style={ui.number}>{today.pushups}</Text><Text style={ui.small}>+{today.pushups} saved today</Text></Card>
-        <Card style={ui.flex}><Text style={ui.label}>Steps</Text><Text style={ui.number}>{today.steps.toLocaleString()}</Text><Text style={ui.small}>+{Math.floor(today.steps / 100)} health today</Text></Card>
+        <Card style={ui.flex}><Text style={ui.label}>Travel steps</Text><Text style={ui.number}>{data.travelSteps.available.toLocaleString()}</Text><Text style={ui.small}>{data.travelSteps.spent.toLocaleString()} spent · {today.steps.toLocaleString()} earned today</Text></Card>
       </View>
       <Card style={{ backgroundColor: '#202b32' }}>
         <View style={ui.between}><View style={{ gap: 5 }}><Text style={[ui.label, { color: colors.purple }]}>Running agility</Text><Text style={ui.heading}>{(today.distanceMeters / 1000).toFixed(2)} km today</Text></View><Text style={{ color: colors.purple, fontSize: 26, fontWeight: '800' }}>{percentLabel(stats.dodgeBps)}</Text></View>
@@ -50,7 +50,7 @@ export default function Camp() {
       </Card>
       <Button label="Train pushups  ·  increase damage" onPress={() => router.push('/session')} />
       <View style={ui.row}><View style={ui.flex}><Button secondary label={health.connected ? "Connected steps" : "Connect steps"} onPress={() => router.push('/health')} /></View><View style={ui.flex}><Button secondary label={running ? "Return to your run" : "Start running"} onPress={() => router.push('/run')} /></View></View>
-      <Text style={ui.small}>{health.connected ? `${healthName} steps sync automatically. ${health.syncedAt ? `Last synced ${new Date(health.syncedAt).toLocaleTimeString()}.` : 'Syncing your steps…'}` : 'Connect your phone’s health app to sync steps automatically.'} Step health, pushup damage, and running dodge reset daily at 5 AM device time. Your fitness history, items, and gold stay.</Text>
+      <Text style={ui.small}>{health.connected ? `${healthName} steps sync automatically. ${health.syncedAt ? `Last synced ${new Date(health.syncedAt).toLocaleTimeString()}.` : 'Syncing your steps…'}` : 'Connect your phone’s health app to sync steps automatically.'} Steps pay for dungeon travel: normal is free, heroic costs 1,000, and mythic costs 5,000. Travel steps, pushup damage, and running dodge reset daily at 5 AM device time. Your fitness history, items, and gold stay.</Text>
       {health.error && <Text style={[ui.small, { color: colors.gold }]}>Step sync needs attention. Open Connected steps to retry.</Text>}
     </View>
 

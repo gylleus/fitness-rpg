@@ -9,6 +9,7 @@ import * as schema from './schema';
 import { giveItem } from '../../test/equipment';
 import { GEAR } from '../game/equipment';
 import { equipItem, unequipItem } from './inventory';
+import { advanceExpedition } from '../../test/expeditions';
 import { createTestDb } from '../../test/db';
 import { advanceDungeon, claimChallenge, getGameSnapshot, getHero, getSavedPushups, purchasePotion,
   retreatDungeon, expireBattles, savePushupWorkout, saveRun, saveStepTotal, startDungeon, drinkPotion } from './game';
@@ -27,7 +28,7 @@ afterEach(() => { for (const db of databases.splice(0)) if (db.$client.open) db.
 function nextAttack(db: ReturnType<typeof createTestDb>, run: ReturnType<typeof startDungeon>) {
   for (let i = 0; i < 10 && run.status === 'active'; i++) {
     const attacks = run.state.attacksMade;
-    const next = advanceDungeon(db, run.id, run.state.tick, now)!;
+    const next = advanceExpedition(db, run, now);
     if (next.state.attacksMade > attacks) return next;
     run = next;
   }
@@ -52,7 +53,7 @@ describe('saved pushup damage power', () => {
     let run = startDungeon(db, 0, now);
     expect(run.state.stats).toMatchObject({ pushups: 4, attack: 35, damageMultiplier: 1.4 });
     run = nextAttack(db, run);
-    expect(run.state.enemyHp).toBe(55 - run.state.impacts![0].amount);
+    expect(run.state.enemyHp).toBe(run.state.dungeon!.enemies[0].health - run.state.impacts![0].amount);
     expect(run.state.impacts![0].amount).toBeGreaterThanOrEqual(28);
     expect(run.state.impacts![0].amount).toBeLessThanOrEqual(42);
     expect(advanceDungeon(db, run.id, run.state.tick - 1, now)).toEqual(run);
@@ -76,7 +77,7 @@ describe('saved pushup damage power', () => {
       db.update(schema.heroes).set({ focusAttacks: 10 }).run();
       saveRun(db, day, { distanceMeters: 10000, durationSeconds: 4500, steps: 10000 }, 'agility', now);
       let run = nextAttack(db, startDungeon(db, 0, now));
-      run = advanceDungeon(db, run.id, run.state.tick, now)!;
+      run = advanceExpedition(db, run, now);
       const before = getGameSnapshot(db, now);
       expect(before.hero).toMatchObject({ pushupUnitsSpent: 0, focusAttacks: 9, combatMeters: { dodge: 0 } });
       db.$client.close();
@@ -97,7 +98,7 @@ describe('saved pushup damage power', () => {
     savePushupWorkout(db, { ...workout, validReps: 1 });
     const entry = startDungeon(db, 0, now);
     let run = entry;
-    for (let i = 0; i < 100 && run.status === 'active'; i++) run = advanceDungeon(db, run.id, run.state.tick, now)!;
+    for (let i = 0; i < 100 && run.status === 'active'; i++) run = advanceExpedition(db, run, now);
     expect(run.status).toBe('defeat');
     expect(run.state.attacksMade).toBeGreaterThan(1);
     expect(getGameSnapshot(db, now)).toMatchObject({ currentHealth: entry.state.entryHp, savedPushups: 1, hero: { gold: 0, xp: 0 } });
@@ -141,7 +142,7 @@ describe('saved pushup damage power', () => {
     getHero(db);
     db.update(schema.heroes).set({ focusAttacks: 10 }).run();
     let run = startDungeon(db, 0, now);
-    for (let i = 0; i < 3; i++) run = advanceDungeon(db, run.id, run.state.tick, now)!;
+    for (let i = 0; i < 3; i++) run = advanceExpedition(db, run, now);
     const before = getGameSnapshot(db, now);
     db.run("CREATE TRIGGER fail_turn BEFORE UPDATE ON dungeon_runs BEGIN SELECT RAISE(ABORT, 'disk error'); END");
     expect(() => advanceDungeon(db, run.id, run.state.tick, now)).toThrow();
@@ -229,6 +230,8 @@ it('migrates old free-attack battles without losing banked progress or workouts'
     sqlite.exec(readFileSync(join(__dirname, 'migrations/0004_dungeon_recovery.sql'), 'utf8'));
     sqlite.exec(readFileSync(join(__dirname, 'migrations/0005_pushup_damage.sql'), 'utf8'));
     sqlite.exec(readFileSync(join(__dirname, 'migrations/0006_inventory.sql'), 'utf8'));
+    sqlite.exec(readFileSync(join(__dirname, 'migrations/0007_daily_fitness_reset.sql'), 'utf8'));
+    sqlite.exec(readFileSync(join(__dirname, 'migrations/0008_camp_expeditions.sql'), 'utf8'));
     const db = drizzle(sqlite, { schema });
     const snapshot = getGameSnapshot(db, now);
     expect(snapshot).toMatchObject({ savedPushups: 12, hero: { gold: 70, xp: 85, swordLevel: 2 },

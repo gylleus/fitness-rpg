@@ -15,9 +15,12 @@ export const SLOT_LABELS: Record<EquipmentSlot, string> = {
 };
 export type ModifierStat = 'health' | 'damage' | 'armor' | 'pushup_damage_coefficient' | 'crit_chance_bps' | 'crit_damage_bps';
 export type ItemModifier = { stat: ModifierStat; value: number; affix?: string };
+export type ItemRarity = 'common' | 'uncommon' | 'rare' | 'epic';
 export type GearItem = {
-  version?: 2; definitionId: string; name: string; kind: ItemKind; rarity: 'common' | 'uncommon' | 'rare';
+  version?: 2; definitionId: string; name: string; kind: ItemKind; rarity: ItemRarity;
   category?: ItemCategory; tier?: number; description?: string; visualDescription?: string;
+  /** Absent on historical snapshots; independent of the catalog's visual tier. */
+  itemLevel?: number;
   /** Optional only because historical earned-item snapshots predate classes. */
   weaponType?: WeaponType;
   sellValue: number; damageMin?: number; damageMax?: number; armor?: number; modifiers?: ItemModifier[];
@@ -54,11 +57,12 @@ export function previewEquipment(inventory: readonly OwnedItem[], selected: Owne
 /** Add armor to known pre-catalog gear without erasing paid-for health bonuses.
  * Never replace saved rolls, rarity, name, price, effects or damage from GEAR. */
 export function upgradeGear(item: GearItem): GearItem {
-  if (item.version === 2) return item;
   const definition = GEAR[item.definitionId];
+  const itemLevel = validItemLevel(item.itemLevel ?? item.tier ?? definition?.tier ?? 1);
+  if (item.version === 2) return item.itemLevel === itemLevel ? item : { ...item, itemLevel };
   const armor = item.armor ?? (item.definitionId === 'travel_wraps'
     ? 2 + Math.floor((item.health ?? 0) / 20) * 8 : definition?.armor);
-  return { ...item, version: 2, category: item.category ?? definition?.category,
+  return { ...item, version: 2, itemLevel, category: item.category ?? definition?.category,
     tier: item.tier ?? definition?.tier, description: item.description ?? definition?.description,
     visualDescription: item.visualDescription ?? definition?.visualDescription, armor };
 }
@@ -66,12 +70,12 @@ export function upgradeGear(item: GearItem): GearItem {
 /** Preserve old paid upgrades once, with their health kept as a separate bonus. */
 export function startingEquipment(swordLevel = 0, armorLevel = 0, amuletOwned = false) {
   const items: { item: GearItem; slot: EquipmentSlot }[] = [
-    { slot: 'weapon', item: { ...GEAR.wooden_club, name: swordLevel ? 'Seasoned Wooden Club' : GEAR.wooden_club.name,
+    { slot: 'weapon', item: { ...GEAR.wooden_club, itemLevel: 1, name: swordLevel ? 'Seasoned Wooden Club' : GEAR.wooden_club.name,
       damageMin: 20 + swordLevel * 3, damageMax: 30 + swordLevel * 3, sellValue: 5 + swordLevel * 15 } },
-    { slot: 'armor', item: { ...GEAR.travel_wraps, name: armorLevel ? 'Reinforced Travel Wraps' : GEAR.travel_wraps.name,
+    { slot: 'armor', item: { ...GEAR.travel_wraps, itemLevel: 1, name: armorLevel ? 'Reinforced Travel Wraps' : GEAR.travel_wraps.name,
       armor: 2 + armorLevel * 8, health: armorLevel * 20, sellValue: 3 + armorLevel * 15 } },
   ];
-  if (amuletOwned) items.push({ slot: 'amulet', item: { ...GEAR.restraint_amulet } });
+  if (amuletOwned) items.push({ slot: 'amulet', item: { ...GEAR.restraint_amulet, itemLevel: 1 } });
   return items;
 }
 
@@ -107,41 +111,71 @@ export function equipmentBonuses(items: readonly { item: GearItem; slot: Equipme
     coefficientBonus: coefficientBps / 10000, critChanceBps, critMultiplierBps, effects };
 }
 
-export type LootDrop = { encounter: number; item: GearItem; boss: boolean };
-const AFFIXES: { name: string; stat: ModifierStat; min: number; max: number; scale?: number }[] = [
-  { name: 'of Vigor', stat: 'health', min: 5, max: 12 },
-  { name: 'of Impact', stat: 'damage', min: 1, max: 3 },
-  { name: 'of Warding', stat: 'armor', min: 2, max: 6 },
-  { name: 'of Discipline', stat: 'pushup_damage_coefficient', min: 1, max: 3, scale: 0.0025 },
-  { name: 'of Precision', stat: 'crit_chance_bps', min: 1, max: 3, scale: 100 },
-  { name: 'of Ruin', stat: 'crit_damage_bps', min: 5, max: 15, scale: 100 },
+export type LootDrop = { encounter: number; item: GearItem; boss: boolean; source?: 'enemy' | 'chest' };
+export type LootDifficulty = 'normal' | 'heroic' | 'mythic';
+export type LootOptions = { difficulty?: LootDifficulty; level?: number; chest?: boolean };
+const AFFIXES: { prefix: string; suffix: string; stat: ModifierStat; min: number; max: number; scale?: number }[] = [
+  { prefix: 'Vital', suffix: 'of Vigor', stat: 'health', min: 5, max: 12 },
+  { prefix: 'Crushing', suffix: 'of Impact', stat: 'damage', min: 1, max: 3 },
+  { prefix: 'Stalwart', suffix: 'of Warding', stat: 'armor', min: 2, max: 6 },
+  { prefix: 'Disciplined', suffix: 'of Discipline', stat: 'pushup_damage_coefficient', min: 1, max: 3, scale: 0.0025 },
+  { prefix: 'Keen', suffix: 'of the Seer', stat: 'crit_chance_bps', min: 1, max: 3, scale: 100 },
+  { prefix: 'Ruinous', suffix: 'of Cataclysm', stat: 'crit_damage_bps', min: 5, max: 15, scale: 100 },
 ];
+const RARITIES: readonly ItemRarity[] = ['common', 'uncommon', 'rare', 'epic'];
+/** Basis-point weights conditional on receiving an item, ordered like RARITIES. */
+const LOOT_WEIGHTS: Record<LootDifficulty, readonly number[]> = {
+  normal: [8000, 1850, 145, 5], heroic: [5000, 4300, 680, 20], mythic: [3500, 5000, 1450, 50],
+};
+const BOSS_WEIGHTS: Record<LootDifficulty, readonly number[]> = {
+  normal: [0, 9700, 295, 5], heroic: [0, 0, 9950, 50], mythic: [0, 0, 9800, 200],
+};
+const LOOT_BASES = [1, 2, 3].map(tier => Object.values(GEAR).filter(item => item.tier === tier && item.rarity === 'common'));
+const validItemLevel = (level: number) => Number.isFinite(level) ? Math.max(1, Math.floor(level)) : 1;
 
 /** Each encounter owns a stream; saved lootPlan retains old items and rolls.
- * Tier matches the chapter, common/uncommon/rare weights are 60/30/10, and
- * bosses guarantee rare gear. A rare receives two distinct rolled modifiers. */
-export function rollLoot(seed: number, encounter: number, boss: boolean, dungeonId = 0): LootDrop[] {
-  let state = seedFor(`loot-v2:${seed}:${encounter}`);
+ * Mobs drop an item 20% of the time; bosses and unopened chests guarantee one.
+ * The old dungeon ID is only a level fallback, never an item's power ceiling. */
+export function rollLoot(seed: number, encounter: number, boss: boolean, dungeonId = 0, options: LootOptions = {}): LootDrop[] {
+  const difficulty = options.difficulty ?? 'normal';
+  const dungeonLevel = validItemLevel(options.level ?? dungeonId + 1);
+  const source = options.chest ? 'chest' : 'enemy';
+  let state = seedFor(`loot-v3:${seed}:${encounter}:${source}`);
   const draw = (min: number, max: number) => { const next = randomInt(state, min, max); state = next.state; return next.value; };
-  if (!boss && draw(0, 9999) >= 3500) return [];
-  const tier = Math.max(1, Math.min(3, Math.floor(dungeonId) + 1));
-  const rarityRoll = draw(0, 99);
-  const rarity = boss || rarityRoll >= 90 ? 'rare' : rarityRoll >= 60 ? 'uncommon' : 'common';
-  const pool = Object.values(GEAR).filter(item => item.tier === tier && item.rarity === rarity);
+  if (!boss && !options.chest && draw(0, 9999) >= 2000) return [];
+  let rarityRoll = draw(0, 9999);
+  const weights = boss ? BOSS_WEIGHTS[difficulty] : LOOT_WEIGHTS[difficulty];
+  const rarity = RARITIES.find((_, index) => (rarityRoll -= weights[index]) < 0)!;
+  const itemLevel = Math.max(1, dungeonLevel + draw(-1, 1));
+  const tier = Math.min(3, 1 + Math.floor((itemLevel - 1) / 5));
+  const pool = LOOT_BASES[tier - 1];
   const base = pool[draw(0, pool.length - 1)];
-  const modifiers = (base.modifiers ?? []).map(modifier => ({ ...modifier }));
+  const levelScale = 1 + (itemLevel - 1) * .12;
+  // Catalog tiers describe existing artwork and baseline power at levels 1/6/11.
+  const intrinsicScale = levelScale / (1 + (tier - 1) * .6);
+  const modifiers: ItemModifier[] = [];
   const available = [...AFFIXES];
-  const affixCount = rarity === 'rare' ? 2 : rarity === 'uncommon' ? 1 : 0;
-  const affixNames: string[] = [];
-  for (let i = 0; i < affixCount; i++) {
+  const rollAffix = (position: 'prefix' | 'suffix') => {
     const [affix] = available.splice(draw(0, available.length - 1), 1);
-    const value = Math.round(draw(affix.min, affix.max) * tier * (affix.scale ?? 1) * 10000) / 10000;
-    modifiers.push({ stat: affix.stat, value, affix: affix.name });
-    affixNames.push(affix.name.replace(/^of /, ''));
-  }
-  const item: GearItem = { ...base, modifiers, sellValue: base.sellValue + affixCount * 5 * tier,
-    name: affixNames.length ? `${base.name} of ${affixNames.join(' & ')}` : base.name };
-  return [{ encounter, item, boss }];
+    const raw = draw(affix.min, affix.max) * levelScale * (rarity === 'epic' ? 1.5 : 1) * (affix.scale ?? 1);
+    const value = affix.stat === 'pushup_damage_coefficient' ? Math.round(raw * 10000) / 10000 : Math.round(raw);
+    modifiers.push({ stat: affix.stat, value, affix: affix[position] });
+    return affix[position];
+  };
+  const prefix = rarity === 'rare' || rarity === 'epic' ? rollAffix('prefix') : '';
+  const suffix = rarity !== 'common' ? rollAffix('suffix') : '';
+  // Copy only intrinsic properties. Old common definitions can contain magical
+  // bonuses; those remain on earned snapshots but never leak into fresh rolls.
+  const item: GearItem = { version: 2, definitionId: base.definitionId, kind: base.kind,
+    category: base.category, weaponType: base.weaponType, tier, itemLevel, rarity,
+    name: [prefix, base.name, suffix].filter(Boolean).join(' '),
+    description: base.description, visualDescription: base.visualDescription,
+    damageMin: base.damageMin === undefined ? undefined : Math.max(1, Math.round(base.damageMin * intrinsicScale)),
+    damageMax: base.damageMax === undefined ? undefined : Math.max(1, Math.round(base.damageMax * intrinsicScale)),
+    armor: base.armor === undefined ? undefined : Math.max(1, Math.round(base.armor * intrinsicScale)),
+    modifiers, sellValue: Math.max(1, Math.round(base.sellValue * intrinsicScale + modifiers.length * 5 * levelScale * (rarity === 'epic' ? 1.5 : 1))),
+  };
+  return [{ encounter, item, boss, source }];
 }
 
 const percent = (value: number) => Number(value.toFixed(2)).toString();

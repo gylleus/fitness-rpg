@@ -26,6 +26,7 @@ export function DungeonJourney({ battle, playing, speed, fullScreen = false }: {
   const [effects, setEffects] = useState<{ tick: number; impacts: FloatingImpact[] }>(() => ({ tick: battle.tick, impacts: [] }));
   const finishImpact = useCallback((id: string) => setEffects(current => ({ ...current, impacts: current.impacts.filter(impact => impact.id !== id) })), []);
   const dungeon = battleDungeon(battle);
+  const atChest = battle.phase === 'chest' || battle.phase === 'chest-reveal';
   const wetlands = hasWetlandsScenery(dungeon);
   const hollowDelve = dungeon.biomeId === 'hollow_delve';
   const groundY = height - (fullScreen ? 90 : 42);
@@ -51,7 +52,7 @@ export function DungeonJourney({ battle, playing, speed, fullScreen = false }: {
   const camera = useMemo(() => Animated.multiply(Animated.subtract(position, width * 0.22), -1), [position, width]);
   const parallax = useMemo(() => Animated.multiply(camera, 0.3), [camera]);
   const heroPosition = useMemo(() => Animated.add(position, strike), [position, strike]);
-  return <View onLayout={e => { setWidth(e.nativeEvent.layout.width); setHeight(e.nativeEvent.layout.height); }} accessibilityLabel={battle.phase === 'travelling' ? 'Your hero walks right through the dungeon' : 'Your hero attacks the enemy on the path'}
+  return <View onLayout={e => { setWidth(e.nativeEvent.layout.width); setHeight(e.nativeEvent.layout.height); }} accessibilityLabel={atChest ? 'Your hero waits beside a chest' : battle.phase === 'travelling' ? 'Your hero walks right through the dungeon' : 'Your hero attacks the enemy on the path'}
     style={{ height: fullScreen ? '100%' : 240, width: '100%', overflow: 'hidden', borderRadius: fullScreen ? 0 : 16, backgroundColor: '#111e22' }}>
     {wetlands ? <WetlandsBackdrop width={width} height={height} groundY={groundY} heroHeight={heroHeight}
       position={position} initialPosition={journeyTarget(battle)} seed={battle.rng?.seed ?? dungeon.id} /> : hollowDelve ?
@@ -66,14 +67,20 @@ export function DungeonJourney({ battle, playing, speed, fullScreen = false }: {
     <Animated.View testID="dungeon-world" style={{ position: 'absolute', bottom: fullScreen ? 70 : 22, width: worldWidth, height: 170, transform: [{ translateX: camera }] }}>
       {!wetlands && !hollowDelve && Array.from({ length: Math.ceil(worldWidth / 55) }, (_, i) => <View key={`stone-${i}`} style={{ position: 'absolute', bottom: 3, left: i * 55, width: 18, height: 4, backgroundColor: '#627050', opacity: 0.55 }} />)}
       {dungeon.enemies.map((enemy, i) => <View key={`${enemy.id ?? enemy.name}-${i}`} style={{ position: 'absolute', left: 40 + (i + 1) * 320, bottom: 20, opacity: i < battle.defeated - 1 ? 0.3 : 1 }}>
-        {!fullScreen && <Text style={{ position: 'absolute', bottom: 133, left: -70, width: 140, color: dungeon.color, fontSize: 10, textAlign: 'center' }}>{i === dungeon.enemies.length - 1 ? 'BOSS · ' : ''}{enemy.name}</Text>}
-        <EntitySprite entityId={enemy.id} {...enemyAnimation(battle, i)} heroHeight={heroHeight} facing="left" playing={playing} speed={speed} fallback={enemy.sprite} tint={dungeon.color} />
+        {dungeon.chestEncounters?.includes(i) ? <View accessibilityLabel="Treasure chest" testID={`dungeon-chest-${i}`}
+          style={{ width: 50, height: 38, marginLeft: -25, backgroundColor: '#70462e', borderWidth: 3, borderColor: '#dbb965', borderRadius: 5 }}>
+          <View style={{ top: 10, height: 3, backgroundColor: '#dbb965' }} />
+          <View style={{ position: 'absolute', left: 19, top: 9, width: 7, height: 12, backgroundColor: '#f2ce79' }} />
+        </View> : <>
+          {!fullScreen && <Text style={{ position: 'absolute', bottom: 133, left: -70, width: 140, color: dungeon.color, fontSize: 10, textAlign: 'center' }}>{i === dungeon.enemies.length - 1 ? 'BOSS · ' : ''}{enemy.name}</Text>}
+          <EntitySprite entityId={enemy.id} {...enemyAnimation(battle, i)} heroHeight={heroHeight} facing="left" playing={playing} speed={speed} fallback={enemy.sprite} tint={dungeon.color} />
+        </>}
       </View>)}
       <Animated.View style={{ position: 'absolute', bottom: 20, transform: [{ translateX: heroPosition }] }}>
         <EntitySprite entityId={heroEntityId} {...heroAnimation(battle)} heroHeight={heroHeight} facing="right" playing={playing} speed={speed} />
       </Animated.View>
       {effects.impacts.map(impact => <FloatingDamage key={impact.id} impact={impact} playing={playing} speed={speed} onComplete={finishImpact} />)}
     </Animated.View>
-    {!fullScreen && <Text style={{ position: 'absolute', top: 14, left: 14, color: battle.lastAction === 'dodge' ? colors.purple : colors.text, fontSize: 11, fontWeight: '700' }}>{battle.status === 'active' ? battle.phase === 'travelling' ? 'ONWARD →' : battle.lastAction === 'dodge' ? 'DODGE · MISS' : 'ENEMY ENCOUNTER' : battle.status.toUpperCase()}</Text>}
+    {!fullScreen && <Text style={{ position: 'absolute', top: 14, left: 14, color: battle.lastAction === 'dodge' ? colors.purple : colors.text, fontSize: 11, fontWeight: '700' }}>{battle.status === 'active' ? atChest ? 'TREASURE CHEST' : battle.phase === 'travelling' ? 'ONWARD →' : battle.lastAction === 'dodge' ? 'DODGE · MISS' : 'ENEMY ENCOUNTER' : battle.status.toUpperCase()}</Text>}
   </View>;
 }

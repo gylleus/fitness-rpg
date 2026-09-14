@@ -1,12 +1,13 @@
 import { afterEach, expect, it } from 'vitest';
 import { eq } from 'drizzle-orm';
+import { advanceExpedition } from '../../test/expeditions';
 import { createTestDb } from '../../test/db';
 import { giveItem } from '../../test/equipment';
 import { GEAR } from '../game/equipment';
 import { battleTurn, type BattleState } from '../game/combat';
-import { advanceDungeon, expireBattles, getGameSnapshot, getHero, retreatDungeon, savePushupWorkout, startDungeon } from './game';
+import { advanceDungeon, expireBattles, getDungeonMap, getGameSnapshot, getHero, retreatDungeon, savePushupWorkout, startDungeon } from './game';
 import { equipItem, getInventory, sellItem, unequipItem } from './inventory';
-import { dungeonRuns, dungeonSeeds, heroes, inventoryItems } from './schema';
+import { dungeonRuns, heroes, inventoryItems } from './schema';
 
 const now = new Date(2026, 8, 11, 12).getTime();
 const databases: ReturnType<typeof createTestDb>[] = [];
@@ -18,7 +19,7 @@ function trained() {
   return db;
 }
 function finish(db: ReturnType<typeof database>, run = startDungeon(db, 0, now)) {
-  for (let i = 0; i < 2000 && run.status === 'active'; i++) run = advanceDungeon(db, run.id, run.state.tick, now)!;
+  for (let i = 0; i < 2000 && run.status === 'active'; i++) run = advanceExpedition(db, run, now);
   expect(run.status).not.toBe('active');
   return run;
 }
@@ -29,7 +30,7 @@ it('converts legacy bonuses once, preserves resources and never regifts sold sta
   const snapshot = getGameSnapshot(db, now);
   expect(snapshot.inventory).toHaveLength(3);
   expect(snapshot.stats).toMatchObject({ baseDamageMin: 34, baseDamageMax: 44, baseHealth: 150, pushupDamageCoefficient: 0.11 });
-  expect(snapshot.hero).toMatchObject({ gold: 147, xp: 200, healthPotions: 2, inventoryVersion: 2 });
+  expect(snapshot.hero).toMatchObject({ gold: 147, xp: 200, healthPotions: 2, inventoryVersion: 3 });
   const club = snapshot.inventory.find(item => item.slot === 'weapon')!;
   unequipItem(db, 'weapon'); sellItem(db, club.id);
   expect(getGameSnapshot(db, now).inventory).toHaveLength(2);
@@ -105,22 +106,22 @@ it('replays the same full defeat after retry and keeps loot and seeds unchanged'
   const second = finish(db);
   expect(second.state).toEqual(first.state);
   expect(getInventory(db)).toHaveLength(2);
-  expect(db.select().from(dungeonSeeds).get()?.victories).toBe(0);
+  expect(getDungeonMap(db).generation).toBe(0);
 });
 
-it('retains the seed across daily expiry and keeps other dungeon counters independent', () => {
+it('retains every offer across daily expiry and refreshes all seeds after a victory', () => {
   const db = trained();
-  getHero(db);
-  db.update(heroes).set({ unlockedDungeon: 1 }).run();
-  const other = startDungeon(db, 1, now);
-  retreatDungeon(db, other.id);
-  expect(finish(db).status).toBe('victory');
-  const same = startDungeon(db, 1, now);
-  expect(same.state.rng).toEqual(other.state.rng);
+  const original = getDungeonMap(db);
+  const other = startDungeon(db, original.offers[1].offerId, now);
   const tomorrow = now + 24 * 60 * 60 * 1000;
   expireBattles(db, tomorrow);
-  expect(startDungeon(db, 1, tomorrow).state.rng).toEqual(other.state.rng);
-  expect(db.select().from(dungeonSeeds).where(eq(dungeonSeeds.dungeonId, 1)).get()?.victories).toBe(0);
+  const retry = startDungeon(db, original.offers[1].offerId, tomorrow);
+  expect(retry.state.rng).toEqual(other.state.rng);
+  expect(getDungeonMap(db)).toEqual(original);
+  retreatDungeon(db, retry.id);
+  expect(finish(db).status).toBe('victory');
+  expect(getDungeonMap(db).generation).toBe(1);
+  expect(() => startDungeon(db, original.offers[1].offerId, now)).toThrow(/no longer available/);
 });
 
 it('does not reroll on retreat or JSON reload, including dodge and item effects', () => {
@@ -137,7 +138,7 @@ it('does not reroll on retreat or JSON reload, including dodge and item effects'
   expect(startDungeon(db, 0, now).state).toEqual(first.state);
 });
 
-it('banks every pending drop and the guaranteed boss reward once, advancing only this dungeon seed', () => {
+it('banks every pending drop and the guaranteed boss reward once, refreshing the camp map', () => {
   const db = trained();
   const start = startDungeon(db, 0, now);
   const win = finish(db, start);
@@ -149,7 +150,7 @@ it('banks every pending drop and the guaranteed boss reward once, advancing only
   advanceDungeon(db, win.id, win.state.tick, now);
   expect(getInventory(db)).toEqual(inventory);
   expect(getHero(db)).toEqual(hero);
-  expect(db.select().from(dungeonSeeds).all()).toEqual([{ dungeonId: 0, victories: 1 }]);
+  expect(getDungeonMap(db).generation).toBe(1);
   const retry = startDungeon(db, 0, now);
   expect(retry.state.rng?.generation).toBe(1);
   expect(retry.state.rng?.seed).not.toBe(start.state.rng?.seed);
@@ -158,14 +159,14 @@ it('banks every pending drop and the guaranteed boss reward once, advancing only
 it('commits loot, seed and victory together even if the final checkpoint write fails', () => {
   const db = trained();
   let run = startDungeon(db, 0, now);
-  for (let i = 0; i < 2000 && battleTurn(run.state).status !== 'victory'; i++) run = advanceDungeon(db, run.id, run.state.tick, now)!;
+  for (let i = 0; i < 2000 && battleTurn(run.state).status !== 'victory'; i++) run = advanceExpedition(db, run, now);
   expect(battleTurn(run.state).status).toBe('victory');
   const hero = getHero(db), inventory = getInventory(db);
   db.run("CREATE TRIGGER fail_reward BEFORE UPDATE ON dungeon_runs BEGIN SELECT RAISE(ABORT, 'disk error'); END");
   expect(() => advanceDungeon(db, run.id, run.state.tick, now)).toThrow();
   expect(getInventory(db)).toEqual(inventory);
   expect(getHero(db)).toEqual(hero);
-  expect(db.select().from(dungeonSeeds).get()?.victories).toBe(0);
+  expect(getDungeonMap(db).generation).toBe(0);
   expect(db.select().from(dungeonRuns).where(eq(dungeonRuns.id, run.id)).get()).toEqual(run);
   db.run('DROP TRIGGER fail_reward');
   expect(advanceDungeon(db, run.id, run.state.tick, now)?.status).toBe('victory');

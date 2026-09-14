@@ -1,13 +1,12 @@
 import { and, desc, eq, gte, lt, sql } from 'drizzle-orm';
 import type { BaseSQLiteDatabase } from 'drizzle-orm/sqlite-core';
 import * as schema from './schema';
-import { activityDays, challengeClaims, dungeonRuns, dungeonSeeds, heroes, inventoryItems, runs, sessions, sets } from './schema';
-import { beginBattle, battleTurn, DUNGEONS, type BattleState } from '../game/combat';
+import { activityDays, campMaps, challengeClaims, dungeonRuns, dungeonSeeds, heroes, inventoryItems, runs, sessions, sets, travelDays } from './schema';
+import { beginBattle, battleTurn, generateDungeonMap, resolveChest, type BattleState } from '../game/combat';
 import { attackPower, CHALLENGES, DAILY_RESET_HOUR, dayStart, fitnessDay, heroStats, localDay, nextDailyReset, recentDays, validateRun, validateSteps,
   type ChallengeId, type RunActivity } from '../game/rules';
 import { FOCUS_ATTACKS, HEALING_HP, POTIONS, type Potion } from '../game/items';
 import { getEquipped, getInventory, initializeInventory } from './inventory';
-import { dungeonSeed } from '../game/random';
 import { equippedWeaponType, upgradeGear } from '../game/equipment';
 
 // Both production Expo SQLite and the test SQLite driver execute synchronously.
@@ -17,7 +16,7 @@ export type GameDb = BaseSQLiteDatabase<'sync', unknown, typeof schema>;
 export function getHero(db: GameDb) {
   db.insert(heroes).values({ id: 1 }).onConflictDoNothing().run();
   const hero = db.select().from(heroes).where(eq(heroes.id, 1)).get()!;
-  if (hero.inventoryVersion < 2) { initializeInventory(db); return { ...hero, inventoryVersion: 2 }; }
+  if (hero.inventoryVersion < 3) { initializeInventory(db); return { ...hero, inventoryVersion: 3 }; }
   return hero;
 }
 
@@ -141,27 +140,48 @@ export function expireBattles(db: GameDb, now = Date.now()) {
     for (const run of active) {
       if (run.state.day === localDay(now)) continue;
       saveBattleCheckpoint(tx, run.id, { ...run.state, status: 'expired', gold: 0, xp: 0, loot: [],
-        log: ['It is a new fitness day. Step health, pushup damage, and running dodge reset at 5 AM device time. Start a fresh expedition.'] });
+        log: ['It is a new fitness day. Travel steps, pushup damage, and running dodge reset at 5 AM device time. Start a fresh expedition.'] });
     }
   });
 }
 
-export function startDungeon(db: GameDb, dungeonId: number, now = Date.now()) {
+export function getDungeonMap(db: GameDb) {
+  const saved = db.select().from(campMaps).where(eq(campMaps.id, 1)).get();
+  if (saved) return saved;
+  const hero = getHero(db);
+  db.insert(campMaps).values({ id: 1, generation: 0,
+    offers: generateDungeonMap(1 + Math.floor(hero.xp / 100), 0) }).onConflictDoNothing().run();
+  return db.select().from(campMaps).where(eq(campMaps.id, 1)).get()!;
+}
+
+export function getTravelSteps(db: GameDb, day = localDay()) {
+  const earned = getFitnessDay(db, day).steps;
+  const spent = db.select().from(travelDays).where(eq(travelDays.day, day)).get()?.spent ?? 0;
+  return { earned, spent, available: Math.max(0, earned - spent) };
+}
+
+/** String offer IDs reject stale map selections. Numeric IDs select a current map slot. */
+export function startDungeon(db: GameDb, offerId: string | number, now = Date.now()) {
   return db.transaction((tx) => {
     expireBattles(tx, now);
     const active = tx.select().from(dungeonRuns).where(eq(dungeonRuns.status, 'active')).get();
     if (active) return active;
     const hero = getHero(tx);
-    if (!Number.isInteger(dungeonId) || !DUNGEONS[dungeonId] || dungeonId > hero.unlockedDungeon) throw new Error('Defeat the previous boss to unlock this dungeon.');
+    const map = getDungeonMap(tx);
+    const dungeon = typeof offerId === 'string' ? map.offers.find(offer => offer.offerId === offerId)
+      : Number.isInteger(offerId) ? map.offers[offerId] : undefined;
+    if (!dungeon) throw new Error('This path is no longer available. Choose a dungeon from the refreshed camp map.');
     const day = localDay(now);
     const equipped = getEquipped(tx);
     const stats = heroStats(hero, getFitnessDay(tx, day), undefined, equipped);
     const health = availableHealth(hero, stats.health, day);
-    if (health <= 0) throw new Error('Your hero needs more health. Walk, drink a healing potion, equip health bonuses, or return tomorrow.');
-    tx.insert(dungeonSeeds).values({ dungeonId }).onConflictDoNothing().run();
-    const generation = tx.select().from(dungeonSeeds).where(eq(dungeonSeeds.dungeonId, dungeonId)).get()!.victories;
-    const state = beginBattle(dungeonId, day, stats, health, { focusAttacks: hero.focusAttacks,
-      seed: dungeonSeed(dungeonId, generation), generation, weaponType: equippedWeaponType(equipped) });
+    if (health <= 0) throw new Error('Your hero needs more health. Drink a healing potion, equip health bonuses, or return tomorrow.');
+    const travel = getTravelSteps(tx, day);
+    if (travel.available < dungeon.stepCost) throw new Error(`You need ${dungeon.stepCost.toLocaleString()} travel steps for this dungeon; ${travel.available.toLocaleString()} available today.`);
+    if (dungeon.stepCost > 0) tx.insert(travelDays).values({ day, spent: dungeon.stepCost })
+      .onConflictDoUpdate({ target: travelDays.day, set: { spent: sql`${travelDays.spent} + ${dungeon.stepCost}` } }).run();
+    const state = beginBattle(dungeon.id, day, stats, health, { focusAttacks: hero.focusAttacks, dungeon,
+      seed: dungeon.seed, generation: map.generation, weaponType: equippedWeaponType(equipped) });
     return tx.insert(dungeonRuns).values({ startedAt: now, state, status: 'active' }).returning().get();
   });
 }
@@ -177,6 +197,7 @@ export function advanceDungeon(db: GameDb, id: number, expectedTick: number, now
     const hero = getHero(tx);
     // All damage inputs are snapshotted at entry. New training powers the next run.
     const next = battleTurn(run.state);
+    if (next === run.state) return run;
     tx.update(heroes).set({ focusAttacks: next.focusAttacks, ...(next.rng ? {} : { combatMeters: next.meters }) }).where(eq(heroes.id, 1)).run();
     if (next.status === 'victory') {
       // Award once in the same transaction as the final checkpoint. Level-up
@@ -189,16 +210,36 @@ export function advanceDungeon(db: GameDb, id: number, expectedTick: number, now
         for (const [i, drop] of (next.loot ?? []).entries()) {
           tx.insert(inventoryItems).values({ item: drop.item, slot: null, acquiredAt: now, sourceKey: `run:${id}:loot:${i}` }).run();
         }
-        const advanced = tx.update(dungeonSeeds).set({ victories: next.rng.generation + 1 })
-          .where(and(eq(dungeonSeeds.dungeonId, next.dungeonId), eq(dungeonSeeds.victories, next.rng.generation))).returning().get();
-        if (!advanced) throw new Error('This dungeon reward has already been completed.');
+        // Pre-map expeditions keep their historical reward guard and saved rolls.
+        if (next.dungeon?.mapGeneration === undefined) {
+          const advanced = tx.update(dungeonSeeds).set({ victories: next.rng.generation + 1 })
+            .where(and(eq(dungeonSeeds.dungeonId, next.dungeonId), eq(dungeonSeeds.victories, next.rng.generation))).returning().get();
+          if (!advanced) throw new Error('This dungeon reward has already been completed.');
+        }
       }
+      const map = getDungeonMap(tx);
+      const generation = next.dungeon?.mapGeneration ?? map.generation;
+      const refreshed = tx.update(campMaps).set({ generation: generation + 1,
+        offers: generateDungeonMap(1 + Math.floor((hero.xp + next.xp) / 100), generation + 1) })
+        .where(and(eq(campMaps.id, 1), eq(campMaps.generation, generation))).returning().get();
+      if (!refreshed) throw new Error('This dungeon reward has already been completed.');
       tx.update(heroes).set({ gold: hero.gold + next.gold, xp: hero.xp + next.xp,
-        unlockedDungeon: Math.max(hero.unlockedDungeon, Math.min(DUNGEONS.length - 1, next.dungeonId + 1)),
         damageDay: next.day, damageTaken: Math.max(0, maxHealth - next.heroHp),
       }).where(eq(heroes.id, 1)).run();
     }
     return saveBattleCheckpoint(tx, id, next);
+  });
+}
+
+/** Chest decisions use the same tick guard as combat; contents are awarded on victory. */
+export function resolveDungeonChest(db: GameDb, id: number, expectedTick: number,
+  action: 'open' | 'skip' | 'continue', now = Date.now()) {
+  return db.transaction(tx => {
+    expireBattles(tx, now);
+    const run = tx.select().from(dungeonRuns).where(eq(dungeonRuns.id, id)).get();
+    if (!run || run.status !== 'active' || run.state.tick !== expectedTick) return run;
+    const next = resolveChest(run.state, action);
+    return next === run.state ? run : saveBattleCheckpoint(tx, id, next);
   });
 }
 
@@ -244,7 +285,8 @@ export function getGameSnapshot(db: GameDb, now = Date.now()) {
   const latestBattle = latestRun && latestRun.dismissedAt === null ? latestRun : null;
   const power = attackPower(stats, hero.focusAttacks);
   return {
-    hero, today, history, stats, inventory, savedPushups, damage: power.damage, damageMin: power.minDamage, damageMax: power.maxDamage, damageMultiplier: power.multiplier,
+    hero, today, history, stats, inventory, savedPushups, dungeonMap: getDungeonMap(db).offers, travelSteps: getTravelSteps(db, today.day),
+    damage: power.damage, damageMin: power.minDamage, damageMax: power.maxDamage, damageMultiplier: power.multiplier,
     currentHealth: availableHealth(hero, stats.health, today.day),
     claimed: db.select().from(challengeClaims).where(eq(challengeClaims.day, today.day)).all().map((c) => c.challengeId),
     latestBattle,

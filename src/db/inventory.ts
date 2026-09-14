@@ -7,7 +7,7 @@ import { fitsSlot, startingEquipment, upgradeGear, type EquipmentSlot } from '..
 export function initializeInventory(db: GameDb) {
   db.transaction(tx => {
     const hero = tx.select().from(heroes).where(eq(heroes.id, 1)).get();
-    if (!hero || hero.inventoryVersion >= 2) return;
+    if (!hero || hero.inventoryVersion >= 3) return;
     if (hero.inventoryVersion < 1) {
       for (const { item, slot } of startingEquipment(hero.swordLevel, hero.armorLevel, hero.amuletOwned)) {
         tx.insert(inventoryItems).values({ item, slot, acquiredAt: Date.now(), sourceKey: `legacy:${slot}` }).run();
@@ -17,7 +17,7 @@ export function initializeInventory(db: GameDb) {
         tx.update(inventoryItems).set({ item: upgradeGear(owned.item) }).where(eq(inventoryItems.id, owned.id)).run();
       }
     }
-    tx.update(heroes).set({ inventoryVersion: 2 }).where(eq(heroes.id, 1)).run();
+    tx.update(heroes).set({ inventoryVersion: 3 }).where(eq(heroes.id, 1)).run();
   });
 }
 

@@ -1,66 +1,71 @@
 import { describe, expect, it } from 'vitest';
 import { eq } from 'drizzle-orm';
 import { createTestDb } from '../../test/db';
+import { advanceExpedition } from '../../test/expeditions';
 import { giveItem } from '../../test/equipment';
 import { GEAR } from '../game/equipment';
-import { advanceDungeon, getGameSnapshot, getHero, savePushupWorkout, saveStepTotal, startDungeon } from './game';
+import { advanceDungeon, getDungeonMap, getGameSnapshot, getHero, savePushupWorkout, saveStepTotal, startDungeon } from './game';
 import { dungeonRuns, heroes } from './schema';
-import { DUNGEONS } from '../game/combat';
+import { battleTurn } from '../game/combat';
 import { localDay } from '../game/rules';
 
 const now = new Date(2026, 8, 6, 12).getTime();
 const day = localDay(now);
 function trained() {
   const db = createTestDb();
-  savePushupWorkout(db, { sourceKey: 'training', startedAt: now - 60000, endedAt: now, validReps: 0, partialReps: 0 });
+  savePushupWorkout(db, { sourceKey: 'training', startedAt: now - 60000, endedAt: now, validReps: 20, partialReps: 0 });
   saveStepTotal(db, day, 20000);
   return db;
 }
 function finish(db: ReturnType<typeof createTestDb>, run: ReturnType<typeof startDungeon>) {
-  for (let i = 0; run.status === 'active' && i < 500; i++) run = advanceDungeon(db, run.id, run.state.tick, now)!;
+  for (let i = 0; run.status === 'active' && i < 500; i++) run = advanceExpedition(db, run, now);
   return run;
 }
 describe('victory stakes', () => {
-  it('unlocks Hollow Delve by clearing Frostbound Keep and persists its complete roster', () => {
+  it('makes Hollow Delve reachable from camp without chapter unlocks and persists its scaled roster', () => {
     const db = trained();
     getHero(db);
-    expect(() => startDungeon(db, 3, now)).toThrow('Defeat the previous boss');
-    db.update(heroes).set({ unlockedDungeon: 2 }).run();
-    let run = startDungeon(db, 2, now);
+    const offer = getDungeonMap(db).offers.find(offer => offer.biomeId === 'hollow_delve')!;
+    let run = startDungeon(db, offer.offerId, now);
+    expect(run.state.dungeon).toEqual(offer);
+    expect(db.select().from(dungeonRuns).where(eq(dungeonRuns.id, run.id)).get()?.state.dungeon).toEqual(offer);
     // Exercise the real victory transaction from a saved final combat beat.
-    const state = { ...run.state, encounter: 3, defeated: 3, phase: 'fighting' as const,
+    const state = { ...run.state, encounter: offer.enemies.length - 1, defeated: offer.enemies.length - 1, phase: 'fighting' as const,
       turn: 'hero' as const, enemyHp: 1 };
     db.update(dungeonRuns).set({ state }).where(eq(dungeonRuns.id, run.id)).run();
     run = advanceDungeon(db, run.id, state.tick, now)!;
     expect(run.status).toBe('victory');
-    expect(getHero(db).unlockedDungeon).toBe(3);
-    const delve = startDungeon(db, 3, now);
-    expect(delve.state.dungeon?.biomeId).toBe('hollow_delve');
-    expect(delve.state.dungeon?.enemies).toEqual(DUNGEONS[3].enemies);
-    expect(db.select().from(dungeonRuns).where(eq(dungeonRuns.id, delve.id)).get()?.state.dungeon).toEqual(DUNGEONS[3]);
+    expect(getHero(db).unlockedDungeon).toBe(0);
+    expect(getDungeonMap(db).generation).toBe(1);
+    expect(run.state.loot?.find(drop => drop.boss)?.item.rarity).toMatch(/rare|epic/);
     db.$client.close();
   });
   it('banks the whole bounty once and carries exact remaining health into a replay', () => {
     const db = trained();
     let run = startDungeon(db, 0, now);
-    while (run.state.defeated < 1) run = advanceDungeon(db, run.id, run.state.tick, now)!;
+    for (let i = 0; run.state.defeated < 1 && i < 100; i++) run = advanceExpedition(db, run, now);
     expect(run.state.gold).toBe(10);
     expect(getHero(db)).toMatchObject({ gold: 0, xp: 0 });
     run = finish(db, run);
     expect(run.status).toBe('victory');
-    expect(getHero(db)).toMatchObject({ gold: 72, xp: 99, pushupUnitsSpent: 0 });
-    expect(getGameSnapshot(db, now).savedPushups).toBe(0);
+    const earned = { gold: run.state.gold, xp: run.state.xp, pushupUnitsSpent: 0 };
+    expect(getHero(db)).toMatchObject(earned);
+    expect(getGameSnapshot(db, now).savedPushups).toBe(20);
     expect(getGameSnapshot(db, now).currentHealth).toBe(run.state.heroHp);
     expect(run.state.heroHp).toBeLessThan(run.state.entryHp);
     advanceDungeon(db, run.id, run.state.tick - 1, now);
-    expect(getHero(db).gold).toBe(72);
+    expect(getHero(db).gold).toBe(earned.gold);
     const replay = startDungeon(db, 0, now);
     expect(replay.state.entryHp).toBe(run.state.heroHp);
+    // Resume a losing combat checkpoint; the refund must use entry HP rather
+    // than the final hit's remaining health or the dungeon's new bounty.
+    const losingState = { ...replay.state, heroHp: 1, phase: 'fighting' as const, turn: 'enemy' as const };
+    db.update(dungeonRuns).set({ state: losingState }).where(eq(dungeonRuns.id, replay.id)).run();
     const loss = finish(db, replay);
     expect(loss.status).toBe('defeat');
     expect(loss.state).toMatchObject({ gold: 0, xp: 0 });
-    expect(getHero(db)).toMatchObject({ gold: 72, xp: 99, pushupUnitsSpent: 0 });
-    expect(getGameSnapshot(db, now).savedPushups).toBe(0);
+    expect(getHero(db)).toMatchObject(earned);
+    expect(getGameSnapshot(db, now).savedPushups).toBe(20);
     expect(startDungeon(db, 0, now).state.entryHp).toBe(replay.state.entryHp);
     db.$client.close();
   });
@@ -68,12 +73,12 @@ describe('victory stakes', () => {
     const db = trained();
     const win = finish(db, startDungeon(db, 0, now));
     saveStepTotal(db, day, 22000);
-    expect(getGameSnapshot(db, now).currentHealth).toBe(win.state.heroHp + 20);
+    expect(getGameSnapshot(db, now).currentHealth).toBe(win.state.heroHp);
     giveItem(db, GEAR.hide_armor, 'armor');
-    expect(getGameSnapshot(db, now).currentHealth).toBe(win.state.heroHp + 20);
+    expect(getGameSnapshot(db, now).currentHealth).toBe(win.state.heroHp);
     expect(getGameSnapshot(db, now).stats.armor).toBe(12);
     giveItem(db, { ...GEAR.hide_armor, modifiers: [{ stat: 'health', value: 25 }] }, 'armor');
-    expect(getGameSnapshot(db, now).currentHealth).toBe(win.state.heroHp + 45);
+    expect(getGameSnapshot(db, now).currentHealth).toBe(win.state.heroHp + 25);
     const tomorrow = new Date(2026, 8, 7, 12).getTime();
     const next = getGameSnapshot(db, tomorrow);
     expect(next.currentHealth).toBe(next.stats.health);
@@ -93,9 +98,10 @@ describe('victory stakes', () => {
   it('rolls back all rewards and health if the victory checkpoint cannot be saved', () => {
     const db = trained();
     let run = startDungeon(db, 0, now);
-    while (!(run.state.encounter === DUNGEONS[0].enemies.length - 1 && run.state.phase === 'fighting' && run.state.turn === 'hero' && run.state.enemyHp <= run.state.stats.attack)) {
-      run = advanceDungeon(db, run.id, run.state.tick, now)!;
+    for (let i = 0; battleTurn(run.state).status !== 'victory' && i < 500; i++) {
+      run = advanceExpedition(db, run, now);
     }
+    expect(battleTurn(run.state).status).toBe('victory');
     db.run("CREATE TRIGGER fail_victory BEFORE UPDATE ON dungeon_runs BEGIN SELECT RAISE(ABORT, 'disk error'); END");
     const hero = getHero(db);
     expect(() => advanceDungeon(db, run.id, run.state.tick, now)).toThrow();
