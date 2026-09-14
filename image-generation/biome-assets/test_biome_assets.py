@@ -7,7 +7,7 @@ from unittest.mock import patch
 import numpy as np
 from PIL import Image
 
-from biome_assets import bundle, digest, edit_plan, local_definition, make_plan, prepare, save, sha, tomllib
+from biome_assets import actor_style_plan, bundle, digest, edit_plan, local_definition, make_plan, prepare, save, sha, tomllib
 
 
 class BiomeAssetsTests(unittest.TestCase):
@@ -104,6 +104,41 @@ class BiomeAssetsTests(unittest.TestCase):
             sources["assets"]["test_background"]["references"] = [plan["assets"][0]["reference"]]
             save(self.root / "sources.json", sources)
             self.prepare_fixture()
+
+    def test_actor_style_references_are_distinct_from_layout_and_required_in_provenance(self):
+        sources = self.source_fixture()
+        Image.new("RGB", (128, 128), "brown").save(self.root / "actor.png")
+        plan = json.loads((self.root / "plan.json").read_text())
+        save(self.root / "references.json", {"test_background": "source.png"})
+        with patch("biome_assets.ROOT", self.root):
+            plan = actor_style_plan(edit_plan(plan, self.root / "references.json"), [self.root / "actor.png"])
+            asset = plan["assets"][0]
+            self.assertIn("Input image 1 is the edit target", asset["prompt"])
+            self.assertIn("Input image 2 is an authored character STYLE REFERENCE ONLY", asset["prompt"])
+            self.assertEqual(asset["reference"]["image"], "source.png")
+            save(self.root / "plan.json", plan)
+            sources["plan_sha256"] = sha(self.root / "plan.json")
+            record = sources["assets"]["test_background"]
+            record["prompt_sha256"] = asset["prompt_sha256"]
+            record["references"] = [asset["reference"]]
+            save(self.root / "sources.json", sources)
+            with self.assertRaisesRegex(ValueError, "actor style reference"):
+                self.prepare_fixture()
+            self.assertFalse((self.root / "out").exists())
+            record["references"] += asset["style_references"]
+            save(self.root / "sources.json", sources)
+            self.prepare_fixture()
+            Image.new("RGB", (128, 128), "blue").save(self.root / "actor.png")
+            with self.assertRaisesRegex(ValueError, "checksum changed"):
+                self.prepare_fixture()
+
+    def test_new_scenery_can_use_actor_style_without_an_existing_layout_image(self):
+        self.source_fixture()
+        plan = json.loads((self.root / "plan.json").read_text())
+        with patch("biome_assets.ROOT", self.root):
+            plan = actor_style_plan(plan, [self.root / "source.png"])
+        self.assertNotIn("reference", plan["assets"][0])
+        self.assertIn("Input image 1 is an authored character STYLE REFERENCE ONLY", plan["assets"][0]["prompt"])
 
     def test_ground_contact_is_measured_after_logical_export(self):
         sources = self.source_fixture(transparent=True)

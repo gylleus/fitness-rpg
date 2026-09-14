@@ -196,6 +196,12 @@ def prepare(plan_path, sources_path, out):
         for reference in spec.get("references", []):
             if sha(sources_path.parent / reference["image"]) != reference["sha256"]:
                 raise ValueError("Reference image checksum changed")
+        for reference in asset.get("style_references", []):
+            if sha(ROOT / reference["image"]) != reference["sha256"] or not any(
+                (sources_path.parent / r["image"]).resolve() == (ROOT / reference["image"]).resolve()
+                and r["sha256"] == reference["sha256"] for r in spec.get("references", [])
+            ):
+                raise ValueError("Source provenance must include every planned actor style reference")
         if "reference" in asset:
             reference = asset["reference"]
             if sha(ROOT / reference["image"]) != reference["sha256"] or not any(
@@ -345,6 +351,26 @@ def edit_plan(plan, references_path):
     return plan
 
 
+def actor_style_plan(plan, references):
+    """Make actor image references an explicit, reproducible generation input."""
+    records = []
+    for value in references:
+        path = Path(value).resolve()
+        records.append({"image": str(path.relative_to(ROOT)), "sha256": sha(path)})
+    if not records:
+        raise ValueError("At least one actor style reference is required")
+    for asset in plan["assets"]:
+        first = 2 if "reference" in asset else 1
+        asset["style_references"] = deepcopy(records)
+        asset["prompt"] += "\n" + "\n".join([
+            "Actor art direction: " + "; ".join(f"Input image {i + first} is an authored character STYLE REFERENCE ONLY" for i in range(len(records))) + ".",
+            "Redraw the scenery in the same deliberately drawn pixel-art language as these actors. Keep the planned scene, biome colors, silhouettes and transparency; do not insert characters or copy their equipment into the scenery.",
+            "Use clear stepped contours, broad connected color patches, and three or four discrete shades per material. Replace photographic mottling, grain, airbrushed volume and tiny highlights with sparse purposeful pixel clusters. The change must be visible at gameplay size, not only when zooming into a texture.",
+            "Do not merely resize, blur, recolor, posterize or apply a pixelation filter to the old artwork. Draw fresh simplified material faces and clean edges with restrained background contrast."])
+        asset["prompt_sha256"] = digest(asset["prompt"])
+    return plan
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
@@ -354,12 +380,14 @@ def main(argv=None):
     plan.add_argument("--asset", nargs="+")
     plan.add_argument("--recipe", type=Path)
     plan.add_argument("--edit-from", type=Path, help="JSON mapping of every planned asset ID to a reference PNG, relative to the JSON file")
+    plan.add_argument("--style-reference", nargs="+", type=Path, help="Authored actor images to attach as mandatory visual style references")
     plan.add_argument("--out", type=Path, required=True)
     interior = commands.add_parser("plan-interior", help="Plan reusable recess, wall and ceiling layers")
     interior.add_argument("--theme", required=True, help="Theme from interiors.toml, or your custom recipe")
     interior.add_argument("--biome", help="Optional runtime biome ID; defaults to the theme name")
     interior.add_argument("--recipe", type=Path)
     interior.add_argument("--edit-from", type=Path, help="JSON mapping of every planned asset ID to a reference PNG, relative to the JSON file")
+    interior.add_argument("--style-reference", nargs="+", type=Path, help="Authored actor images to attach as mandatory visual style references")
     interior.add_argument("--with-scenery", action="store_true", help="Include a walking floor and eight authored decorations")
     interior.add_argument("--decorations", type=Path, help="Optional decoration recipes for complete interior sets")
     interior.add_argument("--out", type=Path, required=True)
@@ -400,6 +428,8 @@ def main(argv=None):
             data = make_plan(args.biome, args.kind, args.asset, recipe_path=args.recipe)
         if args.edit_from:
             data = edit_plan(data, args.edit_from)
+        if args.style_reference:
+            data = actor_style_plan(data, args.style_reference)
         if args.out.exists() and json.loads(args.out.read_text()) != data:
             parser.error("Plan inputs changed; choose a new output path")
         args.out.parent.mkdir(parents=True, exist_ok=True)

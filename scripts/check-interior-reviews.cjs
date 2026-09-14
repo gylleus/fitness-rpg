@@ -50,6 +50,7 @@ async function connect(url) {
 async function audit(folder) {
   const html = path.resolve(folder, 'review.html');
   assert(fs.existsSync(html), `Missing review: ${html}`);
+  const expectedProps = Object.keys(JSON.parse(fs.readFileSync(path.resolve(folder, 'props.json'), 'utf8')).props).length;
   const target = await (await fetch(`http://127.0.0.1:${port}/json/new?about:blank`, { method: 'PUT' })).json();
   const page = await connect(target.webSocketDebuggerUrl);
   const { send, evaluate } = page;
@@ -66,7 +67,7 @@ async function audit(folder) {
       if (!ready) await delay(100);
     }
     assert(ready, `${biome}: review did not load`);
-    assert.equal(await evaluate('document.querySelectorAll("#decorations figure").length'), 8);
+    assert.equal(await evaluate('document.querySelectorAll("#decorations figure").length'), expectedProps);
     assert.equal(await evaluate('document.querySelectorAll("#textures figure").length'), 4);
     assert.equal(await evaluate('document.querySelector("#error").textContent'), '');
     // Disable sprite animation while comparing scenery pixels.
@@ -104,7 +105,7 @@ async function audit(folder) {
     assert(await evaluate('document.documentElement.scrollWidth <= window.innerWidth'), `${biome}: mobile horizontal overflow`);
     assert.deepEqual(page.errors, [], `${biome}: browser exceptions`);
     assert.equal(page.requests.filter(url => /^https?:/.test(url)).length, 0, `${biome}: review requested an external asset`);
-    return { biome, decorations: 8, viewports: 3, sceneryToggles: 5, offline: true, browserErrors: 0 };
+    return { biome, decorations: expectedProps, viewports: 3, sceneryToggles: 5, offline: true, browserErrors: 0 };
   } finally {
     page.close();
     await fetch(`http://127.0.0.1:${port}/json/close/${target.id}`);

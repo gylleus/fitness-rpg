@@ -37,6 +37,12 @@ is roughly 1–1.9 source pixels per game unit. The shared `[pixels]` profile in
 category: approximately 96 visible pixels for a 64-unit reference actor.
 Attach the existing player and authored enemy sheets as style references when
 generating new art, preserving the requested scenery subjects and biome colors.
+Use `--style-reference assets/sprites/barbarian_player--idle.png
+assets/sprites/delve_dwarf--idle.png` with `plan` or `plan-interior`. The planner
+records the exact images and hashes, labels them separately from a layout edit
+target, and adds a redraw brief. Attach the edit target first (if any), followed
+by these actor images, to image generation. Source provenance must include every
+planned style reference; preparation rejects missing or changed references.
 Judge detail beside `barbarian_player`, `bog_toad` and `delve_dwarf` at gameplay
 scale, rather than enlarging each isolated asset to fill a preview card.
 
@@ -63,6 +69,12 @@ ground contact and roof anchors. It never resamples an earlier runtime export.
 Use `--style PATH` for another shared profile or `--out PATH` for a candidate
 export. The same command supports frost caves, crypts, fortress and future
 registered interiors; no biome-specific processing code is needed.
+
+Re-exporting changes the pixel grid and color budget, but preserves the source
+illustration's forms and shading. It is not a substitute for a style redraw.
+If scenery still looks painterly beside the actors, generate new source artwork
+with the actor references, then apply the shared exporter. Review the actual
+composite on a phone; texture dimensions alone do not prove a visible style match.
 
 ## Enclosed locations
 
