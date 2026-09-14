@@ -1,0 +1,89 @@
+schema_version = 1
+id = "wayfarer_menu"
+name = "The Wayfarer's Rest"
+
+[direction]
+visual_description = "A practical woodland camp at dusk. Indigo shadows, patched canvas, old timber, tarnished brass and a small warm fire surround the adventurer. Menu surfaces resemble a travel kit: dark woven cloth, riveted metal frames and worn brass controls."
+style = "Dark fantasy pixel illustration; grounded, weathered, calm. Use deliberate pixel clusters and quiet flat areas behind native text."
+palette = ["#151620", "#232630", "#30343e", "#565044", "#f1e6ce", "#b4b2ab", "#b8cc97", "#d7bb82", "#b5b5e2", "#ed9a86"]
+avoid = ["text baked into artwork", "logos", "cute mascot treatment", "busy surfaces under text", "photorealism", "glowing neon borders"]
+reference = "../design_guidelines.toml"
+prompts = "generation-prompts.json"
+
+[[assets]]
+id = "camp"
+name = "Camp at dusk"
+category = "camp"
+visual_description = "A patched tent and lantern stand opposite a stone-ring campfire. A kettle hangs over the fire. Dark spruce trees part around a distant ruined watchtower, while an empty dirt clearing leaves room for the adventurer."
+[assets.generation]
+prompt_key = "camp"
+canvas = [1536, 1024]
+transparent = false
+composition = "Keep the tent and campfire in the middle band. Leave the lower center free for the live player sprite. Never generate the player into the background."
+[assets.runtime]
+path = "assets/ui/camp-v1.png"
+usage = "CampScene, cover fit in a 1.65:1 viewport; live equipped hero at 50% x and 85% y."
+
+[[assets]]
+id = "background"
+name = "Travel cloth"
+category = "background"
+visual_description = "Charcoal-indigo coarse woven cloth with worn leather seams and dry pine needles at the far edges. The center stays dark and quiet."
+[assets.generation]
+prompt_key = "background"
+canvas = [1024, 1536]
+transparent = false
+composition = "Portrait, edge details only. Center must remain quiet enough for UI overlays."
+[assets.runtime]
+path = "assets/ui/background-v1.png"
+usage = "Shared Screen and tab background; cover fit, 50% opacity over navy."
+
+[[assets]]
+id = "frame"
+name = "Riveted brass panel"
+category = "frames"
+visual_description = "A narrow tarnished bronze border has angular riveted corner plates, tiny scratches and restrained warm highlights."
+[assets.generation]
+prompt_key = "frame"
+canvas = [1254, 1254]
+transparent = true
+composition = "Front view, border at canvas edges; corner details fit inside the outer 8%. Straight edge sections can stretch. The requested opaque center was generated transparent; runtime supplies its own solid center."
+[assets.runtime]
+path = "assets/ui/frame-v1.png"
+usage = "PanelFrame renders eight border slices; the center stays native-colored for contrast."
+slice_fraction = 0.08
+corner_size = 18
+
+[[assets]]
+id = "button"
+name = "Brass action plaque"
+category = "buttons"
+visual_description = "A warm brass plaque with clipped corners, a worn bevel and two small end rivets. Its center has a quiet opaque label area."
+[assets.generation]
+prompt_key = "button"
+refinement = "button-refinement.txt"
+canvas = [2172, 724]
+transparent = false
+composition = "Wide frontal plaque, no text. The refined source retains a lower margin; clip it at runtime."
+[assets.runtime]
+path = "assets/ui/button-v1.png"
+usage = "Primary Button background stretches to 128% container height and clips below the plaque. Native label stays centered, dark and accessible. Secondary and disabled states use native styling."
+
+[[assets]]
+id = "inventory"
+name = "The traveling kit"
+category = "inventory"
+visual_description = "A lantern lights a repaired leather pack, rolled blanket, battered sword and round shield. An open blank field journal and clay flask sit on a rough table."
+[assets.generation]
+prompt_key = "inventory"
+canvas = [1536, 1024]
+transparent = false
+composition = "Keep key objects within a central horizontal band, allowing wide banner crops. Journal has no writing. No people."
+[assets.runtime]
+path = "assets/ui/inventory-v1.png"
+usage = "Inventory cover banner; native content and controls follow below."
+
+[native_assets]
+implementation = "src/ui/MenuIcon.tsx"
+icons = ["camp", "sword", "pack", "journal", "strength", "steps", "run", "coin"]
+description = "Angular line symbols drawn with the existing react-native-svg dependency. Native icons preserve contrast at small sizes; do not replace them with generated text or a raster sprite sheet."

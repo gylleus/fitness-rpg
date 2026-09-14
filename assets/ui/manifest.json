@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "method": "built-in image_gen",
+  "prompts": "content/ui/generation-prompts.json",
+  "assets": [
+    {
+      "id": "camp",
+      "path": "assets/ui/camp-v1.png",
+      "source": "exec-9cfa728f-a92a-4556-b065-2d1c45070190.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "4c90659158b0da71d566e94d92239472f36b376c4a86730dec0db518f357933d"
+    },
+    {
+      "id": "background",
+      "path": "assets/ui/background-v1.png",
+      "source": "exec-189421ae-2cb0-45d1-bc12-61544e5dcd8e.png",
+      "width": 1024,
+      "height": 1536,
+      "sha256": "2e4792178bf5efb74ffd43e9b99a7517eb6040d4bd6b7ffeec52a035e6463d88"
+    },
+    {
+      "id": "frame",
+      "path": "assets/ui/frame-v1.png",
+      "source": "exec-a57df6a9-9e2f-418b-ace9-50945b10c93c.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "7d560d31569ef1108f223198456a184aa56fb408c88276f08536f7e188f9d074"
+    },
+    {
+      "id": "button",
+      "path": "assets/ui/button-v1.png",
+      "source": "exec-6992c131-aead-4840-9479-63eb450461f8.png",
+      "width": 2172,
+      "height": 724,
+      "sha256": "8dac3188f0436ac5e7d4ac696db0388a00fa203f99cb1434f2b5ad63bc7ea0a1"
+    },
+    {
+      "id": "inventory",
+      "path": "assets/ui/inventory-v1.png",
+      "source": "exec-b9f106e5-b456-4e83-9334-08d47d70b5d0.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "ca6b0cf54278f0af4f84bdf1ce3cd51d2e0ae04560fb6901d63d49cc7d391082"
+    }
+  ]
+}
