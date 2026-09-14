@@ -189,6 +189,13 @@ def prepare(plan_path, sources_path, out):
         for reference in spec.get("references", []):
             if sha(sources_path.parent / reference["image"]) != reference["sha256"]:
                 raise ValueError("Reference image checksum changed")
+        if "reference" in asset:
+            reference = asset["reference"]
+            if sha(ROOT / reference["image"]) != reference["sha256"] or not any(
+                (sources_path.parent / r["image"]).resolve() == (ROOT / reference["image"]).resolve()
+                and r["sha256"] == reference["sha256"] for r in spec.get("references", [])
+            ):
+                raise ValueError("Source provenance must include the planned edit reference")
         image = Image.open(source).convert("RGBA")
         width, height = asset["canvas"]
         if abs(image.width / image.height / (width / height) - 1) > .01:
@@ -209,6 +216,16 @@ def prepare(plan_path, sources_path, out):
         if not pixels[..., 3].any():
             raise ValueError(f"Asset disappears at logical resolution: {asset['id']}")
         prepared.append((asset, spec, source, Image.fromarray(pixels)))
+    ground_metadata = {}
+    for asset, _, _, image in prepared:
+        if asset["kind"] == "ground":
+            # Measure after export, before any output is written.
+            alpha = np.array(image.getchannel("A"))
+            if not alpha.any(axis=0).all():
+                raise ValueError("Ground must provide a surface across its complete width")
+            rows = (alpha > 0).argmax(axis=0)
+            ground_metadata[asset["id"]] = {"canvas": asset["canvas"],
+                "surface_y": float(np.median(rows)) * asset["canvas"][1] / image.height}
     interior = None
     if "interior" in plan:
         from interiors import prepared_scene
@@ -220,7 +237,8 @@ def prepare(plan_path, sources_path, out):
         image.save(image_path, optimize=True)
         manifest["assets"][asset["id"]] = {"image": image_path.name, "sha256": sha(image_path),
             "size": list(image.size), "source": os.path.relpath(source, out), "source_sha256": spec["sha256"],
-            "backend": spec["backend"], "prompt_sha256": spec["prompt_sha256"], "export": asset["export"]}
+            "backend": spec["backend"], "prompt_sha256": spec["prompt_sha256"], "export": asset["export"],
+            **ground_metadata.get(asset["id"], {})}
     if interior:
         manifest["interior"] = interior
     save(out / "manifest.json", manifest)
@@ -263,7 +281,7 @@ def bundle(manifest_path, mapping_path, out=None):
     for key, slot, spec, image, source_relative in selected:
         shutil.copyfile(image, out / f"{slot}.png")
         runtime[slot] = {"id": key, "source": source_relative,
-            **{k: spec[k] for k in ("source_sha256", "sha256", "size", "backend", "prompt_sha256", "export")}}
+            **{k: spec[k] for k in ("source_sha256", "sha256", "size", "backend", "prompt_sha256", "export", "canvas", "surface_y") if k in spec}}
     save(out / "sources.json", runtime)
     if interior:
         save(out / "interior.json", interior)
@@ -290,6 +308,24 @@ def local_definition(plan_path, out):
     out.write_text(text)
 
 
+def edit_plan(plan, references_path):
+    """Attach reviewed input images and exact restyling prompts to any asset plan."""
+    references_path = Path(references_path).resolve()
+    references = json.loads(references_path.read_text())
+    if set(references) != {asset["id"] for asset in plan["assets"]}:
+        raise ValueError("Edit references must cover exactly the selected assets")
+    for asset in plan["assets"]:
+        reference = (references_path.parent / references[asset["id"]]).resolve()
+        asset["reference"] = {"image": str(reference.relative_to(ROOT)), "sha256": sha(reference)}
+        alpha = "Keep genuine transparent alpha in empty areas, never a painted checkerboard or matte." if asset["transparent"] else "Keep the image completely opaque."
+        asset["prompt"] = "\n".join([
+            "Use case: style-transfer", "Input image 1 is the edit target.",
+            "Restyle the supplied game layer to the materials, palette and formations below. Preserve its canvas aspect ratio, orthographic camera, independent layer role, horizontal continuation and overall occupied/empty layout. Replace conflicting surface details and shapes; this is not merely a color tint.",
+            alpha, asset["prompt"]])
+        asset["prompt_sha256"] = digest(asset["prompt"])
+    return plan
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
@@ -298,11 +334,13 @@ def main(argv=None):
     plan.add_argument("--kind", choices=("all", "background", "ground", "prop", "enemy"), default="all")
     plan.add_argument("--asset", nargs="+")
     plan.add_argument("--recipe", type=Path)
+    plan.add_argument("--edit-from", type=Path, help="JSON mapping of every planned asset ID to a reference PNG, relative to the JSON file")
     plan.add_argument("--out", type=Path, required=True)
     interior = commands.add_parser("plan-interior", help="Plan reusable recess, wall and ceiling layers")
     interior.add_argument("--theme", required=True, help="Theme from interiors.toml, or your custom recipe")
     interior.add_argument("--biome", help="Optional runtime biome ID; defaults to the theme name")
     interior.add_argument("--recipe", type=Path)
+    interior.add_argument("--edit-from", type=Path, help="JSON mapping of every planned asset ID to a reference PNG, relative to the JSON file")
     interior.add_argument("--out", type=Path, required=True)
     prep = commands.add_parser("prepare", help="Validate and export supplied static art at the planned texture resolution")
     prep.add_argument("--plan", type=Path, required=True)
@@ -326,6 +364,8 @@ def main(argv=None):
             data = make_interior_plan(args.theme, args.biome, args.recipe)
         else:
             data = make_plan(args.biome, args.kind, args.asset, recipe_path=args.recipe)
+        if args.edit_from:
+            data = edit_plan(data, args.edit_from)
         if args.out.exists() and json.loads(args.out.read_text()) != data:
             parser.error("Plan inputs changed; choose a new output path")
         args.out.parent.mkdir(parents=True, exist_ok=True)

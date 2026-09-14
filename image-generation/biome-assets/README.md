@@ -58,6 +58,14 @@ air below; a painted checkerboard is a failed generation. If extraction needs a
 separate imagegen edit, keep both images and record that exact edit prompt and
 input hash in source provenance, alongside the original generation prompt.
 
+To restyle an approved layout, provide `--edit-from references.json` to `plan` or
+`plan-interior`. This JSON maps each planned asset ID to its reference PNG path,
+relative to the JSON file. Keep reference copies immutable inside the repository.
+The planner adds explicit edit instructions and reference hashes; use each saved
+prompt with its referenced image. Preparation requires matching reference
+provenance. This works for changing an existing palette or applying another
+interior theme. Hollow Delve's earth-brown revision demonstrates the workflow.
+
 Texture pixels and world coordinates are separate. A 2048×768 roof occupies a
 640×240 logical rectangle. Preparation measures its lowest opaque pixel and writes
 `origin_y`, so runtime anchors the actual underside a configured distance above
@@ -135,6 +143,8 @@ and an offline review page. Changed inputs require a new output directory.
 Logical scenery dimensions are shared across biomes; sprite palette mapping and
 scene source colors serve different roles. Texture resolution does not change the
 character, ground or ceiling scale.
+Ground preparation also measures the exported walking contact row and carries
+`surface_y` and logical `canvas` into the runtime source manifest.
 
 To use the local SDXL route for **opaque backgrounds**, translate the same prompts:
 

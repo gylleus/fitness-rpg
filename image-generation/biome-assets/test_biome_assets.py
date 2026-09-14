@@ -7,7 +7,7 @@ from unittest.mock import patch
 import numpy as np
 from PIL import Image
 
-from biome_assets import bundle, digest, local_definition, make_plan, prepare, save, sha, tomllib
+from biome_assets import bundle, digest, edit_plan, local_definition, make_plan, prepare, save, sha, tomllib
 
 
 class BiomeAssetsTests(unittest.TestCase):
@@ -38,8 +38,7 @@ class BiomeAssetsTests(unittest.TestCase):
             self.assertEqual(plan["style"]["id"], "readable-dark-fantasy-v2")
             self.assertEqual({a["kind"] for a in plan["assets"]}, {"background", "ground", "prop", "enemy"})
             for asset in plan["assets"]:
-                if not (asset["kind"] == "background" and "interior" in plan):
-                    self.assertIn(plan["style"][asset["kind"]], asset["prompt"])
+                self.assertIn(plan["style"][asset["kind"]], asset["prompt"])
                 if asset["kind"] == "enemy":
                     self.assertIn(asset["source_definition"]["visual"]["attack"], asset["sheet_prompt"])
                     self.assertIn("exactly 24", asset["sheet_prompt"])
@@ -87,6 +86,43 @@ class BiomeAssetsTests(unittest.TestCase):
         self.assertEqual(image.size, (64, 36))
         self.assertEqual(image.getchannel("A").getextrema(), (255, 255))
         self.assertEqual(manifest, self.prepare_fixture())
+
+    def test_edit_plan_records_and_requires_its_reference(self):
+        sources = self.source_fixture()
+        plan = json.loads((self.root / "plan.json").read_text())
+        save(self.root / "references.json", {"test_background": "source.png"})
+        with patch("biome_assets.ROOT", self.root):
+            plan = edit_plan(plan, self.root / "references.json")
+            self.assertIn("Input image 1 is the edit target", plan["assets"][0]["prompt"])
+            save(self.root / "plan.json", plan)
+            sources["plan_sha256"] = sha(self.root / "plan.json")
+            sources["assets"]["test_background"]["prompt_sha256"] = plan["assets"][0]["prompt_sha256"]
+            save(self.root / "sources.json", sources)
+            with self.assertRaisesRegex(ValueError, "planned edit reference"):
+                self.prepare_fixture()
+            self.assertFalse((self.root / "out").exists())
+            sources["assets"]["test_background"]["references"] = [plan["assets"][0]["reference"]]
+            save(self.root / "sources.json", sources)
+            self.prepare_fixture()
+
+    def test_ground_contact_is_measured_after_logical_export(self):
+        sources = self.source_fixture(transparent=True)
+        plan = json.loads((self.root / "plan.json").read_text())
+        plan["assets"][0]["kind"] = "ground"
+        save(self.root / "plan.json", plan)
+        pixels = np.full((72, 128, 4), (70, 50, 30, 255), dtype=np.uint8)
+        pixels[:28, :, 3] = 0
+        Image.fromarray(pixels).save(self.root / "source.png")
+        sources["plan_sha256"] = sha(self.root / "plan.json")
+        sources["assets"]["test_background"]["sha256"] = sha(self.root / "source.png")
+        save(self.root / "sources.json", sources)
+        manifest = self.prepare_fixture()
+        self.assertEqual(manifest["assets"]["test_background"]["surface_y"], 14)
+        save(self.root / "mapping.json", {"test_background": "ground"})
+        with patch("biome_assets.ROOT", self.root):
+            bundle(self.root / "out/manifest.json", self.root / "mapping.json", self.root / "runtime")
+        runtime = json.loads((self.root / "runtime/sources.json").read_text())
+        self.assertEqual(runtime["ground"]["surface_y"], 14)
 
     def test_changed_plan_source_prompt_or_reference_rejected_before_writing(self):
         for mutation in ("plan", "source", "prompt", "reference"):
