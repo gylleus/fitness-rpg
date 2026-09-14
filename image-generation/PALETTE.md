@@ -3,18 +3,21 @@
 [`assets/palette.json`](../assets/palette.json) is the single master palette,
 currently **ENDESGA 32**. Edit that file to change the palette for every exporter.
 The older `sprite-animation/palette.json` and `dark-fantasy-01/palette.json` paths
-are compatibility symlinks, not separate copies.
+and `pyxelate-study/fantasy-palette.json` are compatibility symlinks, not separate copies.
 
 [`scripts/asset_palette.py`](../scripts/asset_palette.py) supplies prompt guidance,
 palette metadata/hashes, exact RGB validation and the common CIEDE2000 mapper.
 Mapping runs **after** resizing or filtering, without dithering. Every visible
 pixel, including partially transparent pixels, must belong to the master palette.
+Code-drawn fallback sprites use a lightweight RGB lookup for theme tints; raster
+exports use the perceptual mapper. Both return only exact master colors.
 Fully transparent RGB is discarded. Alpha coverage and sprite geometry have their
 own export rules and are not changed by the color mapper.
 
 | Pipeline | Palette enforcement |
 | --- | --- |
 | Player, enemy, animated props, authored sheets | Shared `pixels.convert`; runtime atlas bundling also rejects out-of-palette sheets |
+| Code-drawn fallback sprites | Native tint selection always returns an exact color from the same JSON master |
 | Static sprite backgrounds | Shared `pixels.convert` |
 | Biome layers, roofs, floors, standalone props | Shared texture compiler and preparer, including older source/logical-resolution plans |
 | Decoration atlases | Shared prop compiler, including the legacy max-edge helper |

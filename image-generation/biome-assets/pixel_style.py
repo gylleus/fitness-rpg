@@ -22,13 +22,14 @@ def validate(profile):
         value = profile.get(key)
         if not isinstance(value, (int, float)) or not math.isfinite(value) or value <= 0:
             raise ValueError(f"Invalid pixel profile {key}")
+    count = len(load_palette()["colors"])
     for kind in ("background", "ground", "prop"):
-        colors = profile.get(f"{kind}_colors")
+        colors = profile.get(f"{kind}_colors", count)
         if type(colors) is not int or not 2 <= colors <= 256:
             raise ValueError(f"Invalid {kind} palette budget")
     result = deepcopy(profile)
     # Saved older recipes retain their geometry but cannot select independent colors.
-    result.update({f"{kind}_colors": len(load_palette()["colors"]) for kind in ("background", "ground", "prop")})
+    result.update({f"{kind}_colors": count for kind in ("background", "ground", "prop")})
     result["palette"] = palette_contract()
     return result
 

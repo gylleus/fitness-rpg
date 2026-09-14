@@ -7,7 +7,7 @@
     424
   ],
   "decoded_rgba_bytes": 3473408,
-  "individual_png_bytes": 575637,
-  "atlas_png_bytes": 644861,
+  "individual_png_bytes": 246268,
+  "atlas_png_bytes": 264668,
   "contact": "Every packed cutout has nonempty bottom pixels at its ground anchor; source padding is removed."
 }

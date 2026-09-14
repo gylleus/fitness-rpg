@@ -5,7 +5,7 @@
   "original": "image-generation/items/v1/sources/coal_cage_pendant.png",
   "source_sha256": "2e373818531c6633459767c5912e96940620c17aeb121d4ce5dbfa40cb0f2e1b",
   "icon": "assets/items/coal_cage_pendant.png",
-  "icon_sha256": "f9c2ff440a1f9dd05853624bab58fa20617ba85fc6de4418632e4b21ef11c89e",
+  "icon_sha256": "2d4469a6266fb92d53f04861aca844d2525269fb0f1430d3541c0af8a7428dd6",
   "target": [
     64,
     64
@@ -17,5 +17,23 @@
     "source_sha256": "2e373818531c6633459767c5912e96940620c17aeb121d4ce5dbfa40cb0f2e1b",
     "icon_sha256": "0e1a51b1ffd4a488e95d9e1d0e13ccad9bc052a36f34280235b62d62ae7a0967",
     "reason": "Replaced after visual and pixel-boundary review"
+  },
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/coal_cage_pendant.png",
+    "source_sha256": "f9c2ff440a1f9dd05853624bab58fa20617ba85fc6de4418632e4b21ef11c89e",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "2d4469a6266fb92d53f04861aca844d2525269fb0f1430d3541c0af8a7428dd6",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
   }
 }

@@ -1,0 +1,30 @@
+[
+  {
+    "file": "index.html",
+    "images": 0,
+    "loaded": true,
+    "overflow": false,
+    "externalImages": false
+  },
+  {
+    "file": "comparison.html",
+    "images": 12,
+    "loaded": true,
+    "overflow": false,
+    "externalImages": false
+  },
+  {
+    "file": "items.html",
+    "images": 192,
+    "loaded": true,
+    "overflow": false,
+    "externalImages": false
+  },
+  {
+    "file": "map.html",
+    "images": 2,
+    "loaded": true,
+    "overflow": false,
+    "externalImages": false
+  }
+]

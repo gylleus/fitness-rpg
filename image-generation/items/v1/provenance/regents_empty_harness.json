@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/regents_empty_harness.png",
   "source_sha256": "49d445fd802b876efa81c2aa919cf46c73fd9af4fedab7a0051bf450e6abdda4",
   "icon": "assets/items/regents_empty_harness.png",
-  "icon_sha256": "2d9bed39a9aa8b6705e371491defc6cdb7cd30d5cfc3df076526fdc639fec7eb",
+  "icon_sha256": "f20c8a93a391c1104e2535fc3f807cdd4b12d89a580df1715bc8fa7820a510c8",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Regent's Empty Harness. A pale steel chest harness has exaggeratedly broad shoulders and a narrow segmented waist. A small three-point crown is raised at the collar above dark indigo lining and tarnished gold rivets.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Regent's Empty Harness. A pale steel chest harness has exaggeratedly broad shoulders and a narrow segmented waist. A small three-point crown is raised at the collar above dark indigo lining and tarnished gold rivets.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/regents_empty_harness.png",
+    "source_sha256": "2d9bed39a9aa8b6705e371491defc6cdb7cd30d5cfc3df076526fdc639fec7eb",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "f20c8a93a391c1104e2535fc3f807cdd4b12d89a580df1715bc8fa7820a510c8",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

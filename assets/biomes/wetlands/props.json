@@ -10,11 +10,18 @@
     "schema_version": 1,
     "pixels_per_unit": 1.5,
     "reference_height": 64,
-    "background_colors": 48,
+    "background_colors": 32,
     "ground_colors": 32,
-    "prop_colors": 32
+    "prop_colors": 32,
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    }
   },
-  "sha256": "4299151757c3988ecf7ec89799089dcbefd1455f6772ec1358b74139672aff42",
+  "sha256": "17f264d985034958c9744b507116dcbcb7bd8a8a07e654a50c4516862bd5df3b",
   "padding": 2,
   "props": {
     "wetlands_channel_marker": {
@@ -25,7 +32,7 @@
       ],
       "height_scale": 1.4,
       "pixels_per_unit": 1.484375,
-      "pixels_sha256": "fc319a0511f0893529d49e165149c6f5dc4d03ca36b7c785454fd4c01bcfd73e",
+      "pixels_sha256": "19b7a8e5ab565ea54d84332720fbe2456e9a49f983e4fdadeadd4f273ef3f15a",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -66,7 +73,7 @@
       ],
       "height_scale": 1.5,
       "pixels_per_unit": 1.5,
-      "pixels_sha256": "840620b096fe166035152ef362bea74827ff013c88757c2a2138f7a53ec21454",
+      "pixels_sha256": "0bdc9107165b9468958e2f3189359a24556349eb791cda216dc1bffd00de308a",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -107,7 +114,7 @@
       ],
       "height_scale": 0.65,
       "pixels_per_unit": 1.4663461538461537,
-      "pixels_sha256": "b248eab5627b76838addb2b7c083d4c8a841bf833f17b982e4b7182654f43bbb",
+      "pixels_sha256": "5b783282761d5cda2ede2038ac1079791e726903e53f8f570626094f7de3d79e",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -148,7 +155,7 @@
       ],
       "height_scale": 1.5,
       "pixels_per_unit": 1.5,
-      "pixels_sha256": "15a0359a47b0cd876f18ece845a8ed83508037d6d9d9fe7643f4689e1a880878",
+      "pixels_sha256": "a2de78b59ec86b4462ee28abe9b95ebb4a7aa7c97b3cf188a824f4de77f290c1",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -189,7 +196,7 @@
       ],
       "height_scale": 0.95,
       "pixels_per_unit": 1.4967105263157896,
-      "pixels_sha256": "729153cfdc51df67fe41165b96f253af650a67812047636449802b64ffb30a80",
+      "pixels_sha256": "d04bc6724eb8f2ec64a84858b33045355eda8e378f0af16b21d0b52a64bf9e47",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -230,7 +237,7 @@
       ],
       "height_scale": 0.9,
       "pixels_per_unit": 1.4930555555555556,
-      "pixels_sha256": "b2d5ec67d348d207d533c2522c5adbff6f0d8046b09c40a13cdd9f7b89395abd",
+      "pixels_sha256": "714e2435a57c58c026ee1073fb6d0d98f816754eef1c4c8e3a9c2ab9ca256c7c",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -271,7 +278,7 @@
       ],
       "height_scale": 0.65,
       "pixels_per_unit": 1.4903846153846154,
-      "pixels_sha256": "8b6ea5004b0fbe4de36cc4f1e21b73511b566804efcb3da169b6c5e8e02bc061",
+      "pixels_sha256": "736e7ee244484c31df8a8ce503bf8412d602e8d88b60f7e66276082d9f396c61",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -312,7 +319,7 @@
       ],
       "height_scale": 0.45,
       "pixels_per_unit": 1.4930555555555556,
-      "pixels_sha256": "7f6457786514b8542b00e576d3f662c3744aec34929f1f56ed6ab296dcf79248",
+      "pixels_sha256": "b830383db9abc1ae0493456d74bc68a4796481e758724e2a282d6a16f9b548fe",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -353,7 +360,7 @@
       ],
       "height_scale": 0.55,
       "pixels_per_unit": 1.477272727272727,
-      "pixels_sha256": "ba3f6e7fcd223a21334fbe8a19d225b7098baf82262dc263a18003a2beb3e8fe",
+      "pixels_sha256": "7ba6898601f0c849e3546a647b6212873e885996359c3166c5ad0a596c1607a3",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -394,7 +401,7 @@
       ],
       "height_scale": 0.95,
       "pixels_per_unit": 1.480263157894737,
-      "pixels_sha256": "4fcc6cf6678447b428ab3afeb4fe1f57677c9371d52736bee95203803aa8335c",
+      "pixels_sha256": "dc1fc99b4c1efc5435b698d98deb83c1730ad0e007cc1ec4e1541b1b751f73df",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -435,7 +442,7 @@
       ],
       "height_scale": 3.4,
       "pixels_per_unit": 1.4981617647058825,
-      "pixels_sha256": "43e4d39d86e8b0987619bdf0f3f952e88864fd309658756b46bc6b9916ce47ef",
+      "pixels_sha256": "5ca42080b54c88acd250797386a96eb744aa8b3772c54070aa8601a75045f68f",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -476,7 +483,7 @@
       ],
       "height_scale": 3.0,
       "pixels_per_unit": 1.5,
-      "pixels_sha256": "360cdfb9dff02bde0b947e87468d6872de5802157b2f61e1ed348cc075f69ea8",
+      "pixels_sha256": "5e592ff403cb62b686565ad08a1a8d69e9ee72cdbcf81356283a068d426828dc",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -517,7 +524,7 @@
       ],
       "height_scale": 2.3,
       "pixels_per_unit": 1.4945652173913044,
-      "pixels_sha256": "40c1d23b1d9aa859c6b98551397f52801ae27ecbc346b9edd520e98e39d53bba",
+      "pixels_sha256": "d2ab34387cfe6ce65c43b03dda44bbf80947b2df9f96cde33f6e571704b54b11",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -558,7 +565,7 @@
       ],
       "height_scale": 0.65,
       "pixels_per_unit": 1.4903846153846154,
-      "pixels_sha256": "72d1dfa9852258337a44c2ea22ba055cd7ed204dff7779904cb82d1cc5a12b61",
+      "pixels_sha256": "305591f6087639e7908062241825770ef51125eeba072f5777508030209525bd",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -599,7 +606,7 @@
       ],
       "height_scale": 0.75,
       "pixels_per_unit": 1.5,
-      "pixels_sha256": "6aed1e1a407877ef27684420f5f1bf139a84e0be3a3663c9e9d6b891312e0583",
+      "pixels_sha256": "f8ded6e6dacb2b37166f5b91f52ff48a3c4526d6ba7479d0436a94376a7d97e1",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -640,7 +647,7 @@
       ],
       "height_scale": 0.9,
       "pixels_per_unit": 1.4930555555555556,
-      "pixels_sha256": "e863d7957062a123f8a20089a5f55707037ff3bf9dd098485e4dd4536f70fd12",
+      "pixels_sha256": "ec8811886b19d6ccf7de9763b4f16704ca2621913b267225712be05de623320c",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-1.png",
         "sha256": "7e9e5a080491724d29d7f67bca9792e1f816f863172ae485c632291e26a31352",
@@ -681,7 +688,7 @@
       ],
       "height_scale": 1.1,
       "pixels_per_unit": 1.5056818181818181,
-      "pixels_sha256": "dfd311938cdcbcd46eff90342537983a47e410ad950ef8e9e5ec0450f08a0696",
+      "pixels_sha256": "735c2ffeebbd8618e6245099a2d00199f5f05f9e46a718a60262700ba4fe8b45",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -722,7 +729,7 @@
       ],
       "height_scale": 0.5,
       "pixels_per_unit": 1.5,
-      "pixels_sha256": "67bb56c1e12463a1e36a1cf8cf365e6a3c20e2e902b01493235f524292aa99d9",
+      "pixels_sha256": "20f0376384cee40e904a548f7a239d8f7f6056cbffb2d332386b09a76c919f6a",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -763,7 +770,7 @@
       ],
       "height_scale": 0.6,
       "pixels_per_unit": 1.5104166666666667,
-      "pixels_sha256": "eedf1f6a57f7c2fb7216aaa7646faa3c429e6c5a494924e56c9482c2a1c6eb80",
+      "pixels_sha256": "57d58e91426c19949606a5cad875c519c6aec83ed690be56d9e5b75ca79e8575",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -804,7 +811,7 @@
       ],
       "height_scale": 0.8,
       "pixels_per_unit": 1.50390625,
-      "pixels_sha256": "cd84625a56a242fdb0b87345c01f2be2efab950cfbd5e5ec7bb55f157a5be4e7",
+      "pixels_sha256": "d844368b7c472f5c5486e31cbe715c640fef45609d1046b8159a3e164527e9e5",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -845,7 +852,7 @@
       ],
       "height_scale": 0.4,
       "pixels_per_unit": 1.484375,
-      "pixels_sha256": "c6a88f93beb1a62c0c3df35fe13346f10d3cbec20f2441f79a6e66c1265ba7f8",
+      "pixels_sha256": "bc00c39f169cde54e1907128d5df7f12b7b56c806d867a3a4c895ab6d4d67904",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -886,7 +893,7 @@
       ],
       "height_scale": 0.4,
       "pixels_per_unit": 1.484375,
-      "pixels_sha256": "0195575eaab6c6363a9fd70d2ca2b560fa9d88ed78707098aab9d24ab4305fd1",
+      "pixels_sha256": "f30a5f1e354e9a34089101e4f79e01b87af3e64a3b5df3cdbaf9f2f659a061f9",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -927,7 +934,7 @@
       ],
       "height_scale": 0.85,
       "pixels_per_unit": 1.5073529411764706,
-      "pixels_sha256": "44cc1da45ed7a20b384b52e3221de53189ec9f9e4798303fab17d60c36c238f7",
+      "pixels_sha256": "6917c13972f386c78abca7e1856ce5a3abccd12805221436ce5f02fea021f9f8",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -968,7 +975,7 @@
       ],
       "height_scale": 0.25,
       "pixels_per_unit": 1.5,
-      "pixels_sha256": "e0112a20653b6ee1f87041341de823d2a1d19e807b9e212c1ee2f9f17e2c44fb",
+      "pixels_sha256": "1d9d2126cd18a625d8d571629aac4509d9bc7d14f4e883e3deeffee7434261b7",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -1009,7 +1016,7 @@
       ],
       "height_scale": 1.25,
       "pixels_per_unit": 1.5,
-      "pixels_sha256": "80c9aad1e3e77da0a68dfc5e966144d413d90079198d72e55b5a7dad41375f93",
+      "pixels_sha256": "2d34d059183bd63a05a8c45dddd203db8789c19551f23ee2b538df5c52bd8a86",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -1050,7 +1057,7 @@
       ],
       "height_scale": 0.5,
       "pixels_per_unit": 1.5,
-      "pixels_sha256": "8f4fa061ed97e0ebeddac74888e8879336ba8114504335ef4d639f844564748c",
+      "pixels_sha256": "e58ab34a6487648a37ed9ffd80773330ea5168ac6e43716beae399cafee37f0a",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -1091,7 +1098,7 @@
       ],
       "height_scale": 0.5,
       "pixels_per_unit": 1.5,
-      "pixels_sha256": "830f4477f68d8933fd3b079d0e341e14e86d9bc1ef77d4e20d3ec8a489925a72",
+      "pixels_sha256": "369897677d3b37020795d2cb28d9b388fe7fb922682960e240532e7f476cc4cc",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -1132,7 +1139,7 @@
       ],
       "height_scale": 0.75,
       "pixels_per_unit": 1.5,
-      "pixels_sha256": "f282eb13adaabd93206e6233170fcc9d1c471d823ec428ae6186e54dbcefadd4",
+      "pixels_sha256": "e095bbb7fdcc623e20ee024db3e03c1ecc77a12cc0a5cbe9a35353212f0ad23e",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -1173,7 +1180,7 @@
       ],
       "height_scale": 1.6,
       "pixels_per_unit": 1.50390625,
-      "pixels_sha256": "4a90af4f7b62d9d11dbd3928f0f6b27d24ffed89b23eece127cb75340f9edb3c",
+      "pixels_sha256": "719e5fbfd6d77a658a60ab7f980bb79babebd5b0632438085e180fcc08dcdc2e",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -1214,7 +1221,7 @@
       ],
       "height_scale": 0.5,
       "pixels_per_unit": 1.5,
-      "pixels_sha256": "a8fee51416c6e21f946f8b7206ffe417c60500d5aa87639a72e83d7367cb59b2",
+      "pixels_sha256": "1ff1499071f9c0aa278e438940da50007a3b9380035086ee7630e6242260d86c",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -1255,7 +1262,7 @@
       ],
       "height_scale": 1.8,
       "pixels_per_unit": 1.5017361111111112,
-      "pixels_sha256": "56c1fa842413775262dd61ff251e7377790308a5bfab064e001d3e7454662b42",
+      "pixels_sha256": "595816904faf35cd36d69df621192685699ee5cca57b178e8499c6ac2f8f065e",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",
@@ -1296,7 +1303,7 @@
       ],
       "height_scale": 1.1,
       "pixels_per_unit": 1.5056818181818181,
-      "pixels_sha256": "00a613c08812211f8994b05910f0a4f9bc62d062a889f2fa51650c2a0ee3fc29",
+      "pixels_sha256": "a953ebe1d26924db04e2a5f710cdc84eca85f59b52af63b3e80e283e37cb5edb",
       "source": {
         "image": "image-generation/scene-samples/biome-props-v2/wetlands/sheet-2.png",
         "sha256": "d662c34a9b5856a165e681950b43279904e8999f74289875e3093d0383c39a3b",

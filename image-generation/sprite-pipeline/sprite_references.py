@@ -7,6 +7,7 @@ from pathlib import Path
 import time
 
 from sprites import BASE, ROOT, STUDY, load, save_json, sha256, entries, subject, id_field, actions_for, motion, looping
+from asset_palette import load_palette
 
 
 def token_chunks(tokens, tokenizer, count, repeat=False):
@@ -211,8 +212,8 @@ def prepare(run):
                 **reference_anchor(native, subject(entry)["visual"]), "reference_idle_bbox": native.getbbox(),
                 "height_scale": subject(entry)["visual"]["height_scale"],
                 "reference_sha256": sha256(out / "reference.png"),
-                "source_palette": subject(entry)["visual"]["palette"], "output_palette": "ENDESGA 32",
-                "note": "Source palette guides prose colors; visible output is mapped to ENDESGA32. Scale is a display ratio, not source-image resolution."})
+                "source_palette": subject(entry)["visual"]["palette"], "output_palette": load_palette()["name"],
+                "note": "Source palette guides prose colors; visible output is mapped to the global game palette. Scale is a display ratio, not source-image resolution."})
         else:
             record = verify_prepared(out)
             if record["original_sha256"] != sha256(original) or record["reference_sha256"] != sha256(out / "reference.png") or record.get("selection", {}) != selection:

@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/iron_rivet_grips.png",
   "source_sha256": "5ffec941ca4f609f055e90144b96e7b9b8f41b8e6c0c97e2c5b66efdb09cc14b",
   "icon": "assets/items/iron_rivet_grips.png",
-  "icon_sha256": "d2750bf0606f15f438990c04c088e603f9a484bf7126aa2e86529e871bbc5f36",
+  "icon_sha256": "b9462a1312636520589c8023645050688bc080a0ce57effb3921de5c191195c4",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Iron Rivet Grips. A row of large square iron rivets crosses each dark leather knuckle pad. Narrow steel plates protect the backs of the fingers, and plain leather straps tighten the low cuffs.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Iron Rivet Grips. A row of large square iron rivets crosses each dark leather knuckle pad. Narrow steel plates protect the backs of the fingers, and plain leather straps tighten the low cuffs.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/iron_rivet_grips.png",
+    "source_sha256": "d2750bf0606f15f438990c04c088e603f9a484bf7126aa2e86529e871bbc5f36",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "b9462a1312636520589c8023645050688bc080a0ce57effb3921de5c191195c4",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

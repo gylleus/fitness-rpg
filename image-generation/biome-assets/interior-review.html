@@ -7,6 +7,7 @@ body{margin:0 auto;max-width:1180px;padding:24px}h1{font-size:32px;margin:5px 0 
 </style>
 <div class="chip">Biome art review</div><h1 id="title"></h1>
 <p>Layered interior scenery and grounded decorations at the authored characters' pixel scale. Pan through the route to inspect depth, roof clearance and repetition.</p>
+<p id="palette"></p>
 <div class="controls"><button id="play">Play travel</button><label>Travel <input id="travel" type="range" min="0" max="12800" value="280" step="1"></label><label>View <select id="viewport"><option value="wide">Landscape</option><option value="tall">Portrait</option><option value="compact">Compact</option></select></label></div>
 <div class="controls" id="toggles"></div><div class="stage"><canvas id="scene"></canvas></div><p id="error"></p>
 <p class="note">The knight is an existing game sprite for scale. This review uses the game's layout, parallax and prop placement calculations. These are scenery sets; enemies and playable chapter progression are separate.</p>
@@ -17,6 +18,7 @@ body{margin:0 auto;max-width:1180px;padding:24px}h1{font-size:32px;margin:5px 0 
 const data=/* SCENE_DATA */;
 const canvas=document.getElementById('scene'),ctx=canvas.getContext('2d'),travel=document.getElementById('travel'),viewport=document.getElementById('viewport');
 document.title=data.title+' — art review';document.getElementById('title').textContent=data.title;
+document.getElementById('palette').textContent=data.assets.props.pixel_profile?.palette?.name ? 'Shared game palette: '+data.assets.props.pixel_profile.palette.name : '';
 const images={},enabled={};let playing=false,position=Number(travel.value),elapsed=0,last=0,frameRequest=0;
 for(const key of [...data.assets.scene.layers.map(l=>l.image),'props','ground','hero']){
   enabled[key]=true;const label=document.createElement('label'),check=document.createElement('input');check.type='checkbox';check.checked=true;

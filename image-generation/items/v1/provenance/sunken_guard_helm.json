@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/sunken_guard_helm.png",
   "source_sha256": "a974139f4a1e7fe12a57f7b3a0eca793d9dbf186ff4229bf5e027b377ea95c41",
   "icon": "assets/items/sunken_guard_helm.png",
-  "icon_sha256": "7e6de6b79cd1e9b1b8b5dfa61a8e44c1f00f725ebd6189940cd759cc15600432",
+  "icon_sha256": "405be92cd4eebfbd1a02206ef1a769c94e72ddcf50ec46826929686694237513",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Sunken Guard Helm. A round steel helmet has broad hinged cheek pieces and a broken short crest. Dark green mineral streaks cross its gray face, and one cheek hinge is replaced by thick copper wire.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Sunken Guard Helm. A round steel helmet has broad hinged cheek pieces and a broken short crest. Dark green mineral streaks cross its gray face, and one cheek hinge is replaced by thick copper wire.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/sunken_guard_helm.png",
+    "source_sha256": "7e6de6b79cd1e9b1b8b5dfa61a8e44c1f00f725ebd6189940cd759cc15600432",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "405be92cd4eebfbd1a02206ef1a769c94e72ddcf50ec46826929686694237513",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

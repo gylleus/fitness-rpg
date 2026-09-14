@@ -3,7 +3,7 @@
     "id": "hollow_delve_slate_path",
     "source": "image-generation/scene-samples/hollow-delve-earth-v7/sources/ground.png",
     "source_sha256": "37efcb53be50eabf67aff861b8d38a56c3eb0bf8268f5ebd30ef52e55c885d58",
-    "sha256": "5e64746a71e0faadff6c9aeddcc696a50c9e0421a2d8ef3b26b018efee54d766",
+    "sha256": "50786027cf44815211b5c5cea8df6141b2a12e5ca85bae1d2c041591092f97c0",
     "size": [
       384,
       144
@@ -11,6 +11,13 @@
     "backend": "built-in imagegen",
     "prompt_sha256": "8543a87cc6a995efb5c576381fbd0c1c3e9df36ae44178ffbdabfbb77e76e168",
     "export": {
+      "palette": {
+        "file": "assets/palette.json",
+        "name": "ENDESGA 32",
+        "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+        "metric": "ciede2000",
+        "dither": "none"
+      },
       "resolution": "world",
       "sampling": "nearest",
       "reduction": "area",
@@ -20,9 +27,16 @@
         "schema_version": 1,
         "pixels_per_unit": 1.5,
         "reference_height": 64,
-        "background_colors": 48,
+        "background_colors": 32,
         "ground_colors": 32,
-        "prop_colors": 32
+        "prop_colors": 32,
+        "palette": {
+          "file": "assets/palette.json",
+          "name": "ENDESGA 32",
+          "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+          "metric": "ciede2000",
+          "dither": "none"
+        }
       },
       "alpha": "binary"
     },
@@ -36,7 +50,7 @@
     "id": "hollow_delve_prop_atlas",
     "source": "image-generation/scene-samples/biome-props-v2/hollow_delve/recipe.json",
     "source_sha256": "a178bb1df5e71b46c82c7708ab41ca0a10a12bc63149c486364b6bb7fc93f845",
-    "sha256": "e300717ac1e58a8bccc18ff75f1b326d42dbee9da97241eb2da4d5e63e0b2e6c",
+    "sha256": "c86fdf20f57a6e37f4b164ca7d6c2acd273d5409ab7dd336c67554e3efb37c9b",
     "size": [
       2048,
       300
@@ -45,9 +59,16 @@
       "schema_version": 1,
       "pixels_per_unit": 1.5,
       "reference_height": 64,
-      "background_colors": 48,
+      "background_colors": 32,
       "ground_colors": 32,
-      "prop_colors": 32
+      "prop_colors": 32,
+      "palette": {
+        "file": "assets/palette.json",
+        "name": "ENDESGA 32",
+        "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+        "metric": "ciede2000",
+        "dither": "none"
+      }
     },
     "backend": "built-in imagegen; actor-scale cutouts in one atlas"
   },
@@ -55,7 +76,7 @@
     "id": "hollow_delve_depth",
     "source": "image-generation/scene-samples/hollow-delve-earth-v7/sources/depth.png",
     "source_sha256": "728ca29de83dd608e8f08a7619f9ebdd53f3a84b40b146607a7bb8d670794227",
-    "sha256": "3ca15d6dd3c32bc53c34f77b222ac295da9582325912943f092c6936f6767abf",
+    "sha256": "f7b36fa11d5b66159166a330f05fd9ca85597e158fad6f7886cb51335842271f",
     "size": [
       960,
       540
@@ -63,18 +84,32 @@
     "backend": "built-in imagegen",
     "prompt_sha256": "5f2f67dfb1792ea7d5e332909d60b7de2519c55760b0a63a20130a505cbf5b97",
     "export": {
+      "palette": {
+        "file": "assets/palette.json",
+        "name": "ENDESGA 32",
+        "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+        "metric": "ciede2000",
+        "dither": "none"
+      },
       "resolution": "world",
       "sampling": "nearest",
       "reduction": "area",
       "dither": "none",
-      "colors": 48,
+      "colors": 32,
       "pixel_profile": {
         "schema_version": 1,
         "pixels_per_unit": 1.5,
         "reference_height": 64,
-        "background_colors": 48,
+        "background_colors": 32,
         "ground_colors": 32,
-        "prop_colors": 32
+        "prop_colors": 32,
+        "palette": {
+          "file": "assets/palette.json",
+          "name": "ENDESGA 32",
+          "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+          "metric": "ciede2000",
+          "dither": "none"
+        }
       },
       "alpha": "opaque"
     },
@@ -87,7 +122,7 @@
     "id": "hollow_delve_wall",
     "source": "image-generation/scene-samples/hollow-delve-earth-v7/sources/wall.png",
     "source_sha256": "a9bf7df1fb0eb05dc34c1327da459c876e789f305b56bcbcac80c2f02249030c",
-    "sha256": "c755b44fa40699bdb55c42d1381039ddbaa4df4004f826ffbfd0d8d787e8d251",
+    "sha256": "0699ce09d3dd39f5246472dbd7c93bbda532f1992ffc05d0ebdfd4131c935155",
     "size": [
       960,
       540
@@ -95,18 +130,32 @@
     "backend": "built-in imagegen",
     "prompt_sha256": "322668811d1b517e7e3caa7529db84d919e62ed2c1262ac1a00627ee3393fe81",
     "export": {
+      "palette": {
+        "file": "assets/palette.json",
+        "name": "ENDESGA 32",
+        "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+        "metric": "ciede2000",
+        "dither": "none"
+      },
       "resolution": "world",
       "sampling": "nearest",
       "reduction": "area",
       "dither": "none",
-      "colors": 48,
+      "colors": 32,
       "pixel_profile": {
         "schema_version": 1,
         "pixels_per_unit": 1.5,
         "reference_height": 64,
-        "background_colors": 48,
+        "background_colors": 32,
         "ground_colors": 32,
-        "prop_colors": 32
+        "prop_colors": 32,
+        "palette": {
+          "file": "assets/palette.json",
+          "name": "ENDESGA 32",
+          "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+          "metric": "ciede2000",
+          "dither": "none"
+        }
       },
       "alpha": "binary"
     },
@@ -119,7 +168,7 @@
     "id": "hollow_delve_roof",
     "source": "image-generation/scene-samples/hollow-delve-earth-v7/sources/roof.png",
     "source_sha256": "380d76dae08bfe8b4f407295b7c88f99d0ebd37fa7a04f55c16a12da45fb7461",
-    "sha256": "28df8503b5221ed87efd65fe18b83f26a2caae1c19526a66cdad91be09ac2083",
+    "sha256": "6555ddea081933fdfb60e453f1c29dff80e635cde40f0dec9d350d0dd96f6e33",
     "size": [
       960,
       360
@@ -127,18 +176,32 @@
     "backend": "built-in imagegen",
     "prompt_sha256": "b5b457b42d571bb12826ace681cb154d311e7df73c230736c7df6b5b339aca80",
     "export": {
+      "palette": {
+        "file": "assets/palette.json",
+        "name": "ENDESGA 32",
+        "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+        "metric": "ciede2000",
+        "dither": "none"
+      },
       "resolution": "world",
       "sampling": "nearest",
       "reduction": "area",
       "dither": "none",
-      "colors": 48,
+      "colors": 32,
       "pixel_profile": {
         "schema_version": 1,
         "pixels_per_unit": 1.5,
         "reference_height": 64,
-        "background_colors": 48,
+        "background_colors": 32,
         "ground_colors": 32,
-        "prop_colors": 32
+        "prop_colors": 32,
+        "palette": {
+          "file": "assets/palette.json",
+          "name": "ENDESGA 32",
+          "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+          "metric": "ciede2000",
+          "dither": "none"
+        }
       },
       "alpha": "binary"
     },

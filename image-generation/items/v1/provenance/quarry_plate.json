@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/quarry_plate.png",
   "source_sha256": "9458631a3ea598e629d8f3898593a6a69a96c35f4b2cd5b4499ed7436752c8cd",
   "icon": "assets/items/quarry_plate.png",
-  "icon_sha256": "5ea4b21876fe93adbef71e15e5402bde6e673790da0b0ace0c3369682e5fb611",
+  "icon_sha256": "103bce8c22bd40e11b88bb2add0ce61839e2bd240f9310da3d71b143987f5085",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Quarry Plate. A heavy flat steel breastplate has a reinforced rectangular belly panel and broad leather straps. Ochre dust outlines its oversized rivets, and one shoulder strap is reinforced with copper wire.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Quarry Plate. A heavy flat steel breastplate has a reinforced rectangular belly panel and broad leather straps. Ochre dust outlines its oversized rivets, and one shoulder strap is reinforced with copper wire.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/quarry_plate.png",
+    "source_sha256": "5ea4b21876fe93adbef71e15e5402bde6e673790da0b0ace0c3369682e5fb611",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "103bce8c22bd40e11b88bb2add0ce61839e2bd240f9310da3d71b143987f5085",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

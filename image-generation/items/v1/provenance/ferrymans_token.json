@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/ferrymans_token.png",
   "source_sha256": "9f201c2291c2589bec2cd450b0ee5e3cb405e2ef77758d6c1ab6f4fbb63ed602",
   "icon": "assets/items/ferrymans_token.png",
-  "icon_sha256": "86974336a22700476c3c99651d1131047f1645693d1288229fa4bfc4dad2b13b",
+  "icon_sha256": "8f3d599fd80f0c11b493a4f0a203b758b818299d2a1ed2a56749f19587638a3d",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Ferryman's Token. A worn brass ring bears a small round dark coin mounted flat across the top. A simple recessed boat shape survives on the coin beneath patches of green-black tarnish.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Ferryman's Token. A worn brass ring bears a small round dark coin mounted flat across the top. A simple recessed boat shape survives on the coin beneath patches of green-black tarnish.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/ferrymans_token.png",
+    "source_sha256": "86974336a22700476c3c99651d1131047f1645693d1288229fa4bfc4dad2b13b",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "8f3d599fd80f0c11b493a4f0a203b758b818299d2a1ed2a56749f19587638a3d",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

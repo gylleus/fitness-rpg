@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/fen_eye_ring.png",
   "source_sha256": "4f8a44a335eb41efe696d5b6b3c99758a55f5402e81c67e55d5b1de289bd4707",
   "icon": "assets/items/fen_eye_ring.png",
-  "icon_sha256": "78fd283247107f34577b3013a211f037fe48770f5379417fd5b73388e20cfe14",
+  "icon_sha256": "d50862db3bfe00543fc99fd9f030b7734e6832c413fa2f7079e29e05227e0ebd",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Fen Eye Ring. A squat black iron ring holds a cloudy olive-green oval stone in four heavy claws. A pale horizontal vein crosses the stone, and the broad shank is rough with shallow pits.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Fen Eye Ring. A squat black iron ring holds a cloudy olive-green oval stone in four heavy claws. A pale horizontal vein crosses the stone, and the broad shank is rough with shallow pits.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/fen_eye_ring.png",
+    "source_sha256": "78fd283247107f34577b3013a211f037fe48770f5379417fd5b73388e20cfe14",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "d50862db3bfe00543fc99fd9f030b7734e6832c413fa2f7079e29e05227e0ebd",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

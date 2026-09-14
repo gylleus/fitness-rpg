@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/iron_thistle.png",
   "source_sha256": "b6cb2b4d03752b5d6429c799bfc2cb5212629750dc37d41808b7303835537864",
   "icon": "assets/items/iron_thistle.png",
-  "icon_sha256": "82d071fe6362832ff82edacf9c3fee9f2ed8df8fedfdc359df6be6e790847c6c",
+  "icon_sha256": "dbb6e74bd8adebd70705c08c016339095a41d2393e93e9d551ff5efb45aca924",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Iron Thistle. A dense iron mace head spreads into short blunt petal-shaped fins like a closed thistle. Tarnished violet steel catches the edges above a thin stemlike haft with a broad round pommel.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Iron Thistle. A dense iron mace head spreads into short blunt petal-shaped fins like a closed thistle. Tarnished violet steel catches the edges above a thin stemlike haft with a broad round pommel.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/iron_thistle.png",
+    "source_sha256": "82d071fe6362832ff82edacf9c3fee9f2ed8df8fedfdc359df6be6e790847c6c",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "dbb6e74bd8adebd70705c08c016339095a41d2393e93e9d551ff5efb45aca924",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

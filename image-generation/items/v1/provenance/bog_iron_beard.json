@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/bog_iron_beard.png",
   "source_sha256": "716d61d1beceda06e2cac0a78685224c02abb73f4a5cb6db68b7c9eda84ffbd4",
   "icon": "assets/items/bog_iron_beard.png",
-  "icon_sha256": "60e44e1efb604fc2caa3030afa5814b22821630d9a8f4781c9bdb19effa4f00f",
+  "icon_sha256": "fad7bfd3eb7642c82d60055d3ad86f1b609a156af6aa0924c252e510a9282b5b",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Bog Iron Beard. A heavy bearded axe has a thick dark-brown iron head with a porous hammered face. The downward beard ends in a blunt point, and cream linen binds the short blackened handle.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Bog Iron Beard. A heavy bearded axe has a thick dark-brown iron head with a porous hammered face. The downward beard ends in a blunt point, and cream linen binds the short blackened handle.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/bog_iron_beard.png",
+    "source_sha256": "60e44e1efb604fc2caa3030afa5814b22821630d9a8f4781c9bdb19effa4f00f",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "fad7bfd3eb7642c82d60055d3ad86f1b609a156af6aa0924c252e510a9282b5b",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

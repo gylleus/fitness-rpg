@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/antler_signet.png",
   "source_sha256": "697f835e739d718b83b16f67b387ded97c5146a5106d4c29dc6f1b0ce1eab66b",
   "icon": "assets/items/antler_signet.png",
-  "icon_sha256": "5e75925ecc11fcaa639df97572815236f4b04a3f92bce4410796d102aff7c52f",
+  "icon_sha256": "10501393bcf4202543bf2952c523c1c0953ee0ed297326ca6c0b34772bebbc9d",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Antler Signet. A flat oval of yellow antler is set into a thick dark copper ring. A tiny natural dark pore marks its face, and simple crossed pins secure the bone at either end.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Antler Signet. A flat oval of yellow antler is set into a thick dark copper ring. A tiny natural dark pore marks its face, and simple crossed pins secure the bone at either end.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/antler_signet.png",
+    "source_sha256": "5e75925ecc11fcaa639df97572815236f4b04a3f92bce4410796d102aff7c52f",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "10501393bcf4202543bf2952c523c1c0953ee0ed297326ca6c0b34772bebbc9d",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/furnace_seal.png",
   "source_sha256": "54d1e0adf97756b8d24e2007f743d67ed4e305586a8df3d18b78f063a8c59e4d",
   "icon": "assets/items/furnace_seal.png",
-  "icon_sha256": "4f6ed4b769fa670a459e2797b3c0179d08ca99a10ae125da14a1352b83468055",
+  "icon_sha256": "4069a2a9a96c589d1d17d678527bf76969439a92f945204e1a9b1b7bc3f74db0",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Furnace Seal. A thick bronze signet ring has a square blackened face with a recessed anvil shape. Heat-blue marks edge the face, and a small chipped corner exposes warm metal beneath.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Furnace Seal. A thick bronze signet ring has a square blackened face with a recessed anvil shape. Heat-blue marks edge the face, and a small chipped corner exposes warm metal beneath.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/furnace_seal.png",
+    "source_sha256": "4f6ed4b769fa670a459e2797b3c0179d08ca99a10ae125da14a1352b83468055",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "4069a2a9a96c589d1d17d678527bf76969439a92f945204e1a9b1b7bc3f74db0",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

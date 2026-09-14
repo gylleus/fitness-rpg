@@ -1,0 +1,27 @@
+{
+  "apk": "/Users/gylleus/repo/projects/fitness-rpg-biome-assets/android/app/build/outputs/apk/release/app-release.apk",
+  "apk_sha256": "6edcbedeb40c6742f5380ea7ad4e46adb193e6fe0be8a0d1ecb5fe015f213288",
+  "runtime_textures": 279,
+  "routing_modules": [
+    "src/ui/DungeonJourney.tsx",
+    "src/scenes/interiorRoutes.ts",
+    "src/scenes/interiorLocations.ts",
+    "src/scenes/InteriorLocationBackdrop.tsx",
+    "src/scenes/wetlands.ts",
+    "src/ui/PixelSprite.tsx",
+    "src/sprites/palette.ts"
+  ],
+  "palette": {
+    "file": "assets/palette.json",
+    "name": "ENDESGA 32",
+    "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+    "metric": "ciede2000",
+    "dither": "none"
+  },
+  "checks": [
+    "all runtime game textures packaged",
+    "manifest hashes, alpha and exact visible pixels",
+    "APK contains current compiled bundle",
+    "chapter routing sources match worktree"
+  ]
+}
