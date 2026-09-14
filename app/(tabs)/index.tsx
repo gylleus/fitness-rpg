@@ -1,7 +1,8 @@
 import { useRouter } from 'expo-router';
-import { Text, View } from 'react-native';
+import { Alert, Text, View } from 'react-native';
 import { db } from '../../src/db/client';
 import { claimChallenge } from '../../src/db/game';
+import { resetDailyData } from '../../src/db/dev';
 import { useGame } from '../../src/game/GameProvider';
 import { multiplierLabel, percentLabel } from '../../src/game/items';
 import { CHALLENGES, dayStart } from '../../src/game/rules';
@@ -65,5 +66,17 @@ export default function Camp() {
         </Card>;
       })}
     </View>
+    {__DEV__ && <Card>
+      <Text style={ui.label}>Development tools</Text>
+      <Text style={ui.small}>Clear the current fitness day’s pushups, steps, runs, and quests. Earlier days, gear, gold, and XP stay saved. Step syncing pauses until you reconnect.</Text>
+      <Button secondary label="Reset data" disabled={!!running} onPress={() => Alert.alert('Reset today’s data?',
+        'Delete this fitness day’s activity and quest claims, restore health, and end active combat. Step syncing will disconnect; reconnecting imports your phone’s steps again.', [
+          { text: 'Cancel', style: 'cancel' },
+          { text: 'Reset data', style: 'destructive', onPress: () => {
+            if (perform(() => resetDailyData(db))) health.disconnect();
+          } },
+        ])} />
+      {running && <Text style={ui.small}>Finish or discard your current run to reset daily data.</Text>}
+    </Card>}
   </Screen>;
 }

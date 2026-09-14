@@ -38,7 +38,12 @@ export function HealthProvider({ children }: PropsWithChildren) {
     const timer = setInterval(() => { void sync(); }, 60_000);
     return () => clearInterval(timer);
   }, [connected, foreground, data.today.day, sync]);
-  return <HealthContext.Provider value={{ connected, busy, error, syncedAt, connect, sync, disconnect: () => { setHealthConnected(db, false); setConnected(false); setError(null); } }}>{children}</HealthContext.Provider>;
+  const disconnect = () => {
+    // A development reset may already have disconnected in its transaction.
+    if (getHealthConnection(db)?.enabled) setHealthConnected(db, false);
+    setConnected(false); setSyncedAt(getHealthConnection(db)?.syncedAt ?? null); setError(null);
+  };
+  return <HealthContext.Provider value={{ connected, busy, error, syncedAt, connect, sync, disconnect }}>{children}</HealthContext.Provider>;
 }
 export function useHealth() {
   const context = useContext(HealthContext);

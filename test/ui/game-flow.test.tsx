@@ -7,6 +7,7 @@ import { GEAR } from '../../src/game/equipment';
 import { DUNGEONS } from '../../src/game/combat';
 import { createTestDb } from '../db';
 import { getGameSnapshot, savePushupWorkout } from '../../src/db/game';
+import { createRecording } from '../../src/db/recordings';
 import * as gameRepository from '../../src/db/game';
 import { dungeonRuns, heroes } from '../../src/db/schema';
 import RootLayout from '../../app/_layout';
@@ -134,6 +135,46 @@ async function navigate(path: '/dungeon' | '/forge' | '/progress' | '/') {
 }
 
 describe('first playable game flow', () => {
+  it('confirms a development reset, refreshes camp, and keeps step sync disconnected after remount', async () => {
+    savePushupWorkout(mockDb, { sourceKey: 'dev-training', startedAt: NOW - 60_000, endedAt: NOW, validReps: 20, partialReps: 2 });
+    await renderRouter(routes);
+    await press('Connect steps');
+    await press('Connect Test Health');
+    await press('← Camp');
+    const before = getGameSnapshot(mockDb);
+    await press('Reset data');
+    expect(Alert.alert).toHaveBeenCalledWith('Reset today’s data?', expect.any(String), expect.any(Array));
+    expect(getGameSnapshot(mockDb)).toEqual(before);
+    const buttons = jest.mocked(Alert.alert).mock.calls.at(-1)?.[2];
+    expect(buttons).toContainEqual({ text: 'Cancel', style: 'cancel' });
+    await act(async () => { buttons?.find(button => button.text === 'Reset data')?.onPress?.(); });
+    expect(screen.getByText('+0 saved today')).toBeVisible();
+    expect(screen.queryByText('6,000')).toBeNull();
+    expect(screen.getByRole('button', { name: 'Connect steps' })).toBeVisible();
+    expect(getGameSnapshot(mockDb)).toMatchObject({ today: { pushups: 0, steps: 0 }, stats: { damageMultiplier: 1 } });
+    mockNativeSteps.mockClear();
+    await moveTime(60_000);
+    await cleanup();
+    await renderRouter(routes);
+    expect(screen.getByRole('button', { name: 'Connect steps' })).toBeVisible();
+    expect(mockNativeSteps).not.toHaveBeenCalled();
+    expect(getGameSnapshot(mockDb).today.steps).toBe(0);
+  });
+
+  it('disables the development reset while a GPS run is unfinished', async () => {
+    createRecording(mockDb, 'active-dev-run', NOW);
+    await renderRouter(routes);
+    expect(screen.getByRole('button', { name: 'Reset data' })).toBeDisabled();
+    expect(screen.getByText('Finish or discard your current run to reset daily data.')).toBeVisible();
+  });
+
+  it('hides development reset controls in production', async () => {
+    jest.replaceProperty(global as typeof global & { __DEV__: boolean }, '__DEV__', false);
+    await renderRouter(routes);
+    expect(screen.queryByRole('button', { name: 'Reset data' })).toBeNull();
+    expect(screen.queryByText('Development tools')).toBeNull();
+  });
+
   it('updates the camp knight after equipping a sword and returns to fists when unequipped', async () => {
     const sword = Object.values(GEAR).find(item => item.weaponType === 'sword')!;
     giveItem(mockDb, sword);

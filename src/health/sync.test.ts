@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { createTestDb } from '../../test/db';
 import { getFitnessDay, saveStepTotal } from '../db/game';
+import { resetDailyData } from '../db/dev';
 import { dayStart, localDay } from '../game/rules';
 import { setHealthConnected, stepsInSegments, syncHealth } from './sync';
 const native = vi.hoisted(() => ({ authorized: vi.fn(), steps: vi.fn() }));
@@ -45,6 +46,28 @@ describe('connected step sync', () => {
     await syncHealth(db, now);
     expect(native.steps).not.toHaveBeenCalled();
     db.$client.close();
+  });
+  it('does not restore cleared steps when an in-flight sync finishes after a dev reset', async () => {
+    const db = createTestDb();
+    vi.stubGlobal('__DEV__', true);
+    let finishRead!: (steps: number) => void;
+    const readStarted = new Promise<void>(resolve => {
+      native.steps.mockImplementationOnce(() => new Promise<number>(finish => { finishRead = finish; resolve(); }));
+    });
+    try {
+      setHealthConnected(db, true);
+      saveStepTotal(db, day, 4000);
+      const pending = syncHealth(db, now);
+      await readStarted;
+      resetDailyData(db, now);
+      finishRead(6000);
+      await pending;
+      expect(getFitnessDay(db, day).steps).toBe(0);
+      native.steps.mockClear();
+      await syncHealth(db, now + 60_000);
+      expect(native.steps).not.toHaveBeenCalled();
+      expect(getFitnessDay(db, day).steps).toBe(0);
+    } finally { db.$client.close(); vi.unstubAllGlobals(); }
   });
   it('queries only active running intervals for recorded run steps', async () => {
     native.steps.mockResolvedValueOnce(100).mockResolvedValueOnce(80);

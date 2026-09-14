@@ -83,6 +83,14 @@ recorded fixtures instead of by doing pushups on every code change.
 
 ## Development
 
+Development builds show **Camp → Development tools → Reset data**. After
+confirmation, it deletes the current 5 AM fitness day's pushups, steps, saved
+runs/routes, and quest claims, restores health, and ends active combat. Earlier
+days, gear, gold, XP, and supplies remain saved. Step syncing disconnects so
+cleared totals stay at zero; reconnecting imports the phone's steps again.
+Finish or discard any ongoing GPS run first. This control is hidden and the
+reset operation is blocked in production builds.
+
 Python content and image-generation tools use [uv](https://docs.astral.sh/uv/).
 Run `uv sync --locked`, then `uv run content` to validate game content or
 `uv run sprites --help` for sprite generation. See
