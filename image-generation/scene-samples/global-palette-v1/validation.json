@@ -37,7 +37,7 @@
   "typecheck": "passed",
   "lint": "passed",
   "android_build": "release arm64-v8a; successful",
-  "phone_install": "Not installed: no ADB device discovered on 2026-09-15; debugging address requested.",
+  "phone_install": "Installed on SM-F946N with adb install -r; installed APK hash matches apk-audit.json; cold launch successful; saves preserved. See phone-install.json.",
   "native_fallbacks": "All seven code-native sprite shapes, default tint and every dungeon tint render exact master-palette colours.",
   "apk_sha256": "6edcbedeb40c6742f5380ea7ad4e46adb193e6fe0be8a0d1ecb5fe015f213288"
 }
