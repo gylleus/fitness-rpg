@@ -35,13 +35,13 @@ function nextAttack(db: ReturnType<typeof createTestDb>, run: ReturnType<typeof 
 }
 
 describe('saved pushup damage power', () => {
-  it('permits entry at zero pushups and counts saved full reps once across days', () => {
+  it('permits entry at zero pushups and keeps lifetime reps out of the next day’s power', () => {
     const db = database();
     expect(startDungeon(db, 0, now).state.stats.attack).toBe(25);
     savePushupWorkout(db, workout);
     savePushupWorkout(db, workout);
     expect(getGameSnapshot(db, now)).toMatchObject({ savedPushups: 100, damage: 275, damageMultiplier: 11, today: { pushups: 100, partialReps: 3 } });
-    expect(getGameSnapshot(db, tomorrow)).toMatchObject({ savedPushups: 100, damage: 275, today: { pushups: 0 } });
+    expect(getGameSnapshot(db, tomorrow)).toMatchObject({ savedPushups: 100, damage: 25, damageMultiplier: 1, today: { pushups: 0 } });
   });
 
   it('never spends training, including historically spent reps, on attacks or retreats', () => {

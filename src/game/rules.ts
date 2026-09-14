@@ -2,15 +2,18 @@ import type { AttackEffect } from './attacks';
 import { BASE_PUSHUP_DAMAGE_COEFFICIENT, FOCUS_COEFFICIENT_BONUS } from './items';
 import { equipmentBonuses, startingEquipment, type OwnedItem } from './equipment';
 
-/** Pure game rules. Fitness records never contain derived game power. */
+export const DAILY_RESET_HOUR = 5;
+
+/** The fitness day starts at 5 AM on the device's local calendar. */
 export function localDay(time: number | Date = Date.now()): string {
   const d = new Date(time);
+  if (d.getHours() < DAILY_RESET_HOUR) d.setDate(d.getDate() - 1);
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
 export function recentDays(now = Date.now(), count = 7): string[] {
   return Array.from({ length: count }, (_, i) => {
-    const d = new Date(now);
+    const d = new Date(dayStart(localDay(now)));
     d.setDate(d.getDate() - count + 1 + i);
     return localDay(d);
   });
@@ -18,12 +21,13 @@ export function recentDays(now = Date.now(), count = 7): string[] {
 
 export function dayStart(day: string): number {
   const [year, month, date] = day.split('-').map(Number);
-  return new Date(year, month - 1, date).getTime();
+  return new Date(year, month - 1, date, DAILY_RESET_HOUR).getTime();
 }
 
-export function nextMidnight(now = Date.now()): number {
-  const d = new Date(now);
-  d.setHours(24, 0, 0, 0);
+export function nextDailyReset(now = Date.now()): number {
+  const d = new Date(dayStart(localDay(now)));
+  // Calendar arithmetic keeps the reset at 5 AM on 23- and 25-hour days.
+  d.setDate(d.getDate() + 1);
   return d.getTime();
 }
 

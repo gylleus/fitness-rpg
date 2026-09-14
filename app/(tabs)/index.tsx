@@ -4,7 +4,7 @@ import { db } from '../../src/db/client';
 import { claimChallenge } from '../../src/db/game';
 import { useGame } from '../../src/game/GameProvider';
 import { multiplierLabel, percentLabel } from '../../src/game/items';
-import { CHALLENGES } from '../../src/game/rules';
+import { CHALLENGES, dayStart } from '../../src/game/rules';
 import { useHealth } from '../../src/health/HealthProvider';
 import { healthName } from '../../src/health/native';
 import { activeRecording } from '../../src/db/recordings';
@@ -31,14 +31,14 @@ export default function Camp() {
       </View>
       <View style={ui.divider} />
       <Text style={ui.label}>Pushup power</Text>
-      <Text style={ui.number}>{data.savedPushups} <Text style={{ fontSize: 14, color: colors.green }}>saved · {multiplierLabel(data.damageMultiplier)} damage</Text></Text>
-      <Text style={ui.small}>{percentLabel(stats.pushupDamageCoefficient * 10000)} bonus damage per pushup{hero.focusAttacks > 0 ? ` · focus: ${hero.focusAttacks} attacks left` : ''}. Saved pushups are never consumed. Focus adds 2 percentage points per pushup.</Text>
+      <Text style={ui.number}>{today.pushups} <Text style={{ fontSize: 14, color: colors.green }}>today · {multiplierLabel(data.damageMultiplier)} damage</Text></Text>
+      <Text style={ui.small}>{percentLabel(stats.pushupDamageCoefficient * 10000)} bonus damage per pushup{hero.focusAttacks > 0 ? ` · focus: ${hero.focusAttacks} attacks left` : ''}. Attacks never consume pushups. The bonus resets at 5 AM device time. Focus adds 2 percentage points per pushup.</Text>
       <Text style={[ui.body, { color: colors.purple }]}>{percentLabel(stats.dodgeBps)} dodge today · from running</Text>
       <Button label={data.latestBattle?.status === 'active' ? 'Continue your expedition  →' : 'Enter the dungeon  →'} onPress={() => data.latestBattle?.status === 'active' ? router.push('/expedition') : router.navigate('/dungeon')} />
     </Card>
 
     <View style={{ gap: 14 }}>
-      <View style={ui.between}><Text style={ui.heading}>Today fuels your hero</Text><Text style={ui.small}>{new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</Text></View>
+      <View style={ui.between}><Text style={ui.heading}>Today fuels your hero</Text><Text style={ui.small}>{new Date(dayStart(today.day)).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</Text></View>
       <View style={ui.row}>
         <Card style={ui.flex}><Text style={ui.label}>Pushups</Text><Text style={ui.number}>{today.pushups}</Text><Text style={ui.small}>+{today.pushups} saved today</Text></Card>
         <Card style={ui.flex}><Text style={ui.label}>Steps</Text><Text style={ui.number}>{today.steps.toLocaleString()}</Text><Text style={ui.small}>+{Math.floor(today.steps / 100)} health today</Text></Card>
@@ -49,7 +49,7 @@ export default function Camp() {
       </Card>
       <Button label="Train pushups  ·  increase damage" onPress={() => router.push('/session')} />
       <View style={ui.row}><View style={ui.flex}><Button secondary label={health.connected ? "Connected steps" : "Connect steps"} onPress={() => router.push('/health')} /></View><View style={ui.flex}><Button secondary label={running ? "Return to your run" : "Start running"} onPress={() => router.push('/run')} /></View></View>
-      <Text style={ui.small}>{health.connected ? `${healthName} steps sync automatically. ${health.syncedAt ? `Last synced ${new Date(health.syncedAt).toLocaleTimeString()}.` : 'Syncing your steps…'}` : 'Connect your phone’s health app to sync steps automatically.'} Step health and running dodge reset at local midnight. Your saved pushup power, items, and gold stay.</Text>
+      <Text style={ui.small}>{health.connected ? `${healthName} steps sync automatically. ${health.syncedAt ? `Last synced ${new Date(health.syncedAt).toLocaleTimeString()}.` : 'Syncing your steps…'}` : 'Connect your phone’s health app to sync steps automatically.'} Step health, pushup damage, and running dodge reset daily at 5 AM device time. Your fitness history, items, and gold stay.</Text>
       {health.error && <Text style={[ui.small, { color: colors.gold }]}>Step sync needs attention. Open Connected steps to retry.</Text>}
     </View>
 

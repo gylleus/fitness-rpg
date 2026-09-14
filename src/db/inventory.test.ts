@@ -108,7 +108,7 @@ it('replays the same full defeat after retry and keeps loot and seeds unchanged'
   expect(db.select().from(dungeonSeeds).get()?.victories).toBe(0);
 });
 
-it('retains the seed across midnight expiry and keeps other dungeon counters independent', () => {
+it('retains the seed across daily expiry and keeps other dungeon counters independent', () => {
   const db = trained();
   getHero(db);
   db.update(heroes).set({ unlockedDungeon: 1 }).run();

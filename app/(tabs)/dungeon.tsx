@@ -58,7 +58,7 @@ export default function DungeonScreen() {
     {run && !active && <Card>
       <Text style={ui.label}>Expedition result</Text>
       <Text style={ui.heading}>{battleDungeon(run.state).name}</Text>
-        <Text style={ui.body}>This expedition has ended. You are back at camp with {data.currentHealth} / {data.stats.health} HP. Your saved pushups still power every attack.</Text>
+        <Text style={ui.body}>This expedition has ended. You are back at camp with {data.currentHealth} / {data.stats.health} HP. Today’s pushups power your attacks until 5 AM device time.</Text>
         <Text style={ui.body}>{run.status === 'victory' ? `Victory · ${run.state.gold} gold · ${run.state.xp} XP earned` : 'No loot earned. Entry health is restored.'}</Text>
         {run.status === 'victory' && <LootRewards loot={run.state.loot ?? []} />}
         <Button secondary label="Choose a new expedition" onPress={() => perform(() => dismissDungeonResult(db, run.id))} />
@@ -66,11 +66,11 @@ export default function DungeonScreen() {
     </Card>}
     <View style={{ gap: 14 }}>
       <Text style={ui.heading}>{data.damageMin}–{data.damageMax} damage · {multiplierLabel(data.damageMultiplier)} pushup power</Text>
-      <Text style={ui.body}>{data.savedPushups} saved pushups increase your damage. Attacks never consume pushups; you can enter even with zero.</Text>
+      <Text style={ui.body}>{data.today.pushups} pushups today increase your damage until 5 AM device time. Attacks never consume pushups; you can enter even with zero.</Text>
       <Text style={ui.small}>Defeat the boss to secure the entire bounty. Wins carry health; failed attempts restore entry health and award no loot. Enemies can drop items; bosses guarantee an item. Combat and loot rolls repeat after failure. Only victory changes this dungeon’s rolls. Training and equipment take effect on your next expedition.</Text>
       {!active && data.currentHealth <= 0 && <Card>
         <Text style={ui.heading}>Recover health before setting out</Text>
-        <Text style={ui.body}>Sync your steps, use a healing potion, or equip health bonuses to recover health. Daily health also resets tomorrow.</Text>
+        <Text style={ui.body}>Sync your steps, use a healing potion, or equip health bonuses to recover health. Daily health also resets at 5 AM device time.</Text>
         <Button label="Sync steps for health" onPress={() => router.push('/health')} />
         <Button secondary label="Open inventory" onPress={() => router.navigate('/forge')} />
       </Card>}

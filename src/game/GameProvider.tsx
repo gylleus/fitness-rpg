@@ -3,7 +3,7 @@ import { ActivityIndicator, Alert, AppState, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { db, useDatabaseMigrations } from '../db/client';
 import { getGameSnapshot, type GameSnapshot } from '../db/game';
-import { localDay, nextMidnight } from './rules';
+import { localDay, nextDailyReset } from './rules';
 import { Button, colors, ui } from '../ui/theme';
 
 const GameContext = createContext<{
@@ -41,10 +41,10 @@ export function GameProvider({ children }: PropsWithChildren) {
   const day = data?.today.day;
   useEffect(() => {
     if (!success || !foreground) return;
-    const midnight = setTimeout(refresh, Math.max(1, nextMidnight() - Date.now() + 50));
+    const reset = setTimeout(refresh, Math.max(1, nextDailyReset() - Date.now()));
     // Also detect a timezone or system-clock change while the app stays open.
     const clockCheck = setInterval(() => { if (localDay() !== day) refresh(); }, 30_000);
-    return () => { clearTimeout(midnight); clearInterval(clockCheck); };
+    return () => { clearTimeout(reset); clearInterval(clockCheck); };
   }, [success, foreground, day, refresh]);
 
   if (migrationError || !data) return <View style={{ flex: 1, backgroundColor: colors.bg, justifyContent: 'center', padding: 28, gap: 16 }}>

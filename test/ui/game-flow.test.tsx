@@ -492,7 +492,7 @@ describe('first playable game flow', () => {
     await renderRouter(routes, { initialUrl: '/dungeon' });
     await press('Enter dungeon  →');
     for (let tick = 0; tick < 100; tick++) await moveTime(800);
-    expect(screen.getByText('Entry health restored. Your pushup power stays.')).toBeVisible();
+    expect(screen.getByText('Entry health restored. Daily bonuses reset at 5 AM device time.')).toBeVisible();
     expect(getGameSnapshot(mockDb).latestBattle?.state.attacksMade).toBeGreaterThan(2);
     expect(screen.getByRole('button', { name: 'Try this dungeon again' })).toBeEnabled();
     expect(getGameSnapshot(mockDb)).toMatchObject({ savedPushups: 2, hero: { gold: 0, xp: 0 }, today: { pushups: 2 } });
@@ -519,18 +519,40 @@ describe('first playable game flow', () => {
     expect(screen.getByText(/2.17× damage/)).toBeVisible();
   });
 
-  it('refreshes midnight bonuses in a mounted app without deleting yesterday', async () => {
-    const late = new Date(2026, 8, 6, 23, 59, 59).getTime();
+  it.each(['open', 'backgrounded', 'closed'] as const)('resets bonuses at 5 AM when the app was %s without deleting history', async mode => {
+    const late = new Date(2026, 8, 7, 4, 59, 59).getTime();
     jest.setSystemTime(late);
     savePushupWorkout(mockDb, { sourceKey: 'late-training', startedAt: late - 60_000, endedAt: late, validReps: 20, partialReps: 0 });
+    gameRepository.saveStepTotal(mockDb, '2026-09-06', 6000);
     await renderRouter(routes);
     expect(screen.getByText('+20 saved today')).toBeVisible();
-    await moveTime(1100);
+    expect(screen.getByText(/3× damage/)).toBeVisible();
+    expect(screen.getByText('6,000')).toBeVisible();
+    if (mode === 'backgrounded') await act(async () => { appStateListeners.forEach(listener => listener('background')); });
+    if (mode === 'closed') await cleanup();
+    await moveTime(1000);
+    if (mode === 'backgrounded') await act(async () => { appStateListeners.forEach(listener => listener('active')); });
+    if (mode === 'closed') await renderRouter(routes);
     expect(screen.queryByText('+20 saved today')).toBeNull();
+    expect(screen.queryByText('6,000')).toBeNull();
     const snapshot = getGameSnapshot(mockDb);
     expect(snapshot.today.pushups).toBe(0);
+    expect(snapshot.stats.dailyHealth).toBe(0);
     expect(snapshot.savedPushups).toBe(20);
-    expect(screen.getByText(/3× damage/)).toBeVisible();
+    expect(screen.getByText(/1× damage/)).toBeVisible();
     expect(snapshot.history.find((day) => day.day === '2026-09-06')?.pushups).toBe(20);
+  });
+
+  it('keeps daily pushup and step power through midnight', async () => {
+    const late = new Date(2026, 8, 6, 23, 59, 59).getTime();
+    jest.setSystemTime(late);
+    savePushupWorkout(mockDb, { sourceKey: 'midnight-training', startedAt: late - 60_000, endedAt: late, validReps: 20, partialReps: 0 });
+    gameRepository.saveStepTotal(mockDb, '2026-09-06', 6000);
+    await renderRouter(routes);
+    await moveTime(1000);
+    expect(screen.getByText('+20 saved today')).toBeVisible();
+    expect(screen.getByText(/3× damage/)).toBeVisible();
+    expect(screen.getByText('6,000')).toBeVisible();
+    expect(getGameSnapshot(mockDb).today.day).toBe('2026-09-06');
   });
 });

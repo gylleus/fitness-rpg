@@ -137,17 +137,17 @@ describe('fitness persistence', () => {
     db.update(heroes).set({ gold: 123, xp: 250, unlockedDungeon: 1 }).run();
     for (const gear of startingEquipment(2, 1)) giveItem(db, gear.item, gear.slot);
     const nextDay = getGameSnapshot(db, tomorrow);
-    expect(nextDay.stats).toMatchObject({ attack: 99, health: 130, dodgeBps: 0, dailyHealth: 0 });
+    expect(nextDay.stats).toMatchObject({ attack: 33, pushups: 0, damageMultiplier: 1, health: 130, dodgeBps: 0, dailyHealth: 0 });
     expect(nextDay.hero).toMatchObject({ gold: 123, xp: 250, unlockedDungeon: 1 });
     expect(nextDay.history.find((d) => d.day === today)).toMatchObject({ pushups: 20, steps: 6000, distanceMeters: 2000 });
     expect(nextDay.totals).toMatchObject({ pushups: 20, bestPushupDay: 20, runs: 1 });
   });
-  it('credits a workout spanning midnight to its completion date', () => {
+  it('credits a workout spanning the 5 AM reset to its completion fitness day', () => {
     const db = createTestDb();
-    const midnight = new Date(2026, 8, 7).getTime();
-    savePushupWorkout(db, { ...workout, startedAt: midnight - 30_000, endedAt: midnight + 30_000 });
+    const reset = new Date(2026, 8, 7, 5).getTime();
+    savePushupWorkout(db, { ...workout, startedAt: reset - 30_000, endedAt: reset });
     expect(getFitnessDay(db, today).pushups).toBe(0);
-    expect(getFitnessDay(db, localDay(midnight)).pushups).toBe(20);
+    expect(getFitnessDay(db, localDay(reset)).pushups).toBe(20);
   });
   it('rejects malformed dates and invalid activity without altering history', () => {
     const db = createTestDb();

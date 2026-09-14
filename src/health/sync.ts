@@ -1,7 +1,7 @@
 import { eq, gte } from 'drizzle-orm';
 import type { GameDb } from '../db/game';
 import { activityDays, healthConnections, runRecordings, runs } from '../db/schema';
-import { dayStart, nextMidnight, recentDays } from '../game/rules';
+import { dayStart, nextDailyReset, recentDays } from '../game/rules';
 import type { RunSegment } from '../running/route';
 import { healthAuthorized, healthName, readHealthSteps } from './native';
 
@@ -27,7 +27,10 @@ async function sync(db: GameDb, now: number) {
   // Complete the reads before applying them, so a failed sync preserves the
   // previous complete snapshot. Native zero replaces legacy manual data too.
   const totals: { day: string; steps: number }[] = [];
-  for (const day of days) totals.push({ day, steps: await readHealthSteps(dayStart(day), Math.min(nextMidnight(dayStart(day)), now)) });
+  for (const day of days) {
+    const start = dayStart(day), end = Math.min(nextDailyReset(start), now);
+    totals.push({ day, steps: start < end ? await readHealthSteps(start, end) : 0 });
+  }
   const updates: { id: number; steps: number }[] = [];
   for (const run of db.select().from(runs).where(gte(runs.day, days[0])).all()) {
     if (!run.recordingId) continue;

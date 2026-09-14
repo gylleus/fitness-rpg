@@ -38,7 +38,7 @@ export default function Progress() {
           <Text style={{ color: colors.muted, fontSize: 10 }}>{new Date(dayStart(d.day)).getDate()}</Text>
         </Pressable>;
       })}</View>
-      <Text style={ui.small}>Tap a day to explore it. Empty days stay visible; your history never resets with your game bonuses.</Text>
+      <Text style={ui.small}>Tap a day to explore it. Each day runs from 5 AM to 5 AM device time. Empty days stay visible; your history never resets with your game bonuses.</Text>
     </Card>
 
     <View style={{ gap: 14 }}>
@@ -67,7 +67,7 @@ export default function Progress() {
       </Card>)}
     </View>
 
-    <Card><Text style={ui.heading}>Your pushup power</Text><Detail label="Saved pushups" value={String(data.savedPushups)} /><Detail label="Damage multiplier" value={multiplierLabel(data.damageMultiplier)} /><Text style={ui.small}>Every saved full rep boosts damage. Attacks never spend pushups or subtract from your fitness history.</Text></Card>
+    <Card><Text style={ui.heading}>Your pushup power</Text><Detail label="Pushups today" value={String(data.today.pushups)} /><Detail label="Damage multiplier" value={multiplierLabel(data.damageMultiplier)} /><Text style={ui.small}>Today’s full reps boost damage until 5 AM device time. Attacks never spend pushups or subtract from your fitness history.</Text></Card>
     <View style={{ gap: 14 }}><Text style={ui.heading}>Since your first day</Text>
       <View style={ui.row}><Card style={ui.flex}><Text style={ui.label}>Total pushups</Text><Text style={ui.number}>{data.totals.pushups.toLocaleString()}</Text></Card><Card style={ui.flex}><Text style={ui.label}>Best pushup day</Text><Text style={ui.number}>{data.totals.bestPushupDay.toLocaleString()}</Text></Card></View>
       <Card><Detail label="Distance run, all time" value={`${(data.totals.distanceMeters / 1000).toFixed(2)} km`} /><Detail label="Runs completed" value={data.totals.runs.toLocaleString()} /><Text style={ui.small}>Your exercise data and game progress are saved on this phone. No account or internet needed.</Text></Card>

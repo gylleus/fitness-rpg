@@ -3,7 +3,7 @@ import type { BaseSQLiteDatabase } from 'drizzle-orm/sqlite-core';
 import * as schema from './schema';
 import { activityDays, challengeClaims, dungeonRuns, dungeonSeeds, heroes, inventoryItems, runs, sessions, sets } from './schema';
 import { beginBattle, battleTurn, DUNGEONS, type BattleState } from '../game/combat';
-import { attackPower, CHALLENGES, dayStart, fitnessDay, heroStats, localDay, nextMidnight, recentDays, validateRun, validateSteps,
+import { attackPower, CHALLENGES, DAILY_RESET_HOUR, dayStart, fitnessDay, heroStats, localDay, nextDailyReset, recentDays, validateRun, validateSteps,
   type ChallengeId, type RunActivity } from '../game/rules';
 import { FOCUS_ATTACKS, HEALING_HP, POTIONS, type Potion } from '../game/items';
 import { getEquipped, getInventory, initializeInventory } from './inventory';
@@ -21,7 +21,7 @@ export function getHero(db: GameDb) {
   return hero;
 }
 
-/** Saved full reps power damage; historical spending never subtracts from them. */
+/** Lifetime full reps for workout receipts and history, independent of daily power. */
 export function getSavedPushups(db: GameDb) {
   const reps = db.select({ total: sql<number>`coalesce(sum(${sets.validReps}), 0)`.mapWith(Number) })
     .from(sets).innerJoin(sessions, eq(sets.sessionId, sessions.id)).where(eq(sessions.exercise, 'pushup')).get()!;
@@ -30,7 +30,7 @@ export function getSavedPushups(db: GameDb) {
 
 export function getFitnessDay(db: GameDb, day = localDay()) {
   const start = dayStart(day);
-  const end = nextMidnight(start);
+  const end = nextDailyReset(start);
   const reps = db.select({
     full: sql<number>`coalesce(sum(${sets.validReps}), 0)`.mapWith(Number),
     partial: sql<number>`coalesce(sum(${sets.partialReps}), 0)`.mapWith(Number),
@@ -118,7 +118,7 @@ export function drinkPotion(db: GameDb, kind: Potion, now = Date.now()) {
     if (hero[potion.field] <= 0) throw new Error('Buy this potion from Supplies first.');
     if (kind === 'health') {
       const day = localDay(now);
-      const maximum = heroStats(hero, getFitnessDay(tx, day), getSavedPushups(tx), getEquipped(tx)).health;
+      const maximum = heroStats(hero, getFitnessDay(tx, day), undefined, getEquipped(tx)).health;
       const health = availableHealth(hero, maximum, day);
       if (health === maximum) throw new Error('Your health is already full.');
       tx.update(heroes).set({ healthPotions: hero.healthPotions - 1, damageDay: day,
@@ -141,7 +141,7 @@ export function expireBattles(db: GameDb, now = Date.now()) {
     for (const run of active) {
       if (run.state.day === localDay(now)) continue;
       saveBattleCheckpoint(tx, run.id, { ...run.state, status: 'expired', gold: 0, xp: 0, loot: [],
-        log: ['A new day begins. Start a fresh expedition with today’s health and dodge. Your saved pushup power stays.'] });
+        log: ['It is a new fitness day. Step health, pushup damage, and running dodge reset at 5 AM device time. Start a fresh expedition.'] });
     }
   });
 }
@@ -155,7 +155,7 @@ export function startDungeon(db: GameDb, dungeonId: number, now = Date.now()) {
     if (!Number.isInteger(dungeonId) || !DUNGEONS[dungeonId] || dungeonId > hero.unlockedDungeon) throw new Error('Defeat the previous boss to unlock this dungeon.');
     const day = localDay(now);
     const equipped = getEquipped(tx);
-    const stats = heroStats(hero, getFitnessDay(tx, day), getSavedPushups(tx), equipped);
+    const stats = heroStats(hero, getFitnessDay(tx, day), undefined, equipped);
     const health = availableHealth(hero, stats.health, day);
     if (health <= 0) throw new Error('Your hero needs more health. Walk, drink a healing potion, equip health bonuses, or return tomorrow.');
     tx.insert(dungeonSeeds).values({ dungeonId }).onConflictDoNothing().run();
@@ -181,7 +181,7 @@ export function advanceDungeon(db: GameDb, id: number, expectedTick: number, now
     if (next.status === 'victory') {
       // Award once in the same transaction as the final checkpoint. Level-up
       // health does not refill the hero on victory; the exact remaining HP stays.
-      const maxHealth = heroStats({ ...hero, xp: hero.xp + next.xp }, getFitnessDay(tx, next.day), getSavedPushups(tx), getEquipped(tx)).health;
+      const maxHealth = heroStats({ ...hero, xp: hero.xp + next.xp }, getFitnessDay(tx, next.day), undefined, getEquipped(tx)).health;
       if (next.rng) {
         // A pre-catalog run can finish after the bag migration. The awarded
         // snapshot and result preview must show the same upgraded item.
@@ -232,12 +232,12 @@ export function getGameSnapshot(db: GameDb, now = Date.now()) {
   const today = history[history.length - 1];
   const dailyReps = db.select({ total: sql<number>`coalesce(sum(${sets.validReps}), 0)`.mapWith(Number) })
     .from(sets).innerJoin(sessions, eq(sessions.id, sets.sessionId)).where(eq(sessions.exercise, 'pushup'))
-    .groupBy(sql`date(${sets.endedAt} / 1000, 'unixepoch', 'localtime')`).all();
+    .groupBy(sql`date(${sets.endedAt} / 1000, 'unixepoch', 'localtime', ${`-${DAILY_RESET_HOUR} hours`})`).all();
   const runTotals = db.select({ distance: sql<number>`coalesce(sum(${runs.distanceMeters}), 0)`.mapWith(Number),
     count: sql<number>`count(*)`.mapWith(Number) }).from(runs).get()!;
   const savedPushups = getSavedPushups(db);
   const inventory = getInventory(db);
-  const stats = heroStats(hero, today, savedPushups, inventory);
+  const stats = heroStats(hero, today, undefined, inventory);
   const latestRun = db.select().from(dungeonRuns).orderBy(desc(dungeonRuns.id)).limit(1).get();
   // Select the latest first: filtering dismissed rows in SQL would resurrect
   // an even older result when the player clears the current one.

@@ -21,7 +21,7 @@ The full rules, balance, storage model, and future integrations are in [GAME_DES
 - **Dungeon:** the hero walks right through the scrolling world, stopping to fight.
   Defeat the final boss to bank all gold and XP. Failure/retreat gives zero loot
   and restores entry health. Expeditions fill the screen in landscape, with pause and
-  retreat controls. Saved pushups multiply base damage by `1 + 0.1 * pushups` and
+  retreat controls. Today’s pushups multiply base damage by `1 + 0.1 * pushups` and
   are never consumed. A victory carries remaining health into the next run.
   Walking and the camera move continuously between encounters, switching straight
   into an attack on arrival. Damage numbers pop on impact, drift upward and fade;
@@ -32,8 +32,9 @@ The full rules, balance, storage model, and future integrations are in [GAME_DES
   Weapons roll within their damage range. Combat and loot replay on retries;
   only victory advances that dungeon's seed. Gear changes take effect at camp.
   Buy and drink potions under Supplies. Existing upgrades become equipped items
-  with their earned bonuses preserved. Saved gear and pushup power carry over;
-  step health and running dodge reset at local midnight.
+  with their earned bonuses preserved. Saved gear carries over; step health,
+  pushup damage, running dodge, and daily quests reset at 5 AM device time.
+  Fitness days run from 5 AM to 5 AM, and workout history stays saved.
 - **Progress:** view daily activity, running pace and routes, lifetime totals, and
   delete incorrect runs (including their saved routes).
 

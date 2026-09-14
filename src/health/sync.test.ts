@@ -51,4 +51,24 @@ describe('connected step sync', () => {
     expect(await stepsInSegments([{ start: 10, end: 20 }, { start: 40, end: 60 }])).toBe(180);
     expect(native.steps.mock.calls).toEqual([[10, 20], [40, 60]]);
   });
+  it('syncs steps from 5 AM, carrying them through midnight and excluding them after reset', async () => {
+    const db = createTestDb();
+    try {
+      setHealthConnected(db, true);
+      const reset = new Date(2026, 8, 7, 5).getTime();
+      native.steps.mockImplementation(async (start: number) => start < reset ? 6000 : 100);
+      await syncHealth(db, reset - 1);
+      expect(native.steps).toHaveBeenLastCalledWith(dayStart(day), reset - 1);
+      expect(getFitnessDay(db, localDay(reset - 1)).steps).toBe(6000);
+      native.steps.mockClear();
+      await syncHealth(db, reset);
+      expect(getFitnessDay(db, localDay(reset)).steps).toBe(0);
+      expect(native.steps.mock.calls.every(([start, end]) => start < end)).toBe(true);
+      expect(native.steps).toHaveBeenLastCalledWith(dayStart(day), reset);
+      await syncHealth(db, reset + 60_000);
+      expect(native.steps).toHaveBeenLastCalledWith(reset, reset + 60_000);
+      expect(getFitnessDay(db, localDay(reset)).steps).toBe(100);
+      expect(getFitnessDay(db, day).steps).toBe(6000);
+    } finally { db.$client.close(); }
+  });
 });

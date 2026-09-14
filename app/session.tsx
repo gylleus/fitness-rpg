@@ -198,7 +198,7 @@ export default function Session() {
 
   if (summary) return <Screen>
     <PageHeading eyebrow="Training / workout saved" title="A little stronger." />
-    <Card><Text style={ui.label}>Pushups completed</Text><Text style={[ui.number, { fontSize: 64 }]}>{summary.full}</Text><Text style={[ui.heading, { color: colors.green }]}>+{summary.credited} pushups saved</Text><Text style={ui.body}>{summary.partial} shallow reps recorded separately. Your effort is saved on this phone.</Text><Text style={ui.small}>Every saved pushup adds 10% of your base damage before item bonuses. Pushups are never consumed, and your power carries over.</Text></Card>
+    <Card><Text style={ui.label}>Pushups completed</Text><Text style={[ui.number, { fontSize: 64 }]}>{summary.full}</Text><Text style={[ui.heading, { color: colors.green }]}>+{summary.credited} pushups saved</Text><Text style={ui.body}>{summary.partial} shallow reps recorded separately. Your effort is saved on this phone.</Text><Text style={ui.small}>Every full pushup adds 10% of your base damage before item bonuses until 5 AM device time. Attacks never consume pushups, and your workout history stays saved.</Text></Card>
     <Button label="Return to camp" onPress={() => router.replace('/')} />
     <Button secondary label="Take this power to the dungeon" onPress={() => router.replace('/dungeon')} />
   </Screen>;

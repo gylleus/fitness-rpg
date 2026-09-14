@@ -76,7 +76,7 @@ export default function ExpeditionScreen() {
     {!active && <View pointerEvents="box-none" style={styles.resultArea}>
       <ScrollView style={styles.result} contentContainerStyle={{ padding: 20, gap: 12 }}>
         <Text style={ui.heading}>{battle.status === 'victory' ? 'Boss defeated. Well fought.' : 'Back to the campfire.'}</Text>
-        <Text style={ui.body}>{battle.status === 'victory' ? `${battle.gold} gold · ${battle.xp} XP secured` : 'Entry health restored. Your pushup power stays.'}</Text>
+        <Text style={ui.body}>{battle.status === 'victory' ? `${battle.gold} gold · ${battle.xp} XP secured` : 'Entry health restored. Daily bonuses reset at 5 AM device time.'}</Text>
         {battle.status === 'victory' && <>
           <Text style={[ui.small, { color: colors.green }]}>{battle.loot?.length ? 'Loot secured. Tap an item to inspect it.' : 'No item drops in this older expedition'}</Text>
           <LootRewards loot={battle.loot ?? []} />

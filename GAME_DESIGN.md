@@ -18,9 +18,9 @@ An in-game level is adventure progress, not a measurement of physical ability.
 6. Wins carry exact remaining health into the next expedition. Failure restores
    entry health and grants zero loot. Used potion charges stay spent.
 
-All saved pushups **carry over across days**, as do gear, gold, XP, unlocked dungeons,
-potions, and unused focus charges. Daily step health and running agility expire
-at local midnight, and health recovers to the new day's maximum.
+Step health, pushup damage, running agility, and daily quests reset at **5 AM
+device time**. Health recovers to the new day's maximum. Workout history, gear,
+gold, XP, unlocked dungeons, potions, and unused focus charges carry over.
 
 ## Character, resources, and initial balance
 
@@ -32,16 +32,16 @@ These are tunable game numbers, not prescribed workout targets.
 | Starter Wooden Club | 20–30 damage per hit | While equipped |
 | Found equipment | Damage range, health, flat damage, or pushup coefficient bonus | While equipped |
 | Each level after level 1 | +1 damage, +5 health | Permanent |
-| Completed pushup | +10% of base damage per attack, before item bonuses | Permanent |
-| Every 100 steps today | +1 health | Until local midnight |
-| Running distance and pace | Agility, expressed as deterministic dodge | Until local midnight |
+| Completed pushup | +10% of base damage per attack, before item bonuses | Until 5 AM device time |
+| Every 100 steps today | +1 health | Until 5 AM device time |
+| Running distance and pace | Agility, expressed as deterministic dodge | Until 5 AM device time |
 
 ### Pushup damage
 
-Damage is `round(baseDamage * (1 + coefficient * savedPushups))`. The default
-coefficient is `0.1` in `src/game/items.ts`; 10 saved pushups doubles damage,
-20 triples it. Full reps from all saved pushup workouts count, including older
-reps previously spent under stockpile rules. Partial reps remain in history and
+Damage is `round(baseDamage * (1 + coefficient * todayPushups))`. The default
+coefficient is `0.1` in `src/game/items.ts`; 10 pushups today doubles damage,
+20 triples it. Full reps from workouts completed during the current fitness day
+count. Lifetime totals remain in history. Partial reps remain in history and
 do not add damage. There is no cap, spending, attack limit, or exhaustion state
 for new battles. Zero pushups permits entry with the normal base damage.
 
@@ -65,7 +65,7 @@ agility from saved distance and active duration.
 ```
 level = 1 + floor(xp / 100)
 baseDamage = seededRoll(weaponMin, weaponMax) + gearDamageBonus + (level - 1)
-damage = round(baseDamage * (1 + pushupDamageCoefficient * savedPushups))
+damage = round(baseDamage * (1 + pushupDamageCoefficient * todayPushups))
 dailyHealth = floor(totalSteps / 100)
 health = 100 + equippedHealthBonus + (level - 1) * 5 + dailyHealth
 speedKmh = distanceMeters / activeSeconds * 3.6
@@ -108,11 +108,16 @@ schema supports later critical, damage and healing items.
 
 ## Time, persistence, and migration
 
-A day is a local calendar date. Derive health/agility from saved activity and
-refresh on foreground entry and midnight; no reset job or deletion is needed.
-Pushup sets and GPS workouts belong to their completion date. An active dungeon
-expires when the local date changes, dropping pending loot and retaining pushup power. Used potion charges stay consumed. Unused focus charges carry over; dungeon seeds stay unchanged. Version one trusts the phone's
-clock; no streak penalty applies on rest days.
+A fitness day runs from 5 AM to the next 5 AM in the device's local timezone,
+using calendar arithmetic across daylight-saving changes. Derive health, pushup
+damage, and agility from that day's activity; refresh at the reset boundary and
+on foreground entry. No background reset job or history deletion is needed.
+Pushup sets and GPS workouts belong to the fitness day in which they finish.
+Native step sync queries the same 5 AM intervals. An active dungeon expires at
+the reset, dropping pending loot so it cannot retain yesterday's power. Used
+potion charges stay consumed. Unused focus charges carry over; dungeon seeds
+stay unchanged. Version one trusts the phone's clock; no streak penalty applies
+on rest days.
 
 Use the existing expo-sqlite + Drizzle database, offline with no new account or
 backend. [Expo SDK 57 SQLite](https://docs.expo.dev/versions/v57.0.0/sdk/sqlite/).
@@ -121,16 +126,16 @@ backend. [Expo SDK 57 SQLite](https://docs.expo.dev/versions/v57.0.0/sdk/sqlite/
 | --- | --- |
 | Sessions and sets | Exercise, timestamps, full/partial reps, form data |
 | Activity days | Native aggregate steps, source, sync time, legacy total |
-| Runs | Completion date, source/key, distance, active seconds, steps, recording ID |
+| Runs | Completion fitness day, source/key, distance, active seconds, steps, recording ID |
 | Recordings and route points | Status, pause intervals, accepted GPS fixes, route gaps |
 | Health connection | Explicit opt-in and last completed sync |
 | Hero | Gold, XP, unlocks, daily damage, legacy fields, potions, focus charges, inventory conversion version |
 | Inventory items | Unique owned item ID, immutable item snapshot, optional unique equipment slot, acquisition/source |
 | Dungeon seeds | Victory counter per dungeon |
 | Dungeon runs | Entry stats/roster, RNG seed/state, loot plan, focus charges, turns, combat log, pending rewards |
-| Challenge claims | Unique local date + challenge ID |
+| Challenge claims | Unique fitness day + challenge ID |
 
-Power counts all saved full pushup reps directly. Workout save keys prevent
+Power counts the current fitness day's saved full pushup reps. Workout save keys prevent
 duplicating a retried save. Every turn atomically saves focus, RNG state,
 and its battle checkpoint. Stale callbacks do nothing, and failed saves roll
 back all changes, including the final boss reward. Attacks do not change fitness
@@ -144,6 +149,10 @@ Migration 0006 adds inventory and dungeon seed storage. On first read, one
 transaction converts old sword/armor levels and the owned amulet to equipped
 item instances with equivalent average damage, health and coefficient bonuses.
 A version flag prevents starter items from reappearing after they are sold.
+Migration 0007 expires active battles that used lifetime power, preserving banked
+progress and past results. It assigns existing GPS runs to their completion
+fitness day; manual entries retain their chosen date. Native step aggregates
+are replaced with the new intervals on the next health sync.
 
 ## Automatic dungeon battles
 
@@ -176,7 +185,7 @@ Focus charges stay consumed. Entry health is restored on failure/retreat.
 
 Daily damage from successful expeditions is stored separately from max health.
 More steps or armor can add available health; a healing potion reduces that
-stored damage. Running helps avoid future damage. At local midnight health
+stored damage. Running helps avoid future damage. At 5 AM device time health
 recovers. No dungeon entry is allowed at zero available health.
 
 ## Inventory and equipment
@@ -206,13 +215,13 @@ Inventory → Supplies retains healing potions (30 gold, restore up to 40 HP at
 camp) and focus potions (25 gold, +0.02 coefficient for ten attacks). Only one
 focus potion can be active. Full-health healing and already-active focus are
 blocked without consuming a charge. Potions can be bought during an expedition
-but are drunk only at camp. All gear and unused supplies survive midnight and
+but are drunk only at camp. All gear and unused supplies survive daily resets and
 app restarts. XP levels still require 100 XP each.
 
 ## Daily challenges and screens
 
 Daily optional quests remain: complete 10 pushups, walk 3,000 steps, run 1 km.
-Each grants 20 gold once per date. Progress comes from raw activity; combat cannot undo quest progress. Later goals can be
+Each grants 20 gold once per fitness day. Progress comes from raw activity; combat cannot undo quest progress. Later goals can be
 personalized for alternatives and recovery days.
 
 Keep the dark woodland theme and pixel characters, with layouts that fit narrow
@@ -229,13 +238,13 @@ visual style, and descriptive writing conventions. The
 curated TOML definitions and resolved JSON export. Runtime combat still
 uses `src/game/combat.ts`; authored content does not automatically alter those battles.
 
-- **Camp:** saved pushups, damage multiplier, damage per hit, available health,
+- **Camp:** today's pushups, damage multiplier, damage per hit, available health,
   daily running dodge, today's activity, native step connection, and quests.
 - **Dungeon:** portrait expedition picker and landscape full-screen travel/combat,
   pause/resume, retreat, boss rewards, and retry feedback.
 - **Inventory:** equipment slots, a shared bag, item inspection/comparison, equip/unequip/sell, and potion supplies.
 - **Progress:** seven-day raw activity chart, daily runs/pace/agility, lifetime
-  totals, best pushup day, and the saved-pushup damage multiplier.
+  totals, best pushup day, and today's pushup damage multiplier.
 - **Pushups:** camera counter/corrections; save full reps to increase damage and
   record partials separately. Recalibration preserves accumulated totals.
 - **Connected steps:** one-time Health Connect/HealthKit setup, automatic sync,
@@ -291,7 +300,7 @@ Verify zero-pushup entry, multiplier arithmetic, additive coefficient bonuses,
 focus expiry, unchanged saved reps during combat, fixed entry power, stale tick
 guards, rollback on failed saves, and the boss killing blow. Test deterministic dodge and critical/
 proc sequences across enemy changes and persisted reloads, using saved RNG state.
-Verify daily agility/health reset while resources/history persist, including
+Verify 5 AM device-time agility/health/pushup resets while resources/history persist, including
 legacy migration and duplicate workout saves. Check potion ownership, gold,
 full-health/active-focus guards, camp-only use, equipment swaps, duplicate rings, sales, and legacy gear conversion.
 

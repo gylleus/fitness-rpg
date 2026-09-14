@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { attackPower, dayStart, fitnessDay, heroStats, localDay, nextMidnight, paceLabel, pushupPower, recentDays, runDodgeBps, validateRun, validateSteps } from './rules';
+import { attackPower, dayStart, fitnessDay, heroStats, localDay, nextDailyReset, paceLabel, pushupPower, recentDays, runDodgeBps, validateRun, validateSteps } from './rules';
 import { startingEquipment } from './equipment';
 import { battleTurn, beginBattle, DUNGEONS } from './combat';
 
@@ -66,19 +66,28 @@ describe('fitness power', () => {
   ])('rejects invalid run data: %j', (run) => { expect(() => validateRun(run)).toThrow(); });
 });
 
-describe('local calendar days', () => {
-  it('uses local dates at midnight and across month/year boundaries', () => {
-    const midnight = new Date(2027, 0, 1).getTime();
-    expect(localDay(midnight - 1)).toBe('2026-12-31');
-    expect(localDay(midnight)).toBe('2027-01-01');
-    expect(nextMidnight(midnight - 1)).toBe(midnight);
-    expect(dayStart('2027-01-01')).toBe(midnight);
-    expect(recentDays(midnight, 3)).toEqual(['2026-12-30', '2026-12-31', '2027-01-01']);
+describe('local fitness days', () => {
+  it('resets at exactly 5 AM across month/year boundaries, retaining power through midnight', () => {
+    const reset = new Date(2027, 0, 1, 5).getTime();
+    expect(localDay(new Date(2027, 0, 1))).toBe('2026-12-31');
+    expect(localDay(reset - 1)).toBe('2026-12-31');
+    expect(localDay(reset)).toBe('2027-01-01');
+    expect(nextDailyReset(reset - 1)).toBe(reset);
+    expect(nextDailyReset(reset)).toBe(new Date(2027, 0, 2, 5).getTime());
+    expect(dayStart('2027-01-01')).toBe(reset);
+    expect(recentDays(reset - 1, 3)).toEqual(['2026-12-29', '2026-12-30', '2026-12-31']);
+    expect(recentDays(reset, 3)).toEqual(['2026-12-30', '2026-12-31', '2027-01-01']);
   });
-  it('uses calendar arithmetic for a daylight-saving transition', () => {
-    const before = new Date(2026, 2, 8, 12).getTime();
-    expect(nextMidnight(before)).toBe(new Date(2026, 2, 9).getTime());
-    expect(recentDays(before, 3)).toEqual(['2026-03-06', '2026-03-07', '2026-03-08']);
+  it.each([[2, 8], [2, 29], [9, 25], [10, 1]])('uses local calendar arithmetic through DST on month %i day %i', (month, date) => {
+    // Covers European and US spring/fall transitions when run in those timezones.
+    const before = new Date(2026, month, date - 1, 5).getTime();
+    const reset = new Date(2026, month, date, 5).getTime();
+    expect(nextDailyReset(before)).toBe(reset);
+    expect(localDay(new Date(2026, month, date, 4, 59))).toBe(localDay(before));
+    expect(recentDays(reset - 1, 2)).toEqual([localDay(new Date(2026, month, date - 2, 5)), localDay(before)]);
+    const elapsedHours = (reset - before) / 3_600_000;
+    const offsetChange = (new Date(reset).getTimezoneOffset() - new Date(before).getTimezoneOffset()) / 60;
+    expect(elapsedHours).toBe(24 + offsetChange);
   });
 });
 
