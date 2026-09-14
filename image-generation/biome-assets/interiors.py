@@ -36,7 +36,7 @@ def validate_scene(scene):
         raise ValueError("An enclosed interior needs a ceiling layer")
 
 
-def make_interior_plan(theme, biome_id=None, recipe_path=None):
+def make_interior_plan(theme, biome_id=None, recipe_path=None, style_path=None):
     recipe_path = Path(recipe_path or HERE / "interiors.toml")
     recipe = tomllib.loads(recipe_path.read_text())
     if recipe["schema_version"] != 1 or theme not in recipe["themes"]:
@@ -44,10 +44,8 @@ def make_interior_plan(theme, biome_id=None, recipe_path=None):
     biome_id = safe_id(biome_id or theme)
     selected = recipe["themes"][theme]
     scene = {"schema_version": 1, **deepcopy(recipe["scene"]), **deepcopy(selected.get("scene", {})), "layers": []}
-    style = ("Refined dark fantasy pixel art at the same texture density as the Wetlands environment. "
-             "Fine deliberate pixel clusters and readable material edges, with medium surface detail and restrained contrast. "
-             "Retain the full generated texture resolution; do not simulate a tiny pixel grid or enlarge chunky blocks. "
-             "Group value and hue behind actors, keeping bright accents sparse. Crisp texture, no photographic noise or blur.")
+    style_path = Path(style_path or HERE / "style.toml")
+    style = tomllib.loads(style_path.read_text())
     assets = []
     for spec in recipe["layers"]:
         asset_id = f"{biome_id}_{spec['id']}"
@@ -61,13 +59,13 @@ def make_interior_plan(theme, biome_id=None, recipe_path=None):
             f"Materials: {selected['materials']}",
             f"Composition: {spec['prompt']}",
             "Camera: strict orthographic side view along a horizontal tunnel, parallel to the image plane. The passage continues sideways off both edges.",
-            f"Style/medium: {style}",
+            f"Style/medium: {style['style']} {style['background']}",
             f"Color palette: {selected['palette']}",
             f"Lighting: {selected['lighting']}",
             f"Canvas: {spec['canvas'][0]} by {spec['canvas'][1]} logical units; generate a large image with width at least 1536 pixels and this aspect ratio.",
             "Transparency: genuine alpha in all empty areas; never paint checkerboard or a colored matte." if spec["transparent"] else "Opacity: completely opaque edge-to-edge image.",
             "If a reference image is supplied, use it for pixel texture density and restrained shading only; keep the requested indoor subject and enclosed composition.",
-            "Avoid: tiny-resolution upscaling, flat featureless polygons, photorealism, harsh white highlights, vast cave expanses, soaring ceilings, long vanishing-point corridors, characters, text, UI and watermarks."])
+            "Avoid: " + ", ".join(style["avoid"] + ["tiny-resolution upscaling", "flat featureless polygons", "harsh white highlights", "vast cave expanses", "soaring ceilings", "long vanishing-point corridors", "characters"])])
         assets.append({"id": asset_id, "name": f"{selected['name']} — {spec['id']}", "kind": "background",
             "canvas": spec["canvas"], "transparent": spec["transparent"], "prompt": prompt, "prompt_sha256": digest(prompt),
             "source_definition": {"visual_description": selected["materials"], "layer": spec},
@@ -75,7 +73,7 @@ def make_interior_plan(theme, biome_id=None, recipe_path=None):
                        "colors": "source", "alpha": "binary" if spec["transparent"] else "opaque"}})
     validate_scene(scene)
     return {"schema_version": 1, "biome_id": biome_id, "theme": theme, "interior": scene,
-            "style": {"style": style, "avoid": ["vast cave", "photorealism", "chunky upscaling"]},
+            "style": style, "style_sha256": sha(style_path),
             "recipe": {"text": recipe_path.read_text(), "sha256": sha(recipe_path)}, "assets": assets}
 
 

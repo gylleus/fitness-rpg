@@ -39,7 +39,7 @@ async function main() {
   const exports = { ...headless, Skia };
   const { WetlandsArtwork } = loadProduction('src/scenes/WetlandsArtwork.tsx', exports);
   const { HollowDelveArtwork } = loadProduction('src/scenes/HollowDelveArtwork.tsx', exports);
-  const { delveBackgroundX, delveTransition, hollowDelveLayout } = loadProduction('src/scenes/hollowDelve.ts', exports);
+  const { hollowDelveLayout } = loadProduction('src/scenes/hollowDelve.ts', exports);
   const { sceneryOffset, wetlandsLayout } = loadProduction('src/scenes/wetlands.ts', exports);
   const { visibleScenery } = loadProduction('src/scenes/sceneryAtlas.ts', exports);
   const { SceneryAtlasArtwork } = loadProduction('src/scenes/SceneryAtlasArtwork.tsx', exports);
@@ -114,10 +114,9 @@ async function main() {
     const camera = layout.width * 0.22 - position;
     const surface = makeOffscreenSurface(layout.width, layout.height);
     const nodes = [React.createElement(HollowDelveArtwork, { key: 'scenery', images: selected, layout,
-      background: { ...layout.background, x: delveBackgroundX(camera, layout.background.width, layout.width) },
+      camera,
       ground: { ...layout.ground, x: sceneryOffset(camera, 1, layout.ground.width) },
-      ...atlasDrawing(layout, camera),
-      galleryOpacity: delveTransition(position, 500), cavernOpacity: delveTransition(position, 1100) })];
+      ...atlasDrawing(layout, camera) })];
     if (enemy) for (const [id, x, facing] of [['barbarian_player', layout.width * 0.22, 'right'],
       [enemy, layout.width * 0.22 + 80, 'left']]) {
       const entity = catalog.entities[id];
@@ -163,13 +162,39 @@ async function main() {
       first.dispose(); repeat.dispose();
     }
     const delveLayout = hollowDelveLayout(640, 360, 288, 64);
+    // The lowest roof pixel is the strictest bound at every travel position.
+    // Check visible alpha in every shipped pose, including raised weapons.
+    let clearedPoses = 0;
+    const playerIds = Object.keys(catalog.entities).filter(id => id === 'barbarian_player' || id.startsWith('knight_'));
+    for (const id of [...playerIds, ...delveEnemies]) {
+      const entity = catalog.entities[id], geometry = spriteGeometry(entity, 64);
+      for (const [action, clip] of Object.entries(entity.actions)) {
+        const atlas = decode(`assets/sprites/${id}--${action}.png`);
+        const rgba = pixels(atlas, atlas.width(), atlas.height());
+        for (const frame of clip.frames) {
+          let top = entity.frameSize[1];
+          for (let y = 0; y < entity.frameSize[1] && top === entity.frameSize[1]; y++) {
+            for (let x = 0; x < entity.frameSize[0]; x++) {
+              if (rgba[((frame.y + y) * atlas.width() + frame.x + x) * 4 + 3]) { top = y; break; }
+            }
+          }
+          assert(delveLayout.groundY + geometry.top + top * geometry.scale >= delveLayout.ceilingY,
+            `${id}/${action}: visible pose touches the lowest ceiling edge`);
+          clearedPoses++;
+        }
+      }
+    }
     for (const [keys, period] of [[['slate_path'], 512],
-      [['props'], delveLayout.scenery.period]]) {
+      [['props'], delveLayout.scenery.period],
+      ...delveLayout.layers.map(layer => [[layer.image], layer.rect.width * 2 / layer.parallax])]) {
       const selected = Object.fromEntries(Object.keys(delveImages).map(key => [key, keys.includes(key) ? delveImages[key] : null]));
-      const first = await renderDelve(delveLayout, 300, selected);
-      const repeat = await renderDelve(delveLayout, 300 + period, selected);
-      assert.deepEqual(pixels(first, 640, 360), pixels(repeat, 640, 360), 'Hollow Delve: ground/props repeat changed pixels');
-      first.dispose(); repeat.dispose();
+      const origin = delveLayout.width * .22;
+      const first = await renderDelve(delveLayout, origin, selected);
+      const repeat = await renderDelve(delveLayout, origin + period, selected);
+      const moved = await renderDelve(delveLayout, origin + 173, selected);
+      assert.deepEqual(pixels(first, 640, 360), pixels(repeat, 640, 360), `${keys}: repeat changed pixels`);
+      assert.notDeepEqual(pixels(first, 640, 360), pixels(moved, 640, 360), `${keys}: travel does not move visible art`);
+      first.dispose(); repeat.dispose(); moved.dispose();
     }
     let propCrops = 0;
     for (const [biome, image] of [['wetlands', images.props], ['hollow_delve', delveImages.props]]) {
@@ -190,10 +215,11 @@ async function main() {
         crop.dispose(); surface.dispose(); propCrops++; renders++;
       }
     }
-    fs.writeFileSync(path.join(output, 'report.json'), JSON.stringify({ renderer: 'real Skia / CanvasKit', renders, propCrops,
+    fs.writeFileSync(path.join(output, 'report.json'), JSON.stringify({ renderer: 'real Skia / CanvasKit', renders, propCrops, clearedPoses,
       checks: ['10 runtime texture hashes and dimensions; original generated prop source hashes', 'opaque viewport at four sizes, Wetlands and all five Hollow Delve encounters',
         '64 exact prop atlas crops with nonempty contact rows', 'production sprites on the shared ground baseline',
-        'pixel-exact mirrored background/ground and culled atlas repetition'] }, null, 2) + '\n');
+        'all player/enemy poses below the lowest roof edge',
+        'independent visible interior layer motion; pixel-exact mirrored background/ground and culled atlas repetition'] }, null, 2) + '\n');
     console.log(`Scene rendering passed: ${renders} real-Skia renders. Artifacts: ${output}`);
   } finally { decoded.forEach(image => image.dispose()); }
 }

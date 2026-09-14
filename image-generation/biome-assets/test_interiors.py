@@ -19,6 +19,9 @@ class InteriorTests(unittest.TestCase):
             self.assertEqual([a["transparent"] for a in plan["assets"]], [False, True, True])
             self.assertEqual([a["export"]["resolution"] for a in plan["assets"]], ["source"] * 3)
             self.assertEqual([a["parallax"] for a in plan["interior"]["layers"]], [.1, .32, .68])
+            for asset in plan["assets"]:
+                self.assertIn(plan["style"]["background"], asset["prompt"])
+                self.assertIn(plan["style"]["style"], asset["prompt"])
             materials.add(plan["assets"][0]["source_definition"]["visual_description"])
         self.assertEqual(len(materials), 5)
 

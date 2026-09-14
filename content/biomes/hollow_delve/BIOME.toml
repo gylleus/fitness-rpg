@@ -60,14 +60,32 @@ id = "hollow_delve_pool_ledge"
 name = "Sunken cavern ledge"
 description = "A continuous gravel ledge skirts a still black pool beneath massive mineral ribs. The water occupies the lower chamber beyond the ledge."
 [[background_layers]]
-id = "hollow_delve_cavern_backdrop"
-name = "Limestone chambers"
-visual_description = "Close damp limestone walls and shallow shadowed recesses line a low horizontal passage. A heavy roof presses down above the route, supported by short rock piers and worn timber braces."
+id = "hollow_delve_depth"
+name = "Shallow mine recesses"
+visual_description = "Dim shallow limestone recesses form the enclosed back of a horizontal mine tunnel, with distant supports barely visible in the stone."
 [background_layers.generation]
-parallax = 0.18
-repeat_x = false
+parallax = 0.10
+repeat_x = true
 transparent = false
-composition = "Use the shared interior recipe for three independent planes: dim rear recesses, nearer wall piers with transparent gaps, and a continuous low roof cutout. The ceiling follows the floor at a fixed actor-relative clearance rather than stretching to viewport height. Maintain fine texture at low contrast and separate the ground and freestanding props."
+composition = "Opaque rear plane of the shared interior recipe. Keep mineral and timber texture subdued; no vast chamber or foreground objects."
+[[background_layers]]
+id = "hollow_delve_wall"
+name = "Close limestone wall piers"
+visual_description = "Damp limestone piers and worn timber braces stand against a low rear wall, with broad gaps revealing shallow recesses."
+[background_layers.generation]
+parallax = 0.32
+repeat_x = true
+transparent = true
+composition = "Separate nearer wall plane of the shared interior recipe. Use real transparency in the gaps and above the wall; the roof, floor and freestanding props are separate."
+[[background_layers]]
+id = "hollow_delve_roof"
+name = "Low stone tunnel roof"
+visual_description = "A heavy rough limestone roof presses down above the route, with short blunt stalactites and worn timber braces embedded in the rock."
+[background_layers.generation]
+parallax = 0.68
+repeat_x = true
+transparent = true
+composition = "Continuous overhead cutout in the shared interior recipe's 640 by 240 logical canvas. Solid across the top edge, genuinely transparent beneath the underside. The measured underside follows the ground at a fixed actor-relative clearance."
 [[ground_sections]]
 id = "hollow_delve_slate_path"
 name = "Slate and gravel path"

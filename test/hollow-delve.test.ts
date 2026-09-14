@@ -4,7 +4,8 @@ import { fitnessDay, heroStats } from '../src/game/rules';
 import catalog from '../assets/sprites/catalog.json';
 import type { SpriteCatalog } from '../src/sprites/types';
 import { sampleSprite } from '../src/sprites/playback';
-import { delveBackgroundX, delveTransition, hollowDelveLayout } from '../src/scenes/hollowDelve';
+import { hollowDelveLayout } from '../src/scenes/hollowDelve';
+import { interiorLayerRect } from '../src/scenes/interior';
 import { visibleScenery } from '../src/scenes/sceneryAtlas';
 import sources from '../assets/biomes/hollow_delve/sources.json';
 import roster from '../src/game/rosters/hollow_delve.json';
@@ -47,21 +48,23 @@ it('resolves every enemy animation and holds death while attack recovers to idle
 });
 
 it.each([[300, 240, 198, 92], [390, 844, 754, 140], [844, 390, 300, 126.5], [320, 480, 390, 140]])(
-  'keeps cave surfaces grounded and pans inside painted edges at %ix%i', (width, height, groundY, heroHeight) => {
+  'keeps cave surfaces grounded and the tunnel enclosed at %ix%i', (width, height, groundY, heroHeight) => {
     const layout = hollowDelveLayout(width, height, groundY, heroHeight);
     expect(layout.ground.y + sources.slate_path.surface_y / sources.slate_path.size[1] * layout.ground.height).toBeCloseTo(groundY);
     for (const prop of layout.scenery.props) {
       expect(prop.y + prop.height).toBeCloseTo(groundY);
     }
     for (const camera of [100, -254, -1560, -10_000_000]) {
-      const x = delveBackgroundX(camera, layout.background.width, width);
-      expect(x).toBeLessThanOrEqual(0);
-      expect(x + layout.background.width).toBeGreaterThanOrEqual(width - 1e-6);
+      for (const layer of layout.layers) {
+        expect(Math.abs(interiorLayerRect(layer, camera).x)).toBeLessThan(layer.rect.width * 2);
+      }
       const visible = visibleScenery(layout.scenery, camera);
       expect(visible.keys.length).toBeGreaterThan(0);
       expect(visibleScenery(layout.scenery, camera - layout.scenery.period)).toEqual(visible);
     }
-    expect(delveTransition(0, 500)).toBe(0);
-    expect(delveTransition(610, 500)).toBe(0.5);
-    expect(delveTransition(1560, 1100)).toBe(1);
+    expect(groundY - layout.ceilingY).toBeCloseTo(heroHeight * 104 / 64);
+    expect(layout.layers.map(layer => layer.parallax)).toEqual([.1, .32, .68]);
+    expect(sources.depth.size[0]).toBeGreaterThanOrEqual(1536);
+    expect(sources.wall.size[0]).toBeGreaterThanOrEqual(1536);
+    expect(sources.roof.size[0]).toBeGreaterThanOrEqual(1536);
   });

@@ -59,7 +59,7 @@ def make_plan(biome_id, kind="all", selected=None, content_root=None, style_path
             raise ValueError("Interior recipe does not match biome/schema")
         from interiors import make_interior_plan
         interior_plan = make_interior_plan(recipe_data["interior_theme"], biome_id,
-                                          candidate_recipe.parent / recipe_data["interior_recipe"])
+                                          candidate_recipe.parent / recipe_data["interior_recipe"], style_path)
         if kind == "background":
             if selected and set(selected) != {a["id"] for a in interior_plan["assets"]}:
                 raise ValueError("Plan the complete interior layer set; all layers share one scene contract")
@@ -111,6 +111,7 @@ def make_plan(biome_id, kind="all", selected=None, content_root=None, style_path
         if role == "background":
             lines.append(f"Scene/backdrop: {entry['generation']['composition']}")
             constraints += [f"Keep rows {scene['ground_y'] - 2 * scene['reference_height']} through {scene['ground_y']} quiet across the full width for moving combatants.",
+                            "Generate a full source texture at least 1536 pixels wide at the specified aspect ratio; logical dimensions define layout, not output resolution.",
                             "Rear atmosphere only. Foreground props and the playable floor are separate assets. No characters, enemies or freestanding objects.",
                             "Use controlled material texture and grouped shading. Preserve fine pixel edges without dense high-contrast highlights behind actors."]
         elif role == "ground":
