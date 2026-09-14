@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/frostbound_pestle.png",
   "source_sha256": "ae6bb4fd86a489aeadede19e66a08a783fec12c8515e5e23d23046b664dd80e4",
   "icon": "assets/items/frostbound_pestle.png",
-  "icon_sha256": "ee22267ed508e40cb503fd1a1a05eedb8b6ca97e203d44b713f556f4612c122f",
+  "icon_sha256": "b68108025f073c9292963563d384034979a75eff9e13fe6647389622820b3f55",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Frostbound Pestle. An elongated white stone head narrows into a cold blue iron socket. Frost collects inside the chipped top, while layered gray sealskin wraps the handle almost to the head.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Frostbound Pestle. An elongated white stone head narrows into a cold blue iron socket. Frost collects inside the chipped top, while layered gray sealskin wraps the handle almost to the head.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/frostbound_pestle.png",
+    "source_sha256": "ee22267ed508e40cb503fd1a1a05eedb8b6ca97e203d44b713f556f4612c122f",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "b68108025f073c9292963563d384034979a75eff9e13fe6647389622820b3f55",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

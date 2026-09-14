@@ -8,5 +8,21 @@
     1402
   ],
   "runtime": "assets/maps/world-map.png",
-  "runtimeExport": "Byte-identical source; routes, labels and interactive nodes are drawn by the app."
+  "runtimeExport": "Original dimensions and alpha; shared master palette without dithering.",
+  "palette_export": {
+    "source": "image-generation/maps/world-map-v1/source.png",
+    "source_sha256": "b8a333387b25800993d114ea62eb55d81e1f852d7fb838e6f8ba277330778c5c",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      1122,
+      1402
+    ],
+    "sha256": "dad0d61fb9a447222e2177ecb3180d8bb47fca2508cc386769f2c58867c7b556"
+  }
 }

@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/slag_knuckle_mitts.png",
   "source_sha256": "66d1c61d5ca72d5811ce06b11fcef29ddd0924f9447da3d8cc897d35a998385e",
   "icon": "assets/items/slag_knuckle_mitts.png",
-  "icon_sha256": "b878b3472b8884ebe1a96c00285fe18246d27c5644ac95a5f3c1eba5202bd00a",
+  "icon_sha256": "eb1e5e2a10cc59e23762da3382823b9d120c451ae7e99334fed3efc8a240f7b6",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Slag Knuckle Mitts. Thick black leather mitts support irregular charcoal slag blocks across the knuckles. Three bright iron pins pierce each block above broad straps of scorched brown hide.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Slag Knuckle Mitts. Thick black leather mitts support irregular charcoal slag blocks across the knuckles. Three bright iron pins pierce each block above broad straps of scorched brown hide.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/slag_knuckle_mitts.png",
+    "source_sha256": "b878b3472b8884ebe1a96c00285fe18246d27c5644ac95a5f3c1eba5202bd00a",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "eb1e5e2a10cc59e23762da3382823b9d120c451ae7e99334fed3efc8a240f7b6",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

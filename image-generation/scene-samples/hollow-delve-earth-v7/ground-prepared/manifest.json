@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "biome_id": "hollow_delve",
+  "inputs": {
+    "plan_sha256": "8f62eaf3bad7dfb0185d40a5fce53dba9bb3e9087cff01848b987b775e0b144f",
+    "sources_sha256": "eaa302a7d156b7a060dfd7b851a10cfe05394fc196e1b6d2a40e766bb5361145"
+  },
+  "assets": {
+    "hollow_delve_slate_path": {
+      "image": "hollow_delve_slate_path.png",
+      "sha256": "442994811229ff330127d505b79a7408cf827c2b3e48f5840ee64f7d39e15915",
+      "size": [
+        256,
+        96
+      ],
+      "source": "../sources/ground.png",
+      "source_sha256": "37efcb53be50eabf67aff861b8d38a56c3eb0bf8268f5ebd30ef52e55c885d58",
+      "backend": "built-in imagegen",
+      "prompt_sha256": "8543a87cc6a995efb5c576381fbd0c1c3e9df36ae44178ffbdabfbb77e76e168",
+      "export": {
+        "sampling": "nearest",
+        "alpha": "binary",
+        "colors": "source",
+        "resolution": "logical"
+      },
+      "canvas": [
+        256,
+        96
+      ],
+      "surface_y": 41.0
+    }
+  }
+}

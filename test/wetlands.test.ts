@@ -3,6 +3,7 @@ import { DUNGEONS, battleDungeon, beginBattle } from '../src/game/combat';
 import { fitnessDay, heroStats } from '../src/game/rules';
 import { hasWetlandsScenery, wetlandsLayout } from '../src/scenes/wetlands';
 import { visibleScenery } from '../src/scenes/sceneryAtlas';
+import sources from '../assets/biomes/wetlands/sources.json';
 
 it('selects Wetlands for new and older snapshots without changing other saved dungeons', () => {
   expect(hasWetlandsScenery(DUNGEONS[0])).toBe(true);
@@ -19,7 +20,7 @@ it('selects Wetlands for new and older snapshots without changing other saved du
 it.each([[300, 240, 198, 92], [390, 844, 754, 140], [844, 390, 300, 126.5], [320, 480, 390, 140]])(
   'plants the turf and prop atlas on the character baseline at %ix%i', (width, height, baseline, hero) => {
     const layout = wetlandsLayout(width, height, baseline, hero);
-    expect(layout.ground.y + layout.ground.height * 338 / 768).toBeCloseTo(baseline);
+    expect(layout.ground.y + layout.ground.height * sources.ground.surface_y / sources.ground.canvas[1]).toBeCloseTo(baseline);
     for (const prop of layout.scenery.props) expect(prop.y + prop.height).toBeCloseTo(baseline);
     expect(layout.scenery.props.find(p => p.key === 'wetlands_leaning_willow')?.height).toBeCloseTo(hero * 3.4);
     for (const camera of [26, -254, -1734, -10_000_000]) {

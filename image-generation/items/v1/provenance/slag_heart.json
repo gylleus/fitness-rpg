@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/slag_heart.png",
   "source_sha256": "6735a54d9fbd55139ed3f5f83afa7fadaa054b2f8a3ec25f429a87dc008646f9",
   "icon": "assets/items/slag_heart.png",
-  "icon_sha256": "dc2e9156b871406ff16e2030a7534ae339c82099cd5808fecb9923ccc6b26784",
+  "icon_sha256": "12e5dffa64f5cd851afa4b978f3f1b5a73a817e820a4c71bf42acb7ded006fc1",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Slag Heart. A porous black stone pendant has a heavy uneven teardrop silhouette. A thin amber mineral seam crosses its widest part beneath three dull iron claws and a soot-dark cloth cord.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Slag Heart. A porous black stone pendant has a heavy uneven teardrop silhouette. A thin amber mineral seam crosses its widest part beneath three dull iron claws and a soot-dark cloth cord.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/slag_heart.png",
+    "source_sha256": "dc2e9156b871406ff16e2030a7534ae339c82099cd5808fecb9923ccc6b26784",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "12e5dffa64f5cd851afa4b978f3f1b5a73a817e820a4c71bf42acb7ded006fc1",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

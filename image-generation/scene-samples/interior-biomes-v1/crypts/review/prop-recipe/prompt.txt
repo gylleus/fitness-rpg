@@ -1,0 +1,17 @@
+Use case: stylized-concept
+Asset type: eight separate decoration cutouts for Low vaulted crypt
+Style: Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks. Refined material edges and deliberate fine pixel clusters at the Wetlands texture density. Keep local contrast restrained behind actors; distant layers use a narrower value range. Preserve full texture resolution independently of the logical layout. Do not enlarge a coarse pixel grid to create quiet scenery.
+Palette: Muted blue-gray stone, old beige mortar, dark olive stains and deep cool shadow.
+Lighting: Restrained indirect cool light on stone edges; niche interiors remain dim, with no luminous symbols.
+Prop detail: Medium detail concentrated at the outer silhouette and a few identifying features. Keep interior shading grouped. Show one complete isolated object with a clear support contact.
+Exactly FOUR columns by TWO rows, eight equal cells, wide 2:1 canvas 2048 by 1024. Each cell contains exactly one complete isolated prop or the specified small grouped object, centered with at least 40 pixels of clear padding on every side. No grid lines or labels. All props sit on a flat invisible ground line within their own cell, with no cast shadow, ground patch or backdrop. Strict orthographic side view, no strong overhead perspective. Real transparent alpha outside every object, including holes and between cells.
+Cell order, left to right then top to bottom:
+1. Low closed weathered stone sarcophagus
+2. Dusty funerary urn with a chipped lid
+3. Short stone plinth carrying three melted candles with tiny subdued flames
+4. Small old skull and bone heap
+5. Broken hooded funerary statue on a grounded pedestal, no living figure
+6. Cracked stone coffin lid propped securely against a low rubble base
+7. Old standing iron oil lamp with a restrained dull flame
+8. Small decayed iron-bound burial chest
+Keep each object entirely within its cell, especially poles and handles. No characters, words, symbols, checkerboard, walls, floors or roof.

@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "biome_id": "lava_caves",
+  "alpha_threshold": 128,
+  "max_prop_edge": 240,
+  "atlas_width": 1024,
+  "padding": 2,
+  "definitions": [
+    {
+      "id": "lava_caves_basalt_boulder",
+      "name": "Layered basalt boulder",
+      "height_scale": 0.5,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.5
+      }
+    },
+    {
+      "id": "lava_caves_obsidian_cluster",
+      "name": "Small squat obsidian outcrop with restrained dull red reflections",
+      "height_scale": 0.65,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.65
+      }
+    },
+    {
+      "id": "lava_caves_ash_urn",
+      "name": "Cracked ash-filled stone urn",
+      "height_scale": 0.45,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.45
+      }
+    },
+    {
+      "id": "lava_caves_cooled_vent",
+      "name": "Low cooled lava vent with one faint ember seam and no smoke",
+      "height_scale": 0.4,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.4
+      }
+    },
+    {
+      "id": "lava_caves_iron_brazier",
+      "name": "Heavy iron brazier with a few dull embers",
+      "height_scale": 0.85,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.85
+      }
+    },
+    {
+      "id": "lava_caves_ore_cart",
+      "name": "Abandoned iron ore cart carrying volcanic stone",
+      "height_scale": 0.75,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.75
+      }
+    },
+    {
+      "id": "lava_caves_chain_coil",
+      "name": "Rusted chain coiled beside a broken mining pick",
+      "height_scale": 0.35,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.35
+      }
+    },
+    {
+      "id": "lava_caves_broken_column",
+      "name": "Broken natural basalt column with a flat grounded base",
+      "height_scale": 0.95,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.95
+      }
+    }
+  ],
+  "sheets": [
+    {
+      "image": "../../prepared/lava_caves_decorations.png",
+      "sha256": "b8cb9dd757003270ccda6967ba12543544c3c93d3068ceca8d50a0a7c1308532",
+      "prompt_file": "prompt.txt",
+      "columns": 4,
+      "rows": 2,
+      "props": [
+        "lava_caves_basalt_boulder",
+        "lava_caves_obsidian_cluster",
+        "lava_caves_ash_urn",
+        "lava_caves_cooled_vent",
+        "lava_caves_iron_brazier",
+        "lava_caves_ore_cart",
+        "lava_caves_chain_coil",
+        "lava_caves_broken_column"
+      ]
+    }
+  ]
+}

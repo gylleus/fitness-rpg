@@ -130,6 +130,8 @@ def export(weapon, actions, provenance):
         dest.mkdir(parents=True, exist_ok=True)
         sheet = Image.new('RGBA', (SIZE * len(frames), SIZE))
         records = []
+        from asset_palette import map_palette
+        frames = [map_palette(frame) for frame in frames]
         for i, frame in enumerate(frames):
             filename = f'frame-{i:03d}.png'
             frame.save(dest / filename)

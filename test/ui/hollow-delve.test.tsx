@@ -16,10 +16,13 @@ it('follows travel without restarting at a saved checkpoint or resize', async ()
   const view = await render(<HollowDelveBackdrop {...props} />);
   const groundX = () => view.getAllByTestId('native-scene-shader')[3].props.rect.value.x;
   expect(groundX()).toBe(390 * 0.22 - 600);
+  const layerXs = () => view.getAllByTestId('native-scene-shader').slice(0, 3).map(node => node.props.rect.value.x);
+  expect(layerXs()).toEqual([.1, .32, .68].map(rate => (390 * .22 - 600) * rate));
   const atlas = () => view.getByTestId('native-sprite-atlas');
   const initialTransforms = atlas().props.transforms.value;
   expect(initialTransforms.length).toBeGreaterThan(0);
   await act(() => { position.setValue(650); });
+  expect(layerXs()).toEqual([.1, .32, .68].map(rate => (390 * .22 - 650) * rate));
   expect(atlas().props.transforms.value).not.toEqual(initialTransforms);
   const movedTransforms = atlas().props.transforms.value;
   await view.rerender(<HollowDelveBackdrop {...props} initialPosition={610} />);

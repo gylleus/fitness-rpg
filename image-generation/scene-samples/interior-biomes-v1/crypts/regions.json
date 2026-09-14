@@ -1,0 +1,10 @@
+{
+  "crypts_sarcophagus": [12, 134, 470, 374],
+  "crypts_funerary_urn": [558, 49, 782, 396],
+  "crypts_candle_plinth": [971, 43, 1248, 405],
+  "crypts_bone_heap": [1341, 142, 1767, 392],
+  "crypts_broken_statue": [99, 418, 368, 873],
+  "crypts_coffin_lid": [498, 483, 885, 853],
+  "crypts_iron_lamp": [986, 429, 1226, 869],
+  "crypts_burial_chest": [1366, 594, 1736, 831]
+}

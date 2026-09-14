@@ -1,6 +1,7 @@
 import type { Dungeon } from '../game/combat';
 import roster from '../game/rosters/wetlands.json';
 import propAtlas from '../../assets/biomes/wetlands/props.json';
+import sources from '../../assets/biomes/wetlands/sources.json';
 import { sceneryAtlasLayout } from './sceneryAtlas';
 
 /** Recognize Wetlands snapshots saved before biomeId was added, without
@@ -16,9 +17,9 @@ export type SceneRect = { x: number; y: number; width: number; height: number };
 export function wetlandsLayout(width: number, height: number, groundY: number, heroHeight: number, seed = 0) {
   const scale = heroHeight / 64;
   const background: SceneRect = { x: 0, y: groundY - 288 * scale, width: 640 * scale, height: 360 * scale };
-  // The v1 image's solid turf begins at source row 338 / 768. Align that
-  // measured surface, rather than the requested (but unfulfilled) row 24.
-  const ground: SceneRect = { x: 0, y: groundY - 42.25 * scale, width: 256 * scale, height: 96 * scale };
+  // Re-exporting at a different pixel density can move the sampled support row.
+  const ground: SceneRect = { x: 0, y: groundY - sources.ground.surface_y * scale,
+    width: sources.ground.canvas[0] * scale, height: sources.ground.canvas[1] * scale };
   return {
     width, height, groundY,
     // Lift the distant horizon slightly so it clears the generated reed bank.

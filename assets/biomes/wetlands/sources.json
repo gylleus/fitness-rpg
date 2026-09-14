@@ -2,48 +2,204 @@
   "sky": {
     "id": "wetlands_overcast_sky",
     "source": "image-generation/scene-samples/wetlands-v1/wetlands_overcast_sky.png",
-    "sha256": "c64c5ced7b3bea0bd796f90146aa964a4a00f954d53aa799696f4dd412019e99",
+    "sha256": "b2ade3974a264cf58abf059c626f8c30a381ce2400b04b067ebd331f3ba93499",
     "size": [
-      1672,
-      941
-    ]
+      960,
+      540
+    ],
+    "source_sha256": "c64c5ced7b3bea0bd796f90146aa964a4a00f954d53aa799696f4dd412019e99",
+    "canvas": [
+      640,
+      360
+    ],
+    "export": {
+      "palette": {
+        "file": "assets/palette.json",
+        "name": "ENDESGA 32",
+        "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+        "metric": "ciede2000",
+        "dither": "none"
+      },
+      "resolution": "world",
+      "sampling": "nearest",
+      "reduction": "area",
+      "dither": "none",
+      "colors": 32,
+      "pixel_profile": {
+        "schema_version": 1,
+        "pixels_per_unit": 1.5,
+        "reference_height": 64,
+        "background_colors": 32,
+        "ground_colors": 32,
+        "prop_colors": 32,
+        "palette": {
+          "file": "assets/palette.json",
+          "name": "ENDESGA 32",
+          "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+          "metric": "ciede2000",
+          "dither": "none"
+        }
+      },
+      "alpha": "opaque"
+    }
   },
   "distant": {
     "id": "wetlands_distant_silhouettes",
     "source": "image-generation/scene-samples/wetlands-v1/wetlands_distant_silhouettes.png",
-    "sha256": "6c1346b8e1737c5e91508c440ada0aaba519d7a18d7e893045c8e4902ca3ee74",
+    "sha256": "f8ab552e5a64a86afa7c784c715783bf79eac9cf00bbbed99e03589154b94a5b",
     "size": [
-      1672,
-      941
-    ]
+      960,
+      540
+    ],
+    "source_sha256": "6c1346b8e1737c5e91508c440ada0aaba519d7a18d7e893045c8e4902ca3ee74",
+    "canvas": [
+      640,
+      360
+    ],
+    "export": {
+      "palette": {
+        "file": "assets/palette.json",
+        "name": "ENDESGA 32",
+        "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+        "metric": "ciede2000",
+        "dither": "none"
+      },
+      "resolution": "world",
+      "sampling": "nearest",
+      "reduction": "area",
+      "dither": "none",
+      "colors": 32,
+      "pixel_profile": {
+        "schema_version": 1,
+        "pixels_per_unit": 1.5,
+        "reference_height": 64,
+        "background_colors": 32,
+        "ground_colors": 32,
+        "prop_colors": 32,
+        "palette": {
+          "file": "assets/palette.json",
+          "name": "ENDESGA 32",
+          "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+          "metric": "ciede2000",
+          "dither": "none"
+        }
+      },
+      "alpha": "binary"
+    }
   },
   "banks": {
     "id": "wetlands_reed_banks",
     "source": "image-generation/scene-samples/wetlands-v1/wetlands_reed_banks.png",
-    "sha256": "59f681084074fbc3bfa56f30aed8ad3d385a42b83648bf5f26e0f4c19220a8ef",
+    "sha256": "ae0a36e85ea5c131effcb020d8e0b7382c6c8f4177450e49979236c8389d0cb0",
     "size": [
-      1672,
-      941
-    ]
+      960,
+      540
+    ],
+    "source_sha256": "59f681084074fbc3bfa56f30aed8ad3d385a42b83648bf5f26e0f4c19220a8ef",
+    "canvas": [
+      640,
+      360
+    ],
+    "export": {
+      "palette": {
+        "file": "assets/palette.json",
+        "name": "ENDESGA 32",
+        "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+        "metric": "ciede2000",
+        "dither": "none"
+      },
+      "resolution": "world",
+      "sampling": "nearest",
+      "reduction": "area",
+      "dither": "none",
+      "colors": 32,
+      "pixel_profile": {
+        "schema_version": 1,
+        "pixels_per_unit": 1.5,
+        "reference_height": 64,
+        "background_colors": 32,
+        "ground_colors": 32,
+        "prop_colors": 32,
+        "palette": {
+          "file": "assets/palette.json",
+          "name": "ENDESGA 32",
+          "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+          "metric": "ciede2000",
+          "dither": "none"
+        }
+      },
+      "alpha": "binary"
+    }
   },
   "ground": {
     "id": "wetlands_raised_peat_path",
     "source": "image-generation/scene-samples/wetlands-v1/wetlands_raised_peat_path.png",
-    "sha256": "7ac7914cd6c5962816f8a751e095643614d734bd9252a9605140660cf27f341c",
+    "sha256": "9ca169687011dd5dd23f0df33f1bbd975bd6f4193e9d135403f715f7fd1d89fe",
     "size": [
-      2048,
-      768
-    ]
+      384,
+      144
+    ],
+    "source_sha256": "7ac7914cd6c5962816f8a751e095643614d734bd9252a9605140660cf27f341c",
+    "canvas": [
+      256,
+      96
+    ],
+    "export": {
+      "palette": {
+        "file": "assets/palette.json",
+        "name": "ENDESGA 32",
+        "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+        "metric": "ciede2000",
+        "dither": "none"
+      },
+      "resolution": "world",
+      "sampling": "nearest",
+      "reduction": "area",
+      "dither": "none",
+      "colors": 32,
+      "pixel_profile": {
+        "schema_version": 1,
+        "pixels_per_unit": 1.5,
+        "reference_height": 64,
+        "background_colors": 32,
+        "ground_colors": 32,
+        "prop_colors": 32,
+        "palette": {
+          "file": "assets/palette.json",
+          "name": "ENDESGA 32",
+          "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+          "metric": "ciede2000",
+          "dither": "none"
+        }
+      },
+      "alpha": "binary"
+    },
+    "surface_y": 40.666666666666664
   },
   "props": {
     "id": "wetlands_prop_atlas",
     "source": "image-generation/scene-samples/biome-props-v2/wetlands/recipe.json",
     "source_sha256": "f502fd3de105d49e2d2a3c93bc062ffbba34d2d75cbfcf52108df4fb00a35603",
-    "sha256": "8b6687cd16387354d77de6c2bb1975e3ab8728b8c0603609a81b6f60e38ae284",
+    "sha256": "17f264d985034958c9744b507116dcbcb7bd8a8a07e654a50c4516862bd5df3b",
     "size": [
       2048,
-      866
+      424
     ],
-    "backend": "built-in imagegen; trimmed nearest cutouts in one atlas"
+    "pixel_profile": {
+      "schema_version": 1,
+      "pixels_per_unit": 1.5,
+      "reference_height": 64,
+      "background_colors": 32,
+      "ground_colors": 32,
+      "prop_colors": 32,
+      "palette": {
+        "file": "assets/palette.json",
+        "name": "ENDESGA 32",
+        "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+        "metric": "ciede2000",
+        "dither": "none"
+      }
+    },
+    "backend": "built-in imagegen; actor-scale cutouts in one atlas"
   }
 }

@@ -1,0 +1,82 @@
+{
+  "renderer": "real Skia / CanvasKit",
+  "renders": 223,
+  "propCrops": 96,
+  "clearedPoses": 224,
+  "pixelProfile": {
+    "schema_version": 1,
+    "pixels_per_unit": 1.5,
+    "reference_height": 64,
+    "background_colors": 48,
+    "ground_colors": 32,
+    "prop_colors": 32
+  },
+  "checks": [
+    "30 runtime texture hashes and dimensions; original generated prop source hashes",
+    "shared world pixel density and per-prop palette budgets",
+    "opaque viewport at four sizes, Wetlands, Hollow Delve and all four new interiors",
+    "96 exact prop atlas crops with nonempty contact rows",
+    "production sprites on the shared ground baseline",
+    "all player/enemy poses below the lowest roof edge",
+    "independent visible interior layer motion; pixel-exact mirrored background/ground and culled atlas repetition"
+  ],
+  "scenery_commit": "c1335b1",
+  "comparison_before_commit": "2f8f712",
+  "python_pipeline_tests": 24,
+  "prop_packer_tests": 6,
+  "scene_logic_tests": 27,
+  "ui_tests": 6,
+  "typecheck": "passed",
+  "lint": "passed",
+  "offline_reviews": [
+    {
+      "biome": "lava_caves",
+      "decorations": 8,
+      "viewports": 3,
+      "sceneryToggles": 5,
+      "offline": true,
+      "browserErrors": 0
+    },
+    {
+      "biome": "frost_caves",
+      "decorations": 8,
+      "viewports": 3,
+      "sceneryToggles": 5,
+      "offline": true,
+      "browserErrors": 0
+    },
+    {
+      "biome": "crypts",
+      "decorations": 8,
+      "viewports": 3,
+      "sceneryToggles": 5,
+      "offline": true,
+      "browserErrors": 0
+    },
+    {
+      "biome": "fortress",
+      "decorations": 8,
+      "viewports": 3,
+      "sceneryToggles": 5,
+      "offline": true,
+      "browserErrors": 0
+    }
+  ],
+  "comparison_review": [
+    {
+      "file": "pixel-scale-comparison.html",
+      "images": 12,
+      "decoded": true,
+      "mobileOverflow": false
+    },
+    {
+      "file": "index.html",
+      "images": 4,
+      "decoded": true,
+      "mobileOverflow": false
+    }
+  ],
+  "android_apk_sha256": "136a5c21e3e03a1c9c3a5ce09210fce023e6dad5748c69dde5b4157074775ab9",
+  "installed_apk_verified": true,
+  "phone_review_files_verified": 8
+}

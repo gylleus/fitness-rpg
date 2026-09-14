@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "biome_id": "frost_caves",
+  "alpha_threshold": 128,
+  "max_prop_edge": 240,
+  "atlas_width": 1024,
+  "padding": 2,
+  "definitions": [
+    {
+      "id": "frost_caves_snow_boulder",
+      "name": "Snow-capped frozen boulder",
+      "height_scale": 0.55,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.55
+      }
+    },
+    {
+      "id": "frost_caves_cloudy_ice",
+      "name": "Short cluster of thick cloudy blue ice slabs",
+      "height_scale": 0.8,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.8
+      }
+    },
+    {
+      "id": "frost_caves_frozen_crate",
+      "name": "Old supply crate rimmed with thick frost",
+      "height_scale": 0.55,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.55
+      }
+    },
+    {
+      "id": "frost_caves_unlit_brazier",
+      "name": "Snow-dusted iron brazier, unlit",
+      "height_scale": 0.85,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.85
+      }
+    },
+    {
+      "id": "frost_caves_split_barrel",
+      "name": "Split wooden barrel partly encased in cloudy ice",
+      "height_scale": 0.55,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.55
+      }
+    },
+    {
+      "id": "frost_caves_broken_sled",
+      "name": "Low broken wooden expedition sled with coiled rope",
+      "height_scale": 0.45,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.45
+      }
+    },
+    {
+      "id": "frost_caves_frozen_chest",
+      "name": "Closed iron-bound chest trapped in frost",
+      "height_scale": 0.55,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.55
+      }
+    },
+    {
+      "id": "frost_caves_ice_shelf",
+      "name": "Squat irregular frozen-stone shelf with short attached icicles",
+      "height_scale": 1.0,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 1.0
+      }
+    }
+  ],
+  "sheets": [
+    {
+      "image": "../../prepared/frost_caves_decorations.png",
+      "sha256": "b0f70ace567b6571bd08762d439704b1b0405eca6acd0e99caeb4ce93ce8d240",
+      "prompt_file": "prompt.txt",
+      "columns": 4,
+      "rows": 2,
+      "props": [
+        "frost_caves_snow_boulder",
+        "frost_caves_cloudy_ice",
+        "frost_caves_frozen_crate",
+        "frost_caves_unlit_brazier",
+        "frost_caves_split_barrel",
+        "frost_caves_broken_sled",
+        "frost_caves_frozen_chest",
+        "frost_caves_ice_shelf"
+      ]
+    }
+  ]
+}

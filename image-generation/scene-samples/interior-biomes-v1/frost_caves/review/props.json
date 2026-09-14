@@ -1,0 +1,349 @@
+{
+  "schema_version": 1,
+  "biome_id": "frost_caves",
+  "image": "props.png",
+  "size": [
+    1024,
+    100
+  ],
+  "pixel_profile": {
+    "schema_version": 1,
+    "pixels_per_unit": 1.5,
+    "reference_height": 64,
+    "background_colors": 48,
+    "ground_colors": 32,
+    "prop_colors": 32
+  },
+  "sha256": "e2b67fd13e285d241f11af977ba242d9b8ca258f4f426936b7ba2c3b48f8f894",
+  "padding": 2,
+  "props": {
+    "frost_caves_snow_boulder": {
+      "name": "Snow-capped frozen boulder",
+      "anchor": [
+        31.0,
+        53
+      ],
+      "height_scale": 0.55,
+      "pixels_per_unit": 1.5056818181818181,
+      "pixels_sha256": "a23c0cc4017531007a38db5417f673f01f002a37087601e9c81edf41fbe8e53b",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/frost_caves/review/prop-recipe/../../prepared/frost_caves_decorations.png",
+        "sha256": "b0f70ace567b6571bd08762d439704b1b0405eca6acd0e99caeb4ce93ce8d240",
+        "cell": [
+          0,
+          0,
+          444,
+          444
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          48,
+          90,
+          389,
+          379
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          62,
+          53
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 471,
+        "y": 2,
+        "width": 62,
+        "height": 53
+      }
+    },
+    "frost_caves_cloudy_ice": {
+      "name": "Short cluster of thick cloudy blue ice slabs",
+      "anchor": [
+        36.5,
+        77
+      ],
+      "height_scale": 0.8,
+      "pixels_per_unit": 1.50390625,
+      "pixels_sha256": "d0cc6455602c69eb0ffb180235643b22dcf44e77d3a5894706c0ddd7411b31c1",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/frost_caves/review/prop-recipe/../../prepared/frost_caves_decorations.png",
+        "sha256": "b0f70ace567b6571bd08762d439704b1b0405eca6acd0e99caeb4ce93ce8d240",
+        "cell": [
+          444,
+          0,
+          887,
+          444
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          77,
+          65,
+          380,
+          382
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          73,
+          77
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 250,
+        "y": 2,
+        "width": 73,
+        "height": 77
+      }
+    },
+    "frost_caves_frozen_crate": {
+      "name": "Old supply crate rimmed with thick frost",
+      "anchor": [
+        31.5,
+        53
+      ],
+      "height_scale": 0.55,
+      "pixels_per_unit": 1.5056818181818181,
+      "pixels_sha256": "6958c5e0922ddba012d03a280b9479da95f6d49b82c41e42d7416e6ff9f79ffc",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/frost_caves/review/prop-recipe/../../prepared/frost_caves_decorations.png",
+        "sha256": "b0f70ace567b6571bd08762d439704b1b0405eca6acd0e99caeb4ce93ce8d240",
+        "cell": [
+          887,
+          0,
+          1330,
+          444
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          56,
+          108,
+          388,
+          384
+        ],
+        "reduced_trim": [
+          1,
+          0,
+          64,
+          53
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 404,
+        "y": 2,
+        "width": 63,
+        "height": 53
+      }
+    },
+    "frost_caves_unlit_brazier": {
+      "name": "Snow-dusted iron brazier, unlit",
+      "anchor": [
+        39.0,
+        82
+      ],
+      "height_scale": 0.85,
+      "pixels_per_unit": 1.5073529411764706,
+      "pixels_sha256": "f31ab2163b39ff2e1dfd0ce4d552614dfab81e6f0a461ca8f32592df53ba77f6",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/frost_caves/review/prop-recipe/../../prepared/frost_caves_decorations.png",
+        "sha256": "b0f70ace567b6571bd08762d439704b1b0405eca6acd0e99caeb4ce93ce8d240",
+        "cell": [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          98,
+          92,
+          365,
+          373
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          78,
+          82
+        ],
+        "removed_detached_pixels": 1,
+        "components": 1
+      },
+      "frame": {
+        "x": 168,
+        "y": 2,
+        "width": 78,
+        "height": 82
+      }
+    },
+    "frost_caves_split_barrel": {
+      "name": "Split wooden barrel partly encased in cloudy ice",
+      "anchor": [
+        27.0,
+        53
+      ],
+      "height_scale": 0.55,
+      "pixels_per_unit": 1.5056818181818181,
+      "pixels_sha256": "6a12be8e5232a6307edeee01c1ae84e6cab7a4b51eb1e8364a94342de703416d",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/frost_caves/review/prop-recipe/../../prepared/frost_caves_decorations.png",
+        "sha256": "b0f70ace567b6571bd08762d439704b1b0405eca6acd0e99caeb4ce93ce8d240",
+        "cell": [
+          0,
+          444,
+          444,
+          887
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          65,
+          54,
+          395,
+          371
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          54,
+          53
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 537,
+        "y": 2,
+        "width": 54,
+        "height": 53
+      }
+    },
+    "frost_caves_broken_sled": {
+      "name": "Low broken wooden expedition sled with coiled rope",
+      "anchor": [
+        41.5,
+        43
+      ],
+      "height_scale": 0.45,
+      "pixels_per_unit": 1.4930555555555556,
+      "pixels_sha256": "0e766e4efc7df06d38a634782f1b1ac6a2c2a0f30d9052f4f7eea654f5afcf31",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/frost_caves/review/prop-recipe/../../prepared/frost_caves_decorations.png",
+        "sha256": "b0f70ace567b6571bd08762d439704b1b0405eca6acd0e99caeb4ce93ce8d240",
+        "cell": [
+          444,
+          444,
+          887,
+          887
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          23,
+          121,
+          419,
+          327
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          83,
+          43
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 595,
+        "y": 2,
+        "width": 83,
+        "height": 43
+      }
+    },
+    "frost_caves_frozen_chest": {
+      "name": "Closed iron-bound chest trapped in frost",
+      "anchor": [
+        36.5,
+        53
+      ],
+      "height_scale": 0.55,
+      "pixels_per_unit": 1.5056818181818181,
+      "pixels_sha256": "7fdede248f3daa269d5a6d4f92b1d6fa1dc2ecc758fc180f99ed887d1b1ca564",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/frost_caves/review/prop-recipe/../../prepared/frost_caves_decorations.png",
+        "sha256": "b0f70ace567b6571bd08762d439704b1b0405eca6acd0e99caeb4ce93ce8d240",
+        "cell": [
+          887,
+          444,
+          1330,
+          887
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          56,
+          107,
+          387,
+          348
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          73,
+          53
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 327,
+        "y": 2,
+        "width": 73,
+        "height": 53
+      }
+    },
+    "frost_caves_ice_shelf": {
+      "name": "Squat irregular frozen-stone shelf with short attached icicles",
+      "anchor": [
+        81.0,
+        96
+      ],
+      "height_scale": 1.0,
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "27f51f72bb9584f764bde2b38c3afb0f96a1cc3cb31bcbe85917424ccefb1fe1",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/frost_caves/review/prop-recipe/../../prepared/frost_caves_decorations.png",
+        "sha256": "b0f70ace567b6571bd08762d439704b1b0405eca6acd0e99caeb4ce93ce8d240",
+        "cell": [
+          1330,
+          444,
+          1774,
+          887
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          47,
+          130,
+          397,
+          338
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          162,
+          96
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 2,
+        "y": 2,
+        "width": 162,
+        "height": 96
+      }
+    }
+  }
+}

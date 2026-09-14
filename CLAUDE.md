@@ -82,6 +82,11 @@ and retain both `pyproject.toml` and `uv.lock` changes.
 
 ## Enemy Design
 
+For biome asset generation, follow [the shared interface and prompt guide](image-generation/biome-assets/README.md).
+Use `uv run biome-assets plan` for backgrounds, ground, props and enemy art briefs,
+and `uv run sprites import-sheets` for authored enemy sheets. Put biome-specific
+layout, masking, timing and contact corrections in recipes, not new Python scripts.
+
 For `design-enemy` requests or collaborative biome enemy design, read and follow
 [skills/design-enemy/SKILL.md](skills/design-enemy/SKILL.md). It supports biome
 suggestions, custom concepts, appearance and attack review, and saving accepted

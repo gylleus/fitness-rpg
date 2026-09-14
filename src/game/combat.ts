@@ -49,7 +49,7 @@ export const DUNGEONS: Dungeon[] = [
   { id: 0, biomeId: wetlands.biome_id, name: wetlands.name, subtitle: 'A path through reeds, dark pools and tangled roots.', color: '#8ae3b1',
     enemies: (['bog_toad', 'drowned_corpse', 'giant_water_strider', 'bog_hag', 'root_hulk'] as const)
       .map(id => wetlands.enemies[id] as Enemy) },
-  ...LEGACY_DUNGEONS.slice(1),
+  ...LEGACY_DUNGEONS.slice(1).map(dungeon => ({ ...dungeon, biomeId: dungeon.id === 1 ? 'embercrypt' : 'frostbound_keep' })),
   { id: 3, biomeId: hollowDelve.biome_id, name: hollowDelve.name,
     subtitle: 'Blind hunters beneath the abandoned mines.', color: '#a4b8a0',
     enemies: (['troglodyte', 'giant_cave_spider', 'bone_slime', 'delve_dwarf', 'delve_gnoll'] as const)

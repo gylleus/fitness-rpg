@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "6f8dfd97e317e2df835e547d1721839d93feea593535e966c29a7677a495b60a",
+  "assets": {
+    "hollow_delve_depth": {
+      "image": "sources/depth.png",
+      "sha256": "728ca29de83dd608e8f08a7619f9ebdd53f3a84b40b146607a7bb8d670794227",
+      "prompt_sha256": "5f2f67dfb1792ea7d5e332909d60b7de2519c55760b0a63a20130a505cbf5b97",
+      "backend": "built-in imagegen",
+      "generation_prompt": "Use case: style-transfer\nInput image 1 is the edit target.\nRestyle the supplied game layer to the materials, palette and formations below. Preserve its canvas aspect ratio, orthographic camera, independent layer role, horizontal continuation and overall occupied/empty layout. Replace conflicting surface details and shapes; this is not merely a color tint.\nKeep the image completely opaque.\nUse case: stylized-concept\nAsset type: independently scrolling depth layer for a claustrophobic side-scrolling game interior\nPrimary request: Low earthy limestone cave\nMaterials: An ordinary compact underground cave of warm brown limestone, weathered earthen rock, subdued tan sediment bands and dusty cracks. Broad irregular rounded rock masses and shallow ledges, with occasional old brown timber. Natural rock buttresses rather than brick columns or arches. Ceiling: a heavy low gently uneven brown rock shelf; mostly blunt rounded underside, no hanging needles or icicle teeth. No stalagmite forest, dense stalactites, crystals, blue mineral crusts or dramatic fantasy formations.\nComposition: Opaque distant recess layer only. A close horizontal band of dark shallow recesses in an enclosed passage, interrupted by dim silhouettes of distant supports. Subtle atmospheric depth and a narrow value range. No enormous chamber, vertical abyss, soaring pillars or receding corridor. No foreground ceiling, floor, nearby wall piers, props or characters. Fill the entire image; any visible recess has an enclosed back.\nCamera: strict orthographic side view along a horizontal tunnel, parallel to the image plane. The passage continues sideways off both edges.\nStyle/medium: Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks. Refined material edges and deliberate fine pixel clusters at the Wetlands texture density. Keep local contrast restrained behind actors; distant layers use a narrower value range. Preserve full texture resolution independently of the logical layout. Do not enlarge a coarse pixel grid to create quiet scenery.\nColor palette: Earth brown #554334, umber #382a21, warm charcoal #211b16, dusty warm gray #7d7060, muted tan #95816a and dark old timber #493727. No blue, cyan, teal or purple cast.\nLighting: Dim neutral-to-warm reflected light with soft brown shadows and restrained highlights. A typical earthy underground passage, neither icy nor orange-glowing.\nCanvas: 640 by 360 logical units; generate a large image with width at least 1536 pixels and this aspect ratio.\nOpacity: completely opaque edge-to-edge image.\nIf a reference image is supplied, use it for pixel texture density and restrained shading only; keep the requested indoor subject and enclosed composition.\nAvoid: photorealism, intricate microtexture, dense cracks or hatching, single-pixel speckle, dithering, dramatic spotlights, bloom, soft airbrushed edges, text, watermarks, UI, painted checkerboard, isometric or overhead view, a road receding to a vanishing point, tiny-resolution upscaling, flat featureless polygons, harsh white highlights, vast cave expanses, soaring ceilings, long vanishing-point corridors, characters",
+      "references": [
+        {
+          "image": "../hollow-delve-tunnel-v6/prepared/hollow_delve_depth.png",
+          "sha256": "801fec48209f957a60ec9b10fc45b4ebd0dcba0fde43a9423b66a208e579eb21",
+          "role": "Planned restyling input"
+        }
+      ]
+    },
+    "hollow_delve_wall": {
+      "image": "sources/wall.png",
+      "sha256": "a9bf7df1fb0eb05dc34c1327da459c876e789f305b56bcbcac80c2f02249030c",
+      "prompt_sha256": "322668811d1b517e7e3caa7529db84d919e62ed2c1262ac1a00627ee3393fe81",
+      "backend": "built-in imagegen",
+      "generation_prompt": "Use case: style-transfer\nInput image 1 is the edit target.\nRestyle the supplied game layer to the materials, palette and formations below. Preserve its canvas aspect ratio, orthographic camera, independent layer role, horizontal continuation and overall occupied/empty layout. Replace conflicting surface details and shapes; this is not merely a color tint.\nKeep genuine transparent alpha in empty areas, never a painted checkerboard or matte.\nUse case: stylized-concept\nAsset type: independently scrolling wall layer for a claustrophobic side-scrolling game interior\nPrimary request: Low earthy limestone cave\nMaterials: An ordinary compact underground cave of warm brown limestone, weathered earthen rock, subdued tan sediment bands and dusty cracks. Broad irregular rounded rock masses and shallow ledges, with occasional old brown timber. Natural rock buttresses rather than brick columns or arches. Ceiling: a heavy low gently uneven brown rock shelf; mostly blunt rounded underside, no hanging needles or icicle teeth. No stalagmite forest, dense stalactites, crystals, blue mineral crusts or dramatic fantasy formations.\nComposition: Separate nearer rear-wall layer on genuine transparency. Three irregularly spaced substantial wall piers with low connecting masonry or rock shelves, leaving broad transparent gaps between them to reveal the independently supplied recess layer. Wall piers extend down to logical row 288 of 360 and stay flush to the rear wall. The central action band has subdued material shading. Keep the upper third mostly transparent: the overhead ceiling is a separate asset. No horizon, sky, deep vista, freestanding props or floor strip. No painted dark backdrop in the gaps.\nCamera: strict orthographic side view along a horizontal tunnel, parallel to the image plane. The passage continues sideways off both edges.\nStyle/medium: Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks. Refined material edges and deliberate fine pixel clusters at the Wetlands texture density. Keep local contrast restrained behind actors; distant layers use a narrower value range. Preserve full texture resolution independently of the logical layout. Do not enlarge a coarse pixel grid to create quiet scenery.\nColor palette: Earth brown #554334, umber #382a21, warm charcoal #211b16, dusty warm gray #7d7060, muted tan #95816a and dark old timber #493727. No blue, cyan, teal or purple cast.\nLighting: Dim neutral-to-warm reflected light with soft brown shadows and restrained highlights. A typical earthy underground passage, neither icy nor orange-glowing.\nCanvas: 640 by 360 logical units; generate a large image with width at least 1536 pixels and this aspect ratio.\nTransparency: genuine alpha in all empty areas; never paint checkerboard or a colored matte.\nIf a reference image is supplied, use it for pixel texture density and restrained shading only; keep the requested indoor subject and enclosed composition.\nAvoid: photorealism, intricate microtexture, dense cracks or hatching, single-pixel speckle, dithering, dramatic spotlights, bloom, soft airbrushed edges, text, watermarks, UI, painted checkerboard, isometric or overhead view, a road receding to a vanishing point, tiny-resolution upscaling, flat featureless polygons, harsh white highlights, vast cave expanses, soaring ceilings, long vanishing-point corridors, characters",
+      "references": [
+        {
+          "image": "../hollow-delve-tunnel-v6/prepared/hollow_delve_wall.png",
+          "sha256": "aefb4dadc1ea71113d85a1d96f41efdd512903bbf89ddac495e2aef5bcf9a905",
+          "role": "Planned restyling input"
+        },
+        {
+          "image": "sources/wall-generated.png",
+          "sha256": "102d27c43be313d96f552446a6cea9a16f0b58cc7dbfcc88be15ac4a36c4c990",
+          "role": "Original generation; rejected matte; alpha extraction target"
+        }
+      ],
+      "edits": [
+        {
+          "prompt": "Use case: background-extraction\nUse background removal to extract the brown stonework and timber from this existing image. Remove the checkerboard pixels completely. Return an RGBA PNG file with a transparent background (alpha=0), retaining opaque rock (alpha=255). This is background removal only. Do not redraw, restyle, relight, sharpen, add a backdrop or illustrate a transparency pattern. The current white and gray checkerboard is a painted background that needs removal.",
+          "input": "sources/wall-generated.png",
+          "input_sha256": "102d27c43be313d96f552446a6cea9a16f0b58cc7dbfcc88be15ac4a36c4c990",
+          "output": "sources/wall.png",
+          "output_sha256": "a9bf7df1fb0eb05dc34c1327da459c876e789f305b56bcbcac80c2f02249030c"
+        }
+      ]
+    },
+    "hollow_delve_roof": {
+      "image": "sources/roof.png",
+      "sha256": "380d76dae08bfe8b4f407295b7c88f99d0ebd37fa7a04f55c16a12da45fb7461",
+      "prompt_sha256": "b5b457b42d571bb12826ace681cb154d311e7df73c230736c7df6b5b339aca80",
+      "backend": "built-in imagegen",
+      "generation_prompt": "Use case: style-transfer\nInput image 1 is the edit target.\nRestyle the supplied game layer to the materials, palette and formations below. Preserve its canvas aspect ratio, orthographic camera, independent layer role, horizontal continuation and overall occupied/empty layout. Replace conflicting surface details and shapes; this is not merely a color tint.\nKeep genuine transparent alpha in empty areas, never a painted checkerboard or matte.\nUse case: stylized-concept\nAsset type: independently scrolling roof layer for a claustrophobic side-scrolling game interior\nPrimary request: Low earthy limestone cave\nMaterials: An ordinary compact underground cave of warm brown limestone, weathered earthen rock, subdued tan sediment bands and dusty cracks. Broad irregular rounded rock masses and shallow ledges, with occasional old brown timber. Natural rock buttresses rather than brick columns or arches. Ceiling: a heavy low gently uneven brown rock shelf; mostly blunt rounded underside, no hanging needles or icicle teeth. No stalagmite forest, dense stalactites, crystals, blue mineral crusts or dramatic fantasy formations.\nComposition: A continuous heavy low overhead ceiling strip seen strictly from the side. WIDE 8:3 image, intended 2048 by 768 or equivalent. Solid material occupies the entire upper edge and roughly the upper two thirds, ending in an irregular but mostly horizontal underside with a few short downward projections. All material is physically connected to the top; the lower third is genuinely transparent empty air. A narrow dark nearly uniform top band blends into the solid ceiling fill. Compatible left and right edges for horizontal mirror repetition. No floor, columns reaching the bottom, detached rocks, characters, sky, windows, complete cavern or wall backdrop. This is a close tunnel roof cutout, not an entire scene.\nCamera: strict orthographic side view along a horizontal tunnel, parallel to the image plane. The passage continues sideways off both edges.\nStyle/medium: Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks. Refined material edges and deliberate fine pixel clusters at the Wetlands texture density. Keep local contrast restrained behind actors; distant layers use a narrower value range. Preserve full texture resolution independently of the logical layout. Do not enlarge a coarse pixel grid to create quiet scenery.\nColor palette: Earth brown #554334, umber #382a21, warm charcoal #211b16, dusty warm gray #7d7060, muted tan #95816a and dark old timber #493727. No blue, cyan, teal or purple cast.\nLighting: Dim neutral-to-warm reflected light with soft brown shadows and restrained highlights. A typical earthy underground passage, neither icy nor orange-glowing.\nCanvas: 640 by 240 logical units; generate a large image with width at least 1536 pixels and this aspect ratio.\nTransparency: genuine alpha in all empty areas; never paint checkerboard or a colored matte.\nIf a reference image is supplied, use it for pixel texture density and restrained shading only; keep the requested indoor subject and enclosed composition.\nAvoid: photorealism, intricate microtexture, dense cracks or hatching, single-pixel speckle, dithering, dramatic spotlights, bloom, soft airbrushed edges, text, watermarks, UI, painted checkerboard, isometric or overhead view, a road receding to a vanishing point, tiny-resolution upscaling, flat featureless polygons, harsh white highlights, vast cave expanses, soaring ceilings, long vanishing-point corridors, characters",
+      "references": [
+        {
+          "image": "../hollow-delve-tunnel-v6/prepared/hollow_delve_roof.png",
+          "sha256": "b9553dc3437dcc04ff7535a2e603218cf1d49288553677b42d7eeea7ab18f4a6",
+          "role": "Planned restyling input"
+        },
+        {
+          "image": "sources/roof-generated.png",
+          "sha256": "a14f42f027740348a7e81a7e43773b47d7c223671e5ea97dfbf6559f605d9561",
+          "role": "Original generation; rejected matte; alpha extraction target"
+        }
+      ],
+      "edits": [
+        {
+          "prompt": "Use case: background-extraction\nUse background removal to extract the brown stonework and timber from this existing image. Remove the checkerboard pixels completely. Return an RGBA PNG file with a transparent background (alpha=0), retaining opaque rock (alpha=255). This is background removal only. Do not redraw, restyle, relight, sharpen, add a backdrop or illustrate a transparency pattern. The current white and gray checkerboard is a painted background that needs removal.",
+          "input": "sources/roof-generated.png",
+          "input_sha256": "a14f42f027740348a7e81a7e43773b47d7c223671e5ea97dfbf6559f605d9561",
+          "output": "sources/roof.png",
+          "output_sha256": "380d76dae08bfe8b4f407295b7c88f99d0ebd37fa7a04f55c16a12da45fb7461"
+        }
+      ]
+    }
+  }
+}

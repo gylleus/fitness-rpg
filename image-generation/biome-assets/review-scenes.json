@@ -1,0 +1,8 @@
+[
+  {"title": "Wetlands", "image": "landscape-encounter.png"},
+  {"title": "Hollow Delve", "image": "hollow-delve-landscape-delve_dwarf.png"},
+  {"title": "Lava caves", "image": "lava_caves-landscape.png"},
+  {"title": "Frost caves", "image": "frost_caves-landscape.png"},
+  {"title": "Crypts", "image": "crypts-landscape.png"},
+  {"title": "Fortress", "image": "fortress-landscape.png"}
+]

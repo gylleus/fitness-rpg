@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/thawless_grasp.png",
   "source_sha256": "25898b4c62759c94ce5cf87fce439792aa5b310d34210477a57294d8e31f1d4a",
   "icon": "assets/items/thawless_grasp.png",
-  "icon_sha256": "3c1428662417dc4cec3159f4ccf5add5c5c7bb2c42f951862f98a7d5b3037ec0",
+  "icon_sha256": "816fb95637a603297aec6d50be574becf065b70e183ccb5cd5af2e6b99b7c01e",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Thawless Grasp. Thick blue-white ice plates are trapped in a black iron frame over heavy gloves. Broad dark fingertips remain exposed, and gray fur seals the deep wrist openings.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Thawless Grasp. Thick blue-white ice plates are trapped in a black iron frame over heavy gloves. Broad dark fingertips remain exposed, and gray fur seals the deep wrist openings.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/thawless_grasp.png",
+    "source_sha256": "3c1428662417dc4cec3159f4ccf5add5c5c7bb2c42f951862f98a7d5b3037ec0",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "816fb95637a603297aec6d50be574becf065b70e183ccb5cd5af2e6b99b7c01e",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

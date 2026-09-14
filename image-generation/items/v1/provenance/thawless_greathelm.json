@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/thawless_greathelm.png",
   "source_sha256": "68e8a34e5dfaccc06a07980ea49d59d76012c0978d3b4d7d78b819c131345747",
   "icon": "assets/items/thawless_greathelm.png",
-  "icon_sha256": "1fd946b450616b5b5f7ee844ab4e09d194aafb96b29b5de03f4508fefd49d29c",
+  "icon_sha256": "dd027c542bde8e6202ae02e39b173c9cd9fb1e4875774bccd4a89e4c58087388",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Thawless Greathelm. A broad cylindrical steel helm has a flat frozen crown and a narrow cross-shaped face opening. Blue ice fills dents at the temples above a thick dark fur neck seal.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Thawless Greathelm. A broad cylindrical steel helm has a flat frozen crown and a narrow cross-shaped face opening. Blue ice fills dents at the temples above a thick dark fur neck seal.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/thawless_greathelm.png",
+    "source_sha256": "1fd946b450616b5b5f7ee844ab4e09d194aafb96b29b5de03f4508fefd49d29c",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "dd027c542bde8e6202ae02e39b173c9cd9fb1e4875774bccd4a89e4c58087388",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

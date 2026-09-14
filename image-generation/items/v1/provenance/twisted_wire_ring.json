@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/twisted_wire_ring.png",
   "source_sha256": "c0c4fed3afc4908c049424f01e547ca9671e34e3fa3aeb9c6f9fe825e64c8581",
   "icon": "assets/items/twisted_wire_ring.png",
-  "icon_sha256": "f16e46722cc19d186802a46314ec15ae434ba3a25f60c09e6feeede82408d479",
+  "icon_sha256": "ed0d2f01c13d32cbf51616af4c29e4e78303cd82f7af0a2d76e19e59ad09a9a9",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Twisted Wire Ring. Three uneven strands of dark copper wire twist into a thick finger ring. One strand ends in a small flattened knot, and the inner circle is polished bright by wear.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Twisted Wire Ring. Three uneven strands of dark copper wire twist into a thick finger ring. One strand ends in a small flattened knot, and the inner circle is polished bright by wear.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/twisted_wire_ring.png",
+    "source_sha256": "f16e46722cc19d186802a46314ec15ae434ba3a25f60c09e6feeede82408d479",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "ed0d2f01c13d32cbf51616af4c29e4e78303cd82f7af0a2d76e19e59ad09a9a9",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

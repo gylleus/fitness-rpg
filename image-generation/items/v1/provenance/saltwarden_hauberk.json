@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/saltwarden_hauberk.png",
   "source_sha256": "ea4a8083ba57be145439f2e5a32ae86aa15cf371e53bfe6d73dc6b196798aa11",
   "icon": "assets/items/saltwarden_hauberk.png",
-  "icon_sha256": "00e58444b1ddb25fe7380d87539ead15c4e4e2232f21a5ed9a790d4b188b0842",
+  "icon_sha256": "4e14f086f23878e6b9c95e6b3d96c33ff4dd035bc861bb4eec2d9993894e3d33",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Saltwarden Hauberk. A long silver-gray ring shirt hangs beneath a heavy teal leather shoulder yoke. White salt crust interrupts the lower rings, and a broad weathered belt pulls the waist slightly askew.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Saltwarden Hauberk. A long silver-gray ring shirt hangs beneath a heavy teal leather shoulder yoke. White salt crust interrupts the lower rings, and a broad weathered belt pulls the waist slightly askew.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/saltwarden_hauberk.png",
+    "source_sha256": "00e58444b1ddb25fe7380d87539ead15c4e4e2232f21a5ed9a790d4b188b0842",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "4e14f086f23878e6b9c95e6b3d96c33ff4dd035bc861bb4eec2d9993894e3d33",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

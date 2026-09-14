@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "biome_id": "fortress",
+  "alpha_threshold": 128,
+  "max_prop_edge": 240,
+  "atlas_width": 1024,
+  "padding": 2,
+  "definitions": [
+    {
+      "id": "fortress_supply_barrel",
+      "name": "Iron-hooped wooden supply barrel",
+      "height_scale": 0.55,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.55
+      }
+    },
+    {
+      "id": "fortress_supply_crates",
+      "name": "Two squat stacked military supply crates",
+      "height_scale": 0.65,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.65
+      }
+    },
+    {
+      "id": "fortress_weapon_rack",
+      "name": "Grounded wooden rack with a spear, axe and sword",
+      "height_scale": 1.0,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 1.0
+      }
+    },
+    {
+      "id": "fortress_shield_stand",
+      "name": "Wooden stand carrying two battered unmarked shields",
+      "height_scale": 0.85,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.85
+      }
+    },
+    {
+      "id": "fortress_standing_brazier",
+      "name": "Heavy standing iron brazier with subdued glowing coals",
+      "height_scale": 0.9,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.9
+      }
+    },
+    {
+      "id": "fortress_masonry_rubble",
+      "name": "Low pile of broken dressed stone and mortar",
+      "height_scale": 0.4,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.4
+      }
+    },
+    {
+      "id": "fortress_strongbox",
+      "name": "Closed military strongbox with iron straps",
+      "height_scale": 0.5,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.5
+      }
+    },
+    {
+      "id": "fortress_banner_stand",
+      "name": "Short freestanding banner pole on a heavy base with a plain faded burgundy pennant, no emblem",
+      "height_scale": 1.15,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 1.15
+      }
+    }
+  ],
+  "sheets": [
+    {
+      "image": "../../prepared/fortress_decorations.png",
+      "sha256": "c98976ac3fab056582ea66665772451e7f129aa319b2bd44b6b35adf475b49a1",
+      "prompt_file": "prompt.txt",
+      "columns": 4,
+      "rows": 2,
+      "props": [
+        "fortress_supply_barrel",
+        "fortress_supply_crates",
+        "fortress_weapon_rack",
+        "fortress_shield_stand",
+        "fortress_standing_brazier",
+        "fortress_masonry_rubble",
+        "fortress_strongbox",
+        "fortress_banner_stand"
+      ]
+    }
+  ]
+}

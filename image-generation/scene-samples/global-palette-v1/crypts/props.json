@@ -1,0 +1,356 @@
+{
+  "schema_version": 1,
+  "biome_id": "crypts",
+  "image": "props.png",
+  "size": [
+    1024,
+    100
+  ],
+  "pixel_profile": {
+    "schema_version": 1,
+    "pixels_per_unit": 1.5,
+    "reference_height": 64,
+    "background_colors": 32,
+    "ground_colors": 32,
+    "prop_colors": 32,
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    }
+  },
+  "sha256": "05e267b3a4259936569a5d5ddb5e202425d711680174885d100ae8287f1e6996",
+  "padding": 2,
+  "props": {
+    "crypts_sarcophagus": {
+      "name": "Low closed weathered stone sarcophagus",
+      "anchor": [
+        65.0,
+        62
+      ],
+      "height_scale": 0.65,
+      "pixels_per_unit": 1.4903846153846154,
+      "pixels_sha256": "656062f68443db7df8dc61c1b201b76422ed470c630b0d99b1767093cdd2e79a",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/crypts/review/prop-recipe/../../prepared/crypts_decorations.png",
+        "sha256": "ea339baa52ae9e737e6a50789817b3e810efaf03af818de7be6df8611656f963",
+        "cell": [
+          12,
+          134,
+          470,
+          374
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          20,
+          20,
+          438,
+          220
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          130,
+          62
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 238,
+        "y": 2,
+        "width": 130,
+        "height": 62
+      }
+    },
+    "crypts_funerary_urn": {
+      "name": "Dusty funerary urn with a chipped lid",
+      "anchor": [
+        13.0,
+        43
+      ],
+      "height_scale": 0.45,
+      "pixels_per_unit": 1.4930555555555556,
+      "pixels_sha256": "f6792923d619dc5bcdb29c954b7a0e4c875941fa565d5e3fc08ade39a27ebfe8",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/crypts/review/prop-recipe/../../prepared/crypts_decorations.png",
+        "sha256": "ea339baa52ae9e737e6a50789817b3e810efaf03af818de7be6df8611656f963",
+        "cell": [
+          558,
+          49,
+          782,
+          396
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          20,
+          20,
+          204,
+          327
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          26,
+          43
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 464,
+        "y": 2,
+        "width": 26,
+        "height": 43
+      }
+    },
+    "crypts_candle_plinth": {
+      "name": "Short stone plinth carrying three melted candles with tiny subdued flames",
+      "anchor": [
+        30.0,
+        82
+      ],
+      "height_scale": 0.85,
+      "pixels_per_unit": 1.5073529411764706,
+      "pixels_sha256": "0ba59ae44106cc327197a7e94151d1fad6bd3c812cfeeefc2c7770b47ece2537",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/crypts/review/prop-recipe/../../prepared/crypts_decorations.png",
+        "sha256": "ea339baa52ae9e737e6a50789817b3e810efaf03af818de7be6df8611656f963",
+        "cell": [
+          971,
+          43,
+          1248,
+          405
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          20,
+          20,
+          257,
+          342
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          60,
+          82
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 59,
+        "y": 2,
+        "width": 60,
+        "height": 82
+      }
+    },
+    "crypts_bone_heap": {
+      "name": "Small old skull and bone heap",
+      "anchor": [
+        31.0,
+        34
+      ],
+      "height_scale": 0.35,
+      "pixels_per_unit": 1.517857142857143,
+      "pixels_sha256": "88b4ebe12c0fac24a33cdee7e7ebc4af326fe716308da5f036887c5055be5127",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/crypts/review/prop-recipe/../../prepared/crypts_decorations.png",
+        "sha256": "ea339baa52ae9e737e6a50789817b3e810efaf03af818de7be6df8611656f963",
+        "cell": [
+          1341,
+          142,
+          1767,
+          392
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          20,
+          20,
+          406,
+          230
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          62,
+          34
+        ],
+        "removed_detached_pixels": 0,
+        "components": 2
+      },
+      "frame": {
+        "x": 494,
+        "y": 2,
+        "width": 62,
+        "height": 34
+      }
+    },
+    "crypts_broken_statue": {
+      "name": "Broken hooded funerary statue on a grounded pedestal, no living figure",
+      "anchor": [
+        26.5,
+        96
+      ],
+      "height_scale": 1.0,
+      "pixels_per_unit": 1.5,
+      "pixels_sha256": "4c2f55eb7060dff1ccac89e38af5a7c11020f3e00d5545880cba97ea536f651b",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/crypts/review/prop-recipe/../../prepared/crypts_decorations.png",
+        "sha256": "ea339baa52ae9e737e6a50789817b3e810efaf03af818de7be6df8611656f963",
+        "cell": [
+          99,
+          418,
+          368,
+          873
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          20,
+          20,
+          249,
+          435
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          53,
+          96
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 2,
+        "y": 2,
+        "width": 53,
+        "height": 96
+      }
+    },
+    "crypts_coffin_lid": {
+      "name": "Cracked stone coffin lid propped securely against a low rubble base",
+      "anchor": [
+        33.0,
+        62
+      ],
+      "height_scale": 0.65,
+      "pixels_per_unit": 1.4903846153846154,
+      "pixels_sha256": "5e60f17efdf415c4cc38f7dc23986a7b6a4103804d67b3947d3c4b43fee1cbbe",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/crypts/review/prop-recipe/../../prepared/crypts_decorations.png",
+        "sha256": "ea339baa52ae9e737e6a50789817b3e810efaf03af818de7be6df8611656f963",
+        "cell": [
+          498,
+          483,
+          885,
+          853
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          20,
+          20,
+          367,
+          350
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          66,
+          62
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 168,
+        "y": 2,
+        "width": 66,
+        "height": 62
+      }
+    },
+    "crypts_iron_lamp": {
+      "name": "Old standing iron oil lamp with a restrained dull flame",
+      "anchor": [
+        20.5,
+        82
+      ],
+      "height_scale": 0.85,
+      "pixels_per_unit": 1.5073529411764706,
+      "pixels_sha256": "4bcacecc06be8c7435d385619be0e10c56a7344bbd543b242859ef831fce6f83",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/crypts/review/prop-recipe/../../prepared/crypts_decorations.png",
+        "sha256": "ea339baa52ae9e737e6a50789817b3e810efaf03af818de7be6df8611656f963",
+        "cell": [
+          986,
+          429,
+          1226,
+          869
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          20,
+          20,
+          220,
+          420
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          41,
+          82
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 123,
+        "y": 2,
+        "width": 41,
+        "height": 82
+      }
+    },
+    "crypts_burial_chest": {
+      "name": "Small decayed iron-bound burial chest",
+      "anchor": [
+        44.0,
+        53
+      ],
+      "height_scale": 0.55,
+      "pixels_per_unit": 1.5056818181818181,
+      "pixels_sha256": "dc73a22b0bc2a56ecfcee7ccaaa8d61159482691474324b3a85d87a1d13ade5a",
+      "source": {
+        "image": "image-generation/scene-samples/interior-biomes-v1/crypts/review/prop-recipe/../../prepared/crypts_decorations.png",
+        "sha256": "ea339baa52ae9e737e6a50789817b3e810efaf03af818de7be6df8611656f963",
+        "cell": [
+          1366,
+          594,
+          1736,
+          831
+        ],
+        "alpha_threshold": 128,
+        "source_trim": [
+          20,
+          20,
+          350,
+          217
+        ],
+        "reduced_trim": [
+          0,
+          0,
+          88,
+          53
+        ],
+        "removed_detached_pixels": 0,
+        "components": 1
+      },
+      "frame": {
+        "x": 372,
+        "y": 2,
+        "width": 88,
+        "height": 53
+      }
+    }
+  }
+}

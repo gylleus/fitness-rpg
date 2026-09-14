@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/bogwatch_cuirass.png",
   "source_sha256": "3dd31675450492e1fa72ed9eff55507b55da82ce6ced0055174ca139b088f434",
   "icon": "assets/items/bogwatch_cuirass.png",
-  "icon_sha256": "2f4ecd72e68bfce4cc4606212cc0d5b51d85f70578b532512bc9dccec0923071",
+  "icon_sha256": "f5b54bbe0062820d92104c67393d5f9aa0f721dfef10e0c0759ec209c0216e43",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Bogwatch Cuirass. A dull iron breastplate has a swollen rounded chest and a short skirt of three hanging plates. Green water stains trail from the shoulder rivets over a torn brown leather backing.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Bogwatch Cuirass. A dull iron breastplate has a swollen rounded chest and a short skirt of three hanging plates. Green water stains trail from the shoulder rivets over a torn brown leather backing.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/bogwatch_cuirass.png",
+    "source_sha256": "2f4ecd72e68bfce4cc4606212cc0d5b51d85f70578b532512bc9dccec0923071",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "f5b54bbe0062820d92104c67393d5f9aa0f721dfef10e0c0759ec209c0216e43",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

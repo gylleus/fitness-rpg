@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/ditch_blade.png",
   "source_sha256": "5c771cb25b5384b33cfc170d1088ae540477bb13d45a799b908568f2761dcf3e",
   "icon": "assets/items/ditch_blade.png",
-  "icon_sha256": "39df205dc3c1842faf24ac61b18b2a700f1d5823413a8973da1d55ad70435c4c",
+  "icon_sha256": "0f60fbea609717805ff04ab3d18e48b74748c29f8e2c49d1d834a9c56bb80594",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Ditch Blade. A short broad iron sword has a crooked tip and a deep notch near the middle. Its plain crossguard bends forward on one side, and muddy cloth binds the exposed wooden tang.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Ditch Blade. A short broad iron sword has a crooked tip and a deep notch near the middle. Its plain crossguard bends forward on one side, and muddy cloth binds the exposed wooden tang.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/ditch_blade.png",
+    "source_sha256": "39df205dc3c1842faf24ac61b18b2a700f1d5823413a8973da1d55ad70435c4c",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "0f60fbea609717805ff04ab3d18e48b74748c29f8e2c49d1d834a9c56bb80594",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

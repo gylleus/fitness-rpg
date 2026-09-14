@@ -1,5 +1,10 @@
 # Reusable local sprite pipeline
 
+For biome backgrounds, ground, props and enemy prompt planning, start with the
+[shared biome asset guide](../biome-assets/README.md). For current generated enemy
+sheets, use [the authored-sheet importer](AUTHORED_SHEETS.md) through
+`uv run sprites import-sheets --recipe PATH --out DIRECTORY`.
+
 See [Python setup](../PYTHON.md) for Linux/CUDA and Apple Silicon/MPS runtimes.
 Mac animation uses separately converted FP16 experts; Linux retains its FP8
 weights. The same commands handle reference generation, processing and export.

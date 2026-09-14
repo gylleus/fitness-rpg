@@ -65,6 +65,18 @@ class RuntimeAssetsTests(unittest.TestCase):
             self.assertEqual((output/"catalog.json").read_text(), "keep existing package")
             self.assertFalse((root/"generated.ts").exists())
 
+    def test_off_palette_atlas_fails_before_publishing(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.fixture(root)
+            path = root / "export/idle/nearest/spritesheet.png"
+            image = Image.open(path).convert("RGBA")
+            image.putpixel((0, 0), (1, 2, 3, 1))
+            image.save(path)
+            with self.assertRaisesRegex(ValueError, "outside ENDESGA 32"):
+                bundle(root / "bundle.json", root / "game", root / "generated.ts")
+            self.assertFalse((root / "game").exists())
+
     def test_rebundle_preserves_existing_encoding_and_updates_changed_pixels(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

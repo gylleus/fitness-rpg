@@ -1,0 +1,34 @@
+[
+  {
+    "biome": "lava_caves",
+    "decorations": 8,
+    "viewports": 3,
+    "sceneryToggles": 5,
+    "offline": true,
+    "browserErrors": 0
+  },
+  {
+    "biome": "frost_caves",
+    "decorations": 8,
+    "viewports": 3,
+    "sceneryToggles": 5,
+    "offline": true,
+    "browserErrors": 0
+  },
+  {
+    "biome": "crypts",
+    "decorations": 8,
+    "viewports": 3,
+    "sceneryToggles": 5,
+    "offline": true,
+    "browserErrors": 0
+  },
+  {
+    "biome": "fortress",
+    "decorations": 8,
+    "viewports": 3,
+    "sceneryToggles": 5,
+    "offline": true,
+    "browserErrors": 0
+  }
+]

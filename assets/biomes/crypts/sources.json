@@ -1,0 +1,213 @@
+{
+  "depth": {
+    "id": "crypts_depth",
+    "source": "image-generation/scene-samples/interior-biomes-v1/crypts/sources/crypts_depth.png",
+    "source_sha256": "935e533b020b5bc77a9ea0953b35839518668ae8eb0f058142b47568709e5ecd",
+    "sha256": "83c3b517d6d067e496942eec45d52018e72c7f5216c489d08ed10aa280bf7304",
+    "size": [
+      960,
+      540
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "40f1625ce3afca8e63412e84ba17485b45ee14c0066b78f114e2ecb2a7fdb4fb",
+    "export": {
+      "palette": {
+        "file": "assets/palette.json",
+        "name": "ENDESGA 32",
+        "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+        "metric": "ciede2000",
+        "dither": "none"
+      },
+      "resolution": "world",
+      "sampling": "nearest",
+      "reduction": "area",
+      "dither": "none",
+      "colors": 32,
+      "pixel_profile": {
+        "schema_version": 1,
+        "pixels_per_unit": 1.5,
+        "reference_height": 64,
+        "background_colors": 32,
+        "ground_colors": 32,
+        "prop_colors": 32,
+        "palette": {
+          "file": "assets/palette.json",
+          "name": "ENDESGA 32",
+          "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+          "metric": "ciede2000",
+          "dither": "none"
+        }
+      },
+      "alpha": "opaque"
+    },
+    "canvas": [
+      640,
+      360
+    ]
+  },
+  "wall": {
+    "id": "crypts_wall",
+    "source": "image-generation/scene-samples/interior-biomes-v1/crypts/sources/crypts_wall.png",
+    "source_sha256": "61580bf4c139b1008cc9e60a28355eab9b360522d4f6b443076cba0935c1958c",
+    "sha256": "ef5741d57b9b379f13e77a9af8f46028245405cbe3846bdb238c165edd7c80da",
+    "size": [
+      960,
+      540
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "e35cb911e3cfa5efea36b8fe104e05f51b06b8b390515e460b6ee86170a95931",
+    "export": {
+      "palette": {
+        "file": "assets/palette.json",
+        "name": "ENDESGA 32",
+        "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+        "metric": "ciede2000",
+        "dither": "none"
+      },
+      "resolution": "world",
+      "sampling": "nearest",
+      "reduction": "area",
+      "dither": "none",
+      "colors": 32,
+      "pixel_profile": {
+        "schema_version": 1,
+        "pixels_per_unit": 1.5,
+        "reference_height": 64,
+        "background_colors": 32,
+        "ground_colors": 32,
+        "prop_colors": 32,
+        "palette": {
+          "file": "assets/palette.json",
+          "name": "ENDESGA 32",
+          "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+          "metric": "ciede2000",
+          "dither": "none"
+        }
+      },
+      "alpha": "binary"
+    },
+    "canvas": [
+      640,
+      360
+    ]
+  },
+  "roof": {
+    "id": "crypts_roof",
+    "source": "image-generation/scene-samples/interior-biomes-v1/crypts/sources/crypts_roof.png",
+    "source_sha256": "b5433228d44b69455abc87989bee8d0b5fe7626b6b7008e7507dcad79f1b40a9",
+    "sha256": "d52f0869dfd88b7fdc77b54b442e66d24735c6edd403ef0bc6cc74dc4f8adafa",
+    "size": [
+      960,
+      360
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "45d9f9f73f584c0650d0eda43ce1a56be056b0cd2f9cf191018b86808180a870",
+    "export": {
+      "palette": {
+        "file": "assets/palette.json",
+        "name": "ENDESGA 32",
+        "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+        "metric": "ciede2000",
+        "dither": "none"
+      },
+      "resolution": "world",
+      "sampling": "nearest",
+      "reduction": "area",
+      "dither": "none",
+      "colors": 32,
+      "pixel_profile": {
+        "schema_version": 1,
+        "pixels_per_unit": 1.5,
+        "reference_height": 64,
+        "background_colors": 32,
+        "ground_colors": 32,
+        "prop_colors": 32,
+        "palette": {
+          "file": "assets/palette.json",
+          "name": "ENDESGA 32",
+          "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+          "metric": "ciede2000",
+          "dither": "none"
+        }
+      },
+      "alpha": "binary"
+    },
+    "canvas": [
+      640,
+      240
+    ]
+  },
+  "ground": {
+    "id": "crypts_ground",
+    "source": "image-generation/scene-samples/interior-biomes-v1/crypts/sources/crypts_ground.png",
+    "source_sha256": "937520464adfbe27a7830a2d2cadea2528ce438327f8e1fb643b0fbac58cdaeb",
+    "sha256": "4b58024b2f4cbbef4ad8a920ecb8c22af976043958cde0edf96872625b15ebc7",
+    "size": [
+      384,
+      144
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "d36220696f3f3582d4c00f661469371925d02d798d1349ad48c56159c9019755",
+    "export": {
+      "palette": {
+        "file": "assets/palette.json",
+        "name": "ENDESGA 32",
+        "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+        "metric": "ciede2000",
+        "dither": "none"
+      },
+      "resolution": "world",
+      "sampling": "nearest",
+      "reduction": "area",
+      "dither": "none",
+      "colors": 32,
+      "pixel_profile": {
+        "schema_version": 1,
+        "pixels_per_unit": 1.5,
+        "reference_height": 64,
+        "background_colors": 32,
+        "ground_colors": 32,
+        "prop_colors": 32,
+        "palette": {
+          "file": "assets/palette.json",
+          "name": "ENDESGA 32",
+          "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+          "metric": "ciede2000",
+          "dither": "none"
+        }
+      },
+      "alpha": "binary"
+    },
+    "canvas": [
+      256,
+      96
+    ],
+    "surface_y": 49.333333333333336
+  },
+  "props": {
+    "id": "crypts_prop_atlas",
+    "source": "image-generation/scene-samples/interior-biomes-v1/crypts/review/prop-recipe/recipe.json",
+    "source_sha256": "4de7eebb5821f610ccdc66445a889c9b1c17cca1b8e88e1fa3fd78801b2bafa1",
+    "sha256": "05e267b3a4259936569a5d5ddb5e202425d711680174885d100ae8287f1e6996",
+    "size": [
+      1024,
+      100
+    ],
+    "pixel_profile": {
+      "schema_version": 1,
+      "pixels_per_unit": 1.5,
+      "reference_height": 64,
+      "background_colors": 32,
+      "ground_colors": 32,
+      "prop_colors": 32,
+      "palette": {
+        "file": "assets/palette.json",
+        "name": "ENDESGA 32",
+        "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+        "metric": "ciede2000",
+        "dither": "none"
+      }
+    },
+    "backend": "built-in imagegen; actor-scale cutouts in one atlas"
+  }
+}

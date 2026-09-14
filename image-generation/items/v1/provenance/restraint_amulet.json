@@ -5,7 +5,7 @@
   "original": "image-generation/items/v1/sources/restraint_amulet.png",
   "source_sha256": "284d3a98019a0a5ebe978ced1b7a7b3ce7955efc0ace1b8d1d20de05b0010a79",
   "icon": "assets/items/restraint_amulet.png",
-  "icon_sha256": "ee07e3d3e75a56ba53ad2844ca55c017bbeaade86aae87c509965ad84e8119ac",
+  "icon_sha256": "9a508d7a8b39c078dc428e5194a13b0bd0fb1eb097bf5e95033b88f21dc79acb",
   "target": [
     64,
     64
@@ -17,5 +17,23 @@
     "source_sha256": "284d3a98019a0a5ebe978ced1b7a7b3ce7955efc0ace1b8d1d20de05b0010a79",
     "icon_sha256": "389721a9aaa609e9d4af36349c6c1295fb1ba44d503dd1ca3e1c3d4739c31b1b",
     "reason": "Replaced after visual and pixel-boundary review"
+  },
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/restraint_amulet.png",
+    "source_sha256": "ee07e3d3e75a56ba53ad2844ca55c017bbeaade86aae87c509965ad84e8119ac",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "9a508d7a8b39c078dc428e5194a13b0bd0fb1eb097bf5e95033b88f21dc79acb",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
   }
 }

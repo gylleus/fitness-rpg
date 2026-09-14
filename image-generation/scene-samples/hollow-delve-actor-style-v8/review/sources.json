@@ -1,0 +1,153 @@
+{
+  "slate_path": {
+    "id": "hollow_delve_slate_path",
+    "source": "image-generation/scene-samples/hollow-delve-earth-v7/sources/ground.png",
+    "source_sha256": "37efcb53be50eabf67aff861b8d38a56c3eb0bf8268f5ebd30ef52e55c885d58",
+    "sha256": "5e64746a71e0faadff6c9aeddcc696a50c9e0421a2d8ef3b26b018efee54d766",
+    "size": [
+      384,
+      144
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "8543a87cc6a995efb5c576381fbd0c1c3e9df36ae44178ffbdabfbb77e76e168",
+    "export": {
+      "resolution": "world",
+      "sampling": "nearest",
+      "reduction": "area",
+      "dither": "none",
+      "colors": 32,
+      "pixel_profile": {
+        "schema_version": 1,
+        "pixels_per_unit": 1.5,
+        "reference_height": 64,
+        "background_colors": 48,
+        "ground_colors": 32,
+        "prop_colors": 32
+      },
+      "alpha": "binary"
+    },
+    "canvas": [
+      256,
+      96
+    ],
+    "surface_y": 41.333333333333336
+  },
+  "props": {
+    "id": "hollow_delve_prop_atlas",
+    "source": "image-generation/scene-samples/biome-props-v2/hollow_delve/recipe.json",
+    "source_sha256": "a178bb1df5e71b46c82c7708ab41ca0a10a12bc63149c486364b6bb7fc93f845",
+    "sha256": "e300717ac1e58a8bccc18ff75f1b326d42dbee9da97241eb2da4d5e63e0b2e6c",
+    "size": [
+      2048,
+      300
+    ],
+    "pixel_profile": {
+      "schema_version": 1,
+      "pixels_per_unit": 1.5,
+      "reference_height": 64,
+      "background_colors": 48,
+      "ground_colors": 32,
+      "prop_colors": 32
+    },
+    "backend": "built-in imagegen; actor-scale cutouts in one atlas"
+  },
+  "depth": {
+    "id": "hollow_delve_depth",
+    "source": "image-generation/scene-samples/hollow-delve-actor-style-v8/sources/depth.png",
+    "source_sha256": "a2530001bac5cc42d0403d8312a9e5ccb0a326ace9381eda3d59fc4d1fb5e388",
+    "sha256": "a253b71cc740b7a61e227a29834122b30acf2ea609123aedde0853c7c5dea4e1",
+    "size": [
+      960,
+      540
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "dae21c636054d4adab6fec7a8782b9fa0a8189834b61593e282d95d4dbe740d3",
+    "export": {
+      "resolution": "world",
+      "sampling": "nearest",
+      "reduction": "area",
+      "dither": "none",
+      "colors": 48,
+      "pixel_profile": {
+        "schema_version": 1,
+        "pixels_per_unit": 1.5,
+        "reference_height": 64,
+        "background_colors": 48,
+        "ground_colors": 32,
+        "prop_colors": 32
+      },
+      "min_width": 1536,
+      "alpha": "opaque"
+    },
+    "canvas": [
+      640,
+      360
+    ]
+  },
+  "wall": {
+    "id": "hollow_delve_wall",
+    "source": "image-generation/scene-samples/hollow-delve-actor-style-v8/sources/wall.png",
+    "source_sha256": "48b5973b70be38749325da8dff1a519a5f0e438fde9d902b8a7b6678e306feca",
+    "sha256": "fe9a856f06445803eff86f5ee7870200bfd011c1be6c056c83f352b83975c93d",
+    "size": [
+      960,
+      540
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "b56c1da7095cacdee7315227bb2d14f3f0dfb7332ab178a008d4a9e4b20ac1d4",
+    "export": {
+      "resolution": "world",
+      "sampling": "nearest",
+      "reduction": "area",
+      "dither": "none",
+      "colors": 48,
+      "pixel_profile": {
+        "schema_version": 1,
+        "pixels_per_unit": 1.5,
+        "reference_height": 64,
+        "background_colors": 48,
+        "ground_colors": 32,
+        "prop_colors": 32
+      },
+      "min_width": 1536,
+      "alpha": "binary"
+    },
+    "canvas": [
+      640,
+      360
+    ]
+  },
+  "roof": {
+    "id": "hollow_delve_roof",
+    "source": "image-generation/scene-samples/hollow-delve-actor-style-v8/sources/roof.png",
+    "source_sha256": "44b558d81078ff080d735fd289875ff372ebc7803df76b7e35f1661d5f7ad795",
+    "sha256": "c0695b6dce0dabfdfe884ab2dbe5486044d7ff3a56c9f514ae3cdb2d7cc90143",
+    "size": [
+      960,
+      360
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "50303f9f1c8008395e206528398870c4db275ef2e8fec308e62533128bf7c915",
+    "export": {
+      "resolution": "world",
+      "sampling": "nearest",
+      "reduction": "area",
+      "dither": "none",
+      "colors": 48,
+      "pixel_profile": {
+        "schema_version": 1,
+        "pixels_per_unit": 1.5,
+        "reference_height": 64,
+        "background_colors": 48,
+        "ground_colors": 32,
+        "prop_colors": 32
+      },
+      "min_width": 1536,
+      "alpha": "binary"
+    },
+    "canvas": [
+      640,
+      240
+    ]
+  }
+}

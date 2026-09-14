@@ -40,15 +40,15 @@ if (replacementPrompt !== null) {
     icon_sha256: previous.icon_sha256, reason: 'Replaced after visual and pixel-boundary review' };
 }
 fs.copyFileSync(source, original);
-// Export sizing only: preserve source colors/alpha and use nearest-neighbor
-// sampling. No matting, painted backgrounds, palette invention or art edits.
-execFileSync('convert', [original, ...(fitContent ? ['-trim', '+repage'] : []), '-filter', 'Point', '-resize', fitContent ? '56x56' : '64x64', '-background', 'none',
-  '-gravity', 'center', '-extent', '64x64', `PNG32:${destination}`]);
+// The shared exporter preserves the source and maps the sized icon to the master palette.
+const paletteExport = JSON.parse(execFileSync('uv', ['run', 'sprite-python', 'scripts/export_static_asset.py',
+  original, destination, '--icon', ...(fitContent ? ['--fit-content'] : [])], { cwd: root, encoding: 'utf8' }));
 const hash = file => createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 fs.writeFileSync(metadata, JSON.stringify({ id, backend: 'built-in imagegen', definition_sha256: prompt.definition_sha256,
   original: path.relative(root, original), source_sha256: hash(original), icon: path.relative(root, destination),
-  icon_sha256: hash(destination), target: [64, 64], export: fitContent
-    ? 'ImageMagick transparent-border trim and Point fit within 56x56; original alpha; centered 64x64 canvas'
-    : 'ImageMagick Point resize with original alpha; centered 64x64 canvas',
+  palette_export: { ...paletteExport, resized_from_master: true, input_kind: 'generated source master' },
+  fit_content: fitContent, icon_sha256: hash(destination), target: [64, 64], export: fitContent
+    ? 'ImageMagick transparent-border trim and Point fit within 56x56; original alpha; centered 64x64 canvas; global game palette'
+    : 'ImageMagick Point resize with original alpha; centered 64x64 canvas; global game palette',
   prompt: replacementPrompt ?? prompt.prompt, ...(supersedes ? { supersedes } : {}) }, null, 2) + '\n');
 console.log(`Imported ${id}: ${destination}`);

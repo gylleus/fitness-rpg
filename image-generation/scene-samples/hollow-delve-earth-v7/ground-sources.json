@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "8f62eaf3bad7dfb0185d40a5fce53dba9bb3e9087cff01848b987b775e0b144f",
+  "assets": {
+    "hollow_delve_slate_path": {
+      "image": "sources/ground.png",
+      "sha256": "37efcb53be50eabf67aff861b8d38a56c3eb0bf8268f5ebd30ef52e55c885d58",
+      "prompt_sha256": "8543a87cc6a995efb5c576381fbd0c1c3e9df36ae44178ffbdabfbb77e76e168",
+      "backend": "built-in imagegen",
+      "generation_prompt": "Use case: style-transfer\nInput image 1 is the edit target.\nRestyle the supplied game layer to the materials, palette and formations below. Preserve its canvas aspect ratio, orthographic camera, independent layer role, horizontal continuation and overall occupied/empty layout. Replace conflicting surface details and shapes; this is not merely a color tint.\nKeep genuine transparent alpha in empty areas, never a painted checkerboard or matte.\nUse case: stylized-concept\nAsset type: ground for a side-scrolling combat game\nPrimary request: Slate and gravel path\nSubject: Earth-brown compact stone and dusty tan gravel form a level cave ledge. Warm gray fractured rock lies underneath; no blue, cyan or purple coloration.\nStyle/medium: Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks. A readable continuous walking lip with sparse low-contrast material marks. Keep the surface level and separate from scenery and actors.\nComposition/framing: orthographic side view, parallel to the screen.\nLighting/mood: Dim neutral-to-warm reflected light reveals earthy brown limestone and dusty tan sediment. Brown shadows remain soft and subdued; no blue mineral glow or icy lighting.\nColor palette: Cavern black #211B16, Wet slate #554334, Limestone #95816A, Old timber #493727, Iron rust #8B513B, Fungal green #8AA778\nComposition: A continuous horizontal earthy brown side-on walking strip on genuine alpha above logical row 36 of 96. The upper 36 rows must be completely transparent. Level tan gravel lip precisely at row 36, with dark umber compact rock below. Sparse warm gray stone chips, no blue highlights. Preserve the flat surface and edges; no tracks, props, figures or pointed formations. A level slate-gravel lip at row 36, dark compact stone below to the bottom and transparency above. The outer 16 columns share this same flat profile. Large variations stay in the center; no holes or raised obstacles.\nConstraints: Designed for 256 by 96 logical pixels; judge detail at this size. Walking contact at logical row 36; common 16-column edge margins. Genuine transparent alpha outside the subject; no colored matte or painted transparency pattern.\nAvoid: photorealism, intricate microtexture, dense cracks or hatching, single-pixel speckle, dithering, dramatic spotlights, bloom, soft airbrushed edges, text, watermarks, UI, painted checkerboard, isometric or overhead view, a road receding to a vanishing point, characters baked into scenery, isometric view, bright cheerful colors, readable text, smooth airbrushed edges, mandatory gaps in the walking surface",
+      "references": [
+        {
+          "image": "reference-ground.png",
+          "sha256": "be04c45533ff414ae44fa9b86f3f957daf91f12b12b6c31ee2b336e0ebb895dd",
+          "role": "Planned restyling input"
+        },
+        {
+          "image": "sources/ground-generated.png",
+          "sha256": "4411ae5d59ca6bfac5d4ce9281c7f6e677de3067d20199f83685a08e892c4325",
+          "role": "Original generation; rejected matte; alpha extraction target"
+        }
+      ],
+      "edits": [
+        {
+          "prompt": "Use case: background-extraction\nInput image 1 is the edit target. Deliver a genuine transparent RGBA PNG cutout. Preserve the brown rock artwork, dimensions, colors, texture and layout. Remove only all the black empty background above the ground strip. Empty space must be actual alpha zero, not black or white pixels and not a visible checkerboard. The entire lower rock strip remains opaque through the bottom edge, with alpha zero above its surface. Do not add new formations, spikes, stalactites, objects, text, cast shadows or any new backdrop.",
+          "input": "sources/ground-generated.png",
+          "input_sha256": "4411ae5d59ca6bfac5d4ce9281c7f6e677de3067d20199f83685a08e892c4325",
+          "output": "sources/ground.png",
+          "output_sha256": "37efcb53be50eabf67aff861b8d38a56c3eb0bf8268f5ebd30ef52e55c885d58"
+        }
+      ]
+    }
+  }
+}

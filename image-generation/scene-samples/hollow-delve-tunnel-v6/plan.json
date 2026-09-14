@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "biome_id": "hollow_delve",
+  "theme": "limestone_tunnel",
+  "interior": {
+    "schema_version": 1,
+    "canvas": [
+      640,
+      360
+    ],
+    "reference_height": 64,
+    "ground_y": 288,
+    "ceiling_clearance": 104,
+    "fill": "#171e25",
+    "layers": [
+      {
+        "id": "depth",
+        "role": "rear",
+        "canvas": [
+          640,
+          360
+        ],
+        "parallax": 0.1,
+        "origin_y": 288,
+        "asset_id": "hollow_delve_depth",
+        "repeat": "mirror"
+      },
+      {
+        "id": "wall",
+        "role": "rear",
+        "canvas": [
+          640,
+          360
+        ],
+        "parallax": 0.32,
+        "origin_y": 288,
+        "asset_id": "hollow_delve_wall",
+        "repeat": "mirror"
+      },
+      {
+        "id": "roof",
+        "role": "ceiling",
+        "canvas": [
+          640,
+          240
+        ],
+        "parallax": 0.68,
+        "origin_y": "alpha_bottom",
+        "asset_id": "hollow_delve_roof",
+        "repeat": "mirror"
+      }
+    ]
+  },
+  "style": {
+    "style": "Refined dark fantasy pixel art at the same texture density as the Wetlands environment. Fine deliberate pixel clusters and readable material edges, with medium surface detail and restrained contrast. Retain the full generated texture resolution; do not simulate a tiny pixel grid or enlarge chunky blocks. Group value and hue behind actors, keeping bright accents sparse. Crisp texture, no photographic noise or blur.",
+    "avoid": [
+      "vast cave",
+      "photorealism",
+      "chunky upscaling"
+    ]
+  },
+  "recipe": {
+    "text": "schema_version = 1\n\n[scene]\ncanvas = [640, 360]\nreference_height = 64\nground_y = 288\nceiling_clearance = 104\nfill = \"#171e25\"\n\n[[layers]]\nid = \"depth\"\nrole = \"rear\"\ncanvas = [640, 360]\nparallax = 0.10\ntransparent = false\norigin_y = 288\nprompt = \"Opaque distant recess layer only. A close horizontal band of dark shallow recesses in an enclosed passage, interrupted by dim silhouettes of distant supports. Subtle atmospheric depth and a narrow value range. No enormous chamber, vertical abyss, soaring pillars or receding corridor. No foreground ceiling, floor, nearby wall piers, props or characters. Fill the entire image; any visible recess has an enclosed back.\"\n\n[[layers]]\nid = \"wall\"\nrole = \"rear\"\ncanvas = [640, 360]\nparallax = 0.32\ntransparent = true\norigin_y = 288\nprompt = \"Separate nearer rear-wall layer on genuine transparency. Three irregularly spaced substantial wall piers with low connecting masonry or rock shelves, leaving broad transparent gaps between them to reveal the independently supplied recess layer. Wall piers extend down to logical row 288 of 360 and stay flush to the rear wall. The central action band has subdued material shading. Keep the upper third mostly transparent: the overhead ceiling is a separate asset. No horizon, sky, deep vista, freestanding props or floor strip. No painted dark backdrop in the gaps.\"\n\n[[layers]]\nid = \"roof\"\nrole = \"ceiling\"\ncanvas = [640, 240]\nparallax = 0.68\ntransparent = true\norigin_y = \"alpha_bottom\"\nprompt = \"A continuous heavy low overhead ceiling strip seen strictly from the side. WIDE 8:3 image, intended 2048 by 768 or equivalent. Solid material occupies the entire upper edge and roughly the upper two thirds, ending in an irregular but mostly horizontal underside with a few short downward projections. All material is physically connected to the top; the lower third is genuinely transparent empty air. A narrow dark nearly uniform top band blends into the solid ceiling fill. Compatible left and right edges for horizontal mirror repetition. No floor, columns reaching the bottom, detached rocks, characters, sky, windows, complete cavern or wall backdrop. This is a close tunnel roof cutout, not an entire scene.\"\n\n[themes.limestone_tunnel]\nname = \"Low limestone mine tunnel\"\nmaterials = \"Damp blue-gray limestone with readable layered chips and restrained mineral seams; occasional worn timber embedded in the wall. Compact abandoned horizontal mine tunnel. Ceiling: thick rough limestone slabs with short blunt stalactites, a few thin mineral seams and worn timber braces pressed into the rock.\"\npalette = \"Cold slate #394757, charcoal #171e25, subdued gray limestone #727c82, desaturated old timber #635044 and small dull rust accents.\"\nlighting = \"Soft cold reflected light from the passage, shallow ambient shadow beneath the roof; no bright opening or dramatic spotlight.\"\n\n[themes.frost_cave]\nname = \"Narrow frost cave\"\nmaterials = \"Compact glacial tunnel enclosed by layered opaque blue ice and dark frozen stone. Readable ice fractures and trapped cloudy bands. Ceiling: a low solid ice shelf with short attached icicles, compressed snow seams and no view of an open sky.\"\npalette = \"Desaturated steel blue, slate, dark indigo and restrained cloudy ice blue; sparse pale cyan edge accents.\"\nlighting = \"Muted diffuse blue light carried through cloudy ice, dark seams and no sparkling bloom.\"\n\n[themes.volcano_tunnel]\nname = \"Confined volcanic tunnel\"\nmaterials = \"A cramped horizontal lava tube of dark layered basalt and cooled lava folds. Sparse narrow ember seams. Ceiling: heavy basalt shelves with short attached lava drips and thick cooled crust; no vast caldera or magma lake.\"\npalette = \"Charcoal basalt, muted brown-black, ash gray and sparse dark burnt-orange seams.\"\nlighting = \"Dim reflected amber from sparse narrow seams below, with cool charcoal shadow and no glowing haze.\"\n\n[themes.crypt]\nname = \"Low vaulted crypt\"\nmaterials = \"A confined burial passage of weathered dressed stone, closed wall niches and worn mortar. Ceiling: a low shallow barrel vault with broad voussoir stones, occasional cracked mortar and attached stone ribs. No cathedral-height space or freestanding tombs baked into the background.\"\npalette = \"Muted blue-gray stone, old beige mortar, dark olive stains and deep cool shadow.\"\nlighting = \"Restrained indirect cool light on stone edges; niche interiors remain dim, with no luminous symbols.\"\n\n[themes.castle]\nname = \"Enclosed castle passage\"\nmaterials = \"A close medieval castle service passage with substantial dressed-stone wall piers and small shuttered recesses. Ceiling: low heavy timber crossbeams under a continuous stone-and-plaster roof, restrained grain and chipped plaster. No throne hall, outdoor battlements or soaring atrium.\"\npalette = \"Desaturated warm-gray masonry, cool charcoal shadows, weathered brown beams and muted ochre plaster.\"\nlighting = \"Soft indirect warm-gray light with shallow beam shadows; no brilliant windows or shafts of sunlight.\"\n",
+    "sha256": "5ae333def2e7b71b96d31cd6c9f133707b6c341fd43f73233238e9956d80a84b"
+  },
+  "assets": [
+    {
+      "id": "hollow_delve_depth",
+      "name": "Low limestone mine tunnel \u2014 depth",
+      "kind": "background",
+      "canvas": [
+        640,
+        360
+      ],
+      "transparent": false,
+      "prompt": "Use case: stylized-concept\nAsset type: independently scrolling depth layer for a claustrophobic side-scrolling game interior\nPrimary request: Low limestone mine tunnel\nMaterials: Damp blue-gray limestone with readable layered chips and restrained mineral seams; occasional worn timber embedded in the wall. Compact abandoned horizontal mine tunnel. Ceiling: thick rough limestone slabs with short blunt stalactites, a few thin mineral seams and worn timber braces pressed into the rock.\nComposition: Opaque distant recess layer only. A close horizontal band of dark shallow recesses in an enclosed passage, interrupted by dim silhouettes of distant supports. Subtle atmospheric depth and a narrow value range. No enormous chamber, vertical abyss, soaring pillars or receding corridor. No foreground ceiling, floor, nearby wall piers, props or characters. Fill the entire image; any visible recess has an enclosed back.\nCamera: strict orthographic side view along a horizontal tunnel, parallel to the image plane. The passage continues sideways off both edges.\nStyle/medium: Refined dark fantasy pixel art at the same texture density as the Wetlands environment. Fine deliberate pixel clusters and readable material edges, with medium surface detail and restrained contrast. Retain the full generated texture resolution; do not simulate a tiny pixel grid or enlarge chunky blocks. Group value and hue behind actors, keeping bright accents sparse. Crisp texture, no photographic noise or blur.\nColor palette: Cold slate #394757, charcoal #171e25, subdued gray limestone #727c82, desaturated old timber #635044 and small dull rust accents.\nLighting: Soft cold reflected light from the passage, shallow ambient shadow beneath the roof; no bright opening or dramatic spotlight.\nCanvas: 640 by 360 logical units; generate a large image with width at least 1536 pixels and this aspect ratio.\nOpacity: completely opaque edge-to-edge image.\nIf a reference image is supplied, use it for pixel texture density and restrained shading only; keep the requested indoor subject and enclosed composition.\nAvoid: tiny-resolution upscaling, flat featureless polygons, photorealism, harsh white highlights, vast cave expanses, soaring ceilings, long vanishing-point corridors, characters, text, UI and watermarks.",
+      "prompt_sha256": "66253625111e10d5f0b9eb9856bdab2a697b9383cceffe67361de37ff2e31499",
+      "source_definition": {
+        "visual_description": "Damp blue-gray limestone with readable layered chips and restrained mineral seams; occasional worn timber embedded in the wall. Compact abandoned horizontal mine tunnel. Ceiling: thick rough limestone slabs with short blunt stalactites, a few thin mineral seams and worn timber braces pressed into the rock.",
+        "layer": {
+          "id": "depth",
+          "role": "rear",
+          "canvas": [
+            640,
+            360
+          ],
+          "parallax": 0.1,
+          "transparent": false,
+          "origin_y": 288,
+          "prompt": "Opaque distant recess layer only. A close horizontal band of dark shallow recesses in an enclosed passage, interrupted by dim silhouettes of distant supports. Subtle atmospheric depth and a narrow value range. No enormous chamber, vertical abyss, soaring pillars or receding corridor. No foreground ceiling, floor, nearby wall piers, props or characters. Fill the entire image; any visible recess has an enclosed back."
+        }
+      },
+      "export": {
+        "resolution": "source",
+        "min_width": 1536,
+        "sampling": "nearest",
+        "colors": "source",
+        "alpha": "opaque"
+      }
+    },
+    {
+      "id": "hollow_delve_wall",
+      "name": "Low limestone mine tunnel \u2014 wall",
+      "kind": "background",
+      "canvas": [
+        640,
+        360
+      ],
+      "transparent": true,
+      "prompt": "Use case: stylized-concept\nAsset type: independently scrolling wall layer for a claustrophobic side-scrolling game interior\nPrimary request: Low limestone mine tunnel\nMaterials: Damp blue-gray limestone with readable layered chips and restrained mineral seams; occasional worn timber embedded in the wall. Compact abandoned horizontal mine tunnel. Ceiling: thick rough limestone slabs with short blunt stalactites, a few thin mineral seams and worn timber braces pressed into the rock.\nComposition: Separate nearer rear-wall layer on genuine transparency. Three irregularly spaced substantial wall piers with low connecting masonry or rock shelves, leaving broad transparent gaps between them to reveal the independently supplied recess layer. Wall piers extend down to logical row 288 of 360 and stay flush to the rear wall. The central action band has subdued material shading. Keep the upper third mostly transparent: the overhead ceiling is a separate asset. No horizon, sky, deep vista, freestanding props or floor strip. No painted dark backdrop in the gaps.\nCamera: strict orthographic side view along a horizontal tunnel, parallel to the image plane. The passage continues sideways off both edges.\nStyle/medium: Refined dark fantasy pixel art at the same texture density as the Wetlands environment. Fine deliberate pixel clusters and readable material edges, with medium surface detail and restrained contrast. Retain the full generated texture resolution; do not simulate a tiny pixel grid or enlarge chunky blocks. Group value and hue behind actors, keeping bright accents sparse. Crisp texture, no photographic noise or blur.\nColor palette: Cold slate #394757, charcoal #171e25, subdued gray limestone #727c82, desaturated old timber #635044 and small dull rust accents.\nLighting: Soft cold reflected light from the passage, shallow ambient shadow beneath the roof; no bright opening or dramatic spotlight.\nCanvas: 640 by 360 logical units; generate a large image with width at least 1536 pixels and this aspect ratio.\nTransparency: genuine alpha in all empty areas; never paint checkerboard or a colored matte.\nIf a reference image is supplied, use it for pixel texture density and restrained shading only; keep the requested indoor subject and enclosed composition.\nAvoid: tiny-resolution upscaling, flat featureless polygons, photorealism, harsh white highlights, vast cave expanses, soaring ceilings, long vanishing-point corridors, characters, text, UI and watermarks.",
+      "prompt_sha256": "5e9e8dadcf4015e231acf7be8200513c64f5a879630f98fa1a4c72dd02818d0e",
+      "source_definition": {
+        "visual_description": "Damp blue-gray limestone with readable layered chips and restrained mineral seams; occasional worn timber embedded in the wall. Compact abandoned horizontal mine tunnel. Ceiling: thick rough limestone slabs with short blunt stalactites, a few thin mineral seams and worn timber braces pressed into the rock.",
+        "layer": {
+          "id": "wall",
+          "role": "rear",
+          "canvas": [
+            640,
+            360
+          ],
+          "parallax": 0.32,
+          "transparent": true,
+          "origin_y": 288,
+          "prompt": "Separate nearer rear-wall layer on genuine transparency. Three irregularly spaced substantial wall piers with low connecting masonry or rock shelves, leaving broad transparent gaps between them to reveal the independently supplied recess layer. Wall piers extend down to logical row 288 of 360 and stay flush to the rear wall. The central action band has subdued material shading. Keep the upper third mostly transparent: the overhead ceiling is a separate asset. No horizon, sky, deep vista, freestanding props or floor strip. No painted dark backdrop in the gaps."
+        }
+      },
+      "export": {
+        "resolution": "source",
+        "min_width": 1536,
+        "sampling": "nearest",
+        "colors": "source",
+        "alpha": "binary"
+      }
+    },
+    {
+      "id": "hollow_delve_roof",
+      "name": "Low limestone mine tunnel \u2014 roof",
+      "kind": "background",
+      "canvas": [
+        640,
+        240
+      ],
+      "transparent": true,
+      "prompt": "Use case: stylized-concept\nAsset type: independently scrolling roof layer for a claustrophobic side-scrolling game interior\nPrimary request: Low limestone mine tunnel\nMaterials: Damp blue-gray limestone with readable layered chips and restrained mineral seams; occasional worn timber embedded in the wall. Compact abandoned horizontal mine tunnel. Ceiling: thick rough limestone slabs with short blunt stalactites, a few thin mineral seams and worn timber braces pressed into the rock.\nComposition: A continuous heavy low overhead ceiling strip seen strictly from the side. WIDE 8:3 image, intended 2048 by 768 or equivalent. Solid material occupies the entire upper edge and roughly the upper two thirds, ending in an irregular but mostly horizontal underside with a few short downward projections. All material is physically connected to the top; the lower third is genuinely transparent empty air. A narrow dark nearly uniform top band blends into the solid ceiling fill. Compatible left and right edges for horizontal mirror repetition. No floor, columns reaching the bottom, detached rocks, characters, sky, windows, complete cavern or wall backdrop. This is a close tunnel roof cutout, not an entire scene.\nCamera: strict orthographic side view along a horizontal tunnel, parallel to the image plane. The passage continues sideways off both edges.\nStyle/medium: Refined dark fantasy pixel art at the same texture density as the Wetlands environment. Fine deliberate pixel clusters and readable material edges, with medium surface detail and restrained contrast. Retain the full generated texture resolution; do not simulate a tiny pixel grid or enlarge chunky blocks. Group value and hue behind actors, keeping bright accents sparse. Crisp texture, no photographic noise or blur.\nColor palette: Cold slate #394757, charcoal #171e25, subdued gray limestone #727c82, desaturated old timber #635044 and small dull rust accents.\nLighting: Soft cold reflected light from the passage, shallow ambient shadow beneath the roof; no bright opening or dramatic spotlight.\nCanvas: 640 by 240 logical units; generate a large image with width at least 1536 pixels and this aspect ratio.\nTransparency: genuine alpha in all empty areas; never paint checkerboard or a colored matte.\nIf a reference image is supplied, use it for pixel texture density and restrained shading only; keep the requested indoor subject and enclosed composition.\nAvoid: tiny-resolution upscaling, flat featureless polygons, photorealism, harsh white highlights, vast cave expanses, soaring ceilings, long vanishing-point corridors, characters, text, UI and watermarks.",
+      "prompt_sha256": "cad6c400f00e7cb5e26fe2b7095072829eb6efc4ec0720b3bf0ef5e119733c70",
+      "source_definition": {
+        "visual_description": "Damp blue-gray limestone with readable layered chips and restrained mineral seams; occasional worn timber embedded in the wall. Compact abandoned horizontal mine tunnel. Ceiling: thick rough limestone slabs with short blunt stalactites, a few thin mineral seams and worn timber braces pressed into the rock.",
+        "layer": {
+          "id": "roof",
+          "role": "ceiling",
+          "canvas": [
+            640,
+            240
+          ],
+          "parallax": 0.68,
+          "transparent": true,
+          "origin_y": "alpha_bottom",
+          "prompt": "A continuous heavy low overhead ceiling strip seen strictly from the side. WIDE 8:3 image, intended 2048 by 768 or equivalent. Solid material occupies the entire upper edge and roughly the upper two thirds, ending in an irregular but mostly horizontal underside with a few short downward projections. All material is physically connected to the top; the lower third is genuinely transparent empty air. A narrow dark nearly uniform top band blends into the solid ceiling fill. Compatible left and right edges for horizontal mirror repetition. No floor, columns reaching the bottom, detached rocks, characters, sky, windows, complete cavern or wall backdrop. This is a close tunnel roof cutout, not an entire scene."
+        }
+      },
+      "export": {
+        "resolution": "source",
+        "min_width": 1536,
+        "sampling": "nearest",
+        "colors": "source",
+        "alpha": "binary"
+      }
+    }
+  ]
+}

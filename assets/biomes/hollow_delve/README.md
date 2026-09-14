@@ -1,6 +1,6 @@
 # Hollow Delve scenery
 
-Five bundled textures: three detailed cave backgrounds, a walking surface and
+Five bundled textures: three subdued cave backgrounds, a walking surface and
 one atlas containing 32 isolated props. `sources.json` records source paths,
 checksums and dimensions. `props.json` adds named rectangles, measured support
 anchors, canonical height scales and exact cutout pixel hashes.
@@ -13,9 +13,10 @@ anchors, canonical height scales and exact cutout pixel hashes.
 | slate_path | Continuous mirrored slate-and-gravel walking surface |
 | props | 32 cave props: supports, arches, carts, crystals, fungi, bones, tools, machinery and ruins |
 
-The backgrounds use detailed 1672×941 built-in imagegen
-[panoramas](../../../image-generation/scene-samples/hollow-delve-backgrounds-v4/),
-preserving the complete source pixels and colors.
+The backgrounds use low-detail built-in imagegen
+[panoramas](../../../image-generation/scene-samples/hollow-delve-backgrounds-v5/),
+exported at the shared 640×360 logical canvas with nearest sampling and source
+colors. Broad rock masses and quiet shadowed recesses keep combatants readable.
 They pan slowly inside their painted bounds and crossfade during travel; they
 are not tiled. Props use the new trimmed 2048×882 atlas; the original ground
 retains its ENDESGA32 export. Exact prop prompts, source images and recipes are
@@ -30,13 +31,14 @@ The library repeats every 4608 world units; an ordinary run shows a subset.
 Pause, restored checkpoints and resizing preserve the arrangement.
 
 ```bash
-uv run sprite-python scripts/bundle_scenery.py --biome hollow_delve
-uv run sprite-python image-generation/scene-samples/hollow-delve-backgrounds-v4/prepare.py
+uv run biome-assets bundle-props --biome hollow_delve
+uv run biome-assets bundle --manifest image-generation/scene-samples/hollow-delve-backgrounds-v5/prepared/manifest.json --mapping image-generation/scene-samples/hollow-delve-backgrounds-v5/runtime.json
 npm run test:scenery
 ```
 
-The historical `hollow-delve-props-v1/prepare.py` reproduces the old package and
-must not be used to build current runtime art. Its source ground remains archived.
+The historical `hollow-delve-props-v1/prepare.py` and
+`hollow-delve-backgrounds-v4/prepare.py` reproduce old packages and must not be
+used to build current runtime art. Their original sources remain archived.
 
 The scenery audit renders production Skia artwork with every cave enemy at
 four viewport sizes, checks source hashes, exact atlas crops, visible support

@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/blue_iron_cuirass.png",
   "source_sha256": "aac36aa38427a8c50b948cf63523dc844e42a6ace29874d4d06397f95f4dadb0",
   "icon": "assets/items/blue_iron_cuirass.png",
-  "icon_sha256": "f893c9b287af7246ec0c5f697dbcdc1e3117ed488143c16e6242006a7b56acaf",
+  "icon_sha256": "59c51fe93b5a3db310573577e479817d101afe0bfed0fa6bc12145bf8098821a",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Blue Iron Cuirass. A smooth deep-blue iron breastplate has an angular central ridge and two broad squared shoulder tabs. Small pale dents scatter over the belly above a layered skirt of gray metal strips.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Blue Iron Cuirass. A smooth deep-blue iron breastplate has an angular central ridge and two broad squared shoulder tabs. Small pale dents scatter over the belly above a layered skirt of gray metal strips.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/blue_iron_cuirass.png",
+    "source_sha256": "f893c9b287af7246ec0c5f697dbcdc1e3117ed488143c16e6242006a7b56acaf",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "59c51fe93b5a3db310573577e479817d101afe0bfed0fa6bc12145bf8098821a",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

@@ -5,7 +5,7 @@
   "original": "image-generation/items/v1/sources/regents_last_seal.png",
   "source_sha256": "f6ddf27158d6a6ab6d171d69a38f5bfa17dc63ffc7dc2abcf2d61bddcc14ae35",
   "icon": "assets/items/regents_last_seal.png",
-  "icon_sha256": "45a5e25f82d45a5295a8887ea5d2a1f32aec7883d6de1bc7a6446f1f08ffa907",
+  "icon_sha256": "3a794ecfd3624b0aa4f08f36d9f8e24b1af6a369b1fab95026c5683d704c8815",
   "target": [
     64,
     64
@@ -17,5 +17,23 @@
     "source_sha256": "f6ddf27158d6a6ab6d171d69a38f5bfa17dc63ffc7dc2abcf2d61bddcc14ae35",
     "icon_sha256": "f857e7e6230ac7ec8aae3e3be3db3548f2edc8fc5a8f3ff40bfde0b2b7e327fb",
     "reason": "Replaced after visual and pixel-boundary review"
+  },
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/regents_last_seal.png",
+    "source_sha256": "45a5e25f82d45a5295a8887ea5d2a1f32aec7883d6de1bc7a6446f1f08ffa907",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "3a794ecfd3624b0aa4f08f36d9f8e24b1af6a369b1fab95026c5683d704c8815",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
   }
 }

@@ -10,7 +10,8 @@ import { FloatingDamage, type FloatingImpact } from './FloatingDamage';
 import { colors } from './theme';
 import { WetlandsBackdrop } from '../scenes/WetlandsBackdrop';
 import { hasWetlandsScenery } from '../scenes/wetlands';
-import { HollowDelveBackdrop } from '../scenes/HollowDelveBackdrop';
+import { InteriorLocationBackdrop } from '../scenes/InteriorLocationBackdrop';
+import { journeyInterior } from '../scenes/interiorRoutes';
 
 /** The hero advances in world coordinates; a following camera reveals the path. */
 export function DungeonJourney({ battle, playing, speed, fullScreen = false }: { battle: BattleState; playing: boolean; speed: number; fullScreen?: boolean }) {
@@ -28,7 +29,7 @@ export function DungeonJourney({ battle, playing, speed, fullScreen = false }: {
   const dungeon = battleDungeon(battle);
   const atChest = battle.phase === 'chest' || battle.phase === 'chest-reveal';
   const wetlands = hasWetlandsScenery(dungeon);
-  const hollowDelve = dungeon.biomeId === 'hollow_delve';
+  const interior = journeyInterior(battle);
   const groundY = height - (fullScreen ? 90 : 42);
   const worldWidth = (dungeon.enemies.length + 1) * 320 + 320;
   // Remember the incoming tick during render so fresh effects appear together
@@ -55,8 +56,8 @@ export function DungeonJourney({ battle, playing, speed, fullScreen = false }: {
   return <View onLayout={e => { setWidth(e.nativeEvent.layout.width); setHeight(e.nativeEvent.layout.height); }} accessibilityLabel={atChest ? 'Your hero waits beside a chest' : battle.phase === 'travelling' ? 'Your hero walks right through the dungeon' : 'Your hero attacks the enemy on the path'}
     style={{ height: fullScreen ? '100%' : 240, width: '100%', overflow: 'hidden', borderRadius: fullScreen ? 0 : 16, backgroundColor: '#111e22' }}>
     {wetlands ? <WetlandsBackdrop width={width} height={height} groundY={groundY} heroHeight={heroHeight}
-      position={position} initialPosition={journeyTarget(battle)} seed={battle.rng?.seed ?? dungeon.id} /> : hollowDelve ?
-      <HollowDelveBackdrop width={width} height={height} groundY={groundY} heroHeight={heroHeight}
+      position={position} initialPosition={journeyTarget(battle)} seed={battle.rng?.seed ?? dungeon.id} /> : interior ?
+      <InteriorLocationBackdrop location={interior} width={width} height={height} groundY={groundY} heroHeight={heroHeight}
       position={position} initialPosition={journeyTarget(battle)} seed={battle.rng?.seed ?? dungeon.id} /> : <>
     <View style={{ position: 'absolute', top: 24, right: 30, width: 33, height: 33, borderRadius: 20, backgroundColor: dungeon.color, opacity: 0.5 }} />
     <Animated.View style={{ position: 'absolute', bottom: fullScreen ? 90 : 42, width: 2400, height: 190, transform: [{ translateX: parallax }] }}>
@@ -65,7 +66,7 @@ export function DungeonJourney({ battle, playing, speed, fullScreen = false }: {
     <View style={{ position: 'absolute', bottom: 0, height: fullScreen ? 92 : 44, width: '100%', backgroundColor: '#2c4032', borderTopWidth: 5, borderColor: '#56704a' }} />
     </>}
     <Animated.View testID="dungeon-world" style={{ position: 'absolute', bottom: fullScreen ? 70 : 22, width: worldWidth, height: 170, transform: [{ translateX: camera }] }}>
-      {!wetlands && !hollowDelve && Array.from({ length: Math.ceil(worldWidth / 55) }, (_, i) => <View key={`stone-${i}`} style={{ position: 'absolute', bottom: 3, left: i * 55, width: 18, height: 4, backgroundColor: '#627050', opacity: 0.55 }} />)}
+      {!wetlands && !interior && Array.from({ length: Math.ceil(worldWidth / 55) }, (_, i) => <View key={`stone-${i}`} style={{ position: 'absolute', bottom: 3, left: i * 55, width: 18, height: 4, backgroundColor: '#627050', opacity: 0.55 }} />)}
       {dungeon.enemies.map((enemy, i) => <View key={`${enemy.id ?? enemy.name}-${i}`} style={{ position: 'absolute', left: 40 + (i + 1) * 320, bottom: 20, opacity: i < battle.defeated - 1 ? 0.3 : 1 }}>
         {dungeon.chestEncounters?.includes(i) ? <View accessibilityLabel="Treasure chest" testID={`dungeon-chest-${i}`}
           style={{ width: 50, height: 38, marginLeft: -25, backgroundColor: '#70462e', borderWidth: 3, borderColor: '#dbb965', borderRadius: 5 }}>

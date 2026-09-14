@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/rusted_arming_sword.png",
   "source_sha256": "60d7091d8fbaede0761d146e1a859b86280e35c4a0fbc49e647352ca3c65656f",
   "icon": "assets/items/rusted_arming_sword.png",
-  "icon_sha256": "ac56c66e69f4271ab5a99705ebcaa51cc6b885b640f7bf1ef754e7a6db1feb9e",
+  "icon_sha256": "d95962b22b6275dfb453efe2dc8ed86414c796bc112dd5609796ed2235958033",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Rusted Arming Sword. A straight double-edged sword has orange rust islands across a dull steel fuller. The simple iron crossguard remains square, and a faded red leather grip ends in a disk pommel.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Rusted Arming Sword. A straight double-edged sword has orange rust islands across a dull steel fuller. The simple iron crossguard remains square, and a faded red leather grip ends in a disk pommel.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/rusted_arming_sword.png",
+    "source_sha256": "ac56c66e69f4271ab5a99705ebcaa51cc6b885b640f7bf1ef754e7a6db1feb9e",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "d95962b22b6275dfb453efe2dc8ed86414c796bc112dd5609796ed2235958033",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

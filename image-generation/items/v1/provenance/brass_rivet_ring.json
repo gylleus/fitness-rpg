@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/brass_rivet_ring.png",
   "source_sha256": "8255cecbca13f200c1c43aab56bc948afcc201b286670b92d15611bd1c792892",
   "icon": "assets/items/brass_rivet_ring.png",
-  "icon_sha256": "ce8a6b8ec763ea3d129c34aa0e41a9a7a8fcb6c43daebbf18b82ccef5907ca65",
+  "icon_sha256": "49ae6d5022ce2481604c46c29ffcd9cb25b9a3d31ef65ed4df5dd5523b735afd",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Brass Rivet Ring. A heavy brass ring has a single oversized square rivet as its raised face. The rivet corners are rounded by wear, and two dark solder lines cross the thick band.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Brass Rivet Ring. A heavy brass ring has a single oversized square rivet as its raised face. The rivet corners are rounded by wear, and two dark solder lines cross the thick band.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/brass_rivet_ring.png",
+    "source_sha256": "ce8a6b8ec763ea3d129c34aa0e41a9a7a8fcb6c43daebbf18b82ccef5907ca65",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "49ae6d5022ce2481604c46c29ffcd9cb25b9a3d31ef65ed4df5dd5523b735afd",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

@@ -1,0 +1,2 @@
+Use case: background-extraction
+Use background removal to extract the brown stonework and timber from this existing image. Remove the checkerboard pixels completely. Return an RGBA PNG file with a transparent background (alpha=0), retaining opaque rock (alpha=255). This is background removal only. Do not redraw, restyle, relight, sharpen, add a backdrop or illustrate a transparency pattern. The current white and gray checkerboard is a painted background that needs removal.

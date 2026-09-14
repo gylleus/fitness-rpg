@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/ember_vow.png",
   "source_sha256": "c15136095cb356c0ea08b7fe0d987249858f6b379dc515bf92d766d4dbaf151f",
   "icon": "assets/items/ember_vow.png",
-  "icon_sha256": "2fa5a35038b6e675f4a840e9768f7ca1f5c4733d8c7f2e1f0815d99e6de93e9b",
+  "icon_sha256": "66c1712bcb0473caf7acf6aa420a694727c13acafe2777e3efa73ee2d35e946c",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Ember Vow. A broad steel sword has a warm amber stone buried flush in its heavy iron guard. Soot darkens the blade base, and a short trailing strip of red cloth hangs from the pommel.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Ember Vow. A broad steel sword has a warm amber stone buried flush in its heavy iron guard. Soot darkens the blade base, and a short trailing strip of red cloth hangs from the pommel.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/ember_vow.png",
+    "source_sha256": "2fa5a35038b6e675f4a840e9768f7ca1f5c4733d8c7f2e1f0815d99e6de93e9b",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "66c1712bcb0473caf7acf6aa420a694727c13acafe2777e3efa73ee2d35e946c",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

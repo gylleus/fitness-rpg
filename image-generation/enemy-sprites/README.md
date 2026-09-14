@@ -1,5 +1,11 @@
 # Enemy roster adapter
 
+For the currently selected built-in imagegen enemy sheets, use the shared
+[authored-sheet workflow](../sprite-pipeline/AUTHORED_SHEETS.md):
+`uv run enemy-sprites import-sheets --recipe PATH --out DIRECTORY`.
+Wetlands and Hollow Delve use data recipes for the same extractor and atlas importer.
+The commands below describe the alternative local SDXL/Wan route and its older trials.
+
 Enemy generation is now a layer above the reusable
 [local sprite pipeline](../sprite-pipeline/README.md). `batch.py` resolves the
 current canonical content catalog with `scripts/content.py`, maps each enemy's

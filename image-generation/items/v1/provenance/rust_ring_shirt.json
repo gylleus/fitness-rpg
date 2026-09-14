@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/rust_ring_shirt.png",
   "source_sha256": "07cb3ff842f9255556ad136ef87eead04f5a34b50870819488161a22108cfbc2",
   "icon": "assets/items/rust_ring_shirt.png",
-  "icon_sha256": "c18df7bd43eba4a6d6763e9b1bb8dc75a65b4c8f844c5bec0c98448c30b171f0",
+  "icon_sha256": "1364560f4ac3db88aa721aac1377a6ae533b8d09d424c4bd810f3ce8e6f003fa",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Rust Ring Shirt. A sleeveless shirt of large rust-brown iron rings hangs over ragged charcoal cloth. Several brighter replacement rings interrupt the chest, while the lower edge droops unevenly on the right.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Rust Ring Shirt. A sleeveless shirt of large rust-brown iron rings hangs over ragged charcoal cloth. Several brighter replacement rings interrupt the chest, while the lower edge droops unevenly on the right.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/rust_ring_shirt.png",
+    "source_sha256": "c18df7bd43eba4a6d6763e9b1bb8dc75a65b4c8f844c5bec0c98448c30b171f0",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "1364560f4ac3db88aa721aac1377a6ae533b8d09d424c4bd810f3ce8e6f003fa",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

@@ -1,0 +1,26 @@
+{
+  "verified_at": "2026-09-14T23:39:09.642454+00:00",
+  "device": "adb-R3CW70AZDFK-Ua5ozk._adb-tls-connect._tcp",
+  "package": "com.gylleus.fitnessrpg",
+  "asset_commit": "63c3235",
+  "installed_apk_sha256": "6edcbedeb40c6742f5380ea7ad4e46adb193e6fe0be8a0d1ecb5fe015f213288",
+  "matches_verified_apk": true,
+  "install": "adb install -r: Success; app data retained",
+  "cold_launch": "Starting: Intent { cmp=com.gylleus.fitnessrpg/.MainActivity }\nStatus: ok\nLaunchState: COLD\nActivity: com.gylleus.fitnessrpg/.MainActivity\nTotalTime: 213\nWaitTime: 215\nComplete",
+  "runtime_texture_count": 279,
+  "palette": "ENDESGA 32",
+  "reviews": {
+    "directory": "/sdcard/Download/FitnessRPG-ENDESGA-reviews",
+    "verified_html_sha256": {
+      "comparison.html": "e00ca6dd7084417fcdb36a89fa6ec21c2049e0631ab2856b87178c7d3b757e20",
+      "crypts/review.html": "1e1bf3a1035f450515c7fd3d3552ab64447a63d7fa76e849502ba9e2954ff364",
+      "fortress/review.html": "11e0b665c2058f2f273b3d0f0542ec1344f481effbac43aa09e310fe3418bf2c",
+      "frost_caves/review.html": "8fcc85e42a3fb7bd07d54c93322e80057f83c613273058a1679a8d86f4c9d77f",
+      "hollow_delve/review.html": "30399c9581fee80a86feabec762e78ea7139abf1c4c629346f3601fb33cf3fb1",
+      "index.html": "c32db2482d49d18d571c22e4ceb7ad15ae9577b4c5ce0bf072f640e9b1440bba",
+      "items.html": "6db7c1e8f1fa7274bfe9056bc4974ad463c4a697d1643e2eb71c5fc5821f37fc",
+      "lava_caves/review.html": "5c294aa18f0c807804a3861370ed1b58040bd94df396847329fb2f1776ea36b2",
+      "map.html": "4eb9837d0ee922159248a249fbf8230c51dcaca8c91836cf74b1affae58216a5"
+    }
+  }
+}
