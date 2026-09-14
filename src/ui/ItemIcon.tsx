@@ -4,7 +4,7 @@ import type { GearItem } from '../game/equipment';
 import { itemImages } from '../items/generated';
 import { colors } from './theme';
 
-export const rarityColor = { common: colors.muted, uncommon: colors.green, rare: colors.purple };
+export const rarityColor = { common: colors.text, uncommon: colors.green, rare: '#91c9ff', epic: colors.purple };
 const fallback = { weapon: 'wooden_club', armor: 'travel_wraps', helmet: 'iron_helmet', gloves: 'leather_gloves', ring: 'copper_ring', amulet: 'restraint_amulet' };
 
 export function ItemIcon({ item, size = 64 }: { item: GearItem; size?: number }) {

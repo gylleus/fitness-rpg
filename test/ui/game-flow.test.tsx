@@ -4,7 +4,7 @@ import { router } from 'expo-router';
 import { Alert, AppState, type AppStateStatus } from 'react-native';
 import { giveItem } from '../equipment';
 import { GEAR } from '../../src/game/equipment';
-import { DUNGEONS } from '../../src/game/combat';
+import { battleDungeon } from '../../src/game/combat';
 import { createTestDb } from '../db';
 import { getGameSnapshot, savePushupWorkout } from '../../src/db/game';
 import { createRecording } from '../../src/db/recordings';
@@ -134,6 +134,20 @@ async function navigate(path: '/dungeon' | '/forge' | '/progress' | '/') {
   await act(async () => { router.navigate(path); });
 }
 
+function advanceSavedExpedition(run: ReturnType<typeof gameRepository.startDungeon>) {
+  return run.state.phase === 'chest' ? gameRepository.resolveDungeonChest(mockDb, run.id, run.state.tick, 'open', NOW)!
+    : run.state.phase === 'chest-reveal' ? gameRepository.resolveDungeonChest(mockDb, run.id, run.state.tick, 'continue', NOW)!
+      : gameRepository.advanceDungeon(mockDb, run.id, run.state.tick, NOW)!;
+}
+
+async function finishExpedition() {
+  for (let tick = 0; tick < 200 && getGameSnapshot(mockDb).latestBattle?.status === 'active'; tick++) {
+    if (screen.queryByRole('button', { name: 'Open chest' })) await press('Open chest');
+    else if (screen.queryByTestId('chest-prompt')) await press('Continue expedition');
+    else await moveTime(800);
+  }
+}
+
 describe('first playable game flow', () => {
   it('confirms a development reset, refreshes camp, and keeps step sync disconnected after remount', async () => {
     savePushupWorkout(mockDb, { sourceKey: 'dev-training', startedAt: NOW - 60_000, endedAt: NOW, validReps: 20, partialReps: 2 });
@@ -194,43 +208,90 @@ describe('first playable game flow', () => {
     expect(screen.getByTestId('entity-sprite-knight_player_fist')).toBeTruthy();
   });
 
-  it('lets players inspect locked map destinations without starting or unlocking them', async () => {
+  it('shows every tier around camp and explains the steps needed for premium entry', async () => {
     await renderRouter(routes, { initialUrl: '/dungeon' });
+    const offers = getGameSnapshot(mockDb).dungeonMap;
     expect(screen.getByTestId('dungeon-map')).toBeVisible();
-    expect(screen.getAllByRole('button', { name: /^Select / })).toHaveLength(DUNGEONS.length);
-    expect(screen.getByRole('button', { name: 'Select Wetlands, selected' })).toBeSelected();
-    await press('Select Embercrypt, locked');
-    expect(screen.getByRole('button', { name: 'Select Embercrypt, locked' })).toBeSelected();
-    expect(screen.getByText('Defeat Root Hulk in Wetlands to open this path.')).toBeVisible();
-    expect(screen.getByRole('button', { name: 'Defeat Root Hulk' })).toBeDisabled();
+    expect(screen.getAllByRole('button', { name: /^Select / })).toHaveLength(4);
+    expect(screen.getByTestId(`map-location-${offers[0].offerId}`)).toBeSelected();
+    const heroic = offers.find(offer => offer.difficulty === 'heroic')!;
+    await fireEvent.press(screen.getByTestId(`map-location-${heroic.offerId}`));
+    expect(screen.getByText('Heroic · Level 1')).toBeVisible();
+    expect(screen.getByText(/Boss reward: guaranteed Rare item/)).toBeVisible();
+    expect(screen.getByRole('button', { name: 'Need 1,000 more steps' })).toBeDisabled();
     expect(getGameSnapshot(mockDb).latestBattle).toBeNull();
-    expect(getGameSnapshot(mockDb).hero.unlockedDungeon).toBe(0);
-    await press('Select Wetlands, available');
+    await fireEvent.press(screen.getByTestId(`map-location-${offers[0].offerId}`));
+    expect(screen.getByText(/Boss reward: guaranteed Uncommon item/)).toBeVisible();
     expect(screen.getByRole('button', { name: 'Enter dungeon  →' })).toBeEnabled();
   });
 
-  it.each(DUNGEONS)('enters the selected $name map destination', async dungeon => {
-    gameRepository.getHero(mockDb);
-    mockDb.update(heroes).set({ unlockedDungeon: 3 }).run();
+  it.each([0, 1, 2, 3])('enters selected map offer %i and spends its displayed cost', async slot => {
+    gameRepository.saveStepTotal(mockDb, '2026-09-06', 6000);
+    const offer = getGameSnapshot(mockDb).dungeonMap[slot];
     await renderRouter(routes, { initialUrl: '/dungeon' });
-    await press(new RegExp(`^Select ${dungeon.name},`));
-    expect(screen.getByTestId(`map-location-${dungeon.id}`)).toBeSelected();
+    await fireEvent.press(screen.getByTestId(`map-location-${offer.offerId}`));
+    expect(screen.getByTestId(`map-location-${offer.offerId}`)).toBeSelected();
     await press('Enter dungeon  →');
-    expect(getGameSnapshot(mockDb).latestBattle?.state.dungeonId).toBe(dungeon.id);
+    expect(getGameSnapshot(mockDb).latestBattle?.state.dungeon?.offerId).toBe(offer.offerId);
+    expect(getGameSnapshot(mockDb).travelSteps).toMatchObject({ spent: offer.stepCost, available: 6000 - offer.stepCost });
     expect(screen.getByTestId('fullscreen-expedition')).toBeVisible();
   });
 
   it('allows map browsing during an active run while preventing a second expedition', async () => {
-    gameRepository.getHero(mockDb);
-    mockDb.update(heroes).set({ unlockedDungeon: 3 }).run();
-    const active = gameRepository.startDungeon(mockDb, 0, NOW);
+    const offers = getGameSnapshot(mockDb).dungeonMap;
+    const active = gameRepository.startDungeon(mockDb, offers[0].offerId, NOW);
     await renderRouter(routes, { initialUrl: '/dungeon' });
-    expect(screen.getByRole('button', { name: 'Select Wetlands, in progress' })).toBeSelected();
-    await press('Select Hollow Delve, available');
+    expect(screen.getByTestId(`map-location-${offers[0].offerId}`)).toBeSelected();
+    await fireEvent.press(screen.getByTestId(`map-location-${offers[3].offerId}`));
     expect(screen.getByRole('button', { name: 'Expedition in progress' })).toBeDisabled();
     await press('Continue expedition');
     expect(getGameSnapshot(mockDb).latestBattle?.id).toBe(active.id);
     expect(mockDb.select().from(dungeonRuns).all()).toHaveLength(1);
+  });
+
+  it('pauses at a closed chest, reveals contents only after opening, and waits for Continue', async () => {
+    const run = gameRepository.startDungeon(mockDb, 0, NOW);
+    const chestItem = { encounter: 0, boss: false, item: { ...GEAR.copper_ring, name: 'Hidden chest treasure', itemLevel: 3 } };
+    mockDb.update(dungeonRuns).set({ state: { ...run.state,
+      dungeon: { ...battleDungeon(run.state), chestEncounters: [0] },
+      lootPlan: [chestItem, ...(run.state.lootPlan ?? []).filter(drop => drop.encounter !== 0)],
+    } }).run();
+    await renderRouter(routes, { initialUrl: '/expedition' });
+    for (let i = 0; i < 3; i++) await moveTime(500);
+    expect(screen.getByText('A chest beside the path.')).toBeVisible();
+    expect(screen.queryByText('Hidden chest treasure')).toBeNull();
+    expect(screen.queryByLabelText('Enemy health')).toBeNull();
+    const closedTick = getGameSnapshot(mockDb).latestBattle!.state.tick;
+    await moveTime(10000);
+    expect(getGameSnapshot(mockDb).latestBattle!.state.tick).toBe(closedTick);
+    await press('Open chest');
+    expect(screen.getByText('Hidden chest treasure')).toBeVisible();
+    expect(screen.getByText('Loot · Pending victory')).toBeVisible();
+    const openTick = getGameSnapshot(mockDb).latestBattle!.state.tick;
+    await moveTime(10000);
+    expect(getGameSnapshot(mockDb).latestBattle!.state.tick).toBe(openTick);
+    await press('Preview loot Hidden chest treasure');
+    expect(screen.getByText(/· Rings · Item level 3$/)).toBeVisible();
+    expect(screen.getByText('Pending loot. Defeat the final boss to secure this item.')).toBeVisible();
+    await press('Close item');
+    await press('Continue expedition');
+    expect(screen.queryByTestId('chest-prompt')).toBeNull();
+    await moveTime(800);
+    expect(getGameSnapshot(mockDb).latestBattle!.state.tick).toBeGreaterThan(openTick + 1);
+  });
+
+  it('leaves an unopened chest without revealing or taking its loot', async () => {
+    const run = gameRepository.startDungeon(mockDb, 0, NOW);
+    mockDb.update(dungeonRuns).set({ state: { ...run.state, phase: 'chest', travel: 3,
+      dungeon: { ...battleDungeon(run.state), chestEncounters: [0] },
+      lootPlan: [{ encounter: 0, boss: false, item: { ...GEAR.copper_ring, name: 'Skipped treasure' } }],
+    } }).run();
+    await renderRouter(routes, { initialUrl: '/expedition' });
+    expect(screen.queryByText('Skipped treasure')).toBeNull();
+    await press('Leave chest');
+    expect(screen.queryByTestId('chest-prompt')).toBeNull();
+    expect(screen.queryByText('Skipped treasure')).toBeNull();
+    expect(getGameSnapshot(mockDb).latestBattle!.state).toMatchObject({ encounter: 1, loot: [] });
   });
 
   it('equips two found rings independently and locks their controls during combat', async () => {
@@ -257,7 +318,7 @@ describe('first playable game flow', () => {
   it('shows the actual boss reward and makes the won equipment inspectable in the bag', async () => {
     savePushupWorkout(mockDb, { sourceKey: 'loot-training', startedAt: NOW - 60000, endedAt: NOW, validReps: 100, partialReps: 0 });
     let run = gameRepository.startDungeon(mockDb, 0, NOW);
-    for (let i = 0; i < 200 && run.status === 'active'; i++) run = gameRepository.advanceDungeon(mockDb, run.id, run.state.tick, NOW)!;
+    for (let i = 0; i < 200 && run.status === 'active'; i++) run = advanceSavedExpedition(run);
     expect(run.status).toBe('victory');
     const boss = run.state.loot!.find(drop => drop.boss)!;
     await renderRouter(routes, { initialUrl: '/dungeon' });
@@ -367,15 +428,15 @@ describe('first playable game flow', () => {
     expect(getGameSnapshot(mockDb).savedPushups).toBe(4);
   });
 
-  it('explains zero health and offers step recovery before entry', async () => {
+  it('explains health recovery separately from travel steps before entry', async () => {
     gameRepository.getHero(mockDb);
-    mockDb.update(heroes).set({ damageDay: '2026-09-06', damageTaken: 100 }).run();
-    savePushupWorkout(mockDb, { sourceKey: 'reserve', startedAt: NOW - 60000, endedAt: NOW, validReps: 4, partialReps: 0 });
+    mockDb.update(heroes).set({ damageDay: '2026-09-06', damageTaken: 100, healthPotions: 1 }).run();
     await renderRouter(routes, { initialUrl: '/dungeon' });
     expect(screen.getByRole('button', { name: 'Recover health to enter' })).toBeDisabled();
-    await press('Sync steps for health');
-    await press('Connect Test Health');
-    await press('← Camp');
+    expect(screen.queryByRole('button', { name: 'Sync steps for health' })).toBeNull();
+    await press('Open inventory');
+    await press('Supplies');
+    await press('Drink healing potion');
     await navigate('/dungeon');
     expect(screen.getByRole('button', { name: 'Enter dungeon  →' })).toBeEnabled();
   });
@@ -447,7 +508,7 @@ describe('first playable game flow', () => {
     expect(getGameSnapshot(mockDb).totals.pushups).toBe(10);
   });
 
-  it('connects native steps and refreshes power without a manual entry form', async () => {
+  it('connects native steps and refreshes the travel budget without a manual entry form', async () => {
     await renderRouter(routes);
     await press('Connect steps');
     await press('Connect Test Health');
@@ -510,29 +571,31 @@ describe('first playable game flow', () => {
     expect(getGameSnapshot(mockDb).latestBattle?.state.tick).toBe(3);
   });
 
-  it('shows boss victory, retains rewards, and enables the next dungeon', async () => {
+  it('shows boss victory, retains rewards, and selects a freshly generated destination', async () => {
     savePushupWorkout(mockDb, { sourceKey: 'boss-training', startedAt: NOW - 60_000, endedAt: NOW, validReps: 100, partialReps: 0 });
-    savePushupWorkout(mockDb, { sourceKey: 'entry-reserve', startedAt: NOW - 60_000, endedAt: NOW, validReps: 100, partialReps: 0 });
-    gameRepository.saveStepTotal(mockDb, '2026-09-06', 20000);
+    const before = getGameSnapshot(mockDb).dungeonMap;
     await renderRouter(routes, { initialUrl: '/dungeon' });
     await press('Enter dungeon  →');
-    for (let tick = 0; tick < 65; tick++) await moveTime(800);
+    await finishExpedition();
     expect(screen.getByText('Boss defeated. Well fought.')).toBeVisible();
-    expect(getGameSnapshot(mockDb).hero).toMatchObject({ gold: 72, xp: 99, unlockedDungeon: 1 });
+    expect(screen.queryByRole('button', { name: 'Try this dungeon again' })).toBeNull();
+    const won = getGameSnapshot(mockDb);
+    expect(won.hero.gold).toBeGreaterThan(0);
+    expect(won.hero.xp).toBeGreaterThan(0);
+    expect(won.dungeonMap.every(offer => !before.some(old => old.offerId === offer.offerId))).toBe(true);
     await press('Choose a new expedition');
-    expect(screen.getByRole('button', { name: 'Select Wetlands, available' })).toBeEnabled();
-    expect(screen.getByRole('button', { name: 'Select Embercrypt, selected' })).toBeSelected();
-    expect(screen.getByRole('button', { name: 'Select Frostbound Keep, locked' })).toBeVisible();
+    expect(screen.queryByTestId(`map-location-${before[0].offerId}`)).toBeNull();
+    expect(screen.getByTestId(`map-location-${won.dungeonMap[0].offerId}`)).toBeSelected();
     expect(screen.getByRole('button', { name: 'Enter dungeon  →' })).toBeEnabled();
     await press('Enter dungeon  →');
-    expect(getGameSnapshot(mockDb).latestBattle?.state.dungeonId).toBe(1);
+    expect(getGameSnapshot(mockDb).latestBattle?.state.dungeon?.offerId).toBe(won.dungeonMap[0].offerId);
   });
 
   it('keeps fighting without spending pushups and allows retrying after defeat', async () => {
     savePushupWorkout(mockDb, { sourceKey: 'two-attacks', startedAt: NOW - 60_000, endedAt: NOW, validReps: 2, partialReps: 0 });
     await renderRouter(routes, { initialUrl: '/dungeon' });
     await press('Enter dungeon  →');
-    for (let tick = 0; tick < 100; tick++) await moveTime(800);
+    await finishExpedition();
     expect(screen.getByText('Entry health restored. Daily bonuses reset at 5 AM device time.')).toBeVisible();
     expect(getGameSnapshot(mockDb).latestBattle?.state.attacksMade).toBeGreaterThan(2);
     expect(screen.getByRole('button', { name: 'Try this dungeon again' })).toBeEnabled();
@@ -584,7 +647,7 @@ describe('first playable game flow', () => {
     expect(snapshot.history.find((day) => day.day === '2026-09-06')?.pushups).toBe(20);
   });
 
-  it('keeps daily pushup and step power through midnight', async () => {
+  it('keeps daily pushup power and travel steps through midnight', async () => {
     const late = new Date(2026, 8, 6, 23, 59, 59).getTime();
     jest.setSystemTime(late);
     savePushupWorkout(mockDb, { sourceKey: 'midnight-training', startedAt: late - 60_000, endedAt: late, validReps: 20, partialReps: 0 });

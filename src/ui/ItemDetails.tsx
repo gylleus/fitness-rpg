@@ -11,7 +11,7 @@ export function ItemDetails({ item, onClose, children }: PropsWithChildren<{ ite
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#000000bb', padding: 20 }}>
       <Card style={{ maxHeight: '90%', width: '100%', maxWidth: 600, borderColor: rarityColor[item.rarity], overflow: 'hidden' }}>
         <View style={ui.between}>
-          <Text style={[ui.label, { flex: 1, color: rarityColor[item.rarity] }]}>{item.rarity} · {category ? CATEGORY_LABELS[category] : item.kind}{item.tier ? ` · Tier ${item.tier}` : ''}</Text>
+          <Text style={[ui.label, { flex: 1, color: rarityColor[item.rarity] }]}>{item.rarity} · {category ? CATEGORY_LABELS[category] : item.kind} · Item level {item.itemLevel ?? 1}</Text>
           <Button compact secondary label="Close item" onPress={onClose} />
         </View>
         <ScrollView style={{ flexShrink: 1 }} contentContainerStyle={{ gap: 14, paddingRight: 6 }} keyboardShouldPersistTaps="handled">
