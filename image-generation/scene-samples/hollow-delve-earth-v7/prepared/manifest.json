@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "biome_id": "hollow_delve",
+  "inputs": {
+    "plan_sha256": "6f8dfd97e317e2df835e547d1721839d93feea593535e966c29a7677a495b60a",
+    "sources_sha256": "04f3406f57de35dd6903a3033e95c61e4eb0e67c3c108256392e38dd9f2e4019"
+  },
+  "assets": {
+    "hollow_delve_depth": {
+      "image": "hollow_delve_depth.png",
+      "sha256": "29935ac8c41eabfd4f0f61e93639ff6bf653ecfdb0ec29a27b97453dcb918c26",
+      "size": [
+        1672,
+        941
+      ],
+      "source": "../sources/depth.png",
+      "source_sha256": "728ca29de83dd608e8f08a7619f9ebdd53f3a84b40b146607a7bb8d670794227",
+      "backend": "built-in imagegen",
+      "prompt_sha256": "5f2f67dfb1792ea7d5e332909d60b7de2519c55760b0a63a20130a505cbf5b97",
+      "export": {
+        "resolution": "source",
+        "min_width": 1536,
+        "sampling": "nearest",
+        "colors": "source",
+        "alpha": "opaque"
+      }
+    },
+    "hollow_delve_wall": {
+      "image": "hollow_delve_wall.png",
+      "sha256": "ef482cdb1cef9778f395aa0d44cbd437db487b4e84ab233c3cabf5216f146f2b",
+      "size": [
+        1672,
+        941
+      ],
+      "source": "../sources/wall.png",
+      "source_sha256": "a9bf7df1fb0eb05dc34c1327da459c876e789f305b56bcbcac80c2f02249030c",
+      "backend": "built-in imagegen",
+      "prompt_sha256": "322668811d1b517e7e3caa7529db84d919e62ed2c1262ac1a00627ee3393fe81",
+      "export": {
+        "resolution": "source",
+        "min_width": 1536,
+        "sampling": "nearest",
+        "colors": "source",
+        "alpha": "binary"
+      }
+    },
+    "hollow_delve_roof": {
+      "image": "hollow_delve_roof.png",
+      "sha256": "c6404369c30b183737b943ef48821ab483610205569958591fe8870fab7e8eaa",
+      "size": [
+        2048,
+        768
+      ],
+      "source": "../sources/roof.png",
+      "source_sha256": "380d76dae08bfe8b4f407295b7c88f99d0ebd37fa7a04f55c16a12da45fb7461",
+      "backend": "built-in imagegen",
+      "prompt_sha256": "b5b457b42d571bb12826ace681cb154d311e7df73c230736c7df6b5b339aca80",
+      "export": {
+        "resolution": "source",
+        "min_width": 1536,
+        "sampling": "nearest",
+        "colors": "source",
+        "alpha": "binary"
+      }
+    }
+  },
+  "interior": {
+    "schema_version": 1,
+    "canvas": [
+      640,
+      360
+    ],
+    "reference_height": 64,
+    "ground_y": 288,
+    "ceiling_clearance": 104,
+    "fill": "#211b16",
+    "layers": [
+      {
+        "id": "depth",
+        "role": "rear",
+        "canvas": [
+          640,
+          360
+        ],
+        "parallax": 0.1,
+        "origin_y": 288,
+        "asset_id": "hollow_delve_depth",
+        "repeat": "mirror"
+      },
+      {
+        "id": "wall",
+        "role": "rear",
+        "canvas": [
+          640,
+          360
+        ],
+        "parallax": 0.32,
+        "origin_y": 288,
+        "asset_id": "hollow_delve_wall",
+        "repeat": "mirror"
+      },
+      {
+        "id": "roof",
+        "role": "ceiling",
+        "canvas": [
+          640,
+          240
+        ],
+        "parallax": 0.68,
+        "origin_y": 140.3125,
+        "asset_id": "hollow_delve_roof",
+        "repeat": "mirror",
+        "cap_y": 28.75
+      }
+    ]
+  }
+}

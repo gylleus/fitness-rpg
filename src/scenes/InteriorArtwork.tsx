@@ -26,6 +26,9 @@ export function InteriorArtwork({ images, layout, camera = 0, ground, propSprite
     <Rect x={0} y={0} width={layout.width} height={layout.height} color={layout.fill} />
     {rear ?? layers('rear')}
     <SceneryAtlasArtwork image={images.props} sprites={propSprites} transforms={propTransforms} />
+    {layout.layers.filter(layer => layer.role === 'ceiling').map(layer =>
+      <Rect key={`cap-${layer.id}`} x={0} y={0} width={layout.width}
+        height={Math.max(0, layer.rect.y + (layer.cap_y ?? 0) * layout.scale)} color={layout.fill} />)}
     {ceiling ?? layers('ceiling')}
     <Rect x={0} y={layout.groundY} width={layout.width} height={layout.height - layout.groundY} color={layout.fill} />
     <InteriorLayerArtwork image={images.ground} rect={ground} width={layout.width} height={layout.height} />

@@ -2,7 +2,7 @@ import { sceneryAtlasLayout } from './sceneryAtlas';
 
 export type InteriorLayer = {
   id: string; image: string; role: 'rear' | 'ceiling'; canvas: number[];
-  parallax: number; origin_y: number; repeat: 'mirror';
+  parallax: number; origin_y: number; cap_y?: number; repeat: 'mirror';
 };
 export type InteriorScene = {
   schema_version: number; canvas: number[]; reference_height: number;

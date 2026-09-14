@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "biome_id": "hollow_delve",
+  "theme": "limestone_tunnel",
+  "interior": {
+    "schema_version": 1,
+    "canvas": [
+      640,
+      360
+    ],
+    "reference_height": 64,
+    "ground_y": 288,
+    "ceiling_clearance": 104,
+    "fill": "#211b16",
+    "layers": [
+      {
+        "id": "depth",
+        "role": "rear",
+        "canvas": [
+          640,
+          360
+        ],
+        "parallax": 0.1,
+        "origin_y": 288,
+        "asset_id": "hollow_delve_depth",
+        "repeat": "mirror"
+      },
+      {
+        "id": "wall",
+        "role": "rear",
+        "canvas": [
+          640,
+          360
+        ],
+        "parallax": 0.32,
+        "origin_y": 288,
+        "asset_id": "hollow_delve_wall",
+        "repeat": "mirror"
+      },
+      {
+        "id": "roof",
+        "role": "ceiling",
+        "canvas": [
+          640,
+          240
+        ],
+        "parallax": 0.68,
+        "origin_y": "alpha_bottom",
+        "asset_id": "hollow_delve_roof",
+        "repeat": "mirror"
+      }
+    ]
+  },
+  "style": {
+    "schema_version": 1,
+    "id": "readable-dark-fantasy-v2",
+    "style": "Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks.",
+    "background": "Refined material edges and deliberate fine pixel clusters at the Wetlands texture density. Keep local contrast restrained behind actors; distant layers use a narrower value range. Preserve full texture resolution independently of the logical layout. Do not enlarge a coarse pixel grid to create quiet scenery.",
+    "prop": "Medium detail concentrated at the outer silhouette and a few identifying features. Keep interior shading grouped. Show one complete isolated object with a clear support contact.",
+    "enemy": "Highest silhouette clarity and controlled contrast in the scene. Consistent body proportions and equipment across poses, deliberate grouped shading, no fine stippled texture. Strict left-facing side profile.",
+    "ground": "A readable continuous walking lip with sparse low-contrast material marks. Keep the surface level and separate from scenery and actors.",
+    "avoid": [
+      "photorealism",
+      "intricate microtexture",
+      "dense cracks or hatching",
+      "single-pixel speckle",
+      "dithering",
+      "dramatic spotlights",
+      "bloom",
+      "soft airbrushed edges",
+      "text",
+      "watermarks",
+      "UI",
+      "painted checkerboard",
+      "isometric or overhead view",
+      "a road receding to a vanishing point"
+    ],
+    "walk": "Six ordered poses of an anatomy-appropriate walk in place: ready contact, weight shift, passing pose, opposite contact, opposite weight shift, return toward the starting contact. No horizontal travel across cells.",
+    "death": "Six ordered poses: recoil, loss of support, falling, floor contact, settling, fully inert corpse resting on its actual support. The last pose stays down."
+  },
+  "style_sha256": "f0df349515fe85db8cd5b3c41f4e1b328a0788be113de6e6050de778d50a7682",
+  "recipe": {
+    "text": "schema_version = 1\n\n[scene]\ncanvas = [640, 360]\nreference_height = 64\nground_y = 288\nceiling_clearance = 104\nfill = \"#171e25\"\n\n[[layers]]\nid = \"depth\"\nrole = \"rear\"\ncanvas = [640, 360]\nparallax = 0.10\ntransparent = false\norigin_y = 288\nprompt = \"Opaque distant recess layer only. A close horizontal band of dark shallow recesses in an enclosed passage, interrupted by dim silhouettes of distant supports. Subtle atmospheric depth and a narrow value range. No enormous chamber, vertical abyss, soaring pillars or receding corridor. No foreground ceiling, floor, nearby wall piers, props or characters. Fill the entire image; any visible recess has an enclosed back.\"\n\n[[layers]]\nid = \"wall\"\nrole = \"rear\"\ncanvas = [640, 360]\nparallax = 0.32\ntransparent = true\norigin_y = 288\nprompt = \"Separate nearer rear-wall layer on genuine transparency. Three irregularly spaced substantial wall piers with low connecting masonry or rock shelves, leaving broad transparent gaps between them to reveal the independently supplied recess layer. Wall piers extend down to logical row 288 of 360 and stay flush to the rear wall. The central action band has subdued material shading. Keep the upper third mostly transparent: the overhead ceiling is a separate asset. No horizon, sky, deep vista, freestanding props or floor strip. No painted dark backdrop in the gaps.\"\n\n[[layers]]\nid = \"roof\"\nrole = \"ceiling\"\ncanvas = [640, 240]\nparallax = 0.68\ntransparent = true\norigin_y = \"alpha_bottom\"\nprompt = \"A continuous heavy low overhead ceiling strip seen strictly from the side. WIDE 8:3 image, intended 2048 by 768 or equivalent. Solid material occupies the entire upper edge and roughly the upper two thirds, ending in an irregular but mostly horizontal underside with a few short downward projections. All material is physically connected to the top; the lower third is genuinely transparent empty air. A narrow dark nearly uniform top band blends into the solid ceiling fill. Compatible left and right edges for horizontal mirror repetition. No floor, columns reaching the bottom, detached rocks, characters, sky, windows, complete cavern or wall backdrop. This is a close tunnel roof cutout, not an entire scene.\"\n\n[themes.limestone_tunnel]\nname = \"Low earthy limestone cave\"\nmaterials = \"An ordinary compact underground cave of warm brown limestone, weathered earthen rock, subdued tan sediment bands and dusty cracks. Broad irregular rounded rock masses and shallow ledges, with occasional old brown timber. Natural rock buttresses rather than brick columns or arches. Ceiling: a heavy low gently uneven brown rock shelf; mostly blunt rounded underside, no hanging needles or icicle teeth. No stalagmite forest, dense stalactites, crystals, blue mineral crusts or dramatic fantasy formations.\"\npalette = \"Earth brown #554334, umber #382a21, warm charcoal #211b16, dusty warm gray #7d7060, muted tan #95816a and dark old timber #493727. No blue, cyan, teal or purple cast.\"\nlighting = \"Dim neutral-to-warm reflected light with soft brown shadows and restrained highlights. A typical earthy underground passage, neither icy nor orange-glowing.\"\n[themes.limestone_tunnel.scene]\nfill = \"#211b16\"\n\n[themes.frost_cave]\nname = \"Narrow frost cave\"\nmaterials = \"Compact glacial tunnel enclosed by layered opaque blue ice and dark frozen stone. Readable ice fractures and trapped cloudy bands. Ceiling: a low solid ice shelf with short attached icicles, compressed snow seams and no view of an open sky.\"\npalette = \"Desaturated steel blue, slate, dark indigo and restrained cloudy ice blue; sparse pale cyan edge accents.\"\nlighting = \"Muted diffuse blue light carried through cloudy ice, dark seams and no sparkling bloom.\"\n\n[themes.volcano_tunnel]\nname = \"Confined volcanic tunnel\"\nmaterials = \"A cramped horizontal lava tube of dark layered basalt and cooled lava folds. Sparse narrow ember seams. Ceiling: heavy basalt shelves with short attached lava drips and thick cooled crust; no vast caldera or magma lake.\"\npalette = \"Charcoal basalt, muted brown-black, ash gray and sparse dark burnt-orange seams.\"\nlighting = \"Dim reflected amber from sparse narrow seams below, with cool charcoal shadow and no glowing haze.\"\n\n[themes.crypt]\nname = \"Low vaulted crypt\"\nmaterials = \"A confined burial passage of weathered dressed stone, closed wall niches and worn mortar. Ceiling: a low shallow barrel vault with broad voussoir stones, occasional cracked mortar and attached stone ribs. No cathedral-height space or freestanding tombs baked into the background.\"\npalette = \"Muted blue-gray stone, old beige mortar, dark olive stains and deep cool shadow.\"\nlighting = \"Restrained indirect cool light on stone edges; niche interiors remain dim, with no luminous symbols.\"\n\n[themes.castle]\nname = \"Enclosed castle passage\"\nmaterials = \"A close medieval castle service passage with substantial dressed-stone wall piers and small shuttered recesses. Ceiling: low heavy timber crossbeams under a continuous stone-and-plaster roof, restrained grain and chipped plaster. No throne hall, outdoor battlements or soaring atrium.\"\npalette = \"Desaturated warm-gray masonry, cool charcoal shadows, weathered brown beams and muted ochre plaster.\"\nlighting = \"Soft indirect warm-gray light with shallow beam shadows; no brilliant windows or shafts of sunlight.\"\n",
+    "sha256": "3fb258fd050604818581357524f31d9f2d60ae2807f0862932e872fcfd6ae6a3"
+  },
+  "assets": [
+    {
+      "id": "hollow_delve_depth",
+      "name": "Low earthy limestone cave \u2014 depth",
+      "kind": "background",
+      "canvas": [
+        640,
+        360
+      ],
+      "transparent": false,
+      "prompt": "Use case: style-transfer\nInput image 1 is the edit target.\nRestyle the supplied game layer to the materials, palette and formations below. Preserve its canvas aspect ratio, orthographic camera, independent layer role, horizontal continuation and overall occupied/empty layout. Replace conflicting surface details and shapes; this is not merely a color tint.\nKeep the image completely opaque.\nUse case: stylized-concept\nAsset type: independently scrolling depth layer for a claustrophobic side-scrolling game interior\nPrimary request: Low earthy limestone cave\nMaterials: An ordinary compact underground cave of warm brown limestone, weathered earthen rock, subdued tan sediment bands and dusty cracks. Broad irregular rounded rock masses and shallow ledges, with occasional old brown timber. Natural rock buttresses rather than brick columns or arches. Ceiling: a heavy low gently uneven brown rock shelf; mostly blunt rounded underside, no hanging needles or icicle teeth. No stalagmite forest, dense stalactites, crystals, blue mineral crusts or dramatic fantasy formations.\nComposition: Opaque distant recess layer only. A close horizontal band of dark shallow recesses in an enclosed passage, interrupted by dim silhouettes of distant supports. Subtle atmospheric depth and a narrow value range. No enormous chamber, vertical abyss, soaring pillars or receding corridor. No foreground ceiling, floor, nearby wall piers, props or characters. Fill the entire image; any visible recess has an enclosed back.\nCamera: strict orthographic side view along a horizontal tunnel, parallel to the image plane. The passage continues sideways off both edges.\nStyle/medium: Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks. Refined material edges and deliberate fine pixel clusters at the Wetlands texture density. Keep local contrast restrained behind actors; distant layers use a narrower value range. Preserve full texture resolution independently of the logical layout. Do not enlarge a coarse pixel grid to create quiet scenery.\nColor palette: Earth brown #554334, umber #382a21, warm charcoal #211b16, dusty warm gray #7d7060, muted tan #95816a and dark old timber #493727. No blue, cyan, teal or purple cast.\nLighting: Dim neutral-to-warm reflected light with soft brown shadows and restrained highlights. A typical earthy underground passage, neither icy nor orange-glowing.\nCanvas: 640 by 360 logical units; generate a large image with width at least 1536 pixels and this aspect ratio.\nOpacity: completely opaque edge-to-edge image.\nIf a reference image is supplied, use it for pixel texture density and restrained shading only; keep the requested indoor subject and enclosed composition.\nAvoid: photorealism, intricate microtexture, dense cracks or hatching, single-pixel speckle, dithering, dramatic spotlights, bloom, soft airbrushed edges, text, watermarks, UI, painted checkerboard, isometric or overhead view, a road receding to a vanishing point, tiny-resolution upscaling, flat featureless polygons, harsh white highlights, vast cave expanses, soaring ceilings, long vanishing-point corridors, characters",
+      "prompt_sha256": "5f2f67dfb1792ea7d5e332909d60b7de2519c55760b0a63a20130a505cbf5b97",
+      "source_definition": {
+        "visual_description": "An ordinary compact underground cave of warm brown limestone, weathered earthen rock, subdued tan sediment bands and dusty cracks. Broad irregular rounded rock masses and shallow ledges, with occasional old brown timber. Natural rock buttresses rather than brick columns or arches. Ceiling: a heavy low gently uneven brown rock shelf; mostly blunt rounded underside, no hanging needles or icicle teeth. No stalagmite forest, dense stalactites, crystals, blue mineral crusts or dramatic fantasy formations.",
+        "layer": {
+          "id": "depth",
+          "role": "rear",
+          "canvas": [
+            640,
+            360
+          ],
+          "parallax": 0.1,
+          "transparent": false,
+          "origin_y": 288,
+          "prompt": "Opaque distant recess layer only. A close horizontal band of dark shallow recesses in an enclosed passage, interrupted by dim silhouettes of distant supports. Subtle atmospheric depth and a narrow value range. No enormous chamber, vertical abyss, soaring pillars or receding corridor. No foreground ceiling, floor, nearby wall piers, props or characters. Fill the entire image; any visible recess has an enclosed back."
+        }
+      },
+      "export": {
+        "resolution": "source",
+        "min_width": 1536,
+        "sampling": "nearest",
+        "colors": "source",
+        "alpha": "opaque"
+      },
+      "reference": {
+        "image": "image-generation/scene-samples/hollow-delve-tunnel-v6/prepared/hollow_delve_depth.png",
+        "sha256": "801fec48209f957a60ec9b10fc45b4ebd0dcba0fde43a9423b66a208e579eb21"
+      }
+    },
+    {
+      "id": "hollow_delve_wall",
+      "name": "Low earthy limestone cave \u2014 wall",
+      "kind": "background",
+      "canvas": [
+        640,
+        360
+      ],
+      "transparent": true,
+      "prompt": "Use case: style-transfer\nInput image 1 is the edit target.\nRestyle the supplied game layer to the materials, palette and formations below. Preserve its canvas aspect ratio, orthographic camera, independent layer role, horizontal continuation and overall occupied/empty layout. Replace conflicting surface details and shapes; this is not merely a color tint.\nKeep genuine transparent alpha in empty areas, never a painted checkerboard or matte.\nUse case: stylized-concept\nAsset type: independently scrolling wall layer for a claustrophobic side-scrolling game interior\nPrimary request: Low earthy limestone cave\nMaterials: An ordinary compact underground cave of warm brown limestone, weathered earthen rock, subdued tan sediment bands and dusty cracks. Broad irregular rounded rock masses and shallow ledges, with occasional old brown timber. Natural rock buttresses rather than brick columns or arches. Ceiling: a heavy low gently uneven brown rock shelf; mostly blunt rounded underside, no hanging needles or icicle teeth. No stalagmite forest, dense stalactites, crystals, blue mineral crusts or dramatic fantasy formations.\nComposition: Separate nearer rear-wall layer on genuine transparency. Three irregularly spaced substantial wall piers with low connecting masonry or rock shelves, leaving broad transparent gaps between them to reveal the independently supplied recess layer. Wall piers extend down to logical row 288 of 360 and stay flush to the rear wall. The central action band has subdued material shading. Keep the upper third mostly transparent: the overhead ceiling is a separate asset. No horizon, sky, deep vista, freestanding props or floor strip. No painted dark backdrop in the gaps.\nCamera: strict orthographic side view along a horizontal tunnel, parallel to the image plane. The passage continues sideways off both edges.\nStyle/medium: Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks. Refined material edges and deliberate fine pixel clusters at the Wetlands texture density. Keep local contrast restrained behind actors; distant layers use a narrower value range. Preserve full texture resolution independently of the logical layout. Do not enlarge a coarse pixel grid to create quiet scenery.\nColor palette: Earth brown #554334, umber #382a21, warm charcoal #211b16, dusty warm gray #7d7060, muted tan #95816a and dark old timber #493727. No blue, cyan, teal or purple cast.\nLighting: Dim neutral-to-warm reflected light with soft brown shadows and restrained highlights. A typical earthy underground passage, neither icy nor orange-glowing.\nCanvas: 640 by 360 logical units; generate a large image with width at least 1536 pixels and this aspect ratio.\nTransparency: genuine alpha in all empty areas; never paint checkerboard or a colored matte.\nIf a reference image is supplied, use it for pixel texture density and restrained shading only; keep the requested indoor subject and enclosed composition.\nAvoid: photorealism, intricate microtexture, dense cracks or hatching, single-pixel speckle, dithering, dramatic spotlights, bloom, soft airbrushed edges, text, watermarks, UI, painted checkerboard, isometric or overhead view, a road receding to a vanishing point, tiny-resolution upscaling, flat featureless polygons, harsh white highlights, vast cave expanses, soaring ceilings, long vanishing-point corridors, characters",
+      "prompt_sha256": "322668811d1b517e7e3caa7529db84d919e62ed2c1262ac1a00627ee3393fe81",
+      "source_definition": {
+        "visual_description": "An ordinary compact underground cave of warm brown limestone, weathered earthen rock, subdued tan sediment bands and dusty cracks. Broad irregular rounded rock masses and shallow ledges, with occasional old brown timber. Natural rock buttresses rather than brick columns or arches. Ceiling: a heavy low gently uneven brown rock shelf; mostly blunt rounded underside, no hanging needles or icicle teeth. No stalagmite forest, dense stalactites, crystals, blue mineral crusts or dramatic fantasy formations.",
+        "layer": {
+          "id": "wall",
+          "role": "rear",
+          "canvas": [
+            640,
+            360
+          ],
+          "parallax": 0.32,
+          "transparent": true,
+          "origin_y": 288,
+          "prompt": "Separate nearer rear-wall layer on genuine transparency. Three irregularly spaced substantial wall piers with low connecting masonry or rock shelves, leaving broad transparent gaps between them to reveal the independently supplied recess layer. Wall piers extend down to logical row 288 of 360 and stay flush to the rear wall. The central action band has subdued material shading. Keep the upper third mostly transparent: the overhead ceiling is a separate asset. No horizon, sky, deep vista, freestanding props or floor strip. No painted dark backdrop in the gaps."
+        }
+      },
+      "export": {
+        "resolution": "source",
+        "min_width": 1536,
+        "sampling": "nearest",
+        "colors": "source",
+        "alpha": "binary"
+      },
+      "reference": {
+        "image": "image-generation/scene-samples/hollow-delve-tunnel-v6/prepared/hollow_delve_wall.png",
+        "sha256": "aefb4dadc1ea71113d85a1d96f41efdd512903bbf89ddac495e2aef5bcf9a905"
+      }
+    },
+    {
+      "id": "hollow_delve_roof",
+      "name": "Low earthy limestone cave \u2014 roof",
+      "kind": "background",
+      "canvas": [
+        640,
+        240
+      ],
+      "transparent": true,
+      "prompt": "Use case: style-transfer\nInput image 1 is the edit target.\nRestyle the supplied game layer to the materials, palette and formations below. Preserve its canvas aspect ratio, orthographic camera, independent layer role, horizontal continuation and overall occupied/empty layout. Replace conflicting surface details and shapes; this is not merely a color tint.\nKeep genuine transparent alpha in empty areas, never a painted checkerboard or matte.\nUse case: stylized-concept\nAsset type: independently scrolling roof layer for a claustrophobic side-scrolling game interior\nPrimary request: Low earthy limestone cave\nMaterials: An ordinary compact underground cave of warm brown limestone, weathered earthen rock, subdued tan sediment bands and dusty cracks. Broad irregular rounded rock masses and shallow ledges, with occasional old brown timber. Natural rock buttresses rather than brick columns or arches. Ceiling: a heavy low gently uneven brown rock shelf; mostly blunt rounded underside, no hanging needles or icicle teeth. No stalagmite forest, dense stalactites, crystals, blue mineral crusts or dramatic fantasy formations.\nComposition: A continuous heavy low overhead ceiling strip seen strictly from the side. WIDE 8:3 image, intended 2048 by 768 or equivalent. Solid material occupies the entire upper edge and roughly the upper two thirds, ending in an irregular but mostly horizontal underside with a few short downward projections. All material is physically connected to the top; the lower third is genuinely transparent empty air. A narrow dark nearly uniform top band blends into the solid ceiling fill. Compatible left and right edges for horizontal mirror repetition. No floor, columns reaching the bottom, detached rocks, characters, sky, windows, complete cavern or wall backdrop. This is a close tunnel roof cutout, not an entire scene.\nCamera: strict orthographic side view along a horizontal tunnel, parallel to the image plane. The passage continues sideways off both edges.\nStyle/medium: Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks. Refined material edges and deliberate fine pixel clusters at the Wetlands texture density. Keep local contrast restrained behind actors; distant layers use a narrower value range. Preserve full texture resolution independently of the logical layout. Do not enlarge a coarse pixel grid to create quiet scenery.\nColor palette: Earth brown #554334, umber #382a21, warm charcoal #211b16, dusty warm gray #7d7060, muted tan #95816a and dark old timber #493727. No blue, cyan, teal or purple cast.\nLighting: Dim neutral-to-warm reflected light with soft brown shadows and restrained highlights. A typical earthy underground passage, neither icy nor orange-glowing.\nCanvas: 640 by 240 logical units; generate a large image with width at least 1536 pixels and this aspect ratio.\nTransparency: genuine alpha in all empty areas; never paint checkerboard or a colored matte.\nIf a reference image is supplied, use it for pixel texture density and restrained shading only; keep the requested indoor subject and enclosed composition.\nAvoid: photorealism, intricate microtexture, dense cracks or hatching, single-pixel speckle, dithering, dramatic spotlights, bloom, soft airbrushed edges, text, watermarks, UI, painted checkerboard, isometric or overhead view, a road receding to a vanishing point, tiny-resolution upscaling, flat featureless polygons, harsh white highlights, vast cave expanses, soaring ceilings, long vanishing-point corridors, characters",
+      "prompt_sha256": "b5b457b42d571bb12826ace681cb154d311e7df73c230736c7df6b5b339aca80",
+      "source_definition": {
+        "visual_description": "An ordinary compact underground cave of warm brown limestone, weathered earthen rock, subdued tan sediment bands and dusty cracks. Broad irregular rounded rock masses and shallow ledges, with occasional old brown timber. Natural rock buttresses rather than brick columns or arches. Ceiling: a heavy low gently uneven brown rock shelf; mostly blunt rounded underside, no hanging needles or icicle teeth. No stalagmite forest, dense stalactites, crystals, blue mineral crusts or dramatic fantasy formations.",
+        "layer": {
+          "id": "roof",
+          "role": "ceiling",
+          "canvas": [
+            640,
+            240
+          ],
+          "parallax": 0.68,
+          "transparent": true,
+          "origin_y": "alpha_bottom",
+          "prompt": "A continuous heavy low overhead ceiling strip seen strictly from the side. WIDE 8:3 image, intended 2048 by 768 or equivalent. Solid material occupies the entire upper edge and roughly the upper two thirds, ending in an irregular but mostly horizontal underside with a few short downward projections. All material is physically connected to the top; the lower third is genuinely transparent empty air. A narrow dark nearly uniform top band blends into the solid ceiling fill. Compatible left and right edges for horizontal mirror repetition. No floor, columns reaching the bottom, detached rocks, characters, sky, windows, complete cavern or wall backdrop. This is a close tunnel roof cutout, not an entire scene."
+        }
+      },
+      "export": {
+        "resolution": "source",
+        "min_width": 1536,
+        "sampling": "nearest",
+        "colors": "source",
+        "alpha": "binary"
+      },
+      "reference": {
+        "image": "image-generation/scene-samples/hollow-delve-tunnel-v6/prepared/hollow_delve_roof.png",
+        "sha256": "b9553dc3437dcc04ff7535a2e603218cf1d49288553677b42d7eeea7ab18f4a6"
+      }
+    }
+  ],
+  "source_sha256": {
+    "biomes/hollow_delve/BIOME.toml": "336fa6d9c422a97f4957c049c8f99ce87fe55cf048a501971d80f5d2521b3dfe",
+    "biomes/hollow_delve/SCENERY.toml": "a144e5e5f1a0e70d8331d480dd7c50558a54e7af29310ae83fedbb086a65385d",
+    "biomes/hollow_delve/ENEMIES.toml": "326934d55340a07cb5a39845c97f57017d7e3eeebd262b7d0268bf82b3c45a92"
+  }
+}

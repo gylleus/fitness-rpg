@@ -72,6 +72,10 @@ Texture pixels and world coordinates are separate. A 2048×768 roof occupies a
 the ground. The default clearance is 104 units for a 64-unit actor. It stays
 relative to actors when the viewport changes; tall screens fill upward with the
 roof's opaque upper edge. Grounded props remain beneath the roof drawing layer.
+If extraction clears the dark band above the roof, preparation measures its first
+fully opaque horizontal cross-section as `cap_y`. The renderer joins that row to
+the scene's solid fill above, keeping the ceiling continuous without repainting
+the texture. A roof with no opaque cross-section or no empty air beneath fails.
 
 For a different architecture, copy the shared TOML, add a material theme and pass
 `--recipe PATH`. Optional `[themes.NAME.scene]` overrides allow a higher vaulted

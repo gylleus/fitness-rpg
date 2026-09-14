@@ -1,0 +1,48 @@
+<!doctype html><meta charset="utf-8"><title>Biome asset review</title><style>body{background:#20272d;color:#ddd;font:16px sans-serif}img,canvas{image-rendering:pixelated;max-width:100%;background:#343b42}figure{margin:24px 0}label{margin-right:16px}</style><h1>Review at logical size</h1><p>Inspect quiet combat space, alpha, contact and repeat seams in the game composition before bundling.</p><h2>Interior composition</h2>
+<p>Drag travel to inspect parallax and mirrored seams. The outline marks one reference-height actor; review actual combat sprites in the runtime audit too.</p>
+<label>Travel <input id="travel" type="range" min="0" max="12800" value="0" step="1"></label>
+<label>Viewport <select id="viewport"><option value="wide">Landscape</option><option value="tall">Portrait</option></select></label>
+<p id="layers"></p><canvas id="scene"></canvas>
+<script type="application/json" id="interior-data">{"scene": {"schema_version": 1, "canvas": [640, 360], "reference_height": 64, "ground_y": 288, "ceiling_clearance": 104, "fill": "#211b16", "layers": [{"id": "depth", "role": "rear", "canvas": [640, 360], "parallax": 0.1, "origin_y": 288, "asset_id": "hollow_delve_depth", "repeat": "mirror"}, {"id": "wall", "role": "rear", "canvas": [640, 360], "parallax": 0.32, "origin_y": 288, "asset_id": "hollow_delve_wall", "repeat": "mirror"}, {"id": "roof", "role": "ceiling", "canvas": [640, 240], "parallax": 0.68, "origin_y": 140.3125, "asset_id": "hollow_delve_roof", "repeat": "mirror", "cap_y": 28.75}]}, "assets": {"hollow_delve_depth": {"image": "hollow_delve_depth.png", "sha256": "29935ac8c41eabfd4f0f61e93639ff6bf653ecfdb0ec29a27b97453dcb918c26", "size": [1672, 941], "source": "../sources/depth.png", "source_sha256": "728ca29de83dd608e8f08a7619f9ebdd53f3a84b40b146607a7bb8d670794227", "backend": "built-in imagegen", "prompt_sha256": "5f2f67dfb1792ea7d5e332909d60b7de2519c55760b0a63a20130a505cbf5b97", "export": {"resolution": "source", "min_width": 1536, "sampling": "nearest", "colors": "source", "alpha": "opaque"}}, "hollow_delve_wall": {"image": "hollow_delve_wall.png", "sha256": "ef482cdb1cef9778f395aa0d44cbd437db487b4e84ab233c3cabf5216f146f2b", "size": [1672, 941], "source": "../sources/wall.png", "source_sha256": "a9bf7df1fb0eb05dc34c1327da459c876e789f305b56bcbcac80c2f02249030c", "backend": "built-in imagegen", "prompt_sha256": "322668811d1b517e7e3caa7529db84d919e62ed2c1262ac1a00627ee3393fe81", "export": {"resolution": "source", "min_width": 1536, "sampling": "nearest", "colors": "source", "alpha": "binary"}}, "hollow_delve_roof": {"image": "hollow_delve_roof.png", "sha256": "c6404369c30b183737b943ef48821ab483610205569958591fe8870fab7e8eaa", "size": [2048, 768], "source": "../sources/roof.png", "source_sha256": "380d76dae08bfe8b4f407295b7c88f99d0ebd37fa7a04f55c16a12da45fb7461", "backend": "built-in imagegen", "prompt_sha256": "b5b457b42d571bb12826ace681cb154d311e7df73c230736c7df6b5b339aca80", "export": {"resolution": "source", "min_width": 1536, "sampling": "nearest", "colors": "source", "alpha": "binary"}}}}</script>
+<script>
+const data=JSON.parse(document.getElementById('interior-data').textContent);
+const canvas=document.getElementById('scene'), ctx=canvas.getContext('2d');
+const travel=document.getElementById('travel'), viewport=document.getElementById('viewport');
+const loaded={}, enabled={};
+for(const layer of data.scene.layers){
+  const label=document.createElement('label'), check=document.createElement('input');
+  check.type='checkbox';check.checked=true;enabled[layer.id]=true;
+  check.onchange=()=>{enabled[layer.id]=check.checked;draw()};
+  label.append(check,document.createTextNode(layer.id));document.getElementById('layers').append(label);
+}
+function draw(){
+  const s=data.scene, tall=viewport.value==='tall';
+  canvas.width=tall?390:640;canvas.height=tall?600:360;
+  const scale=(tall?100:64)/s.reference_height, ground=canvas.height-(tall?70:72);
+  const ceiling=ground-s.ceiling_clearance*scale;
+  ctx.imageSmoothingEnabled=false;ctx.fillStyle=s.fill;ctx.fillRect(0,0,canvas.width,canvas.height);
+  for(const layer of s.layers){
+    const im=loaded[layer.asset_id];if(!im||!enabled[layer.id])continue;
+    const w=layer.canvas[0]*scale,h=layer.canvas[1]*scale;
+    const y=(layer.role==='ceiling'?ceiling:ground)-layer.origin_y*scale;
+    if(layer.role==='ceiling'){ctx.fillStyle=s.fill;ctx.fillRect(0,0,canvas.width,Math.max(0,y+(layer.cap_y||0)*scale))}
+    const offset=(-Number(travel.value)*layer.parallax)%(2*w);
+    for(let n=Math.floor(-offset/w)-1;n*w+offset<canvas.width;n++){
+      ctx.save();ctx.translate(n*w+offset,y);if(Math.abs(n%2)===1){ctx.translate(w,0);ctx.scale(-1,1)}
+      if(y>0)ctx.drawImage(im,0,0,im.width,1,0,-y,w,y);
+      ctx.drawImage(im,0,0,w,h);
+      if(y+h<canvas.height)ctx.drawImage(im,0,im.height-1,im.width,1,0,h,w,canvas.height-y-h);
+      ctx.restore();
+    }
+  }
+  ctx.fillStyle=s.fill;ctx.fillRect(0,ground,canvas.width,canvas.height-ground);
+  ctx.strokeStyle='#d5b969';ctx.lineWidth=1;
+  ctx.strokeRect(canvas.width*.22-12*scale,ground-s.reference_height*scale,24*scale,s.reference_height*scale);
+}
+travel.oninput=draw;viewport.onchange=draw;
+Promise.all(Object.entries(data.assets).map(([id,asset])=>new Promise((resolve,reject)=>{
+  const im=new Image();im.onload=()=>{loaded[id]=im;resolve()};im.onerror=reject;im.src=asset.image;
+}))).then(draw).catch(()=>{document.getElementById('layers').append(' Image load failed. Keep this page beside its PNGs.')});
+</script><figure><img width="640" src="hollow_delve_depth.png"><figcaption>hollow_delve_depth — texture [1672, 941], logical canvas [640, 360]</figcaption></figure>
+<figure><img width="640" src="hollow_delve_wall.png"><figcaption>hollow_delve_wall — texture [1672, 941], logical canvas [640, 360]</figcaption></figure>
+<figure><img width="640" src="hollow_delve_roof.png"><figcaption>hollow_delve_roof — texture [2048, 768], logical canvas [640, 240]</figcaption></figure>

@@ -7,7 +7,7 @@
   "reference_height": 64,
   "ground_y": 288,
   "ceiling_clearance": 104,
-  "fill": "#171e25",
+  "fill": "#211b16",
   "layers": [
     {
       "id": "depth",
@@ -43,9 +43,10 @@
         240
       ],
       "parallax": 0.68,
-      "origin_y": 143.125,
+      "origin_y": 140.3125,
       "asset_id": "hollow_delve_roof",
       "repeat": "mirror",
+      "cap_y": 28.75,
       "image": "roof"
     }
   ]

@@ -78,17 +78,22 @@ def make_interior_plan(theme, biome_id=None, recipe_path=None, style_path=None):
 
 
 def prepared_scene(plan, prepared_images):
+    import numpy as np
     scene = deepcopy(plan["interior"])
     validate_scene(scene)
     for layer in scene["layers"]:
         image = prepared_images[layer["asset_id"]]
         if layer["role"] == "ceiling":
             alpha = image.getchannel("A")
-            if alpha.crop((0, 0, image.width, 1)).getextrema() != (255, 255):
-                raise ValueError("Ceiling must connect opaquely across the complete top edge")
             bounds = alpha.getbbox()
             if not bounds or bounds[3] >= image.height:
                 raise ValueError("Ceiling needs transparent clearance below its underside")
+            solid_rows = np.flatnonzero((np.array(alpha) == 255).all(axis=1))
+            if not len(solid_rows):
+                raise ValueError("Ceiling needs a solid cross-section across its complete width")
+            # Background removal may clear the dark band above the rock. Join
+            # its first full-width solid row to the scene fill in the renderer.
+            layer["cap_y"] = int(solid_rows[0]) * layer["canvas"][1] / image.height
             if layer["origin_y"] == "alpha_bottom":
                 layer["origin_y"] = bounds[3] * layer["canvas"][1] / image.height
         elif layer["origin_y"] == "alpha_bottom":
@@ -127,6 +132,7 @@ function draw(){
     const im=loaded[layer.asset_id];if(!im||!enabled[layer.id])continue;
     const w=layer.canvas[0]*scale,h=layer.canvas[1]*scale;
     const y=(layer.role==='ceiling'?ceiling:ground)-layer.origin_y*scale;
+    if(layer.role==='ceiling'){ctx.fillStyle=s.fill;ctx.fillRect(0,0,canvas.width,Math.max(0,y+(layer.cap_y||0)*scale))}
     const offset=(-Number(travel.value)*layer.parallax)%(2*w);
     for(let n=Math.floor(-offset/w)-1;n*w+offset<canvas.width;n++){
       ctx.save();ctx.translate(n*w+offset,y);if(Math.abs(n%2)===1){ctx.translate(w,0);ctx.scale(-1,1)}

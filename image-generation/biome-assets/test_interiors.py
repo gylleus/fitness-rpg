@@ -57,8 +57,13 @@ class InteriorTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "transparent clearance"):
             prepared_scene(plan, images)
         images["crypt_roof"] = Image.new("RGBA", (64, 24))
-        with self.assertRaisesRegex(ValueError, "complete top edge"):
+        with self.assertRaisesRegex(ValueError, "transparent clearance"):
             prepared_scene(plan, images)
+        roof = images["crypt_roof"]
+        roof.paste((30, 40, 50, 255), (0, 4, 64, 16))
+        resolved = prepared_scene(plan, images)["layers"][2]
+        self.assertEqual(resolved["cap_y"], 40)
+        self.assertEqual(resolved["origin_y"], 160)
 
     def test_invalid_geometry_and_parallax_rejected(self):
         plan = make_interior_plan("castle")
