@@ -157,6 +157,18 @@ run. Its controls inspect both chapter sections; it is disabled in release
 builds. Run `npm run test:scenery` for texture/source hashes, actual Skia rendering,
 ground contact, roof clearance and independent layer repetition across all sets.
 
+After building a release APK, verify the delivery artifact before installing it:
+
+```sh
+uv run sprite-python scripts/check_android_biomes.py --aapt2 "$ANDROID_HOME/build-tools/36.0.0/aapt2"
+```
+
+This checks every runtime biome's actual packaged pixels through Android's
+resource table, the compiled bundle, and the chapter routing source map. It
+catches a review-only export, unregistered textures and a build from the wrong
+checkout. Install the verified APK with `adb -s ENDPOINT install -r
+android/app/build/outputs/apk/release/app-release.apk` to preserve existing saves.
+
 Use image references with explicit roles: the approved player for sprite style,
 the approved enemy for identity and motion, or a selected scene for background
 style. Do not transfer a reference's unrelated anatomy or objects. Record the
