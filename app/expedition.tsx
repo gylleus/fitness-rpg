@@ -59,7 +59,7 @@ export default function ExpeditionScreen() {
       </View>
       <View style={styles.chapter}><Text style={[ui.label, { color: dungeon.color }]}>{dungeon.name}</Text>
         {dungeon.difficulty && <Text style={ui.small}>{dungeon.difficulty} · Level {dungeon.level}</Text>}
-        <Text style={ui.small}>{battle.defeated}/{dungeon.enemies.length} encounters · {battle.loot?.length ?? 0} items · ◆ {battle.gold} {active ? 'pending' : 'earned'}</Text></View>
+        <Text style={ui.small}>{battle.defeated}/{dungeon.enemies.length - (dungeon.chestEncounters?.length ?? 0)} monsters · {battle.loot?.length ?? 0} items · ◆ {battle.gold} {active ? 'pending' : 'earned'}</Text></View>
       {!atChest && <View style={[styles.health, { maxWidth: 260 }]}>
         <Text numberOfLines={1} style={[styles.name, { textAlign: 'right' }]}>{enemy.name} · {battle.enemyHp}/{enemy.health} HP</Text>
         <Meter value={battle.enemyHp} max={enemy.health} color={colors.red} label="Enemy health" />
