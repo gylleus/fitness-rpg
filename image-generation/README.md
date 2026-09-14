@@ -1,5 +1,8 @@
 # Local sprite generation
 
+All game-art pipelines use the [shared master palette](PALETTE.md), currently
+ENDESGA 32 in `assets/palette.json`. Color counts alone are not a palette contract.
+
 Start new biome work with the [biome asset interface and prompt guide](biome-assets/README.md):
 `uv run biome-assets plan --biome ID --out PLAN.json`. It covers backgrounds,
 ground, props and enemy references using one shared style profile. Current enemy

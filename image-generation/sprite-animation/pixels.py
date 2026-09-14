@@ -13,7 +13,6 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 from scipy import ndimage
-from skimage.color import rgb2lab, deltaE_ciede2000
 from skimage.transform import resize
 
 from common import ROOT, STUDY, PYX_REV, save_json, sha256
@@ -21,9 +20,8 @@ from common import ROOT, STUDY, PYX_REV, save_json, sha256
 sys.path.insert(0, str(STUDY / "vendor" / f"pyxelate-{PYX_REV}"))
 
 
-def palette_colors():
-    colors = json.loads((ROOT / "palette.json").read_text())["colors"]
-    return np.array([list(bytes.fromhex(c.lstrip("#"))) for c in colors], dtype=np.uint8)
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
+from asset_palette import map_palette, palette_colors, palette_contract, load_palette
 
 
 def extend_foreground(rgba):
@@ -42,20 +40,6 @@ def extend_foreground(rgba):
     _, indices = ndimage.distance_transform_edt(~confident, return_indices=True)
     rgb = a[..., :3][tuple(indices)]
     return Image.fromarray(rgb, "RGB")
-
-
-def map_palette(rgb, colors=None, metric="ciede2000"):
-    colors = palette_colors() if colors is None else colors
-    lab = rgb2lab(np.asarray(rgb.convert("RGB")) / 255.0)
-    palette_lab = rgb2lab(colors[None, :, :] / 255.0)[0]
-    if metric == "ciede2000":
-        distance = deltaE_ciede2000(lab[:, :, None, :], palette_lab[None, None, :, :])
-    elif metric == "cie76":
-        distance = ((lab[:, :, None, :] - palette_lab) ** 2).sum(-1)
-    else:
-        raise ValueError(f"Unknown palette metric: {metric}")
-    closest = distance.argmin(-1)
-    return Image.fromarray(colors[closest], "RGB")
 
 
 def convert(rgba, size, method="conservative", mask_resize="coverage", threshold=128, color_metric="ciede2000"):
@@ -249,7 +233,7 @@ def export(frames, loop, out, name, pivot, metadata_extra=None):
         "format": "RGBA8888", "size": {"w": sheet.width, "h": sheet.height}, "scale": "1",
         "frameTags": [{"name": name, "from": 0, "to": len(selected) - 1, "direction": "forward"}],
         "pivot": {"x": pivot[0], "y": pivot[1], "units": "normalized_frame"},
-        "palette": "ENDESGA 32", "loop": loop, **(metadata_extra or {})}})
+        "palette": load_palette()["name"], "palette_contract": palette_contract(), "loop": loop, **(metadata_extra or {})}})
 
 
 def comparison(rows, out):

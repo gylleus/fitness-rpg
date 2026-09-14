@@ -17,6 +17,7 @@ sys.path.insert(0, str(BASE))
 import numpy as np
 from PIL import Image
 from pixels import convert, fixed_crop, comparison
+from asset_palette import palette_contract
 
 
 def import_sheet(recipe_path, out):
@@ -69,7 +70,7 @@ def import_sheet(recipe_path, out):
         "height_scale": recipe.get("height_scale", 1), "reference_idle_height_px": idle_height,
         "shared_crop": box, "actions": {}, "source": provenance,
         "backend": recipe.get("backend", "authored sheet import"),
-        "recipe_sha256": sha256(recipe_path),
+        "recipe_sha256": sha256(recipe_path), "palette_contract": palette_contract(),
         "code_sha256": {"sheet_import.py": sha256(Path(__file__)), "pixels.py": sha256(BASE/"pixels.py")},
         "framing": "Explicit source rectangles and ground origins; one union crop/scale for all actions."}
     rows = []

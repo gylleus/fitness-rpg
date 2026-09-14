@@ -8,6 +8,8 @@ const root = path.resolve(__dirname, '..');
 const partial = process.argv.includes('--partial');
 const check = process.argv.includes('--check');
 const definitions = require('../src/game/catalog/items.json').items;
+const palette = require('../assets/palette.json');
+const allowed = new Set(palette.colors.map(color => parseInt(color.slice(1), 16)));
 const entries = {};
 const hashes = new Set();
 for (const id of Object.keys(definitions)) {
@@ -20,6 +22,10 @@ for (const id of Object.keys(definitions)) {
   let occupied = 0, transparent = 0, border = 0;
   for (let y = 0; y < 64; y++) for (let x = 0; x < 64; x++) {
     const alpha = pixels[(y * 64 + x) * 4 + 3];
+    const i = (y * 64 + x) * 4;
+    if (alpha > 0 && !allowed.has((pixels[i] << 16) | (pixels[i + 1] << 8) | pixels[i + 2])) {
+      throw new Error(`${id}: visible RGB outside ${palette.name}`);
+    }
     if (alpha === 0) transparent++;
     if (alpha >= 128) {
       occupied++;

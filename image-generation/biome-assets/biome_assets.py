@@ -13,6 +13,7 @@ import shutil
 import sys
 
 from pixel_style import compile_texture, export_contract, guidance
+from asset_palette import map_palette, palette_contract, palette_guidance, validate_image
 
 if sys.version_info < (3, 11):
     import tomli as tomllib
@@ -108,7 +109,7 @@ def make_plan(biome_id, kind="all", selected=None, content_root=None, style_path
                  f"Primary request: {entry['name']}", f"Subject: {entry['visual_description'].strip()}",
                  f"Style/medium: {style['style']} {style[role]}",
                  "Composition/framing: orthographic side view, parallel to the screen.",
-                 f"Lighting/mood: {biome['visual']['lighting']}", f"Color palette: {palette}"]
+                 f"Lighting/mood: {biome['visual']['lighting']}", f"Material color intent: {palette}", palette_guidance()]
         constraints = [f"Designed for {canvas[0]} by {canvas[1]} logical pixels; judge detail at this size."]
         if role != "enemy":
             constraints.append(guidance(style["pixels"], canvas if role != "prop" else None,
@@ -179,7 +180,7 @@ def prepare(plan_path, sources_path, out):
     expected = {entry["id"] for entry in plan["assets"]}
     if set(sources["assets"]) != expected:
         raise ValueError("Sources must cover exactly the selected planned assets")
-    fingerprint = {"plan_sha256": sha(plan_path), "sources_sha256": sha(sources_path)}
+    fingerprint = {"plan_sha256": sha(plan_path), "sources_sha256": sha(sources_path), "palette": palette_contract()}
     if (out / "manifest.json").exists():
         old = json.loads((out / "manifest.json").read_text())
         if old["inputs"] != fingerprint:
@@ -240,7 +241,7 @@ def prepare(plan_path, sources_path, out):
         pixels[pixels[..., 3] == 0] = 0
         if not pixels[..., 3].any():
             raise ValueError(f"Asset disappears at logical resolution: {asset['id']}")
-        prepared.append((asset, spec, source, Image.fromarray(pixels)))
+        prepared.append(({**asset, "export": {**asset["export"], "palette": palette_contract()}}, spec, source, map_palette(Image.fromarray(pixels))))
     ground_metadata = {}
     for asset, _, _, image in prepared:
         if asset["kind"] == "ground":
@@ -279,6 +280,7 @@ def prepare(plan_path, sources_path, out):
 def bundle(manifest_path, mapping_path, out=None):
     manifest_path, mapping_path = Path(manifest_path).resolve(), Path(mapping_path).resolve()
     manifest, mapping = json.loads(manifest_path.read_text()), json.loads(mapping_path.read_text())
+    from PIL import Image
     biome = safe_id(manifest["biome_id"])
     out = Path(out or ROOT / "assets" / "biomes" / biome).resolve()
     if not mapping or len(set(mapping.values())) != len(mapping):
@@ -291,6 +293,7 @@ def bundle(manifest_path, mapping_path, out=None):
         source = (manifest_path.parent / spec["source"]).resolve()
         if sha(image) != spec["sha256"] or sha(source) != spec["source_sha256"]:
             raise ValueError(f"Prepared image or original source changed: {key}")
+        validate_image(Image.open(image), image)
         source_relative = str(source.relative_to(ROOT))
         selected.append((key, slot, spec, image, source_relative))
     interior = deepcopy(manifest.get("interior"))

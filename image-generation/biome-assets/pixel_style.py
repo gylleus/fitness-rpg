@@ -7,6 +7,10 @@ from copy import deepcopy
 import math
 from pathlib import Path
 import tomllib
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
+from asset_palette import map_palette, palette_contract, palette_guidance, load_palette
 
 STYLE = Path(__file__).with_name("style.toml")
 
@@ -22,7 +26,11 @@ def validate(profile):
         colors = profile.get(f"{kind}_colors")
         if type(colors) is not int or not 2 <= colors <= 256:
             raise ValueError(f"Invalid {kind} palette budget")
-    return deepcopy(profile)
+    result = deepcopy(profile)
+    # Saved older recipes retain their geometry but cannot select independent colors.
+    result.update({f"{kind}_colors": len(load_palette()["colors"]) for kind in ("background", "ground", "prop")})
+    result["palette"] = palette_contract()
+    return result
 
 
 def load_profile(path=None):
@@ -30,7 +38,8 @@ def load_profile(path=None):
 
 
 def export_contract(profile, kind):
-    return {"resolution": "world", "sampling": "nearest", "reduction": "area",
+    profile = validate(profile)
+    return {"palette": palette_contract(), "resolution": "world", "sampling": "nearest", "reduction": "area",
             "dither": "none", "colors": profile[f"{kind}_colors"],
             "pixel_profile": validate(profile)}
 
@@ -41,7 +50,7 @@ def guidance(profile, canvas=None, height_scale=None):
     text = (f"Pixel scale: match the authored player and enemy sprites at {density:g} texture pixels per game unit; "
             f"a {reference:g}-unit standing actor is approximately {density * reference:g} visible pixels tall. "
             "Use deliberate connected color clusters and a few stepped shade bands, with no photographic grain or dithering. "
-            "Keep scenery contrast below the actors and preserve the biome palette. ")
+            "Keep scenery contrast below the actors. " + palette_guidance() + " ")
     if height_scale is not None:
         text += f"This prop occupies {reference * height_scale:g} game units in height and exports at approximately {round(reference * height_scale * density)} visible pixels tall. "
     elif canvas:
@@ -50,10 +59,10 @@ def guidance(profile, canvas=None, height_scale=None):
 
 
 def compile_texture(image, logical_size, profile, kind):
-    """Area-reduce microtexture, use a bounded palette and restore hard alpha.
+    """Area-reduce microtexture, use the master game palette and restore hard alpha.
 
-    Premultiplied filtering excludes hidden matte colors. Palette selection uses
-    visible pixels only, so a small transparent cutout gets its full color budget.
+    Premultiplied filtering excludes hidden matte colors. Palette mapping uses
+    visible pixels only, with the same fixed RGB choices as every actor.
     Runtime magnification remains nearest-neighbor, without interpolation blur.
     """
     import numpy as np
@@ -69,10 +78,6 @@ def compile_texture(image, logical_size, profile, kind):
     visible = pixels[..., 3] > 128
     if not visible.any():
         raise ValueError("Asset disappears at the configured pixel density")
-    palette_input = Image.fromarray(pixels[..., :3][visible][None, ...])
-    quantized = palette_input.quantize(colors=profile[f"{kind}_colors"],
-                                      method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE).convert("RGB")
-    pixels[visible, :3] = np.asarray(quantized)[0]
     pixels[..., 3] = visible.astype(np.uint8) * 255
     pixels[~visible] = 0
-    return Image.fromarray(pixels)
+    return map_palette(Image.fromarray(pixels))

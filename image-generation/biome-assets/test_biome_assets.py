@@ -35,7 +35,7 @@ class BiomeAssetsTests(unittest.TestCase):
         for biome in ("wetlands", "hollow_delve"):
             plan = make_plan(biome)
             self.assertEqual(plan, make_plan(biome))
-            self.assertEqual(plan["style"]["id"], "actor-scale-dark-fantasy-v3")
+            self.assertEqual(plan["style"]["id"], "actor-scale-endesga-v4")
             self.assertEqual({a["kind"] for a in plan["assets"]}, {"background", "ground", "prop", "enemy"})
             for asset in plan["assets"]:
                 self.assertIn(plan["style"][asset["kind"]], asset["prompt"])

@@ -3,6 +3,7 @@ import json
 import os
 
 from sprites import ROOT, save_json, sha256, subject
+from asset_palette import load_palette, palette_contract
 
 
 def validate(asset):
@@ -98,7 +99,7 @@ def export(run, entry, options, suffix):
                               "duration": 1000, "source_frame": 0, "sha256": sha256(dest / "frame-000.png")}],
                  "meta": {"image": "spritesheet.png", "asset_id": asset["id"], "kind": "background",
                           "size": {"w": width, "h": height}, "repeat": False, "pivot": None,
-                          "grid": {"columns": 1, "rows": 1, "order": "row-major"}, "palette": "ENDESGA 32"}}
+                          "grid": {"columns": 1, "rows": 1, "order": "row-major"}, "palette": load_palette()["name"], "palette_contract": palette_contract()}}
         save_json(dest / "spritesheet.json", atlas)
         variants[label] = {"frame_sha256": sha256(dest / "frame-000.png"), "opaque": frame.getchannel("A").getextrema() == (255,255)}
     save_json(folder / "manifest.json", {"asset_id": asset["id"], "name": asset["name"], "kind": "background",

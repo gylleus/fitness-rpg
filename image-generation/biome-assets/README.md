@@ -70,7 +70,7 @@ Use `--style PATH` for another shared profile or `--out PATH` for a candidate
 export. The same command supports frost caves, crypts, fortress and future
 registered interiors; no biome-specific processing code is needed.
 
-Re-exporting changes the pixel grid and color budget, but preserves the source
+Re-exporting changes the pixel grid and shared master palette, but preserves the source
 illustration's forms and shading. It is not a substitute for a style redraw.
 If scenery still looks painterly beside the actors, generate new source artwork
 with the actor references, then apply the shared exporter. Review the actual
@@ -322,3 +322,7 @@ uv run sprite-python -m unittest discover -s image-generation/sprite-pipeline -p
 ```
 
 See [the pipeline audit](RESEARCH.md) for the causes of the previous divergence.
+
+All scenery exports use the exact RGB values in [the global game palette](../PALETTE.md),
+including legacy saved recipes. Palette metadata identifies the master file and its hash.
+Material descriptions choose subsets; they cannot enable adaptive palettes.

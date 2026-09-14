@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 RECIPES = ROOT / "image-generation/scene-samples/biome-props-v2"
 sys.path.insert(0, str(ROOT / "image-generation/biome-assets"))
 from pixel_style import compile_texture, load_profile, validate
+from asset_palette import map_palette, validate_image, palette_contract
 
 
 def sha(data):
@@ -54,7 +55,7 @@ def trim_prop(image, max_edge=256, threshold=128, *, world_height=None, pixel_pr
     else:
         ratio = min(1, max_edge / max(clean.size))
         size = tuple(max(1, round(n * ratio)) for n in clean.size)
-        clean = clean.resize(size, Image.Resampling.NEAREST)
+        clean = map_palette(clean.resize(size, Image.Resampling.NEAREST))
     # Reduction can lose the last sparse row. Trim once more so the
     # declared support line cannot sit below an empty exported row.
     reduced_bounds = clean.getbbox()
@@ -154,6 +155,7 @@ def bundle(biome, recipe_dir=None, destination=None, pixel_profile=None):
         frame = frames[key]
         atlas.paste(tile, (frame["x"], frame["y"]))
         props[key]["frame"] = frame
+    validate_image(atlas, f"{biome} prop atlas")
     out.mkdir(parents=True, exist_ok=True)
     image_path = out / "props.png"
     atlas.save(image_path, optimize=True)

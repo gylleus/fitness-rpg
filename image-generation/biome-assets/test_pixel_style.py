@@ -10,6 +10,7 @@ from PIL import Image
 from biome_assets import digest, prepare, save, sha
 from pixel_style import compile_texture, export_contract, load_profile, validate
 from reexport import reexport_biome
+from asset_palette import validate_image
 
 
 class PixelStyleTests(unittest.TestCase):
@@ -40,8 +41,23 @@ class PixelStyleTests(unittest.TestCase):
         image = compile_texture(Image.fromarray(pixels), (64, 64), profile, "prop")
         colors = np.array(image)[..., :3]
         self.assertLessEqual(len(np.unique(colors.reshape(-1, 3), axis=0)), 32)
-        self.assertLess(float(colors.std()), float(pixels.std()) * .5)
+        validate_image(image)
+        # Fixed material ramps can have different channel variance; test spatial detail.
+        self.assertLess(float(np.abs(np.diff(colors.astype(float), axis=0)).mean()),
+                        float(np.abs(np.diff(pixels.astype(float), axis=0)).mean()))
         self.assertEqual(image.tobytes(), compile_texture(Image.fromarray(pixels), (64, 64), profile, "prop").tobytes())
+
+    def test_actor_scenery_and_static_exporters_share_exact_rgb_mapping(self):
+        import sys
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "sprite-animation"))
+        from pixels import map_palette
+        from bundle_scenery import trim_prop
+        profile = load_profile()
+        source = Image.new("RGBA", (48, 48), (90, 70, 50, 255))
+        actor = map_palette(source)
+        for kind in ("background", "ground", "prop"):
+            self.assertEqual(compile_texture(source, (32, 32), profile, kind).tobytes(), actor.tobytes())
+        self.assertEqual(trim_prop(source)[0].tobytes(), actor.tobytes())
 
     def test_invalid_profile_and_vanishing_cutout_fail(self):
         profile = load_profile()

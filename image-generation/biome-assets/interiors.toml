@@ -37,7 +37,7 @@ prompt = "A continuous heavy low overhead ceiling strip seen strictly from the s
 [themes.limestone_tunnel]
 name = "Low earthy limestone cave"
 materials = "An ordinary compact underground cave of warm brown limestone, weathered earthen rock, subdued tan sediment bands and dusty cracks. Broad irregular rounded rock masses and shallow ledges, with occasional old brown timber. Natural rock buttresses rather than brick columns or arches. Ceiling: a heavy low gently uneven brown rock shelf; mostly blunt rounded underside, no hanging needles or icicle teeth. No stalagmite forest, dense stalactites, crystals, blue mineral crusts or dramatic fantasy formations."
-palette = "Earth brown #554334, umber #382a21, warm charcoal #211b16, dusty warm gray #7d7060, muted tan #95816a and dark old timber #493727. No blue, cyan, teal or purple cast."
+palette = "Earth brown, umber, warm charcoal, dusty warm gray, muted tan and dark old timber, using the global palette's brown material ramp. No blue, cyan, teal or purple cast."
 lighting = "Dim neutral-to-warm reflected light with soft brown shadows and restrained highlights. A typical earthy underground passage, neither icy nor orange-glowing."
 [themes.limestone_tunnel.scene]
 fill = "#211b16"

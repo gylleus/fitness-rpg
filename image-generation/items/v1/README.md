@@ -22,8 +22,9 @@ node scripts/review-item-icons.cjs
 ```
 
 Import preserves the original and uses ImageMagick's Point filter solely to
-export the requested 64×64 size with original colors and alpha. It does not
-invent art, remove backgrounds, recolor icons or add painted transparency.
+export the requested 64×64 size with original alpha, followed by the shared
+[master palette mapper](../../PALETTE.md). It does not remove backgrounds or
+add painted transparency. All visible RGB values use the global game palette.
 An existing icon is never silently overwritten. ImageMagick (`convert` and
 `montage`) is required for these asset preparation/review commands.
 
@@ -49,3 +50,7 @@ script also produces labeled category contact sheets under `/tmp/frpg-item-revie
 These icons illustrate the named base item. Rolled modifiers retain that same
 icon and add their names and stats in the item detail view. They do not alter
 the player's battle animation or the shape of the held club sprite.
+
+Rebuild all icons with `uv run sprite-python scripts/export_static_asset.py --reexport-items`.
+`palette_export` records the exact palette and input hash. When original local-only
+masters are unavailable, `palette-inputs/` preserves the accepted pre-palette exports.
