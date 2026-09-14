@@ -7,7 +7,22 @@ import { randomInt, seedFor } from './random';
 import type { WeaponType } from './weapons';
 
 export type Enemy = { id?: string; name: string; health: number; attack: number; gold: number; xp: number; sprite: 'slime' | 'wolf' | 'knight' | 'boss' };
-export type Dungeon = { id: number; biomeId?: string; name: string; subtitle: string; color: string; enemies: Enemy[] };
+export type DungeonDifficulty = 'normal' | 'heroic' | 'mythic';
+export type Dungeon = {
+  id: number; biomeId?: string; name: string; subtitle: string; color: string; enemies: Enemy[];
+  /** Optional metadata keeps previously saved dungeon snapshots playable. */
+  difficulty?: DungeonDifficulty; level?: number; stepCost?: number; offerId?: string; mapGeneration?: number; seed?: number;
+  /** These nonboss roster positions contain a chest instead of their enemy. */
+  chestEncounters?: number[];
+};
+export type DungeonOffer = Dungeon & {
+  difficulty: DungeonDifficulty; level: number; stepCost: number; offerId: string; mapGeneration: number; seed: number;
+};
+export const DUNGEON_DIFFICULTIES: Record<DungeonDifficulty, { label: string; stepCost: number; encounters: number; bossMultiplier: number }> = {
+  normal: { label: 'Normal', stepCost: 0, encounters: 5, bossMultiplier: 1 },
+  heroic: { label: 'Heroic', stepCost: 1000, encounters: 8, bossMultiplier: 1.12 },
+  mythic: { label: 'Mythic', stepCost: 5000, encounters: 12, bossMultiplier: 1.25 },
+};
 // Pre-snapshot saves retain their original enemies and balances.
 const LEGACY_DUNGEONS: Dungeon[] = [
   { id: 0, name: 'Mossfall Hollow', subtitle: 'Something stirs beneath the roots.', color: '#8ae3b1', enemies: [
@@ -40,6 +55,54 @@ export const DUNGEONS: Dungeon[] = [
     enemies: (['troglodyte', 'giant_cave_spider', 'bone_slime', 'delve_dwarf', 'delve_gnoll'] as const)
       .map(id => hollowDelve.enemies[id] as Enemy) },
 ];
+
+/** Stable offers for the current camp map. Only a victory advances generation. */
+export function generateDungeonMap(playerLevel: number, generation: number): DungeonOffer[] {
+  if (!Number.isSafeInteger(playerLevel) || playerLevel < 1 || !Number.isSafeInteger(generation) || generation < 0) {
+    throw new Error('Dungeon maps require a positive hero level and a nonnegative generation.');
+  }
+  let state = seedFor(`camp-map-v1:${generation}:${playerLevel}`);
+  const draw = (min: number, max: number) => { const roll = randomInt(state, min, max); state = roll.state; return roll.value; };
+  const templates = [...DUNGEONS];
+  // The first free expedition retains the familiar Wetlands introduction.
+  if (generation > 0) {
+    for (let i = templates.length - 1; i > 0; i--) {
+      const j = draw(0, i);
+      [templates[i], templates[j]] = [templates[j], templates[i]];
+    }
+  }
+  return (['normal', 'normal', 'heroic', 'mythic'] as const).map((difficulty, slot) => {
+    const template = templates[slot % templates.length];
+    const settings = DUNGEON_DIFFICULTIES[difficulty];
+    const level = difficulty === 'normal' ? draw(Math.max(1, playerLevel - 3), playerLevel) : playerLevel;
+    const offerId = `camp-v1:${generation}:${slot}`;
+    const seed = seedFor(`${offerId}:${level}:${template.id}`);
+    const ordinary = template.enemies.slice(0, -1);
+    const averageHealth = ordinary.reduce((sum, enemy) => sum + enemy.health, 0) / ordinary.length;
+    const averageAttack = ordinary.reduce((sum, enemy) => sum + enemy.attack, 0) / ordinary.length;
+    const enemyMultiplier = difficulty === 'mythic' ? 1.15 : difficulty === 'heroic' ? 1.08 : 1;
+    const enemies = Array.from({ length: settings.encounters }, (_, encounter) => {
+      const boss = encounter === settings.encounters - 1;
+      const authored = boss ? template.enemies[template.enemies.length - 1] : ordinary[encounter % ordinary.length];
+      // Retain authored enemy identities/art while removing the old chapter stat ladder.
+      const healthRatio = Math.min(1.3, Math.max(0.75, authored.health / averageHealth));
+      const attackRatio = Math.min(1.2, Math.max(0.8, authored.attack / averageAttack));
+      return { ...authored,
+        health: Math.round(boss ? (140 + (level - 1) * 25) * settings.bossMultiplier
+          : (65 + (level - 1) * 10) * healthRatio * enemyMultiplier),
+        attack: Math.round(boss ? (18 + (level - 1) * 2) * settings.bossMultiplier
+          : (11 + (level - 1) * 1.5) * attackRatio * enemyMultiplier),
+        gold: (boss ? 24 : 8) + level * (boss ? 4 : 2),
+        xp: (boss ? 20 : 8) + level * (boss ? 4 : 2),
+      };
+    });
+    // At most one replacement keeps each premium tier strictly longer in combat.
+    const chestRoll = randomInt(seedFor(`chest-v1:${seed}`), 0, 99);
+    const chestEncounters = chestRoll.value < 35
+      ? [randomInt(chestRoll.state, 1, enemies.length - 2).value] : [];
+    return { ...template, difficulty, level, stepCost: settings.stepCost, offerId, mapGeneration: generation, seed, enemies, chestEncounters };
+  });
+}
 export type BattleStatus = 'active' | 'victory' | 'defeat' | 'exhausted' | 'retreated' | 'expired';
 export type BattleImpact = {
   target: 'hero' | 'enemy';
@@ -49,7 +112,7 @@ export type BattleImpact = {
   critical?: boolean;
 };
 export type BattleState = {
-  rulesVersion?: 2 | 3;
+  rulesVersion?: 2 | 3 | 4;
   rng?: { seed: number; state: number; generation: number };
   lootPlan?: LootDrop[];
   loot?: LootDrop[];
@@ -70,7 +133,7 @@ export type BattleState = {
   xp: number;
   log: string[];
   tick: number;
-  phase: 'travelling' | 'fighting';
+  phase: 'travelling' | 'fighting' | 'chest' | 'chest-reveal';
   travel: number;
   entryHp: number;
   focusAttacks: number;
@@ -86,22 +149,27 @@ export function battleDungeon(battle: BattleState): Dungeon {
 }
 
 export function beginBattle(dungeonId: number, day: string, stats: HeroStats, entryHp = stats.health,
-  resources: { focusAttacks?: number; meters?: CombatMeters; seed?: number; generation?: number; weaponType?: WeaponType } = {}): BattleState {
-  const dungeon = DUNGEONS[dungeonId];
+  resources: { focusAttacks?: number; meters?: CombatMeters; seed?: number; generation?: number; weaponType?: WeaponType; dungeon?: Dungeon } = {}): BattleState {
+  const dungeon = resources.dungeon ?? DUNGEONS[dungeonId];
   if (!dungeon) throw new Error('Dungeon not found.');
-  const seeded = resources.seed !== undefined;
-  return { rulesVersion: seeded ? 3 : 2,
+  if (dungeon.id !== dungeonId || dungeon.enemies.length === 0) throw new Error('Invalid dungeon snapshot.');
+  const seed = resources.seed ?? dungeon.seed;
+  const seeded = seed !== undefined;
+  const chestEncounters = [...new Set(dungeon.chestEncounters ?? [])]
+    .filter(encounter => Number.isInteger(encounter) && encounter >= 0 && encounter < dungeon.enemies.length - 1);
+  return { rulesVersion: dungeon.difficulty ? 4 : seeded ? 3 : 2,
     weaponType: resources.weaponType ?? 'mace',
-    ...(seeded ? { rng: { seed: resources.seed!, state: seedFor(`combat-v1:${resources.seed}`), generation: resources.generation ?? 0 },
-      loot: [], lootPlan: dungeon.enemies.flatMap((_, i) => rollLoot(resources.seed!, i, i === dungeon.enemies.length - 1, dungeonId)) } : {}),
-    dungeonId, dungeon: { ...dungeon, enemies: dungeon.enemies.map(enemy => ({ ...enemy })) }, day, stats, heroHp: entryHp, entryHp, enemyHp: dungeon.enemies[0].health, encounter: 0, defeated: 0,
+    ...(seeded ? { rng: { seed, state: seedFor(`combat-v1:${seed}`), generation: resources.generation ?? dungeon.mapGeneration ?? 0 },
+      loot: [], lootPlan: dungeon.enemies.flatMap((_, i) => rollLoot(seed, i, i === dungeon.enemies.length - 1, dungeonId,
+        { difficulty: dungeon.difficulty, level: dungeon.level, chest: chestEncounters.includes(i) })) } : {}),
+    dungeonId, dungeon: { ...dungeon, ...(dungeon.chestEncounters ? { chestEncounters } : {}), enemies: dungeon.enemies.map(enemy => ({ ...enemy })) }, day, stats, heroHp: entryHp, entryHp, enemyHp: dungeon.enemies[0].health, encounter: 0, defeated: 0,
     turn: 'hero', status: 'active', phase: 'travelling', travel: 0, gold: 0, xp: 0, log: [`You enter ${dungeon.name}.`], tick: 0,
     focusAttacks: resources.focusAttacks ?? 0, meters: seeded ? emptyCombatMeters() : resources.meters ?? emptyCombatMeters(), attacksMade: 0, lastAction: 'travel' };
 }
 
 /** A saved travel step or attack. Pushup power is fixed at entry and never spent. */
 export function battleTurn(current: BattleState): BattleState {
-  if (current.status !== 'active') return current;
+  if (current.status !== 'active' || current.phase === 'chest' || current.phase === 'chest-reveal') return current;
   const next = { ...current, tick: current.tick + 1, log: [...current.log], impacts: [] as BattleImpact[] };
   const enemies = battleDungeon(current).enemies;
   const enemy = enemies[current.encounter];
@@ -116,6 +184,13 @@ export function battleTurn(current: BattleState): BattleState {
     // of the next leg instead of skipping its first travel segment.
     next.travel = current.lastAction === 'attack' ? 0 : current.travel + 1;
     if (next.travel < 3) {
+      next.log = next.log.slice(-5);
+      return next;
+    }
+    if (battleDungeon(current).chestEncounters?.includes(current.encounter)) {
+      next.phase = 'chest';
+      next.enemyHp = 0;
+      next.log.push('A closed chest waits beside the path. Open it or continue?');
       next.log = next.log.slice(-5);
       return next;
     }
@@ -177,6 +252,33 @@ export function battleTurn(current: BattleState): BattleState {
       if (next.loot) next.loot = [];
       next.log.push('No loot earned. Your entry health is restored.');
     }
+  }
+  next.log = next.log.slice(-5);
+  return next;
+}
+
+/** Opening and leaving are separate saved actions; the travel timer cannot loot a chest. */
+export function resolveChest(current: BattleState, action: 'open' | 'skip' | 'continue'): BattleState {
+  if (current.status !== 'active') return current;
+  const opening = current.phase === 'chest' && action === 'open';
+  const leaving = (current.phase === 'chest' && action === 'skip') || (current.phase === 'chest-reveal' && action === 'continue');
+  if (!opening && !leaving) return current;
+  const next = { ...current, tick: current.tick + 1, log: [...current.log], impacts: [] as BattleImpact[] };
+  if (opening) {
+    const contents = (current.lootPlan ?? []).filter(drop => drop.encounter === current.encounter);
+    next.loot = [...(current.loot ?? []), ...contents];
+    next.phase = 'chest-reveal';
+    next.log.push(contents.length ? `The chest contains ${contents.map(drop => drop.item.name).join(', ')}.` : 'The chest is empty.');
+  } else {
+    const enemies = battleDungeon(current).enemies;
+    if (current.encounter >= enemies.length - 1) return current;
+    next.encounter++;
+    next.enemyHp = enemies[next.encounter].health;
+    next.turn = 'hero';
+    next.phase = 'travelling';
+    next.travel = 0;
+    next.lastAction = 'travel';
+    next.log.push(action === 'skip' ? 'You leave the chest closed and continue.' : 'You close the chest and continue.');
   }
   next.log = next.log.slice(-5);
   return next;

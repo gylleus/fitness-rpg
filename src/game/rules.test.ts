@@ -16,17 +16,17 @@ describe('fitness power', () => {
     const activity = fitnessDay(day, 120);
     expect(activity.pushups).toBe(120);
   });
-  it('adds step health to permanent gear and levels', () => {
+  it('derives health from permanent gear and levels without spending steps on combat', () => {
     expect(heroStats({ ...hero, xp: 250, swordLevel: 2, armorLevel: 1 }, fitnessDay(day, 20, 4, 3000), 20, startingEquipment(2, 1)))
-      .toEqual({ level: 3, attack: 99, health: 160, baseAttack: 33, baseDamageMin: 28, baseDamageMax: 38, baseHealth: 130, dailyHealth: 30,
+      .toEqual({ level: 3, attack: 99, health: 130, baseAttack: 33, baseDamageMin: 28, baseDamageMax: 38, baseHealth: 130, dailyHealth: 0,
         armor: 10, critChanceBps: 0, critMultiplierBps: 15000,
         dodgeBps: 0, pushups: 20, pushupDamageCoefficient: 0.1, damageMultiplier: 3, attackEffects: [] });
   });
-  it('awards running dodge without multiplying or double-counting health', () => {
+  it('retains running dodge while steps no longer increase health', () => {
     const activity = fitnessDay(day, 0, 0, 6000, [{ distanceMeters: 2000, durationSeconds: 900, steps: 2000 }]);
     expect(activity.steps).toBe(6000);
     expect(activity.agilityBps).toBe(400);
-    expect(heroStats(hero, activity)).toMatchObject({ dailyHealth: 60, dodgeBps: 400 });
+    expect(heroStats(hero, activity)).toMatchObject({ health: 100, dailyHealth: 0, dodgeBps: 400 });
   });
   it('weights distance by bounded pace and caps daily dodge at 30%', () => {
     expect(runDodgeBps({ distanceMeters: 5000, durationSeconds: 2250 })).toBe(1000);

@@ -100,7 +100,8 @@ export function heroStats(hero: Hero, today: FitnessDay, pushups = today.pushups
   const baseDamageMin = bonuses.damageMin + level - 1, baseDamageMax = bonuses.damageMax + level - 1;
   const baseAttack = (baseDamageMin + baseDamageMax) / 2;
   const baseHealth = 100 + bonuses.health + (level - 1) * 5;
-  const dailyHealth = Math.floor(today.steps / 100);
+  // Steps pay for travel from camp. Keep this legacy snapshot field at zero.
+  const dailyHealth = 0;
   const pushupDamageCoefficient = BASE_PUSHUP_DAMAGE_COEFFICIENT + bonuses.coefficientBonus;
   const power = pushupPower(baseAttack, pushups, pushupDamageCoefficient);
   return { attack: power.damage, health: baseHealth + dailyHealth, baseAttack, baseDamageMin, baseDamageMax, baseHealth, dailyHealth, level,
