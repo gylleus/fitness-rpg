@@ -1,5 +1,9 @@
 # Detailed Hollow Delve backgrounds
 
+Archived comparison sources. Current runtime art uses the quieter
+[v5 panels](../hollow-delve-backgrounds-v5/README.md) and shared `biome-assets`
+commands. The historical command below restores superseded detailed art.
+
 Three built-in imagegen panoramas replace the earlier low-detail SDXL samples:
 natural limestone, the timber gallery and the sunken cavern. Each is 1672×941.
 Fine mineral ribs, chisel marks, damp stone and damaged timber remain visible

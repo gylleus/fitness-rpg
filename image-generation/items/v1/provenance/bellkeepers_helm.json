@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/bellkeepers_helm.png",
   "source_sha256": "c9ec0af1d66d7b3143bab11f0a6c0191b82cb3f83298aeb156b8b248ec543c08",
   "icon": "assets/items/bellkeepers_helm.png",
-  "icon_sha256": "a55017656f9fef1fa6f7e7fa291624a6021ce2a8db464684817bd5487f26a4bb",
+  "icon_sha256": "37451febd825ccae75376d1030d410771403353e5106d0619c480b53b08a5c0e",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Bellkeeper's Helm. A narrow bronze helmet resembles an upturned bell with an uneven flared rim. A rectangular face slit interrupts the front, and green tarnish runs from a thick iron loop at the crown.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Bellkeeper's Helm. A narrow bronze helmet resembles an upturned bell with an uneven flared rim. A rectangular face slit interrupts the front, and green tarnish runs from a thick iron loop at the crown.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/bellkeepers_helm.png",
+    "source_sha256": "a55017656f9fef1fa6f7e7fa291624a6021ce2a8db464684817bd5487f26a4bb",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "37451febd825ccae75376d1030d410771403353e5106d0619c480b53b08a5c0e",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

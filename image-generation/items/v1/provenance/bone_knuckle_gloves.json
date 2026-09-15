@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/bone_knuckle_gloves.png",
   "source_sha256": "809321d99442d8aca756e8e902cafb727822969e25866a0ab3021344363e6a7b",
   "icon": "assets/items/bone_knuckle_gloves.png",
-  "icon_sha256": "3c81e208ce985ff1c005955a2cf1807cd4d1a3f374b7dc8b649ca533333d02ba",
+  "icon_sha256": "ccc586e8b646730c2b0f5f8d1fe9ffaea723b0717dd65161a47243c9594e4f8f",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Bone Knuckle Gloves. Four small yellow bone plates cover each glove's knuckles above dark brown leather fingers. Copper wire holds the plates in place, and uneven cream stitches edge the short cuffs.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Bone Knuckle Gloves. Four small yellow bone plates cover each glove's knuckles above dark brown leather fingers. Copper wire holds the plates in place, and uneven cream stitches edge the short cuffs.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/bone_knuckle_gloves.png",
+    "source_sha256": "3c81e208ce985ff1c005955a2cf1807cd4d1a3f374b7dc8b649ca533333d02ba",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "ccc586e8b646730c2b0f5f8d1fe9ffaea723b0717dd65161a47243c9594e4f8f",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

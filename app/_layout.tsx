@@ -19,6 +19,7 @@ export default function RootLayout() {
         <Stack.Screen name="health" options={{ presentation: 'modal' }} />
         <Stack.Screen name="run" />
         <Stack.Screen name="expedition" options={{ orientation: 'landscape', statusBarHidden: true, navigationBarHidden: true, animation: 'fade' }} />
+        <Stack.Screen name="scenery-review" options={{ orientation: 'landscape', statusBarHidden: true, navigationBarHidden: true, animation: 'fade' }} />
       </Stack>
       </HealthProvider>
     </GameProvider>

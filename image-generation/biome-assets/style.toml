@@ -1,0 +1,18 @@
+schema_version = 1
+id = "actor-scale-endesga-v4"
+style = "Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks."
+background = "Match the visible pixel size and grouped shading of the authored player and enemies. Broad connected color clusters, a few stepped material shades and restrained local contrast behind actors; distant layers use a narrower value range. Preserve layered depth and readable material edges at the shared world pixel density."
+prop = "Match the authored actor pixel scale, with a clean silhouette, restrained dark contour and a few stepped material shades. Size detail for the object's actual in-game height. Show one complete isolated object with a clear support contact; no miniature photographic surface texture."
+enemy = "Highest silhouette clarity and controlled contrast in the scene. Consistent body proportions and equipment across poses, deliberate grouped shading, no fine stippled texture. Strict left-facing side profile."
+ground = "A readable continuous walking lip with sparse low-contrast material marks. Keep the surface level and separate from scenery and actors."
+avoid = ["photorealism", "intricate microtexture", "dense cracks or hatching", "single-pixel speckle", "dithering", "dramatic spotlights", "bloom", "soft airbrushed edges", "text", "watermarks", "UI", "painted checkerboard", "isometric or overhead view", "a road receding to a vanishing point"]
+walk = "Six ordered poses of an anatomy-appropriate walk in place: ready contact, weight shift, passing pose, opposite contact, opposite weight shift, return toward the starting contact. No horizontal travel across cells."
+death = "Six ordered poses: recoil, loss of support, falling, floor contact, settling, fully inert corpse resting on its actual support. The last pose stays down."
+
+# Authored actors span roughly 1–1.9 source pixels per game unit. This common
+# scenery target retains 96 visible pixels per 64-unit reference actor.
+# Palette values and size come only from assets/palette.json.
+[pixels]
+schema_version = 1
+pixels_per_unit = 1.5
+reference_height = 64

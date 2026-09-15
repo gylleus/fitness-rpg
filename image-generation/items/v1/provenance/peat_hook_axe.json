@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/peat_hook_axe.png",
   "source_sha256": "647bc43f7eef6fc2505b843ed6ca8d24e629f415e6569f70a3f35aafd81d21fc",
   "icon": "assets/items/peat_hook_axe.png",
-  "icon_sha256": "e5019ef123ed9115a1f549fd0a7819ad622d3f44c9e0083281712e40154de526",
+  "icon_sha256": "ea5df382a4d7a711d1a2b78c1cff32f3a618f483d7d72dd02ddfd262c8b8669c",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Peat Hook Axe. A narrow iron axe blade drops into a long hooked beard. Black peat stains coat its inner curve, and the short ash handle is repaired with a tightly wound copper band.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Peat Hook Axe. A narrow iron axe blade drops into a long hooked beard. Black peat stains coat its inner curve, and the short ash handle is repaired with a tightly wound copper band.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/peat_hook_axe.png",
+    "source_sha256": "e5019ef123ed9115a1f549fd0a7819ad622d3f44c9e0083281712e40154de526",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "ea5df382a4d7a711d1a2b78c1cff32f3a618f483d7d72dd02ddfd262c8b8669c",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

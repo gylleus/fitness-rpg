@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/chapel_watch_sword.png",
   "source_sha256": "17b6b1889133a22b38812d6857e30b485c3365cd789cb83558594a674ecfc37b",
   "icon": "assets/items/chapel_watch_sword.png",
-  "icon_sha256": "2109bc7240ef054c06edf3e84cc86776d898c8f640306f45c945678c244c9842",
+  "icon_sha256": "fab02bc2e765b73c68de45523af6db8a64f53e0811ae9bd37f366e6277ba1b4f",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Chapel Watch Sword. A broad straight sword has a short fuller ending in a small round hole. Its iron guard resembles a low chapel arch, and the grip wears orderly strips of charcoal-gray cloth.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Chapel Watch Sword. A broad straight sword has a short fuller ending in a small round hole. Its iron guard resembles a low chapel arch, and the grip wears orderly strips of charcoal-gray cloth.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/chapel_watch_sword.png",
+    "source_sha256": "2109bc7240ef054c06edf3e84cc86776d898c8f640306f45c945678c244c9842",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "fab02bc2e765b73c68de45523af6db8a64f53e0811ae9bd37f366e6277ba1b4f",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

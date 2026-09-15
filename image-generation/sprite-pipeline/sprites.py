@@ -29,6 +29,7 @@ if sys.version_info < (3, 11):
     sys.modules.setdefault("tomllib", tomli)
 import tomllib
 from common import save_json, sha256
+from asset_palette import load_palette, palette_guidance
 
 DEFAULT_ART = {
     "style": "Stylized weathered dark fantasy, exaggerated readable silhouettes, worn practical materials.",
@@ -88,7 +89,7 @@ def reference_override(asset, result):
         return {**result, "reference": asset["reference"]["prompt"],
                 "reference_negative": asset["reference"]["negative"],
                 "caption_source": "explicit assets.reference.prompt"}
-    return result
+    return {**result, "reference": result["reference"] + " " + palette_guidance()}
 
 
 def prompts(asset, art, facing, caption=None):
@@ -282,7 +283,7 @@ def make_plan(args, assets, art, source):
     copies = plan_inputs(args, planned, facing)
     config = {"schema_version": 2, "facing": facing, "actions": actions,
         "export": {"size": size, "frame_step": step, "columns": 8, "margin": .08,
-                   "palette": json.loads((BASE / "palette.json").read_text())},
+                   "palette": load_palette()},
         "art": art, "assets": planned, "source": source,
         "reference_generation": {k: study[k] for k in ("base_model", "lora", "vae", "generation")},
         "animation_generation": {**generation, "end_condition": False},
@@ -321,6 +322,9 @@ def child(command, run, *extra):
 
 
 def main(enemy_adapter=False):
+    if sys.argv[1:2] == ["import-sheets"]:
+        from authored_sheets import main as sheets_main
+        return sheets_main(sys.argv[2:])
     if not enemy_adapter and sys.argv[1:2] == ["bundle"]:
         from runtime_assets import main as bundle_main
         return bundle_main(sys.argv[2:])

@@ -7,6 +7,7 @@ import math
 from pathlib import Path
 import re
 import tomllib
+from asset_palette import palette_guidance, palette_contract
 
 ROOT = Path(__file__).resolve().parents[1]
 WEAPON_TYPES = {'maces': 'mace', 'swords': 'sword', 'axes': 'axe', 'fist_weapons': 'fist'}
@@ -105,7 +106,7 @@ def runtime_catalog(items):
 
 
 def icon_prompts(items):
-    return [{'id': key, 'category': item['category'], 'target': [64, 64],
+    return [{'id': key, 'category': item['category'], 'target': [64, 64], 'palette': palette_contract(),
              'definition_sha256': hashlib.sha256(json.dumps(item, sort_keys=True).encode()).hexdigest(),
              'prompt': f"Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\n"
              f"Subject: {item['name']}. {item['visual_description']}\n"
@@ -113,7 +114,7 @@ def icon_prompts(items):
              "Render one icon only, not a sheet. Square canvas, true transparent alpha background. "
              "The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, "
              "a dark one-pixel silhouette outline, and simple three-tone shading. "
-             "No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."}
+             "No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border. " + palette_guidance()}
             for key, item in items.items()]
 
 

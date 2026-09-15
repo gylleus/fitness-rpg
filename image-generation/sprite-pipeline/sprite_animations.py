@@ -194,14 +194,15 @@ def timing(length, fps, action, step, loop=None):
 
 
 def export_options(config, size=None, frame_step=None):
-    options = {**config["export"]}
+    from asset_palette import load_palette
+    options = {**config["export"], "palette": load_palette()}
     if size is not None:
         options["size"] = size
     if frame_step is not None:
         options["frame_step"] = frame_step
     if not 16 <= options["size"] <= 256 or not 1 <= options["frame_step"] <= 16:
         raise ValueError("Use frame size 16..256 and frame step 1..16")
-    suffix = "" if options == config["export"] else f"-{options['size']}-step-{options['frame_step']}"
+    suffix = "" if all(options[key] == config["export"][key] for key in ("size", "frame_step")) else f"-{options['size']}-step-{options['frame_step']}"
     return options, suffix
 
 
@@ -374,6 +375,9 @@ def package(run, enemies=None, action=None):
     paths.extend(p for p in (run / "inputs").rglob("*") if p.is_file())
     archive = run / ("sprites.zip" if "assets" in config else "enemy-sprites.zip")
     with ZipFile(archive, "w", ZIP_DEFLATED) as z:
+        from asset_palette import PALETTE, ROOT as ASSET_ROOT
+        z.write(PALETTE, "provenance/assets/palette.json")
+        z.write(ASSET_ROOT / "scripts/asset_palette.py", "provenance/scripts/asset_palette.py")
         for path in sorted(set(paths)):
             z.write(path, str(path.relative_to(run)))
         for entry in entries(config):

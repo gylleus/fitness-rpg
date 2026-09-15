@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "biome_id": "hollow_delve",
+  "style": {
+    "schema_version": 1,
+    "id": "readable-dark-fantasy-v2",
+    "style": "Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks.",
+    "background": "Refined material edges and deliberate fine pixel clusters at the Wetlands texture density. Keep local contrast restrained behind actors; distant layers use a narrower value range. Preserve full texture resolution independently of the logical layout. Do not enlarge a coarse pixel grid to create quiet scenery.",
+    "prop": "Medium detail concentrated at the outer silhouette and a few identifying features. Keep interior shading grouped. Show one complete isolated object with a clear support contact.",
+    "enemy": "Highest silhouette clarity and controlled contrast in the scene. Consistent body proportions and equipment across poses, deliberate grouped shading, no fine stippled texture. Strict left-facing side profile.",
+    "ground": "A readable continuous walking lip with sparse low-contrast material marks. Keep the surface level and separate from scenery and actors.",
+    "avoid": [
+      "photorealism",
+      "intricate microtexture",
+      "dense cracks or hatching",
+      "single-pixel speckle",
+      "dithering",
+      "dramatic spotlights",
+      "bloom",
+      "soft airbrushed edges",
+      "text",
+      "watermarks",
+      "UI",
+      "painted checkerboard",
+      "isometric or overhead view",
+      "a road receding to a vanishing point"
+    ],
+    "walk": "Six ordered poses of an anatomy-appropriate walk in place: ready contact, weight shift, passing pose, opposite contact, opposite weight shift, return toward the starting contact. No horizontal travel across cells.",
+    "death": "Six ordered poses: recoil, loss of support, falling, floor contact, settling, fully inert corpse resting on its actual support. The last pose stays down."
+  },
+  "source_sha256": {
+    "biomes/hollow_delve/BIOME.toml": "336fa6d9c422a97f4957c049c8f99ce87fe55cf048a501971d80f5d2521b3dfe",
+    "biomes/hollow_delve/SCENERY.toml": "a144e5e5f1a0e70d8331d480dd7c50558a54e7af29310ae83fedbb086a65385d",
+    "biomes/hollow_delve/ENEMIES.toml": "326934d55340a07cb5a39845c97f57017d7e3eeebd262b7d0268bf82b3c45a92"
+  },
+  "style_sha256": "f0df349515fe85db8cd5b3c41f4e1b328a0788be113de6e6050de778d50a7682",
+  "scene": {
+    "canvas": [
+      640,
+      360
+    ],
+    "ground_y": 288,
+    "reference_height": 64,
+    "view": "orthographic_side",
+    "style": "Refined dark fantasy pixel art with the texture density of Wetlands. Preserve full-resolution source textures independently of the logical canvas. Material edges and controlled mineral or timber detail remain visible, while restrained local contrast keeps actors readable. A nearby low ceiling encloses the horizontal passage.",
+    "avoid": [
+      "characters baked into scenery",
+      "isometric view",
+      "a road receding to a vanishing point",
+      "bright cheerful colors",
+      "readable text",
+      "smooth airbrushed edges",
+      "mandatory gaps in the walking surface"
+    ]
+  },
+  "assets": [
+    {
+      "id": "hollow_delve_slate_path",
+      "name": "Slate and gravel path",
+      "kind": "ground",
+      "canvas": [
+        256,
+        96
+      ],
+      "transparent": true,
+      "prompt": "Use case: style-transfer\nInput image 1 is the edit target.\nRestyle the supplied game layer to the materials, palette and formations below. Preserve its canvas aspect ratio, orthographic camera, independent layer role, horizontal continuation and overall occupied/empty layout. Replace conflicting surface details and shapes; this is not merely a color tint.\nKeep genuine transparent alpha in empty areas, never a painted checkerboard or matte.\nUse case: stylized-concept\nAsset type: ground for a side-scrolling combat game\nPrimary request: Slate and gravel path\nSubject: Earth-brown compact stone and dusty tan gravel form a level cave ledge. Warm gray fractured rock lies underneath; no blue, cyan or purple coloration.\nStyle/medium: Weathered dark fantasy pixel art. Broad readable shapes, deliberate stepped color clusters, restrained outlines and a small muted palette. Material identity comes from silhouette and a few grouped marks. A readable continuous walking lip with sparse low-contrast material marks. Keep the surface level and separate from scenery and actors.\nComposition/framing: orthographic side view, parallel to the screen.\nLighting/mood: Dim neutral-to-warm reflected light reveals earthy brown limestone and dusty tan sediment. Brown shadows remain soft and subdued; no blue mineral glow or icy lighting.\nColor palette: Cavern black #211B16, Wet slate #554334, Limestone #95816A, Old timber #493727, Iron rust #8B513B, Fungal green #8AA778\nComposition: A continuous horizontal earthy brown side-on walking strip on genuine alpha above logical row 36 of 96. The upper 36 rows must be completely transparent. Level tan gravel lip precisely at row 36, with dark umber compact rock below. Sparse warm gray stone chips, no blue highlights. Preserve the flat surface and edges; no tracks, props, figures or pointed formations. A level slate-gravel lip at row 36, dark compact stone below to the bottom and transparency above. The outer 16 columns share this same flat profile. Large variations stay in the center; no holes or raised obstacles.\nConstraints: Designed for 256 by 96 logical pixels; judge detail at this size. Walking contact at logical row 36; common 16-column edge margins. Genuine transparent alpha outside the subject; no colored matte or painted transparency pattern.\nAvoid: photorealism, intricate microtexture, dense cracks or hatching, single-pixel speckle, dithering, dramatic spotlights, bloom, soft airbrushed edges, text, watermarks, UI, painted checkerboard, isometric or overhead view, a road receding to a vanishing point, characters baked into scenery, isometric view, bright cheerful colors, readable text, smooth airbrushed edges, mandatory gaps in the walking surface",
+      "prompt_sha256": "8543a87cc6a995efb5c576381fbd0c1c3e9df36ae44178ffbdabfbb77e76e168",
+      "source_definition": {
+        "id": "hollow_delve_slate_path",
+        "name": "Slate and gravel path",
+        "visual_description": "Earth-brown compact stone and dusty tan gravel form a level cave ledge. Warm gray fractured rock lies underneath; no blue, cyan or purple coloration.",
+        "generation": {
+          "composition": "A continuous horizontal earthy brown side-on walking strip on genuine alpha above logical row 36 of 96. The upper 36 rows must be completely transparent. Level tan gravel lip precisely at row 36, with dark umber compact rock below. Sparse warm gray stone chips, no blue highlights. Preserve the flat surface and edges; no tracks, props, figures or pointed formations."
+        },
+        "kind": "ground",
+        "canvas": [
+          256,
+          96
+        ],
+        "transparent": true
+      },
+      "export": {
+        "sampling": "nearest",
+        "alpha": "binary",
+        "colors": "source",
+        "resolution": "logical"
+      },
+      "reference": {
+        "image": "image-generation/scene-samples/hollow-delve-earth-v7/reference-ground.png",
+        "sha256": "be04c45533ff414ae44fa9b86f3f957daf91f12b12b6c31ee2b336e0ebb895dd"
+      }
+    }
+  ],
+  "variant_recipe": {
+    "text": "schema_version = 2\nbiome_id = \"hollow_delve\"\ninterior_theme = \"limestone_tunnel\"\ninterior_recipe = \"../interiors.toml\"\n",
+    "sha256": "34b7f1453e5e68f30a45a427ed7028d5993f20bc11e5fbaf6aee9836e15c3ca6"
+  }
+}

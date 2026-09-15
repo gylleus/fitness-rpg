@@ -1,0 +1,213 @@
+{
+  "depth": {
+    "id": "frost_caves_depth",
+    "source": "image-generation/scene-samples/interior-biomes-v1/frost_caves/sources/frost_caves_depth.png",
+    "source_sha256": "424a19477beacc3418fd21f94027132e5bf7356cd628b0727e3ea8a054ca7fd0",
+    "sha256": "3d1acf85cdf8f1b51f1289a2ea2af788658de8bd3a70f809de28b7cdcfe98bf8",
+    "size": [
+      960,
+      540
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "f44eff37afca5e1e02294551179575bdbb438b390a66ad71a0102c7a984f3076",
+    "export": {
+      "palette": {
+        "file": "assets/palette.json",
+        "name": "ENDESGA 32",
+        "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+        "metric": "ciede2000",
+        "dither": "none"
+      },
+      "resolution": "world",
+      "sampling": "nearest",
+      "reduction": "area",
+      "dither": "none",
+      "colors": 32,
+      "pixel_profile": {
+        "schema_version": 1,
+        "pixels_per_unit": 1.5,
+        "reference_height": 64,
+        "background_colors": 32,
+        "ground_colors": 32,
+        "prop_colors": 32,
+        "palette": {
+          "file": "assets/palette.json",
+          "name": "ENDESGA 32",
+          "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+          "metric": "ciede2000",
+          "dither": "none"
+        }
+      },
+      "alpha": "opaque"
+    },
+    "canvas": [
+      640,
+      360
+    ]
+  },
+  "wall": {
+    "id": "frost_caves_wall",
+    "source": "image-generation/scene-samples/interior-biomes-v1/frost_caves/sources/frost_caves_wall.png",
+    "source_sha256": "92fbafe8dc8d873a30e0a24f59ad9a9c033f1ce0ce8b0d6643c15a44da9fbe86",
+    "sha256": "06312e10f70e050fdb0a6a22c8b4db6421ae85bdd391f74ad5785b21764bd873",
+    "size": [
+      960,
+      540
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "654dc34748566f07d5721912b7af827840e42d194c8325adeb209ca4b855a4ad",
+    "export": {
+      "palette": {
+        "file": "assets/palette.json",
+        "name": "ENDESGA 32",
+        "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+        "metric": "ciede2000",
+        "dither": "none"
+      },
+      "resolution": "world",
+      "sampling": "nearest",
+      "reduction": "area",
+      "dither": "none",
+      "colors": 32,
+      "pixel_profile": {
+        "schema_version": 1,
+        "pixels_per_unit": 1.5,
+        "reference_height": 64,
+        "background_colors": 32,
+        "ground_colors": 32,
+        "prop_colors": 32,
+        "palette": {
+          "file": "assets/palette.json",
+          "name": "ENDESGA 32",
+          "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+          "metric": "ciede2000",
+          "dither": "none"
+        }
+      },
+      "alpha": "binary"
+    },
+    "canvas": [
+      640,
+      360
+    ]
+  },
+  "roof": {
+    "id": "frost_caves_roof",
+    "source": "image-generation/scene-samples/interior-biomes-v1/frost_caves/sources/frost_caves_roof.png",
+    "source_sha256": "7ef28ce3244f4a0f9486c488ab1c44603631bbd458616d219a817be352444c1e",
+    "sha256": "1630c7abc6a5f8b0b44892eeae27b145936232ecf226b782778b3672af211e07",
+    "size": [
+      960,
+      360
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "8610d82ffff626187496a660d5df31d661ec82b77f6ea234b99040f30b53e00d",
+    "export": {
+      "palette": {
+        "file": "assets/palette.json",
+        "name": "ENDESGA 32",
+        "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+        "metric": "ciede2000",
+        "dither": "none"
+      },
+      "resolution": "world",
+      "sampling": "nearest",
+      "reduction": "area",
+      "dither": "none",
+      "colors": 32,
+      "pixel_profile": {
+        "schema_version": 1,
+        "pixels_per_unit": 1.5,
+        "reference_height": 64,
+        "background_colors": 32,
+        "ground_colors": 32,
+        "prop_colors": 32,
+        "palette": {
+          "file": "assets/palette.json",
+          "name": "ENDESGA 32",
+          "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+          "metric": "ciede2000",
+          "dither": "none"
+        }
+      },
+      "alpha": "binary"
+    },
+    "canvas": [
+      640,
+      240
+    ]
+  },
+  "ground": {
+    "id": "frost_caves_ground",
+    "source": "image-generation/scene-samples/interior-biomes-v1/frost_caves/sources/frost_caves_ground.png",
+    "source_sha256": "145995d1083ad98fb5981498bd33b92df605e219161f35d42f4f7d45e1cb3b0e",
+    "sha256": "8857e2cd888e3ba6a1a62c256c134a47ad4e94011aa1dc6d2da747cfe1a94a8e",
+    "size": [
+      384,
+      144
+    ],
+    "backend": "built-in imagegen",
+    "prompt_sha256": "ede2e539879602d2897fd1d586e476efd5fd9ecf3b85839acb34a81fb07411b7",
+    "export": {
+      "palette": {
+        "file": "assets/palette.json",
+        "name": "ENDESGA 32",
+        "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+        "metric": "ciede2000",
+        "dither": "none"
+      },
+      "resolution": "world",
+      "sampling": "nearest",
+      "reduction": "area",
+      "dither": "none",
+      "colors": 32,
+      "pixel_profile": {
+        "schema_version": 1,
+        "pixels_per_unit": 1.5,
+        "reference_height": 64,
+        "background_colors": 32,
+        "ground_colors": 32,
+        "prop_colors": 32,
+        "palette": {
+          "file": "assets/palette.json",
+          "name": "ENDESGA 32",
+          "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+          "metric": "ciede2000",
+          "dither": "none"
+        }
+      },
+      "alpha": "binary"
+    },
+    "canvas": [
+      256,
+      96
+    ],
+    "surface_y": 53.333333333333336
+  },
+  "props": {
+    "id": "frost_caves_prop_atlas",
+    "source": "image-generation/scene-samples/interior-biomes-v1/frost_caves/review/prop-recipe/recipe.json",
+    "source_sha256": "d5381f3faa13dcbf99153ef61a3255e062c0d548bf93fb2f1286da1cafe166e3",
+    "sha256": "55f345d8c4aa297b0bb03f2a6551762634082c5071dff97c353ccf90e5fc865c",
+    "size": [
+      1024,
+      100
+    ],
+    "pixel_profile": {
+      "schema_version": 1,
+      "pixels_per_unit": 1.5,
+      "reference_height": 64,
+      "background_colors": 32,
+      "ground_colors": 32,
+      "prop_colors": 32,
+      "palette": {
+        "file": "assets/palette.json",
+        "name": "ENDESGA 32",
+        "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+        "metric": "ciede2000",
+        "dither": "none"
+      }
+    },
+    "backend": "built-in imagegen; actor-scale cutouts in one atlas"
+  }
+}

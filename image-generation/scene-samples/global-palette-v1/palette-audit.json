@@ -1,0 +1,2244 @@
+{
+  "palette": {
+    "file": "assets/palette.json",
+    "name": "ENDESGA 32",
+    "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+    "metric": "ciede2000",
+    "dither": "none"
+  },
+  "files": {
+    "assets/biomes/crypts/depth.png": {
+      "colors": 13,
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "83c3b517d6d067e496942eec45d52018e72c7f5216c489d08ed10aa280bf7304"
+    },
+    "assets/biomes/crypts/ground.png": {
+      "colors": 11,
+      "size": [
+        384,
+        144
+      ],
+      "sha256": "4b58024b2f4cbbef4ad8a920ecb8c22af976043958cde0edf96872625b15ebc7"
+    },
+    "assets/biomes/crypts/props.png": {
+      "colors": 18,
+      "size": [
+        1024,
+        100
+      ],
+      "sha256": "05e267b3a4259936569a5d5ddb5e202425d711680174885d100ae8287f1e6996"
+    },
+    "assets/biomes/crypts/roof.png": {
+      "colors": 12,
+      "size": [
+        960,
+        360
+      ],
+      "sha256": "d52f0869dfd88b7fdc77b54b442e66d24735c6edd403ef0bc6cc74dc4f8adafa"
+    },
+    "assets/biomes/crypts/wall.png": {
+      "colors": 15,
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "ef5741d57b9b379f13e77a9af8f46028245405cbe3846bdb238c165edd7c80da"
+    },
+    "assets/biomes/fortress/depth.png": {
+      "colors": 5,
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "d2735106ccf39acc2cde0d88c350ddc95c88592fcd7c3385ba8b419c98a01ed8"
+    },
+    "assets/biomes/fortress/ground.png": {
+      "colors": 8,
+      "size": [
+        384,
+        144
+      ],
+      "sha256": "156365c8921917773927208a4740b194373fce3e49bdce48c03377f26f9614a8"
+    },
+    "assets/biomes/fortress/props.png": {
+      "colors": 18,
+      "size": [
+        1024,
+        114
+      ],
+      "sha256": "0963ec2e1689b4d5c3ae886a77d8cb2f250ae7774e016b9a632fc28de1343249"
+    },
+    "assets/biomes/fortress/roof.png": {
+      "colors": 9,
+      "size": [
+        960,
+        360
+      ],
+      "sha256": "fd547b46c186a46e1a66b835b671da2807302ddab39da6767ea005ac63eee5df"
+    },
+    "assets/biomes/fortress/wall.png": {
+      "colors": 15,
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "df31ed932b5f9bfc7c84907981eb71453f41a589c5aaa58c04fe28215977f8a2"
+    },
+    "assets/biomes/frost_caves/depth.png": {
+      "colors": 8,
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "3d1acf85cdf8f1b51f1289a2ea2af788658de8bd3a70f809de28b7cdcfe98bf8"
+    },
+    "assets/biomes/frost_caves/ground.png": {
+      "colors": 7,
+      "size": [
+        384,
+        144
+      ],
+      "sha256": "8857e2cd888e3ba6a1a62c256c134a47ad4e94011aa1dc6d2da747cfe1a94a8e"
+    },
+    "assets/biomes/frost_caves/props.png": {
+      "colors": 13,
+      "size": [
+        1024,
+        100
+      ],
+      "sha256": "55f345d8c4aa297b0bb03f2a6551762634082c5071dff97c353ccf90e5fc865c"
+    },
+    "assets/biomes/frost_caves/roof.png": {
+      "colors": 8,
+      "size": [
+        960,
+        360
+      ],
+      "sha256": "1630c7abc6a5f8b0b44892eeae27b145936232ecf226b782778b3672af211e07"
+    },
+    "assets/biomes/frost_caves/wall.png": {
+      "colors": 9,
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "06312e10f70e050fdb0a6a22c8b4db6421ae85bdd391f74ad5785b21764bd873"
+    },
+    "assets/biomes/hollow_delve/depth.png": {
+      "colors": 6,
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "f7b36fa11d5b66159166a330f05fd9ca85597e158fad6f7886cb51335842271f"
+    },
+    "assets/biomes/hollow_delve/props.png": {
+      "colors": 19,
+      "size": [
+        2048,
+        300
+      ],
+      "sha256": "c86fdf20f57a6e37f4b164ca7d6c2acd273d5409ab7dd336c67554e3efb37c9b"
+    },
+    "assets/biomes/hollow_delve/roof.png": {
+      "colors": 11,
+      "size": [
+        960,
+        360
+      ],
+      "sha256": "6555ddea081933fdfb60e453f1c29dff80e635cde40f0dec9d350d0dd96f6e33"
+    },
+    "assets/biomes/hollow_delve/slate_path.png": {
+      "colors": 10,
+      "size": [
+        384,
+        144
+      ],
+      "sha256": "50786027cf44815211b5c5cea8df6141b2a12e5ca85bae1d2c041591092f97c0"
+    },
+    "assets/biomes/hollow_delve/wall.png": {
+      "colors": 10,
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "0699ce09d3dd39f5246472dbd7c93bbda532f1992ffc05d0ebdfd4131c935155"
+    },
+    "assets/biomes/lava_caves/depth.png": {
+      "colors": 7,
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "4724e520e266b95a88c49b287566950935257cc419eaee12af2a92ced1acd138"
+    },
+    "assets/biomes/lava_caves/ground.png": {
+      "colors": 3,
+      "size": [
+        384,
+        144
+      ],
+      "sha256": "98f603716ee749592e4601bcbcc46c72da55407500c91fc493ad6fb43e34955c"
+    },
+    "assets/biomes/lava_caves/props.png": {
+      "colors": 11,
+      "size": [
+        1024,
+        95
+      ],
+      "sha256": "bab85095df6d396d1a521b3e8c9bfcd2566fc30426f6aa53d6f0f026cc94a43a"
+    },
+    "assets/biomes/lava_caves/roof.png": {
+      "colors": 12,
+      "size": [
+        960,
+        360
+      ],
+      "sha256": "9593848f62d653c31de0a75077e663ae378b4b6118ad3b71b1821b064ada3303"
+    },
+    "assets/biomes/lava_caves/wall.png": {
+      "colors": 9,
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "c3c73fdcb10db3dfb32eeefb01a60d34eb795a74212b70c5beed189b5d47a470"
+    },
+    "assets/biomes/wetlands/banks.png": {
+      "colors": 14,
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "ae0a36e85ea5c131effcb020d8e0b7382c6c8f4177450e49979236c8389d0cb0"
+    },
+    "assets/biomes/wetlands/distant.png": {
+      "colors": 5,
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "f8ab552e5a64a86afa7c784c715783bf79eac9cf00bbbed99e03589154b94a5b"
+    },
+    "assets/biomes/wetlands/ground.png": {
+      "colors": 6,
+      "size": [
+        384,
+        144
+      ],
+      "sha256": "9ca169687011dd5dd23f0df33f1bbd975bd6f4193e9d135403f715f7fd1d89fe"
+    },
+    "assets/biomes/wetlands/props.png": {
+      "colors": 23,
+      "size": [
+        2048,
+        424
+      ],
+      "sha256": "17f264d985034958c9744b507116dcbcb7bd8a8a07e654a50c4516862bd5df3b"
+    },
+    "assets/biomes/wetlands/sky.png": {
+      "colors": 7,
+      "size": [
+        960,
+        540
+      ],
+      "sha256": "b2ade3974a264cf58abf059c626f8c30a381ce2400b04b067ebd331f3ba93499"
+    },
+    "assets/items/antler_beard_axe.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "46d147ea5ae4308355e88543a75321da085e85578a6dae0db355c8f88d23564c"
+    },
+    "assets/items/antler_crowned_mace.png": {
+      "colors": 19,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "d00b68da122e8e66ea8f9f055b96e66927794e1f8f0e03b13e915ec84f2c6cab"
+    },
+    "assets/items/antler_guard_blade.png": {
+      "colors": 19,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "0a18169778c421ccf51d5b6fb8899ee68333e2c4eab09876a2f5166dd5de2798"
+    },
+    "assets/items/antler_guard_helm.png": {
+      "colors": 19,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "d9968bba8cae7e101ad193d37bb251de7b299ada9d00647f24fba63525587292"
+    },
+    "assets/items/antler_plated_grips.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "5a303154c60702fb1b2392fb5c0c623f4ee207036060fe84c74f246e32f9ea5d"
+    },
+    "assets/items/antler_scale_harness.png": {
+      "colors": 19,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "e72252203aacf21b14021771909147cc603e67ae73a07b8edb729a528505f378"
+    },
+    "assets/items/antler_signet.png": {
+      "colors": 13,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "10501393bcf4202543bf2952c523c1c0953ee0ed297326ca6c0b34772bebbc9d"
+    },
+    "assets/items/antler_tally.png": {
+      "colors": 12,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "329514038a80e17a629fc0833cd57977455e336c214d4a41b967ae5aa574b692"
+    },
+    "assets/items/ashwood_warhammer.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "636eb423fbdc106fcda3a3b57d56bf1ccc1d276860b079dae3ee71a423e77500"
+    },
+    "assets/items/bark_armor.png": {
+      "colors": 14,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f847c870bb59abfbd3578549b750c63427facc2644aea11d0a50ca83db474076"
+    },
+    "assets/items/bellkeepers_helm.png": {
+      "colors": 20,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "37451febd825ccae75376d1030d410771403353e5106d0619c480b53b08a5c0e"
+    },
+    "assets/items/bellmetal_band.png": {
+      "colors": 13,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "dd518339cff4621131d6fa5b73cc1850990f8b755b6414f7b8c7d19560cd253a"
+    },
+    "assets/items/bellrope_gloves.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "cf50731a31c2460259c0880c931e709f5b88cc82b801378e759a2d06376f52dc"
+    },
+    "assets/items/black_ice_rapier.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "76f42e2cae44bf244660743a45fd6f7a719e2d66cab57b3c20e7528be2a2c5a2"
+    },
+    "assets/items/blackglass_hammer.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "28146dbd52d1f5ec647c2fe862568307e1f0ce3f975c708a2153270ff4378f67"
+    },
+    "assets/items/blue_iron_cuirass.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "59c51fe93b5a3db310573577e479817d101afe0bfed0fa6bc12145bf8098821a"
+    },
+    "assets/items/blue_iron_gauntlets.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "5419fc179031e75995c0d06a162be6b3f242d07078fc1593b8a13be3f2816ea5"
+    },
+    "assets/items/blue_iron_loop.png": {
+      "colors": 14,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "56a3b6debda0c42defa7326059730ccc60540157be5ae86dbdccfeadd0aedfe7"
+    },
+    "assets/items/blue_iron_sallet.png": {
+      "colors": 14,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "879a2ae421199fc0156bd2703a7ec7a023a46a104542a53a770a10daeb0f8978"
+    },
+    "assets/items/blue_watch_medallion.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "05cab1b1c5d22748dd83b9e900700675ff91c91bc41addf406b7d7cc05a5e74a"
+    },
+    "assets/items/bog_iron_beard.png": {
+      "colors": 12,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "fad7bfd3eb7642c82d60055d3ad86f1b609a156af6aa0924c252e510a9282b5b"
+    },
+    "assets/items/bogwatch_cuirass.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f5b54bbe0062820d92104c67393d5f9aa0f721dfef10e0c0759ec209c0216e43"
+    },
+    "assets/items/bogwatch_gauntlets.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "5d258573429e0a40ec996ecaab9c2757f9031b3d8507ddb244e350f92f928b78"
+    },
+    "assets/items/bone_brow_mask.png": {
+      "colors": 11,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "26fdff9744ddc0bf3f74c2440dcffc297f3ceb1b43c9b6c8947ee7f088c38f32"
+    },
+    "assets/items/bone_hilted_shortblade.png": {
+      "colors": 19,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "fadbe4606b163c941465984ce484d9775b071481909743dec0eecad47173a348"
+    },
+    "assets/items/bone_knuckle_gloves.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "ccc586e8b646730c2b0f5f8d1fe9ffaea723b0717dd65161a47243c9594e4f8f"
+    },
+    "assets/items/bone_lashed_axe.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "1c90e5a607a2fc379d6fdbcfe97221c3f6a0681518af6fb08d11c29e4c891723"
+    },
+    "assets/items/bone_loop_ring.png": {
+      "colors": 13,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "b39d8b500a6a39a8335a6523bca0e796ea2ae21847d5514e492c936f0f3e21d1"
+    },
+    "assets/items/bone_toggle_pendant.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "202eb0b710c4db8da490a2461bdf82ec2221c7b9c6efd2798428bb1fb64cc154"
+    },
+    "assets/items/brass_guard_estoc.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "fe53ca6db26c1a17c711803e538ebc0221ce6db46e03023329761388ce760e41"
+    },
+    "assets/items/brass_rivet_ring.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "49ae6d5022ce2481604c46c29ffcd9cb25b9a3d31ef65ed4df5dd5523b735afd"
+    },
+    "assets/items/broken_chain_charm.png": {
+      "colors": 13,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f97327c2fcbd6bdb1293e67cfc380390311ee3e9ff750ea6bd58701b2125fef7"
+    },
+    "assets/items/camp_hatchet.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "27671b39c69bd7095742eaec7518665037f3ea6a9b14fff017079fa26962b59b"
+    },
+    "assets/items/chain_apron.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "7a53d8cd3223d2775b9b43112cf5bc7e40ad55335319140c46bee1e8c83fd26d"
+    },
+    "assets/items/chain_link_ring.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "1ab3f3e538d6f2aad68e76de449c4561cc8bf90b91f57da99aa9c7291bab55a7"
+    },
+    "assets/items/chain_notched_axe.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "b96bfd189c3256ae122c75de40cd733d0ffca6f8ba7324975b1509d882f285f3"
+    },
+    "assets/items/chain_veil_hood.png": {
+      "colors": 14,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "84a192639ba9e070166206b54ded7d091f317132864127bc22ffa72d9e9e6e5f"
+    },
+    "assets/items/chainback_gloves.png": {
+      "colors": 14,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "3289fc59e5d48047e7297ab0cbca52415c8c525892b852c74b3c5dd741eabe1c"
+    },
+    "assets/items/chainbound_cudgel.png": {
+      "colors": 19,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "a1616b53f09a361c0bf2ed8d873ac2508aed75ff49be4ae7b5e582f97ec75095"
+    },
+    "assets/items/chapel_bell_mace.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "1ac0e80e244033f15b4a166111538b9c33a102316850c95881ee8747fa24b143"
+    },
+    "assets/items/chapel_pall.png": {
+      "colors": 13,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "32579020177f1b25d0eae008b6376cf212f59c388c0e6453d190d5736fdb7330"
+    },
+    "assets/items/chapel_watch_sword.png": {
+      "colors": 14,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "fab02bc2e765b73c68de45523af6db8a64f53e0811ae9bd37f366e6277ba1b4f"
+    },
+    "assets/items/charcoal_splitter.png": {
+      "colors": 19,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "be7a54e3a9d6d261a3040e628b7e3098bcff96839c46828a8c4aafccd654758f"
+    },
+    "assets/items/cinder_horn_helm.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "9f70a0740c45d8e4cf22aee7e2a6be0b4fc5a024e07abc14961fb1ffe1b45260"
+    },
+    "assets/items/cinder_wedge.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "979a81a7c5a54cd9e94e24de06b3e6f588ed37249021b4704ada43fde20f0209"
+    },
+    "assets/items/coal_cage_pendant.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "2d4469a6266fb92d53f04861aca844d2525269fb0f1430d3541c0af8a7428dd6"
+    },
+    "assets/items/coal_edge.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "c8b9c9e177e15de19eeb86e70574e81e3b5e0468fc6fb6b5a725b4038559380c"
+    },
+    "assets/items/coal_iron_ring.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "7bda5ba9eb2cae0ed42367892dde151b73ae17c55130cc8570f57381108e2d82"
+    },
+    "assets/items/coalheart_double_axe.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "68371489d268e982c94d9f0b3bcbda6697ced47d0b618715c3918fdb9de2c6e9"
+    },
+    "assets/items/coalstained_gambeson.png": {
+      "colors": 12,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "b0961e863892a172126f9e528ba3fc5273a279496c8deaffd8088513f765591d"
+    },
+    "assets/items/coalstained_gloves.png": {
+      "colors": 10,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "8309e3172cfae72999936d133ba9cd5820904d6f70203f9a6230a1647ba63772"
+    },
+    "assets/items/copper_ring.png": {
+      "colors": 19,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "1ba09f1ab397670c91ecaa113759e460e51525a0c4de679c0b95dae6b1434b8a"
+    },
+    "assets/items/ditch_blade.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "0f60fbea609717805ff04ab3d18e48b74748c29f8e2c49d1d834a9c56bb80594"
+    },
+    "assets/items/drowned_bell_charm.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "16cfa68c2f16804a991683f3d7f1ad11f4d6dd163e6861fa277686a3c21dd736"
+    },
+    "assets/items/drowned_woodsman.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "c4032c61e973d841b72f199646a3968f13ac53bffbb5096b73ba90462a3ffa12"
+    },
+    "assets/items/ember_eye_ring.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "1d52f723f13872bf0f60bbb4817259ae59b319ac9ee51200a601bc40b7743d49"
+    },
+    "assets/items/ember_in_a_bottle.png": {
+      "colors": 20,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "a53d4c23b1bcf9733ac8cc66d5b3563f93d118899e9aab7f66cab7935b7e2171"
+    },
+    "assets/items/ember_stitched_coat.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "269cb5ffef98fe54c3e9ae58adaffd020e9bc912439349ca06fdf64623937db7"
+    },
+    "assets/items/ember_thread_grips.png": {
+      "colors": 14,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "5238a3e0c86a4ec1cf2510a938d4ff3eba882610606ccfbc66cdc6131d63ae93"
+    },
+    "assets/items/ember_vow.png": {
+      "colors": 19,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "66c1712bcb0473caf7acf6aa420a694727c13acafe2777e3efa73ee2d35e946c"
+    },
+    "assets/items/embersmiths_maul.png": {
+      "colors": 20,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f765a3db1c0d4205bd8a64857c9ec27e61349a7397a704327902af55badabe43"
+    },
+    "assets/items/executioners_receipt.png": {
+      "colors": 14,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "15c88466b3aaad2b44db7af2891831ecd7ed3371993cccd18810242c53f90daf"
+    },
+    "assets/items/fen_eye_ring.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "d50862db3bfe00543fc99fd9f030b7734e6832c413fa2f7079e29e05227e0ebd"
+    },
+    "assets/items/ferrymans_broad_axe.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "91e86f5df1eda538c5b4b9e15325cccf9644cc8896f4fef4f206e91d68a349e5"
+    },
+    "assets/items/ferrymans_cudgel.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "eb3d316677886c4bb506a57acf2fb5e4a2fea301819d268b29eb3f3809533fb2"
+    },
+    "assets/items/ferrymans_falchion.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "83599a9a7d83bf51d5636960221adc9362a8c65f53b14ec94de36dd1e40cf94e"
+    },
+    "assets/items/ferrymans_jack.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "6cee32b23147e147cdb015e1ca5de5496325c41b235e3b93d20ece62df7b7ef9"
+    },
+    "assets/items/ferrymans_mitts.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "723b08890e4ce41601da18c89d4fd0654ef6e8f0956d57ff58ee6ea14142aec4"
+    },
+    "assets/items/ferrymans_obol.png": {
+      "colors": 12,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "8138cbd1b6789da8e2cadbf4c0ea94b86ca950e1a98c9f49a2d5c011d2644e37"
+    },
+    "assets/items/ferrymans_sallet.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "76afae6fdee4dc45e2a0f52b86639a6570d7b24d1f69313b07924fe860a11731"
+    },
+    "assets/items/ferrymans_token.png": {
+      "colors": 13,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "8f3d599fd80f0c11b493a4f0a203b758b818299d2a1ed2a56749f19587638a3d"
+    },
+    "assets/items/flanged_iron_mace.png": {
+      "colors": 13,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "6b37f8ec947122eb0432703523069b9cbe49472ad813c4ef0e7a3b78f289e288"
+    },
+    "assets/items/forge_slag_mace.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "070b0e6d90ea543d1ef7f8a963aea27b345f37cd5dab6a24e1d0dddfb9f97ec4"
+    },
+    "assets/items/frost_fur_cap.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "fb5f305183173cab6d6e658180b2f71ea50d0db45967978cd7d2c8574ae4f3a4"
+    },
+    "assets/items/frost_fur_mittens.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "9f66ce1a3fb496c11766e17484ddadeac5ddf089667b7f4275a2fbe4d8f49ccb"
+    },
+    "assets/items/frost_hide_coat.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "053c3f6bf1338eec13856c60dad3cedb728293d63133703bb6ae9403546a0bae"
+    },
+    "assets/items/frost_silver_band.png": {
+      "colors": 14,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "3fcb0e019824b59e882b907baa8f47112bc2a72b340f4272c47e0697410ff221"
+    },
+    "assets/items/frostbound_pestle.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "b68108025f073c9292963563d384034979a75eff9e13fe6647389622820b3f55"
+    },
+    "assets/items/frostbound_teardrop.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "2c643cd10402e85fb9ee5bf2be1019b9a3675de036687d571504365f714086c4"
+    },
+    "assets/items/frostwood_hatchet.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "10c601886079198d295ab81a2d9936f8160ae0fc01d4838663d3f1f2c2b2b202"
+    },
+    "assets/items/furnace_cleaver.png": {
+      "colors": 20,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f8301f6b41a8e45446cc8242f9e7305ed756b7fc2b532a0cdeea4d9038d43d11"
+    },
+    "assets/items/furnace_fists.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "b8aca4043061c87c903a21643b6fe2d07230a2db70a964430f1cf794e4b384f4"
+    },
+    "assets/items/furnace_guard.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "4f451b49a67c85cfa15ff8849b68baf23575a11bf532aaf40437e48e5a96f351"
+    },
+    "assets/items/furnace_jaw.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "458566b95f443853c7c2f698efbf3998a70b59fc9033cae63bba8fabfdec9348"
+    },
+    "assets/items/furnace_key.png": {
+      "colors": 19,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "6b0919f6130728a2d07705612ec9ca9aea9fd34aa8cfa90c57b5ceaf497233e8"
+    },
+    "assets/items/furnace_seal.png": {
+      "colors": 24,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "4069a2a9a96c589d1d17d678527bf76969439a92f945204e1a9b1b7bc3f74db0"
+    },
+    "assets/items/furnace_visage.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f9f074d8a720ca194f15d83e0bc10f6d29c85a9d7f0c0bbfc900d82a6fe43922"
+    },
+    "assets/items/glacier_crescent.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "99596c6ba65edd2f4438a7991a1ac86b8235241639d063bed038575e5a74d9b4"
+    },
+    "assets/items/grave_marker_hammer.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "ea534c537b7cb47d40195aca1cd78b34f4038b9ed3618272d656cd88fd0d2c64"
+    },
+    "assets/items/hide_armor.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "89cda6adb1d05d3e4c8fe1ab7ee8858a5dda2a36149de8e6669e5ca80706ff3a"
+    },
+    "assets/items/icebound_judgement.png": {
+      "colors": 19,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "ebc91699eadacd41238b47956b95090d043105d4eef0817a5235e32382850788"
+    },
+    "assets/items/iron_club.png": {
+      "colors": 13,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "8ffc84a364f821eb5e3b522acdf6a0559ccd024618d173aa1cc671f329498465"
+    },
+    "assets/items/iron_helmet.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "dfd378624d0243af8afdd33a5a084266829b7f275b3127e37fab74e774ec778f"
+    },
+    "assets/items/iron_rivet_grips.png": {
+      "colors": 13,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "b9462a1312636520589c8023645050688bc080a0ce57effb3921de5c191195c4"
+    },
+    "assets/items/iron_scale_vest.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "e87b8168a80949ba02689b121bf651fdae4fa9e0ef6a77d521ec719a2da68437"
+    },
+    "assets/items/iron_thistle.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "dbb6e74bd8adebd70705c08c016339095a41d2393e93e9d551ff5efb45aca924"
+    },
+    "assets/items/iron_tooth_charm.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "51ab862c9b8e73c8ca19cb6047a6658a0fd8922f997ef1ee2f8a1a6484362ab8"
+    },
+    "assets/items/king_under_stone.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "d5e2f44d9a58044c8b0a6616d1f9d6d78df001b4d6b9ca3cd3e39b98ff0d15f4"
+    },
+    "assets/items/last_coin_ring.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f62f5d5ffc9ecb1100136ec6f29d4842f74b8771df152499139a0117ec1a45b8"
+    },
+    "assets/items/last_felling.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "4938a2d8ea0d7490cc050e58199ec01be60c4212500e360d9c68ce24609e4705"
+    },
+    "assets/items/last_hold.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "3e8f73fcfe2694c6edff5380490610874563d1550f53f72228b342e5f62455c6"
+    },
+    "assets/items/last_watch_helm.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "139278ed62ccaa00772128898453e149d2b1c58c2bae9ee3cbbc86463594243f"
+    },
+    "assets/items/last_word.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "7eb5dddd61c3d030117bdfe62d68fec61ab2382196d3e5e5770e374c2f7af82b"
+    },
+    "assets/items/leather_gloves.png": {
+      "colors": 14,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "43aeff6d75f772e5d469864639706e297ec6616af24a96ab37b33cd2a1765f15"
+    },
+    "assets/items/leechkeepers_pestle.png": {
+      "colors": 14,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "4544ae36e34fbe4356ea7902357dd3d2fac2860984845fdd7d717d0b3a9f2aba"
+    },
+    "assets/items/linen_handwraps.png": {
+      "colors": 19,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "21b8a308bdf71ecb52bd3978e37b7c64b9458726f5b16b0326ed3c5fe79b411d"
+    },
+    "assets/items/miners_hanger.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "8e0ca36de3d40c56034d4521adcedcedd9fb45ed72856591e1a09ae208c99f0c"
+    },
+    "assets/items/oath_weight_pendant.png": {
+      "colors": 19,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "b6f9dbb05232792b94068e4f8d2e94fede8e9f2f5db6eb43acc61a44ee82e516"
+    },
+    "assets/items/oathbound_breastplate.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "516ccca869321b5ba34c38bd7cda6965c0e33887dee8a1dba863a9cb0d10cbaf"
+    },
+    "assets/items/oathbound_gauntlets.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "284d739b591504935bd72f521bf3760ca3f9dfe7fdfbcd34921894a3bcb56294"
+    },
+    "assets/items/oathkeepers_bascinet.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "c140a6a2b938b45ee0663de34d2e57d6bfb337d2f23d68f52ed3cb135dfcf747"
+    },
+    "assets/items/oathkeepers_circle.png": {
+      "colors": 19,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "82221a22442f4aff89d0ed7810d4d6d94def6ca472d25864a84abfe561bfeb79"
+    },
+    "assets/items/oathweight.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "ba9ae86842d5bd4146859ffced5e7829c8041c6091ca3d00330089c5ca62f179"
+    },
+    "assets/items/pale_regents_edge.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "97ad48a94590ac25d1a2421cefeb818669cac5f839c849930e5f24fd8d8a1d79"
+    },
+    "assets/items/pale_regents_helm.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "0271acce57a51cf734f0e7ca2fa6f3979e79ebf32fb51cc349cdf9837b12b0cc"
+    },
+    "assets/items/peat_cutters_mallet.png": {
+      "colors": 7,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "fc0f6f316927e823b0f4cd35682872893dab5e0981446bb9d9d87374c5c39ffd"
+    },
+    "assets/items/peat_hook_axe.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "ea5df382a4d7a711d1a2b78c1cff32f3a618f483d7d72dd02ddfd262c8b8669c"
+    },
+    "assets/items/pebble_on_cord.png": {
+      "colors": 14,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "575941812b9a6095a7ac2d6fcfcadd4380941d3a1ec113e06c3cb73a362cf165"
+    },
+    "assets/items/quarry_agate_ring.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "b928393c49f0166ad140123a7ee78791c53bcda0515e87fc6895d310b5c63ac5"
+    },
+    "assets/items/quarry_guard_helm.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "2f2e04d9cf60e0514a84dbd6f780ec71364e8973a757da59bad3fd11cdf60e2a"
+    },
+    "assets/items/quarry_handguards.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "40ad763224ac8dc67a41837937885b77464ca8d6bcc1b819e0d1d9983893bb1d"
+    },
+    "assets/items/quarry_pick_axe.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "3c4ffa27d98b4b1b32fa29a603b628f16bfafa1bfa5404c0ba90176cbec219b5"
+    },
+    "assets/items/quarry_plate.png": {
+      "colors": 20,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "103bce8c22bd40e11b88bb2add0ce61839e2bd240f9310da3d71b143987f5085"
+    },
+    "assets/items/quarry_sledge.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "89ebe71f648f29cefe539dd0141879d8fe8e341ae598c7908c29ad2f786a389b"
+    },
+    "assets/items/quarry_spirit_stone.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "fd7196b55a3605f150452e03df5de4cd4b0d42a4b0a6a04ca2bf55acd0d022ee"
+    },
+    "assets/items/red_seam_blade.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "a326cf380a4310e35876166715655280ccea085449bd5cbf526613c58366980f"
+    },
+    "assets/items/reed_braid_charm.png": {
+      "colors": 14,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "5483acfec461963d7ae77548529efa4da61a7f93d3dc8b462a3e413cded670d1"
+    },
+    "assets/items/reed_crown_helm.png": {
+      "colors": 13,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "d6c727e0f00a90bc7715173aca7db199e3fd6078dda034fc1027f1ff4359cf13"
+    },
+    "assets/items/reed_knot_ring.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "ae6044b12ca799287f61c0b96e606b4c38c67ac9be457ea68d5cc5d3386dd228"
+    },
+    "assets/items/reed_weave_grips.png": {
+      "colors": 13,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "83d6d8e1b5f51c91bd3eb3b6bf6309bc61d07ff913fd14563bf28734cc232ad3"
+    },
+    "assets/items/reed_woven_vest.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "fb1b4242034a2d55e4d124a95405c492e0659a397b8c1e20647cd9039193e6e6"
+    },
+    "assets/items/reedknife.png": {
+      "colors": 12,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "4981c51ef35fab4b5883c699372b3fe9f1f2ff99c2aae61307c42153e6862d28"
+    },
+    "assets/items/regents_cold_hands.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "8a77c4cd55d5b3a1a3c930f3e6d1f98ccecb44ee08bf1a13cc2b28dade1c14d6"
+    },
+    "assets/items/regents_empty_harness.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f20c8a93a391c1104e2535fc3f807cdd4b12d89a580df1715bc8fa7820a510c8"
+    },
+    "assets/items/regents_last_seal.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "3a794ecfd3624b0aa4f08f36d9f8e24b1af6a369b1fab95026c5683d704c8815"
+    },
+    "assets/items/regents_signet.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "4215ce11cdd3216fab86ca53c0ee1fd23d818e2dcd439c4627fe714b8d14d9fb"
+    },
+    "assets/items/restraint_amulet.png": {
+      "colors": 12,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "9a508d7a8b39c078dc428e5194a13b0bd0fb1eb097bf5e95033b88f21dc79acb"
+    },
+    "assets/items/rime_arming_sword.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "efe255f13b3fd7ca9043b561ee5595ac723d7780a3f0ea4789dae54c508f16a7"
+    },
+    "assets/items/road_ends_here.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "a54954c724c9beca50a5f354cd59d36f9531450aa2e43facf5df7643ab29c7d4"
+    },
+    "assets/items/roadkeepers_knot.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "8311caf7f6c1a18a540e24949a416aefcce3dede02e4f900b9cdd649f7be6508"
+    },
+    "assets/items/roadworn_bastion.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "8574a4303edcbe5720ada487451bf39ea5bc75b551708eb8a9a826fb01ea8a53"
+    },
+    "assets/items/root_coil_ring.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "d3aabcd518cec5a10490dc02e6af7ef8becc982a271d59830625693da5e92eb7"
+    },
+    "assets/items/root_maul.png": {
+      "colors": 13,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "2d7dcdb7b9fe2314de5ca6a11ff8821b2bff330c771845185d82a3f7cdb392d4"
+    },
+    "assets/items/rootbound_grips.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "2a507ce3289a59222c70d18c316fa9a36668da243e52592b1419b92de743df43"
+    },
+    "assets/items/rust_ring_shirt.png": {
+      "colors": 13,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "1364560f4ac3db88aa721aac1377a6ae533b8d09d424c4bd810f3ce8e6f003fa"
+    },
+    "assets/items/rust_tooth_hatchet.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "5321a2c21189be9aad13400a9a99a0cd61cb7689356ee258ef7da243cae6e607"
+    },
+    "assets/items/rusted_arming_sword.png": {
+      "colors": 20,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "d95962b22b6275dfb453efe2dc8ed86414c796bc112dd5609796ed2235958033"
+    },
+    "assets/items/salt_pearl_ring.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "b2b75243e6a9efeb2c21a047b8e00a37fd21f659579c9a959ae19383cc0d63f8"
+    },
+    "assets/items/saltbreaker.png": {
+      "colors": 19,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "db2bdcd7b29d86f2ea703e55bcfedec192abdad28faebe265f8b65306d603a84"
+    },
+    "assets/items/saltglass_sabre.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "0dffd370221cbf05299f7f9d1ce8efff2d3c172d6b2957188d4f8d39a8b4e49d"
+    },
+    "assets/items/saltglass_vial.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "c419fc9d38adb973e8316b20296d71e6369d62b3b61a855729f36c13819f1252"
+    },
+    "assets/items/saltwarden_gloves.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "c7caf6be54e1158d03f020f46cb3ca2160b92ea6b91f8ea849c7c9e96564bb36"
+    },
+    "assets/items/saltwarden_hauberk.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "4e14f086f23878e6b9c95e6b3d96c33ff4dd035bc861bb4eec2d9993894e3d33"
+    },
+    "assets/items/saltwarden_helm.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "de442d655ed6924c0b5af9c5c2438453f460859a500c9485c9e6b02342e041fb"
+    },
+    "assets/items/saltwarden_mace.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "076cfc96c25bae1f313b195cc4a2cb32bd258c02f8f8b5775e611930e8856356"
+    },
+    "assets/items/scarred_longsword.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "28fcf6a76b9c05d99d1a9706ba3e0124803060ab7a50517e97ddd3ef5d366d23"
+    },
+    "assets/items/silver_fen_reaver.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "d0526049568700046b38025289c85878ae371934db07e7950c3f64a271639caf"
+    },
+    "assets/items/silver_knuckle_maul.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "c7a5608110fb0b44bdfcf3d67fb3f0e1c533481c04192b1da18753d458e65a61"
+    },
+    "assets/items/silver_mourning_mail.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "0a71c84a9ecfc485470fcc41f891e07963cba20357d6840b6b2aec38cd74ecb2"
+    },
+    "assets/items/silver_pallbearers.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f00a55d88b8216395be24197d92ca20a80446dd58a167aef7edc49393c977472"
+    },
+    "assets/items/silver_vigil_locket.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "57dadc39888d626684cfbb27411fde12782a06ba7b0e2f4c5318f595a0844901"
+    },
+    "assets/items/silver_vigil_mask.png": {
+      "colors": 11,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "806108d761e5028500b5fc2731992bdecac7f8225e5cf3246b98d2eb5ab168c5"
+    },
+    "assets/items/slag_crown.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "463fe2ee1bc48f025f036fe2cb214ffb8a36fb8baec313de3f2d99fbf6547a6c"
+    },
+    "assets/items/slag_heart.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "12e5dffa64f5cd851afa4b978f3f1b5a73a817e820a4c71bf42acb7ded006fc1"
+    },
+    "assets/items/slag_knight_harness.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "8cce1c76543a37db329947c299cd686c7c7af942fbcd5e700cfbfc489d78c612"
+    },
+    "assets/items/slag_knuckle_mitts.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "eb1e5e2a10cc59e23762da3382823b9d120c451ae7e99334fed3efc8a240f7b6"
+    },
+    "assets/items/slagstone_ring.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "1da661ebcfc357128a0e358634953d9d07a38ac915e69ec20b56d3215ab1cc49"
+    },
+    "assets/items/smiths_half_moon.png": {
+      "colors": 22,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "965c89e8533021a31c26fa6c6b5034aa3dd30e80608360717c7d2471d468f6a7"
+    },
+    "assets/items/smiths_skullcap.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "6e56a637ece9baa58b47e56d73ada1cc9f7f5afa42c57b0ceb54f39c4a122205"
+    },
+    "assets/items/smiths_thumbprint.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "497ce732e6f1c14d298da19eff7a95e8a02fb894c9ab576f17dd782181a776e3"
+    },
+    "assets/items/soot_padded_hood.png": {
+      "colors": 11,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "24321282383b05af2ec0c403b949b716b0c85097baae60c100b886f6ad67731a"
+    },
+    "assets/items/stitched_coif.png": {
+      "colors": 13,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "78be67ac161114c3ab038fbcf6e589b5dba69a24a9c94dda16edabfdb2e601f4"
+    },
+    "assets/items/sunken_guard_helm.png": {
+      "colors": 20,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "405be92cd4eebfbd1a02206ef1a769c94e72ddcf50ec46826929686694237513"
+    },
+    "assets/items/sunken_officers_sabre.png": {
+      "colors": 19,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "8f2d7f18d1e9d9bd51c74b6a2387271eda0a579afbd02531f3f0cfa2180e5393"
+    },
+    "assets/items/thawless_blade.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f894d701c4d2707dd1896e187919191cf61fe8b49e4a715297f2bbff1a3304d8"
+    },
+    "assets/items/thawless_carapace.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "6cf74905f77a5d5b6a5b3c1dfcc499afc2583e61a8d5bc73421a9f26f517106d"
+    },
+    "assets/items/thawless_grasp.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "816fb95637a603297aec6d50be574becf065b70e183ccb5cd5af2e6b99b7c01e"
+    },
+    "assets/items/thawless_greathelm.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "dd027c542bde8e6202ae02e39b173c9cd9fb1e4875774bccd4a89e4c58087388"
+    },
+    "assets/items/thawless_loop.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "f3a879072585e8b2d428a0832b4bdb7a2e787116484378c0210e3d0b70b5eb84"
+    },
+    "assets/items/thawless_reliquary.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "ce022d8ba8c692a53d217effcca788309f176710c570ef760ec982e00f577019"
+    },
+    "assets/items/travel_wraps.png": {
+      "colors": 11,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "b731b960cc735d2a5484b1103a32012cfb764b8636d3effe2381d35246ff20c6"
+    },
+    "assets/items/twisted_wire_ring.png": {
+      "colors": 13,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "ed0d2f01c13d32cbf51616af4c29e4e78303cd82f7af0a2d76e19e59ad09a9a9"
+    },
+    "assets/items/vigil_moon_ring.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "7c7a8b30b82f7739c34cceeab8e5d75407c9410db8173bf80bb5e3d7d2dc565e"
+    },
+    "assets/items/watchfire_sword.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "4c33ad1b8b813ef549b44bd299a61baf57b69b88fac466ebe31e18833b9e5979"
+    },
+    "assets/items/widows_measure.png": {
+      "colors": 14,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "59ad08d2acf8293c4cc4a6f639fe459e6f5e1db9235c9de606c7740a4ccf64e2"
+    },
+    "assets/items/willow_crescent.png": {
+      "colors": 17,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "93e63a6276601464ba45af42ffea59fd97e4b35c4c27d68e128779283748dc7d"
+    },
+    "assets/items/willow_heart_charm.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "dee8423bc71985538161d9db949ff5fb52ce6a8dce67e83ecc5139e2ec0fbb86"
+    },
+    "assets/items/willow_knot_cowl.png": {
+      "colors": 13,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "90c13cacc0169805a43f535ae199728313bff301c53a55cf290bd2d6544aad47"
+    },
+    "assets/items/willow_splitter.png": {
+      "colors": 15,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "4f4d9a9648c1ac304f89e906069be068b1fb19ed47d9034ad2962cd8a3a817bf"
+    },
+    "assets/items/winter_bell.png": {
+      "colors": 16,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "858a1848b99c5c071180ec44a350b2eda078becf0aa4ee06e81291018bb5cda0"
+    },
+    "assets/items/winter_tithe.png": {
+      "colors": 18,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "2a4459d6948150862fc857bf8630c1bdb8f0944865504421936f009e2316a7b7"
+    },
+    "assets/items/wooden_club.png": {
+      "colors": 12,
+      "size": [
+        64,
+        64
+      ],
+      "sha256": "44cb9436871d967922b9ef3557b86a32365e1c6ae2386cd98f56b5e15106f6ef"
+    },
+    "assets/maps/world-map.png": {
+      "colors": 24,
+      "size": [
+        1122,
+        1402
+      ],
+      "sha256": "dad0d61fb9a447222e2177ecb3180d8bb47fca2508cc386769f2c58867c7b556"
+    },
+    "assets/sprites/barbarian_player--attack.png": {
+      "colors": 21,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "60114ba7491e9508b276346b6ec5b12819c9c1e0550b537895c08c2fb31b7608"
+    },
+    "assets/sprites/barbarian_player--death.png": {
+      "colors": 24,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "d68536781d415ab2916e6f4de2511d3c3eb6ab962d0eb9dcc31fe6ef93c89c96"
+    },
+    "assets/sprites/barbarian_player--idle.png": {
+      "colors": 16,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "2fcde370119f5bce2a5f1f418a8ad39a95579b376eb5d6a0bbb8c510f80b30fe"
+    },
+    "assets/sprites/barbarian_player--walk.png": {
+      "colors": 23,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "2a1740e8da66e6a4891792d7783ebadd1e9594320589214a64023c590b1ae28c"
+    },
+    "assets/sprites/bog_hag--attack.png": {
+      "colors": 19,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "fc1e598edb054df64946297074a3aa2c084d3f8395d6111c58d63ea9b275371a"
+    },
+    "assets/sprites/bog_hag--death.png": {
+      "colors": 19,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "8ee8893b9b2233a7e4ff06ab6af9277a0b4018759dbf9a63dc7ff60cf6720123"
+    },
+    "assets/sprites/bog_hag--idle.png": {
+      "colors": 21,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "d1d6a68bc9eb79fd236ca6237ae80ae2644e0e2c0c63807affeef6269279f102"
+    },
+    "assets/sprites/bog_hag--walk.png": {
+      "colors": 19,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "f0a7a13b023a7fac43341ce636eb892fdeef5ef18c5f6e793cbff3ae38be3f69"
+    },
+    "assets/sprites/bog_toad--attack.png": {
+      "colors": 21,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "63eeed66b4f4456555e3e77d70b6f3ae701edf2df565ad64b9febb122fd85b31"
+    },
+    "assets/sprites/bog_toad--death.png": {
+      "colors": 20,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "948203e4428edc2f3f4a856e46bac8e67ee08b32629ce8c764b75a2f61f00b9b"
+    },
+    "assets/sprites/bog_toad--idle.png": {
+      "colors": 20,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "e75d8352c5d6b52cf186ff65b8f7eb7d30ef097e0d25c5bf95963e3f3c6d96dc"
+    },
+    "assets/sprites/bog_toad--walk.png": {
+      "colors": 20,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "a9ecaa3ebc5a61aba27fddaeac0ebe216eef650f4b8d1654c33cc4fc1a8d2f5b"
+    },
+    "assets/sprites/bone_slime--attack.png": {
+      "colors": 12,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "45d31ba1bdd4471e514611733a0989139feae5aaee3df97312c346678f1fb249"
+    },
+    "assets/sprites/bone_slime--death.png": {
+      "colors": 12,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "3bce34eb11c6bb0dbef433eb42106ceec1e43a129dc49a182fee2949a1be6d66"
+    },
+    "assets/sprites/bone_slime--idle.png": {
+      "colors": 13,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "8818efaca3721da5b4c7a4b05afc3aa3a9d22687dd2e74d10d652d8d83a67436"
+    },
+    "assets/sprites/bone_slime--walk.png": {
+      "colors": 11,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "024b05b0b1e51a98bd185f086052d5eff403507ac9b1d905ac33d462d2c9b5eb"
+    },
+    "assets/sprites/delve_dwarf--attack.png": {
+      "colors": 19,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "e56a1775ba0b1dccc3b5d179cd98c0685da035238e1d8c689369dbd1b9392e89"
+    },
+    "assets/sprites/delve_dwarf--death.png": {
+      "colors": 19,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "69cdd1ee7dcefb4bf725d1a7867e8733279297d82cf8e6a01ae87f5183cd9579"
+    },
+    "assets/sprites/delve_dwarf--idle.png": {
+      "colors": 18,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "40a7a616dc1cb525111c076f4b575c13056c00864dc2e013821895906afa50b6"
+    },
+    "assets/sprites/delve_dwarf--walk.png": {
+      "colors": 19,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "4460547a0843320342f40adc1e395dc4bb003b04b3c1cd2a21e990d7b6454ba8"
+    },
+    "assets/sprites/delve_gnoll--attack.png": {
+      "colors": 16,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "6d79a65b7b9d61d0ded5cd321df13bf27a6d3724f8e3e6e7eb62e9755a1df47c"
+    },
+    "assets/sprites/delve_gnoll--death.png": {
+      "colors": 17,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "a31bd6204f07c644c7819fe6e18bc86feabd2995b2c81e3b1316d8a4e868d3cd"
+    },
+    "assets/sprites/delve_gnoll--idle.png": {
+      "colors": 16,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "b32bef46fad09b3ad7b96dfe1fd7ba30753d37f0a78454e02ac46c0d50677123"
+    },
+    "assets/sprites/delve_gnoll--walk.png": {
+      "colors": 16,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "b3091de1a7b9d3b26d79558826c2d125cccfe6e8301b895d43fde36d5408fd4a"
+    },
+    "assets/sprites/drowned_corpse--attack.png": {
+      "colors": 19,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "cbc2e3a25bd459eb8f603b6cb72f58e178a281b0a6a02b37e731722ea002baf7"
+    },
+    "assets/sprites/drowned_corpse--death.png": {
+      "colors": 23,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "f9a38617b21c03d7c2865205ca5702941b5ba45ba9bc90c45d72ce8b684fd146"
+    },
+    "assets/sprites/drowned_corpse--idle.png": {
+      "colors": 22,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "d43248cb3db0bf3b4a983fa2acfdce8bb6f713650a39d5d87abb79dbc5e56179"
+    },
+    "assets/sprites/drowned_corpse--walk.png": {
+      "colors": 18,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "33a5b206b0da8635ef9044d351ea6118250b094516a7e3802b4449ce55d79e0f"
+    },
+    "assets/sprites/giant_cave_spider--attack.png": {
+      "colors": 17,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "56f4c74e5074f9e116437c9373fb1afef0a50b1f32b0bf6b652e490316736422"
+    },
+    "assets/sprites/giant_cave_spider--death.png": {
+      "colors": 18,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "f09ab07f656b30e05b08747f550094a729d978bba627c3524e33f40f76683cb3"
+    },
+    "assets/sprites/giant_cave_spider--idle.png": {
+      "colors": 16,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "d2933ee0f13f69bfdbbaf563331d45839cfe5cdd092eef2fdac7a6d6ba715bd9"
+    },
+    "assets/sprites/giant_cave_spider--walk.png": {
+      "colors": 17,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "0c42e6e7a169fba34dae082b20030f2c0b343b892cc321305a27e857e4ecaa3b"
+    },
+    "assets/sprites/giant_water_strider--attack.png": {
+      "colors": 17,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "96b8113fc820e5c16335e58d5ffbfe0c850ed2d8fad5e221c2346d2409770366"
+    },
+    "assets/sprites/giant_water_strider--death.png": {
+      "colors": 17,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "832b01570c957cc6469b0259409f3ec6bf6626d388e7a6152d25ff5aaaad52bb"
+    },
+    "assets/sprites/giant_water_strider--idle.png": {
+      "colors": 17,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "83e9fa590e24574d40330ef0cc491839de0fb8f8563cc2e2a99d05b708db0022"
+    },
+    "assets/sprites/giant_water_strider--walk.png": {
+      "colors": 17,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "c0491d46e869b3d1f0ba0b0f63f05977b74c9ace136a8c6470b8f3ee39126c53"
+    },
+    "assets/sprites/knight_player_axe--attack.png": {
+      "colors": 22,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "d3a5278e84b70519f4cdce336fd91e2238d7741efdd0135f71895778d72a585f"
+    },
+    "assets/sprites/knight_player_axe--death.png": {
+      "colors": 24,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "bfda5bb2971ade6aa7e7ce70d21d1350765607b5a60ffe0d97b8ec7114b84933"
+    },
+    "assets/sprites/knight_player_axe--idle.png": {
+      "colors": 18,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "90c801582b3b2cc18e9670ef2bec432c57c19b71b90d65fa20a7b6d87154f8b7"
+    },
+    "assets/sprites/knight_player_axe--walk.png": {
+      "colors": 25,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "1f04a91fe79370500289094a2b2b4dcca70c960d8a816005099acff8b21a9743"
+    },
+    "assets/sprites/knight_player_fist--attack.png": {
+      "colors": 24,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "eb3f683cc2e510744394271d61c2fee95bdac89b5e410c48f77bb554a92666d6"
+    },
+    "assets/sprites/knight_player_fist--death.png": {
+      "colors": 23,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "67565f70821a8a29943cb48499975bcd43909a225d96351ac5ecf70e77fd77f8"
+    },
+    "assets/sprites/knight_player_fist--idle.png": {
+      "colors": 20,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "79b26544686066d6bab2ac67f04ab87313ee1b29077faeef27494fb1fa712210"
+    },
+    "assets/sprites/knight_player_fist--walk.png": {
+      "colors": 23,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "24e49f1145532506bcf15b3c109ba22c155e5b9ebaa350c8fe5cf8ded3e4b6c0"
+    },
+    "assets/sprites/knight_player_sword--attack.png": {
+      "colors": 22,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "258e0969c9e4f45358a12b7c8a54f70f01bbb622891cbcc0ccdb8f632986400c"
+    },
+    "assets/sprites/knight_player_sword--death.png": {
+      "colors": 23,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "f79a61e65be51ffacb11d52c0bff780ec7ca3342c400e3e7b8d4661dc6b2f2c0"
+    },
+    "assets/sprites/knight_player_sword--idle.png": {
+      "colors": 19,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "3e9d1a15458456b9329fdc5af806920488dae2f800edcdf351771f24dc074caa"
+    },
+    "assets/sprites/knight_player_sword--walk.png": {
+      "colors": 23,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "70169a734c725ccb09178dc10eac334a10418f465918751542a62734faafb217"
+    },
+    "assets/sprites/root_hulk--attack.png": {
+      "colors": 18,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "c2ae2ac4a578054fb319c3202687ed4296bea411dd5e35131fd123e00447a96e"
+    },
+    "assets/sprites/root_hulk--death.png": {
+      "colors": 18,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "fd68a4f6f8818505266328af665d014fa7dce471140fbf56ffdc787c39f70106"
+    },
+    "assets/sprites/root_hulk--idle.png": {
+      "colors": 17,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "d29bb353cbee82e59f627c8c662d7447497d2100b489e1fa6d36d64b45835c6b"
+    },
+    "assets/sprites/root_hulk--walk.png": {
+      "colors": 18,
+      "size": [
+        1024,
+        128
+      ],
+      "sha256": "5adc8e2b4f9de910060a4d1cb3680b7ffef2ec41ad5f47f3d9816a5741bb371f"
+    },
+    "assets/sprites/troglodyte--attack.png": {
+      "colors": 18,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "08c823f699bec542d93685665a673fa7cca040262eaa0f74ef0844558679c17e"
+    },
+    "assets/sprites/troglodyte--death.png": {
+      "colors": 18,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "e964e2f5b84990e3b1bfc1597ead83825a1077cd05b19db6fb581b7575ecfc6b"
+    },
+    "assets/sprites/troglodyte--idle.png": {
+      "colors": 18,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "c1c356992ab147616ec9bed67a0c48c047faaea9e8bb9a016e513da1e9d92cac"
+    },
+    "assets/sprites/troglodyte--walk.png": {
+      "colors": 17,
+      "size": [
+        768,
+        128
+      ],
+      "sha256": "1093d15afa6c5b41cfe09047e10f233430c5d42c3a4b6e3e49409a9cac3f3be9"
+    }
+  },
+  "passed": true
+}

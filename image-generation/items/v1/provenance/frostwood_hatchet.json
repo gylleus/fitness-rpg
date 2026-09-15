@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/frostwood_hatchet.png",
   "source_sha256": "a57d4850c1a67ad94d23e5bb9ea6731b97e189790d2b5debba981d585e6dfb80",
   "icon": "assets/items/frostwood_hatchet.png",
-  "icon_sha256": "23c3ecd79765740509673de628f6707dbec0f81ccd44b3a636e986bdf75ef256",
+  "icon_sha256": "10c601886079198d295ab81a2d9936f8160ae0fc01d4838663d3f1f2c2b2b202",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Frostwood Hatchet. A pale steel hatchet has a short angular blade and a gray-white wooden handle. Blue frost gathers under its thick socket, and a soft hide loop hangs from the rounded butt.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Frostwood Hatchet. A pale steel hatchet has a short angular blade and a gray-white wooden handle. Blue frost gathers under its thick socket, and a soft hide loop hangs from the rounded butt.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/frostwood_hatchet.png",
+    "source_sha256": "23c3ecd79765740509673de628f6707dbec0f81ccd44b3a636e986bdf75ef256",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "10c601886079198d295ab81a2d9936f8160ae0fc01d4838663d3f1f2c2b2b202",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

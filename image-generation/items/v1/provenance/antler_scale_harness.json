@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/antler_scale_harness.png",
   "source_sha256": "d2321007501a3725d14ee1882d0ff0592f412646798743c6fe194048f1bd7351",
   "icon": "assets/items/antler_scale_harness.png",
-  "icon_sha256": "824a5b447df3b3624b1acf09d861594b3ae795cdc4f32243f0243bc698f8cdf3",
+  "icon_sha256": "e72252203aacf21b14021771909147cc603e67ae73a07b8edb729a528505f378",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Antler Scale Harness. Flattened yellow antler plates overlap across dark brown leather. Each plate has two visible copper pins, and a narrow strip of coarse black fur softens the high chest opening.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Antler Scale Harness. Flattened yellow antler plates overlap across dark brown leather. Each plate has two visible copper pins, and a narrow strip of coarse black fur softens the high chest opening.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/antler_scale_harness.png",
+    "source_sha256": "824a5b447df3b3624b1acf09d861594b3ae795cdc4f32243f0243bc698f8cdf3",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "e72252203aacf21b14021771909147cc603e67ae73a07b8edb729a528505f378",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

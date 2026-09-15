@@ -1,0 +1,43 @@
+{
+  "palette": {
+    "file": "assets/palette.json",
+    "name": "ENDESGA 32",
+    "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+    "metric": "ciede2000",
+    "dither": "none"
+  },
+  "baseline": "c79c2bd",
+  "geometry_and_alpha": {
+    "same_dimensions": 279,
+    "same_alpha": 279,
+    "unchanged_actor_files": 56,
+    "changed_visible_rgb": 223
+  },
+  "tests": {
+    "shared_palette": 5,
+    "biome_pipeline": 27,
+    "sprite_pipeline": 51,
+    "enemy_adapter": 8,
+    "animation_pixels": 10,
+    "scenery_atlas": 6,
+    "item_catalog": 4,
+    "native_sprite_ui": 14
+  },
+  "production_rendering": {
+    "scene_renders": 223,
+    "actor_atlas_crops": 384,
+    "scaled_mirrored_actor_samples": 336
+  },
+  "browser": {
+    "interiors": 5,
+    "viewports_per_interior": 3,
+    "static_pages": 4,
+    "static_embedded_images": 206
+  },
+  "typecheck": "passed",
+  "lint": "passed",
+  "android_build": "release arm64-v8a; successful",
+  "phone_install": "Installed on SM-F946N with adb install -r; installed APK hash matches apk-audit.json; cold launch successful; saves preserved. See phone-install.json.",
+  "native_fallbacks": "All seven code-native sprite shapes, default tint and every dungeon tint render exact master-palette colours.",
+  "apk_sha256": "6edcbedeb40c6742f5380ea7ad4e46adb193e6fe0be8a0d1ecb5fe015f213288"
+}

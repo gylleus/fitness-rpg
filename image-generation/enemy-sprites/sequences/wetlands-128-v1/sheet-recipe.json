@@ -1,0 +1,885 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "bog_toad",
+      "name": "Bog Toad",
+      "facing": "left",
+      "size": 128,
+      "height_scale": 0.55,
+      "backend": "built-in imagegen frame sheets, imported on CPU",
+      "layout_note": "Connected subject extraction; documented action-wide scale; fixed x anchor per source grid column; source floor alignment; no per-frame rescaling.",
+      "scale_mode": "ready_pose",
+      "sources": {
+        "idle": {
+          "image": "bog_toad/idle-source.png",
+          "sha256": "09e3e66746a032bd41fc7e0ddb71ada87866fe2648b8812681a412d2d05b90a2",
+          "columns": 4,
+          "rows": 2,
+          "min_area": 1000,
+          "mask": {
+            "kind": "color_key",
+            "color": [
+              139,
+              155,
+              180
+            ],
+            "tolerance": 26
+          }
+        },
+        "walk": {
+          "image": "bog_toad/walk-source.png",
+          "sha256": "db195a8c8e0cb276b506c8783366580a874a5bcc8538434c6951289ddb66b6b2",
+          "columns": 4,
+          "rows": 2,
+          "min_area": 1000,
+          "mask": {
+            "kind": "color_key",
+            "color": [
+              139,
+              155,
+              180
+            ],
+            "tolerance": 26
+          }
+        },
+        "attack": {
+          "image": "bog_toad/attack-source.png",
+          "sha256": "f2be20e5d07b7ae9a7f3d5243b24676fce02eadcf8bd253e3b9653f0ca714e1f",
+          "columns": 4,
+          "rows": 2,
+          "min_area": 1000,
+          "mask": {
+            "kind": "color_key",
+            "color": [
+              139,
+              155,
+              180
+            ],
+            "tolerance": 26
+          }
+        },
+        "death": {
+          "image": "bog_toad/death-source.png",
+          "sha256": "915c5d3f895a9a0bce85c8d458e23ec335366374ddaa6821a975ed59104afbb8",
+          "columns": 4,
+          "rows": 2,
+          "min_area": 1000,
+          "mask": {
+            "kind": "color_key",
+            "color": [
+              139,
+              155,
+              180
+            ],
+            "tolerance": 26
+          }
+        }
+      },
+      "actions": {
+        "idle": {
+          "source": "idle",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "loop": true,
+          "durations_ms": [
+            150,
+            150,
+            150,
+            150,
+            150,
+            150,
+            150,
+            150
+          ]
+        },
+        "walk": {
+          "source": "walk",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "loop": true,
+          "durations_ms": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        "attack": {
+          "source": "attack",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "loop": false,
+          "durations_ms": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ],
+          "lift": [
+            0,
+            0,
+            0,
+            24,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "death": {
+          "source": "death",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "loop": false,
+          "durations_ms": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ]
+        }
+      }
+    },
+    {
+      "id": "drowned_corpse",
+      "name": "Drowned Corpse",
+      "facing": "left",
+      "size": 128,
+      "height_scale": 1.0,
+      "backend": "built-in imagegen frame sheets, imported on CPU",
+      "layout_note": "Connected subject extraction; documented action-wide scale; fixed x anchor per source grid column; source floor alignment; no per-frame rescaling.",
+      "scale_mode": "ready_pose",
+      "sources": {
+        "idle": {
+          "image": "drowned_corpse/idle-source.png",
+          "sha256": "622278e41a2e0e65a8cf11799d9787ff039e5d081abe7ddaf8e963d5edb1d5de",
+          "columns": 4,
+          "rows": 2,
+          "min_area": 1000,
+          "mask": {
+            "kind": "color_key",
+            "color": [
+              139,
+              155,
+              180
+            ],
+            "tolerance": 26
+          }
+        },
+        "walk": {
+          "image": "drowned_corpse/walk-source.png",
+          "sha256": "c5de84e8104c336fd0e8b60e9adf18fbaf0ecb7211aea6188f0be33e59f42096",
+          "columns": 4,
+          "rows": 2,
+          "min_area": 1000,
+          "mask": {
+            "kind": "color_key",
+            "color": [
+              139,
+              155,
+              180
+            ],
+            "tolerance": 26
+          }
+        },
+        "attack": {
+          "image": "drowned_corpse/attack-source.png",
+          "sha256": "81a6a7d0ad487f762d2aa44be73e216bd8ae178bcb2c3013226c5d09394004b5",
+          "columns": 4,
+          "rows": 2,
+          "min_area": 1000,
+          "mask": {
+            "kind": "color_key",
+            "color": [
+              139,
+              155,
+              180
+            ],
+            "tolerance": 26
+          }
+        },
+        "death": {
+          "image": "drowned_corpse/death-source.png",
+          "sha256": "b4c718641a6b20819c1676f67759bb5a21e27c60375af95ed684a3f93747e23f",
+          "columns": 4,
+          "rows": 2,
+          "min_area": 1000,
+          "mask": {
+            "kind": "color_key",
+            "color": [
+              139,
+              155,
+              180
+            ],
+            "tolerance": 26
+          }
+        }
+      },
+      "actions": {
+        "idle": {
+          "source": "idle",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "loop": true,
+          "durations_ms": [
+            150,
+            150,
+            150,
+            150,
+            150,
+            150,
+            150,
+            150
+          ]
+        },
+        "walk": {
+          "source": "walk",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "loop": true,
+          "durations_ms": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        "attack": {
+          "source": "attack",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "loop": false,
+          "durations_ms": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        "death": {
+          "source": "death",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "loop": false,
+          "durations_ms": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ]
+        }
+      }
+    },
+    {
+      "id": "bog_hag",
+      "name": "Bog Hag",
+      "facing": "left",
+      "size": 128,
+      "height_scale": 1.15,
+      "backend": "built-in imagegen frame sheets, imported on CPU",
+      "layout_note": "Connected subject extraction; documented action-wide scale; fixed x anchor per source grid column; source floor alignment; no per-frame rescaling.",
+      "scale_mode": "ready_pose",
+      "sources": {
+        "idle": {
+          "image": "bog_hag/idle-source.png",
+          "sha256": "2b75728c7bb747deb8864542804e50db9c13d3c648259c6cda7ce5a9bd509487",
+          "columns": 4,
+          "rows": 2,
+          "min_area": 1000,
+          "mask": {
+            "kind": "color_key",
+            "color": [
+              139,
+              155,
+              180
+            ],
+            "tolerance": 26
+          }
+        },
+        "walk": {
+          "image": "bog_hag/walk-source.png",
+          "sha256": "61ea499569c61b92dbf45b1f272488440fcab5eeea81812f1def13bca9dced24",
+          "columns": 4,
+          "rows": 2,
+          "min_area": 1000,
+          "mask": {
+            "kind": "color_key",
+            "color": [
+              139,
+              155,
+              180
+            ],
+            "tolerance": 26
+          }
+        },
+        "attack": {
+          "image": "bog_hag/attack-source.png",
+          "sha256": "239e34595944c5616a104b8ceeee2deac485a6a28b74baf3ff7800bba0867bf6",
+          "columns": 4,
+          "rows": 2,
+          "min_area": 1000,
+          "mask": {
+            "kind": "color_key",
+            "color": [
+              139,
+              155,
+              180
+            ],
+            "tolerance": 26
+          }
+        },
+        "death": {
+          "image": "bog_hag/death-source.png",
+          "sha256": "e787c57871ff06a3aaece71ae85520e1724069e93722e0b15a5c5a3ad1f328d0",
+          "columns": 4,
+          "rows": 2,
+          "min_area": 1000,
+          "mask": {
+            "kind": "color_key",
+            "color": [
+              139,
+              155,
+              180
+            ],
+            "tolerance": 26
+          }
+        }
+      },
+      "actions": {
+        "idle": {
+          "source": "idle",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "loop": true,
+          "durations_ms": [
+            150,
+            150,
+            150,
+            150,
+            150,
+            150,
+            150,
+            150
+          ]
+        },
+        "walk": {
+          "source": "walk",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "loop": true,
+          "durations_ms": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        "attack": {
+          "source": "attack",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "loop": false,
+          "durations_ms": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        "death": {
+          "source": "death",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "loop": false,
+          "durations_ms": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ]
+        }
+      }
+    },
+    {
+      "id": "root_hulk",
+      "name": "Root Hulk",
+      "facing": "left",
+      "size": 128,
+      "height_scale": 1.2,
+      "backend": "built-in imagegen frame sheets, imported on CPU",
+      "layout_note": "Connected subject extraction; documented action-wide scale; fixed x anchor per source grid column; source floor alignment; no per-frame rescaling.",
+      "scale_mode": "ready_pose",
+      "sources": {
+        "idle": {
+          "image": "root_hulk/idle-source.png",
+          "sha256": "589216ffb178f344e21f0cb7b72e1c10e8f48193586eb635b93ca416f04d27dd",
+          "columns": 4,
+          "rows": 2,
+          "min_area": 1000,
+          "mask": {
+            "kind": "color_key",
+            "color": [
+              139,
+              155,
+              180
+            ],
+            "tolerance": 26
+          }
+        },
+        "walk": {
+          "image": "root_hulk/walk-source.png",
+          "sha256": "54af3eec787b71382f702ca8e28a77093016995218ff89cdbbd307c99c370fce",
+          "columns": 4,
+          "rows": 2,
+          "min_area": 1000,
+          "mask": {
+            "kind": "color_key",
+            "color": [
+              139,
+              155,
+              180
+            ],
+            "tolerance": 26
+          }
+        },
+        "attack": {
+          "image": "root_hulk/attack-source.png",
+          "sha256": "16af0415d18967e8af937bb24f05cf2baaa3cc5c19e0cdab960c99d39d6537dc",
+          "columns": 4,
+          "rows": 2,
+          "min_area": 1000,
+          "mask": {
+            "kind": "color_key",
+            "color": [
+              139,
+              155,
+              180
+            ],
+            "tolerance": 26
+          }
+        },
+        "death": {
+          "image": "root_hulk/death-source.png",
+          "sha256": "6330871e822708865797faccd519b4f17d70df47b2f0919f70a8c340c46ed1fa",
+          "columns": 4,
+          "rows": 2,
+          "min_area": 1000,
+          "mask": {
+            "kind": "color_key",
+            "color": [
+              139,
+              155,
+              180
+            ],
+            "tolerance": 26
+          }
+        }
+      },
+      "actions": {
+        "idle": {
+          "source": "idle",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "loop": true,
+          "durations_ms": [
+            150,
+            150,
+            150,
+            150,
+            150,
+            150,
+            150,
+            150
+          ]
+        },
+        "walk": {
+          "source": "walk",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "loop": true,
+          "durations_ms": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        "attack": {
+          "source": "attack",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "loop": false,
+          "durations_ms": [
+            100,
+            100,
+            150,
+            70,
+            100,
+            100,
+            100,
+            80
+          ]
+        },
+        "death": {
+          "source": "death",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "loop": false,
+          "durations_ms": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ]
+        }
+      }
+    },
+    {
+      "id": "giant_water_strider",
+      "name": "Giant Water Strider",
+      "facing": "left",
+      "size": 128,
+      "height_scale": 0.9,
+      "backend": "built-in imagegen frame sheets, imported on CPU",
+      "layout_note": "Connected subject extraction; documented action-wide scale; fixed x anchor per source grid column; source floor alignment; no per-frame rescaling.",
+      "scale_mode": "ready_pose",
+      "sources": {
+        "idle": {
+          "image": "giant_water_strider/idle-source.png",
+          "sha256": "6ce1c682d4ae1bb8033da7a1daf50fa3ae675c531d2312c2466a37bdf7ca5768",
+          "columns": 4,
+          "rows": 2,
+          "min_area": 1000,
+          "mask": {
+            "kind": "color_key",
+            "color": [
+              139,
+              155,
+              180
+            ],
+            "tolerance": 26
+          }
+        },
+        "walk": {
+          "image": "giant_water_strider/walk-source.png",
+          "sha256": "137b07314e244e5d7b7f6800534e0294517be858403570d649a24a35a8b53c93",
+          "columns": 4,
+          "rows": 2,
+          "min_area": 1000,
+          "mask": {
+            "kind": "color_key",
+            "color": [
+              139,
+              155,
+              180
+            ],
+            "tolerance": 26
+          }
+        },
+        "attack": {
+          "image": "giant_water_strider/attack-source.png",
+          "sha256": "52953692cd2e49aa277fddbbbd46fa42660ac4137356f5af295e82b23f64ffc5",
+          "columns": 4,
+          "rows": 2,
+          "min_area": 1000,
+          "mask": {
+            "kind": "color_key",
+            "color": [
+              139,
+              155,
+              180
+            ],
+            "tolerance": 26
+          }
+        },
+        "death": {
+          "image": "giant_water_strider/death-source.png",
+          "sha256": "cacbf3cc3ba69bf1818f1e0c8dc27c7f5c0c9dafd69293eeab9581f7a36a95c8",
+          "columns": 4,
+          "rows": 2,
+          "min_area": 1000,
+          "mask": {
+            "kind": "color_key",
+            "color": [
+              139,
+              155,
+              180
+            ],
+            "tolerance": 26
+          }
+        }
+      },
+      "actions": {
+        "idle": {
+          "source": "idle",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "loop": true,
+          "durations_ms": [
+            150,
+            150,
+            150,
+            150,
+            150,
+            150,
+            150,
+            150
+          ]
+        },
+        "walk": {
+          "source": "walk",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "loop": true,
+          "durations_ms": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        "attack": {
+          "source": "attack",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "loop": false,
+          "durations_ms": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        "death": {
+          "source": "death",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "loop": false,
+          "durations_ms": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ]
+        }
+      }
+    }
+  ]
+}

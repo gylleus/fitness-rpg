@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/cinder_horn_helm.png",
   "source_sha256": "3a328220916b89c01d473be611b0cc3382ca302c0a8c0419dc7d5e78ebc5ce22",
   "icon": "assets/items/cinder_horn_helm.png",
-  "icon_sha256": "5ea349ac76e193f2ed7cec221eac903b9039e13c5c1d623c1cac61dbc52168fb",
+  "icon_sha256": "9f70a0740c45d8e4cf22aee7e2a6be0b4fc5a024e07abc14961fb1ffe1b45260",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Cinder Horn Helm. A low black steel helmet has two short blunt hornlike projections made from layered metal. Rust-red seams separate the layers, and gray padded cheek guards frame a large open face.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Cinder Horn Helm. A low black steel helmet has two short blunt hornlike projections made from layered metal. Rust-red seams separate the layers, and gray padded cheek guards frame a large open face.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/cinder_horn_helm.png",
+    "source_sha256": "5ea349ac76e193f2ed7cec221eac903b9039e13c5c1d623c1cac61dbc52168fb",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "9f70a0740c45d8e4cf22aee7e2a6be0b4fc5a024e07abc14961fb1ffe1b45260",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }

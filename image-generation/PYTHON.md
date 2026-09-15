@@ -30,6 +30,7 @@ importing your own pixels, animation, props and static backgrounds.
 | --- | --- |
 | `uv run sprites …` | Shared asset pipeline: reference, plan, prepare, animate, export, review, package. |
 | `uv run enemy-sprites …` | Enemy roster entry point to the same pipeline. |
+| `uv run biome-assets …` | Shared biome prompts, static source preparation and scenery bundling. Planning/definition use the root environment; pixel operations use the pinned sprite environment. |
 | `uv run sprite-python …` | Run a helper script or tests in the pinned GPU environment. |
 | `uv run sprite-setup …` | Existing sprite environment/model setup commands. |
 | `uv run content …` | Validate or export authored game content. |

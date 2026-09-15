@@ -1,4 +1,5 @@
 import { View } from 'react-native';
+import { spriteColor } from '../sprites/palette';
 
 // Small code-native sprites: no network assets or font-dependent emoji artwork.
 const sprites = {
@@ -42,7 +43,8 @@ export function PixelSprite({ kind = 'hero', size = 112, tint = '#93b9a0', flip 
   kind?: keyof typeof sprites; size?: number; tint?: string; flip?: boolean;
 }) {
   const pixel = size / 16;
-  const palette: Record<string, string> = { C: tint, W: '#e4e9dc', K: '#192824', S: '#d6b799', G: '#eec977' };
+  const palette: Record<string, string> = { C: spriteColor(tint), W: spriteColor('#c0cbdc'),
+    K: spriteColor('#181425'), S: spriteColor('#e4a672'), G: spriteColor('#feae34') };
   return <View accessible={false} style={{ width: size, height: pixel * 14, transform: [{ scaleX: flip ? -1 : 1 }] }}>
     {sprites[kind].flatMap((row, y) => [...row].map((cell, x) => cell !== ' ' ?
       <View key={`${x}-${y}`} style={{ position: 'absolute', left: x * pixel, top: y * pixel, width: pixel + 0.2, height: pixel + 0.2, backgroundColor: palette[cell] }} /> : null))}

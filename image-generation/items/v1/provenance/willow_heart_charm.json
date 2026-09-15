@@ -5,7 +5,7 @@
   "original": "image-generation/items/v1/sources/willow_heart_charm.png",
   "source_sha256": "8b6c768db0e67cd914e5b629d67baf3bc34f438b52b81993d34cf6dda0b3d5a1",
   "icon": "assets/items/willow_heart_charm.png",
-  "icon_sha256": "17249297c8a48ae42786b9fedcc16f10f271b51102d8f77d35607d525372d5be",
+  "icon_sha256": "dee8423bc71985538161d9db949ff5fb52ce6a8dce67e83ecc5139e2ec0fbb86",
   "target": [
     64,
     64
@@ -17,5 +17,23 @@
     "source_sha256": "8b6c768db0e67cd914e5b629d67baf3bc34f438b52b81993d34cf6dda0b3d5a1",
     "icon_sha256": "3a31e85d47e88163997071b899c020fbb69ef80f2dea00af30f249447492335b",
     "reason": "Replaced after visual and pixel-boundary review"
+  },
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/willow_heart_charm.png",
+    "source_sha256": "17249297c8a48ae42786b9fedcc16f10f271b51102d8f77d35607d525372d5be",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "dee8423bc71985538161d9db949ff5fb52ce6a8dce67e83ecc5139e2ec0fbb86",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
   }
 }

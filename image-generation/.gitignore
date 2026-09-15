@@ -19,6 +19,8 @@ runs/
 outputs/
 inputs/
 originals/
+# Immutable sources required to rebuild the selected cave background package.
+!scene-samples/hollow-delve-backgrounds-v5/originals/
 processed/
 sheets/
 fixed-palette/

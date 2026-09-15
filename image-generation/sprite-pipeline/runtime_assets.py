@@ -11,6 +11,7 @@ import tempfile
 from sprites import REPO, save_json, sha256
 from export_sheet import skip_frames
 from PIL import Image
+from asset_palette import validate_image, palette_contract
 
 
 def valid_id(value):
@@ -65,6 +66,7 @@ def bundle(recipe_path, out, registry, frame_step=None):
                 atlas = json.loads(atlas_path.read_text())
                 sheet_path = folder / "spritesheet.png"
                 sheet = Image.open(sheet_path).convert("RGBA")
+                validate_image(sheet, sheet_path)
                 records = atlas["frames"]
                 repeat = atlas["meta"]["repeat"]
                 if type(repeat) is not bool or (action == "death" and repeat):
@@ -116,7 +118,7 @@ def bundle(recipe_path, out, registry, frame_step=None):
                 sources[key]["sheets"][action] = {"atlas_sha256": sha256(atlas_path), "image_sha256": sha256(sheet_path), "output_sha256": sha256(staging/filename)}
             catalog["entities"][key] = entity
         save_json(staging/"catalog.json", catalog)
-        save_json(staging/"provenance.json", {"recipe_sha256": sha256(recipe_path), "entities": sources})
+        save_json(staging/"provenance.json", {"recipe_sha256": sha256(recipe_path), "palette": palette_contract(), "entities": sources})
         out.mkdir(parents=True, exist_ok=True)
         registry.parent.mkdir(parents=True, exist_ok=True)
         for path in staging.iterdir():

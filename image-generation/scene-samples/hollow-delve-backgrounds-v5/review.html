@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hollow Delve — background comparison</title>
+<style>
+body{margin:24px auto;padding:0 20px;max-width:1000px;background:#171d24;color:#d5d9dd;font:16px/1.5 system-ui}h1{font-size:26px}a{color:#b4cebc}label{display:block;margin:12px 0}select{font:inherit}input{width:min(390px,100%)}.compare{position:relative;width:min(390px,100%);aspect-ratio:390/844;background:#20262e}.compare img{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated}.compare .after{clip-path:inset(0 50% 0 0)}.labels{display:flex;justify-content:space-between;width:min(390px,100%)}.panels img{width:100%;image-rendering:pixelated}.panels{margin-top:32px}figcaption{margin:8px 0}figure{margin:24px 0}
+</style>
+<h1>Hollow Delve: quieter backgrounds</h1>
+<p>The same game renderer, actors, props and floor with the previous and replacement backgrounds. Drag to compare at phone size.</p>
+<label>Chamber <select id="scene"><option value="landscape">Limestone chamber</option><option value="timber_gallery">Timber gallery</option><option value="sunken_cavern">Sunken cavern</option></select></label>
+<div class="labels"><span>Replacement</span><span>Previous</span></div>
+<div class="compare"><img id="before" src="gameplay/landscape-before.png" alt="Previous detailed cave behind the knight and troglodyte"><img class="after" id="after" src="gameplay/landscape-after.png" alt="Replacement cave with broad rock shapes behind the same combatants"></div>
+<label for="split">Comparison position</label><input id="split" type="range" min="0" max="100" value="50">
+<p><a href="prepared/review.html">Native-size exports</a> · <a href="plan.json">Exact generation prompts</a> · <a href="validation.json">Validation and measurements</a></p>
+<section class="panels"><h2>Complete replacement panels</h2>
+<figure><img src="prepared/hollow_delve_landscape.png" alt="Limestone chamber"><figcaption>Limestone chamber — large rock masses and subdued rear recesses.</figcaption></figure>
+<figure><img src="prepared/hollow_delve_timber_gallery.png" alt="Abandoned timber gallery"><figcaption>Timber gallery — widely spaced supports with sparse material marks.</figcaption></figure>
+<figure><img src="prepared/hollow_delve_sunken_cavern.png" alt="Sunken cavern"><figcaption>Sunken cavern — quiet central wall and broad pool reflections.</figcaption></figure>
+</section>
+<script>
+const scene = document.querySelector('#scene');
+const split = document.querySelector('#split');
+const before = document.querySelector('#before');
+const after = document.querySelector('#after');
+scene.addEventListener('change', () => {
+  before.src = `gameplay/${scene.value}-before.png`;
+  after.src = `gameplay/${scene.value}-after.png`;
+  before.alt = `Previous ${scene.selectedOptions[0].text} in the game renderer`;
+  after.alt = `Replacement ${scene.selectedOptions[0].text} in the game renderer`;
+});
+split.addEventListener('input', () => { after.style.clipPath = `inset(0 ${100-Number(split.value)}% 0 0)`; });
+</script>
+</html>

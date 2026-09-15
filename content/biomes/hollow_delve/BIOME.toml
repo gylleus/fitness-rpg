@@ -13,23 +13,23 @@ inhabitants = "Blind troglodytes, giant cave spiders and bone-filled green slime
 supernatural = "Old skulls turn slowly inside green jelly. Repeated tapping seems to answer itself beyond sealed workings, where wet stone carries the sound too far to locate."
 environmental_pressure_and_humor = "Darkness, damp footing, loose rubble and neglected supports make the route oppressive. Successive generations of braces lean against one another with no obvious original support left."
 [visual]
-lighting = "Cold blue-gray reflected light reveals damp limestone. Sparse dull amber points suggest old mineral deposits; pale fungus gives a restrained green accent without illuminating the whole cavern."
-materials = ["ribbed limestone", "wet slate", "splintered timber", "rusted iron", "chalk dust", "old silk", "weathered bone", "pale fungus", "clouded quartz"]
+lighting = "Dim neutral-to-warm reflected light reveals earthy brown limestone and dusty tan sediment. Brown shadows remain soft and subdued; no blue mineral glow or icy lighting."
+materials = ["warm brown limestone", "earth-stained stone", "splintered timber", "rusted iron", "chalk dust", "old silk", "weathered bone", "pale fungus", "clouded quartz"]
 weather = "Cold enclosed air, occasional drips and low mist above underground water; no open sky."
 ambient_sounds = ["slow ceiling drips", "distant water", "strained timber", "grit beneath feet", "indistinct tapping beyond the wall"]
 ambient_motion = "An occasional drip crosses dark stone; hanging silk and loose rope remain almost still."
 [[visual.palette]]
 name = "Cavern black"
-color = "#181B27"
+color = "#211B16"
 [[visual.palette]]
 name = "Wet slate"
-color = "#394757"
+color = "#554334"
 [[visual.palette]]
 name = "Limestone"
-color = "#A6ADB0"
+color = "#95816A"
 [[visual.palette]]
 name = "Old timber"
-color = "#635044"
+color = "#493727"
 [[visual.palette]]
 name = "Iron rust"
 color = "#8B513B"
@@ -37,13 +37,13 @@ color = "#8B513B"
 name = "Fungal green"
 color = "#8AA778"
 [generation]
-composition = "Side-on cave expedition with a clear horizontal walking strip. Three atmosphere panels show natural limestone, worked galleries and the edge of a sunken cavern. Separate ground and isolated scenery preserve a readable route in front of the background water."
+composition = "An enclosed horizontal mine tunnel with close rear walls, shallow recesses and a heavy low roof. Independent distant, wall and ceiling layers create depth while a separate walking strip and props define the route."
 [generation.scene]
 canvas = [640, 360]
 ground_y = 288
 reference_height = 64
 view = "orthographic_side"
-style = "Detailed dark fantasy pixel art with fine mineral ribs, pitted stone, visible chisel marks, damaged timber, crisp small color clusters and a muted cave palette. Preserve the detail of full-resolution source textures when rendering the logical scene; avoid coarse block upscaling."
+style = "Refined dark fantasy pixel art with the texture density of Wetlands. Preserve full-resolution source textures independently of the logical canvas. Material edges and controlled mineral or timber detail remain visible, while restrained local contrast keeps actors readable. A nearby low ceiling encloses the horizontal passage."
 avoid = ["characters baked into scenery", "isometric view", "a road receding to a vanishing point", "bright cheerful colors", "readable text", "smooth airbrushed edges", "mandatory gaps in the walking surface"]
 [generation.ground]
 canvas = [256, 96]
@@ -60,17 +60,35 @@ id = "hollow_delve_pool_ledge"
 name = "Sunken cavern ledge"
 description = "A continuous gravel ledge skirts a still black pool beneath massive mineral ribs. The water occupies the lower chamber beyond the ledge."
 [[background_layers]]
-id = "hollow_delve_cavern_backdrop"
-name = "Limestone chambers"
-visual_description = "Ribbed limestone walls descend from a high, shadowed ceiling. Broad pale shelves and dark recesses alternate behind a clear passage, with shallow reflected light along the lower stone."
+id = "hollow_delve_depth"
+name = "Shallow mine recesses"
+visual_description = "Dim shallow brown limestone recesses form the enclosed back of a horizontal mine tunnel, with distant supports barely visible in the stone."
 [background_layers.generation]
-parallax = 0.18
-repeat_x = false
+parallax = 0.10
+repeat_x = true
 transparent = false
-composition = "Opaque detailed atmosphere panel. Use limestone chambers, abandoned timber galleries and a sunken cavern as three sequential variants with soft overlap during travel. Rock shelves and stalactites remain visibly attached to their walls or ceiling. The walking ground and freestanding props are separate. Preserve fine source texture detail; these full scenes are not seamless tiles."
+composition = "Opaque rear plane of the shared interior recipe. Keep mineral and timber texture subdued; no vast chamber or foreground objects."
+[[background_layers]]
+id = "hollow_delve_wall"
+name = "Close limestone wall piers"
+visual_description = "Natural rounded brown rock buttresses and occasional old timber stand against a low rear wall, with broad gaps revealing shallow recesses."
+[background_layers.generation]
+parallax = 0.32
+repeat_x = true
+transparent = true
+composition = "Separate nearer wall plane of the shared interior recipe. Use real transparency in the gaps and above the wall; the roof, floor and freestanding props are separate."
+[[background_layers]]
+id = "hollow_delve_roof"
+name = "Low stone tunnel roof"
+visual_description = "A heavy brown limestone roof presses down above the route. Its mostly rounded underside has shallow uneven shelves and occasional old timber, without hanging needles, icicle teeth or crowded stalactites."
+[background_layers.generation]
+parallax = 0.68
+repeat_x = true
+transparent = true
+composition = "Continuous overhead cutout in the shared interior recipe's 640 by 240 logical canvas. Solid across the top edge, genuinely transparent beneath the underside. The measured underside follows the ground at a fixed actor-relative clearance."
 [[ground_sections]]
 id = "hollow_delve_slate_path"
 name = "Slate and gravel path"
-visual_description = "Flattened chips of slate and pale gravel form a compact ledge. Broken flagstones sit flush with its upper lip, above dark fractured rock."
+visual_description = "Earth-brown compact stone and dusty tan gravel form a level cave ledge. Warm gray fractured rock lies underneath; no blue, cyan or purple coloration."
 [ground_sections.generation]
-composition = "A continuous horizontal side-on strip on transparency above the surface. Small pale chips and cracks interrupt the dark lower rock. Preserve the shared flat surface and edges; no tracks, props or figures."
+composition = "A continuous horizontal earthy brown side-on walking strip on genuine alpha above logical row 24 of 96. The upper 24 rows must be completely transparent. Level tan gravel lip precisely at row 24, with dark umber compact rock below. Sparse warm gray stone chips, no blue highlights. Preserve the flat surface and edges; no tracks, props, figures or pointed formations."

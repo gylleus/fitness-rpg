@@ -1,0 +1,6 @@
+{
+  "crypts_depth": "depth",
+  "crypts_wall": "wall",
+  "crypts_roof": "roof",
+  "crypts_ground": "ground"
+}

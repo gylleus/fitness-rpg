@@ -1,0 +1,530 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "troglodyte",
+      "name": "Troglodyte",
+      "facing": "left",
+      "size": 128,
+      "height_scale": 0.95,
+      "backend": "built-in imagegen frame sheet; deterministic CPU import",
+      "layout_note": "Alpha-connected extraction, fixed grid-column x anchor, floor-aligned attached pixels. One scale and union crop across all 24 poses; no per-frame resizing.",
+      "scale_mode": "source",
+      "sources": {
+        "sheet": {
+          "image": "troglodyte/sheet-source.png",
+          "sha256": "ee2bb03c243319424ed27a815d4f6e3b06846ce66662626848a8e8a8d5f36dcc",
+          "columns": 6,
+          "rows": 4,
+          "min_area": 500,
+          "mask": {
+            "kind": "alpha",
+            "threshold": 128
+          }
+        }
+      },
+      "actions": {
+        "idle": {
+          "source": "sheet",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "loop": true,
+          "durations_ms": [
+            180,
+            180,
+            180,
+            180,
+            180,
+            180
+          ]
+        },
+        "walk": {
+          "source": "sheet",
+          "indices": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "loop": true,
+          "durations_ms": [
+            110,
+            110,
+            110,
+            110,
+            110,
+            110
+          ]
+        },
+        "attack": {
+          "source": "sheet",
+          "indices": [
+            12,
+            13,
+            14,
+            15,
+            16,
+            17
+          ],
+          "loop": false,
+          "durations_ms": [
+            100,
+            160,
+            100,
+            80,
+            140,
+            140
+          ]
+        },
+        "death": {
+          "source": "sheet",
+          "indices": [
+            18,
+            19,
+            20,
+            21,
+            22,
+            23
+          ],
+          "loop": false,
+          "durations_ms": [
+            100,
+            120,
+            130,
+            140,
+            160,
+            250
+          ]
+        }
+      }
+    },
+    {
+      "id": "giant_cave_spider",
+      "name": "Giant Cave Spider",
+      "facing": "left",
+      "size": 128,
+      "height_scale": 0.6,
+      "backend": "built-in imagegen frame sheet; deterministic CPU import",
+      "layout_note": "Alpha-connected extraction, fixed grid-column x anchor, floor-aligned attached pixels. One scale and union crop across all 24 poses; no per-frame resizing.",
+      "scale_mode": "source",
+      "sources": {
+        "sheet": {
+          "image": "giant_cave_spider/sheet-source.png",
+          "sha256": "d2d5070d15f64efbf4102ff916cca3963877ac9401f9cf7e512109441f185abd",
+          "columns": 6,
+          "rows": 4,
+          "min_area": 500,
+          "mask": {
+            "kind": "alpha",
+            "threshold": 128
+          }
+        }
+      },
+      "actions": {
+        "idle": {
+          "source": "sheet",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "loop": true,
+          "durations_ms": [
+            180,
+            180,
+            180,
+            180,
+            180,
+            180
+          ]
+        },
+        "walk": {
+          "source": "sheet",
+          "indices": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "loop": true,
+          "durations_ms": [
+            110,
+            110,
+            110,
+            110,
+            110,
+            110
+          ]
+        },
+        "attack": {
+          "source": "sheet",
+          "indices": [
+            12,
+            13,
+            14,
+            15,
+            16,
+            17
+          ],
+          "loop": false,
+          "durations_ms": [
+            100,
+            160,
+            100,
+            80,
+            140,
+            140
+          ]
+        },
+        "death": {
+          "source": "sheet",
+          "indices": [
+            18,
+            19,
+            20,
+            21,
+            22,
+            23
+          ],
+          "loop": false,
+          "durations_ms": [
+            100,
+            120,
+            130,
+            140,
+            160,
+            250
+          ]
+        }
+      }
+    },
+    {
+      "id": "bone_slime",
+      "name": "Bone Slime",
+      "facing": "left",
+      "size": 128,
+      "height_scale": 0.45,
+      "backend": "built-in imagegen frame sheet; deterministic CPU import",
+      "layout_note": "Alpha-connected extraction, fixed grid-column x anchor, floor-aligned attached pixels. One scale and union crop across all 24 poses; no per-frame resizing.",
+      "scale_mode": "source",
+      "sources": {
+        "sheet": {
+          "image": "bone_slime/sheet-source.png",
+          "sha256": "9a782390556805e45aa8df7d5aba8c3528b5eda87dac398ae72cd669aed90283",
+          "columns": 6,
+          "rows": 4,
+          "min_area": 500,
+          "mask": {
+            "kind": "alpha",
+            "threshold": 128
+          }
+        }
+      },
+      "actions": {
+        "idle": {
+          "source": "sheet",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "loop": true,
+          "durations_ms": [
+            180,
+            180,
+            180,
+            180,
+            180,
+            180
+          ]
+        },
+        "walk": {
+          "source": "sheet",
+          "indices": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "loop": true,
+          "durations_ms": [
+            110,
+            110,
+            110,
+            110,
+            110,
+            110
+          ]
+        },
+        "attack": {
+          "source": "sheet",
+          "indices": [
+            12,
+            13,
+            14,
+            15,
+            16,
+            17
+          ],
+          "loop": false,
+          "durations_ms": [
+            100,
+            160,
+            100,
+            80,
+            140,
+            140
+          ]
+        },
+        "death": {
+          "source": "sheet",
+          "indices": [
+            18,
+            19,
+            20,
+            21,
+            22,
+            23
+          ],
+          "loop": false,
+          "durations_ms": [
+            100,
+            120,
+            130,
+            140,
+            160,
+            250
+          ]
+        }
+      }
+    },
+    {
+      "id": "delve_dwarf",
+      "name": "Delve Dwarf",
+      "facing": "left",
+      "size": 128,
+      "height_scale": 0.72,
+      "backend": "built-in imagegen frame sheet; deterministic CPU import",
+      "layout_note": "Alpha-connected extraction, fixed grid-column x anchor, floor-aligned attached pixels. One scale and union crop across all 24 poses; no per-frame resizing.",
+      "scale_mode": "source",
+      "sources": {
+        "sheet": {
+          "image": "delve_dwarf/sheet-source.png",
+          "sha256": "37ca6fdbe61392c950c3cec765b8b65324b8d01b7a9f34a5fcb8de68fe8a586a",
+          "columns": 6,
+          "rows": 4,
+          "min_area": 500,
+          "mask": {
+            "kind": "alpha",
+            "threshold": 128
+          }
+        }
+      },
+      "actions": {
+        "idle": {
+          "source": "sheet",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "loop": true,
+          "durations_ms": [
+            180,
+            180,
+            180,
+            180,
+            180,
+            180
+          ]
+        },
+        "walk": {
+          "source": "sheet",
+          "indices": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "loop": true,
+          "durations_ms": [
+            110,
+            110,
+            110,
+            110,
+            110,
+            110
+          ]
+        },
+        "attack": {
+          "source": "sheet",
+          "indices": [
+            12,
+            13,
+            14,
+            15,
+            16,
+            17
+          ],
+          "loop": false,
+          "durations_ms": [
+            100,
+            160,
+            100,
+            80,
+            140,
+            140
+          ]
+        },
+        "death": {
+          "source": "sheet",
+          "indices": [
+            18,
+            19,
+            20,
+            21,
+            22,
+            23
+          ],
+          "loop": false,
+          "durations_ms": [
+            100,
+            120,
+            130,
+            140,
+            160,
+            250
+          ]
+        }
+      }
+    },
+    {
+      "id": "delve_gnoll",
+      "name": "Delve Gnoll",
+      "facing": "left",
+      "size": 128,
+      "height_scale": 1.12,
+      "backend": "built-in imagegen frame sheet; deterministic CPU import",
+      "layout_note": "Alpha-connected extraction, fixed grid-column x anchor, floor-aligned attached pixels. One scale and union crop across all 24 poses; no per-frame resizing.",
+      "scale_mode": "source",
+      "sources": {
+        "sheet": {
+          "image": "delve_gnoll/sheet-source.png",
+          "sha256": "6ea5276d09797ccee336eb9d09e94fbbf05eaa4dd52b1f0af3b82048731d0a60",
+          "columns": 6,
+          "rows": 4,
+          "min_area": 500,
+          "mask": {
+            "kind": "alpha",
+            "threshold": 128
+          }
+        }
+      },
+      "actions": {
+        "idle": {
+          "source": "sheet",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "loop": true,
+          "durations_ms": [
+            180,
+            180,
+            180,
+            180,
+            180,
+            180
+          ]
+        },
+        "walk": {
+          "source": "sheet",
+          "indices": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "loop": true,
+          "durations_ms": [
+            110,
+            110,
+            110,
+            110,
+            110,
+            110
+          ]
+        },
+        "attack": {
+          "source": "sheet",
+          "indices": [
+            12,
+            13,
+            14,
+            15,
+            16,
+            17
+          ],
+          "loop": false,
+          "durations_ms": [
+            100,
+            160,
+            100,
+            80,
+            140,
+            140
+          ]
+        },
+        "death": {
+          "source": "sheet",
+          "indices": [
+            18,
+            19,
+            20,
+            21,
+            22,
+            23
+          ],
+          "loop": false,
+          "durations_ms": [
+            100,
+            120,
+            130,
+            140,
+            160,
+            250
+          ]
+        }
+      }
+    }
+  ]
+}

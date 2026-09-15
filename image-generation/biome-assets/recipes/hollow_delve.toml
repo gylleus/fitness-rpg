@@ -1,0 +1,4 @@
+schema_version = 2
+biome_id = "hollow_delve"
+interior_theme = "limestone_tunnel"
+interior_recipe = "../interiors.toml"

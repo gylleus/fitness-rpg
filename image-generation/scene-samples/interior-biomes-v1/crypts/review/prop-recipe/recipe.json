@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "biome_id": "crypts",
+  "alpha_threshold": 128,
+  "max_prop_edge": 240,
+  "atlas_width": 1024,
+  "padding": 2,
+  "definitions": [
+    {
+      "id": "crypts_sarcophagus",
+      "name": "Low closed weathered stone sarcophagus",
+      "height_scale": 0.65,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.65
+      }
+    },
+    {
+      "id": "crypts_funerary_urn",
+      "name": "Dusty funerary urn with a chipped lid",
+      "height_scale": 0.45,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.45
+      }
+    },
+    {
+      "id": "crypts_candle_plinth",
+      "name": "Short stone plinth carrying three melted candles with tiny subdued flames",
+      "height_scale": 0.85,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.85
+      }
+    },
+    {
+      "id": "crypts_bone_heap",
+      "name": "Small old skull and bone heap",
+      "height_scale": 0.35,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.35
+      }
+    },
+    {
+      "id": "crypts_broken_statue",
+      "name": "Broken hooded funerary statue on a grounded pedestal, no living figure",
+      "height_scale": 1.0,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 1.0
+      }
+    },
+    {
+      "id": "crypts_coffin_lid",
+      "name": "Cracked stone coffin lid propped securely against a low rubble base",
+      "height_scale": 0.65,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.65
+      }
+    },
+    {
+      "id": "crypts_iron_lamp",
+      "name": "Old standing iron oil lamp with a restrained dull flame",
+      "height_scale": 0.85,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.85
+      }
+    },
+    {
+      "id": "crypts_burial_chest",
+      "name": "Small decayed iron-bound burial chest",
+      "height_scale": 0.55,
+      "generation": {
+        "anchor": "ground",
+        "height_scale": 0.55
+      }
+    }
+  ],
+  "sheets": [
+    {
+      "image": "../../prepared/crypts_decorations.png",
+      "sha256": "ea339baa52ae9e737e6a50789817b3e810efaf03af818de7be6df8611656f963",
+      "prompt_file": "prompt.txt",
+      "columns": 4,
+      "rows": 2,
+      "regions": {
+        "crypts_sarcophagus": [
+          12,
+          134,
+          470,
+          374
+        ],
+        "crypts_funerary_urn": [
+          558,
+          49,
+          782,
+          396
+        ],
+        "crypts_candle_plinth": [
+          971,
+          43,
+          1248,
+          405
+        ],
+        "crypts_bone_heap": [
+          1341,
+          142,
+          1767,
+          392
+        ],
+        "crypts_broken_statue": [
+          99,
+          418,
+          368,
+          873
+        ],
+        "crypts_coffin_lid": [
+          498,
+          483,
+          885,
+          853
+        ],
+        "crypts_iron_lamp": [
+          986,
+          429,
+          1226,
+          869
+        ],
+        "crypts_burial_chest": [
+          1366,
+          594,
+          1736,
+          831
+        ]
+      },
+      "props": [
+        "crypts_sarcophagus",
+        "crypts_funerary_urn",
+        "crypts_candle_plinth",
+        "crypts_bone_heap",
+        "crypts_broken_statue",
+        "crypts_coffin_lid",
+        "crypts_iron_lamp",
+        "crypts_burial_chest"
+      ]
+    }
+  ]
+}

@@ -5,11 +5,29 @@
   "original": "image-generation/items/v1/sources/quarry_handguards.png",
   "source_sha256": "1702ebefab3d49dc086624839eb1a539e5eac1376c94f7df6541723b17aaf0f6",
   "icon": "assets/items/quarry_handguards.png",
-  "icon_sha256": "e9268e3bda0d87e131a820c1010e24e81891738e35d0f3ec60714dc6ecc1779a",
+  "icon_sha256": "40ad763224ac8dc67a41837937885b77464ca8d6bcc1b819e0d1d9983893bb1d",
   "target": [
     64,
     64
   ],
   "export": "ImageMagick Point resize with original alpha; centered 64x64 canvas",
-  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Quarry Handguards. Broad steel handguards sit over short ochre-dusted leather gloves. Each back plate has two deep grooves, and thick copper pins attach the separate wrist braces.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border."
+  "prompt": "Use case: stylized-concept\nAsset type: 64x64 pixel-art inventory icon for a dark-fantasy game.\nSubject: Quarry Handguards. Broad steel handguards sit over short ochre-dusted leather gloves. Each back plate has two deep grooves, and thick copper pins attach the separate wrist braces.\nStyle: Crisp pixel art for a weathered dark-fantasy inventory. Muted earth colors, distinct weighted silhouettes, selective bright metal edges, restrained magical accents, and readable large pixel clusters.\nComposition: One complete isolated item, centered with a clear four-pixel margin, no hands or wearer, no scenery, no labels or UI frame. Weapons lean from lower left to upper right; armor and jewelry use a slight three-quarter view. A pair of gloves counts as one item.\nRender one icon only, not a sheet. Square canvas, true transparent alpha background. The object occupies about 80% of the frame. Use chunky pixel clusters at a logical 64x64 scale, a dark one-pixel silhouette outline, and simple three-tone shading. No floor, cast shadow, backdrop, lettering, watermark, glow cloud or surrounding border.",
+  "palette_export": {
+    "source": "image-generation/items/v1/palette-inputs/quarry_handguards.png",
+    "source_sha256": "e9268e3bda0d87e131a820c1010e24e81891738e35d0f3ec60714dc6ecc1779a",
+    "palette": {
+      "file": "assets/palette.json",
+      "name": "ENDESGA 32",
+      "sha256": "d222523dc62fea38b795222294582725d38d0fd6daebfa8928bd31957546d741",
+      "metric": "ciede2000",
+      "dither": "none"
+    },
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "40ad763224ac8dc67a41837937885b77464ca8d6bcc1b819e0d1d9983893bb1d",
+    "resized_from_master": false,
+    "input_kind": "archived original 64px export; generation master unavailable"
+  }
 }
