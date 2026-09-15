@@ -30,6 +30,7 @@ it('retires old ammo-based runs without changing workouts, progression, health, 
     sqlite.exec(readFileSync(join(__dirname, 'migrations/0006_inventory.sql'), 'utf8'));
     sqlite.exec(readFileSync(join(__dirname, 'migrations/0007_daily_fitness_reset.sql'), 'utf8'));
     sqlite.exec(readFileSync(join(__dirname, 'migrations/0008_camp_expeditions.sql'), 'utf8'));
+    sqlite.exec(readFileSync(join(__dirname, 'migrations/0009_dev_travel_steps.sql'), 'utf8'));
     const db = drizzle(sqlite, { schema });
     expect(getGameSnapshot(db, now)).toMatchObject({ savedPushups: 20, currentHealth: 75,
       latestBattle: { status: 'retreated', state: { gold: 0, xp: 0 } }, today: { pushups: 20, partialReps: 2 } });

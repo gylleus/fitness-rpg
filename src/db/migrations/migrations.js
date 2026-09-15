@@ -10,18 +10,11 @@ import m0005 from './0005_pushup_damage.sql';
 import m0006 from './0006_inventory.sql';
 import m0007 from './0007_daily_fitness_reset.sql';
 import m0008 from './0008_camp_expeditions.sql';
+import m0009 from './0009_dev_travel_steps.sql';
 
 export default {
   journal,
   migrations: {
-    m0000,
-    m0001,
-    m0002,
-    m0003,
-    m0004,
-    m0005,
-    m0006,
-    m0007,
-    m0008,
+    m0000, m0001, m0002, m0003, m0004, m0005, m0006, m0007, m0008, m0009,
   },
 };

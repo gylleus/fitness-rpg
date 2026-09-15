@@ -113,6 +113,7 @@ it('migrates active lifetime-power battles while preserving workouts, banked pro
       { day: yesterday, steps: 2000 }, { day: yesterday, steps: 1000 },
     ]);
     sqlite.exec(readFileSync(join(__dirname, 'migrations/0008_camp_expeditions.sql'), 'utf8'));
+    sqlite.exec(readFileSync(join(__dirname, 'migrations/0009_dev_travel_steps.sql'), 'utf8'));
     expect(advanceDungeon(db, fresh.id, 0, reset - 1)?.status).toBe('expired');
     const next = startDungeon(db, 0, reset - 1);
     expect(next.state.stats.pushups).toBe(20);

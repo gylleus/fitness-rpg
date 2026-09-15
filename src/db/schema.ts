@@ -125,6 +125,7 @@ export const campMaps = sqliteTable('camp_maps', {
 export const travelDays = sqliteTable('travel_days', {
   day: text('day').primaryKey(),
   spent: integer('spent').notNull().default(0),
+  bonusSteps: integer('bonus_steps').notNull().default(0),
 });
 
 export const dungeonRuns = sqliteTable('dungeon_runs', {

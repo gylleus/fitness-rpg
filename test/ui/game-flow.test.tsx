@@ -149,6 +149,19 @@ async function finishExpedition() {
 }
 
 describe('first playable game flow', () => {
+  it('adds development travel steps from camp and the map without changing fitness history', async () => {
+    await renderRouter(routes);
+    await press('Add 500 steps (dev)');
+    expect(screen.getByText('500')).toBeVisible();
+    expect(getGameSnapshot(mockDb).today.steps).toBe(0);
+    await navigate('/dungeon');
+    expect(screen.getByText('500 steps available')).toBeVisible();
+    await press('Add 500 steps (dev)');
+    expect(screen.getByText('1,000 steps available')).toBeVisible();
+    const heroic = getGameSnapshot(mockDb).dungeonMap.find(offer => offer.difficulty === 'heroic')!;
+    await press(new RegExp(`Select ${heroic.name}, Heroic`));
+    expect(screen.getByRole('button', { name: 'Enter dungeon  →' })).toBeEnabled();
+  });
   it('confirms a development reset, refreshes camp, and keeps step sync disconnected after remount', async () => {
     savePushupWorkout(mockDb, { sourceKey: 'dev-training', startedAt: NOW - 60_000, endedAt: NOW, validReps: 20, partialReps: 2 });
     await renderRouter(routes);
@@ -187,6 +200,7 @@ describe('first playable game flow', () => {
     await renderRouter(routes);
     expect(screen.queryByRole('button', { name: 'Reset data' })).toBeNull();
     expect(screen.queryByText('Development tools')).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Add 500 steps (dev)' })).toBeNull();
   });
 
   it('updates the camp knight after equipping a sword and returns to fists when unequipped', async () => {

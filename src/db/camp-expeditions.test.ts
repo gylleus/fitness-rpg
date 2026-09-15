@@ -52,7 +52,7 @@ describe('camp map and daily travel steps', () => {
     const run = startDungeon(db, offer.offerId, now);
     retreatDungeon(db, run.id);
     saveStepTotal(db, day, 6000);
-    expect(getTravelSteps(db, day)).toEqual({ earned: 6000, spent: 5000, available: 1000 });
+    expect(getTravelSteps(db, day)).toEqual({ bonus: 0, earned: 6000, spent: 5000, available: 1000 });
     // Native providers overwrite activity totals, never the spending ledger.
     db.update(schema.activityDays).set({ nativeSteps: 4500 }).where(eq(schema.activityDays.day, day)).run();
     expect(getTravelSteps(db, day).available).toBe(0);
@@ -60,7 +60,7 @@ describe('camp map and daily travel steps', () => {
     expect(getTravelSteps(db, day).available).toBe(2000);
     const reset = new Date(2026, 8, 16, 5).getTime();
     expect(getGameSnapshot(db, reset - 1).travelSteps.spent).toBe(5000);
-    expect(getGameSnapshot(db, reset).travelSteps).toEqual({ earned: 0, spent: 0, available: 0 });
+    expect(getGameSnapshot(db, reset).travelSteps).toEqual({ bonus: 0, earned: 0, spent: 0, available: 0 });
     expect(getDungeonMap(db).offers).toContainEqual(offer);
   });
 
@@ -80,7 +80,7 @@ describe('camp map and daily travel steps', () => {
     const offer = getDungeonMap(db).offers.find(offer => offer.difficulty === 'heroic')!;
     db.run("CREATE TRIGGER fail_entry BEFORE INSERT ON dungeon_runs BEGIN SELECT RAISE(ABORT, 'disk error'); END");
     expect(() => startDungeon(db, offer.offerId, now)).toThrow(/disk error/);
-    expect(getTravelSteps(db, day)).toEqual({ earned: 1000, spent: 0, available: 1000 });
+    expect(getTravelSteps(db, day)).toEqual({ bonus: 0, earned: 1000, spent: 0, available: 1000 });
     expect(db.select().from(schema.dungeonRuns).all()).toEqual([]);
   });
 

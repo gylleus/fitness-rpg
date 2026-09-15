@@ -1,17 +1,60 @@
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import { createTestDb } from '../../test/db';
 import { dayStart, localDay, nextDailyReset } from '../game/rules';
-import { advanceDungeon, claimChallenge, getFitnessDay, getGameSnapshot, getHero, savePushupWorkout, saveStepTotal, startDungeon } from './game';
-import { resetDailyData } from './dev';
+import { advanceDungeon, claimChallenge, getFitnessDay, getGameSnapshot, getHero, getTravelSteps, retreatDungeon, savePushupWorkout, saveStepTotal, startDungeon } from './game';
+import { addDevTravelSteps, resetDailyData } from './dev';
 import { createRecording } from './recordings';
 import * as schema from './schema';
 
 let db: ReturnType<typeof createTestDb>;
 const now = new Date(2026, 8, 7, 4, 59).getTime();
 beforeEach(() => { vi.stubGlobal('__DEV__', true); db = createTestDb(); });
-afterEach(() => { db.$client.close(); vi.unstubAllGlobals(); });
+afterEach(() => { db.$client.close(); vi.unstubAllGlobals(); vi.unstubAllEnvs(); });
 const saveWorkout = (time: number, sourceKey: string) => savePushupWorkout(db,
   { sourceKey, startedAt: time - 60_000, endedAt: time, validReps: 20, partialReps: 3 });
+
+it('grants spendable steps without changing synced activity or combat stats', () => {
+  const day = localDay(now);
+  db.insert(schema.activityDays).values({ day, nativeSteps: 1200, stepSource: 'test' }).run();
+  const before = getGameSnapshot(db, now);
+  expect(addDevTravelSteps(db, now)).toEqual({ earned: 1200, bonus: 500, spent: 0, available: 1700 });
+  addDevTravelSteps(db, now);
+  const after = getGameSnapshot(db, now);
+  expect(after.today).toEqual(before.today);
+  expect(after.stats).toEqual(before.stats);
+  expect(after.travelSteps.available).toBe(2200);
+  const run = startDungeon(db, after.dungeonMap[2].offerId, now);
+  retreatDungeon(db, run.id);
+  expect(getTravelSteps(db, day)).toEqual({ earned: 1200, bonus: 1000, spent: 1000, available: 1200 });
+  // Repeated native sync leaves the bonus in its separate ledger.
+  db.update(schema.activityDays).set({ nativeSteps: 1200 }).run();
+  expect(getTravelSteps(db, day).available).toBe(1200);
+});
+
+it('adds exactly 500 even after a downward step correction and expires at the daily reset', () => {
+  const day = localDay(now);
+  saveStepTotal(db, day, 1000);
+  const run = startDungeon(db, 2, now);
+  retreatDungeon(db, run.id);
+  saveStepTotal(db, day, 100);
+  expect(getTravelSteps(db, day).available).toBe(0);
+  expect(addDevTravelSteps(db, now).available).toBe(500);
+  const reset = nextDailyReset(now);
+  expect(getTravelSteps(db, localDay(reset)).available).toBe(0);
+  addDevTravelSteps(db, reset);
+  resetDailyData(db, reset);
+  expect(getTravelSteps(db, localDay(reset))).toEqual({ earned: 0, bonus: 0, spent: 0, available: 0 });
+  expect(getTravelSteps(db, day).available).toBe(500);
+});
+
+it('requires an explicit opt-in to grant steps in an offline release build', () => {
+  vi.stubGlobal('__DEV__', false);
+  vi.stubEnv('EXPO_PUBLIC_DEV_STEP_BUTTON', '');
+  expect(() => addDevTravelSteps(db, now)).toThrow('only available in development');
+  expect(db.select().from(schema.travelDays).all()).toEqual([]);
+  vi.stubEnv('EXPO_PUBLIC_DEV_STEP_BUTTON', '1');
+  expect(addDevTravelSteps(db, now).available).toBe(500);
+});
 
 it.each([now, new Date(2026, 8, 7, 5).getTime()])('resets only the current 5 AM fitness day at %i', time => {
   const day = localDay(time), start = dayStart(day), end = nextDailyReset(start);

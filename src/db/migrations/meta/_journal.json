@@ -64,6 +64,13 @@
       "when": 1789429171320,
       "tag": "0008_camp_expeditions",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1789464229143,
+      "tag": "0009_dev_travel_steps",
+      "breakpoints": true
     }
   ]
 }

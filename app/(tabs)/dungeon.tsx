@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Text, View } from 'react-native';
 import { db } from '../../src/db/client';
 import { dismissDungeonResult, startDungeon } from '../../src/db/game';
+import { addDevTravelSteps, devStepsEnabled } from '../../src/db/dev';
 import { battleDungeon } from '../../src/game/combat';
 import { useGame } from '../../src/game/GameProvider';
 import { LootRewards } from '../../src/ui/LootRewards';
@@ -32,8 +33,10 @@ export default function DungeonScreen() {
       <Text style={ui.label}>Steps for travel today</Text>
       <Text style={ui.heading}>{data.travelSteps.available.toLocaleString()} steps available</Text>
       <Text style={ui.small}>{data.travelSteps.earned.toLocaleString()} earned · {data.travelSteps.spent.toLocaleString()} spent · resets at 5 AM</Text>
+      {data.travelSteps.bonus > 0 && <Text style={ui.small}>Includes {data.travelSteps.bonus.toLocaleString()} development steps</Text>}
       <Text style={ui.body}>Walk to heroic and mythic dungeons using today’s steps. Normal paths are free. New destinations appear after every victory.</Text>
       <Button compact secondary label="Sync travel steps" onPress={() => router.push('/health')} />
+      {devStepsEnabled() && <Button compact secondary label="Add 500 steps (dev)" onPress={() => perform(() => addDevTravelSteps(db))} />}
     </Card>
     {active && <Card>
       <Text style={ui.label}>Expedition in progress</Text>

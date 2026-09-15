@@ -36,6 +36,7 @@ describe('fitness persistence', () => {
     sqlite.exec(readFileSync(join(__dirname, 'migrations/0006_inventory.sql'), 'utf8'));
     sqlite.exec(readFileSync(join(__dirname, 'migrations/0007_daily_fitness_reset.sql'), 'utf8'));
     sqlite.exec(readFileSync(join(__dirname, 'migrations/0008_camp_expeditions.sql'), 'utf8'));
+    sqlite.exec(readFileSync(join(__dirname, 'migrations/0009_dev_travel_steps.sql'), 'utf8'));
       const migrated = drizzle(sqlite, { schema });
       expect(getGameSnapshot(migrated, now).today).toMatchObject({ pushups: 12, partialReps: 2 });
       expect(migrated.select().from(sessions).get()?.sourceKey).toBeNull();

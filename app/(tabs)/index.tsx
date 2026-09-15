@@ -2,7 +2,7 @@ import { useRouter } from 'expo-router';
 import { Alert, Text, View } from 'react-native';
 import { db } from '../../src/db/client';
 import { claimChallenge } from '../../src/db/game';
-import { resetDailyData } from '../../src/db/dev';
+import { addDevTravelSteps, devStepsEnabled, resetDailyData } from '../../src/db/dev';
 import { useGame } from '../../src/game/GameProvider';
 import { multiplierLabel, percentLabel } from '../../src/game/items';
 import { CHALLENGES, dayStart } from '../../src/game/rules';
@@ -49,6 +49,8 @@ export default function Camp() {
         </Card>
         <Card style={[ui.flex, { padding: 16, gap: 8 }]}>
           <MenuIcon name="steps" /><Text style={ui.label}>Travel steps</Text><Text style={ui.number}>{data.travelSteps.available.toLocaleString()}</Text><Text style={ui.small}>{data.travelSteps.spent.toLocaleString()} spent · {today.steps.toLocaleString()} earned today</Text>
+          {data.travelSteps.bonus > 0 && <Text style={ui.small}>+{data.travelSteps.bonus.toLocaleString()} dev steps</Text>}
+          {devStepsEnabled() && <Button compact secondary label="Add 500 steps (dev)" onPress={() => perform(() => addDevTravelSteps(db))} />}
         </Card>
       </View>
       <Button icon="strength" label="Train pushups  ·  increase damage" onPress={() => router.push('/session')} />

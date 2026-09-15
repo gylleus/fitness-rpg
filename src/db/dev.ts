@@ -1,8 +1,27 @@
 import { and, eq, gte, inArray, lt } from 'drizzle-orm';
 import { dayStart, localDay, nextDailyReset } from '../game/rules';
-import { deleteRun, getHero, type GameDb } from './game';
+import { deleteRun, getHero, getTravelSteps, type GameDb } from './game';
 import { activeRecording } from './recordings';
-import { activityDays, challengeClaims, dungeonRuns, healthConnections, heroes, runs, sessions, sets } from './schema';
+import { activityDays, challengeClaims, dungeonRuns, healthConnections, heroes, runs, sessions, sets, travelDays } from './schema';
+
+/** Opt in when bundling a personal offline test build; normal releases hide it. */
+export function devStepsEnabled() {
+  return __DEV__ || process.env.EXPO_PUBLIC_DEV_STEP_BUTTON === '1';
+}
+
+/** Grant travel currency without inventing workouts or changing health sync. */
+export function addDevTravelSteps(db: GameDb, now = Date.now()) {
+  if (!devStepsEnabled()) throw new Error('Step grants are only available in development builds.');
+  return db.transaction(tx => {
+    const day = localDay(now), travel = getTravelSteps(tx, day);
+    // A corrected native total can be below spending. Still add exactly 500
+    // to the displayed balance, covering that shortfall as a development bonus.
+    const bonusSteps = Math.max(travel.bonus, travel.spent - travel.earned) + 500;
+    tx.insert(travelDays).values({ day, bonusSteps })
+      .onConflictDoUpdate({ target: travelDays.day, set: { bonusSteps } }).run();
+    return getTravelSteps(tx, day);
+  });
+}
 
 /** Development only: erase this fitness day's activity without wiping the save. */
 export function resetDailyData(db: GameDb, now = Date.now()) {
@@ -22,6 +41,7 @@ export function resetDailyData(db: GameDb, now = Date.now()) {
     }
     for (const run of tx.select({ id: runs.id }).from(runs).where(eq(runs.day, day)).all()) deleteRun(tx, run.id);
     tx.delete(activityDays).where(eq(activityDays.day, day)).run();
+    tx.delete(travelDays).where(eq(travelDays.day, day)).run();
     tx.delete(challengeClaims).where(eq(challengeClaims.day, day)).run();
 
     for (const run of tx.select().from(dungeonRuns).where(eq(dungeonRuns.status, 'active')).all()) {

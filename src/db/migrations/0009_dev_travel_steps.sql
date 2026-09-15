@@ -1,0 +1,1 @@
+ALTER TABLE `travel_days` ADD `bonus_steps` integer DEFAULT 0 NOT NULL;

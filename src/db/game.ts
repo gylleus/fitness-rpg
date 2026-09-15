@@ -156,8 +156,9 @@ export function getDungeonMap(db: GameDb) {
 
 export function getTravelSteps(db: GameDb, day = localDay()) {
   const earned = getFitnessDay(db, day).steps;
-  const spent = db.select().from(travelDays).where(eq(travelDays.day, day)).get()?.spent ?? 0;
-  return { earned, spent, available: Math.max(0, earned - spent) };
+  const travel = db.select().from(travelDays).where(eq(travelDays.day, day)).get();
+  const spent = travel?.spent ?? 0, bonus = travel?.bonusSteps ?? 0;
+  return { earned, spent, bonus, available: Math.max(0, earned + bonus - spent) };
 }
 
 /** String offer IDs reject stale map selections. Numeric IDs select a current map slot. */
