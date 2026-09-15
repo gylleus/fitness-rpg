@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Wayfarer's Rest · Menu review</title>
+<style>
+:root{color-scheme:dark;--bg:#151620;--panel:#232630;--line:#565044;--ink:#f1e6ce;--gold:#d7bb82;--muted:#b4b2ab}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,sans-serif}main{max-width:1180px;margin:auto;padding:40px 24px}h1,h2{font-family:Georgia,serif;line-height:1.2}h1{font-size:42px;margin:8px 0 16px}h2{font-size:26px}p{max-width:760px;color:var(--muted)}.eyebrow{color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-size:11px}a{color:var(--gold)}nav{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 16px}button{font:inherit;cursor:pointer;min-height:44px;padding:8px 16px;border:1px solid var(--line);border-radius:3px;color:var(--ink);background:var(--panel)}button[aria-pressed=true]{color:var(--bg);background:var(--gold)}button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:4px}.viewer{display:grid;grid-template-columns:minmax(280px,740px) 1fr;gap:32px;align-items:start}figure{margin:0;background:#101119;padding:16px;border:1px solid var(--line);text-align:center}#screen{display:block;width:auto;max-width:100%;max-height:960px;margin:auto}figcaption{color:var(--muted);font-size:12px;margin-top:10px}.art{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:24px}.art article{background:var(--panel);border:1px solid var(--line);padding:16px}.art img{display:block;width:100%;height:180px;object-fit:contain;image-rendering:pixelated}.art h3{margin-bottom:6px}.art p{font-size:13px}code{font-size:12px}aside{padding-top:8px}li{margin:12px 0;color:var(--muted)}footer{margin-top:40px;border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font-size:12px}@media(max-width:750px){main{padding:24px 16px}h1{font-size:32px}.viewer{grid-template-columns:1fr}aside{order:-1}.art img{height:220px}}
+</style>
+</head>
+<body><main>
+<div class="eyebrow">Fitness RPG · UI content library</div>
+<h1>The Wayfarer's Rest</h1>
+<p>A woodland camp, worn brass frames and a traveling kit. Five generated assets now support the camp, dungeon, inventory and progress menus.</p>
+<nav aria-label="Menu screenshots">
+<button aria-pressed="true" data-view="camp-390" data-caption="Camp · 390 pixels">Camp</button>
+<button aria-pressed="false" data-view="inventory-390" data-caption="Inventory · 390 pixels">Inventory</button>
+<button aria-pressed="false" data-view="progress-390" data-caption="Progress · 390 pixels">Progress</button>
+<button aria-pressed="false" data-view="dungeon-390" data-caption="Dungeon · 390 pixels">Dungeon</button>
+<button aria-pressed="false" data-view="camp-quests" data-caption="Camp · activity details and quest board">Activity & quests</button>
+<button aria-pressed="false" data-view="camp-320" data-caption="Narrow layout · 320 pixels">Narrow</button>
+<button aria-pressed="false" data-view="camp-720" data-caption="Wide layout · 720 pixels">Wide</button>
+<button aria-pressed="false" data-view="camp-large-text" data-caption="Camp · simulated 150% text size">Large text</button>
+</nav>
+<div class="viewer"><figure><img id="screen" src="review/camp-390.png" alt="Camp menu with the generated campsite, hero status and brass expedition button"><figcaption id="caption" aria-live="polite">Camp · 390 pixels</figcaption></figure>
+<aside><h2>From camp to adventure</h2><ul>
+<li>Hero status and the expedition action appear together beneath the campsite.</li>
+<li>Training, travel steps and running lead into the daily quest board.</li>
+<li>Rules expand on demand. Labels, progress, focus, and button states remain native.</li>
+<li>The panel corners keep their shape as cards resize. Artwork ships with the app for offline use.</li>
+</ul><p><a href="UI.toml">Asset descriptions</a><br><a href="generation-prompts.json">Complete generation prompts</a><br><a href="README.md">Regeneration guide</a></p></aside></div>
+<h2>The asset set</h2>
+<div class="art">
+<article><img src="../../assets/ui/camp-v1.png" alt="Woodland tent, campfire and ruined watchtower"><h3>Camp at dusk</h3><p>Empty foreground for the live equipped player sprite.</p><code>camp-v1.png</code></article>
+<article><img src="../../assets/ui/background-v1.png" alt="Dark travel cloth with worn leather seams"><h3>Travel cloth</h3><p>A quiet backdrop shared across menus and navigation.</p><code>background-v1.png</code></article>
+<article><img src="../../assets/ui/frame-v1.png" alt="Riveted bronze panel frame"><h3>Brass frame</h3><p>Eight slices preserve the small corner plates.</p><code>frame-v1.png</code></article>
+<article><img src="../../assets/ui/button-v1.png" alt="Plain brass action plaque"><h3>Action plaque</h3><p>Refined opaque label area. The renderer clips the lower source margin.</p><code>button-v1.png</code></article>
+<article><img src="../../assets/ui/inventory-v1.png" alt="Travel pack, sword, shield and blank journal"><h3>Traveling kit</h3><p>A lantern-lit inventory cover.</p><code>inventory-v1.png</code></article>
+</div>
+<footer>Review captured September 15, 2026. Screenshots render the source React Native screens through React Native Web with saved fixture data, mocked native services, a static authored player frame and a preview tab footer. Large text is a browser simulation. Native navigation and game actions are checked separately by the UI tests. Assets were generated with the built-in image tool; measured dimensions and SHA-256 hashes are in <a href="../../assets/ui/manifest.json">the asset manifest</a>.</footer>
+</main><script>
+for(const button of document.querySelectorAll('[data-view]'))button.addEventListener('click',()=>{
+ for(const tab of document.querySelectorAll('[data-view]'))tab.setAttribute('aria-pressed',String(tab===button));
+ const screen=document.getElementById('screen');screen.src='review/'+button.dataset.view+'.png';screen.alt=button.dataset.caption+' menu preview';
+ document.getElementById('caption').textContent=button.dataset.caption;
+});
+</script></body></html>

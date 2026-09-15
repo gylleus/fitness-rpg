@@ -222,3 +222,10 @@ The saved guidelines retain sprite conventions. Generation settings and output
 paths belong to generation runs. Descriptive anatomy, armor, magic, and hazards
 do not create gameplay mechanics or multiply explicit stats. Runtime integration
 and encounter balancing are separate work.
+
+## Menu UI assets
+
+[UI content](ui/README.md) contains the camp, background, frame, button and
+inventory descriptions, complete generation prompts and rendering contracts.
+The [visual review](ui/review.html) shows the generated assets in the menus.
+This art library is separate from the biome and enemy gameplay catalog.

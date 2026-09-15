@@ -38,3 +38,11 @@ The palette is visual guidance; these sources are not quantized to ENDESGA 32.
 
 These UI definitions are an art library, separate from the enemy/biome gameplay
 catalog. They do not add gameplay rules or require a catalog schema migration.
+
+## Visual review
+
+Open [review.html](review.html) locally for the asset gallery and menu screenshots
+at 320, 390 and 720 pixels, plus an enlarged-text sample. The page works offline.
+Screenshots render the actual screen components through React Native Web with
+fixture game data, mocked native services and a static player frame. The review
+footer records those limits; it is not evidence of a device installation.

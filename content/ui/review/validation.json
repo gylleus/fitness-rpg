@@ -1,0 +1,65 @@
+{
+  "date": "2026-09-15",
+  "implementation_commit": "1e5df24",
+  "integrated_main": "b1d650f",
+  "checks": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "logic_tests": {
+      "passed": 348,
+      "suites": 33
+    },
+    "native_ui_tests": {
+      "passed": 70,
+      "suites": 9
+    },
+    "asset_audit": "5 PNG hashes, dimensions, descriptions, prompts and static bundle references verified",
+    "android_export": "passed",
+    "review_gallery": {
+      "views": 8,
+      "missing_images": 0,
+      "browser_errors": 0
+    }
+  },
+  "bundled_assets": [
+    {
+      "id": "camp",
+      "sha256": "4c90659158b0da71d566e94d92239472f36b376c4a86730dec0db518f357933d",
+      "found": true
+    },
+    {
+      "id": "background",
+      "sha256": "2e4792178bf5efb74ffd43e9b99a7517eb6040d4bd6b7ffeec52a035e6463d88",
+      "found": true
+    },
+    {
+      "id": "frame",
+      "sha256": "7d560d31569ef1108f223198456a184aa56fb408c88276f08536f7e188f9d074",
+      "found": true
+    },
+    {
+      "id": "button",
+      "sha256": "8dac3188f0436ac5e7d4ac696db0388a00fa203f99cb1434f2b5ad63bc7ea0a1",
+      "found": true
+    },
+    {
+      "id": "inventory",
+      "sha256": "ca6b0cf54278f0af4f84bdf1ce3cd51d2e0ae04560fb6901d63d49cc7d391082",
+      "found": true
+    }
+  ],
+  "visual_review": {
+    "widths": [
+      320,
+      390,
+      720
+    ],
+    "text_scale_simulation": 1.5,
+    "renderer": "React Native Web with real screen components, fixture game data, mocked native services, static authored player frame and preview tab footer",
+    "notes": [
+      "Inventory categories intentionally scroll horizontally.",
+      "Screenshots are not device-installation evidence.",
+      "Native UI tests emit an existing scenery-review fixture-route warning."
+    ]
+  }
+}
