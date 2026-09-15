@@ -1,23 +1,26 @@
 import { useCallback, useState } from 'react';
 import { useFocusEffect } from 'expo-router';
-import { View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import { useGame } from '../game/GameProvider';
 import { equippedWeaponType } from '../game/equipment';
 import { playerSpriteId } from '../sprites/player';
 import { EntitySprite } from './EntitySprite';
+import { menuArt } from './art';
+import { colors, ui } from './theme';
+import { PanelFrame } from './PanelFrame';
 
 export function CampScene() {
   const { data, foreground } = useGame();
   const [focused, setFocused] = useState(false);
   useFocusEffect(useCallback(() => { setFocused(true); return () => setFocused(false); }, []));
-  return <View style={{ height: 172, backgroundColor: '#15231f', borderRadius: 16, overflow: 'hidden' }}>
-    {[12, 36, 67, 85].map((x, i) => <View key={x} style={{ position: 'absolute', left: `${x}%`, bottom: 20, height: 80 + i % 2 * 40, width: 12, backgroundColor: '#243a2f' }}>
-      <View style={{ position: 'absolute', bottom: 35, left: -23, width: 0, height: 0, borderLeftWidth: 30, borderRightWidth: 30, borderBottomWidth: 90, borderLeftColor: 'transparent', borderRightColor: 'transparent', borderBottomColor: '#2a4334' }} />
-    </View>)}
-    <View style={{ position: 'absolute', top: 16, right: 32, width: 24, height: 24, backgroundColor: '#e9d799', borderRadius: 12 }} />
-    <View style={{ position: 'absolute', bottom: 0, height: 22, width: '100%', backgroundColor: '#304635' }} />
-    <View style={{ position: 'absolute', left: '50%', bottom: 22 }}>
-      <EntitySprite entityId={playerSpriteId(equippedWeaponType(data.inventory))} heroHeight={116} playing={focused && foreground} />
+  return <View style={{ aspectRatio: 1.65, maxHeight: 350, backgroundColor: colors.bg, borderRadius: 3, overflow: 'hidden' }}>
+    <Image source={menuArt.camp} resizeMode="cover" accessible={false} style={[StyleSheet.absoluteFill, { width: '100%', height: '100%' }]} />
+    <View style={{ position: 'absolute', top: 14, left: 14, paddingHorizontal: 9, paddingVertical: 6, backgroundColor: '#151620dd', borderWidth: 1, borderColor: '#565044' }}>
+      <Text style={[ui.label, { color: colors.gold, fontSize: 9 }]}>The Wayfarer&apos;s Rest</Text>
     </View>
+    <View style={{ position: 'absolute', left: '50%', bottom: '15%' }}>
+      <EntitySprite entityId={playerSpriteId(equippedWeaponType(data.inventory))} heroHeight={100} playing={focused && foreground} />
+    </View>
+    <PanelFrame />
   </View>;
 }

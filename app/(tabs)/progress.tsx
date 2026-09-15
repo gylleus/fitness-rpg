@@ -6,7 +6,7 @@ import { deleteRun } from '../../src/db/game';
 import { useGame } from '../../src/game/GameProvider';
 import { dayStart, paceLabel, runDodgeBps, type FitnessDay } from '../../src/game/rules';
 import { percentLabel, multiplierLabel } from '../../src/game/items';
-import { Button, Card, colors, PageHeading, Screen, ui } from '../../src/ui/theme';
+import { Button, Card, colors, PageHeading, Screen, SectionHeading, ui } from '../../src/ui/theme';
 
 type Metric = 'pushups' | 'steps' | 'distanceMeters';
 const metricNames = { pushups: 'Pushups', steps: 'Steps', distanceMeters: 'Run km' };
@@ -23,7 +23,7 @@ export default function Progress() {
   const weekTotal = data.history.reduce((sum, d) => sum + metricValue(d, metric), 0);
   const selectedRuns = data.recentRuns.filter((r) => r.day === day.day);
   return <Screen>
-    <PageHeading eyebrow="Your journal / real-world progress" title="Look how far you’ve come." />
+    <PageHeading eyebrow="Your adventure journal" title="Every day writes a story." />
     <Card>
       <Text style={ui.label}>Last seven days · including today</Text>
       <Text style={ui.number}>{metric === 'distanceMeters' ? weekTotal.toFixed(2) : weekTotal.toLocaleString()} <Text style={{ fontSize: 15, color: colors.muted }}>{metric === 'distanceMeters' ? 'km run' : metric}</Text></Text>
@@ -33,7 +33,7 @@ export default function Progress() {
         const isSelected = d.day === day.day;
         return <Pressable key={d.day} accessibilityRole="button" accessibilityLabel={`${d.day}: ${value} ${metricNames[metric]}`} accessibilityState={{ selected: isSelected }} onPress={() => setSelected(d.day)}
           style={{ flex: 1, alignItems: 'center', gap: 8, paddingBottom: 10, borderBottomWidth: 2, borderBottomColor: isSelected ? colors.green : 'transparent' }}>
-          <View style={{ height: 130, width: '100%', alignItems: 'center', justifyContent: 'flex-end', gap: 6 }}><Text style={{ color: isSelected ? colors.green : colors.muted, fontSize: 10 }}>{shortNumber(value)}</Text><View style={{ width: '65%', minWidth: 10, height: Math.max(2, value / max * 100), backgroundColor: isSelected ? colors.green : '#526b55', borderTopLeftRadius: 5, borderTopRightRadius: 5 }} /></View>
+          <View style={{ height: 130, width: '100%', alignItems: 'center', justifyContent: 'flex-end', gap: 6 }}><Text style={{ color: isSelected ? colors.green : colors.muted, fontSize: 10 }}>{shortNumber(value)}</Text><View style={{ width: '65%', minWidth: 10, height: Math.max(2, value / max * 100), backgroundColor: isSelected ? colors.gold : '#575c52', borderTopLeftRadius: 1, borderTopRightRadius: 1 }} /></View>
           <Text style={{ color: isSelected ? colors.text : colors.muted, fontSize: 10 }}>{new Date(dayStart(d.day)).toLocaleDateString(undefined, { weekday: 'narrow' })}</Text>
           <Text style={{ color: colors.muted, fontSize: 10 }}>{new Date(dayStart(d.day)).getDate()}</Text>
         </Pressable>;
@@ -57,7 +57,7 @@ export default function Progress() {
       {day.day === data.today.day && <Button secondary label="Manage connected steps" onPress={() => router.push('/health')} />}
     </View>
 
-    <View style={{ gap: 14 }}><Text style={ui.heading}>Your runs</Text>
+    <View style={{ gap: 14 }}><SectionHeading title="Your runs" icon="run" />
       {selectedRuns.length === 0 ? <Card><Text style={ui.body}>No runs saved for this day.</Text><Text style={ui.small}>Start a GPS run from camp to see distance, pace, and its effect on your hero here.</Text></Card> : selectedRuns.map((run) => <Card key={run.id}>
         <View style={ui.between}><Text style={ui.heading}>{(run.distanceMeters / 1000).toFixed(2)} km</Text><Text style={[ui.label, { color: colors.purple }]}>{run.source === 'gps' ? 'GPS recorded' : 'Legacy entry'}</Text></View>
         <Text style={ui.body}>{Math.round(run.durationSeconds / 60)} min · {paceLabel(run.distanceMeters, run.durationSeconds)} /km · {run.steps.toLocaleString()} steps</Text>
@@ -68,7 +68,7 @@ export default function Progress() {
     </View>
 
     <Card><Text style={ui.heading}>Your pushup power</Text><Detail label="Pushups today" value={String(data.today.pushups)} /><Detail label="Damage multiplier" value={multiplierLabel(data.damageMultiplier)} /><Text style={ui.small}>Today’s full reps boost damage until 5 AM device time. Attacks never spend pushups or subtract from your fitness history.</Text></Card>
-    <View style={{ gap: 14 }}><Text style={ui.heading}>Since your first day</Text>
+    <View style={{ gap: 14 }}><SectionHeading title="Since your first day" icon="journal" />
       <View style={ui.row}><Card style={ui.flex}><Text style={ui.label}>Total pushups</Text><Text style={ui.number}>{data.totals.pushups.toLocaleString()}</Text></Card><Card style={ui.flex}><Text style={ui.label}>Best pushup day</Text><Text style={ui.number}>{data.totals.bestPushupDay.toLocaleString()}</Text></Card></View>
       <Card><Detail label="Distance run, all time" value={`${(data.totals.distanceMeters / 1000).toFixed(2)} km`} /><Detail label="Runs completed" value={data.totals.runs.toLocaleString()} /><Text style={ui.small}>Your exercise data and game progress are saved on this phone. No account or internet needed.</Text></Card>
     </View>

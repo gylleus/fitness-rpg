@@ -7,8 +7,10 @@ import { useGame } from '../../src/game/GameProvider';
 import { CATEGORY_LABELS, EQUIPMENT_SLOTS, fitsSlot, itemStatsLabel, previewEquipment, SLOT_LABELS, type ItemCategory } from '../../src/game/equipment';
 import { armorReduction, heroStats } from '../../src/game/rules';
 import { POTIONS, type Potion } from '../../src/game/items';
-import { Button, Card, colors, Gold, PageHeading, Screen, ui } from '../../src/ui/theme';
+import { Button, Card, colors, Disclosure, Gold, PageHeading, Screen, SectionHeading, ui } from '../../src/ui/theme';
 import { EquipmentComparison, ItemDetails } from '../../src/ui/ItemDetails';
+import { MenuBanner } from '../../src/ui/MenuBanner';
+import { PanelFrame } from '../../src/ui/PanelFrame';
 import { ItemIcon, rarityColor } from '../../src/ui/ItemIcon';
 
 export default function Inventory() {
@@ -30,6 +32,7 @@ export default function Inventory() {
   const inDungeon = latestBattle?.status === 'active';
   return <Screen>
     <PageHeading eyebrow="Inventory / spoils of the road" title="Pack & equipment." right={<Gold amount={hero.gold} />} />
+    <MenuBanner />
     <View style={ui.row}>
       <View style={ui.flex}><Button secondary={section !== 'gear'} label={`Equipment & bag · ${inventory.length}`} onPress={() => setSection('gear')} /></View>
       <View style={ui.flex}><Button secondary={section !== 'supplies'} label="Supplies" onPress={() => setSection('supplies')} /></View>
@@ -39,7 +42,7 @@ export default function Inventory() {
       <Card>
         <Text style={ui.heading}>{stats.armor ?? 0} armor · {(armorReduction(stats.armor) * 100).toFixed(1)}% damage reduction</Text>
         <Text style={ui.small}>{((stats.critChanceBps ?? 0) / 100).toFixed(1)}% crit chance · {((stats.critMultiplierBps ?? 15000) / 10000).toFixed(2)}× critical damage</Text>
-        <Text style={ui.small}>Each pushup adds {Number((stats.pushupDamageCoefficient * 100).toFixed(2))}% damage. Armor reduces incoming hits, up to 75%; health bonuses increase maximum HP separately.</Text>
+        <Disclosure title="How equipment affects your hero"><Text style={ui.small}>Each pushup adds {Number((stats.pushupDamageCoefficient * 100).toFixed(2))}% damage. Armor reduces incoming hits, up to 75%; health bonuses increase maximum HP separately.</Text></Disclosure>
       </Card>
       <Text style={ui.body}>Gear shapes your strength. Choose an item to inspect, equip or sell.</Text>
       {inDungeon && <Text accessibilityRole="alert" style={[ui.body, { color: colors.gold }]}>Equipment is locked during an expedition. Return to camp to change or sell items.</Text>}
@@ -49,8 +52,8 @@ export default function Inventory() {
           return <Pressable key={slot} accessibilityRole="button" accessibilityLabel={`${SLOT_LABELS[slot]}: ${owned?.item.name ?? 'Empty'}`}
             disabled={!owned} onPress={() => setSelectedId(owned!.id)}
             style={{ width: '48%', minHeight: 102, gap: 7, padding: 14, backgroundColor: colors.panel,
-              borderRadius: 14, borderWidth: 1, borderColor: owned && owned.id === selectedId ? colors.green : colors.border }}>
-            <Text style={ui.label}>{SLOT_LABELS[slot]}</Text>
+              borderRadius: 3, borderWidth: 1, borderColor: owned && owned.id === selectedId ? colors.green : colors.border }}>
+            <PanelFrame /><Text style={ui.label}>{SLOT_LABELS[slot]}</Text>
             <View style={ui.row}>{owned && <ItemIcon item={owned.item} size={48} />}<Text style={{ flex: 1, color: owned ? rarityColor[owned.item.rarity] : colors.muted, fontWeight: '700' }}>{owned?.item.name ?? 'Empty slot'}</Text></View>
             <Text style={ui.small}>{owned ? itemStatsLabel(owned.item) : slot === 'weapon' ? 'Unarmed: 5–9 damage' : 'Find gear in dungeons'}</Text>
           </Pressable>;
@@ -71,11 +74,11 @@ export default function Inventory() {
           onPress={() => { if (perform(() => sellItem(db, selected.id))) setSelectedId(null); }} />
         {selected.slot && <Text style={ui.small}>Unequip before selling.</Text>}
       </ItemDetails>}
-      <View style={ui.between}><Text style={ui.heading}>Your bag</Text><Text style={ui.small}>{bag.length} {bag.length === 1 ? 'item' : 'items'}</Text></View>
+      <SectionHeading title="Your bag" icon="pack" detail={bag.length + (bag.length === 1 ? " item" : " items")} />
       {bag.length > 0 && <>
         <TextInput accessibilityLabel="Search your bag" placeholder="Search items, stats or rarity" placeholderTextColor={colors.muted}
           value={query} onChangeText={value => { setQuery(value); setVisibleCount(24); }}
-          style={{ color: colors.text, borderWidth: 1, borderColor: colors.border, borderRadius: 12, padding: 14 }} />
+          style={{ color: colors.text, borderWidth: 1, borderColor: colors.border, borderRadius: 3, padding: 14 }} />
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
           {(['all', ...Object.keys(CATEGORY_LABELS)] as (ItemCategory | 'all')[]).map(value =>
             <Button key={value} compact secondary={category !== value} label={value === 'all' ? 'All gear' : CATEGORY_LABELS[value]}
@@ -89,7 +92,7 @@ export default function Inventory() {
       </>}
       {bag.length === 0 ? <Card><Text style={ui.body}>Room for your next discovery.</Text><Text style={ui.small}>Enemies can drop equipment. Bosses always reward an item. Defeat the boss to bring your loot home.</Text></Card>
         : filtered.slice(0, visibleCount).map(owned => <Pressable key={owned.id} accessibilityRole="button" accessibilityLabel={`Inspect ${owned.item.name}`} onPress={() => setSelectedId(owned.id)}
-          style={{ padding: 16, gap: 8, borderRadius: 14, backgroundColor: colors.panel, borderWidth: 1, borderColor: owned.id === selectedId ? colors.green : colors.border }}>
+          style={{ padding: 16, gap: 8, borderRadius: 3, backgroundColor: colors.panel, borderWidth: 1, borderColor: owned.id === selectedId ? colors.green : colors.border }}>
           <View style={ui.row}><ItemIcon item={owned.item} /><View style={ui.flex}>
           <View style={ui.between}><Text style={[ui.heading, { flex: 1, color: rarityColor[owned.item.rarity] }]}>{owned.item.name}</Text><Text style={ui.small}>◆ {owned.item.sellValue}</Text></View>
           <Text style={ui.small}>Item level {owned.item.itemLevel ?? 1} · {owned.item.kind} · {itemStatsLabel(owned.item)}</Text>
